@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Floryne Pierson — Tarot & Oracles</title>
+  <meta name="description" content="Guides pour débuter le tarot et les oracles, sélections de jeux et recommandations de produits spirituels. Par Floryne Pierson." />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="64x64" href="favicon-64.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:       #0b0c1a;
+      --deep:      #10112b;
+      --void:      #161831;
+      --violet:    #6b3fa0;
+      --indigo:    #3d2e8c;
+      --lavender:  #a78bd4;
+      --blue-nuit: #1a1f6e;
+      --frost:     #c9c4f5;
+      --glow:      #b48ef0;
+      --moon:      #f0eaff;
+      --silver:    #d4cef5aa;
+      --accent:    #e040fb;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--frost);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR (desktop only) ── */
+    #cursor, #cursor-trail { display: none; }
+    @media (hover: hover) and (pointer: fine) {
+      body { cursor: none; }
+      #cursor {
+        display: block;
+        width: 12px; height: 12px;
+        background: var(--glow);
+        border-radius: 50%;
+        position: fixed;
+        top: 0; left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: 0 0 14px var(--glow), 0 0 40px var(--violet);
+        transition: transform 0.08s ease, background 0.2s;
+      }
+      #cursor-trail {
+        display: block;
+        width: 32px; height: 32px;
+        border: 1px solid var(--lavender);
+        border-radius: 50%;
+        position: fixed;
+        top: 0; left: 0;
+        pointer-events: none;
+        z-index: 9998;
+        opacity: 0.4;
+        transition: left 0.12s ease, top 0.12s ease;
+      }
+    }
+
+    /* ── STARFIELD ── */
+    #stars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      animation: twinkle var(--dur, 3s) ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: var(--min-op, 0.1); transform: scale(1); }
+      50%      { opacity: var(--max-op, 0.9); transform: scale(1.4); }
+    }
+
+    /* ── FLOATING PARTICLES ── */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1rem;
+      animation: floatUp var(--dur2, 6s) ease-in-out infinite;
+      opacity: 0;
+      z-index: 1;
+    }
+    @keyframes floatUp {
+      0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+      20%  { opacity: 0.7; }
+      80%  { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(-120px) rotate(360deg); }
+    }
+
+    /* ── LAYOUT ── */
+    .wrapper { position: relative; z-index: 2; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(to bottom, #0b0c1aee, transparent);
+      backdrop-filter: blur(4px);
+    }
+    .nav-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--lavender);
+      text-decoration: none;
+      z-index: 201;
+      position: relative;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--silver);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1px;
+      background: var(--glow);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .nav-links a:hover { color: var(--moon); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* Hamburger button */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px; height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 201;
+      position: relative;
+      padding: 4px;
+    }
+    .nav-burger span {
+      display: block;
+      height: 2px;
+      background: var(--lavender);
+      border-radius: 2px;
+      transition: transform 0.35s ease, opacity 0.25s ease, background 0.25s;
+      transform-origin: center;
+    }
+    .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--glow); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--glow); }
+
+    /* Drawer */
+    .nav-drawer {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: min(80vw, 300px);
+      background: #10112bf0;
+      backdrop-filter: blur(20px);
+      border-left: 1px solid #6b3fa044;
+      z-index: 199;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 6rem 2.5rem 3rem;
+      gap: 0;
+      box-shadow: -20px 0 60px #0b0c1a88;
+      transform: translateX(110%);
+      visibility: hidden;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), visibility 0s linear 0.4s;
+    }
+    .nav-drawer.open {
+      transform: translateX(0);
+      visibility: visible;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), visibility 0s linear 0s;
+    }
+    .nav-drawer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+    }
+    .nav-drawer ul li {
+      border-bottom: 1px solid #6b3fa022;
+    }
+    .nav-drawer ul li:first-child { border-top: 1px solid #6b3fa022; }
+    .nav-drawer ul li a {
+      display: block;
+      padding: 1.2rem 0;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      color: var(--lavender);
+      text-decoration: none;
+      transition: color 0.25s, padding-left 0.25s;
+    }
+    .nav-drawer ul li a:hover { color: var(--moon); padding-left: 0.5rem; }
+    .drawer-deco {
+      margin-top: 3rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.5rem;
+      color: var(--violet);
+      opacity: 0.4;
+    }
+    .nav-backdrop {
+      position: fixed;
+      inset: 0;
+      background: #0b0c1a88;
+      z-index: 198;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s, visibility 0s linear 0.4s;
+    }
+    .nav-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.4s, visibility 0s linear 0s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    /* Moon background */
+    .moon-bg {
+      position: absolute;
+      width: 380px; height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 42%,
+        #2a1a5e 0%, #1a1040 40%, #0b0c1a 100%);
+      box-shadow:
+        0 0 60px #6b3fa055,
+        0 0 120px #3d2e8c33,
+        inset 0 0 50px #0b0c1a88;
+      animation: moonGlow 6s ease-in-out infinite;
+    }
+    @keyframes moonGlow {
+      0%,100% { box-shadow: 0 0 60px #6b3fa055, 0 0 120px #3d2e8c33, inset 0 0 50px #0b0c1a88; }
+      50%      { box-shadow: 0 0 90px #6b3fa088, 0 0 180px #6b3fa044, inset 0 0 60px #1a1040; }
+    }
+
+    /* Chibi witch SVG */
+    .chibi-container {
+      position: relative;
+      width: 180px; height: 220px;
+      animation: chibiFloat 4s ease-in-out infinite;
+      margin-bottom: -30px;
+      z-index: 3;
+    }
+    @keyframes chibiFloat {
+      0%,100% { transform: translateY(0) rotate(-1deg); }
+      50%      { transform: translateY(-18px) rotate(1deg); }
+    }
+    .chibi-container svg { width: 100%; height: 100%; }
+
+    /* Stars orbit */
+    .orbit {
+      position: absolute;
+      width: 420px; height: 420px;
+      border: 1px dashed #6b3fa033;
+      border-radius: 50%;
+      animation: spinOrbit 30s linear infinite;
+    }
+    @keyframes spinOrbit { to { transform: rotate(360deg); } }
+    .orbit-star {
+      position: absolute;
+      width: 8px; height: 8px;
+      background: var(--glow);
+      border-radius: 50%;
+      top: -4px; left: 50%;
+      box-shadow: 0 0 10px var(--glow);
+    }
+    .orbit2 {
+      width: 520px; height: 520px;
+      border-color: #3d2e8c22;
+      animation-duration: 50s;
+      animation-direction: reverse;
+    }
+    .orbit2 .orbit-star { background: var(--lavender); box-shadow: 0 0 8px var(--lavender); }
+
+    .hero-content {
+      position: relative;
+      z-index: 4;
+      margin-top: 2rem;
+    }
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      opacity: 0.8;
+      margin-bottom: 0.8rem;
+      animation: fadeUp 1s 0.3s both;
+    }
+    .hero-name {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      color: var(--moon);
+      line-height: 1.1;
+      letter-spacing: 0.05em;
+      animation: fadeUp 1s 0.5s both;
+      text-shadow: 0 0 40px var(--violet), 0 0 80px var(--indigo);
+    }
+    .hero-name span {
+      color: var(--glow);
+      display: block;
+      font-size: 0.55em;
+      letter-spacing: 0.3em;
+      margin-top: 0.3em;
+      font-weight: 400;
+    }
+    .hero-tagline {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--silver);
+      margin-top: 1.2rem;
+      max-width: 420px;
+      line-height: 1.7;
+      animation: fadeUp 1s 0.8s both;
+    }
+    .hero-cta {
+      display: inline-block;
+      margin-top: 2.5rem;
+      padding: 0.85rem 2.5rem;
+      border: 1px solid var(--glow);
+      color: var(--glow);
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.4s;
+      animation: fadeUp 1s 1.1s both;
+    }
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--glow);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+      z-index: -1;
+    }
+    .hero-cta:hover { color: var(--ink); }
+    .hero-cta:hover::before { transform: scaleX(1); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      animation: fadeUp 1s 1.5s both;
+      z-index: 4;
+    }
+    .scroll-hint span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      color: var(--lavender);
+      opacity: 0.6;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--glow), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.3; transform: scaleY(1); }
+      50%      { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ── SECTIONS GENERAL ── */
+    section {
+      padding: 7rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: var(--moon);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-title::before, .section-title::after {
+      content: '✦';
+      color: var(--glow);
+      font-size: 0.7em;
+    }
+    .section-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      margin-bottom: 3rem;
+      opacity: 0.7;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-text p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--silver);
+      margin-bottom: 1.2rem;
+    }
+    .about-text p em { color: var(--lavender); font-style: italic; }
+    .about-art {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .moon-card {
+      width: 240px; height: 300px;
+      border: 1px solid #6b3fa044;
+      border-radius: 120px 120px 80px 80px;
+      background: linear-gradient(160deg, #1a1040, #0b0c1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 40px #6b3fa033, inset 0 0 30px #3d2e8c22;
+      animation: chibiFloat 5s 1s ease-in-out infinite;
+    }
+    .moon-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 50% 60%, #6b3fa011, transparent 60%);
+    }
+    .glyph-ring {
+      position: absolute;
+      inset: -20px;
+      border: 1px dashed #6b3fa033;
+      border-radius: 50%;
+      animation: spinOrbit 20s linear infinite;
+    }
+    .glyph-ring span {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      color: var(--glow);
+      font-size: 0.8rem;
+    }
+
+    /* ── SKILLS ── */
+    #skills { text-align: center; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .skill-card {
+      border: 1px solid #6b3fa033;
+      padding: 2rem 1.5rem;
+      border-radius: 4px;
+      background: linear-gradient(160deg, #161831, #0e0f22);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--violet), transparent);
+    }
+    .skill-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px #3d2e8c44;
+    }
+    .skill-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .skill-name {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.75rem;
+      color: var(--lavender);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.6rem;
+    }
+    .skill-desc {
+      font-size: 0.85rem;
+      color: var(--silver);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ── CONTACT ── */
+    #contact { text-align: center; }
+    .contact-orb {
+      width: 200px; height: 200px;
+      margin: 0 auto 3rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, #3d2e8c44, #0b0c1a);
+      border: 1px solid #6b3fa044;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      animation: moonGlow 4s ease-in-out infinite;
+      position: relative;
+    }
+    .contact-orb::after {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border: 1px dashed #6b3fa033;
+      border-radius: 50%;
+      animation: spinOrbit 15s linear infinite;
+    }
+    .contact-text {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--silver);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.8rem;
+      border: 1px solid #6b3fa066;
+      color: var(--lavender);
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+    .contact-link:hover {
+      border-color: var(--glow);
+      color: var(--moon);
+      box-shadow: 0 0 20px #6b3fa044;
+    }
+
+    /* ── DIVIDER ── */
+    .rune-divider {
+      text-align: center;
+      color: var(--violet);
+      opacity: 0.4;
+      font-size: 1rem;
+      letter-spacing: 1rem;
+      padding: 1rem 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid #6b3fa022;
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .footer-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.9rem;
+      color: var(--lavender);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .footer-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: var(--silver);
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.3s, color 0.3s;
+    }
+    .footer-links a:hover { opacity: 1; color: var(--lavender); }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--silver);
+      opacity: 0.3;
+      font-style: italic;
+    }
+
+    /* ── COOKIE BANNER ── */
+    #cookie-banner {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(92vw, 700px);
+      background: #10112bee;
+      border: 1px solid #6b3fa066;
+      backdrop-filter: blur(12px);
+      padding: 1.5rem 2rem;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      box-shadow: 0 8px 40px #0b0c1a88, 0 0 30px #3d2e8c33;
+      border-radius: 4px;
+      animation: fadeUp 0.5s 0.5s both;
+    }
+    #cookie-banner p {
+      flex: 1;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: var(--silver);
+      min-width: 200px;
+    }
+    #cookie-banner a { color: var(--lavender); }
+    .cookie-btns { display: flex; gap: 0.8rem; flex-shrink: 0; }
+    .btn-accept, .btn-refuse {
+      padding: 0.6rem 1.4rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+    .btn-accept {
+      background: var(--violet);
+      color: var(--moon);
+    }
+    .btn-accept:hover { background: var(--glow); color: var(--ink); }
+    .btn-refuse {
+      background: transparent;
+      border: 1px solid #6b3fa055;
+      color: var(--lavender);
+    }
+    .btn-refuse:hover { border-color: var(--lavender); color: var(--moon); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: #0b0c1acc;
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      backdrop-filter: blur(6px);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #10112b;
+      border: 1px solid #6b3fa066;
+      max-width: 660px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 3rem;
+      position: relative;
+      border-radius: 4px;
+      box-shadow: 0 0 60px #3d2e8c44;
+    }
+    .modal h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.1rem;
+      color: var(--lavender);
+      margin-bottom: 1.5rem;
+    }
+    .modal h3 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.8rem;
+      color: var(--glow);
+      margin: 1.5rem 0 0.5rem;
+    }
+    .modal p, .modal li {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: var(--silver);
+    }
+    .modal ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+    .modal a { color: var(--lavender); }
+    .modal-close {
+      position: absolute;
+      top: 1.2rem; right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--lavender);
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--moon); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── AFFILIATION BANNER ── */
+    .affil-banner {
+      background: #1a1040;
+      border-top: 1px solid #6b3fa033;
+      border-bottom: 1px solid #6b3fa033;
+      padding: 0.6rem 2rem;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--lavender);
+      letter-spacing: 0.08em;
+      opacity: 0.75;
+      position: relative;
+      z-index: 2;
+    }
+    .affil-banner a { color: var(--glow); }
+
+    /* ── OFFER CARDS ── */
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .offer-card {
+      border: 1px solid #6b3fa044;
+      padding: 2.2rem 1.8rem;
+      border-radius: 6px;
+      background: linear-gradient(145deg, #161831ee, #0e0f22ee);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s, box-shadow 0.35s;
+    }
+    .offer-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--glow), transparent);
+      opacity: 0.6;
+    }
+    .offer-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 50px #3d2e8c55;
+    }
+    .offer-num {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.55rem;
+      color: var(--glow);
+      letter-spacing: 0.3em;
+      margin-bottom: 1rem;
+      opacity: 0.7;
+    }
+    .offer-icon { font-size: 2.2rem; display: block; margin-bottom: 1rem; }
+    .offer-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.78rem;
+      color: var(--moon);
+      margin-bottom: 0.7rem;
+      line-height: 1.4;
+      letter-spacing: 0.05em;
+    }
+    .offer-desc {
+      font-size: 0.9rem;
+      color: var(--silver);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ── PINTEREST SECTION ── */
+    #pinterest {
+      text-align: center;
+    }
+    .pinterest-card {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      border: 1px solid #6b3fa055;
+      padding: 3rem 4rem;
+      border-radius: 8px;
+      background: linear-gradient(160deg, #1a1040, #10112b);
+      position: relative;
+      overflow: hidden;
+      max-width: 520px;
+      width: 100%;
+      margin-top: 1rem;
+      box-shadow: 0 0 40px #3d2e8c22;
+    }
+    .pinterest-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, #6b3fa022, transparent 70%);
+    }
+    .pinterest-icon {
+      font-size: 3rem;
+      animation: chibiFloat 5s ease-in-out infinite;
+      position: relative;
+    }
+    .pinterest-text {
+      font-size: 1rem;
+      color: var(--silver);
+      font-style: italic;
+      line-height: 1.7;
+      position: relative;
+    }
+    .pinterest-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 2rem;
+      background: linear-gradient(135deg, #6b3fa0, #3d2e8c);
+      color: var(--moon);
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      transition: all 0.3s;
+      position: relative;
+      box-shadow: 0 4px 20px #6b3fa044;
+    }
+    .pinterest-btn:hover {
+      background: linear-gradient(135deg, #b48ef0, #6b3fa0);
+      box-shadow: 0 8px 30px #6b3fa066;
+      transform: translateY(-2px);
+    }
+
+    /* ── RESPONSIVE / MOBILE ── */
+    @media (max-width: 768px) {
+      /* Nav */
+      nav { padding: 1rem 1.5rem; background: #0b0c1af0; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .nav-drawer { display: flex; }
+      .nav-backdrop { display: block; }
+
+      /* Body no cursor */
+      body { cursor: auto; }
+
+      /* Hero */
+      #hero { padding: 0 1.2rem; min-height: 100svh; justify-content: center; }
+      .moon-bg { width: 240px; height: 240px; }
+      .orbit { width: 270px; height: 270px; }
+      .orbit2 { width: 350px; height: 350px; }
+      .chibi-container { width: 130px; height: 160px; margin-bottom: -20px; }
+      .hero-content { margin-top: 1rem; }
+      .hero-name { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+      .hero-name span { font-size: 0.5em; letter-spacing: 0.2em; }
+      .hero-tagline { font-size: 0.95rem; max-width: 100%; margin-top: 0.8rem; }
+      .hero-eyebrow { font-size: 0.5rem; letter-spacing: 0.3em; }
+      .hero-cta { margin-top: 1.8rem; padding: 0.8rem 1.8rem; font-size: 0.6rem; }
+      .scroll-hint { bottom: 1rem; }
+
+      /* Sections */
+      section { padding: 4rem 1.2rem; }
+      .section-title { font-size: clamp(1.1rem, 5vw, 1.5rem); flex-wrap: wrap; }
+      .section-sub { margin-bottom: 1.5rem; }
+
+      /* About */
+      #about { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-art { order: -1; }
+      .moon-card { width: 180px; height: 220px; font-size: 3.5rem; }
+      .about-text p { font-size: 1rem; }
+
+      /* Offers */
+      .offer-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .offer-card { padding: 1.5rem 1.2rem; }
+      .offer-title { font-size: 0.72rem; }
+      .offer-desc { font-size: 0.85rem; }
+
+      /* Pinterest */
+      .pinterest-card { padding: 2rem 1.5rem; }
+      .pinterest-text { font-size: 0.95rem; }
+
+      /* Contact */
+      .contact-orb { width: 140px; height: 140px; font-size: 2.2rem; margin-bottom: 2rem; }
+      .contact-text { font-size: 0.95rem; }
+      .contact-links { gap: 0.8rem; }
+      .contact-link { padding: 0.8rem 1.2rem; font-size: 0.58rem; }
+
+      /* Footer */
+      footer { padding: 2rem 1.2rem; }
+      .footer-links { gap: 1rem; }
+      .footer-links a { font-size: 0.5rem; }
+
+      /* Cookie banner */
+      #cookie-banner { padding: 1.2rem 1.2rem; gap: 1rem; bottom: 0.8rem; }
+      #cookie-banner p { font-size: 0.72rem; min-width: unset; }
+      .btn-accept, .btn-refuse { padding: 0.6rem 1rem; font-size: 0.55rem; }
+
+      /* Modal */
+      .modal { padding: 2rem 1.2rem; max-height: 90vh; }
+      .modal h2 { font-size: 0.95rem; padding-right: 2rem; }
+      .modal h3 { font-size: 0.72rem; }
+      .modal p, .modal li { font-size: 0.8rem; }
+
+      /* Affil banner */
+      .affil-banner { font-size: 0.5rem; padding: 0.5rem 1rem; }
+
+      /* Particles fewer on mobile */
+      .particle:nth-child(n+4) { display: none; }
+
+      /* Divider */
+      .rune-divider { letter-spacing: 0.5rem; font-size: 0.8rem; }
+    }
+
+    @media (max-width: 380px) {
+      .hero-name { font-size: 1.4rem; }
+      .contact-links { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+
+<!-- Stars background -->
+<canvas id="stars"></canvas>
+
+<!-- Floating particles -->
+<div class="particle" style="left:10%;bottom:20%;--dur2:7s;animation-delay:0s">✦</div>
+<div class="particle" style="left:25%;bottom:10%;--dur2:9s;animation-delay:2s">🌙</div>
+<div class="particle" style="left:70%;bottom:15%;--dur2:6s;animation-delay:1s">✧</div>
+<div class="particle" style="left:85%;bottom:25%;--dur2:8s;animation-delay:3s">⋆</div>
+<div class="particle" style="left:50%;bottom:5%;--dur2:10s;animation-delay:0.5s">✦</div>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a class="nav-logo" href="#">F.P.</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="oracle-debutant.html">Débuter</a></li>
+    <li><a href="meilleurs-oracles.html">Sélection</a></li>
+    <li><a href="utiliser-oracle.html">Utiliser</a></li>
+    <li><a href="a-propos.html">À propos</a></li>
+  </ul>
+  <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── DRAWER BACKDROP ── -->
+<div class="nav-backdrop" id="backdrop"></div>
+
+<!-- ── SIDE DRAWER ── -->
+<nav class="nav-drawer" id="drawer" aria-hidden="true">
+  <ul>
+    <li><a href="oracle-debutant.html" class="drawer-link">✦ Débuter avec les oracles</a></li>
+    <li><a href="meilleurs-oracles.html" class="drawer-link">✦ Meilleurs oracles</a></li>
+    <li><a href="utiliser-oracle.html" class="drawer-link">✦ Utiliser un oracle</a></li>
+    <li><a href="a-propos.html" class="drawer-link">✦ À propos</a></li>
+    <li><a href="affiliation.html" class="drawer-link">✦ Affiliation</a></li>
+  </ul>
+  <div class="drawer-deco">☽ ✦ ☾</div>
+</nav>
+
+<!-- ── AFFILIATION BANNER ── -->
+<div class="affil-banner">
+  ✦ Certains liens présents sur ce site peuvent être des liens affiliés, ce qui signifie que je peux percevoir une commission sans coût supplémentaire pour vous. <a href="#" onclick="openModal('affil'); return false;">En savoir plus</a>
+</div>
+
+<!-- ── WRAPPER ── -->
+<div class="wrapper">
+
+  <!-- ── HERO ── -->
+  <section id="hero" style="max-width:none; padding:0;">
+    <div class="orbit"><div class="orbit-star"></div></div>
+    <div class="orbit orbit2"><div class="orbit-star"></div></div>
+    <div class="moon-bg"></div>
+
+    <!-- Chibi witch (SVG inline) -->
+    <div class="chibi-container">
+      <svg viewBox="0 0 180 220" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+        <!-- Hat shadow -->
+        <ellipse cx="90" cy="62" rx="38" ry="6" fill="#1a1040" opacity="0.5"/>
+        <!-- Hat brim -->
+        <ellipse cx="90" cy="60" rx="36" ry="7" fill="#2a1a5e"/>
+        <!-- Hat body -->
+        <polygon points="90,10 68,62 112,62" fill="#1a1040"/>
+        <!-- Hat band -->
+        <rect x="68" y="55" width="44" height="7" rx="2" fill="#6b3fa0" opacity="0.8"/>
+        <!-- Hat star -->
+        <text x="82" y="64" font-size="8" fill="#f0eaff" opacity="0.9">✦</text>
+        <!-- Hair -->
+        <ellipse cx="90" cy="88" rx="30" ry="26" fill="#2d1b69"/>
+        <ellipse cx="62" cy="98" rx="10" ry="22" fill="#2d1b69"/>
+        <ellipse cx="118" cy="98" rx="10" ry="22" fill="#2d1b69"/>
+        <!-- Face -->
+        <ellipse cx="90" cy="88" rx="24" ry="22" fill="#f5e6d3"/>
+        <!-- Blush -->
+        <ellipse cx="74" cy="94" rx="7" ry="4" fill="#e8a0bf" opacity="0.5"/>
+        <ellipse cx="106" cy="94" rx="7" ry="4" fill="#e8a0bf" opacity="0.5"/>
+        <!-- Eyes (closed/happy) -->
+        <path d="M80 88 Q84 84 88 88" stroke="#2d1b69" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M92 88 Q96 84 100 88" stroke="#2d1b69" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Star eyes sparkle -->
+        <text x="78" y="87" font-size="5" fill="#b48ef0">✦</text>
+        <text x="92" y="87" font-size="5" fill="#b48ef0">✦</text>
+        <!-- Mouth -->
+        <path d="M85 96 Q90 100 95 96" stroke="#c4856a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- Body / cloak -->
+        <path d="M65 108 Q60 150 58 175 Q90 168 122 175 Q120 150 115 108 Q102 115 90 114 Q78 115 65 108Z" fill="#1a1040"/>
+        <!-- Cloak details -->
+        <path d="M90 114 L90 168" stroke="#6b3fa0" stroke-width="1" opacity="0.5"/>
+        <!-- Star on cloak -->
+        <text x="83" y="142" font-size="12" fill="#b48ef0" opacity="0.7">✦</text>
+        <!-- Arms -->
+        <path d="M65 115 Q48 125 44 138 Q50 142 58 135 Q60 125 68 118Z" fill="#1a1040"/>
+        <path d="M115 115 Q132 125 136 138 Q130 142 122 135 Q120 125 112 118Z" fill="#1a1040"/>
+        <!-- Wand hand -->
+        <line x1="136" y1="138" x2="148" y2="118" stroke="#6b3fa0" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="149" cy="116" r="5" fill="none" stroke="#b48ef0" stroke-width="1.5"/>
+        <circle cx="149" cy="116" r="2" fill="#e040fb"/>
+        <!-- Wand sparkles -->
+        <text x="152" y="108" font-size="7" fill="#f0eaff" opacity="0.9" class="sparkle1">✦</text>
+        <text x="144" y="104" font-size="5" fill="#b48ef0" opacity="0.7" class="sparkle2">✧</text>
+        <!-- Cat ears on hat -->
+        <polygon points="72,42 66,30 78,38" fill="#2d1b69"/>
+        <polygon points="108,42 114,30 102,38" fill="#2d1b69"/>
+        <polygon points="72,41 68,33 76,38" fill="#6b3fa0" opacity="0.5"/>
+        <polygon points="108,41 112,33 104,38" fill="#6b3fa0" opacity="0.5"/>
+        <!-- Moon on hat -->
+        <text x="83" y="35" font-size="9" fill="#f0eaff" opacity="0.8">🌙</text>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Tarot · Oracles · Guidance intuitive</p>
+      <h1 class="hero-name">
+        Floryne Pierson
+        <span>✦ Guides & Recommandations ✦</span>
+      </h1>
+      <p class="hero-tagline">Guides pour débuter le tarot et les oracles, découvertes de jeux et sélections de produits pour développer ton intuition.</p>
+      <a href="oracle-debutant.html" class="hero-cta">Entrer dans l'orbite</a>
+    </div>
+
+    <div class="scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <div class="rune-divider">⋆ ✦ ☽ ✦ ⋆</div>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="about-text reveal">
+      <p class="section-sub">— à propos</p>
+      <h2 class="section-title">Mon univers</h2>
+      <p style="margin-top:1.5rem">Bienvenue ! Je suis <em>Floryne</em>, et je partage ici ma passion pour le tarot et les oracles. Mon objectif : rendre ces outils accessibles, bienveillants, et vraiment utiles au quotidien.</p>
+      <p>Que tu sois totalement débutant·e ou simplement curieux·se, tu trouveras ici des guides clairs, des découvertes de jeux et des recommandations honnêtes de produits pour développer ton intuition et ta guidance personnelle.</p>
+      <p><em>Chaque carte est une porte. Entrons-y ensemble.</em> 🌙</p>
+    </div>
+    <div class="about-art reveal" style="transition-delay:0.2s">
+      <div class="moon-card">
+        <div class="glyph-ring"><span>✦</span></div>
+        🌙
+      </div>
+    </div>
+  </section>
+
+  <div class="rune-divider">⋆ ✦ ☽ ✦ ⋆</div>
+
+  <!-- ── CE QUE JE PROPOSE ── -->
+  <section id="offres" class="reveal">
+    <p class="section-sub">— ce que je propose</p>
+    <h2 class="section-title" style="justify-content:center">Guides &amp; Recommandations</h2>
+    <p style="font-style:italic;color:var(--silver);margin-bottom:0.5rem;font-size:1rem;text-align:center">
+      Autour du tarot et des oracles — pour débuter, choisir et s'épanouir.
+    </p>
+    <div class="offer-grid">
+      <div class="offer-card reveal">
+        <div class="offer-num">01</div>
+        <span class="offer-icon">🃏</span>
+        <div class="offer-title">Guides pour débuter le tarot et les oracles</div>
+        <p class="offer-desc">Des ressources claires et bienveillantes pour prendre en main tes premières cartes, sans te perdre.</p>
+      </div>
+      <div class="offer-card reveal" style="transition-delay:0.12s">
+        <div class="offer-num">02</div>
+        <span class="offer-icon">✨</span>
+        <div class="offer-title">Sélections de jeux adaptés aux débutants</div>
+        <p class="offer-desc">Mes coups de cœur parmi les tarots et oracles : des jeux accessibles, beaux et vraiment utiles.</p>
+      </div>
+      <div class="offer-card reveal" style="transition-delay:0.24s">
+        <div class="offer-num">03</div>
+        <span class="offer-icon">🔮</span>
+        <div class="offer-title">Recommandations de produits spirituels</div>
+        <p class="offer-desc">Bougies, cristaux, journaux, accessoires — une sélection pensée pour accompagner ta pratique.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rune-divider">⋆ ✦ ☽ ✦ ⋆</div>
+
+  <!-- ── PINTEREST ── -->
+  <section id="pinterest" class="reveal">
+    <p class="section-sub">— inspirations &amp; découvertes</p>
+    <h2 class="section-title" style="justify-content:center">Retrouve-moi sur Pinterest</h2>
+    <div style="display:flex;justify-content:center">
+      <div class="pinterest-card">
+        <div class="pinterest-icon">📌</div>
+        <p class="pinterest-text">
+          Sélections de jeux, inspirations tarot &amp; oracle, idées de rituels et produits spirituels — tout est là, épinglé pour toi.
+        </p>
+        <a href="https://pin.it/5X2GAV6vf" target="_blank" rel="noopener noreferrer" class="pinterest-btn">
+          ✦ Voir mes épingles
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="rune-divider">⋆ ✦ ☽ ✦ ⋆</div>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="reveal">
+    <p class="section-sub">— contact</p>
+    <h2 class="section-title" style="justify-content:center">Entrer en contact</h2>
+    <div class="contact-orb">🔮</div>
+    <p class="contact-text">Tu as une question, tu veux collaborer, ou tu cherches un conseil sur un jeu de tarot ? Les portes sont ouvertes.</p>
+    <div class="contact-links">
+      <a href="mailto:contact@floryne-pierson.fr" class="contact-link">✉ Email</a>
+      <a href="https://pin.it/5X2GAV6vf" target="_blank" rel="noopener noreferrer" class="contact-link">📌 Pinterest</a>
+      <a href="#" class="contact-link">✦ Instagram</a>
+    </div>
+  </section>
+
+</div><!-- /wrapper -->
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="footer-logo">Floryne Pierson</span>
+  <div class="footer-links">
+    <a href="oracle-debutant.html">Débuter</a>
+    <a href="meilleurs-oracles.html">Sélection</a>
+    <a href="utiliser-oracle.html">Utiliser</a>
+    <a href="a-propos.html">À propos</a>
+    <a href="affiliation.html">Affiliation</a>
+    <a href="#" onclick="openModal('ml'); return false;">Mentions légales</a>
+    <a href="#" onclick="openModal('pc'); return false;">Politique de confidentialité</a>
+    <a href="#" onclick="openModal('affil'); return false;">Liens affiliés</a>
+    <a href="#" onclick="openModal('cookies-policy'); return false;">Gestion des cookies</a>
+  </div>
+  <p class="footer-copy">© 2025 Floryne Pierson — Tous droits réservés</p>
+</footer>
+
+<!-- ── COOKIE BANNER ── -->
+<div id="cookie-banner">
+  <p>
+    🍪 Ce site n'utilise pas de cookies de tracking ni de publicité.
+    Des cookies techniques essentiels peuvent être utilisés pour le bon fonctionnement du site.
+    <a href="#" onclick="openModal('cookies-policy'); return false;">En savoir plus</a>.
+  </p>
+  <div class="cookie-btns">
+    <button class="btn-refuse" onclick="dismissCookies()">Refuser</button>
+    <button class="btn-accept" onclick="dismissCookies()">J'accepte</button>
+  </div>
+</div>
+
+<!-- ── MODAL : LIENS AFFILIÉS ── -->
+<div class="modal-overlay" id="modal-affil">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('affil')">✕</button>
+    <h2>Politique de liens affiliés</h2>
+    <p>Conformément aux recommandations de la DGCCRF et aux conditions d'utilisation des programmes d'affiliation (Amazon Partenaires, AliExpress, etc.).</p>
+
+    <h3>Transparence sur les liens affiliés</h3>
+    <p>Certains liens présents sur ce site sont des <strong>liens affiliés</strong>. Cela signifie que si vous cliquez sur l'un de ces liens et effectuez un achat, je peux percevoir une <strong>commission de la part du marchand</strong>, sans aucun coût supplémentaire pour vous.</p>
+
+    <h3>Ce que ça change (ou pas)</h3>
+    <p>Les produits et jeux que je recommande sont sélectionnés selon mes propres critères et convictions. Les liens affiliés ne influencent pas mes avis : je ne recommande que ce que je trouve réellement pertinent pour les débutants en tarot et oracles.</p>
+
+    <h3>Programmes utilisés</h3>
+    <ul>
+      <li><strong>Amazon Partenaires</strong> — Programme d'affiliation d'Amazon EU S.à.r.l.</li>
+      <li><strong>AliExpress</strong> — Programme d'affiliation AliExpress</li>
+    </ul>
+    <p>En tant que partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises.</p>
+
+    <h3>Identification des liens affiliés</h3>
+    <p>Les liens affiliés peuvent être identifiés par leur format d'URL (ex. <em>amzn.to/…</em> ou tag de suivi). En cas de doute, n'hésitez pas à me contacter : <a href="mailto:contact@floryne-pierson.fr">contact@floryne-pierson.fr</a></p>
+  </div>
+</div>
+
+
+<div class="modal-overlay" id="modal-ml">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('ml')">✕</button>
+    <h2>Mentions légales</h2>
+    <p>Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance en l'économie numérique (LCEN).</p>
+
+    <h3>Éditrice du site</h3>
+    <p>Floryne Pierson<br>
+    Particulier — non assujettie à TVA<br>
+    Email : <a href="mailto:contact@floryne-pierson.fr">contact@floryne-pierson.fr</a></p>
+
+    <h3>Hébergement</h3>
+    <p>À renseigner selon votre hébergeur (ex : GitHub Pages, OVH, Netlify…).<br>
+    Adresse et contact de l'hébergeur à compléter.</p>
+
+    <h3>Activité</h3>
+    <p>Partage de guides et recommandations autour du tarot et des oracles. Ce site contient des liens affiliés (Amazon Partenaires, AliExpress) — voir la <a href="#" onclick="closeModal('ml'); openModal('affil'); return false;">politique de liens affiliés</a>.</p>
+
+    <h3>Propriété intellectuelle</h3>
+    <p>L'ensemble du contenu de ce site (textes, visuels, illustrations, charte graphique) est la propriété exclusive de Floryne Pierson, protégé par les lois françaises et internationales relatives au droit d'auteur et à la propriété intellectuelle. Toute reproduction, même partielle, est interdite sans autorisation préalable.</p>
+
+    <h3>Responsabilité</h3>
+    <p>Floryne Pierson s'efforce d'assurer l'exactitude des informations présentes sur ce site. La responsabilité de l'éditrice ne peut être engagée en cas d'inexactitude ou d'omission.</p>
+
+    <h3>Droit applicable</h3>
+    <p>Le présent site est soumis au droit français. En cas de litige, les tribunaux français seront seuls compétents.</p>
+  </div>
+</div>
+
+<!-- ── MODAL : POLITIQUE DE CONFIDENTIALITÉ ── -->
+<div class="modal-overlay" id="modal-pc">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('pc')">✕</button>
+    <h2>Politique de confidentialité</h2>
+    <p>Conformément au Règlement (UE) 2016/679 (RGPD) et à la loi Informatique et Libertés modifiée.</p>
+
+    <h3>Responsable du traitement</h3>
+    <p>Floryne Pierson — <a href="mailto:contact@floryne-pierson.fr">contact@floryne-pierson.fr</a></p>
+
+    <h3>Données collectées</h3>
+    <p>Ce site vitrine ne collecte aucune donnée personnelle de manière automatique. Si vous me contactez par email, les données transmises (nom, adresse email, message) sont utilisées uniquement pour répondre à votre demande et ne sont pas conservées au-delà de ce besoin.</p>
+
+    <h3>Cookies</h3>
+    <p>Ce site n'utilise pas de cookies de tracking, d'analyse ou publicitaires. Seuls des cookies techniques strictement nécessaires au fonctionnement peuvent être déposés (aucun consentement requis selon la directive ePrivacy).</p>
+
+    <h3>Vos droits (RGPD)</h3>
+    <p>Conformément aux articles 15 à 22 du RGPD, vous disposez des droits suivants :</p>
+    <ul>
+      <li>Droit d'accès à vos données</li>
+      <li>Droit de rectification</li>
+      <li>Droit à l'effacement (« droit à l'oubli »)</li>
+      <li>Droit à la limitation du traitement</li>
+      <li>Droit à la portabilité</li>
+      <li>Droit d'opposition</li>
+    </ul>
+    <p>Pour exercer ces droits : <a href="mailto:contact@floryne-pierson.fr">contact@floryne-pierson.fr</a></p>
+    <p>Vous pouvez également introduire une réclamation auprès de la <strong>CNIL</strong> : <a href="https://www.cnil.fr" target="_blank">www.cnil.fr</a></p>
+
+    <h3>Transferts de données</h3>
+    <p>Aucune donnée personnelle n'est transmise à des tiers ou transférée hors de l'Union européenne.</p>
+  </div>
+</div>
+
+<!-- ── MODAL : COOKIES ── -->
+<div class="modal-overlay" id="modal-cookies-policy">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('cookies-policy')">✕</button>
+    <h2>Gestion des cookies</h2>
+    <p>Conformément à la directive européenne ePrivacy (2002/58/CE) et aux recommandations de la CNIL.</p>
+
+    <h3>Qu'est-ce qu'un cookie ?</h3>
+    <p>Un cookie est un petit fichier texte déposé sur votre appareil lors de la visite d'un site web. Il peut contenir des informations sur votre navigation.</p>
+
+    <h3>Cookies utilisés sur ce site</h3>
+    <p>Ce site n'utilise <strong>pas de cookies de mesure d'audience, de tracking ou publicitaires</strong>. Seul le cookie de préférence de consentement (mémorisation de votre choix) peut être déposé — il est exempt de consentement selon les lignes directrices de la CNIL.</p>
+
+    <h3>Vos choix</h3>
+    <p>Vous pouvez à tout moment modifier les paramètres de cookies de votre navigateur. La plupart des navigateurs proposent des options pour refuser les cookies :</p>
+    <ul>
+      <li>Chrome : Paramètres → Confidentialité et sécurité → Cookies</li>
+      <li>Firefox : Options → Vie privée et sécurité</li>
+      <li>Safari : Préférences → Confidentialité</li>
+    </ul>
+    <p>Pour plus d'informations : <a href="https://www.cnil.fr/fr/cookies-et-autres-traceurs" target="_blank">CNIL — Cookies et autres traceurs</a></p>
+  </div>
+</div>
+
+<script>
+  // ── TOUCH DETECTION ──
+  const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
+
+  // ── CURSOR (desktop only) ──
+  const cursor = document.getElementById('cursor');
+  const trail  = document.getElementById('cursor-trail');
+  let mx = 0, my = 0, tx = 0, ty = 0;
+  if (!isTouchDevice()) {
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx - 6 + 'px';
+      cursor.style.top  = my - 6 + 'px';
+    });
+    function animTrail() {
+      tx += (mx - tx) * 0.15;
+      ty += (my - ty) * 0.15;
+      trail.style.left = tx - 16 + 'px';
+      trail.style.top  = ty - 16 + 'px';
+      requestAnimationFrame(animTrail);
+    }
+    animTrail();
+  }
+
+  // ── HAMBURGER DRAWER ──
+  const burger   = document.getElementById('burger');
+  const drawer   = document.getElementById('drawer');
+  const backdrop = document.getElementById('backdrop');
+
+  function openDrawer() {
+    burger.classList.add('open');
+    drawer.classList.add('open');
+    backdrop.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    burger.classList.remove('open');
+    drawer.classList.remove('open');
+    backdrop.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  burger.addEventListener('click', () => {
+    burger.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+  backdrop.addEventListener('click', closeDrawer);
+  document.querySelectorAll('.drawer-link').forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+  // ── STARS ──
+  const canvas = document.getElementById('stars');
+  const ctx    = canvas.getContext('2d');
+  function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const starCount = isTouchDevice() ? 90 : 180;
+  const stars = Array.from({length: starCount}, () => ({
+    x: Math.random(), y: Math.random(),
+    r: Math.random() * 1.5 + 0.3,
+    a: Math.random(),
+    s: Math.random() * 0.008 + 0.003,
+    d: Math.random() > 0.5 ? 1 : -1
+  }));
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.a += s.s * s.d;
+      if (s.a > 1 || s.a < 0.05) s.d *= -1;
+      ctx.beginPath();
+      ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,190,255,${s.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(drawStars);
+  }
+  drawStars();
+
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // ── COOKIE BANNER ──
+  function dismissCookies() {
+    const banner = document.getElementById('cookie-banner');
+    banner.style.transition = 'opacity 0.4s, transform 0.4s';
+    banner.style.opacity = '0';
+    banner.style.transform = 'translateX(-50%) translateY(20px)';
+    setTimeout(() => banner.remove(), 400);
+    try { localStorage.setItem('cookieConsent', 'done'); } catch(e) {}
+  }
+  try {
+    if (localStorage.getItem('cookieConsent')) {
+      document.getElementById('cookie-banner').remove();
+    }
+  } catch(e) {}
+
+  // ── MODALS ──
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  // ── PARALLAX MOON (desktop only) ──
+  if (!isTouchDevice()) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      document.querySelector('.moon-bg').style.transform = `translateY(${y * 0.3}px)`;
+    });
+  }
+</script>
+</body>
+</html>

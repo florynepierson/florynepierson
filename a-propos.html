@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>À propos — Floryne Pierson — Floryne Pierson</title>
+  <meta name="description" content="Qui est Floryne Pierson, pourquoi elle partage autour du tarot et des oracles, et sa vision d'une pratique accessible à tou·tes." />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="64x64" href="favicon-64.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --ink: #0b0c1a; --deep: #10112b; --void: #161831;
+      --violet: #6b3fa0; --indigo: #3d2e8c; --lavender: #a78bd4;
+      --frost: #c9c4f5; --glow: #b48ef0; --moon: #f0eaff;
+      --silver: #d4cef5aa; --accent: #e040fb;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--ink); color: var(--frost); font-family: 'Cormorant Garamond', Georgia, serif; overflow-x: hidden; }
+
+    /* CURSOR */
+    #cursor, #cursor-trail { display: none; }
+    @media (hover: hover) and (pointer: fine) {
+      body { cursor: none; }
+      #cursor { display: block; width: 12px; height: 12px; background: var(--glow); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; box-shadow: 0 0 14px var(--glow), 0 0 40px var(--violet); }
+      #cursor-trail { display: block; width: 32px; height: 32px; border: 1px solid var(--lavender); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; opacity: 0.4; transition: left 0.12s ease, top 0.12s ease; }
+    }
+
+    /* STARS */
+    #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    /* PARTICLES */
+    .particle { position: fixed; pointer-events: none; font-size: 1rem; animation: floatUp var(--dur2, 6s) ease-in-out infinite; opacity: 0; z-index: 1; }
+    @keyframes floatUp { 0% { opacity:0; transform:translateY(0) rotate(0deg); } 20% { opacity:0.7; } 80% { opacity:0.3; } 100% { opacity:0; transform:translateY(-120px) rotate(360deg); } }
+
+    /* NAV */
+    nav.topnav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: linear-gradient(to bottom, #0b0c1aee, transparent); backdrop-filter: blur(4px); }
+    .nav-logo { font-family: 'Cinzel Decorative', serif; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--lavender); text-decoration: none; z-index: 201; position: relative; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--silver); text-decoration: none; transition: color 0.3s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1px; background: var(--glow); transform: scaleX(0); transition: transform 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--moon); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; z-index: 201; padding: 4px; }
+    .nav-burger span { display: block; height: 2px; background: var(--lavender); border-radius: 2px; transition: transform 0.35s ease, opacity 0.25s ease, background 0.25s; transform-origin: center; }
+    .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--glow); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--glow); }
+    .nav-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(80vw,300px); background: #10112bf0; backdrop-filter: blur(20px); border-left: 1px solid #6b3fa044; z-index: 199; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 6rem 2.5rem 3rem; box-shadow: -20px 0 60px #0b0c1a88; transform: translateX(110%); visibility: hidden; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), visibility 0s linear 0.4s; }
+    .nav-drawer.open { transform: translateX(0); visibility: visible; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), visibility 0s linear 0s; }
+    .nav-drawer ul { list-style: none; display: flex; flex-direction: column; width: 100%; }
+    .nav-drawer ul li { border-bottom: 1px solid #6b3fa022; }
+    .nav-drawer ul li:first-child { border-top: 1px solid #6b3fa022; }
+    .nav-drawer ul li a { display: block; padding: 1.2rem 0; font-family: 'Cinzel Decorative', serif; font-size: 0.9rem; letter-spacing: 0.1em; color: var(--lavender); text-decoration: none; transition: color 0.25s, padding-left 0.25s; }
+    .nav-drawer ul li a:hover { color: var(--moon); padding-left: 0.5rem; }
+    .drawer-deco { margin-top: 3rem; font-size: 1.5rem; letter-spacing: 0.5rem; color: var(--violet); opacity: 0.4; }
+    .nav-backdrop { position: fixed; inset: 0; background: #0b0c1a88; z-index: 198; opacity: 0; visibility: hidden; transition: opacity 0.4s, visibility 0s linear 0.4s; }
+    .nav-backdrop.open { opacity: 1; visibility: visible; transition: opacity 0.4s, visibility 0s linear 0s; }
+
+    /* AFFIL BANNER */
+    .affil-banner { background: #1a1040; border-bottom: 1px solid #6b3fa033; padding: 0.6rem 2rem; text-align: center; font-family: 'Space Mono', monospace; font-size: 0.55rem; color: var(--lavender); letter-spacing: 0.08em; opacity: 0.75; position: relative; z-index: 2; margin-top: 60px; }
+    .affil-banner a { color: var(--glow); }
+
+    /* PAGE HERO (inner pages) */
+    .page-hero { padding: 9rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
+    .page-hero-moon { position: absolute; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle at 38% 42%, #2a1a5e 0%, #1a1040 40%, #0b0c1a 100%); box-shadow: 0 0 60px #6b3fa055, 0 0 120px #3d2e8c33; animation: moonGlow 6s ease-in-out infinite; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
+    @keyframes moonGlow { 0%,100% { box-shadow: 0 0 60px #6b3fa055, 0 0 120px #3d2e8c33; } 50% { box-shadow: 0 0 90px #6b3fa088, 0 0 180px #6b3fa044; } }
+    .page-hero-content { position: relative; z-index: 2; }
+    .page-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--lavender); opacity: 0.8; margin-bottom: 0.8rem; }
+    .page-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.8rem, 5vw, 3rem); color: var(--moon); line-height: 1.15; text-shadow: 0 0 40px var(--violet); margin-bottom: 1rem; }
+    .page-intro { font-size: 1.15rem; font-style: italic; color: var(--silver); max-width: 560px; margin: 0 auto; line-height: 1.8; }
+
+    /* WRAPPER */
+    .wrapper { position: relative; z-index: 2; }
+
+    /* CONTENT SECTIONS */
+    .content-section { max-width: 860px; margin: 0 auto; padding: 4rem 2rem; }
+    .content-section + .content-section { padding-top: 0; }
+
+    /* PROSE */
+    .prose h2 { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--moon); margin: 2.5rem 0 1rem; display: flex; align-items: center; gap: 0.8rem; }
+    .prose h2::before { content: '✦'; color: var(--glow); font-size: 0.7em; flex-shrink: 0; }
+    .prose p { font-size: 1.05rem; line-height: 1.95; color: var(--silver); margin-bottom: 1.2rem; }
+    .prose em { color: var(--lavender); font-style: italic; }
+    .prose strong { color: var(--frost); font-weight: 600; }
+    .prose ul { padding-left: 1.5rem; margin-bottom: 1.2rem; }
+    .prose ul li { font-size: 1.05rem; line-height: 1.8; color: var(--silver); margin-bottom: 0.4rem; }
+    .prose ul li::marker { color: var(--glow); }
+
+    /* CARDS GRID */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .card { border: 1px solid #6b3fa044; padding: 2rem 1.8rem; border-radius: 6px; background: linear-gradient(145deg, #161831ee, #0e0f22ee); position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, var(--glow), transparent); opacity: 0.6; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px #3d2e8c44; }
+    .card-icon { font-size: 2rem; display: block; margin-bottom: 1rem; }
+    .card-title { font-family: 'Cinzel Decorative', serif; font-size: 0.8rem; color: var(--moon); margin-bottom: 0.6rem; letter-spacing: 0.05em; line-height: 1.4; }
+    .card-desc { font-size: 0.9rem; color: var(--silver); line-height: 1.7; font-style: italic; }
+    .card-tag { display: inline-block; margin-top: 1rem; font-family: 'Space Mono', monospace; font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--glow); border: 1px solid #6b3fa044; padding: 0.25rem 0.6rem; border-radius: 2px; }
+
+    /* CTA BLOCK */
+    .cta-block { text-align: center; padding: 4rem 2rem; }
+    .cta-block p { font-size: 1.05rem; font-style: italic; color: var(--silver); max-width: 500px; margin: 0 auto 2rem; line-height: 1.8; }
+    .btn-cta { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.9rem 2.5rem; border: 1px solid var(--glow); color: var(--glow); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; position: relative; overflow: hidden; transition: color 0.35s; border-radius: 2px; }
+    .btn-cta::before { content: ''; position: absolute; inset: 0; background: var(--glow); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; z-index: -1; }
+    .btn-cta:hover { color: var(--ink); }
+    .btn-cta:hover::before { transform: scaleX(1); }
+    .btn-cta-purple { border-color: var(--violet); color: var(--lavender); }
+    .btn-cta-purple::before { background: var(--violet); }
+    .btn-cta-purple:hover { color: var(--moon); }
+
+    /* DIVIDER */
+    .rune-divider { text-align: center; color: var(--violet); opacity: 0.4; font-size: 1rem; letter-spacing: 1rem; padding: 1rem 0; position: relative; z-index: 2; }
+
+    /* BREADCRUMB */
+    .breadcrumb { font-family: 'Space Mono', monospace; font-size: 0.5rem; letter-spacing: 0.1em; color: var(--lavender); opacity: 0.5; text-align: center; padding-top: 1rem; position: relative; z-index: 3; }
+    .breadcrumb a { color: inherit; text-decoration: none; }
+    .breadcrumb a:hover { color: var(--glow); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid #6b3fa022; padding: 3rem 2rem; text-align: center; position: relative; z-index: 2; }
+    .footer-logo { font-family: 'Cinzel Decorative', serif; font-size: 0.9rem; color: var(--lavender); margin-bottom: 1.5rem; display: block; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .footer-links a { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; color: var(--silver); text-decoration: none; opacity: 0.6; transition: opacity 0.3s, color 0.3s; }
+    .footer-links a:hover { opacity: 1; color: var(--lavender); }
+    .footer-copy { font-size: 0.75rem; color: var(--silver); opacity: 0.3; font-style: italic; }
+
+    /* COOKIE BANNER */
+    #cookie-banner { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); width: min(92vw,700px); background: #10112bee; border: 1px solid #6b3fa066; backdrop-filter: blur(12px); padding: 1.5rem 2rem; z-index: 1000; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; box-shadow: 0 8px 40px #0b0c1a88, 0 0 30px #3d2e8c33; border-radius: 4px; animation: fadeUp 0.5s 0.5s both; }
+    #cookie-banner p { flex: 1; font-size: 0.8rem; line-height: 1.6; color: var(--silver); min-width: 200px; }
+    #cookie-banner a { color: var(--lavender); }
+    .cookie-btns { display: flex; gap: 0.8rem; flex-shrink: 0; }
+    .btn-accept, .btn-refuse { padding: 0.6rem 1.4rem; font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; border: none; cursor: pointer; transition: all 0.3s; border-radius: 2px; }
+    .btn-accept { background: var(--violet); color: var(--moon); }
+    .btn-accept:hover { background: var(--glow); color: var(--ink); }
+    .btn-refuse { background: transparent; border: 1px solid #6b3fa055; color: var(--lavender); }
+    .btn-refuse:hover { border-color: var(--lavender); color: var(--moon); }
+
+    /* MODAL */
+    .modal-overlay { position: fixed; inset: 0; background: #0b0c1acc; z-index: 500; display: none; align-items: center; justify-content: center; padding: 2rem; backdrop-filter: blur(6px); }
+    .modal-overlay.open { display: flex; }
+    .modal { background: #10112b; border: 1px solid #6b3fa066; max-width: 660px; width: 100%; max-height: 80vh; overflow-y: auto; padding: 3rem; position: relative; border-radius: 4px; box-shadow: 0 0 60px #3d2e8c44; }
+    .modal h2 { font-family: 'Cinzel Decorative', serif; font-size: 1.1rem; color: var(--lavender); margin-bottom: 1.5rem; }
+    .modal h3 { font-family: 'Cinzel Decorative', serif; font-size: 0.8rem; color: var(--glow); margin: 1.5rem 0 0.5rem; }
+    .modal p, .modal li { font-size: 0.85rem; line-height: 1.8; color: var(--silver); }
+    .modal ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+    .modal a { color: var(--lavender); }
+    .modal-close { position: absolute; top: 1.2rem; right: 1.5rem; background: none; border: none; color: var(--lavender); font-size: 1.4rem; cursor: pointer; transition: color 0.2s; }
+    .modal-close:hover { color: var(--moon); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes chibiFloat { 0%,100% { transform:translateY(0) rotate(-1deg); } 50% { transform:translateY(-14px) rotate(1deg); } }
+    @keyframes spinOrbit { to { transform:rotate(360deg); } }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav.topnav { padding: 1rem 1.5rem; background: #0b0c1af0; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .page-hero { padding: 7rem 1.2rem 3.5rem; }
+      .page-hero-moon { width: 200px; height: 200px; }
+      .page-title { font-size: clamp(1.4rem, 7vw, 2rem); }
+      .content-section { padding: 2.5rem 1.2rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+      footer { padding: 2rem 1.2rem; }
+      .footer-links { gap: 1rem; }
+      .footer-links a { font-size: 0.5rem; }
+      #cookie-banner { padding: 1.2rem; gap: 1rem; bottom: 0.8rem; }
+      #cookie-banner p { font-size: 0.72rem; min-width: unset; }
+      .modal { padding: 2rem 1.2rem; max-height: 90vh; }
+      .modal h2 { font-size: 0.95rem; padding-right: 2rem; }
+      .affil-banner { font-size: 0.5rem; padding: 0.5rem 1rem; }
+      .particle:nth-child(n+4) { display: none; }
+      .rune-divider { letter-spacing: 0.5rem; font-size: 0.8rem; }
+      .cta-block { padding: 2.5rem 1.2rem; }
+    }
+    @media (max-width: 380px) {
+      .page-title { font-size: 1.3rem; }
+    }
+
+
+  </style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+<canvas id="stars"></canvas>
+<div class="particle" style="left:10%;bottom:20%;--dur2:7s;animation-delay:0s">✦</div>
+<div class="particle" style="left:25%;bottom:10%;--dur2:9s;animation-delay:2s">🌙</div>
+<div class="particle" style="left:70%;bottom:15%;--dur2:6s;animation-delay:1s">✧</div>
+<div class="particle" style="left:85%;bottom:25%;--dur2:8s;animation-delay:3s">⋆</div>
+<nav class="topnav">
+  <a class="nav-logo" href="index.html">F.P.</a>
+  <ul class="nav-links">
+    <li><a href="index.html" >Accueil</a></li>
+    <li><a href="oracle-debutant.html" >Débuter</a></li>
+    <li><a href="meilleurs-oracles.html" >Sélection</a></li>
+    <li><a href="utiliser-oracle.html" >Utiliser</a></li>
+    <li><a href="a-propos.html" class='active'>À propos</a></li>
+  </ul>
+  <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-backdrop" id="backdrop"></div>
+<nav class="nav-drawer" id="drawer" aria-hidden="true">
+  <ul>
+    <li><a href="index.html" class="drawer-link">✦ Accueil</a></li>
+    <li><a href="oracle-debutant.html" class="drawer-link">✦ Débuter avec les oracles</a></li>
+    <li><a href="meilleurs-oracles.html" class="drawer-link">✦ Meilleurs oracles</a></li>
+    <li><a href="utiliser-oracle.html" class="drawer-link">✦ Utiliser un oracle</a></li>
+    <li><a href="a-propos.html" class="drawer-link">✦ À propos</a></li>
+    <li><a href="affiliation.html" class="drawer-link">✦ Affiliation</a></li>
+  </ul>
+  <div class="drawer-deco">☽ ✦ ☾</div>
+</nav>
+<div class="affil-banner">
+  ✦ Certains liens présents sur ce site peuvent être des liens affiliés — je peux percevoir une commission sans coût supplémentaire pour vous. <a href="affiliation.html">En savoir plus</a>
+</div>
+<div class="wrapper">
+
+  <div class="page-hero">
+    <div class="page-hero-moon"></div>
+    <div class="page-hero-content">
+      <p class="page-eyebrow">Histoire · Vision</p>
+      <h1 class="page-title">À propos</h1>
+      <p class="page-intro">Qui suis-je, pourquoi j'ai créé cet espace, et ce que je veux partager avec toi.</p>
+    </div>
+  </div>
+  <p class="breadcrumb"><a href="index.html">Accueil</a> / À propos</p>
+
+  <div class="rune-divider">⋆ ✦ ☽ ✦ ⋆</div>
+
+  <div class="content-section reveal">
+    <div class="prose">
+      <h2>Bienvenue, je suis Floryne</h2>
+      <p>Je suis une curieuse passionnée d'univers symboliques, d'introspection et de tout ce qui aide à mieux se comprendre. Le tarot et les oracles sont entrés dans ma vie presque par hasard — un jeu aperçu dans une librairie, une curiosité piquée — et ils n'en sont jamais repartis.</p>
+      <p>Ce qui m'a frappée au début, c'est à quel point ces outils peuvent être <em>intimidants de l'extérieur</em> et pourtant si simples et bienveillants une fois qu'on les prend en main. Beaucoup de personnes repartent avant d'avoir vraiment commencé, découragées par un jargon trop ésotérique ou des ressources trop complexes.</p>
+      <p>C'est pour ça que j'ai créé cet espace : pour rendre le tarot et les oracles <strong>accessibles, clairs et démystifiés</strong> — sans perdre leur magie.</p>
+
+      <h2>Ma vision de la pratique</h2>
+      <p>Je ne suis pas médium, je ne prétends pas lire l'avenir, et je ne pense pas que les cartes aient des pouvoirs surnaturels. Ce que je crois, c'est que ces outils sont des <em>amplificateurs de conscience</em> : ils nous aident à verbaliser ce qu'on ressent confusément, à questionner nos habitudes de pensée, à trouver de la clarté dans le bruit du quotidien.</p>
+      <p>Ma pratique est ancrée dans la psychologie junguienne et la symbolique des images. Je l'aborde comme un outil de développement personnel avant tout — accessible à tou·tes, croyant·es comme sceptiques.</p>
+
+      <h2>Ce que tu trouveras ici</h2>
+      <ul>
+        <li>Des <strong>guides pour débuter</strong> rédigés sans jargon obscur.</li>
+        <li>Des <strong>sélections honnêtes</strong> de jeux et de produits — j'achète et j'utilise ce que je recommande.</li>
+        <li>Une approche <strong>bienveillante et inclusive</strong> — le tarot n'a pas de genre, pas de religion, pas de prérequis.</li>
+      </ul>
+
+      <h2>Une transparence totale</h2>
+      <p>Ce site contient des liens affiliés (Amazon, AliExpress). Cela signifie que si tu achètes via mes liens, je touche une petite commission — <em>sans aucun surcoût pour toi</em>. Cette source de revenus m'aide à maintenir le site et à continuer à créer du contenu gratuit.</p>
+      <p>Je ne recommande que des produits que j'utilise moi-même ou que j'ai testés de près. Mon avis n'est jamais à vendre. Pour en savoir plus : <a href="affiliation.html">ma politique d'affiliation</a>.</p>
+    </div>
+  </div>
+
+  <div class="rune-divider">⋆ ✦ ☽ ✦ ⋆</div>
+
+  <div class="content-section reveal">
+    <h2 style="font-family:'Cinzel Decorative',serif;font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--moon);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem"><span style="color:var(--glow)">✦</span> Me retrouver ailleurs</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">📌</span>
+        <div class="card-title">Pinterest</div>
+        <p class="card-desc">Mes sélections visuelles, inspirations tarot &amp; oracle, idées de rituels et produits spirituels — épinglés pour toi.</p>
+        <a href="https://pin.it/5X2GAV6vf" target="_blank" rel="noopener" style="display:inline-block;margin-top:1rem" class="btn-cta">Voir mes épingles</a>
+      </div>
+      <div class="card">
+        <span class="card-icon">✉</span>
+        <div class="card-title">Contact</div>
+        <p class="card-desc">Une question, une collaboration, un jeu à me faire découvrir ? Je lis tous mes messages et j'essaie de répondre rapidement.</p>
+        <a href="mailto:contact@floryne-pierson.fr" style="display:inline-block;margin-top:1rem" class="btn-cta">Écrire un message</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+<footer>
+  <span class="footer-logo">Floryne Pierson</span>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="oracle-debutant.html">Débuter</a>
+    <a href="meilleurs-oracles.html">Sélection</a>
+    <a href="utiliser-oracle.html">Utiliser</a>
+    <a href="a-propos.html">À propos</a>
+    <a href="affiliation.html">Affiliation</a>
+    <a href="#" onclick="openModal('ml'); return false;">Mentions légales</a>
+    <a href="#" onclick="openModal('pc'); return false;">Confidentialité</a>
+    <a href="#" onclick="openModal('cookies-policy'); return false;">Cookies</a>
+  </div>
+  <p class="footer-copy">© 2025 Floryne Pierson — Tous droits réservés</p>
+</footer>
+<div id="cookie-banner">
+  <p>🍪 Ce site n'utilise pas de cookies de tracking. Des cookies techniques essentiels peuvent être utilisés. <a href="#" onclick="openModal('cookies-policy'); return false;">En savoir plus</a>.</p>
+  <div class="cookie-btns">
+    <button class="btn-refuse" onclick="dismissCookies()">Refuser</button>
+    <button class="btn-accept" onclick="dismissCookies()">Accepter</button>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-ml">
+  <div class="modal"><button class="modal-close" onclick="closeModal('ml')">✕</button>
+    <h2>Mentions légales</h2>
+    <p>Conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN).</p>
+    <h3>Éditrice</h3><p>Floryne Pierson — Particulier — <a href="mailto:contact@floryne-pierson.fr">contact@floryne-pierson.fr</a></p>
+    <h3>Hébergement</h3><p>À renseigner selon votre hébergeur.</p>
+    <h3>Activité</h3><p>Guides et recommandations autour du tarot et des oracles. Ce site contient des <a href="affiliation.html">liens affiliés</a>.</p>
+    <h3>Propriété intellectuelle</h3><p>Tout le contenu est la propriété de Floryne Pierson. Reproduction interdite sans autorisation.</p>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-pc">
+  <div class="modal"><button class="modal-close" onclick="closeModal('pc')">✕</button>
+    <h2>Politique de confidentialité</h2>
+    <p>Conformément au RGPD (UE) 2016/679.</p>
+    <h3>Responsable</h3><p>Floryne Pierson — <a href="mailto:contact@floryne-pierson.fr">contact@floryne-pierson.fr</a></p>
+    <h3>Données collectées</h3><p>Aucune donnée personnelle n'est collectée automatiquement. Les emails reçus via le formulaire de contact sont utilisés uniquement pour répondre.</p>
+    <h3>Vos droits</h3><p>Accès, rectification, effacement, opposition — contactez <a href="mailto:contact@floryne-pierson.fr">contact@floryne-pierson.fr</a>. Réclamation : <a href="https://www.cnil.fr">cnil.fr</a></p>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-cookies-policy">
+  <div class="modal"><button class="modal-close" onclick="closeModal('cookies-policy')">✕</button>
+    <h2>Gestion des cookies</h2>
+    <p>Ce site n'utilise pas de cookies de tracking ou publicitaires. Seul un cookie technique de préférence de consentement peut être déposé.</p>
+    <h3>Vos choix</h3><p>Vous pouvez à tout moment modifier les paramètres de votre navigateur pour refuser les cookies.</p>
+    <p>Plus d'infos : <a href="https://www.cnil.fr/fr/cookies-et-autres-traceurs" target="_blank">CNIL — Cookies</a></p>
+  </div>
+</div>
+<script>
+  const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursor-trail');
+  let mx=0,my=0,tx=0,ty=0;
+  if (!isTouchDevice() && cursor) {
+    document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.left=mx-6+'px'; cursor.style.top=my-6+'px'; });
+    function animTrail(){ tx+=(mx-tx)*0.15; ty+=(my-ty)*0.15; trail.style.left=tx-16+'px'; trail.style.top=ty-16+'px'; requestAnimationFrame(animTrail); }
+    animTrail();
+  }
+  const burger=document.getElementById('burger'), drawer=document.getElementById('drawer'), backdrop=document.getElementById('backdrop');
+  function openDrawer(){ burger.classList.add('open'); drawer.classList.add('open'); backdrop.classList.add('open'); drawer.setAttribute('aria-hidden','false'); burger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeDrawer(){ burger.classList.remove('open'); drawer.classList.remove('open'); backdrop.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  burger.addEventListener('click', () => burger.classList.contains('open') ? closeDrawer() : openDrawer());
+  backdrop.addEventListener('click', closeDrawer);
+  document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', closeDrawer));
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeDrawer(); });
+  const canvas=document.getElementById('stars'), ctx=canvas.getContext('2d');
+  function resizeCanvas(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+  resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+  const starCount = isTouchDevice() ? 80 : 160;
+  const stars=Array.from({length:starCount},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.5+0.3,a:Math.random(),s:Math.random()*0.008+0.003,d:Math.random()>0.5?1:-1}));
+  function drawStars(){ ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(s=>{ s.a+=s.s*s.d; if(s.a>1||s.a<0.05)s.d*=-1; ctx.beginPath(); ctx.arc(s.x*canvas.width,s.y*canvas.height,s.r,0,Math.PI*2); ctx.fillStyle=`rgba(200,190,255,${s.a})`; ctx.fill(); }); requestAnimationFrame(drawStars); }
+  drawStars();
+  const reveals=document.querySelectorAll('.reveal');
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }),{threshold:0.1});
+  reveals.forEach(r=>observer.observe(r));
+  function dismissCookies(){ const b=document.getElementById('cookie-banner'); b.style.transition='opacity 0.4s'; b.style.opacity='0'; setTimeout(()=>b.remove(),400); try{localStorage.setItem('cookieConsent','done');}catch(e){} }
+  try{ if(localStorage.getItem('cookieConsent')) document.getElementById('cookie-banner').remove(); }catch(e){}
+  function openModal(id){ document.getElementById('modal-'+id).classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeModal(id){ document.getElementById('modal-'+id).classList.remove('open'); document.body.style.overflow=''; }
+  document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{ if(e.target===o){o.classList.remove('open');document.body.style.overflow='';} }));
+</script>
+</body>
+</html>

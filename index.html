@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Floryne Pierson — Créative</title>
-  <meta name="description" content="Site vitrine de Floryne Pierson, créative." />
+  <title>Floryne Pierson — Tarot & Oracles</title>
+  <meta name="description" content="Guides pour débuter le tarot et les oracles, sélections de jeux et recommandations de produits spirituels. Par Floryne Pierson." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
@@ -669,7 +669,140 @@
       transform: translateY(0);
     }
 
-    /* ── RESPONSIVE ── */
+    /* ── AFFILIATION BANNER ── */
+    .affil-banner {
+      background: #1a1040;
+      border-top: 1px solid #6b3fa033;
+      border-bottom: 1px solid #6b3fa033;
+      padding: 0.6rem 2rem;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--lavender);
+      letter-spacing: 0.08em;
+      opacity: 0.75;
+      position: relative;
+      z-index: 2;
+    }
+    .affil-banner a { color: var(--glow); }
+
+    /* ── OFFER CARDS ── */
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .offer-card {
+      border: 1px solid #6b3fa044;
+      padding: 2.2rem 1.8rem;
+      border-radius: 6px;
+      background: linear-gradient(145deg, #161831ee, #0e0f22ee);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s, box-shadow 0.35s;
+    }
+    .offer-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--glow), transparent);
+      opacity: 0.6;
+    }
+    .offer-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 50px #3d2e8c55;
+    }
+    .offer-num {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.55rem;
+      color: var(--glow);
+      letter-spacing: 0.3em;
+      margin-bottom: 1rem;
+      opacity: 0.7;
+    }
+    .offer-icon { font-size: 2.2rem; display: block; margin-bottom: 1rem; }
+    .offer-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.78rem;
+      color: var(--moon);
+      margin-bottom: 0.7rem;
+      line-height: 1.4;
+      letter-spacing: 0.05em;
+    }
+    .offer-desc {
+      font-size: 0.9rem;
+      color: var(--silver);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ── PINTEREST SECTION ── */
+    #pinterest {
+      text-align: center;
+    }
+    .pinterest-card {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      border: 1px solid #6b3fa055;
+      padding: 3rem 4rem;
+      border-radius: 8px;
+      background: linear-gradient(160deg, #1a1040, #10112b);
+      position: relative;
+      overflow: hidden;
+      max-width: 520px;
+      width: 100%;
+      margin-top: 1rem;
+      box-shadow: 0 0 40px #3d2e8c22;
+    }
+    .pinterest-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, #6b3fa022, transparent 70%);
+    }
+    .pinterest-icon {
+      font-size: 3rem;
+      animation: chibiFloat 5s ease-in-out infinite;
+      position: relative;
+    }
+    .pinterest-text {
+      font-size: 1rem;
+      color: var(--silver);
+      font-style: italic;
+      line-height: 1.7;
+      position: relative;
+    }
+    .pinterest-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 2rem;
+      background: linear-gradient(135deg, #6b3fa0, #3d2e8c);
+      color: var(--moon);
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      transition: all 0.3s;
+      position: relative;
+      box-shadow: 0 4px 20px #6b3fa044;
+    }
+    .pinterest-btn:hover {
+      background: linear-gradient(135deg, #b48ef0, #6b3fa0);
+      box-shadow: 0 8px 30px #6b3fa066;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 700px) {
+      .offer-grid { grid-template-columns: 1fr; }
+      .pinterest-card { padding: 2rem 1.5rem; }
+    }
     @media (max-width: 700px) {
       #about { grid-template-columns: 1fr; gap: 3rem; }
       .about-art { order: -1; }
@@ -704,10 +837,16 @@
   <a class="nav-logo" href="#">F.P.</a>
   <ul class="nav-links">
     <li><a href="#about">À propos</a></li>
-    <li><a href="#skills">Créations</a></li>
+    <li><a href="#offres">Ce que je propose</a></li>
+    <li><a href="#pinterest">Pinterest</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
+
+<!-- ── AFFILIATION BANNER ── -->
+<div class="affil-banner">
+  ✦ Certains liens présents sur ce site peuvent être des liens affiliés, ce qui signifie que je peux percevoir une commission sans coût supplémentaire pour vous. <a href="#" onclick="openModal('affil'); return false;">En savoir plus</a>
+</div>
 
 <!-- ── WRAPPER ── -->
 <div class="wrapper">
@@ -775,12 +914,12 @@
     </div>
 
     <div class="hero-content">
-      <p class="hero-eyebrow">Portfolio · Créative</p>
+      <p class="hero-eyebrow">Tarot · Oracles · Guidance intuitive</p>
       <h1 class="hero-name">
         Floryne Pierson
-        <span>✦ Univers en construction ✦</span>
+        <span>✦ Guides & Recommandations ✦</span>
       </h1>
-      <p class="hero-tagline">Un espace pour mes créations, mes rêves et tout ce qui prend vie entre les étoiles.</p>
+      <p class="hero-tagline">Guides pour débuter le tarot et les oracles, découvertes de jeux et sélections de produits pour développer ton intuition.</p>
       <a href="#about" class="hero-cta">Entrer dans l'orbite</a>
     </div>
 
@@ -797,9 +936,9 @@
     <div class="about-text reveal">
       <p class="section-sub">— à propos</p>
       <h2 class="section-title">Mon univers</h2>
-      <p style="margin-top:1.5rem">Bienvenue dans mon espace ! Je suis <em>Floryne</em>, créative en devenir. Ce site est encore en cours de construction — comme les meilleures choses dans la vie, ça prend le temps qu'il faut.</p>
-      <p>Je façonne peu à peu mon univers, entre créations artistiques, explorations visuelles et projets qui me tiennent à cœur. Tout ça arrive bientôt…</p>
-      <p>En attendant, l'espace est là, les étoiles sont allumées. <em>Reste dans les parages.</em> 🌙</p>
+      <p style="margin-top:1.5rem">Bienvenue ! Je suis <em>Floryne</em>, et je partage ici ma passion pour le tarot et les oracles. Mon objectif : rendre ces outils accessibles, bienveillants, et vraiment utiles au quotidien.</p>
+      <p>Que tu sois totalement débutant·e ou simplement curieux·se, tu trouveras ici des guides clairs, des découvertes de jeux et des recommandations honnêtes de produits pour développer ton intuition et ta guidance personnelle.</p>
+      <p><em>Chaque carte est une porte. Entrons-y ensemble.</em> 🌙</p>
     </div>
     <div class="about-art reveal" style="transition-delay:0.2s">
       <div class="moon-card">
@@ -811,28 +950,50 @@
 
   <div class="rune-divider">⋆ ✦ ☽ ✦ ⋆</div>
 
-  <!-- ── SKILLS / PASSIONS ── -->
-  <section id="skills" class="reveal">
-    <p class="section-sub">— créations & passions</p>
-    <h2 class="section-title" style="justify-content:center">Ce qui m'anime</h2>
-    <p style="font-style:italic;color:var(--silver);margin-bottom:3rem;font-size:1rem">
-      Bientôt rempli de vraies choses. Pour l'instant, voici les grandes directions.
+  <!-- ── CE QUE JE PROPOSE ── -->
+  <section id="offres" class="reveal">
+    <p class="section-sub">— ce que je propose</p>
+    <h2 class="section-title" style="justify-content:center">Guides &amp; Recommandations</h2>
+    <p style="font-style:italic;color:var(--silver);margin-bottom:0.5rem;font-size:1rem;text-align:center">
+      Autour du tarot et des oracles — pour débuter, choisir et s'épanouir.
     </p>
-    <div class="skills-grid">
-      <div class="skill-card reveal">
-        <span class="skill-icon">🎨</span>
-        <div class="skill-name">Création visuelle</div>
-        <p class="skill-desc">Illustrations, design, direction artistique — l'image comme langage premier.</p>
+    <div class="offer-grid">
+      <div class="offer-card reveal">
+        <div class="offer-num">01</div>
+        <span class="offer-icon">🃏</span>
+        <div class="offer-title">Guides pour débuter le tarot et les oracles</div>
+        <p class="offer-desc">Des ressources claires et bienveillantes pour prendre en main tes premières cartes, sans te perdre.</p>
       </div>
-      <div class="skill-card reveal" style="transition-delay:0.1s">
-        <span class="skill-icon">✨</span>
-        <div class="skill-name">Univers & narration</div>
-        <p class="skill-desc">Construire des mondes, des atmosphères, des histoires qui hantent longtemps après.</p>
+      <div class="offer-card reveal" style="transition-delay:0.12s">
+        <div class="offer-num">02</div>
+        <span class="offer-icon">✨</span>
+        <div class="offer-title">Sélections de jeux adaptés aux débutants</div>
+        <p class="offer-desc">Mes coups de cœur parmi les tarots et oracles : des jeux accessibles, beaux et vraiment utiles.</p>
       </div>
-      <div class="skill-card reveal" style="transition-delay:0.2s">
-        <span class="skill-icon">🌙</span>
-        <div class="skill-name">Exploration</div>
-        <p class="skill-desc">Curiosité insatiable — toujours en train d'apprendre, de tester, de surprendre.</p>
+      <div class="offer-card reveal" style="transition-delay:0.24s">
+        <div class="offer-num">03</div>
+        <span class="offer-icon">🔮</span>
+        <div class="offer-title">Recommandations de produits spirituels</div>
+        <p class="offer-desc">Bougies, cristaux, journaux, accessoires — une sélection pensée pour accompagner ta pratique.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rune-divider">⋆ ✦ ☽ ✦ ⋆</div>
+
+  <!-- ── PINTEREST ── -->
+  <section id="pinterest" class="reveal">
+    <p class="section-sub">— inspirations &amp; découvertes</p>
+    <h2 class="section-title" style="justify-content:center">Retrouve-moi sur Pinterest</h2>
+    <div style="display:flex;justify-content:center">
+      <div class="pinterest-card">
+        <div class="pinterest-icon">📌</div>
+        <p class="pinterest-text">
+          Sélections de jeux, inspirations tarot &amp; oracle, idées de rituels et produits spirituels — tout est là, épinglé pour toi.
+        </p>
+        <a href="https://pin.it/5X2GAV6vf" target="_blank" rel="noopener noreferrer" class="pinterest-btn">
+          ✦ Voir mes épingles
+        </a>
       </div>
     </div>
   </section>
@@ -844,11 +1005,11 @@
     <p class="section-sub">— contact</p>
     <h2 class="section-title" style="justify-content:center">Entrer en contact</h2>
     <div class="contact-orb">🔮</div>
-    <p class="contact-text">Tu veux suivre l'évolution du projet, collaborer, ou juste dire bonjour ? Les portes sont ouvertes.</p>
+    <p class="contact-text">Tu as une question, tu veux collaborer, ou tu cherches un conseil sur un jeu de tarot ? Les portes sont ouvertes.</p>
     <div class="contact-links">
       <a href="mailto:contact@floryne-pierson.fr" class="contact-link">✉ Email</a>
+      <a href="https://pin.it/5X2GAV6vf" target="_blank" rel="noopener noreferrer" class="contact-link">📌 Pinterest</a>
       <a href="#" class="contact-link">✦ Instagram</a>
-      <a href="#" class="contact-link">✦ LinkedIn</a>
     </div>
   </section>
 
@@ -860,6 +1021,7 @@
   <div class="footer-links">
     <a href="#" onclick="openModal('ml'); return false;">Mentions légales</a>
     <a href="#" onclick="openModal('pc'); return false;">Politique de confidentialité</a>
+    <a href="#" onclick="openModal('affil'); return false;">Liens affiliés</a>
     <a href="#" onclick="openModal('cookies-policy'); return false;">Gestion des cookies</a>
   </div>
   <p class="footer-copy">© 2025 Floryne Pierson — Tous droits réservés</p>
@@ -878,7 +1040,32 @@
   </div>
 </div>
 
-<!-- ── MODAL : MENTIONS LÉGALES ── -->
+<!-- ── MODAL : LIENS AFFILIÉS ── -->
+<div class="modal-overlay" id="modal-affil">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('affil')">✕</button>
+    <h2>Politique de liens affiliés</h2>
+    <p>Conformément aux recommandations de la DGCCRF et aux conditions d'utilisation des programmes d'affiliation (Amazon Partenaires, AliExpress, etc.).</p>
+
+    <h3>Transparence sur les liens affiliés</h3>
+    <p>Certains liens présents sur ce site sont des <strong>liens affiliés</strong>. Cela signifie que si vous cliquez sur l'un de ces liens et effectuez un achat, je peux percevoir une <strong>commission de la part du marchand</strong>, sans aucun coût supplémentaire pour vous.</p>
+
+    <h3>Ce que ça change (ou pas)</h3>
+    <p>Les produits et jeux que je recommande sont sélectionnés selon mes propres critères et convictions. Les liens affiliés ne influencent pas mes avis : je ne recommande que ce que je trouve réellement pertinent pour les débutants en tarot et oracles.</p>
+
+    <h3>Programmes utilisés</h3>
+    <ul>
+      <li><strong>Amazon Partenaires</strong> — Programme d'affiliation d'Amazon EU S.à.r.l.</li>
+      <li><strong>AliExpress</strong> — Programme d'affiliation AliExpress</li>
+    </ul>
+    <p>En tant que partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises.</p>
+
+    <h3>Identification des liens affiliés</h3>
+    <p>Les liens affiliés peuvent être identifiés par leur format d'URL (ex. <em>amzn.to/…</em> ou tag de suivi). En cas de doute, n'hésitez pas à me contacter : <a href="mailto:contact@floryne-pierson.fr">contact@floryne-pierson.fr</a></p>
+  </div>
+</div>
+
+
 <div class="modal-overlay" id="modal-ml">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('ml')">✕</button>
@@ -893,6 +1080,9 @@
     <h3>Hébergement</h3>
     <p>À renseigner selon votre hébergeur (ex : GitHub Pages, OVH, Netlify…).<br>
     Adresse et contact de l'hébergeur à compléter.</p>
+
+    <h3>Activité</h3>
+    <p>Partage de guides et recommandations autour du tarot et des oracles. Ce site contient des liens affiliés (Amazon Partenaires, AliExpress) — voir la <a href="#" onclick="closeModal('ml'); openModal('affil'); return false;">politique de liens affiliés</a>.</p>
 
     <h3>Propriété intellectuelle</h3>
     <p>L'ensemble du contenu de ce site (textes, visuels, illustrations, charte graphique) est la propriété exclusive de Floryne Pierson, protégé par les lois françaises et internationales relatives au droit d'auteur et à la propriété intellectuelle. Toute reproduction, même partielle, est interdite sans autorisation préalable.</p>

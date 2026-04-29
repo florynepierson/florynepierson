@@ -179,24 +179,29 @@
 
     /* Drawer */
     .nav-drawer {
-      display: none;
       position: fixed;
       top: 0; right: 0; bottom: 0;
       width: min(80vw, 300px);
-      background: #10112bee;
+      background: #10112bf0;
       backdrop-filter: blur(20px);
       border-left: 1px solid #6b3fa044;
       z-index: 199;
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
       padding: 6rem 2.5rem 3rem;
       gap: 0;
       box-shadow: -20px 0 60px #0b0c1a88;
-      transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+      transform: translateX(110%);
+      visibility: hidden;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), visibility 0s linear 0.4s;
     }
-    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer.open {
+      transform: translateX(0);
+      visibility: visible;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), visibility 0s linear 0s;
+    }
     .nav-drawer ul {
       list-style: none;
       display: flex;
@@ -226,17 +231,20 @@
       color: var(--violet);
       opacity: 0.4;
     }
-    /* Drawer backdrop */
     .nav-backdrop {
-      display: none;
       position: fixed;
       inset: 0;
       background: #0b0c1a88;
       z-index: 198;
       opacity: 0;
-      transition: opacity 0.4s;
+      visibility: hidden;
+      transition: opacity 0.4s, visibility 0s linear 0.4s;
     }
-    .nav-backdrop.open { opacity: 1; }
+    .nav-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.4s, visibility 0s linear 0s;
+    }
 
     /* ── HERO ── */
     #hero {

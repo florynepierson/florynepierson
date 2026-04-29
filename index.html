@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Floryne Pierson — Tarot & Oracles</title>
   <meta name="description" content="Guides pour débuter le tarot et les oracles, sélections de jeux et recommandations de produits spirituels. Par Floryne Pierson." />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="64x64" href="favicon-64.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
@@ -36,28 +40,34 @@
       cursor: none;
     }
 
-    /* ── CUSTOM CURSOR ── */
-    #cursor {
-      width: 12px; height: 12px;
-      background: var(--glow);
-      border-radius: 50%;
-      position: fixed;
-      top: 0; left: 0;
-      pointer-events: none;
-      z-index: 9999;
-      box-shadow: 0 0 14px var(--glow), 0 0 40px var(--violet);
-      transition: transform 0.08s ease, background 0.2s;
-    }
-    #cursor-trail {
-      width: 32px; height: 32px;
-      border: 1px solid var(--lavender);
-      border-radius: 50%;
-      position: fixed;
-      top: 0; left: 0;
-      pointer-events: none;
-      z-index: 9998;
-      opacity: 0.4;
-      transition: left 0.12s ease, top 0.12s ease;
+    /* ── CUSTOM CURSOR (desktop only) ── */
+    #cursor, #cursor-trail { display: none; }
+    @media (hover: hover) and (pointer: fine) {
+      body { cursor: none; }
+      #cursor {
+        display: block;
+        width: 12px; height: 12px;
+        background: var(--glow);
+        border-radius: 50%;
+        position: fixed;
+        top: 0; left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: 0 0 14px var(--glow), 0 0 40px var(--violet);
+        transition: transform 0.08s ease, background 0.2s;
+      }
+      #cursor-trail {
+        display: block;
+        width: 32px; height: 32px;
+        border: 1px solid var(--lavender);
+        border-radius: 50%;
+        position: fixed;
+        top: 0; left: 0;
+        pointer-events: none;
+        z-index: 9998;
+        opacity: 0.4;
+        transition: left 0.12s ease, top 0.12s ease;
+      }
     }
 
     /* ── STARFIELD ── */
@@ -101,7 +111,7 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -115,6 +125,8 @@
       letter-spacing: 0.2em;
       color: var(--lavender);
       text-decoration: none;
+      z-index: 201;
+      position: relative;
     }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
@@ -138,6 +150,93 @@
     }
     .nav-links a:hover { color: var(--moon); }
     .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* Hamburger button */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px; height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 201;
+      position: relative;
+      padding: 4px;
+    }
+    .nav-burger span {
+      display: block;
+      height: 2px;
+      background: var(--lavender);
+      border-radius: 2px;
+      transition: transform 0.35s ease, opacity 0.25s ease, background 0.25s;
+      transform-origin: center;
+    }
+    .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--glow); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--glow); }
+
+    /* Drawer */
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: min(80vw, 300px);
+      background: #10112bee;
+      backdrop-filter: blur(20px);
+      border-left: 1px solid #6b3fa044;
+      z-index: 199;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 6rem 2.5rem 3rem;
+      gap: 0;
+      box-shadow: -20px 0 60px #0b0c1a88;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+    }
+    .nav-drawer ul li {
+      border-bottom: 1px solid #6b3fa022;
+    }
+    .nav-drawer ul li:first-child { border-top: 1px solid #6b3fa022; }
+    .nav-drawer ul li a {
+      display: block;
+      padding: 1.2rem 0;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      color: var(--lavender);
+      text-decoration: none;
+      transition: color 0.25s, padding-left 0.25s;
+    }
+    .nav-drawer ul li a:hover { color: var(--moon); padding-left: 0.5rem; }
+    .drawer-deco {
+      margin-top: 3rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.5rem;
+      color: var(--violet);
+      opacity: 0.4;
+    }
+    /* Drawer backdrop */
+    .nav-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #0b0c1a88;
+      z-index: 198;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .nav-backdrop.open { opacity: 1; }
 
     /* ── HERO ── */
     #hero {
@@ -213,10 +312,6 @@
       position: relative;
       z-index: 4;
       margin-top: 2rem;
-      display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
     }
     .hero-eyebrow {
       font-family: 'Space Mono', monospace;
@@ -253,7 +348,6 @@
       max-width: 420px;
       line-height: 1.7;
       animation: fadeUp 1s 0.8s both;
-      text-align: center;
     }
     .hero-cta {
       display: inline-block;
@@ -804,20 +898,88 @@
       transform: translateY(-2px);
     }
 
-    @media (max-width: 700px) {
-      .offer-grid { grid-template-columns: 1fr; }
-      .pinterest-card { padding: 2rem 1.5rem; }
-    }
-    @media (max-width: 700px) {
-      #about { grid-template-columns: 1fr; gap: 3rem; }
+    /* ── RESPONSIVE / MOBILE ── */
+    @media (max-width: 768px) {
+      /* Nav */
+      nav { padding: 1rem 1.5rem; background: #0b0c1af0; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .nav-drawer { display: flex; }
+      .nav-backdrop { display: block; }
+
+      /* Body no cursor */
+      body { cursor: auto; }
+
+      /* Hero */
+      #hero { padding: 0 1.2rem; min-height: 100svh; justify-content: center; }
+      .moon-bg { width: 240px; height: 240px; }
+      .orbit { width: 270px; height: 270px; }
+      .orbit2 { width: 350px; height: 350px; }
+      .chibi-container { width: 130px; height: 160px; margin-bottom: -20px; }
+      .hero-content { margin-top: 1rem; }
+      .hero-name { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+      .hero-name span { font-size: 0.5em; letter-spacing: 0.2em; }
+      .hero-tagline { font-size: 0.95rem; max-width: 100%; margin-top: 0.8rem; }
+      .hero-eyebrow { font-size: 0.5rem; letter-spacing: 0.3em; }
+      .hero-cta { margin-top: 1.8rem; padding: 0.8rem 1.8rem; font-size: 0.6rem; }
+      .scroll-hint { bottom: 1rem; }
+
+      /* Sections */
+      section { padding: 4rem 1.2rem; }
+      .section-title { font-size: clamp(1.1rem, 5vw, 1.5rem); flex-wrap: wrap; }
+      .section-sub { margin-bottom: 1.5rem; }
+
+      /* About */
+      #about { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-art { order: -1; }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1rem; }
-      section { padding: 5rem 1.5rem; }
-      .moon-bg { width: 260px; height: 260px; }
-      .orbit { width: 300px; height: 300px; }
-      .orbit2 { width: 380px; height: 380px; }
+      .moon-card { width: 180px; height: 220px; font-size: 3.5rem; }
+      .about-text p { font-size: 1rem; }
+
+      /* Offers */
+      .offer-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .offer-card { padding: 1.5rem 1.2rem; }
+      .offer-title { font-size: 0.72rem; }
+      .offer-desc { font-size: 0.85rem; }
+
+      /* Pinterest */
+      .pinterest-card { padding: 2rem 1.5rem; }
+      .pinterest-text { font-size: 0.95rem; }
+
+      /* Contact */
+      .contact-orb { width: 140px; height: 140px; font-size: 2.2rem; margin-bottom: 2rem; }
+      .contact-text { font-size: 0.95rem; }
+      .contact-links { gap: 0.8rem; }
+      .contact-link { padding: 0.8rem 1.2rem; font-size: 0.58rem; }
+
+      /* Footer */
+      footer { padding: 2rem 1.2rem; }
+      .footer-links { gap: 1rem; }
+      .footer-links a { font-size: 0.5rem; }
+
+      /* Cookie banner */
+      #cookie-banner { padding: 1.2rem 1.2rem; gap: 1rem; bottom: 0.8rem; }
+      #cookie-banner p { font-size: 0.72rem; min-width: unset; }
+      .btn-accept, .btn-refuse { padding: 0.6rem 1rem; font-size: 0.55rem; }
+
+      /* Modal */
+      .modal { padding: 2rem 1.2rem; max-height: 90vh; }
+      .modal h2 { font-size: 0.95rem; padding-right: 2rem; }
+      .modal h3 { font-size: 0.72rem; }
+      .modal p, .modal li { font-size: 0.8rem; }
+
+      /* Affil banner */
+      .affil-banner { font-size: 0.5rem; padding: 0.5rem 1rem; }
+
+      /* Particles fewer on mobile */
+      .particle:nth-child(n+4) { display: none; }
+
+      /* Divider */
+      .rune-divider { letter-spacing: 0.5rem; font-size: 0.8rem; }
+    }
+
+    @media (max-width: 380px) {
+      .hero-name { font-size: 1.4rem; }
+      .contact-links { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
@@ -846,6 +1008,23 @@
     <li><a href="#pinterest">Pinterest</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── DRAWER BACKDROP ── -->
+<div class="nav-backdrop" id="backdrop"></div>
+
+<!-- ── SIDE DRAWER ── -->
+<nav class="nav-drawer" id="drawer" aria-hidden="true">
+  <ul>
+    <li><a href="#about" class="drawer-link">✦ À propos</a></li>
+    <li><a href="#offres" class="drawer-link">✦ Ce que je propose</a></li>
+    <li><a href="#pinterest" class="drawer-link">✦ Pinterest</a></li>
+    <li><a href="#contact" class="drawer-link">✦ Contact</a></li>
+  </ul>
+  <div class="drawer-deco">☽ ✦ ☾</div>
 </nav>
 
 <!-- ── AFFILIATION BANNER ── -->
@@ -1159,23 +1338,58 @@
 </div>
 
 <script>
-  // ── CURSOR ──
+  // ── TOUCH DETECTION ──
+  const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
+
+  // ── CURSOR (desktop only) ──
   const cursor = document.getElementById('cursor');
   const trail  = document.getElementById('cursor-trail');
   let mx = 0, my = 0, tx = 0, ty = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx - 6 + 'px';
-    cursor.style.top  = my - 6 + 'px';
-  });
-  function animTrail() {
-    tx += (mx - tx) * 0.15;
-    ty += (my - ty) * 0.15;
-    trail.style.left = tx - 16 + 'px';
-    trail.style.top  = ty - 16 + 'px';
-    requestAnimationFrame(animTrail);
+  if (!isTouchDevice()) {
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx - 6 + 'px';
+      cursor.style.top  = my - 6 + 'px';
+    });
+    function animTrail() {
+      tx += (mx - tx) * 0.15;
+      ty += (my - ty) * 0.15;
+      trail.style.left = tx - 16 + 'px';
+      trail.style.top  = ty - 16 + 'px';
+      requestAnimationFrame(animTrail);
+    }
+    animTrail();
   }
-  animTrail();
+
+  // ── HAMBURGER DRAWER ──
+  const burger   = document.getElementById('burger');
+  const drawer   = document.getElementById('drawer');
+  const backdrop = document.getElementById('backdrop');
+
+  function openDrawer() {
+    burger.classList.add('open');
+    drawer.classList.add('open');
+    backdrop.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    burger.classList.remove('open');
+    drawer.classList.remove('open');
+    backdrop.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  burger.addEventListener('click', () => {
+    burger.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+  backdrop.addEventListener('click', closeDrawer);
+  document.querySelectorAll('.drawer-link').forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
   // ── STARS ──
   const canvas = document.getElementById('stars');
@@ -1184,7 +1398,8 @@
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  const stars = Array.from({length: 180}, () => ({
+  const starCount = isTouchDevice() ? 90 : 180;
+  const stars = Array.from({length: starCount}, () => ({
     x: Math.random(), y: Math.random(),
     r: Math.random() * 1.5 + 0.3,
     a: Math.random(),
@@ -1210,7 +1425,7 @@
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.1 });
   reveals.forEach(r => observer.observe(r));
 
   // ── COOKIE BANNER ──
@@ -1246,11 +1461,13 @@
     });
   });
 
-  // ── PARALLAX MOON ──
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    document.querySelector('.moon-bg').style.transform = `translateY(${y * 0.3}px)`;
-  });
+  // ── PARALLAX MOON (desktop only) ──
+  if (!isTouchDevice()) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      document.querySelector('.moon-bg').style.transform = `translateY(${y * 0.3}px)`;
+    });
+  }
 </script>
 </body>
 </html>

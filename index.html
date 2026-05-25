@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Floryne Pierson | Création Web, SEO & Visibilité Locale</title>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -39,41 +36,23 @@
         }
     </script>
     <style>
-        /* Custom Smooth Scroll & Selection Color */
-        ::selection {
-            background-color: #8F9E8B;
-            color: #FFFFFF;
-        }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #FAF7F2;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #B09A7A;
-            border-radius: 4px;
-        }
-        /* Soft Floating Blob Animations for Premium Background Feel */
-        .blob-bg {
-            filter: blur(80px);
-            opacity: 0.45;
-            z-index: 0;
-        }
+        ::selection { background-color: #8F9E8B; color: #FFFFFF; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FAF7F2; }
+        ::-webkit-scrollbar-thumb { background: #B09A7A; border-radius: 4px; }
+        .blob-bg { filter: blur(80px); opacity: 0.45; z-index: 0; }
     </style>
 </head>
 <body class="bg-brand-cream text-brand-dark font-sans selection:bg-brand-sage selection:text-white overflow-x-hidden">
 
-    <!-- NAVIGATION HEADER -->
+    <!-- NAVIGATION -->
     <nav class="fixed top-0 left-0 w-full bg-brand-cream/80 backdrop-blur-md border-b border-brand-gold/10 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="#accueil" class="flex flex-col">
                 <span class="font-serif text-2xl font-semibold tracking-wider text-brand-dark">FLORYNE PIERSON</span>
-                <span class="text-xs uppercase tracking-widest text-brand-gold -mt-1 font-semibold">Digital Artisan & Web Designer</span>
+                <span class="text-xs uppercase tracking-widest text-brand-gold -mt-1 font-semibold">Création Web & Visibilité Google</span>
             </a>
             
-            <!-- Desktop Links -->
             <div class="hidden md:flex items-center space-x-8 font-medium text-sm tracking-wide text-brand-dark/80">
                 <a href="#services" class="hover:text-brand-gold transition-colors duration-200">Services</a>
                 <a href="#constat" class="hover:text-brand-gold transition-colors duration-200">La Vision</a>
@@ -82,7 +61,6 @@
                 <a href="#contact" class="hover:text-brand-gold transition-colors duration-200">Contact</a>
             </div>
 
-            <!-- Header Call To Actions -->
             <div class="flex items-center space-x-4">
                 <a href="https://wa.me/33638482539?text=Bonjour%20Floryne,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services%20de%20cr%C3%A9ation%20web." 
                    target="_blank" 
@@ -97,31 +75,26 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO -->
     <section id="accueil" class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">
-        <!-- Floating Ambient Background Blobs -->
         <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-brand-sageLight blob-bg"></div>
         <div class="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] rounded-full bg-brand-goldLight/30 blob-bg"></div>
 
         <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
-            <!-- Mini Tagline -->
             <div class="inline-flex items-center space-x-2 bg-brand-sageLight px-4 py-1.5 rounded-full text-brand-dark/80 text-xs tracking-wider uppercase font-semibold mb-6">
                 <span class="w-1.5 h-1.5 rounded-full bg-brand-sage animate-ping"></span>
                 <span>Projets locaux & d'envergure internationale</span>
             </div>
 
-            <!-- Main Heading -->
             <h1 class="font-serif text-5xl md:text-7xl font-light tracking-tight text-brand-dark leading-[1.1] mb-8">
                 Votre savoir-faire mérite <br class="hidden md:inline">
                 <span class="italic font-normal text-brand-gold">d'être trouvé</span>. Partout, tout le temps.
             </h1>
 
-            <!-- Paragraph -->
             <p class="text-lg md:text-xl text-brand-dark/70 font-light max-w-3xl mx-auto leading-relaxed mb-12">
-                Pour les spas, châteaux, créateurs et indépendants qui souhaitent s’affranchir de la dépendance aux algorithmes des réseaux sociaux. Attirez naturellement vos futurs clients directement depuis Google.
+                Pour les spas, châteaux, créateurs et indépendants qui souhaitent s'affranchir de la dépendance aux algorithmes des réseaux sociaux. Attirez naturellement vos futurs clients directement depuis Google.
             </p>
 
-            <!-- Buttons -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-brand-dark text-white rounded-full font-medium hover:bg-brand-gold hover:text-brand-dark shadow-lg shadow-brand-dark/10 transition-all duration-300">
                     Prendre rendez-vous
@@ -132,7 +105,6 @@
                 </a>
             </div>
 
-            <!-- Trust Indicator / Capabilities Badges -->
             <div class="mt-20 pt-8 border-t border-brand-dark/5 flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-xs tracking-widest uppercase font-semibold text-brand-dark/50">
                 <span><i class="fa-solid fa-earth-americas text-brand-gold mr-1.5"></i> Présence globale</span>
                 <span><i class="fa-solid fa-code text-brand-gold mr-1.5"></i> Design sur-mesure</span>
@@ -142,7 +114,7 @@
         </div>
     </section>
 
-    <!-- SECTION CONSTAT & CONTRASTE (Pourquoi Google vs Réseaux Sociaux) -->
+    <!-- CONSTAT -->
     <section id="constat" class="py-24 bg-brand-dark text-brand-cream relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -154,20 +126,18 @@
                     </h2>
                     
                     <p class="text-brand-cream/70 font-light mb-6 leading-relaxed">
-                        Passer des heures à peaufiner des publications Instagram ou TikTok qui disparaissent en 24h est épuisant. Pire encore : cela ne cible pas toujours les personnes prêtes à acheter ou à réserver chez vous <strong>aujourd’hui</strong>.
+                        Passer des heures à peaufiner des publications Instagram ou TikTok qui disparaissent en 24h est épuisant. Pire encore : cela ne cible pas toujours les personnes prêtes à acheter ou à réserver chez vous <strong>aujourd'hui</strong>.
                     </p>
                     <p class="text-brand-cream/70 font-light mb-8 leading-relaxed">
-                        En optimisant votre visibilité sur Google (référencement local, SEO) et en créant un site à votre image, vous construisez un canal d'acquisition automatique qui travaille pour vous, même pendant que vous dormez.
+                        En optimisant votre visibilité sur Google (référencement local, SEO) et en créant un site à votre image, vous construisez un canal d'acquisition qui travaille pour vous, même pendant que vous dormez.
                     </p>
 
-                    <!-- Quote Accent -->
                     <div class="border-l-2 border-brand-gold pl-6 py-2 italic font-serif text-lg text-brand-cream/90">
                         "Un client qui cherche vos services sur Google est déjà prêt à acheter. Un utilisateur sur Instagram cherche juste à se divertir."
                     </div>
                 </div>
 
                 <div class="grid gap-6">
-                    <!-- Cards Comparison -->
                     <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors duration-300">
                         <div class="flex items-start space-x-4">
                             <div class="p-3 rounded-lg bg-red-900/30 text-red-400">
@@ -191,13 +161,12 @@
                             </div>
                         </div>
                     </div>
-                </div> <!-- End of inner grid -->
-
-            </div> <!-- End of content layout grid -->
-        </div> <!-- End of container -->
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- SERVICES SPECIFIQUES (Mes Formules avec Tarifs) -->
+    <!-- SERVICES -->
     <section id="services" class="py-24 bg-brand-cream">
         <div class="max-w-7xl mx-auto px-6">
             
@@ -210,7 +179,7 @@
 
             <div class="grid md:grid-cols-3 gap-8">
                 
-                <!-- Service 1: Local / Proximité -->
+                <!-- Service 1: Local -->
                 <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-start mb-6">
@@ -224,7 +193,7 @@
                         </div>
                         <h3 class="font-serif text-2xl font-semibold mb-4 text-brand-dark">Visibilité Locale & Google Maps</h3>
                         <p class="text-brand-dark/70 font-light text-sm leading-relaxed mb-6">
-                            Parfait pour les <strong>spas, nail artists, instituts de beauté, fleuristes et kinés</strong>. Je structure votre fiche Google et votre mini-site pour vous propulser dans le Top 3 des recherches de votre ville.
+                            Parfait pour les <strong>spas, nail artists, instituts de beauté, fleuristes et kinés</strong>. Je conçois votre site vitrine et structure votre présence Google pour vous rendre visible dans les premières recherches locales.
                         </p>
                         <ul class="space-y-3 mb-8">
                             <li class="flex items-center space-x-2 text-sm text-brand-dark/80">
@@ -246,7 +215,7 @@
                     </a>
                 </div>
 
-                <!-- Service 2: Prestige / Branding -->
+                <!-- Service 2: Prestige -->
                 <div class="bg-brand-dark text-brand-cream rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
                     <div class="absolute top-0 right-0 bg-brand-gold text-brand-dark text-xs uppercase tracking-widest font-bold px-4 py-1 rounded-bl-xl">
                         Premium
@@ -285,7 +254,7 @@
                     </a>
                 </div>
 
-                <!-- Service 3: International / Corporate -->
+                <!-- Service 3: International -->
                 <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-start mb-6">
@@ -322,40 +291,76 @@
                 </div>
 
             </div>
-        </div>
-    </section>
 
-    <!-- LES RÉSULTATS (La preuve concrète) -->
-    <section class="py-20 bg-brand-sageLight/50 border-y border-brand-gold/10">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-4 gap-8 text-center lg:text-left">
-                <div class="lg:col-span-1 flex flex-col justify-center">
-                    <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-2">Preuve de performance</span>
-                    <h3 class="font-serif text-3xl font-light text-brand-dark">Pourquoi investir ?</h3>
-                    <p class="text-sm text-brand-dark/60 mt-3 font-light">Le web n'est pas qu'un outil de communication esthétique : c'est un accélérateur de chiffre d'affaires.</p>
-                </div>
-                <div class="lg:col-span-3 grid sm:grid-cols-3 gap-6">
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-brand-gold/5 text-center">
-                        <span class="block text-5xl font-serif font-semibold text-brand-gold mb-2">+180%</span>
-                        <span class="text-xs uppercase tracking-widest text-brand-dark/50 font-bold block mb-2">Visites Google Maps</span>
-                        <p class="text-xs text-brand-dark/60 font-light">Augmentation moyenne de l'affichage local sur Google Business Profile après 3 mois.</p>
+            <!-- MAINTENANCE -->
+            <div class="mt-12 bg-brand-sageLight/60 border border-brand-gold/15 rounded-3xl p-8 md:p-10">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Suivi & tranquillité</span>
+                        <h3 class="font-serif text-3xl font-light text-brand-dark mb-3">Maintenance mensuelle</h3>
+                        <p class="text-brand-dark/70 font-light text-sm leading-relaxed">
+                            Votre site n'est pas une brochure figée. Avec la formule maintenance, je m'occupe des mises à jour régulières pour que tout reste impeccable sans que vous ayez à vous en soucier.
+                        </p>
                     </div>
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-brand-gold/5 text-center">
-                        <span class="block text-5xl font-serif font-semibold text-brand-gold mb-2">Top 3</span>
-                        <span class="text-xs uppercase tracking-widest text-brand-dark/50 font-bold block mb-2">Google local</span>
-                        <p class="text-xs text-brand-dark/60 font-light">Atteint sur les mots-clés "Spa de luxe", "Fleuriste artisanal", ou "Kinésithérapeute" de votre zone.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-brand-gold/5 text-center">
-                        <span class="block text-5xl font-serif font-semibold text-brand-gold mb-2">0</span>
-                        <span class="text-xs uppercase tracking-widest text-brand-dark/50 font-bold block mb-2">Friction client</span>
-                        <p class="text-xs text-brand-dark/60 font-light">Vos clients réservent en ligne de manière fluide sans perte de temps par messagerie.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white rounded-2xl p-5 border border-brand-gold/10">
+                            <i class="fa-solid fa-pen-to-square text-brand-gold text-xl mb-3 block"></i>
+                            <span class="font-semibold text-brand-dark text-sm block mb-1">2 modifications / mois</span>
+                            <p class="text-xs text-brand-dark/50 font-light">Textes, photos, tarifs, horaires — je m'en charge.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-brand-gold/10">
+                            <i class="fa-solid fa-shield-halved text-brand-gold text-xl mb-3 block"></i>
+                            <span class="font-semibold text-brand-dark text-sm block mb-1">Suivi technique</span>
+                            <p class="text-xs text-brand-dark/50 font-light">Mises à jour sécurité, vérification des performances.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-brand-gold/10">
+                            <i class="fa-solid fa-headset text-brand-gold text-xl mb-3 block"></i>
+                            <span class="font-semibold text-brand-dark text-sm block mb-1">Support prioritaire</span>
+                            <p class="text-xs text-brand-dark/50 font-light">Un problème ? Je réponds sous 24h ouvrées.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-brand-gold/10 flex flex-col justify-center items-center text-center">
+                            <span class="font-serif text-3xl font-semibold text-brand-gold mb-1">~60 €</span>
+                            <span class="text-xs uppercase tracking-widest font-bold text-brand-dark/50">/ mois</span>
+                            <a href="#contact" class="mt-3 text-xs font-semibold text-brand-gold hover:underline">En savoir plus →</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PORTFOLIO / RÉALISATIONS (Mise en avant stylisée de mockups) -->
+    <!-- POURQUOI UN SITE : DONNÉES SECTEUR (pas des stats inventées) -->
+    <section class="py-20 bg-brand-sageLight/50 border-y border-brand-gold/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-4 gap-8 text-center lg:text-left">
+                <div class="lg:col-span-1 flex flex-col justify-center">
+                    <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-2">Le web en chiffres</span>
+                    <h3 class="font-serif text-3xl font-light text-brand-dark">Pourquoi investir ?</h3>
+                    <p class="text-sm text-brand-dark/60 mt-3 font-light">Ce que les études sectorielles observent sur la recherche locale en France.</p>
+                </div>
+                <div class="lg:col-span-3 grid sm:grid-cols-3 gap-6">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-brand-gold/5 text-center">
+                        <span class="block text-5xl font-serif font-semibold text-brand-gold mb-2">97%</span>
+                        <span class="text-xs uppercase tracking-widest text-brand-dark/50 font-bold block mb-2">Recherches locales en ligne</span>
+                        <p class="text-xs text-brand-dark/60 font-light">Des consommateurs utilisent internet pour trouver un commerce ou service local.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-brand-gold/5 text-center">
+                        <span class="block text-5xl font-serif font-semibold text-brand-gold mb-2">76%</span>
+                        <span class="text-xs uppercase tracking-widest text-brand-dark/50 font-bold block mb-2">Visite en 24h</span>
+                        <p class="text-xs text-brand-dark/60 font-light">Des personnes qui cherchent un commerce en local sur mobile s'y rendent dans la journée.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-brand-gold/5 text-center">
+                        <span class="block text-5xl font-serif font-semibold text-brand-gold mb-2">#1</span>
+                        <span class="text-xs uppercase tracking-widest text-brand-dark/50 font-bold block mb-2">Moteur de recherche</span>
+                        <p class="text-xs text-brand-dark/60 font-light">Google capte plus de 90% des recherches en France. Être visible ici, c'est être visible tout court.</p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-xs text-brand-dark/30 mt-6 font-light italic">Sources : Google/Ipsos, BrightLocal Local Consumer Review Survey</p>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO -->
     <section id="portfolio" class="py-24 bg-brand-cream">
         <div class="max-w-7xl mx-auto px-6">
             
@@ -366,73 +371,72 @@
                 </div>
                 <div class="mt-4 md:mt-0">
                     <p class="text-sm text-brand-dark/60 max-w-sm font-light">
-                        Voici des exemples d'interfaces conçues sur-mesure pour allier esthétique soignée et efficacité commerciale.
+                        Sites réels et maquettes conçus sur-mesure pour allier esthétique soignée et efficacité commerciale.
                     </p>
                 </div>
             </div>
 
-            <!-- Portfolio Grid -->
             <div class="grid md:grid-cols-3 gap-8">
                 
-                <!-- Portfolio 1: SPA -->
+                <!-- Portfolio 1: Claire & Coloré (VRAI client) -->
                 <div class="group bg-brand-cardWhite rounded-3xl overflow-hidden border border-brand-gold/10 hover:shadow-xl transition-all duration-300">
                     <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Spa et Bien-être" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/FAF7F2/162521?text=Spa+Design'">
+                        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=80" alt="Claire & Coloré - Onglerie Reims" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/FAF7F2/162521?text=Claire+%26+Color%C3%A9'">
                         <div class="absolute inset-0 bg-brand-dark/20 flex items-end p-6">
-                            <span class="bg-white/90 backdrop-blur-sm text-brand-dark text-xs uppercase tracking-widest font-semibold px-3 py-1 rounded-full">Spa & Instituts</span>
+                            <span class="bg-white/90 backdrop-blur-sm text-brand-dark text-xs uppercase tracking-widest font-semibold px-3 py-1 rounded-full">Client · Onglerie</span>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-serif text-2xl font-semibold mb-2 text-brand-dark">L'Instant Serein</h4>
-                        <p class="text-xs text-brand-dark/50 uppercase tracking-wider mb-4">Site Vitrine & Réservations en ligne</p>
+                        <h4 class="font-serif text-2xl font-semibold mb-2 text-brand-dark">Claire & Coloré</h4>
+                        <p class="text-xs text-brand-dark/50 uppercase tracking-wider mb-4">Site Vitrine, Réservation & SEO Local · Reims</p>
                         <p class="text-sm text-brand-dark/70 font-light mb-6">
-                            Une structure immersive avec parcours utilisateur épuré, permettant de réserver un soin en moins de 3 clics.
+                            Onglerie naturelle et raffinée à Reims. Site complet avec galerie, tarifs, formulaire de réservation et optimisation Google Maps.
                         </p>
                         <div class="border-t border-brand-gold/10 pt-4 flex items-center justify-between text-xs font-semibold text-brand-gold">
-                            <span><i class="fa-solid fa-chart-line mr-1"></i> +45% de réservations directes</span>
-                            <span class="hover:underline cursor-pointer">Voir la démo <i class="fa-solid fa-arrow-up-right-from-square ml-0.5 text-[10px]"></i></span>
+                            <span><i class="fa-solid fa-circle-check mr-1 text-brand-sage"></i> Site en ligne</span>
+                            <a href="https://claireetcolore.fr/" target="_blank" class="hover:underline">Voir le site <i class="fa-solid fa-arrow-up-right-from-square ml-0.5 text-[10px]"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Portfolio 2: CHÂTEAU -->
+                <!-- Portfolio 2: Électricien (maquette) -->
                 <div class="group bg-brand-cardWhite rounded-3xl overflow-hidden border border-brand-gold/10 hover:shadow-xl transition-all duration-300">
                     <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1505912402581-68994787a417?auto=format&fit=crop&w=800&q=80" alt="Château de prestige" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/FAF7F2/162521?text=Prestige+Castle'">
+                        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="Site artisan électricien" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/FAF7F2/162521?text=Artisan+%C3%89lectricien'">
                         <div class="absolute inset-0 bg-brand-dark/20 flex items-end p-6">
-                            <span class="bg-white/90 backdrop-blur-sm text-brand-dark text-xs uppercase tracking-widest font-semibold px-3 py-1 rounded-full">Châteaux & Prestige</span>
+                            <span class="bg-white/90 backdrop-blur-sm text-brand-dark text-xs uppercase tracking-widest font-semibold px-3 py-1 rounded-full">Maquette · Artisan</span>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-serif text-2xl font-semibold mb-2 text-brand-dark">Château de Grandmont</h4>
-                        <p class="text-xs text-brand-dark/50 uppercase tracking-wider mb-4">Site de Privatisation de Mariages</p>
+                        <h4 class="font-serif text-2xl font-semibold mb-2 text-brand-dark">Artisan Électricien</h4>
+                        <p class="text-xs text-brand-dark/50 uppercase tracking-wider mb-4">Maquette de Site Vitrine Local</p>
                         <p class="text-sm text-brand-dark/70 font-light mb-6">
-                            Design majestueux et galeries photos imposantes conçues pour attirer les clients d'exception et internationaux.
+                            Exemple de site pensé pour un artisan local : mise en avant des prestations, zone d'intervention, devis rapide et visibilité Google.
                         </p>
                         <div class="border-t border-brand-gold/10 pt-4 flex items-center justify-between text-xs font-semibold text-brand-gold">
-                            <span><i class="fa-solid fa-envelope mr-1"></i> Leads qualifiés x2.5</span>
-                            <span class="hover:underline cursor-pointer">Voir la démo <i class="fa-solid fa-arrow-up-right-from-square ml-0.5 text-[10px]"></i></span>
+                            <span><i class="fa-solid fa-drafting-compass mr-1 text-brand-gold"></i> Maquette démo</span>
+                            <a href="https://electrician-sigma.vercel.app" target="_blank" class="hover:underline">Voir la démo <i class="fa-solid fa-arrow-up-right-from-square ml-0.5 text-[10px]"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Portfolio 3: FLEURISTE -->
+                <!-- Portfolio 3: Rénovation (maquette) -->
                 <div class="group bg-brand-cardWhite rounded-3xl overflow-hidden border border-brand-gold/10 hover:shadow-xl transition-all duration-300">
                     <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80" alt="Atelier Floral" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/FAF7F2/162521?text=Artisan+Fleuriste'">
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="Site rénovation intérieure" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/FAF7F2/162521?text=R%C3%A9novation'">
                         <div class="absolute inset-0 bg-brand-dark/20 flex items-end p-6">
-                            <span class="bg-white/90 backdrop-blur-sm text-brand-dark text-xs uppercase tracking-widest font-semibold px-3 py-1 rounded-full">Boutique & Artisanat</span>
+                            <span class="bg-white/90 backdrop-blur-sm text-brand-dark text-xs uppercase tracking-widest font-semibold px-3 py-1 rounded-full">Maquette · BTP</span>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-serif text-2xl font-semibold mb-2 text-brand-dark">L'Atelier de Flore</h4>
-                        <p class="text-xs text-brand-dark/50 uppercase tracking-wider mb-4">SEO Local & Click & Collect</p>
+                        <h4 class="font-serif text-2xl font-semibold mb-2 text-brand-dark">Rénovation Intérieure</h4>
+                        <p class="text-xs text-brand-dark/50 uppercase tracking-wider mb-4">Maquette de Site Vitrine & Devis</p>
                         <p class="text-sm text-brand-dark/70 font-light mb-6">
-                            Déploiement d'une stratégie de référencement local "près de chez moi" pour capter les clients mobiles en centre-ville.
+                            Démonstration d'un site pour entreprise BTP : galerie de réalisations, formulaire de devis en ligne et référencement local.
                         </p>
                         <div class="border-t border-brand-gold/10 pt-4 flex items-center justify-between text-xs font-semibold text-brand-gold">
-                            <span><i class="fa-solid fa-ranking-star mr-1"></i> N°1 Google de sa région</span>
-                            <span class="hover:underline cursor-pointer">Voir la démo <i class="fa-solid fa-arrow-up-right-from-square ml-0.5 text-[10px]"></i></span>
+                            <span><i class="fa-solid fa-drafting-compass mr-1 text-brand-gold"></i> Maquette démo</span>
+                            <a href="https://renovation-maquette.vercel.app/" target="_blank" class="hover:underline">Voir la démo <i class="fa-solid fa-arrow-up-right-from-square ml-0.5 text-[10px]"></i></a>
                         </div>
                     </div>
                 </div>
@@ -441,119 +445,111 @@
         </div>
     </section>
 
-    <!-- SECTION TEMOIGNAGES MALT -->
-    <section class="py-24 bg-brand-sageLight/20 border-b border-brand-gold/10">
+    <!-- AVIS CLIENTS -->
+    <!-- 
+        ============================================================
+        SECTION AVIS MALT — INTÉGRATION FUTURE
+        ============================================================
+        Pour intégrer vos avis Malt automatiquement dès que vous en
+        aurez, deux options :
+        
+        OPTION A — Intégration manuelle (recommandé au départ) :
+        Copiez le bloc "review-card" ci-dessous et remplissez :
+          - Le prénom + nom (data-reviewer)
+          - Le texte de l'avis (dans le <p>)
+          - L'intitulé du client (data-title)
+          - La date si vous le souhaitez
+        Retirez la div "malt-placeholder" une fois le premier avis ajouté.
+        
+        OPTION B — Widget Malt embed (si Malt le propose) :
+        Remplacez le contenu de #malt-reviews-container par :
+        <script src="https://widget.malt.com/v1/reviews.js" 
+                data-profile="floryne-pierson">
+        </script>
+        (URL à confirmer quand Malt activera l'option widget)
+        ============================================================
+    -->
+    <section class="py-24 bg-brand-sageLight/20 border-b border-brand-gold/10" id="avis">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Retours d'expérience</span>
                 <h2 class="font-serif text-4xl font-light text-brand-dark">Ce que mes clients disent</h2>
-                <p class="text-sm text-brand-dark/60 font-light mt-2">Avis authentiques récoltés suite à nos collaborations.</p>
+                <p class="text-sm text-brand-dark/60 font-light mt-2">Avis récoltés suite à nos collaborations.</p>
                 <div class="w-16 h-[2px] bg-brand-gold mx-auto mt-6"></div>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Review 1 -->
-                <div class="bg-white p-8 rounded-3xl border border-brand-gold/10 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center space-x-1 text-yellow-500 mb-4">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-brand-dark/80 italic font-light text-sm leading-relaxed mb-6">
-                            "Floryne a transformé la visibilité de notre institut. En 2 mois, nous sommes passés en première page sur Google Maps pour toutes les recherches beauté locales de la ville. Les réservations en ligne pleuvent sans qu'on ait besoin de poster sur Instagram !"
-                        </p>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-brand-gold/10 pt-4">
-                        <div>
-                            <span class="block font-medium text-sm text-brand-dark">Sophie L.</span>
-                            <span class="block text-xs text-brand-dark/40">Gérante d'un Spa & Institut de Beauté</span>
-                        </div>
-                        <span class="text-[10px] uppercase tracking-wider text-brand-gold font-bold bg-brand-cream px-2 py-1 rounded">Avis vérifié Malt</span>
-                    </div>
+            <!-- Placeholder visible AVANT les premiers avis — à supprimer une fois les avis ajoutés -->
+            <div id="malt-placeholder" class="text-center py-16 bg-white rounded-3xl border border-dashed border-brand-gold/30">
+                <div class="w-16 h-16 bg-brand-sageLight rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-star text-brand-gold text-2xl"></i>
                 </div>
-
-                <!-- Review 2 -->
-                <div class="bg-white p-8 rounded-3xl border border-brand-gold/10 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center space-x-1 text-yellow-500 mb-4">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-brand-dark/80 italic font-light text-sm leading-relaxed mb-6">
-                            "Un travail d'une élégance rare pour notre domaine. Floryne comprend tout de suite les codes du haut de gamme. Le site est rapide, immersif, et le formulaire sur-mesure a déjà généré 5 privatisations de mariages en quelques semaines seulement."
-                        </p>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-brand-gold/10 pt-4">
-                        <div>
-                            <span class="block font-medium text-sm text-brand-dark">Jean-Marc de V.</span>
-                            <span class="block text-xs text-brand-dark/40">Propriétaire de Château</span>
-                        </div>
-                        <span class="text-[10px] uppercase tracking-wider text-brand-gold font-bold bg-brand-cream px-2 py-1 rounded">Avis vérifié Malt</span>
-                    </div>
-                </div>
-
-                <!-- Review 3 -->
-                <div class="bg-white p-8 rounded-3xl border border-brand-gold/10 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center space-x-1 text-yellow-500 mb-4">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-brand-dark/80 italic font-light text-sm leading-relaxed mb-6">
-                            "Un projet multilingue mené d'une main de maître. Son profil trilingue a facilité la traduction de notre catalogue et le SEO à l'international. Rigoureuse, professionnelle et à l'écoute. Je recommande les yeux fermés !"
-                        </p>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-brand-gold/10 pt-4">
-                        <div>
-                            <span class="block font-medium text-sm text-brand-dark">Elena R.</span>
-                            <span class="block text-xs text-brand-dark/40">Directrice Marketing, Marque de Créateur</span>
-                        </div>
-                        <span class="text-[10px] uppercase tracking-wider text-brand-gold font-bold bg-brand-cream px-2 py-1 rounded">Avis vérifié Malt</span>
-                    </div>
-                </div>
+                <p class="font-serif text-2xl text-brand-dark/60 mb-2">Les premiers avis arrivent bientôt</p>
+                <p class="text-sm text-brand-dark/40 font-light max-w-sm mx-auto">Retrouvez mes évaluations de missions directement sur mon profil Malt.</p>
+                <a href="https://www.malt.fr" target="_blank" class="inline-flex items-center space-x-2 mt-6 text-sm font-semibold text-orange-500 hover:text-orange-400 transition-colors duration-200">
+                    <i class="fa-solid fa-shield"></i>
+                    <span>Voir mon profil Malt</span>
+                </a>
             </div>
+
+            <!-- Conteneur des avis — décommenter et remplir à l'ajout du premier avis -->
+            <!-- 
+            <div id="malt-reviews-container" class="grid md:grid-cols-3 gap-8">
+                
+                MODÈLE D'UNE CARTE D'AVIS — dupliquer autant de fois que nécessaire
+                <div class="review-card bg-white p-8 rounded-3xl border border-brand-gold/10 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-1 text-yellow-500 mb-4">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-brand-dark/80 italic font-light text-sm leading-relaxed mb-6">
+                            "Texte de l'avis ici."
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-brand-gold/10 pt-4">
+                        <div>
+                            <span class="block font-medium text-sm text-brand-dark">Prénom N.</span>
+                            <span class="block text-xs text-brand-dark/40">Titre / Activité du client</span>
+                        </div>
+                        <span class="text-[10px] uppercase tracking-wider text-brand-gold font-bold bg-brand-cream px-2 py-1 rounded">Avis Malt</span>
+                    </div>
+                </div>
+
+            </div>
+            -->
         </div>
     </section>
 
-    <!-- SECTION PORTRAIT / INTUITION / À PROPOS -->
+    <!-- À PROPOS -->
     <section id="a-propos" class="py-24 bg-brand-sageLight/30 relative">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid md:grid-cols-12 gap-12 items-center">
                 
-                <!-- Portrait Image side -->
                 <div class="md:col-span-5">
                     <div class="relative">
                         <div class="absolute inset-0 border border-brand-gold rounded-3xl translate-x-3 translate-y-3 z-0"></div>
                         <div class="relative z-10 rounded-3xl overflow-hidden shadow-lg h-[450px]">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Floryne Pierson" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x800/FAF7F2/162521?text=Floryne+Pierson'">
+                            <img src="images/floryne.jpg" alt="Floryne Pierson" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x800/FAF7F2/162521?text=Floryne+Pierson'">
                         </div>
                     </div>
                 </div>
 
-                <!-- Bio Text side -->
                 <div class="md:col-span-7 md:pl-6">
-                    <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Artisane du Web</span>
+                    <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Créatrice Web Freelance</span>
                     <h2 class="font-serif text-4xl lg:text-5xl font-light text-brand-dark mb-6">
                         Bonjour, je suis <span class="italic font-normal">Floryne Pierson</span>.
                     </h2>
                     
                     <p class="text-brand-dark/80 font-light mb-4 leading-relaxed">
-                        Spécialiste de la création de sites internet et de la visibilité en ligne, je n'aime pas le jargon complexe, le développement usine ou les designs impersonnels. 
+                        Je crée des sites internet sur-mesure pour les indépendants et les petites structures qui méritent une vraie présence en ligne — sans jargon, sans usine à templates, et avec une vraie attention portée à chaque projet.
                     </p>
                     <p class="text-brand-dark/80 font-light mb-6 leading-relaxed">
-                        J'aime accompagner des structures qui possèdent une véritable âme : des châteaux chargés d'histoire, des spas propices à l'apaisement, des fleuristes passionnés ou des cabinets médicaux. Mon but est de transformer votre identité en un outil web raffiné qui **génère des rendez-vous, des appels et des clients de façon continue**.
+                        Ce qui me tient à cœur : que votre site reflète vraiment ce que vous faites, qu'il soit rapide, lisible sur mobile, et qu'il vous ramène des clients de façon régulière grâce au référencement naturel. Pas besoin de poster tous les jours sur les réseaux sociaux pour exister.
                     </p>
 
-                    <!-- Language and dynamic badges -->
                     <div class="grid grid-cols-3 gap-4 mb-8">
                         <div class="bg-brand-cardWhite p-3 rounded-2xl border border-brand-gold/10 text-center">
                             <span class="block text-xl mb-1">🇫🇷</span>
@@ -572,14 +568,13 @@
                         </div>
                     </div>
 
-                    <!-- CTA -->
                     <div class="flex flex-wrap items-center gap-4">
                         <a href="https://www.linkedin.com/in/floryne-pierson" target="_blank" class="inline-flex items-center space-x-2 text-brand-dark hover:text-brand-gold transition-colors duration-200 text-sm font-semibold border-b border-brand-dark hover:border-brand-gold pb-1">
                             <i class="fa-brands fa-linkedin-in text-lg"></i>
                             <span>Me suivre sur LinkedIn</span>
                         </a>
                         <span class="text-brand-dark/30 hidden sm:inline">|</span>
-                        <span class="text-xs text-brand-dark/60 italic font-light">Projets internationaux gérés à distance.</span>
+                        <span class="text-xs text-brand-dark/60 italic font-light">Projets gérés à distance, partout en France.</span>
                     </div>
 
                 </div>
@@ -588,7 +583,7 @@
         </div>
     </section>
 
-    <!-- SECTION FAQ -->
+    <!-- FAQ -->
     <section class="py-24 bg-brand-cream">
         <div class="max-w-4xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -599,44 +594,41 @@
             </div>
 
             <div class="space-y-6">
-                <!-- FAQ Item 1 -->
                 <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
                     <h4 class="font-serif text-lg font-semibold text-brand-dark mb-3 flex items-start">
                         <span class="text-brand-gold mr-3"><i class="fa-solid fa-circle-question"></i></span>
                         Combien de temps faut-il pour créer mon site internet ?
                     </h4>
                     <p class="text-sm text-brand-dark/70 leading-relaxed font-light pl-7">
-                        Pour une formule locale classique (Spas, Fleuristes, Kinés), le délai moyen est de <strong>2 à 4 semaines</strong> à partir du moment où j'ai reçu l'intégralité de vos textes et visuels. Pour les sites complexes multilingues ou de châteaux nécessitant des fonctionnalités de réservation ou de passerelle complexes, comptez de <strong>4 à 6 semaines</strong>.
+                        Une fois la maquette validée ensemble, le délai de réalisation est de <strong>1 semaine ouvrée</strong>. Ce délai suppose que les contenus (textes, photos, informations pratiques) ont été fournis en amont. Si vous n'avez pas encore de visuels, je peux vous orienter sur des solutions adaptées.
                     </p>
                 </div>
 
-                <!-- FAQ Item 2 -->
                 <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
                     <h4 class="font-serif text-lg font-semibold text-brand-dark mb-3 flex items-start">
                         <span class="text-brand-gold mr-3"><i class="fa-solid fa-circle-question"></i></span>
                         En combien de temps mon site internet sera-t-il rentable ?
                     </h4>
                     <p class="text-sm text-brand-dark/70 leading-relaxed font-light pl-7">
-                        Le référencement naturel (SEO) local ou global nécessite un temps d'indexation par Google. En général, vous commencez à voir les premiers résultats stables sur Google Maps et dans votre région sous <strong>1 à 3 mois</strong>. 
-                        Contrairement aux réseaux sociaux où une publication meurt en 24h, votre site internet est un **actif patrimonial permanent** : une fois positionné, il continue de vous ramener des clients de façon passive tous les mois, sans que vous n'ayez à payer chaque clic. Un seul nouveau contrat ou quelques réservations de soins suffisent généralement à amortir l'investissement de départ en quelques mois.
+                        Le référencement naturel (SEO) local nécessite un temps d'indexation par Google. En général, vous commencez à voir les premiers résultats stables sous <strong>1 à 3 mois</strong>. 
+                        Contrairement aux réseaux sociaux où une publication disparaît en 24h, votre site est un <strong>actif durable</strong> : une fois positionné, il continue de vous ramener des clients de façon passive, sans payer chaque clic. Quelques réservations ou un nouveau contrat suffisent souvent à amortir l'investissement initial.
                     </p>
                 </div>
 
-                <!-- FAQ Item 3 -->
                 <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
                     <h4 class="font-serif text-lg font-semibold text-brand-dark mb-3 flex items-start">
                         <span class="text-brand-gold mr-3"><i class="fa-solid fa-circle-question"></i></span>
                         Pourquoi devrais-je investir dans un site plutôt que de me concentrer sur Instagram ?
                     </h4>
                     <p class="text-sm text-brand-dark/70 leading-relaxed font-light pl-7">
-                        Instagram est un fantastique outil de notoriété, mais il souffre d'une faille majeure : l'attention y est éphémère. Les internautes s'y baladent pour se divertir. Sur Google, **l'intention d'achat est directe**. Quelqu'un qui cherche <em>"Spa de luxe près de chez moi"</em> ou <em>"Château mariage de prestige"</em> cherche activement à réserver **aujourd'hui**. Être présent au moment exact de leur recherche garantit un taux de conversion bien plus élevé.
+                        Instagram est un outil de notoriété, mais avec une faille majeure : l'attention y est éphémère. Les internautes y viennent pour se divertir. Sur Google, <strong>l'intention d'achat est directe</strong>. Quelqu'un qui cherche <em>"Spa de luxe près de chez moi"</em> ou <em>"Château mariage"</em> cherche activement à réserver aujourd'hui. Être présent au bon moment garantit un taux de conversion bien plus élevé qu'une story vue par 200 personnes.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FORMULAIRE DE CONTACT (Prendre rdv) -->
+    <!-- CONTACT -->
     <section id="contact" class="py-24 bg-brand-dark text-brand-cream relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-6 relative z-10">
             
@@ -650,7 +642,6 @@
 
             <div class="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl backdrop-blur-sm">
                 
-                <!-- Contact Methods Icons Row -->
                 <div class="flex flex-wrap justify-center gap-6 mb-12 border-b border-white/5 pb-8">
                     <a href="https://wa.me/33638482539?text=Bonjour%20Floryne,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services%20de%20cr%C3%A9ation%20web." 
                        target="_blank" 
@@ -664,7 +655,6 @@
                     </div>
                 </div>
 
-                <!-- HTML Contact Form with JS Interactivity simulation -->
                 <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
@@ -688,6 +678,7 @@
                                 <option class="bg-brand-dark" value="local">Attirer des clients locaux (SEO Maps)</option>
                                 <option class="bg-brand-dark" value="prestige">Valoriser un domaine / Château</option>
                                 <option class="bg-brand-dark" value="multilang">Déploiement international / Traduction</option>
+                                <option class="bg-brand-dark" value="maintenance">Maintenance de site existant</option>
                                 <option class="bg-brand-dark" value="other">Autre projet digital</option>
                             </select>
                         </div>
@@ -703,14 +694,13 @@
                     </button>
                 </form>
 
-                <!-- Simulated Success Message -->
                 <div id="successMessage" class="hidden text-center py-8 text-brand-cream space-y-4">
                     <div class="w-16 h-16 bg-brand-sage/20 text-brand-sage rounded-full flex items-center justify-center mx-auto text-3xl">
                         <i class="fa-solid fa-circle-check"></i>
                     </div>
                     <h4 class="font-serif text-2xl">Message envoyé avec succès !</h4>
                     <p class="text-sm text-brand-cream/70 font-light max-w-md mx-auto">
-                        Merci pour votre message ! Je l'ai bien reçu et je reviens vers vous sous 48 heures ouvrées pour planifier notre premier échange. À très vite !
+                        Merci ! Je reviens vers vous sous 48 heures ouvrées pour planifier notre premier échange.
                     </p>
                     <button onclick="resetForm()" class="px-6 py-2 bg-white/10 hover:bg-white/20 text-xs rounded-full uppercase tracking-wider font-semibold transition-colors duration-300">
                         Renvoyer un message
@@ -729,7 +719,6 @@
                 <p class="text-xs text-brand-cream/40 mt-1">© 2026. Tous droits réservés.</p>
             </div>
 
-            <!-- Language and Quick Links -->
             <div class="flex items-center space-x-6 text-xs md:text-sm flex-wrap justify-center gap-y-3">
                 <a href="#services" class="hover:text-brand-cream transition-colors duration-200">Services & Tarifs</a>
                 <span>•</span>
@@ -744,32 +733,26 @@
         </div>
     </footer>
 
-    <!-- PERSISTENT FLOATING WHATSAPP BUTTON WITH PRE-TEXT -->
+    <!-- FLOATING WHATSAPP -->
     <a href="https://wa.me/33638482539?text=Bonjour%20Floryne,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services%20de%20cr%C3%A9ation%20web." 
        target="_blank" 
        class="fixed bottom-6 right-6 z-50 bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 group"
-       title="Besoin d'aide ? Parlons-en sur WhatsApp !">
-        <!-- Live notification dot -->
+       title="Parlons-en sur WhatsApp !">
         <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 border-2 border-white rounded-full flex items-center justify-center">
             <span class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span>
         </span>
-        <!-- WhatsApp Icon -->
         <i class="fa-brands fa-whatsapp text-3xl"></i>
-        <!-- Hover Expand text -->
         <span class="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-3 transition-all duration-300 font-semibold text-sm whitespace-nowrap">
             Discuter sur WhatsApp
         </span>
     </a>
 
-    <!-- INTERACTIVITY SCRIPT -->
     <script>
-        // Smooth form validation simulation
         function handleFormSubmit(event) {
             event.preventDefault();
             document.getElementById('contactForm').classList.add('hidden');
             document.getElementById('successMessage').classList.remove('hidden');
         }
-
         function resetForm() {
             document.getElementById('contactForm').reset();
             document.getElementById('contactForm').classList.remove('hidden');

@@ -647,7 +647,6 @@
                     </div>
                 </div>
 
-                <!-- FORMULAIRE CONNECTÉ À FORMSPREE -->
                 <form id="contactForm" action="https://formspree.io/f/mykvdqaj" method="POST" onsubmit="handleFormSubmit(event)" class="space-y-6">
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
@@ -679,7 +678,6 @@
                         <label for="message" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2">Parlez-moi brièvement de votre projet *</label>
                         <textarea id="message" name="message" rows="4" required class="w-full bg-white/5 border border-white/10 focus:border-brand-gold/50 rounded-xl px-4 py-3 text-brand-cream focus:outline-none transition-colors duration-300"></textarea>
                     </div>
-                    <!-- Honeypot anti-spam -->
                     <input type="text" name="_gotcha" style="display:none">
                     <button type="submit" id="submitBtn" class="w-full py-4 bg-brand-gold hover:bg-white text-brand-dark font-semibold rounded-full shadow-lg transition-all duration-300 text-sm">
                         Envoyer ma demande d'estimation <i class="fa-solid fa-paper-plane ml-2 text-xs"></i>
@@ -749,12 +747,11 @@
         </span>
     </a>
 
-    <!-- ===================== MODAL MENTIONS LÉGALES ===================== -->
+    <!-- MODAL MENTIONS LÉGALES -->
     <div id="modal-mentions" class="modal-overlay" onclick="closeModalOnOverlay(event, 'modal-mentions')">
         <div class="modal-box">
             <button class="modal-close" onclick="closeModal('modal-mentions')"><i class="fa-solid fa-xmark"></i></button>
             <h2>Mentions légales</h2>
-
             <h3>Éditrice du site</h3>
             <p>Floryne Pierson — Auto-entrepreneuse<br>
             Metz, 57000<br>
@@ -762,40 +759,33 @@
             TVA non applicable — art. 293 B du CGI<br>
             Téléphone : 06 38 48 25 39<br>
             Email : hello@florynepierson.com</p>
-
             <h3>Hébergeur</h3>
             <p>Vercel Inc.<br>
             440 N Baxter Ave, San Francisco, CA 94107, États-Unis<br>
             <a href="https://vercel.com" target="_blank" style="color:#B09A7A;">vercel.com</a></p>
-
             <h3>Propriété intellectuelle</h3>
             <p>L'ensemble du contenu de ce site (textes, visuels, code, structure) est la propriété de Floryne Pierson. Toute reproduction, même partielle, est interdite sans autorisation préalable.</p>
-
             <h3>Responsabilité</h3>
             <p>Les informations contenues sur ce site sont données à titre indicatif. Floryne Pierson s'efforce de maintenir les informations à jour mais ne peut être tenue responsable d'éventuelles erreurs ou omissions.</p>
-
             <h3>Médiation de la consommation</h3>
             <p>Conformément à l'article L.616-1 du Code de la consommation, en cas de litige non résolu à l'amiable, vous pouvez recourir gratuitement au service de médiation :</p>
             <p><strong>Médiation des Entreprises</strong><br>
             <a href="https://www.mediateur-des-entreprises.fr" target="_blank" style="color:#B09A7A;">www.mediateur-des-entreprises.fr</a><br>
             <em>(Adhésion en cours de finalisation.)</em></p>
-
             <h3>Droit applicable</h3>
             <p>Le présent site est soumis au droit français. Tout litige relatif à son utilisation sera soumis aux juridictions compétentes de Metz.</p>
         </div>
     </div>
 
-    <!-- ===================== MODAL POLITIQUE DE CONFIDENTIALITÉ ===================== -->
+    <!-- MODAL POLITIQUE DE CONFIDENTIALITÉ -->
     <div id="modal-privacy" class="modal-overlay" onclick="closeModalOnOverlay(event, 'modal-privacy')">
         <div class="modal-box">
             <button class="modal-close" onclick="closeModal('modal-privacy')"><i class="fa-solid fa-xmark"></i></button>
             <h2>Politique de confidentialité</h2>
             <p style="font-size:0.75rem; color:rgba(22,37,33,0.4);">Dernière mise à jour : mai 2026</p>
-
             <h3>Responsable du traitement</h3>
             <p>Floryne Pierson — Auto-entrepreneuse<br>
             Metz, 57000 — hello@florynepierson.com</p>
-
             <h3>Données collectées</h3>
             <p>Lors de l'utilisation du formulaire de contact, les données suivantes peuvent être collectées :</p>
             <ul>
@@ -805,47 +795,40 @@
                 <li>Le contenu de votre message</li>
             </ul>
             <p style="margin-top:0.75rem;">Ces données sont utilisées <strong>uniquement</strong> pour répondre à votre demande et ne sont jamais revendues ni transmises à des tiers.</p>
-
             <h3>Durée de conservation</h3>
             <p>Vos données sont conservées le temps nécessaire au traitement de votre demande, et supprimées au plus tard 3 ans après le dernier contact.</p>
-
             <h3>Vos droits (RGPD)</h3>
             <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, d'effacement, de portabilité et d'opposition concernant vos données personnelles.<br>
             Pour exercer ces droits : <a href="mailto:hello@florynepierson.com" style="color:#B09A7A;">hello@florynepierson.com</a><br>
             En cas de réclamation non résolue, vous pouvez contacter la <a href="https://www.cnil.fr" target="_blank" style="color:#B09A7A;">CNIL</a>.</p>
-
             <h3>Services tiers</h3>
             <p>Ce site utilise :</p>
             <ul>
-                <li><strong>Google Fonts</strong> (chargement de polices via CDN Google) — peut transmettre votre adresse IP à Google.</li>
-                <li><strong>Font Awesome</strong> (icônes via CDN) — aucune donnée personnelle collectée.</li>
-                <li><strong>Formspree</strong> (traitement du formulaire de contact) — vos données de formulaire transitent par leurs serveurs sécurisés. <a href="https://formspree.io/legal/privacy-policy" target="_blank" style="color:#B09A7A;">Politique Formspree</a>.</li>
+                <li><strong>Google Fonts</strong> — peut transmettre votre adresse IP à Google.</li>
+                <li><strong>Font Awesome</strong> — aucune donnée personnelle collectée.</li>
+                <li><strong>Formspree</strong> — vos données de formulaire transitent par leurs serveurs sécurisés. <a href="https://formspree.io/legal/privacy-policy" target="_blank" style="color:#B09A7A;">Politique Formspree</a>.</li>
             </ul>
             <p style="margin-top:0.75rem;">Aucun outil de tracking (Google Analytics, Pixel Facebook, etc.) n'est utilisé sur ce site.</p>
         </div>
     </div>
 
-    <!-- ===================== MODAL COOKIES ===================== -->
+    <!-- MODAL COOKIES -->
     <div id="modal-cookies" class="modal-overlay" onclick="closeModalOnOverlay(event, 'modal-cookies')">
         <div class="modal-box">
             <button class="modal-close" onclick="closeModal('modal-cookies')"><i class="fa-solid fa-xmark"></i></button>
             <h2>Gestion des cookies</h2>
-
             <h3>Qu'est-ce qu'un cookie ?</h3>
             <p>Un cookie est un petit fichier texte déposé sur votre navigateur lors de la visite d'un site web. Certains cookies sont indispensables au fonctionnement technique du site, d'autres servent à des fins statistiques ou publicitaires.</p>
-
             <h3>Les cookies utilisés sur ce site</h3>
             <p>Ce site n'utilise <strong>aucun cookie publicitaire ni de tracking.</strong><br>
             Les seuls cookies susceptibles d'être déposés sont des cookies <strong>techniques</strong> liés aux services tiers suivants :</p>
             <ul>
-                <li><strong>Google Fonts</strong> : chargement des polices de caractères. Google peut collecter votre adresse IP dans ce cadre (<a href="https://policies.google.com/privacy" target="_blank" style="color:#B09A7A;">politique Google</a>).</li>
-                <li><strong>Font Awesome</strong> : chargement des icônes. Aucune donnée personnelle collectée.</li>
+                <li><strong>Google Fonts</strong> : Google peut collecter votre adresse IP (<a href="https://policies.google.com/privacy" target="_blank" style="color:#B09A7A;">politique Google</a>).</li>
+                <li><strong>Font Awesome</strong> : Aucune donnée personnelle collectée.</li>
                 <li><strong>Formspree</strong> : traitement sécurisé des soumissions du formulaire de contact.</li>
             </ul>
-
             <h3>Vos choix</h3>
             <p>Vous pouvez à tout moment accepter ou refuser ces cookies via le bandeau affiché à votre première visite. Vous pouvez également configurer votre navigateur pour bloquer les cookies tiers.</p>
-
             <h3>Modifier votre choix</h3>
             <p>Pour modifier votre consentement, cliquez ci-dessous :</p>
             <div style="display:flex; gap:0.75rem; margin-top:1rem; flex-wrap:wrap;">
@@ -855,76 +838,96 @@
         </div>
     </div>
 
-    <!-- ===================== MODAL CGV ===================== -->
+    <!-- ===================== MODAL CGV — VERSION RENFORCÉE ===================== -->
     <div id="modal-cgv" class="modal-overlay" onclick="closeModalOnOverlay(event, 'modal-cgv')">
         <div class="modal-box">
             <button class="modal-close" onclick="closeModal('modal-cgv')"><i class="fa-solid fa-xmark"></i></button>
             <h2>Conditions Générales de Vente</h2>
-            <p style="font-size:0.75rem; color:rgba(22,37,33,0.4);">En vigueur au 1er janvier 2026 &mdash; FLORYNE PIERSON, auto-entrepreneuse, Metz (57000) &mdash; SIRET 931 755 557 00010</p>
+            <p style="font-size:0.75rem; color:rgba(22,37,33,0.4);">En vigueur au 1er mai 2026 &mdash; FLORYNE PIERSON, auto-entrepreneuse &mdash; Metz (57000) &mdash; SIRET 931 755 557 00010</p>
 
-            <h3>Article 1 &mdash; Objet</h3>
-            <p>Les présentes CGV régissent l'ensemble des prestations de création de sites internet, de référencement (SEO) et de maintenance proposées par Floryne Pierson («&nbsp;le Prestataire&nbsp;») à tout client professionnel ou particulier («&nbsp;le Client&nbsp;»). Toute commande implique l'acceptation sans réserve des présentes CGV.</p>
+            <h3>Article 1 &mdash; Objet &amp; Champ d'application</h3>
+            <p>Les présentes Conditions Générales de Vente (ci-après « CGV ») régissent l'ensemble des prestations de création de sites internet, de référencement naturel (SEO) et de maintenance proposées par Floryne Pierson (ci-après « le Prestataire ») à tout client professionnel ou particulier (ci-après « le Client »). Toute commande vaut acceptation pleine et sans réserve des présentes CGV, qui prévalent sur tout document émanant du Client. Le Prestataire se réserve le droit de modifier les présentes CGV à tout moment ; la version applicable est celle en vigueur à la date de signature du devis.</p>
 
-            <h3>Article 2 &mdash; Devis &amp; Commande</h3>
-            <p>Toute prestation fait l'objet d'un devis écrit, valable 30 jours. La commande est confirmée par le retour signé du devis accompagné du versement de l'acompte prévu à l'article 4. Le Prestataire se réserve le droit de refuser toute commande sans avoir à se justifier.</p>
+            <h3>Article 2 &mdash; Devis &amp; Formation du contrat</h3>
+            <p>Toute prestation fait l'objet d'un devis écrit détaillé, valable <strong>30 jours</strong> à compter de sa date d'émission. Le contrat est formé par la réunion de deux conditions cumulatives : (1) retour du devis signé par le Client, et (2) versement de l'acompte prévu à l'article 5. Le Prestataire se réserve le droit de refuser toute commande sans avoir à se justifier, notamment en cas de contenu illicite, de propos diffamatoires ou de projet contraire à ses valeurs.</p>
 
-            <h3>Article 3 &mdash; Déroulement de la prestation</h3>
-            <p>Le délai de réalisation court à compter de la validation de la maquette <strong>et</strong> de la réception de l'intégralité des contenus (textes, photos, informations). Le délai indicatif est d'<strong>1 semaine ouvrée</strong> pour une prestation standard.</p>
-            <p style="margin-top:0.5rem;">Chaque prestation inclut <strong>2 allers-retours de corrections</strong> par phase (maquette et intégration). Toute demande supplémentaire est facturée au taux horaire communiqué sur devis.</p>
+            <h3>Article 3 &mdash; Démarrage &amp; Délais d'exécution</h3>
+            <p>La prestation démarre uniquement après réception simultanée de l'acompte <strong>et</strong> de l'intégralité des éléments nécessaires fournis par le Client (textes, photos, logo, informations pratiques). Le délai indicatif est d'<strong>1 semaine ouvrée</strong> pour une prestation standard, à compter de la validation de la maquette. Ce délai est suspendu de plein droit en cas de retard du Client dans la transmission des éléments ou la validation des étapes. Aucun retard imputable au Client ne peut engager la responsabilité du Prestataire.</p>
 
-            <h3>Article 4 &mdash; Tarifs &amp; Paiement</h3>
-            <p>Les prix sont indiqués en euros TTC. La TVA n'est pas applicable (art. 293 B du CGI). Le paiement s'effectue en deux fois :</p>
+            <h3>Article 4 &mdash; Process de validation &amp; Conformité</h3>
+            <p>Chaque projet inclut <strong>2 allers-retours de corrections</strong> par phase (maquette et intégration). Toute demande de correction supplémentaire est facturée au taux horaire communiqué sur devis. La livraison est réputée conforme au devis signé, et non aux attentes non formalisées ou modifiées en cours de projet. La validation écrite de la version finale par le Client (par email ou tout autre moyen traçable) constitue une acceptation définitive et irrévocable. Aucune modification n'est incluse après cette validation, sauf dans le cadre d'un contrat de maintenance.</p>
+
+            <h3>Article 5 &mdash; Tarifs &amp; Paiement</h3>
+            <p>Les prix sont indiqués en euros. La TVA n'est pas applicable (art. 293 B du CGI). Le paiement s'effectue en deux fois :</p>
             <ul>
-                <li><strong>50 % à la commande</strong> (acompte) — déclenchement de la prestation</li>
-                <li><strong>50 % à la livraison</strong> — avant mise en ligne ou transfert des fichiers</li>
+                <li><strong>50 % à la commande</strong> — acompte non remboursable, déclenchant la prestation</li>
+                <li><strong>50 % à la livraison</strong> — exigible avant mise en ligne ou transfert des fichiers</li>
             </ul>
-            <p style="margin-top:0.5rem;">Le paiement s'effectue par <strong>carte bancaire via Stripe</strong> ou par virement sur demande. Tout retard de paiement entraîne des pénalités égales à 3 fois le taux d'intérêt légal, exigibles sans mise en demeure.</p>
+            <p style="margin-top:0.5rem;">Le paiement s'effectue par carte bancaire via Stripe ou par virement bancaire sur demande. Tout retard de paiement entraîne, de plein droit et sans mise en demeure préalable, des pénalités de retard au taux de <strong>3 fois le taux d'intérêt légal</strong> en vigueur, ainsi qu'une <strong>indemnité forfaitaire de recouvrement de 40 €</strong> conformément à l'article L.441-10 du Code de commerce. Ces pénalités courent à compter du premier jour suivant la date d'échéance.</p>
 
-            <h3>Article 5 &mdash; Transfert de propriété</h3>
-            <p>Le Prestataire conserve l'intégralité des droits de propriété intellectuelle sur les créations jusqu'au paiement complet du solde. À réception du paiement intégral, le Client acquiert les droits d'utilisation du site pour son usage commercial propre. Le Prestataire se réserve le droit de mentionner la réalisation dans son portfolio.</p>
+            <h3>Article 6 &mdash; Obligations &amp; Garanties du Client</h3>
+            <p>Le Client s'engage à :</p>
+            <ul>
+                <li>Fournir des contenus exacts, licites et à jour dans les délais convenus</li>
+                <li>Détenir tous les droits de propriété intellectuelle sur les éléments transmis (textes, photos, logo, marques)</li>
+                <li>Ne pas transmettre de contenus illicites, diffamatoires, violant des droits de tiers ou contraires à l'ordre public</li>
+                <li>Régler les sommes dues aux échéances prévues</li>
+            </ul>
+            <p style="margin-top:0.5rem;">En cas de fourniture de contenus illicites ou portant atteinte aux droits d'un tiers, le Client assume seul et intégralement la responsabilité civile et pénale en découlant. Le Prestataire est expressément dégagé de toute responsabilité à ce titre et se réserve le droit de suspendre immédiatement la prestation sans remboursement.</p>
 
-            <h3>Article 6 &mdash; Obligations du Client</h3>
-            <p>Le Client s'engage à fournir les contenus nécessaires dans les délais convenus, à disposer des droits sur les éléments transmis (photos, textes, logo), et à régler les sommes dues aux échéances prévues.</p>
+            <h3>Article 7 &mdash; Propriété intellectuelle &amp; Transfert de droits</h3>
+            <p>Le Prestataire conserve l'intégralité des droits de propriété intellectuelle sur les créations jusqu'au paiement complet du solde. Tout défaut de paiement suspend le transfert de droits. Après paiement intégral, le Client acquiert un droit d'usage non exclusif du site pour son activité commerciale propre. Toute revente, cession ou réutilisation du code source à des fins commerciales tierces est interdite sans accord écrit préalable du Prestataire. Le Prestataire se réserve le droit de mentionner la réalisation dans son portfolio, sur ses réseaux et à titre de référence commerciale. Le Client souhaitant s'y opposer doit en faire la demande expresse par écrit lors de la signature du devis ; à défaut, la mention est autorisée.</p>
 
-            <h3>Article 7 &mdash; Suspension &amp; Caducité du projet</h3>
-            <p>Si le Client ne fournit pas les contenus ou ne répond pas aux relances dans un délai de <strong>30 jours calendaires</strong>, le projet est suspendu et le Prestataire n'est plus tenu par le délai initial.</p>
-            <p style="margin-top:0.5rem;">Au-delà de <strong>60 jours d'inactivité</strong> du fait du Client, le devis est caduc et l'acompte versé est acquis au Prestataire. La reprise fera l'objet d'un nouveau devis.</p>
+            <h3>Article 8 &mdash; Suspension &amp; Caducité du projet</h3>
+            <p>Si le Client ne fournit pas les éléments demandés ou ne répond pas aux relances dans un délai de <strong>30 jours calendaires</strong>, le projet est suspendu et le Prestataire n'est plus tenu par les délais initialement convenus. Au-delà de <strong>60 jours d'inactivité</strong> du fait exclusif du Client, le projet est considéré comme caduc : l'acompte versé reste définitivement acquis au Prestataire à titre d'indemnisation forfaitaire, et toute reprise fera l'objet d'un nouveau devis.</p>
 
-            <h3>Article 8 &mdash; Droit de rétractation</h3>
-            <p>Les présentes CGV s'adressent principalement à des clients professionnels pour lesquels le droit de rétractation de 14 jours ne s'applique pas. Pour les clients particuliers, ce droit s'applique à compter de la confirmation de commande. Si le Client demande expressément le démarrage des travaux avant l'expiration de ce délai, il y renonce une fois la prestation commencée.</p>
+            <h3>Article 9 &mdash; Résiliation pour faute</h3>
+            <p>Le Prestataire se réserve le droit de résilier le contrat de plein droit, par simple notification écrite (email avec accusé de réception), en cas de :</p>
+            <ul>
+                <li>Non-paiement d'une échéance non régularisé dans les 10 jours suivant mise en demeure</li>
+                <li>Comportement abusif, agressif ou diffamatoire à l'égard du Prestataire</li>
+                <li>Fourniture de contenus manifestement illicites</li>
+                <li>Violation grave des présentes CGV</li>
+            </ul>
+            <p style="margin-top:0.5rem;">En cas de résiliation aux torts du Client, l'acompte versé reste acquis au Prestataire. Si des travaux ont été réalisés au-delà de la phase couverte par l'acompte, une facturation au prorata des travaux effectués pourra être émise.</p>
 
-            <h3>Article 9 &mdash; Responsabilité</h3>
-            <p>La responsabilité du Prestataire est limitée au montant total de la commande. Le Prestataire ne peut être tenu responsable des contenus fournis par le Client ni des résultats commerciaux du site. Aucun résultat de référencement n'est garanti, le SEO étant soumis aux algorithmes de moteurs tiers.</p>
+            <h3>Article 10 &mdash; Droit de rétractation</h3>
+            <p>Les présentes CGV s'adressent principalement à des clients professionnels, pour lesquels le droit légal de rétractation de 14 jours ne s'applique pas. Pour les clients particuliers (consommateurs au sens du Code de la consommation), ce droit s'applique à compter de la confirmation de commande, sauf si le Client demande expressément le démarrage des travaux avant l'expiration de ce délai, auquel cas il y renonce irrévocablement une fois la prestation commencée.</p>
 
-            <h3>Article 10 &mdash; Maintenance</h3>
-            <p>Les prestations de maintenance font l'objet d'un contrat mensuel séparable, résiliable à tout moment avec un préavis de <strong>30 jours</strong> par email. L'absence de paiement mensuel entraîne la suspension du service.</p>
+            <h3>Article 11 &mdash; Responsabilité &amp; Limitation</h3>
+            <p>Le Prestataire est soumis à une <strong>obligation de moyens</strong> et non de résultat. Il ne garantit aucun résultat en matière de SEO, de positionnement Google, de trafic, de conversions ou de chiffre d'affaires, ces éléments étant soumis à des facteurs extérieurs indépendants de sa volonté (algorithmes de moteurs de recherche, concurrence, comportement des internautes). La responsabilité totale du Prestataire, toutes causes confondues, est limitée au montant total effectivement encaissé pour la prestation concernée. Le Prestataire n'est pas responsable des interruptions, pannes ou pertes de données liées aux services tiers (Vercel, Stripe, Formspree, OVH, registraires de noms de domaine).</p>
 
-            <h3>Article 11 &mdash; Confidentialité</h3>
-            <p>Le Prestataire s'engage à garder confidentielles toutes les informations communiquées par le Client et à ne pas les divulguer à des tiers sans accord préalable.</p>
+            <h3>Article 12 &mdash; Force majeure</h3>
+            <p>Aucune des parties ne pourra être tenue responsable d'un manquement à ses obligations contractuelles si ce manquement résulte d'un cas de force majeure au sens de l'article 1218 du Code civil (événement imprévisible, irrésistible et extérieur), notamment : catastrophe naturelle, pandémie, panne généralisée d'internet, cyberattaque, défaillance d'infrastructure d'hébergement, ou tout autre événement hors du contrôle raisonnable des parties. La partie empêchée devra en informer l'autre dans les meilleurs délais. Si la situation se prolonge au-delà de <strong>30 jours</strong>, chaque partie pourra résilier le contrat sans indemnité, sous réserve du remboursement prorata temporis des sommes versées pour les travaux non réalisés.</p>
 
-            <h3>Article 12 &mdash; Loi applicable &amp; Litiges</h3>
-            <p>Les présentes CGV sont soumises au droit français. En cas de litige, une solution amiable sera recherchée en priorité. À défaut, le litige sera soumis aux juridictions compétentes du ressort de Metz. Le Client consommateur peut recourir à la médiation : <a href="https://www.mediateur-des-entreprises.fr" target="_blank" style="color:#B09A7A;">Médiation des Entreprises</a>.</p>
+            <h3>Article 13 &mdash; Maintenance</h3>
+            <p>Les prestations de maintenance font l'objet d'un abonnement mensuel sans engagement minimum, résiliable à tout moment par email avec un préavis de <strong>30 jours</strong>, avec effet au prochain cycle de facturation. L'abonnement comprend les modifications légères (textes, images, tarifs, horaires) dans la limite convenue, le suivi technique de base et le support par email sous 24h ouvrées. Sont expressément exclus : toute refonte graphique, création de nouvelles pages, ajout de fonctionnalités et modifications structurelles, lesquels font l'objet d'un devis séparé. L'absence de paiement mensuel entraîne la suspension immédiate du service sans préavis.</p>
+
+            <h3>Article 14 &mdash; Noms de domaine &amp; Services tiers</h3>
+            <p>Les noms de domaine sont enregistrés au nom du Client, qui en est seul propriétaire et responsable. Le Prestataire peut accompagner leur configuration à titre de service accessoire. Le Client reconnaît que la disponibilité de son site dépend de prestataires tiers (hébergeur, registraire, passerelle de paiement) et que le Prestataire ne peut être tenu responsable des interruptions ou défaillances de ces services.</p>
+
+            <h3>Article 15 &mdash; Confidentialité</h3>
+            <p>Chaque partie s'engage à garder strictement confidentielles toutes les informations, documents et données de nature sensible communiqués par l'autre partie dans le cadre de l'exécution du contrat, et à ne pas les divulguer à des tiers sans accord préalable écrit. Cette obligation de confidentialité demeure en vigueur pendant toute la durée du contrat et pendant <strong>3 ans</strong> après son terme.</p>
+
+            <h3>Article 16 &mdash; Loi applicable, Médiation &amp; Litiges</h3>
+            <p>Les présentes CGV sont soumises exclusivement au droit français. En cas de litige, les parties s'engagent à rechercher une solution amiable avant tout recours judiciaire. À défaut d'accord dans un délai de 30 jours à compter de la notification du litige, le différend sera soumis aux juridictions compétentes du ressort du siège du Prestataire (Metz). Le Client consommateur peut, en dernier recours, recourir gratuitement à la médiation de la consommation : <a href="https://www.mediateur-des-entreprises.fr" target="_blank" style="color:#B09A7A;">Médiation des Entreprises</a>.</p>
         </div>
     </div>
 
     <script>
-        // ===================== FORMULAIRE FORMSPREE =====================
         async function handleFormSubmit(event) {
             event.preventDefault();
             const form = document.getElementById('contactForm');
             const btn = document.getElementById('submitBtn');
             const data = new FormData(form);
-
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Envoi en cours...';
-
             try {
                 const response = await fetch('https://formspree.io/f/mykvdqaj', {
                     method: 'POST',
                     body: data,
                     headers: { 'Accept': 'application/json' }
                 });
-
                 if (response.ok) {
                     form.classList.add('hidden');
                     document.getElementById('successMessage').classList.remove('hidden');
@@ -937,7 +940,6 @@
                 form.classList.add('hidden');
                 document.getElementById('errorMessage').classList.remove('hidden');
             }
-
             btn.disabled = false;
             btn.innerHTML = 'Envoyer ma demande d\'estimation <i class="fa-solid fa-paper-plane ml-2 text-xs"></i>';
         }
@@ -954,19 +956,16 @@
             document.getElementById('errorMessage').classList.add('hidden');
         }
 
-        // ===================== FAQ ACCORDION =====================
         function toggleFaq(btn) {
             const item = btn.closest('.faq-item');
             const answer = item.querySelector('.faq-answer');
             const chevron = item.querySelector('.faq-chevron');
             const isOpen = !answer.classList.contains('hidden');
-
             document.querySelectorAll('.faq-item').forEach(el => {
                 el.querySelector('.faq-answer').classList.add('hidden');
                 el.querySelector('.faq-chevron').style.transform = 'rotate(0deg)';
                 el.querySelector('button').classList.remove('bg-brand-sageLight/30');
             });
-
             if (!isOpen) {
                 answer.classList.remove('hidden');
                 chevron.style.transform = 'rotate(180deg)';
@@ -974,7 +973,6 @@
             }
         }
 
-        // ===================== MODALS =====================
         function openModal(id) {
             document.getElementById(id).classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -992,7 +990,6 @@
             }
         });
 
-        // ===================== COOKIES =====================
         function acceptCookies() {
             localStorage.setItem('cookie-consent', 'accepted');
             document.getElementById('cookie-banner').classList.add('hidden');

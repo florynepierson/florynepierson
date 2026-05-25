@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Floryne Pierson | Création Web, SEO & Visibilité Locale</title>
     
+    <!-- Google Fonts auto-hébergées via CSS @import depuis Vercel — pas de cookie tiers -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,9 +41,93 @@
         ::-webkit-scrollbar-track { background: #FAF7F2; }
         ::-webkit-scrollbar-thumb { background: #B09A7A; border-radius: 4px; }
         .blob-bg { filter: blur(80px); opacity: 0.45; z-index: 0; }
+
+        /* MODALS */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(22,37,33,0.7);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-box {
+            background: #FAF7F2;
+            border-radius: 1.5rem;
+            max-width: 680px;
+            width: 100%;
+            max-height: 82vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+        }
+        .modal-box h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; margin-bottom: 1.25rem; color: #162521; }
+        .modal-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #162521; font-weight: 600; }
+        .modal-box p, .modal-box li { font-size: 0.875rem; color: rgba(22,37,33,0.75); line-height: 1.75; font-weight: 300; }
+        .modal-box ul { list-style: disc; padding-left: 1.25rem; margin-top: 0.4rem; }
+        .modal-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: #B09A7A;
+        }
+
+        /* COOKIE BANNER */
+        #cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 150;
+            background: #162521;
+            color: #FAF7F2;
+            padding: 1rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            border-top: 1px solid rgba(176,154,122,0.2);
+            font-size: 0.8rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        #cookie-banner.hidden { display: none; }
+        #cookie-banner a { color: #B09A7A; text-decoration: underline; }
+        .cookie-btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .cookie-accept { background: #B09A7A; color: #162521; }
+        .cookie-accept:hover { background: #FAF7F2; }
+        .cookie-refuse { background: transparent; color: rgba(250,247,242,0.6); border: 1px solid rgba(250,247,242,0.2); }
+        .cookie-refuse:hover { color: #FAF7F2; border-color: rgba(250,247,242,0.5); }
     </style>
 </head>
 <body class="bg-brand-cream text-brand-dark font-sans selection:bg-brand-sage selection:text-white overflow-x-hidden">
+
+    <!-- ===================== COOKIE BANNER ===================== -->
+    <div id="cookie-banner">
+        <p class="flex-1 min-w-[200px]" style="color:rgba(250,247,242,0.75); margin:0;">
+            Ce site utilise des cookies techniques nécessaires à son fonctionnement (Google Fonts, FontAwesome). Aucun cookie publicitaire ni de tracking n'est utilisé.
+            <a href="#" onclick="openModal('modal-cookies'); return false;" class="ml-1">En savoir plus</a>
+        </p>
+        <div style="display:flex; gap:0.75rem; flex-shrink:0;">
+            <button class="cookie-btn cookie-refuse" onclick="refuseCookies()">Refuser</button>
+            <button class="cookie-btn cookie-accept" onclick="acceptCookies()">Accepter</button>
+        </div>
+    </div>
 
     <!-- NAVIGATION -->
     <nav class="fixed top-0 left-0 w-full bg-brand-cream/80 backdrop-blur-md border-b border-brand-gold/10 z-50 transition-all duration-300">
@@ -118,25 +202,21 @@
     <section id="constat" class="py-24 bg-brand-dark text-brand-cream relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-                
                 <div>
                     <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Sortez de la course aux likes</span>
                     <h2 class="font-serif text-4xl lg:text-5xl font-light mb-8 leading-tight">
                         Est-ce que votre entreprise est <span class="italic text-brand-gold">vraiment</span> visible ?
                     </h2>
-                    
                     <p class="text-brand-cream/70 font-light mb-6 leading-relaxed">
                         Passer des heures à peaufiner des publications Instagram ou TikTok qui disparaissent en 24h est épuisant. Pire encore : cela ne cible pas toujours les personnes prêtes à acheter ou à réserver chez vous <strong>aujourd'hui</strong>.
                     </p>
                     <p class="text-brand-cream/70 font-light mb-8 leading-relaxed">
                         En optimisant votre visibilité sur Google (référencement local, SEO) et en créant un site à votre image, vous construisez un canal d'acquisition qui travaille pour vous, même pendant que vous dormez.
                     </p>
-
                     <div class="border-l-2 border-brand-gold pl-6 py-2 italic font-serif text-lg text-brand-cream/90">
                         "Un client qui cherche vos services sur Google est déjà prêt à acheter. Un utilisateur sur Instagram cherche juste à se divertir."
                     </div>
                 </div>
-
                 <div class="grid gap-6">
                     <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors duration-300">
                         <div class="flex items-start space-x-4">
@@ -149,7 +229,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="bg-white/5 border border-brand-gold/20 rounded-2xl p-6 hover:bg-white/10 transition-colors duration-300">
                         <div class="flex items-start space-x-4">
                             <div class="p-3 rounded-lg bg-green-900/30 text-brand-sage">
@@ -166,160 +245,101 @@
         </div>
     </section>
 
-
-<!-- SERVICES -->
-<section id="services" class="py-24 bg-brand-cream">
-  <div class="max-w-7xl mx-auto px-6">
-    
-    <div class="text-center max-w-2xl mx-auto mb-16">
-      <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">
-        Offres claires & sans confusion
-      </span>
-
-      <h2 class="font-serif text-4xl md:text-5xl font-light mb-6 text-brand-dark">
-        Des sites web pensés pour attirer des clients
-      </h2>
-
-      <p class="text-sm text-brand-dark/60 font-light -mt-2">
-        Chaque offre est un niveau différent de visibilité et de capacité à générer des demandes clients.
-      </p>
-
-      <div class="w-16 h-[2px] bg-brand-gold mx-auto mt-6"></div>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8">
-
-      <!-- OFFRE 1 -->
-      <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
-
-        <div>
-          <div class="flex justify-between items-start mb-6">
-            <div class="w-12 h-12 rounded-2xl bg-brand-sage/10 text-brand-sage flex items-center justify-center">
-              <i class="fa-solid fa-store text-xl"></i>
+    <!-- SERVICES -->
+    <section id="services" class="py-24 bg-brand-cream">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Offres claires & sans confusion</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light mb-6 text-brand-dark">Des sites web pensés pour attirer des clients</h2>
+                <p class="text-sm text-brand-dark/60 font-light -mt-2">Chaque offre est un niveau différent de visibilité et de capacité à générer des demandes clients.</p>
+                <div class="w-16 h-[2px] bg-brand-gold mx-auto mt-6"></div>
             </div>
 
-            <div class="text-right">
-              <span class="text-xs text-brand-dark/40 uppercase tracking-widest block font-semibold">À partir de</span>
-              <span class="text-lg font-bold text-brand-sage font-serif">249 €</span>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- OFFRE 1 -->
+                <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-sage/10 text-brand-sage flex items-center justify-center">
+                                <i class="fa-solid fa-store text-xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-brand-dark/40 uppercase tracking-widest block font-semibold">À partir de</span>
+                                <span class="text-lg font-bold text-brand-sage font-serif">249 €</span>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold mb-4 text-brand-dark">Site vitrine simple</h3>
+                        <p class="text-brand-dark/70 font-light text-sm leading-relaxed mb-6">Un site simple pour présenter votre activité et être présent en ligne.</p>
+                        <ul class="space-y-3 mb-6 text-sm text-brand-dark/80">
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-sage mt-0.5"></i><span>1 page complète (présentation + services + contact)</span></li>
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-sage mt-0.5"></i><span>Design mobile moderne</span></li>
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-sage mt-0.5"></i><span>Bouton WhatsApp ou formulaire</span></li>
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-sage mt-0.5"></i><span>Chargement rapide</span></li>
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-sage mt-0.5"></i><span>Site indexé sur Google</span></li>
+                        </ul>
+                        <div class="bg-brand-sageLight/50 rounded-xl p-3 text-xs text-brand-dark/60 font-light">
+                            <strong class="text-brand-dark/80">SEO :</strong> visibilité de base — votre site est indexé mais peu positionné sur les recherches "métier + ville".
+                        </div>
+                    </div>
+                    <a href="#contact" class="mt-8 w-full text-center py-3 border border-brand-gold hover:bg-brand-gold hover:text-brand-dark rounded-full text-sm font-semibold text-brand-gold transition-all duration-300">Commencer</a>
+                </div>
+
+                <!-- OFFRE 2 -->
+                <div class="bg-brand-dark text-brand-cream rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between relative">
+                    <div class="absolute top-0 right-0 bg-brand-gold text-brand-dark text-xs uppercase tracking-widest font-bold px-4 py-1 rounded-bl-xl">Recommandé</div>
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-gold/20 text-brand-gold flex items-center justify-center">
+                                <i class="fa-solid fa-chart-line text-xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-brand-cream/40 uppercase tracking-widest block font-semibold">À partir de</span>
+                                <span class="text-lg font-bold text-brand-gold font-serif">349 €</span>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-2xl font-light mb-4">Site optimisé pour attirer des clients</h3>
+                        <p class="text-brand-cream/70 font-light text-sm leading-relaxed mb-6">Un site conçu pour apparaître sur Google et transformer les visiteurs en demandes clients.</p>
+                        <ul class="space-y-3 mb-6 text-sm text-brand-cream/80">
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i><span>Tout ce qui est inclus dans l'offre 1</span></li>
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i><span>SEO local optimisé (métier + ville)</span></li>
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i><span>Texte structuré pour attirer des clients</span></li>
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i><span>Mise en avant des services pour convertir</span></li>
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i><span>Contenu pensé pour inciter au contact</span></li>
+                        </ul>
+                        <div class="bg-white/10 rounded-xl p-3 text-xs text-brand-cream/70 font-light">
+                            <strong class="text-brand-cream/90">SEO :</strong> visibilité locale améliorée — votre site peut apparaître sur des recherches locales (ex : "coiffeur Paris", "nail artist Nantes").
+                        </div>
+                    </div>
+                    <a href="#contact" class="mt-8 w-full text-center py-3 bg-brand-gold hover:bg-brand-cream hover:text-brand-dark rounded-full text-sm font-semibold text-brand-dark transition-all duration-300">Attirer des clients</a>
+                </div>
+
+                <!-- OFFRE 3 -->
+                <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-sage/10 text-brand-sage flex items-center justify-center">
+                                <i class="fa-solid fa-gears text-xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-brand-dark/40 uppercase tracking-widest block font-semibold">À partir de</span>
+                                <span class="text-lg font-bold text-brand-sage font-serif">499 €</span>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold mb-4 text-brand-dark">Site complet multi-pages</h3>
+                        <p class="text-brand-dark/70 font-light text-sm leading-relaxed mb-6">Un site plus complet pour présenter votre activité de façon détaillée et professionnelle.</p>
+                        <ul class="space-y-3 mb-6 text-sm text-brand-dark/80">
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-sage mt-0.5"></i><span>Tout ce qui est inclus dans l'offre 2</span></li>
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-sage mt-0.5"></i><span>Pages dédiées : accueil, services, galerie, contact</span></li>
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-sage mt-0.5"></i><span>Design plus complet et personnalisé</span></li>
+                            <li class="flex items-start space-x-2"><i class="fa-solid fa-check text-brand-sage mt-0.5"></i><span>Meilleure base pour la visibilité long terme</span></li>
+                        </ul>
+                        <div class="bg-brand-sageLight/50 rounded-xl p-3 text-xs text-brand-dark/60 font-light">
+                            <strong class="text-brand-dark/80">SEO :</strong> structure complète — plus de pages = plus de chances d'apparaître sur Google.
+                        </div>
+                    </div>
+                    <a href="#contact" class="mt-8 w-full text-center py-3 border border-brand-gold hover:bg-brand-gold hover:text-brand-dark rounded-full text-sm font-semibold text-brand-gold transition-all duration-300">Demander un devis</a>
+                </div>
             </div>
-          </div>
-
-          <h3 class="font-serif text-2xl font-semibold mb-4 text-brand-dark">
-            Site vitrine simple
-          </h3>
-
-          <p class="text-brand-dark/70 font-light text-sm leading-relaxed mb-6">
-            Un site simple pour présenter votre activité et être présent en ligne.
-          </p>
-
-          <ul class="space-y-3 mb-8 text-sm text-brand-dark/80">
-            <li>✔ 1 page complète (présentation + services + contact)</li>
-            <li>✔ Design mobile moderne</li>
-            <li>✔ Bouton WhatsApp ou formulaire</li>
-            <li>✔ Chargement rapide (optimisation basique)</li>
-            <li>✔ Site visible sur Google (indexation)</li>
-            <br>
-            <li style="margin-top:10px;"><b>SEO :</b> visibilité de base sur Google</li>
-            <li style="opacity:0.7;">Votre site est indexé sur Google mais peu positionné dans les recherches (“métier + ville”)</li>
-          </ul>
-        </div>
-
-        <a href="#contact" class="w-full text-center py-3 border border-brand-gold hover:bg-brand-gold hover:text-brand-dark rounded-full text-sm font-semibold text-brand-gold transition-all duration-300">
-          Commencer
-        </a>
-      </div>
-
-      <!-- OFFRE 2 -->
-      <div class="bg-brand-dark text-brand-cream rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between relative">
-
-        <div class="absolute top-0 right-0 bg-brand-gold text-brand-dark text-xs uppercase tracking-widest font-bold px-4 py-1 rounded-bl-xl">
-          Recommandé
-        </div>
-
-        <div>
-          <div class="flex justify-between items-start mb-6">
-            <div class="w-12 h-12 rounded-2xl bg-brand-gold/20 text-brand-gold flex items-center justify-center">
-              <i class="fa-solid fa-chart-line text-xl"></i>
-            </div>
-
-            <div class="text-right">
-              <span class="text-xs text-brand-cream/40 uppercase tracking-widest block font-semibold">À partir de</span>
-              <span class="text-lg font-bold text-brand-gold font-serif">349 €</span>
-            </div>
-          </div>
-
-          <h3 class="font-serif text-2xl font-light mb-4">
-            Site optimisé pour attirer des clients
-          </h3>
-
-          <p class="text-brand-cream/70 font-light text-sm leading-relaxed mb-6">
-            Un site conçu pour apparaître sur Google et transformer les visiteurs en demandes clients.
-          </p>
-
-          <ul class="space-y-3 mb-8 text-sm text-brand-cream/80">
-            <li>✔ Tout ce qui est inclus dans l'Offre  1</li>
-            <li>✔ SEO local optimisé (métier + ville)</li>
-            <li>✔ Texte structuré pour attirer des clients</li>
-            <li>✔ Mise en avant des services pour convertir</li>
-            <li>+ Organisation du contenu pensée pour inciter au contact</li>
-            <br>
-            <li style="margin-top:10px;"><b>SEO :</b> visibilité locale améliorée</li>
-            <li style="opacity:0.8;">Votre site peut apparaître sur des recherches locales
-(ex : “coiffeur Paris”, “nail artist Nantes”)</li>
-          </ul>
-        </div>
-
-        <a href="#contact" class="w-full text-center py-3 bg-brand-gold hover:bg-brand-cream hover:text-brand-dark rounded-full text-sm font-semibold text-brand-dark transition-all duration-300">
-          Attirer des clients
-        </a>
-      </div>
-
-      <!-- OFFRE 3 -->
-      <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
-
-        <div>
-          <div class="flex justify-between items-start mb-6">
-            <div class="w-12 h-12 rounded-2xl bg-brand-sage/10 text-brand-sage flex items-center justify-center">
-              <i class="fa-solid fa-gears text-xl"></i>
-            </div>
-
-            <div class="text-right">
-              <span class="text-xs text-brand-dark/40 uppercase tracking-widest block font-semibold">À partir de</span>
-              <span class="text-lg font-bold text-brand-sage font-serif">499 €</span>
-            </div>
-          </div>
-
-          <h3 class="font-serif text-2xl font-semibold mb-4 text-brand-dark">
-            Site complet multi-pages
-          </h3>
-
-          <p class="text-brand-dark/70 font-light text-sm leading-relaxed mb-6">
-            Un site plus complet pour présenter votre activité de façon détaillée et professionnelle.
-          </p>
-
-          <ul class="space-y-3 mb-8 text-sm text-brand-dark/80">
-            <li>✔ Tout ce qui est inclus dans l'offre 2</li>
-            <li>✔ Page accueil</li>
-            <li>✔ Page services</li>
-            <li>✔ Page galerie / réalisations</li>
-            <li>✔ Page contact</li>
-            <li>✔ Design plus complet et plus personnalisé</li>
-            <li>→ Chaque service peut être trouvé séparément</li>
-            <li>✔ Meilleure base pour visibilité long terme</li>
-            <br>
-            <li style="margin-top:10px;"><b>SEO :</b> structure complète</li>
-            <li style="opacity:0.7;">Plus de pages = plus de chances d'apparaître sur Google</li>
-          </ul>
-        </div>
-
-        <a href="#contact" class="w-full text-center py-3 border border-brand-gold hover:bg-brand-gold hover:text-brand-dark rounded-full text-sm font-semibold text-brand-gold transition-all duration-300">
-          Demander un devis
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
 
             <!-- MAINTENANCE -->
             <div class="mt-12 bg-brand-sageLight/60 border border-brand-gold/15 rounded-3xl p-8 md:p-10">
@@ -348,7 +368,8 @@
                             <p class="text-xs text-brand-dark/50 font-light">Un problème ? Je réponds sous 24h ouvrées.</p>
                         </div>
                         <div class="bg-white rounded-2xl p-5 border border-brand-gold/10 flex flex-col justify-center items-center text-center">
-                            <span class="font-serif text-3xl font-semibold text-brand-gold mb-1">19 à 39€</span>
+                            <span class="font-serif text-3xl font-semibold text-brand-gold mb-1">À partir de</span>
+                            <span class="font-serif text-2xl font-semibold text-brand-gold">19 €</span>
                             <span class="text-xs uppercase tracking-widest font-bold text-brand-dark/50">/ mois</span>
                             <a href="#contact" class="mt-3 text-xs font-semibold text-brand-gold hover:underline">En savoir plus →</a>
                         </div>
@@ -358,7 +379,7 @@
         </div>
     </section>
 
-    <!-- POURQUOI UN SITE : DONNÉES SECTEUR (pas des stats inventées) -->
+    <!-- DONNÉES SECTEUR -->
     <section class="py-20 bg-brand-sageLight/50 border-y border-brand-gold/10">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-4 gap-8 text-center lg:text-left">
@@ -376,7 +397,7 @@
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-brand-gold/5 text-center">
                         <span class="block text-5xl font-serif font-semibold text-brand-gold mb-2">76%</span>
                         <span class="text-xs uppercase tracking-widest text-brand-dark/50 font-bold block mb-2">Visite en 24h</span>
-                        <p class="text-xs text-brand-dark/60 font-light">Des personnes qui cherchent un commerce en local sur mobile s'y rendent dans la journée.</p>
+                        <p class="text-xs text-brand-dark/60 font-light">Des personnes qui cherchent un commerce local sur mobile s'y rendent dans la journée.</p>
                     </div>
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-brand-gold/5 text-center">
                         <span class="block text-5xl font-serif font-semibold text-brand-gold mb-2">#1</span>
@@ -392,22 +413,17 @@
     <!-- PORTFOLIO -->
     <section id="portfolio" class="py-24 bg-brand-cream">
         <div class="max-w-7xl mx-auto px-6">
-            
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
                 <div>
                     <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Art & Code</span>
                     <h2 class="font-serif text-4xl md:text-5xl font-light text-brand-dark">Concrètement, à quoi ressemblera votre site ?</h2>
                 </div>
                 <div class="mt-4 md:mt-0">
-                    <p class="text-sm text-brand-dark/60 max-w-sm font-light">
-                        Sites réels et maquettes conçus sur-mesure pour allier esthétique soignée et efficacité commerciale.
-                    </p>
+                    <p class="text-sm text-brand-dark/60 max-w-sm font-light">Sites réels et maquettes conçus sur-mesure pour allier esthétique soignée et efficacité commerciale.</p>
                 </div>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                
-                <!-- Portfolio 1: Claire & Coloré (VRAI client) -->
                 <div class="group bg-brand-cardWhite rounded-3xl overflow-hidden border border-brand-gold/10 hover:shadow-xl transition-all duration-300">
                     <div class="h-64 overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=80" alt="Claire & Coloré - Onglerie Reims" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/FAF7F2/162521?text=Claire+%26+Color%C3%A9'">
@@ -418,9 +434,7 @@
                     <div class="p-6">
                         <h4 class="font-serif text-2xl font-semibold mb-2 text-brand-dark">Claire & Coloré</h4>
                         <p class="text-xs text-brand-dark/50 uppercase tracking-wider mb-4">Site Vitrine, Réservation & SEO Local · Reims</p>
-                        <p class="text-sm text-brand-dark/70 font-light mb-6">
-                            Onglerie naturelle et raffinée à Reims. Site complet avec galerie, tarifs, formulaire de réservation et optimisation Google Maps.
-                        </p>
+                        <p class="text-sm text-brand-dark/70 font-light mb-6">Onglerie naturelle et raffinée à Reims. Site complet avec galerie, tarifs, formulaire de réservation et optimisation Google Maps.</p>
                         <div class="border-t border-brand-gold/10 pt-4 flex items-center justify-between text-xs font-semibold text-brand-gold">
                             <span><i class="fa-solid fa-circle-check mr-1 text-brand-sage"></i> Site en ligne</span>
                             <a href="https://claireetcolore.fr/" target="_blank" class="hover:underline">Voir le site <i class="fa-solid fa-arrow-up-right-from-square ml-0.5 text-[10px]"></i></a>
@@ -428,7 +442,6 @@
                     </div>
                 </div>
 
-                <!-- Portfolio 2: Électricien (maquette) -->
                 <div class="group bg-brand-cardWhite rounded-3xl overflow-hidden border border-brand-gold/10 hover:shadow-xl transition-all duration-300">
                     <div class="h-64 overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="Site artisan électricien" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/FAF7F2/162521?text=Artisan+%C3%89lectricien'">
@@ -439,9 +452,7 @@
                     <div class="p-6">
                         <h4 class="font-serif text-2xl font-semibold mb-2 text-brand-dark">Artisan Électricien</h4>
                         <p class="text-xs text-brand-dark/50 uppercase tracking-wider mb-4">Maquette de Site Vitrine Local</p>
-                        <p class="text-sm text-brand-dark/70 font-light mb-6">
-                            Exemple de site pensé pour un artisan local : mise en avant des prestations, zone d'intervention, devis rapide et visibilité Google.
-                        </p>
+                        <p class="text-sm text-brand-dark/70 font-light mb-6">Exemple de site pensé pour un artisan local : mise en avant des prestations, zone d'intervention, devis rapide et visibilité Google.</p>
                         <div class="border-t border-brand-gold/10 pt-4 flex items-center justify-between text-xs font-semibold text-brand-gold">
                             <span><i class="fa-solid fa-drafting-compass mr-1 text-brand-gold"></i> Maquette démo</span>
                             <a href="https://electrician-sigma.vercel.app" target="_blank" class="hover:underline">Voir la démo <i class="fa-solid fa-arrow-up-right-from-square ml-0.5 text-[10px]"></i></a>
@@ -449,7 +460,6 @@
                     </div>
                 </div>
 
-                <!-- Portfolio 3: Rénovation (maquette) -->
                 <div class="group bg-brand-cardWhite rounded-3xl overflow-hidden border border-brand-gold/10 hover:shadow-xl transition-all duration-300">
                     <div class="h-64 overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="Site rénovation intérieure" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/FAF7F2/162521?text=R%C3%A9novation'">
@@ -460,44 +470,18 @@
                     <div class="p-6">
                         <h4 class="font-serif text-2xl font-semibold mb-2 text-brand-dark">Rénovation Intérieure</h4>
                         <p class="text-xs text-brand-dark/50 uppercase tracking-wider mb-4">Maquette de Site Vitrine & Devis</p>
-                        <p class="text-sm text-brand-dark/70 font-light mb-6">
-                            Démonstration d'un site pour entreprise BTP : galerie de réalisations, formulaire de devis en ligne et référencement local.
-                        </p>
+                        <p class="text-sm text-brand-dark/70 font-light mb-6">Démonstration d'un site pour entreprise BTP : galerie de réalisations, formulaire de devis en ligne et référencement local.</p>
                         <div class="border-t border-brand-gold/10 pt-4 flex items-center justify-between text-xs font-semibold text-brand-gold">
                             <span><i class="fa-solid fa-drafting-compass mr-1 text-brand-gold"></i> Maquette démo</span>
                             <a href="https://renovation-maquette.vercel.app/" target="_blank" class="hover:underline">Voir la démo <i class="fa-solid fa-arrow-up-right-from-square ml-0.5 text-[10px]"></i></a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- AVIS CLIENTS -->
-    <!-- 
-        ============================================================
-        SECTION AVIS MALT — INTÉGRATION FUTURE
-        ============================================================
-        Pour intégrer vos avis Malt automatiquement dès que vous en
-        aurez, deux options :
-        
-        OPTION A — Intégration manuelle (recommandé au départ) :
-        Copiez le bloc "review-card" ci-dessous et remplissez :
-          - Le prénom + nom (data-reviewer)
-          - Le texte de l'avis (dans le <p>)
-          - L'intitulé du client (data-title)
-          - La date si vous le souhaitez
-        Retirez la div "malt-placeholder" une fois le premier avis ajouté.
-        
-        OPTION B — Widget Malt embed (si Malt le propose) :
-        Remplacez le contenu de #malt-reviews-container par :
-        <script src="https://widget.malt.com/v1/reviews.js" 
-                data-profile="floryne-pierson">
-        </script>
-        (URL à confirmer quand Malt activera l'option widget)
-        ============================================================
-    -->
+    <!-- AVIS -->
     <section class="py-24 bg-brand-sageLight/20 border-b border-brand-gold/10" id="avis">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -507,46 +491,41 @@
                 <div class="w-16 h-[2px] bg-brand-gold mx-auto mt-6"></div>
             </div>
 
-            <!-- Placeholder visible AVANT les premiers avis — à supprimer une fois les avis ajoutés -->
             <div id="malt-placeholder" class="text-center py-16 bg-white rounded-3xl border border-dashed border-brand-gold/30">
                 <div class="w-16 h-16 bg-brand-sageLight rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fa-solid fa-star text-brand-gold text-2xl"></i>
                 </div>
                 <p class="font-serif text-2xl text-brand-dark/60 mb-2">Les premiers avis arrivent bientôt</p>
                 <p class="text-sm text-brand-dark/40 font-light max-w-sm mx-auto">Retrouvez mes évaluations de missions directement sur mon profil Malt.</p>
-                <a href="https://www.malt.fr" target="_blank" class="inline-flex items-center space-x-2 mt-6 text-sm font-semibold text-orange-500 hover:text-orange-400 transition-colors duration-200">
+                <a href="https://www.malt.fr/profile/florynepierson" target="_blank" class="inline-flex items-center space-x-2 mt-6 text-sm font-semibold text-orange-500 hover:text-orange-400 transition-colors duration-200">
                     <i class="fa-solid fa-shield"></i>
                     <span>Voir mon profil Malt</span>
                 </a>
             </div>
 
-            <!-- Conteneur des avis — décommenter et remplir à l'ajout du premier avis -->
-            <!-- 
+            <!--
+            ============================================================
+            AVIS MALT — à décommenter et remplir à l'arrivée du 1er avis
+            Supprimer le bloc "malt-placeholder" ci-dessus en même temps.
+            ============================================================
             <div id="malt-reviews-container" class="grid md:grid-cols-3 gap-8">
-                
-                MODÈLE D'UNE CARTE D'AVIS — dupliquer autant de fois que nécessaire
                 <div class="review-card bg-white p-8 rounded-3xl border border-brand-gold/10 shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-1 text-yellow-500 mb-4">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
-                        <p class="text-brand-dark/80 italic font-light text-sm leading-relaxed mb-6">
-                            "Texte de l'avis ici."
-                        </p>
+                        <p class="text-brand-dark/80 italic font-light text-sm leading-relaxed mb-6">"Texte de l'avis ici."</p>
                     </div>
                     <div class="flex items-center justify-between border-t border-brand-gold/10 pt-4">
                         <div>
                             <span class="block font-medium text-sm text-brand-dark">Prénom N.</span>
                             <span class="block text-xs text-brand-dark/40">Titre / Activité du client</span>
                         </div>
-                        <span class="text-[10px] uppercase tracking-wider text-brand-gold font-bold bg-brand-cream px-2 py-1 rounded">Avis Malt</span>
+                        <a href="https://www.malt.fr/profile/florynepierson" target="_blank">
+                            <span class="text-[10px] uppercase tracking-wider text-brand-gold font-bold bg-brand-cream px-2 py-1 rounded hover:bg-brand-sageLight transition-colors">Avis Malt</span>
+                        </a>
                     </div>
                 </div>
-
             </div>
             -->
         </div>
@@ -556,7 +535,6 @@
     <section id="a-propos" class="py-24 bg-brand-sageLight/30 relative">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid md:grid-cols-12 gap-12 items-center">
-                
                 <div class="md:col-span-5">
                     <div class="relative">
                         <div class="absolute inset-0 border border-brand-gold rounded-3xl translate-x-3 translate-y-3 z-0"></div>
@@ -565,19 +543,17 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="md:col-span-7 md:pl-6">
                     <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Créatrice Web Freelance</span>
                     <h2 class="font-serif text-4xl lg:text-5xl font-light text-brand-dark mb-6">
                         Bonjour, je suis <span class="italic font-normal">Floryne Pierson</span>.
                     </h2>
-                    
                     <p class="text-brand-dark/80 font-light mb-4 leading-relaxed">
-                        Je crée des sites internet sur-mesure pour les indépendants et petites entreprises qui veulent une vraie présence en ligne — sans jargon technique, sans modèles génériques, et avec un accompagnement personnalisé pour chaque projet.</p>
+                        Je crée des sites internet sur-mesure pour les indépendants et petites entreprises qui veulent une vraie présence en ligne — sans jargon technique, sans modèles génériques, et avec un accompagnement personnalisé pour chaque projet.
+                    </p>
                     <p class="text-brand-dark/80 font-light mb-6 leading-relaxed">
                         Ce qui me tient à cœur : que votre site reflète vraiment ce que vous faites, qu'il soit rapide, lisible sur mobile, et qu'il vous ramène des clients de façon régulière grâce au référencement naturel. Pas besoin de poster tous les jours sur les réseaux sociaux pour exister.
                     </p>
-
                     <div class="grid grid-cols-3 gap-4 mb-8">
                         <div class="bg-brand-cardWhite p-3 rounded-2xl border border-brand-gold/10 text-center">
                             <span class="block text-xl mb-1">🇫🇷</span>
@@ -595,7 +571,6 @@
                             <span class="text-[10px] text-brand-gold font-bold">Avanzado</span>
                         </div>
                     </div>
-
                     <div class="flex flex-wrap items-center gap-4">
                         <a href="https://www.linkedin.com/in/floryne-pierson" target="_blank" class="inline-flex items-center space-x-2 text-brand-dark hover:text-brand-gold transition-colors duration-200 text-sm font-semibold border-b border-brand-dark hover:border-brand-gold pb-1">
                             <i class="fa-brands fa-linkedin-in text-lg"></i>
@@ -604,9 +579,7 @@
                         <span class="text-brand-dark/30 hidden sm:inline">|</span>
                         <span class="text-xs text-brand-dark/60 italic font-light">Projets gérés à distance, partout en France.</span>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </section>
@@ -620,7 +593,6 @@
                 <p class="text-sm text-brand-dark/60 font-light mt-2">Délais, budget, rentabilité... Je réponds sans tabou à vos interrogations.</p>
                 <div class="w-16 h-[2px] bg-brand-gold mx-auto mt-6"></div>
             </div>
-
             <div class="space-y-6">
                 <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
                     <h4 class="font-serif text-lg font-semibold text-brand-dark mb-3 flex items-start">
@@ -631,25 +603,22 @@
                         Une fois la maquette validée ensemble, le délai de réalisation est de <strong>1 semaine ouvrée</strong>. Ce délai suppose que les contenus (textes, photos, informations pratiques) ont été fournis en amont. Si vous n'avez pas encore de visuels, je peux vous orienter sur des solutions adaptées.
                     </p>
                 </div>
-
                 <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
                     <h4 class="font-serif text-lg font-semibold text-brand-dark mb-3 flex items-start">
                         <span class="text-brand-gold mr-3"><i class="fa-solid fa-circle-question"></i></span>
                         En combien de temps mon site internet sera-t-il rentable ?
                     </h4>
                     <p class="text-sm text-brand-dark/70 leading-relaxed font-light pl-7">
-                        Le référencement naturel (SEO) local nécessite un temps d'indexation par Google. En général, vous commencez à voir les premiers résultats stables sous <strong>1 à 3 mois</strong>. 
-                        Contrairement aux réseaux sociaux où une publication disparaît en 24h, votre site est un <strong>actif durable</strong> : une fois positionné, il continue de vous ramener des clients de façon passive, sans payer chaque clic. Quelques réservations ou un nouveau contrat suffisent souvent à amortir l'investissement initial.
+                        Le référencement naturel (SEO) local nécessite un temps d'indexation par Google. En général, vous commencez à voir les premiers résultats stables sous <strong>1 à 3 mois</strong>. Contrairement aux réseaux sociaux où une publication disparaît en 24h, votre site est un <strong>actif durable</strong> : une fois positionné, il continue de vous ramener des clients de façon passive, sans payer chaque clic.
                     </p>
                 </div>
-
                 <div class="bg-brand-cardWhite border border-brand-gold/15 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
                     <h4 class="font-serif text-lg font-semibold text-brand-dark mb-3 flex items-start">
                         <span class="text-brand-gold mr-3"><i class="fa-solid fa-circle-question"></i></span>
                         Pourquoi devrais-je investir dans un site plutôt que de me concentrer sur Instagram ?
                     </h4>
                     <p class="text-sm text-brand-dark/70 leading-relaxed font-light pl-7">
-                        Instagram est un outil de notoriété, mais avec une faille majeure : l'attention y est éphémère. Les internautes y viennent pour se divertir. Sur Google, <strong>l'intention d'achat est directe</strong>. Quelqu'un qui cherche <em>"Spa de luxe près de chez moi"</em> ou <em>"Château mariage"</em> cherche activement à réserver aujourd'hui. Être présent au bon moment garantit un taux de conversion bien plus élevé qu'une story vue par 200 personnes.
+                        Instagram est un outil de notoriété, mais avec une faille majeure : l'attention y est éphémère. Sur Google, <strong>l'intention d'achat est directe</strong>. Quelqu'un qui cherche <em>"Spa de luxe près de chez moi"</em> cherche activement à réserver aujourd'hui. Être présent au bon moment garantit un taux de conversion bien plus élevé.
                     </p>
                 </div>
             </div>
@@ -659,7 +628,6 @@
     <!-- CONTACT -->
     <section id="contact" class="py-24 bg-brand-dark text-brand-cream relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-6 relative z-10">
-            
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Parlons de vous</span>
                 <h2 class="font-serif text-4xl md:text-5xl font-light mb-6">Entamer la transformation</h2>
@@ -667,22 +635,19 @@
                     Remplissez ce court formulaire en 2 minutes ou envoyez-moi directement un message. Je vous recontacte sous 48h ouvrées.
                 </p>
             </div>
-
             <div class="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl backdrop-blur-sm">
-                
                 <div class="flex flex-wrap justify-center gap-6 mb-12 border-b border-white/5 pb-8">
                     <a href="https://wa.me/33638482539?text=Bonjour%20Floryne,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services%20de%20cr%C3%A9ation%20web." 
                        target="_blank" 
                        class="flex items-center space-x-3 bg-green-600/10 hover:bg-green-600/20 border border-green-600/20 text-green-400 px-6 py-3 rounded-full transition-all duration-300">
                         <i class="fa-brands fa-whatsapp text-lg"></i>
-                        <span class="text-sm font-semibold">+33 6 38 48 25 39</span>
+                        <span class="text-sm font-semibold">Me contacter sur WhatsApp</span>
                     </a>
                     <div class="flex items-center space-x-3 bg-white/5 border border-white/10 text-brand-cream/80 px-6 py-3 rounded-full">
                         <i class="fa-regular fa-envelope text-lg text-brand-gold"></i>
                         <span class="text-sm">hello@florynepierson.com</span>
                     </div>
                 </div>
-
                 <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
@@ -694,7 +659,6 @@
                             <input type="text" id="company" required placeholder="Ex: Château de ..., Spa de ..." class="w-full bg-white/5 border border-white/10 focus:border-brand-gold/50 rounded-xl px-4 py-3 text-brand-cream focus:outline-none transition-colors duration-300 placeholder-brand-cream/30">
                         </div>
                     </div>
-
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
                             <label for="email" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2">Votre Email *</label>
@@ -711,30 +675,22 @@
                             </select>
                         </div>
                     </div>
-
                     <div>
                         <label for="message" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2">Parlez-moi brièvement de votre projet *</label>
                         <textarea id="message" rows="4" required class="w-full bg-white/5 border border-white/10 focus:border-brand-gold/50 rounded-xl px-4 py-3 text-brand-cream focus:outline-none transition-colors duration-300"></textarea>
                     </div>
-
                     <button type="submit" class="w-full py-4 bg-brand-gold hover:bg-white text-brand-dark font-semibold rounded-full shadow-lg transition-all duration-300 text-sm">
                         Envoyer ma demande d'estimation <i class="fa-solid fa-paper-plane ml-2 text-xs"></i>
                     </button>
                 </form>
-
                 <div id="successMessage" class="hidden text-center py-8 text-brand-cream space-y-4">
                     <div class="w-16 h-16 bg-brand-sage/20 text-brand-sage rounded-full flex items-center justify-center mx-auto text-3xl">
                         <i class="fa-solid fa-circle-check"></i>
                     </div>
                     <h4 class="font-serif text-2xl">Message envoyé avec succès !</h4>
-                    <p class="text-sm text-brand-cream/70 font-light max-w-md mx-auto">
-                        Merci ! Je reviens vers vous sous 48 heures ouvrées pour planifier notre premier échange.
-                    </p>
-                    <button onclick="resetForm()" class="px-6 py-2 bg-white/10 hover:bg-white/20 text-xs rounded-full uppercase tracking-wider font-semibold transition-colors duration-300">
-                        Renvoyer un message
-                    </button>
+                    <p class="text-sm text-brand-cream/70 font-light max-w-md mx-auto">Merci ! Je reviens vers vous sous 48 heures ouvrées pour planifier notre premier échange.</p>
+                    <button onclick="resetForm()" class="px-6 py-2 bg-white/10 hover:bg-white/20 text-xs rounded-full uppercase tracking-wider font-semibold transition-colors duration-300">Renvoyer un message</button>
                 </div>
-
             </div>
         </div>
     </section>
@@ -746,17 +702,24 @@
                 <span class="font-serif text-lg text-brand-cream font-semibold tracking-wider">FLORYNE PIERSON</span>
                 <p class="text-xs text-brand-cream/40 mt-1">© 2026. Tous droits réservés.</p>
             </div>
-
-            <div class="flex items-center space-x-6 text-xs md:text-sm flex-wrap justify-center gap-y-3">
+            <div class="flex items-center flex-wrap justify-center gap-x-5 gap-y-3 text-xs">
                 <a href="#services" class="hover:text-brand-cream transition-colors duration-200">Services & Tarifs</a>
-                <span>•</span>
+                <span class="text-brand-cream/20">•</span>
                 <a href="https://www.linkedin.com/in/floryne-pierson" target="_blank" class="hover:text-brand-cream transition-colors duration-200">LinkedIn</a>
-                <span>•</span>
-                <a href="https://www.malt.fr" target="_blank" class="text-orange-400 hover:text-orange-300 transition-colors duration-200 flex items-center gap-1">
-                    <i class="fa-solid fa-shield"></i> Retrouvez-moi sur Malt
+                <span class="text-brand-cream/20">•</span>
+                <a href="https://www.malt.fr/profile/florynepierson" target="_blank" class="text-orange-400 hover:text-orange-300 transition-colors duration-200 flex items-center gap-1">
+                    <i class="fa-solid fa-shield"></i> Malt
                 </a>
-                <span>•</span>
-                <a href="https://wa.me/33638482539" class="text-green-400 hover:text-green-300 transition-colors duration-200">WhatsApp direct</a>
+                <span class="text-brand-cream/20">•</span>
+                <a href="https://wa.me/33638482539" target="_blank" class="text-green-400 hover:text-green-300 transition-colors duration-200">WhatsApp</a>
+                <span class="text-brand-cream/20">•</span>
+                <button onclick="openModal('modal-mentions')" class="hover:text-brand-cream transition-colors duration-200">Mentions légales</button>
+                <span class="text-brand-cream/20">•</span>
+                <button onclick="openModal('modal-privacy')" class="hover:text-brand-cream transition-colors duration-200">Politique de confidentialité</button>
+                <span class="text-brand-cream/20">•</span>
+                <button onclick="openModal('modal-cookies')" class="hover:text-brand-cream transition-colors duration-200">Cookies</button>
+                <span class="text-brand-cream/20">•</span>
+                <button onclick="openModal('modal-cgv')" class="hover:text-brand-cream transition-colors duration-200">CGV</button>
             </div>
         </div>
     </footer>
@@ -775,7 +738,111 @@
         </span>
     </a>
 
+    <!-- ===================== MODAL MENTIONS LÉGALES ===================== -->
+    <div id="modal-mentions" class="modal-overlay" onclick="closeModalOnOverlay(event, 'modal-mentions')">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('modal-mentions')"><i class="fa-solid fa-xmark"></i></button>
+            <h2>Mentions légales</h2>
+
+            <h3>Éditrice du site</h3>
+            <p>Floryne Pierson — Auto-entrepreneuse<br>
+            Metz, 57000<br>
+            SIRET : 931 755 557 00010<br>
+            TVA non applicable — art. 293 B du CGI<br>
+            Email : hello@florynepierson.com</p>
+
+            <h3>Hébergeur</h3>
+            <p>Vercel Inc.<br>
+            440 N Baxter Ave, San Francisco, CA 94107, États-Unis<br>
+            <a href="https://vercel.com" target="_blank" style="color:#B09A7A;">vercel.com</a></p>
+
+            <h3>Propriété intellectuelle</h3>
+            <p>L'ensemble du contenu de ce site (textes, visuels, code, structure) est la propriété de Floryne Pierson. Toute reproduction, même partielle, est interdite sans autorisation préalable.</p>
+
+            <h3>Responsabilité</h3>
+            <p>Les informations contenues sur ce site sont données à titre indicatif. Floryne Pierson s'efforce de maintenir les informations à jour mais ne peut être tenue responsable d'éventuelles erreurs ou omissions.</p>
+
+            <h3>Médiation de la consommation</h3>
+            <p>Conformément à l'article L.616-1 du Code de la consommation, en cas de litige non résolu à l'amiable, vous pouvez recourir gratuitement au service de médiation :</p>
+            <p><strong>Médiation des Entreprises</strong><br>
+            <a href="https://www.mediateur-des-entreprises.fr" target="_blank" style="color:#B09A7A;">www.mediateur-des-entreprises.fr</a><br>
+            <em>(Adhésion en cours de finalisation.)</em></p>
+
+            <h3>Droit applicable</h3>
+            <p>Le présent site est soumis au droit français. Tout litige relatif à son utilisation sera soumis aux juridictions compétentes de Metz.</p>
+        </div>
+    </div>
+
+    <!-- ===================== MODAL POLITIQUE DE CONFIDENTIALITÉ ===================== -->
+    <div id="modal-privacy" class="modal-overlay" onclick="closeModalOnOverlay(event, 'modal-privacy')">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('modal-privacy')"><i class="fa-solid fa-xmark"></i></button>
+            <h2>Politique de confidentialité</h2>
+            <p style="font-size:0.75rem; color:rgba(22,37,33,0.4);">Dernière mise à jour : mai 2026</p>
+
+            <h3>Responsable du traitement</h3>
+            <p>Floryne Pierson — Auto-entrepreneuse<br>
+            Metz, 57000 — hello@florynepierson.com</p>
+
+            <h3>Données collectées</h3>
+            <p>Lors de l'utilisation du formulaire de contact, les données suivantes peuvent être collectées :</p>
+            <ul>
+                <li>Nom et prénom</li>
+                <li>Nom de l'entreprise ou de l'activité</li>
+                <li>Adresse e-mail</li>
+                <li>Le contenu de votre message</li>
+            </ul>
+            <p style="margin-top:0.75rem;">Ces données sont utilisées <strong>uniquement</strong> pour répondre à votre demande et ne sont jamais revendues ni transmises à des tiers.</p>
+
+            <h3>Durée de conservation</h3>
+            <p>Vos données sont conservées le temps nécessaire au traitement de votre demande, et supprimées au plus tard 3 ans après le dernier contact.</p>
+
+            <h3>Vos droits (RGPD)</h3>
+            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, d'effacement, de portabilité et d'opposition concernant vos données personnelles.<br>
+            Pour exercer ces droits : <a href="mailto:hello@florynepierson.com" style="color:#B09A7A;">hello@florynepierson.com</a><br>
+            En cas de réclamation non résolue, vous pouvez contacter la <a href="https://www.cnil.fr" target="_blank" style="color:#B09A7A;">CNIL</a>.</p>
+
+            <h3>Services tiers</h3>
+            <p>Ce site utilise :</p>
+            <ul>
+                <li><strong>Google Fonts</strong> (chargement de polices via CDN Google) — peut transmettre votre adresse IP à Google.</li>
+                <li><strong>Font Awesome</strong> (icônes via CDN) — aucune donnée personnelle collectée.</li>
+            </ul>
+            <p style="margin-top:0.75rem;">Aucun outil de tracking (Google Analytics, Pixel Facebook, etc.) n'est utilisé sur ce site.</p>
+        </div>
+    </div>
+
+    <!-- ===================== MODAL COOKIES ===================== -->
+    <div id="modal-cookies" class="modal-overlay" onclick="closeModalOnOverlay(event, 'modal-cookies')">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('modal-cookies')"><i class="fa-solid fa-xmark"></i></button>
+            <h2>Gestion des cookies</h2>
+
+            <h3>Qu'est-ce qu'un cookie ?</h3>
+            <p>Un cookie est un petit fichier texte déposé sur votre navigateur lors de la visite d'un site web. Certains cookies sont indispensables au fonctionnement technique du site, d'autres servent à des fins statistiques ou publicitaires.</p>
+
+            <h3>Les cookies utilisés sur ce site</h3>
+            <p>Ce site n'utilise <strong>aucun cookie publicitaire ni de tracking.</strong><br>
+            Les seuls cookies susceptibles d'être déposés sont des cookies <strong>techniques</strong> liés aux services tiers suivants :</p>
+            <ul>
+                <li><strong>Google Fonts</strong> : chargement des polices de caractères. Google peut collecter votre adresse IP dans ce cadre (<a href="https://policies.google.com/privacy" target="_blank" style="color:#B09A7A;">politique Google</a>).</li>
+                <li><strong>Font Awesome</strong> : chargement des icônes. Aucune donnée personnelle collectée.</li>
+            </ul>
+
+            <h3>Vos choix</h3>
+            <p>Vous pouvez à tout moment accepter ou refuser ces cookies via le bandeau affiché à votre première visite. Vous pouvez également configurer votre navigateur pour bloquer les cookies tiers.</p>
+
+            <h3>Modifier votre choix</h3>
+            <p>Pour modifier votre consentement, cliquez ci-dessous :</p>
+            <div style="display:flex; gap:0.75rem; margin-top:1rem; flex-wrap:wrap;">
+                <button class="cookie-btn cookie-accept" onclick="acceptCookies(); closeModal('modal-cookies')">Accepter les cookies</button>
+                <button class="cookie-btn cookie-refuse" style="border:1px solid #B09A7A; color:#B09A7A;" onclick="refuseCookies(); closeModal('modal-cookies')">Refuser les cookies</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // FORM
         function handleFormSubmit(event) {
             event.preventDefault();
             document.getElementById('contactForm').classList.add('hidden');
@@ -786,6 +853,92 @@
             document.getElementById('contactForm').classList.remove('hidden');
             document.getElementById('successMessage').classList.add('hidden');
         }
+
+        // MODALS
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function closeModalOnOverlay(event, id) {
+            if (event.target === document.getElementById(id)) closeModal(id);
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                ['modal-mentions','modal-privacy','modal-cookies','modal-cgv'].forEach(closeModal);
+            }
+        });
+
+        // COOKIES
+        function acceptCookies() {
+            localStorage.setItem('cookie-consent', 'accepted');
+            document.getElementById('cookie-banner').classList.add('hidden');
+        }
+        function refuseCookies() {
+            localStorage.setItem('cookie-consent', 'refused');
+            document.getElementById('cookie-banner').classList.add('hidden');
+        }
+        (function() {
+            if (localStorage.getItem('cookie-consent')) {
+                document.getElementById('cookie-banner').classList.add('hidden');
+            }
+        })();
     </script>
+
+    <!-- ===================== MODAL CGV ===================== -->
+    <div id="modal-cgv" class="modal-overlay" onclick="closeModalOnOverlay(event, 'modal-cgv')">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('modal-cgv')"><i class="fa-solid fa-xmark"></i></button>
+            <h2>Conditions Générales de Vente</h2>
+            <p style="font-size:0.75rem; color:rgba(22,37,33,0.4);">En vigueur au 1er janvier 2026 &mdash; FLORYNE PIERSON, auto-entrepreneuse, Metz (57000) &mdash; SIRET 931 755 557 00010</p>
+
+            <h3>Article 1 &mdash; Objet</h3>
+            <p>Les pr&eacute;sentes CGV r&eacute;gissent l&rsquo;ensemble des prestations de cr&eacute;ation de sites internet, de r&eacute;f&eacute;rencement (SEO) et de maintenance propos&eacute;es par Floryne Pierson (&laquo;&nbsp;le Prestataire&nbsp;&raquo;) &agrave; tout client professionnel ou particulier (&laquo;&nbsp;le Client&nbsp;&raquo;). Toute commande implique l&rsquo;acceptation sans r&eacute;serve des pr&eacute;sentes CGV.</p>
+
+            <h3>Article 2 &mdash; Devis &amp; Commande</h3>
+            <p>Toute prestation fait l&rsquo;objet d&rsquo;un devis &eacute;crit, valable 30 jours. La commande est confirm&eacute;e par le retour sign&eacute; du devis accompagn&eacute; du versement de l&rsquo;acompte pr&eacute;vu &agrave; l&rsquo;article 4. Le Prestataire se r&eacute;serve le droit de refuser toute commande sans avoir &agrave; se justifier.</p>
+
+            <h3>Article 3 &mdash; D&eacute;roulement de la prestation</h3>
+            <p>Le d&eacute;lai de r&eacute;alisation court &agrave; compter de la validation de la maquette <strong>et</strong> de la r&eacute;ception de l&rsquo;int&eacute;gralit&eacute; des contenus (textes, photos, informations). Le d&eacute;lai indicatif est d&rsquo;<strong>1 semaine ouvr&eacute;e</strong> pour une prestation standard.</p>
+            <p style="margin-top:0.5rem;">Chaque prestation inclut <strong>2 allers-retours de corrections</strong> par phase (maquette et int&eacute;gration). Toute demande suppl&eacute;mentaire est factur&eacute;e au taux horaire communiqu&eacute; sur devis.</p>
+
+            <h3>Article 4 &mdash; Tarifs &amp; Paiement</h3>
+            <p>Les prix sont indiqu&eacute;s en euros TTC. La TVA n&rsquo;est pas applicable (art. 293 B du CGI). Le paiement s&rsquo;effectue en deux fois :</p>
+            <ul>
+                <li><strong>50 % &agrave; la commande</strong> (acompte) &mdash; d&eacute;clenchement de la prestation</li>
+                <li><strong>50 % &agrave; la livraison</strong> &mdash; avant mise en ligne ou transfert des fichiers</li>
+            </ul>
+            <p style="margin-top:0.5rem;">Le paiement s&rsquo;effectue par <strong>carte bancaire via Stripe</strong> ou par virement sur demande. Tout retard de paiement entra&icirc;ne des p&eacute;nalit&eacute;s &eacute;gales &agrave; 3 fois le taux d&rsquo;int&eacute;r&ecirc;t l&eacute;gal, exigibles sans mise en demeure.</p>
+
+            <h3>Article 5 &mdash; Transfert de propri&eacute;t&eacute;</h3>
+            <p>Le Prestataire conserve l&rsquo;int&eacute;gralit&eacute; des droits de propri&eacute;t&eacute; intellectuelle sur les cr&eacute;ations jusqu&rsquo;au paiement complet du solde. &Agrave; r&eacute;ception du paiement int&eacute;gral, le Client acquiert les droits d&rsquo;utilisation du site pour son usage commercial propre. Le Prestataire se r&eacute;serve le droit de mentionner la r&eacute;alisation dans son portfolio.</p>
+
+            <h3>Article 6 &mdash; Obligations du Client</h3>
+            <p>Le Client s&rsquo;engage &agrave; fournir les contenus n&eacute;cessaires dans les d&eacute;lais convenus, &agrave; disposer des droits sur les &eacute;l&eacute;ments transmis (photos, textes, logo), et &agrave; r&eacute;gler les sommes dues aux &eacute;ch&eacute;ances pr&eacute;vues.</p>
+
+            <h3>Article 7 &mdash; Suspension &amp; Caducit&eacute; du projet</h3>
+            <p>Si le Client ne fournit pas les contenus ou ne r&eacute;pond pas aux relances dans un d&eacute;lai de <strong>30 jours calendaires</strong>, le projet est suspendu et le Prestataire n&rsquo;est plus tenu par le d&eacute;lai initial.</p>
+            <p style="margin-top:0.5rem;">Au-del&agrave; de <strong>60 jours d&rsquo;inactivit&eacute;</strong> du fait du Client, le devis est caduc et l&rsquo;acompte vers&eacute; est acquis au Prestataire. La reprise fera l&rsquo;objet d&rsquo;un nouveau devis.</p>
+
+            <h3>Article 8 &mdash; Droit de r&eacute;tractation</h3>
+            <p>Les pr&eacute;sentes CGV s&rsquo;adressent principalement &agrave; des clients professionnels pour lesquels le droit de r&eacute;tractation de 14 jours ne s&rsquo;applique pas. Pour les clients particuliers, ce droit s&rsquo;applique &agrave; compter de la confirmation de commande. Si le Client demande express&eacute;ment le d&eacute;marrage des travaux avant l&rsquo;expiration de ce d&eacute;lai, il y renonce une fois la prestation commenc&eacute;e.</p>
+
+            <h3>Article 9 &mdash; Responsabilit&eacute;</h3>
+            <p>La responsabilit&eacute; du Prestataire est limit&eacute;e au montant total de la commande. Le Prestataire ne peut &ecirc;tre tenu responsable des contenus fournis par le Client ni des r&eacute;sultats commerciaux du site. Aucun r&eacute;sultat de r&eacute;f&eacute;rencement n&rsquo;est garanti, le SEO &eacute;tant soumis aux algorithmes de moteurs tiers.</p>
+
+            <h3>Article 10 &mdash; Maintenance</h3>
+            <p>Les prestations de maintenance font l&rsquo;objet d&rsquo;un contrat mensuel s&eacute;parable, r&eacute;siliable &agrave; tout moment avec un pr&eacute;avis de <strong>30 jours</strong> par email. L&rsquo;absence de paiement mensuel entra&icirc;ne la suspension du service.</p>
+
+            <h3>Article 11 &mdash; Confidentialit&eacute;</h3>
+            <p>Le Prestataire s&rsquo;engage &agrave; garder confidentielles toutes les informations communiqu&eacute;es par le Client et &agrave; ne pas les divulguer &agrave; des tiers sans accord pr&eacute;alable.</p>
+
+            <h3>Article 12 &mdash; Loi applicable &amp; Litiges</h3>
+            <p>Les pr&eacute;sentes CGV sont soumises au droit fran&ccedil;ais. En cas de litige, une solution amiable sera recherch&eacute;e en priorit&eacute;. &Agrave; d&eacute;faut, le litige sera soumis aux juridictions comp&eacute;tentes du ressort de Metz. Le Client consommateur peut recourir &agrave; la m&eacute;diation : <a href="https://www.mediateur-des-entreprises.fr" target="_blank" style="color:#B09A7A;">M&eacute;diation des Entreprises</a>.</p>
+        </div>
+    </div>
+
 </body>
 </html>

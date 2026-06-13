@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr" class="scroll-smooth" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://florynepierson.com/">
     <meta property="og:title" content="Floryne Pierson | Création Web, SEO & Visibilité Locale">
     <meta property="og:description" content="Je crée des sites web professionnels pour les indépendants à Metz et alentours. Abonnement sans engagement, site livré en 7 jours.">
-    <meta property="og:image" content="https://floryne-pierson.fr/og-image.jpg">
+    <meta property="og:image" content="https://florynepierson.com/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="fr_FR">
-    <meta property="og:site_name" content="Floryne Pierson - Création Web">
+    <meta property="og:locale:alternate" content="en_GB">
+    <meta property="og:site_name" content="Floryne Pierson - Web Design">
+    <link rel="alternate" hreflang="fr" href="https://florynepierson.com/">
+    <link rel="alternate" hreflang="en" href="https://florynepierson.com/?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://florynepierson.com/">
     
     <title>Floryne Pierson | Création Web, SEO & Visibilité Locale</title>
     
@@ -123,8 +127,34 @@
         .cookie-accept { background: #B09A7A; color: #162521; }
         .cookie-accept:hover { background: #FAF7F2; }
         .cookie-refuse { background: transparent; color: rgba(250,247,242,0.6); border: 1px solid rgba(250,247,242,0.2); }
-        .cookie-refuse:hover { color: #FAF7F2; border-color: rgba(250,247,242,0.5); }
-    </style>
+        /* LANG SWITCHER */
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            background: rgba(176,154,122,0.12);
+            border: 1px solid rgba(176,154,122,0.25);
+            border-radius: 9999px;
+            padding: 3px;
+            gap: 2px;
+        }
+        .lang-btn {
+            padding: 4px 10px;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: rgba(22,37,33,0.5);
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: #B09A7A;
+            color: #162521;
+        }
+        .lang-btn:hover:not(.active) { color: #162521; }
+    
 </head>
 <body class="bg-brand-cream text-brand-dark font-sans selection:bg-brand-sage selection:text-white overflow-x-hidden">
 
@@ -145,27 +175,30 @@
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="#accueil" class="flex flex-col">
                 <span class="font-serif text-2xl font-semibold tracking-wider text-brand-dark">FLORYNE PIERSON</span>
-                <span class="text-xs uppercase tracking-widest text-brand-gold -mt-1 font-semibold">Création Web & Visibilité Google</span>
+                <span class="text-xs uppercase tracking-widest text-brand-gold -mt-1 font-semibold" data-i18n="nav_tagline">Création Web & Visibilité Google</span>
             </a>
             
             <div class="hidden md:flex items-center space-x-8 font-medium text-sm tracking-wide text-brand-dark/80">
-                <a href="#services" class="hover:text-brand-gold transition-colors duration-200">Services</a>
-                <a href="#constat" class="hover:text-brand-gold transition-colors duration-200">La Vision</a>
-                <a href="#portfolio" class="hover:text-brand-gold transition-colors duration-200">Réalisations</a>
-                <a href="#a-propos" class="hover:text-brand-gold transition-colors duration-200">À Propos</a>
-                <a href="#contact" class="hover:text-brand-gold transition-colors duration-200">Contact</a>
+                <a href="#services" class="hover:text-brand-gold transition-colors duration-200" data-i18n="nav_services">Services</a>
+                <a href="#constat" class="hover:text-brand-gold transition-colors duration-200" data-i18n="nav_vision">La Vision</a>
+                <a href="#portfolio" class="hover:text-brand-gold transition-colors duration-200" data-i18n="nav_portfolio">Réalisations</a>
+                <a href="#a-propos" class="hover:text-brand-gold transition-colors duration-200" data-i18n="nav_about">À Propos</a>
+                <a href="#contact" class="hover:text-brand-gold transition-colors duration-200" data-i18n="nav_contact">Contact</a>
             </div>
 
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-3">
+                <!-- LANG SWITCHER -->
+                <div class="lang-switcher hidden sm:flex">
+                    <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+                    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                </div>
                 <a href="https://wa.me/33638482539?text=Bonjour%20Floryne,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services%20de%20cr%C3%A9ation%20web." 
                    target="_blank" 
                    class="hidden sm:inline-flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white text-xs md:text-sm font-semibold px-4 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all duration-300">
                     <i class="fa-brands fa-whatsapp text-lg"></i>
                     <span>WhatsApp</span>
                 </a>
-                <a href="#contact" class="bg-brand-dark hover:bg-brand-gold text-white hover:text-brand-dark text-xs md:text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-sm">
-                    Estimer mon projet
-                </a>
+                <a href="#contact" class="bg-brand-dark hover:bg-brand-gold text-white hover:text-brand-dark text-xs md:text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-sm" data-i18n="nav_cta">Estimer mon projet</a>
             </div>
         </div>
     </nav>
@@ -178,24 +211,24 @@
         <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
             <div class="inline-flex items-center space-x-2 bg-brand-sageLight px-4 py-1.5 rounded-full text-brand-dark/80 text-xs tracking-wider uppercase font-semibold mb-6">
                 <span class="w-1.5 h-1.5 rounded-full bg-brand-sage animate-ping"></span>
-                <span>Projets locaux & d'envergure internationale</span>
+                <span data-i18n="hero_badge">Projets locaux & d'envergure internationale</span>
             </div>
 
-            <h1 class="font-serif text-5xl md:text-7xl font-light tracking-tight text-brand-dark leading-[1.1] mb-8">
+            <h1 class="font-serif text-5xl md:text-7xl font-light tracking-tight text-brand-dark leading-[1.1] mb-8" data-i18n="hero_h1">
                 Votre savoir-faire mérite <br class="hidden md:inline">
                 <span class="italic font-normal text-brand-gold">d'être trouvé</span>. Partout, tout le temps.
             </h1>
 
-            <p class="text-lg md:text-xl text-brand-dark/70 font-light max-w-3xl mx-auto leading-relaxed mb-12">
+            <p class="text-lg md:text-xl text-brand-dark/70 font-light max-w-3xl mx-auto leading-relaxed mb-12" data-i18n="hero_p">
                 Pour les artisans, créateurs et indépendants qui souhaitent s'affranchir de la dépendance aux algorithmes des réseaux sociaux. Attirez naturellement vos futurs clients directement depuis Google.
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-brand-dark text-white rounded-full font-medium hover:bg-brand-gold hover:text-brand-dark shadow-lg shadow-brand-dark/10 transition-all duration-300">
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-brand-dark text-white rounded-full font-medium hover:bg-brand-gold hover:text-brand-dark shadow-lg shadow-brand-dark/10 transition-all duration-300" data-i18n="hero_cta1">
                     Prendre rendez-vous
                 </a>
                 <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 bg-white/60 hover:bg-white text-brand-dark border border-brand-dark/10 rounded-full font-medium transition-all duration-300 flex items-center justify-center space-x-2">
-                    <span>Voir mes réalisations</span>
+                    <span data-i18n="hero_cta2">Voir mes réalisations</span>
                     <i class="fa-solid fa-arrow-right text-xs"></i>
                 </a>
             </div>
@@ -214,17 +247,17 @@
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div>
-                    <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Sortez de la course aux likes</span>
-                    <h2 class="font-serif text-4xl lg:text-5xl font-light mb-8 leading-tight">
+                    <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block" data-i18n="vision_label">Sortez de la course aux likes</span>
+                    <h2 class="font-serif text-4xl lg:text-5xl font-light mb-8 leading-tight" data-i18n="vision_h2">
                         Est-ce que votre entreprise est <span class="italic text-brand-gold">vraiment</span> visible ?
                     </h2>
-                    <p class="text-brand-cream/70 font-light mb-6 leading-relaxed">
+                    <p class="text-brand-cream/70 font-light mb-6 leading-relaxed" data-i18n="vision_p1">
                         Passer des heures à peaufiner des publications Instagram ou TikTok qui disparaissent en 24h est épuisant. Pire encore : cela ne cible pas toujours les personnes prêtes à acheter ou à réserver chez vous <strong>aujourd'hui</strong>.
                     </p>
-                    <p class="text-brand-cream/70 font-light mb-8 leading-relaxed">
+                    <p class="text-brand-cream/70 font-light mb-8 leading-relaxed" data-i18n="vision_p2">
                         En optimisant votre visibilité sur Google (référencement local, SEO) et en créant un site à votre image, vous construisez un canal d'acquisition qui travaille pour vous, même pendant que vous dormez.
                     </p>
-                    <div class="border-l-2 border-brand-gold pl-6 py-2 italic font-serif text-lg text-brand-cream/90">
+                    <div class="border-l-2 border-brand-gold pl-6 py-2 italic font-serif text-lg text-brand-cream/90" data-i18n="vision_quote">
                         "Un client qui cherche vos services sur Google est déjà prêt à acheter. Un utilisateur sur Instagram cherche juste à se divertir."
                     </div>
                 </div>
@@ -260,9 +293,9 @@
     <section id="services" class="py-24 bg-brand-cream">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Offres claires & sans confusion</span>
-                <h2 class="font-serif text-4xl md:text-5xl font-light mb-6 text-brand-dark">Des sites web pensés pour attirer des clients</h2>
-                <p class="text-sm text-brand-dark/60 font-light -mt-2">Chaque offre est un niveau différent de visibilité et de capacité à générer des demandes clients.</p>
+                <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block" data-i18n="services_label">Offres claires & sans confusion</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light mb-6 text-brand-dark" data-i18n="services_h2">Des sites web pensés pour attirer des clients</h2>
+                <p class="text-sm text-brand-dark/60 font-light -mt-2" data-i18n="services_sub">Chaque offre est un niveau différent de visibilité et de capacité à générer des demandes clients.</p>
                 <div class="w-16 h-[2px] bg-brand-gold mx-auto mt-6"></div>
             </div>
 
@@ -425,8 +458,8 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
                 <div>
-                    <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Art & Code</span>
-                    <h2 class="font-serif text-4xl md:text-5xl font-light text-brand-dark">Concrètement, à quoi ressemblera votre site ?</h2>
+                    <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block" data-i18n="portfolio_label">Art & Code</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-light text-brand-dark" data-i18n="portfolio_h2">Concrètement, à quoi ressemblera votre site ?</h2>
                 </div>
                 <div class="mt-4 md:mt-0">
                     <p class="text-sm text-brand-dark/60 max-w-sm font-light">Sites réels et maquettes conçus sur-mesure pour allier esthétique soignée et efficacité commerciale.</p>
@@ -528,14 +561,14 @@
                     </div>
                 </div>
                 <div class="md:col-span-7 md:pl-6">
-                    <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Créatrice Web Freelance</span>
-                    <h2 class="font-serif text-4xl lg:text-5xl font-light text-brand-dark mb-6">
+                    <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block" data-i18n="about_label">Créatrice Web Freelance</span>
+                    <h2 class="font-serif text-4xl lg:text-5xl font-light text-brand-dark mb-6" data-i18n="about_h2">
                         Bonjour, je suis <span class="italic font-normal">Floryne Pierson</span>.
                     </h2>
-                    <p class="text-brand-dark/80 font-light mb-4 leading-relaxed">
+                    <p class="text-brand-dark/80 font-light mb-4 leading-relaxed" data-i18n="about_p1">
                         Je crée des sites internet sur-mesure pour les indépendants et petites entreprises qui veulent une vraie présence en ligne — sans jargon technique, sans modèles génériques, et avec un accompagnement personnalisé pour chaque projet.
                     </p>
-                    <p class="text-brand-dark/80 font-light mb-6 leading-relaxed">
+                    <p class="text-brand-dark/80 font-light mb-6 leading-relaxed" data-i18n="about_p2">
                         Ce qui me tient à cœur : que votre site reflète vraiment ce que vous faites, qu'il soit rapide, lisible sur mobile, et qu'il vous ramène des clients de façon régulière grâce au référencement naturel. Pas besoin de poster tous les jours sur les réseaux sociaux pour exister.
                     </p>
                     <div class="grid grid-cols-3 gap-4 mb-8">
@@ -572,9 +605,9 @@
     <section class="py-24 bg-brand-cream">
         <div class="max-w-4xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Transparence</span>
-                <h2 class="font-serif text-4xl font-light text-brand-dark">Questions Fréquentes</h2>
-                <p class="text-sm text-brand-dark/60 font-light mt-2">Délais, budget, rentabilité... Je réponds sans tabou à vos interrogations.</p>
+                <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block" data-i18n="faq_label">Transparence</span>
+                <h2 class="font-serif text-4xl font-light text-brand-dark" data-i18n="faq_h2">Questions Fréquentes</h2>
+                <p class="text-sm text-brand-dark/60 font-light mt-2" data-i18n="faq_sub">Délais, budget, rentabilité... Je réponds sans tabou à vos interrogations.</p>
                 <div class="w-16 h-[2px] bg-brand-gold mx-auto mt-6"></div>
             </div>
             <div class="space-y-4">
@@ -638,9 +671,9 @@
     <section id="contact" class="py-24 bg-brand-dark text-brand-cream relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block">Parlons de vous</span>
-                <h2 class="font-serif text-4xl md:text-5xl font-light mb-6">Entamer la transformation</h2>
-                <p class="text-brand-cream/70 font-light text-sm md:text-base leading-relaxed">
+                <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block" data-i18n="contact_label">Parlons de vous</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light mb-6" data-i18n="contact_h2">Entamer la transformation</h2>
+                <p class="text-brand-cream/70 font-light text-sm md:text-base leading-relaxed" data-i18n="contact_sub">
                     Remplissez ce court formulaire en 2 minutes ou envoyez-moi directement un message. Je vous recontacte sous 48h ouvrées.
                 </p>
             </div>
@@ -661,21 +694,21 @@
                 <form id="contactForm" action="https://formspree.io/f/mykvdqaj" method="POST" onsubmit="handleFormSubmit(event)" class="space-y-6">
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="name" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2">Votre Nom & Prénom *</label>
+                            <label for="name" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2" data-i18n="form_name">Votre Nom & Prénom *</label>
                             <input type="text" id="name" name="name" required class="w-full bg-white/5 border border-white/10 focus:border-brand-gold/50 rounded-xl px-4 py-3 text-brand-cream focus:outline-none transition-colors duration-300">
                         </div>
                         <div>
-                            <label for="company" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2">Nom de votre Entreprise / Activité *</label>
+                            <label for="company" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2" data-i18n="form_company">Nom de votre Entreprise / Activité *</label>
                             <input type="text" id="company" name="company" required placeholder="Ex: Château de ..., Spa de ..." class="w-full bg-white/5 border border-white/10 focus:border-brand-gold/50 rounded-xl px-4 py-3 text-brand-cream focus:outline-none transition-colors duration-300 placeholder-brand-cream/30">
                         </div>
                     </div>
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="email" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2">Votre Email *</label>
+                            <label for="email" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2" data-i18n="form_email">Votre Email *</label>
                             <input type="email" id="email" name="email" required class="w-full bg-white/5 border border-white/10 focus:border-brand-gold/50 rounded-xl px-4 py-3 text-brand-cream focus:outline-none transition-colors duration-300">
                         </div>
                         <div>
-                            <label for="objective" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2">Votre Objectif Principal *</label>
+                            <label for="objective" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2" data-i18n="form_goal">Votre Objectif Principal *</label>
                             <select id="objective" name="objective" class="w-full bg-brand-dark border border-white/10 focus:border-brand-gold/50 rounded-xl px-4 py-3 text-brand-cream focus:outline-none transition-colors duration-300">
                                 <option class="bg-brand-dark" value="local">Attirer des clients locaux (SEO Maps)</option>
                                 <option class="bg-brand-dark" value="prestige">Valoriser un domaine / Château</option>
@@ -686,11 +719,11 @@
                         </div>
                     </div>
                     <div>
-                        <label for="message" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2">Parlez-moi brièvement de votre projet *</label>
+                        <label for="message" class="block text-xs uppercase tracking-wider font-semibold text-brand-cream/60 mb-2" data-i18n="form_message">Parlez-moi brièvement de votre projet *</label>
                         <textarea id="message" name="message" rows="4" required class="w-full bg-white/5 border border-white/10 focus:border-brand-gold/50 rounded-xl px-4 py-3 text-brand-cream focus:outline-none transition-colors duration-300"></textarea>
                     </div>
                     <input type="text" name="_gotcha" style="display:none">
-                    <button type="submit" id="submitBtn" class="w-full py-4 bg-brand-gold hover:bg-white text-brand-dark font-semibold rounded-full shadow-lg transition-all duration-300 text-sm">
+                    <button type="submit" id="submitBtn" class="w-full py-4 bg-brand-gold hover:bg-white text-brand-dark font-semibold rounded-full shadow-lg transition-all duration-300 text-sm" data-i18n="form_submit">
                         Envoyer ma demande d'estimation <i class="fa-solid fa-paper-plane ml-2 text-xs"></i>
                     </button>
                 </form>
@@ -1010,6 +1043,155 @@
                 document.getElementById('cookie-banner').classList.add('hidden');
             }
         })();
+    </script>
+    <script>
+    // ===================== TRANSLATION SYSTEM =====================
+    const translations = {
+        fr: {
+            // Meta
+            page_title: "Floryne Pierson | Création Web, SEO & Visibilité Locale",
+            // Nav
+            nav_tagline: "Création Web & Visibilité Google",
+            nav_services: "Services",
+            nav_vision: "La Vision",
+            nav_portfolio: "Réalisations",
+            nav_about: "À Propos",
+            nav_contact: "Contact",
+            nav_cta: "Estimer mon projet",
+            // Hero
+            hero_badge: "Projets locaux & d'envergure internationale",
+            hero_h1: `Votre savoir-faire mérite <br class="hidden md:inline"><span class="italic font-normal text-brand-gold">d'être trouvé</span>. Partout, tout le temps.`,
+            hero_p: "Pour les artisans, créateurs et indépendants qui souhaitent s'affranchir de la dépendance aux algorithmes des réseaux sociaux. Attirez naturellement vos futurs clients directement depuis Google.",
+            hero_cta1: "Prendre rendez-vous",
+            hero_cta2: "Voir mes réalisations",
+            // Vision
+            vision_label: "Sortez de la course aux likes",
+            vision_h2: `Est-ce que votre entreprise est <span class="italic text-brand-gold">vraiment</span> visible ?`,
+            vision_p1: "Passer des heures à peaufiner des publications Instagram ou TikTok qui disparaissent en 24h est épuisant. Pire encore : cela ne cible pas toujours les personnes prêtes à acheter ou à réserver chez vous <strong>aujourd'hui</strong>.",
+            vision_p2: "En optimisant votre visibilité sur Google (référencement local, SEO) et en créant un site à votre image, vous construisez un canal d'acquisition qui travaille pour vous, même pendant que vous dormez.",
+            vision_quote: `"Un client qui cherche vos services sur Google est déjà prêt à acheter. Un utilisateur sur Instagram cherche juste à se divertir."`,
+            // Services
+            services_label: "Offres claires & sans confusion",
+            services_h2: "Des sites web pensés pour attirer des clients",
+            services_sub: "Chaque offre est un niveau différent de visibilité et de capacité à générer des demandes clients.",
+            // Portfolio
+            portfolio_label: "Art & Code",
+            portfolio_h2: "Concrètement, à quoi ressemblera votre site ?",
+            // About
+            about_label: "Créatrice Web Freelance",
+            about_h2: `Bonjour, je suis <span class="italic font-normal">Floryne Pierson</span>.`,
+            about_p1: "Je crée des sites internet sur-mesure pour les indépendants et petites entreprises qui veulent une vraie présence en ligne — sans jargon technique, sans modèles génériques, et avec un accompagnement personnalisé pour chaque projet.",
+            about_p2: "Ce qui me tient à cœur : que votre site reflète vraiment ce que vous faites, qu'il soit rapide, lisible sur mobile, et qu'il vous ramène des clients de façon régulière grâce au référencement naturel. Pas besoin de poster tous les jours sur les réseaux sociaux pour exister.",
+            // FAQ
+            faq_label: "Transparence",
+            faq_h2: "Questions Fréquentes",
+            faq_sub: "Délais, budget, rentabilité... Je réponds sans tabou à vos interrogations.",
+            // Contact
+            contact_label: "Parlons de vous",
+            contact_h2: "Entamer la transformation",
+            contact_sub: "Remplissez ce court formulaire en 2 minutes ou envoyez-moi directement un message. Je vous recontacte sous 48h ouvrées.",
+            form_name: "Votre Nom & Prénom *",
+            form_company: "Nom de votre Entreprise / Activité *",
+            form_email: "Votre Email *",
+            form_goal: "Votre Objectif Principal *",
+            form_message: "Parlez-moi brièvement de votre projet *",
+            form_submit: `Envoyer ma demande d'estimation <i class="fa-solid fa-paper-plane ml-2 text-xs"></i>`,
+        },
+        en: {
+            // Meta
+            page_title: "Floryne Pierson | Web Design, SEO & Local Visibility",
+            // Nav
+            nav_tagline: "Web Design & Google Visibility",
+            nav_services: "Services",
+            nav_vision: "The Vision",
+            nav_portfolio: "Portfolio",
+            nav_about: "About",
+            nav_contact: "Contact",
+            nav_cta: "Get a quote",
+            // Hero
+            hero_badge: "Local projects & international reach",
+            hero_h1: `Your expertise deserves <br class="hidden md:inline"><span class="italic font-normal text-brand-gold">to be found</span>. Everywhere, all the time.`,
+            hero_p: "For artisans, creators and freelancers who want to break free from social media algorithm dependency. Attract your future clients naturally, directly from Google.",
+            hero_cta1: "Book a call",
+            hero_cta2: "See my work",
+            // Vision
+            vision_label: "Stop chasing likes",
+            vision_h2: `Is your business <span class="italic text-brand-gold">truly</span> visible online?`,
+            vision_p1: "Spending hours crafting Instagram or TikTok posts that vanish in 24h is exhausting. Worse: they don't always reach people ready to buy or book with you <strong>today</strong>.",
+            vision_p2: "By optimising your Google visibility (local SEO) and building a website that reflects your brand, you create an acquisition channel that works for you — even while you sleep.",
+            vision_quote: `"Someone searching for your services on Google is already ready to buy. Someone scrolling Instagram is just looking for entertainment."`,
+            // Services
+            services_label: "Clear offers, no confusion",
+            services_h2: "Websites built to attract clients",
+            services_sub: "Each offer represents a different level of visibility and lead generation capacity.",
+            // Portfolio
+            portfolio_label: "Art & Code",
+            portfolio_h2: "What will your website actually look like?",
+            // About
+            about_label: "Freelance Web Designer",
+            about_h2: `Hi, I'm <span class="italic font-normal">Floryne Pierson</span>.`,
+            about_p1: "I build custom websites for freelancers and small businesses who want a real online presence — no technical jargon, no generic templates, and personalised support throughout every project.",
+            about_p2: "What matters most to me: that your site truly reflects what you do, loads fast, looks great on mobile, and consistently brings in clients through organic search. No need to post every day on social media to exist.",
+            // FAQ
+            faq_label: "Transparency",
+            faq_h2: "Frequently Asked Questions",
+            faq_sub: "Timelines, budget, ROI... I answer everything, no holds barred.",
+            // Contact
+            contact_label: "Let's talk about you",
+            contact_h2: "Start the transformation",
+            contact_sub: "Fill in this short form in under 2 minutes, or send me a direct message. I'll get back to you within 48 business hours.",
+            form_name: "Your Full Name *",
+            form_company: "Your Business / Activity *",
+            form_email: "Your Email *",
+            form_goal: "Your Main Goal *",
+            form_message: "Tell me briefly about your project *",
+            form_submit: `Send my project request <i class="fa-solid fa-paper-plane ml-2 text-xs"></i>`,
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'fr';
+
+    function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+
+        // Update html lang attribute
+        document.getElementById('html-root').lang = lang;
+
+        // Update page title
+        document.title = translations[lang].page_title;
+
+        // Update all data-i18n elements
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang][key] !== undefined) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+
+        // Update switcher buttons
+        document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+        // Update OG locale meta
+        document.querySelector('meta[property="og:locale"]').setAttribute('content', lang === 'fr' ? 'fr_FR' : 'en_GB');
+
+        // Update URL param without reload
+        const url = new URL(window.location);
+        if (lang === 'en') {
+            url.searchParams.set('lang', 'en');
+        } else {
+            url.searchParams.delete('lang');
+        }
+        window.history.replaceState({}, '', url);
+    }
+
+    // Init: detect ?lang=en in URL or use stored preference
+    (function() {
+        const urlLang = new URLSearchParams(window.location.search).get('lang');
+        const initLang = urlLang || localStorage.getItem('lang') || 'fr';
+        setLang(initLang);
+    })();
     </script>
 
 </body>

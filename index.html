@@ -1187,11 +1187,18 @@
     }
 
     // Init: detect ?lang=en in URL or use stored preference
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
         const urlLang = new URLSearchParams(window.location.search).get('lang');
         const initLang = urlLang || localStorage.getItem('lang') || 'fr';
-        setLang(initLang);
-    })();
+        // Only translate if not FR — FR is already in the HTML, no need to rewrite
+        if (initLang === 'en') {
+            setLang('en');
+        } else {
+            // Just sync the button state
+            document.getElementById('btn-fr').classList.add('active');
+            document.getElementById('btn-en').classList.remove('active');
+        }
+    });
     </script>
 
 </body>

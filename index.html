@@ -1512,5 +1512,92 @@
     });
     </script>
 
+    <!-- ═══ AI ASSISTANT WIDGET (live demo + lead capture) ═══ -->
+    <style>
+      .fpa-btn{position:fixed;bottom:22px;right:22px;width:60px;height:60px;border-radius:50%;
+        background:#23342A;color:#C6A45C;border:none;cursor:pointer;z-index:99998;
+        box-shadow:0 8px 24px rgba(35,52,42,.35);display:flex;align-items:center;justify-content:center;
+        font-size:26px;transition:transform .2s;}
+      .fpa-btn:hover{transform:scale(1.06);}
+      .fpa-btn .fpa-close-ic{display:none;}
+      .fpa-open .fpa-btn .fpa-chat-ic{display:none;}
+      .fpa-open .fpa-btn .fpa-close-ic{display:block;}
+      .fpa-panel{position:fixed;bottom:94px;right:22px;width:380px;max-width:calc(100vw - 32px);
+        height:560px;max-height:calc(100vh - 130px);background:#fff;border:1px solid #C6B187;border-radius:20px;
+        overflow:hidden;z-index:99998;display:none;flex-direction:column;
+        box-shadow:0 20px 55px rgba(35,52,42,.28);font-family:Georgia,'Times New Roman',serif;}
+      .fpa-open .fpa-panel{display:flex;}
+      .fpa-head{background:#23342A;color:#F3EFE6;padding:16px 18px;}
+      .fpa-head b{font-size:1.05rem;}
+      .fpa-head span{display:block;font-size:.76rem;opacity:.72;margin-top:2px;font-family:system-ui,sans-serif;}
+      .fpa-head .fpa-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#8fce9a;margin-right:6px;vertical-align:middle;}
+      .fpa-thread{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:11px;background:#F3EFE6;}
+      .fpa-msg{max-width:84%;padding:10px 14px;border-radius:15px;font-size:.95rem;line-height:1.5;
+        font-family:system-ui,-apple-system,sans-serif;white-space:pre-wrap;}
+      .fpa-bot{align-self:flex-start;background:#fff;border:1px solid #e7e0d2;border-bottom-left-radius:4px;color:#2c3b32;}
+      .fpa-me{align-self:flex-end;background:#23342A;color:#F3EFE6;border-bottom-right-radius:4px;}
+      .fpa-typing{align-self:flex-start;color:#63695E;font-size:.85rem;font-style:italic;font-family:system-ui,sans-serif;}
+      .fpa-bar{display:flex;gap:7px;padding:11px;background:#fff;border-top:1px solid #eee5d6;}
+      .fpa-bar input{flex:1;border:1px solid #C6B187;border-radius:50px;padding:11px 15px;font-size:.92rem;
+        outline:none;font-family:system-ui,sans-serif;color:#23342A;}
+      .fpa-bar button{border:none;background:#C6A45C;color:#fff;border-radius:50px;padding:0 17px;cursor:pointer;font-size:1rem;}
+      .fpa-bar button:disabled{opacity:.5;cursor:default;}
+      .fpa-foot{text-align:center;font-size:.68rem;color:#9a9385;padding:6px;background:#fff;font-family:system-ui,sans-serif;}
+    </style>
+    <button class="fpa-btn" id="fpaBtn" aria-label="Assistant IA">
+      <span class="fpa-chat-ic">💬</span><span class="fpa-close-ic">✕</span>
+    </button>
+    <div class="fpa-panel" id="fpaPanel" role="dialog" aria-label="Assistant IA">
+      <div class="fpa-head"><b id="fpaTitle">Assistant de Floryne</b><span><span class="fpa-dot"></span><span id="fpaSub">Assistant IA · démo en direct</span></span></div>
+      <div class="fpa-thread" id="fpaThread"></div>
+      <div class="fpa-bar">
+        <input id="fpaInput" type="text" autocomplete="off">
+        <button id="fpaSend" aria-label="Envoyer">➤</button>
+      </div>
+      <div class="fpa-foot">✦ Assistant IA — le genre d'outil que Floryne crée pour vous</div>
+    </div>
+    <script>
+    (function(){
+      var isEN = (function(){ try{ var b=document.getElementById('btn-en'); if(b&&b.classList.contains('active'))return true; }catch(e){} try{ return (document.documentElement.lang||'').toLowerCase().indexOf('en')===0; }catch(e){ return false; } })();
+      var T = isEN ? {
+        title:"Floryne's assistant", sub:"AI assistant · live demo",
+        greet:"Hi 👋 I'm Floryne's assistant. Ask me anything about a website, a web app, or an AI assistant for your business.\n\nAnd yes — I'm exactly the kind of assistant Floryne can build for you 🙂",
+        ph:"Type your message…", typing:"typing…", foot:"✦ AI assistant — the kind of tool Floryne builds for you",
+        err:"Connection issue — please try again in a moment."
+      } : {
+        title:"Assistant de Floryne", sub:"Assistant IA · démo en direct",
+        greet:"Bonjour 👋 Je suis l'assistante de Floryne. Posez-moi vos questions sur la création de site, une web app, ou un assistant IA pour votre activité.\n\nEt oui : je suis exactement le type d'assistant que Floryne peut créer pour vous 🙂",
+        ph:"Écrivez votre message…", typing:"écrit…", foot:"✦ Assistant IA — le genre d'outil que Floryne crée pour vous",
+        err:"Souci de connexion — réessayez dans un instant."
+      };
+      document.getElementById('fpaTitle').textContent=T.title;
+      document.getElementById('fpaSub').textContent=T.sub;
+      document.getElementById('fpaInput').placeholder=T.ph;
+      document.querySelector('.fpa-foot').textContent=T.foot;
+      var btn=document.getElementById('fpaBtn'), thread=document.getElementById('fpaThread'),
+          input=document.getElementById('fpaInput'), send=document.getElementById('fpaSend'),
+          convo=[], greeted=false;
+      function bubble(text,who){ var d=document.createElement('div'); d.className='fpa-msg '+(who==='me'?'fpa-me':'fpa-bot'); d.textContent=text; thread.appendChild(d); thread.scrollTop=thread.scrollHeight; return d; }
+      btn.addEventListener('click', function(){
+        document.body.classList.toggle('fpa-open');
+        if(document.body.classList.contains('fpa-open')){ if(!greeted){ bubble(T.greet,'bot'); greeted=true; } setTimeout(function(){input.focus();},80); }
+      });
+      async function ask(){
+        var text=input.value.trim(); if(!text) return;
+        input.value=''; bubble(text,'me'); convo.push({role:'user',content:text}); send.disabled=true;
+        var t=document.createElement('div'); t.className='fpa-typing'; t.textContent=T.typing; thread.appendChild(t); thread.scrollTop=thread.scrollHeight;
+        try{
+          var r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:convo})});
+          var data=await r.json(); t.remove();
+          var reply=data.reply||data.error||T.err;
+          bubble(reply,'bot'); convo.push({role:'assistant',content:reply});
+        }catch(e){ t.remove(); bubble(T.err,'bot'); }
+        send.disabled=false; input.focus();
+      }
+      send.addEventListener('click',ask);
+      input.addEventListener('keydown',function(e){ if(e.key==='Enter') ask(); });
+    })();
+    </script>
+
 </body>
 </html>

@@ -827,7 +827,7 @@
     <!-- FLOATING WHATSAPP -->
     <a href="https://wa.me/33638482539?text=Bonjour%20Floryne,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services%20de%20cr%C3%A9ation%20web." 
        target="_blank" 
-       class="fixed bottom-6 right-6 z-50 bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 group"
+       class="fixed bottom-24 right-6 z-50 bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 group"
        title="Parlons-en sur WhatsApp !">
         <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 border-2 border-white rounded-full flex items-center justify-center">
             <span class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span>
@@ -1558,29 +1558,33 @@
     </div>
     <script>
     (function(){
-      var isEN = (function(){ try{ var b=document.getElementById('btn-en'); if(b&&b.classList.contains('active'))return true; }catch(e){} try{ return (document.documentElement.lang||'').toLowerCase().indexOf('en')===0; }catch(e){ return false; } })();
-      var T = isEN ? {
-        title:"Floryne's assistant", sub:"AI assistant · live demo",
-        greet:"Hi 👋 I'm Floryne's assistant. Ask me anything about a website, a web app, or an AI assistant for your business.\n\nAnd yes — I'm exactly the kind of assistant Floryne can build for you 🙂",
-        ph:"Type your message…", typing:"typing…", foot:"✦ AI assistant — the kind of tool Floryne builds for you",
-        err:"Connection issue — please try again in a moment."
-      } : {
-        title:"Assistant de Floryne", sub:"Assistant IA · démo en direct",
-        greet:"Bonjour 👋 Je suis l'assistante de Floryne. Posez-moi vos questions sur la création de site, une web app, ou un assistant IA pour votre activité.\n\nEt oui : je suis exactement le type d'assistant que Floryne peut créer pour vous 🙂",
-        ph:"Écrivez votre message…", typing:"écrit…", foot:"✦ Assistant IA — le genre d'outil que Floryne crée pour vous",
-        err:"Souci de connexion — réessayez dans un instant."
+      function curEN(){ try{ var b=document.getElementById('btn-en'); if(b&&b.classList.contains('active'))return true; }catch(e){} try{ return (document.documentElement.lang||'').toLowerCase().indexOf('en')===0; }catch(e){} return false; }
+      var DICT = {
+        en:{ title:"Floryne's assistant", sub:"AI assistant · live demo",
+          greet:"Hi 👋 I'm Floryne's assistant. Ask me anything about a website, a web app, or an AI assistant for your business.\n\nAnd yes — I'm exactly the kind of assistant Floryne can build for you 🙂",
+          ph:"Type your message…", typing:"typing…", foot:"✦ AI assistant — the kind of tool Floryne builds for you",
+          err:"Connection issue — please try again in a moment." },
+        fr:{ title:"Assistant de Floryne", sub:"Assistant IA · démo en direct",
+          greet:"Bonjour 👋 Je suis l'assistante de Floryne. Posez-moi vos questions sur la création de site, une web app, ou un assistant IA pour votre activité.\n\nEt oui : je suis exactement le type d'assistant que Floryne peut créer pour vous 🙂",
+          ph:"Écrivez votre message…", typing:"écrit…", foot:"✦ Assistant IA — le genre d'outil que Floryne crée pour vous",
+          err:"Souci de connexion — réessayez dans un instant." }
       };
-      document.getElementById('fpaTitle').textContent=T.title;
-      document.getElementById('fpaSub').textContent=T.sub;
-      document.getElementById('fpaInput').placeholder=T.ph;
-      document.querySelector('.fpa-foot').textContent=T.foot;
+      var T = DICT.fr;
+      function applyLabels(){
+        T = curEN() ? DICT.en : DICT.fr;
+        document.getElementById('fpaTitle').textContent=T.title;
+        document.getElementById('fpaSub').textContent=T.sub;
+        document.getElementById('fpaInput').placeholder=T.ph;
+        document.querySelector('.fpa-foot').textContent=T.foot;
+      }
+      applyLabels();
       var btn=document.getElementById('fpaBtn'), thread=document.getElementById('fpaThread'),
           input=document.getElementById('fpaInput'), send=document.getElementById('fpaSend'),
           convo=[], greeted=false;
       function bubble(text,who){ var d=document.createElement('div'); d.className='fpa-msg '+(who==='me'?'fpa-me':'fpa-bot'); d.textContent=text; thread.appendChild(d); thread.scrollTop=thread.scrollHeight; return d; }
       btn.addEventListener('click', function(){
         document.body.classList.toggle('fpa-open');
-        if(document.body.classList.contains('fpa-open')){ if(!greeted){ bubble(T.greet,'bot'); greeted=true; } setTimeout(function(){input.focus();},80); }
+        if(document.body.classList.contains('fpa-open')){ if(!greeted){ applyLabels(); bubble(T.greet,'bot'); greeted=true; } setTimeout(function(){input.focus();},80); }
       });
       async function ask(){
         var text=input.value.trim(); if(!text) return;

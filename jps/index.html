@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PPI Conseils — Agence immobilière à Metz</title>
+<title>JPS Concept — Agence immobilière à Metz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -115,7 +115,7 @@
 <body>
 
   <nav><div class="wrap nav-in">
-    <div class="logo">PPI<span>·</span>Conseils</div>
+    <div class="logo">JPS<span>·</span>Concept</div>
     <div class="nav-links">
       <a href="#">Acheter</a><a href="#">Louer</a><a href="#">Vendre</a>
       <a href="#">Investir</a><a href="#">Estimation</a><a href="#">Contact</a>
@@ -180,7 +180,7 @@
   <section class="pad"><div class="wrap split">
     <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Intérieur" onerror="this.style.background='#e7e3da'">
     <div>
-      <div class="eyebrow" style="text-transform:uppercase;letter-spacing:.2em;font-size:.74rem;color:var(--gold);font-weight:700;">Pourquoi PPI Conseils</div>
+      <div class="eyebrow" style="text-transform:uppercase;letter-spacing:.2em;font-size:.74rem;color:var(--gold);font-weight:700;">Pourquoi JPS Concept</div>
       <h2 style="font-size:2.2rem;margin-top:10px;">Une agence indépendante, à taille humaine.</h2>
       <ul class="why-list">
         <li><span class="n">1</span><div><b>Estimation gratuite &amp; sans engagement</b><p>Un premier rendez-vous pour évaluer votre bien, sans aucun frais.</p></div></li>
@@ -200,7 +200,7 @@
 
   <footer><div class="wrap foot-in">
     <div>
-      <div class="logo">PPI<span style="color:var(--gold)">·</span>Conseils</div>
+      <div class="logo">JPS<span style="color:var(--gold)">·</span>Concept</div>
       <p style="margin-top:10px;max-width:320px;">Agence immobilière indépendante à Metz — achat, vente, location et investissement.</p>
     </div>
     <div style="font-size:.85rem;line-height:1.9;">
@@ -213,7 +213,7 @@
   <!-- ASSISTANT IA INTÉGRÉ -->
   <button class="pa-btn" id="paBtn">💬</button>
   <div class="pa-panel" id="paPanel">
-    <div class="pa-head"><b>PPI Conseils · Assistant</b><span>● en ligne 24/7</span></div>
+    <div class="pa-head"><b>JPS Concept · Assistant</b><span>● en ligne 24/7</span></div>
     <div class="pa-thread" id="paThread"></div>
     <div class="pa-bar"><input id="paInput" placeholder="Une question ? Un projet ?"><button id="paSend">➤</button></div>
     <div class="pa-foot">Assistant IA — répond à toute heure</div>
@@ -223,7 +223,7 @@
         sendB=document.getElementById('paSend'),btn=document.getElementById('paBtn'),panel=document.getElementById('paPanel'),greeted=false;
     function bub(t,w){var d=document.createElement('div');d.className='pa-msg '+(w==='me'?'pa-me':'pa-bot');d.textContent=t;thread.appendChild(d);thread.scrollTop=thread.scrollHeight;}
     function reply(q){q=q.toLowerCase();
-      if(/\d{2}.?\d{2}.?\d{2}.?\d{2}.?\d{2}|@/.test(q))return "Parfait, c'est bien noté ✅ Un conseiller de PPI Conseils vous recontacte très vite. Merci !";
+      if(/\d{2}.?\d{2}.?\d{2}.?\d{2}.?\d{2}|@/.test(q))return "Parfait, c'est bien noté ✅ Un conseiller de JPS Concept vous recontacte très vite. Merci !";
       if(/horaire|ouvert|ferm/.test(q))return "Nos horaires : lundi 14h-17h30, mardi au vendredi 10h-12h et 14h-17h30, samedi sur RDV. Mais je reste joignable ici à toute heure 🙂 Un projet d'achat, de vente ou de location ?";
       if(/vend|estim/.test(q))return "Avec plaisir — l'estimation est gratuite et sans engagement. Dans quel secteur se trouve votre bien, et à quel prénom + numéro un conseiller peut vous joindre ?";
       if(/invest|locatif|rendement/.test(q))return "C'est notre spécialité : l'investissement locatif à Metz, neuf ou rénové. Quel budget envisagez-vous ? Je transmets votre projet à un conseiller.";
@@ -231,7 +231,7 @@
       if(/honoraire|prix|tarif|frais|commission/.test(q))return "Pour une vente : 4 % jusqu'à 200 000 €, 3 % au-delà. L'estimation et le premier échange sont gratuits. Vous souhaitez vendre un bien ?";
       return "Je peux vous renseigner sur l'achat, la vente, la location ou l'investissement à Metz 🙂 Quel est votre projet ?";
     }
-    btn.onclick=function(){panel.classList.toggle('open');if(panel.classList.contains('open')&&!greeted){bub("Bonjour 👋 Je suis l'assistant de PPI Conseils. Un projet d'achat, de vente, de location ou d'investissement à Metz ? Dites-moi tout — même en dehors des horaires de l'agence.",'bot');greeted=true;input.focus();}};
+    btn.onclick=function(){panel.classList.toggle('open');if(panel.classList.contains('open')&&!greeted){bub("Bonjour 👋 Je suis l'assistant de JPS Concept. Un projet d'achat, de vente, de location ou d'investissement à Metz ? Dites-moi tout — même en dehors des horaires de l'agence.",'bot');greeted=true;input.focus();}};
     function ask(){var t=input.value.trim();if(!t)return;input.value='';bub(t,'me');setTimeout(function(){bub(reply(t),'bot');},450);}
     sendB.onclick=ask;input.addEventListener('keydown',function(e){if(e.key==='Enter')ask();});
   </script>

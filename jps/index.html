@@ -197,10 +197,10 @@
   </header>
 
   <section class="stats"><div class="wrap"><div class="row">
-    <div><div class="num" data-count="35">0</div><div class="lbl">Ans d'expérience</div></div>
-    <div><div class="num" data-count="500" data-suffix="+">0</div><div class="lbl">Biens vendus</div></div>
-    <div><div class="num" data-count="98" data-suffix="%">0</div><div class="lbl">Clients satisfaits</div></div>
-    <div><div class="num" data-count="84" data-suffix="">0</div><div class="lbl">Avis Google</div></div>
+    <div><div class="num" data-count="84">0</div><div class="lbl">Avis Google</div></div>
+    <div><div class="num">Location</div><div class="lbl">Notre spécialité</div></div>
+    <div><div class="num">Metz</div><div class="lbl">& Moselle</div></div>
+    <div><div class="num">Gratuite</div><div class="lbl">Estimation</div></div>
   </div></div></section>
 
   <section class="pad" id="biens"><div class="wrap">
@@ -345,7 +345,7 @@
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
     var counted=false;
     var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!counted){counted=true;document.querySelectorAll('.num').forEach(function(n){
-      var target=parseFloat(n.getAttribute('data-count')),suf=n.getAttribute('data-suffix')||'',dec=target%1!==0,steps=45,i=0;
+      var target=parseFloat(n.getAttribute('data-count')),suf=n.getAttribute('data-suffix')||'',dec=target%1!==0,steps=45,i=0; if(isNaN(target)){return;}
       var t=setInterval(function(){i++;var v=target*(i/steps);n.textContent=(dec?v.toFixed(1):Math.round(v))+suf;if(i>=steps){n.textContent=(dec?target.toFixed(1):target)+suf;clearInterval(t);}},22);
     });}});},{threshold:.4});
     io2.observe(document.querySelector('.stats'));

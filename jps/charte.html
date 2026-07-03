@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JPS Concept — Charte graphique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#101e2e;--gold:#c7a15a;--gold-d:#ac8843;--cream:#f8f6f1;--ink:#1a2431;--muted:#6c7683;--line:#e8e3d9;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif;color:var(--navy);}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 30px;}
+  .sec{padding:56px 0;border-bottom:1px solid var(--line);}
+  .lbl{text-transform:uppercase;letter-spacing:.2em;font-size:.7rem;color:var(--gold);font-weight:700;margin-bottom:22px;}
+  /* cover */
+  .cover{background:var(--navy);color:#fff;padding:80px 0 70px;}
+  .cover .logo{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:700;color:#fff;}
+  .cover .logo span{color:var(--gold);}
+  .cover .sub{color:rgba(255,255,255,.7);margin-top:10px;letter-spacing:.24em;text-transform:uppercase;font-size:.78rem;}
+  .cover h1{color:#fff;font-size:2.4rem;font-weight:500;margin-top:34px;}
+  /* logo section */
+  .logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  @media(max-width:700px){.logo-grid{grid-template-columns:1fr;}}
+  .logo-box{border-radius:14px;padding:48px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);}
+  .logo-box.light{background:#fff;}
+  .logo-box.dark{background:var(--navy);}
+  .wordmark{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:700;letter-spacing:.02em;}
+  .wordmark .g{color:var(--gold);}
+  .light .wordmark{color:var(--navy);}
+  .dark .wordmark{color:#fff;}
+  .note{font-size:.85rem;color:var(--muted);margin-top:14px;}
+  /* colors */
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:700px){.cols{grid-template-columns:repeat(2,1fr);}}
+  .sw{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff;}
+  .sw .chip{height:96px;}
+  .sw .meta{padding:12px 14px;}
+  .sw .nm{font-weight:600;font-size:.9rem;color:var(--navy);}
+  .sw .hex{font-size:.8rem;color:var(--muted);font-family:ui-monospace,monospace;margin-top:2px;}
+  .sw .use{font-size:.74rem;color:var(--muted);margin-top:4px;}
+  /* type */
+  .type-row{padding:18px 0;border-bottom:1px solid var(--line);}
+  .type-row:last-child{border:none;}
+  .type-row .k{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);font-weight:700;margin-bottom:8px;}
+  .specimen-h1{font-family:'Playfair Display',serif;font-size:3rem;font-weight:600;color:var(--navy);line-height:1.1;}
+  .specimen-h1 em{font-style:italic;color:var(--gold);}
+  .specimen-h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;color:var(--navy);}
+  .specimen-h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;color:var(--navy);}
+  .specimen-b{font-size:1.02rem;color:var(--ink);max-width:640px;}
+  .specimen-s{font-size:.82rem;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;}
+  /* components */
+  .comp{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+  .btn{background:var(--gold);color:#fff;padding:13px 28px;border-radius:7px;font-weight:600;font-size:.9rem;border:none;box-shadow:0 6px 18px rgba(199,161,90,.28);}
+  .btn-ghost{background:transparent;border:1.5px solid var(--navy);color:var(--navy);padding:12px 26px;border-radius:7px;font-weight:600;font-size:.9rem;}
+  .tag{background:var(--navy);color:#fff;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600;padding:6px 13px;border-radius:5px;}
+  .pill{border:1px solid var(--line);background:#fff;padding:9px 16px;border-radius:30px;font-size:.85rem;color:var(--ink);}
+  /* imagery */
+  .imgs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:700px){.imgs{grid-template-columns:1fr 1fr;}}
+  .imgs .im{height:150px;border-radius:10px;background-size:cover;background-position:center;}
+  .voice{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media(max-width:700px){.voice{grid-template-columns:1fr;}}
+  .voice .v{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;}
+  .voice .v h3{font-size:1.05rem;margin-bottom:8px;}
+  .voice .v.yes h3::before{content:'✓ ';color:#3f9d5c;}
+  .voice .v.no h3::before{content:'✕ ';color:#c0524a;}
+  .voice .v p{font-size:.9rem;color:var(--muted);}
+  footer{text-align:center;padding:40px 0;color:var(--muted);font-size:.82rem;}
+  footer a{color:var(--gold);text-decoration:none;}
+</style>
+</head>
+<body>
+
+  <div class="cover"><div class="wrap">
+    <div class="logo">JPS<span>·</span>Concept</div>
+    <div class="sub">Agence immobilière · Metz</div>
+    <h1>Charte graphique &amp; identité visuelle</h1>
+  </div></div>
+
+  <section class="sec"><div class="wrap">
+    <div class="lbl">01 — Logo</div>
+    <div class="logo-grid">
+      <div class="logo-box light"><span class="wordmark">JPS<span class="g">·</span>Concept</span></div>
+      <div class="logo-box dark"><span class="wordmark">JPS<span class="g">·</span>Concept</span></div>
+    </div>
+    <p class="note">Le logotype se compose en <b>Playfair Display Bold</b>. Le point central est toujours en <b>or</b>, seul élément coloré — c'est la signature de la marque. Utilisable sur fond clair ou fond bleu nuit.</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lbl">02 — Couleurs</div>
+    <div class="cols">
+      <div class="sw"><div class="chip" style="background:#101e2e"></div><div class="meta"><div class="nm">Bleu nuit</div><div class="hex">#101E2E</div><div class="use">Couleur principale · fonds, titres</div></div></div>
+      <div class="sw"><div class="chip" style="background:#c7a15a"></div><div class="meta"><div class="nm">Or</div><div class="hex">#C7A15A</div><div class="use">Accent · boutons, détails</div></div></div>
+      <div class="sw"><div class="chip" style="background:#f8f6f1;border-bottom:1px solid var(--line)"></div><div class="meta"><div class="nm">Crème</div><div class="hex">#F8F6F1</div><div class="use">Fond doux · sections claires</div></div></div>
+      <div class="sw"><div class="chip" style="background:#1a2431"></div><div class="meta"><div class="nm">Encre</div><div class="hex">#1A2431</div><div class="use">Texte courant</div></div></div>
+      <div class="sw"><div class="chip" style="background:#6c7683"></div><div class="meta"><div class="nm">Gris</div><div class="hex">#6C7683</div><div class="use">Texte secondaire</div></div></div>
+      <div class="sw"><div class="chip" style="background:#e8e3d9"></div><div class="meta"><div class="nm">Ligne</div><div class="hex">#E8E3D9</div><div class="use">Séparateurs, bordures</div></div></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lbl">03 — Typographie</div>
+    <div class="type-row">
+      <div class="k">Titres — Playfair Display</div>
+      <div class="specimen-h1">Votre projet immobilier, <em>entre de bonnes mains.</em></div>
+    </div>
+    <div class="type-row">
+      <div class="k">Sous-titres — Playfair Display</div>
+      <div class="specimen-h2">Une sélection de biens à Metz</div>
+      <div class="specimen-h3" style="margin-top:10px;">Appartement 3 pièces · Metz-Centre</div>
+    </div>
+    <div class="type-row">
+      <div class="k">Texte courant — Inter</div>
+      <div class="specimen-b">Achat, vente, location et investissement — un accompagnement humain, du premier rendez-vous à la remise des clés. Une agence indépendante, à taille humaine, avec une connaissance fine du marché messin.</div>
+    </div>
+    <div class="type-row">
+      <div class="k">Petits textes / labels — Inter</div>
+      <div class="specimen-s">Agence immobilière indépendante · Metz</div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lbl">04 — Composants</div>
+    <div class="comp">
+      <button class="btn">Estimation gratuite</button>
+      <button class="btn-ghost">Nous contacter</button>
+      <span class="tag">À vendre</span>
+      <span class="tag" style="background:var(--gold)">Investissement</span>
+      <span class="pill">72 m² · 2 chambres</span>
+    </div>
+    <p class="note">Boutons à coins arrondis (7 px). Bouton principal en or, bouton secondaire en contour. Étiquettes en bleu nuit ou or pour catégoriser les biens.</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lbl">05 — Direction visuelle</div>
+    <div class="imgs">
+      <div class="im" style="background-image:url('metz.jpg')"></div>
+      <div class="im" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=80')"></div>
+      <div class="im" style="background-image:url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=500&q=80')"></div>
+    </div>
+    <p class="note">Photos <b>chaleureuses et premium</b> : Metz et son patrimoine, intérieurs lumineux, matières nobles. Lumière douce, jamais d'images froides ou génériques. La photo de Metz (heure bleue) est l'image signature.</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="lbl">06 — Ton de voix</div>
+    <div class="voice">
+      <div class="v yes"><h3>Ce qu'on est</h3><p>Professionnel, chaleureux, rassurant. Clair et concis. On parle d'accompagnement humain, de confiance, d'expertise locale.</p></div>
+      <div class="v no"><h3>Ce qu'on évite</h3><p>Le jargon, la survente, l'urgence artificielle. Pas de promesses exagérées ni de ton impersonnel.</p></div>
+    </div>
+  </div></section>
+
+  <footer>
+    Charte graphique — JPS Concept · réalisée par <a href="https://florynepierson.com">Floryne Pierson</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plume — Offre & tarifs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#161a1d;--paper:#f4f1ea;--card:#fffdf9;--gold:#b0895a;--gold-d:#98723f;--line:#e7e0d4;--muted:#8a8072;--soft:#6b6357;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .serif{font-family:'Fraunces',Georgia,serif;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+  .bar{border-bottom:1px solid var(--line);}
+  .bar-in{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .mark{width:32px;height:32px;border-radius:50%;background:linear-gradient(140deg,var(--gold),var(--gold-d));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Fraunces',serif;font-size:1rem;}
+  .brand b{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;}
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;}
+  .lang button{background:none;border:none;padding:5px 11px;font-family:inherit;font-size:.78rem;font-weight:600;color:var(--muted);cursor:pointer;}
+  .lang button.on{background:var(--ink);color:#fff;}
+  .head{text-align:center;padding:44px 0 26px;}
+  .head .ey{font-size:.72rem;text-transform:uppercase;letter-spacing:.26em;color:var(--gold-d);font-weight:600;}
+  .head h1{font-family:'Fraunces',serif;font-weight:500;font-size:2.2rem;margin:12px 0 8px;}
+  .head p{color:var(--soft);max-width:520px;margin:0 auto;}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:10px 0 34px;}
+  @media(max-width:760px){.plans{grid-template-columns:1fr;}}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 22px;display:flex;flex-direction:column;box-shadow:0 12px 34px rgba(60,45,25,.05);}
+  .plan.feat{border-color:var(--gold);box-shadow:0 16px 44px rgba(176,137,90,.18);position:relative;}
+  .plan .badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700;padding:3px 12px;border-radius:20px;}
+  .plan h3{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;}
+  .plan .price{font-family:'Fraunces',serif;font-size:2.1rem;font-weight:600;margin:8px 0 2px;}
+  .plan .price small{font-size:.9rem;color:var(--muted);font-family:'Inter',sans-serif;font-weight:500;}
+  .plan .desc{font-size:.85rem;color:var(--muted);min-height:36px;margin-bottom:14px;}
+  .plan ul{list-style:none;font-size:.9rem;color:var(--soft);}
+  .plan li{padding:6px 0;padding-left:22px;position:relative;}
+  .plan li::before{content:'✦';position:absolute;left:0;color:var(--gold);}
+  .foot{border-top:1px solid var(--line);padding:24px 0 50px;font-size:.84rem;color:var(--soft);display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:space-between;}
+  .foot b{color:var(--ink);}
+  .foot a{color:var(--gold-d);text-decoration:none;}
+  .legal{font-size:.74rem;color:var(--muted);margin-top:8px;width:100%;}
+  @media print{.lang,.bar{display:none;}body{background:#fff;}}
+</style>
+</head>
+<body>
+  <div class="bar"><div class="wrap bar-in">
+    <div class="brand"><span class="mark">P</span><b>Plume</b></div>
+    <div class="lang"><button id="lg-fr" class="on" onclick="setLang('fr')">FR</button><button id="lg-en" onclick="setLang('en')">EN</button></div>
+  </div></div>
+
+  <div class="wrap">
+    <div class="head">
+      <span class="ey" id="t-ey">Offre & tarifs</span>
+      <h1 id="t-h1">Des annonces professionnelles, en quelques secondes.</h1>
+      <p id="t-sub">Trois formules simples. Sans engagement, résiliable à tout moment.</p>
+    </div>
+
+    <div class="plans">
+      <div class="plan">
+        <h3 id="p1-n">Découverte</h3>
+        <div class="price" id="p1-p">Gratuit</div>
+        <div class="desc" id="p1-d">Pour essayer sans risque.</div>
+        <ul id="p1-l"></ul>
+      </div>
+      <div class="plan feat">
+        <span class="badge" id="p2-b">Le plus choisi</span>
+        <h3 id="p2-n">Solo</h3>
+        <div class="price"><span id="p2-p">19 €</span><small id="p2-per"> / mois</small></div>
+        <div class="desc" id="p2-d">Pour un agent indépendant.</div>
+        <ul id="p2-l"></ul>
+      </div>
+      <div class="plan">
+        <h3 id="p3-n">Agence</h3>
+        <div class="price"><span id="p3-p">49 €</span><small id="p3-per"> / mois</small></div>
+        <div class="desc" id="p3-d">Pour toute une équipe.</div>
+        <ul id="p3-l"></ul>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div>
+        <b>Floryne Pierson</b> — <span id="t-role">Ingénieure IA & création web</span><br>
+        <a href="https://florynepierson.com/plume" target="_blank">florynepierson.com/plume</a>
+      </div>
+      <div style="text-align:right;">
+        SIRET 931 755 557 00010<br>
+        <span id="t-vat">TVA non applicable, art. 293 B du CGI</span>
+      </div>
+      <div class="legal" id="t-legal">Tarifs mensuels, sans engagement. Le service génère des textes à visée professionnelle ; une relecture avant publication est recommandée.</div>
+    </div>
+  </div>
+
+<script>
+  var D={
+    fr:{
+      title:"Plume — Offre & tarifs", ey:"Offre & tarifs",
+      h1:"Des annonces professionnelles, en quelques secondes.",
+      sub:"Trois formules simples. Sans engagement, résiliable à tout moment.",
+      role:"Ingénieure IA & création web", vat:"TVA non applicable, art. 293 B du CGI",
+      legal:"Tarifs mensuels, sans engagement. Le service génère des textes à visée professionnelle ; une relecture avant publication est recommandée.",
+      p1:{n:"Découverte",p:"Gratuit",per:"",d:"Pour essayer sans risque.",l:["5 annonces / mois","Accroche + 3 tons","Français & anglais"]},
+      p2:{n:"Solo",p:"19 €",per:" / mois",d:"Pour un agent indépendant.",b:"Le plus choisi",l:["Annonces illimitées","Accroche + 3 tons","Français & anglais","Historique de vos annonces","Support par email"]},
+      p3:{n:"Agence",p:"49 €",per:" / mois",d:"Pour toute une équipe.",l:["Tout le plan Solo","Plusieurs utilisateurs","Ton & style personnalisés","Support prioritaire"]}
+    },
+    en:{
+      title:"Plume — Plans & pricing", ey:"Plans & pricing",
+      h1:"Professional listings, in seconds.",
+      sub:"Three simple plans. No commitment, cancel anytime.",
+      role:"AI Engineer & web design", vat:"VAT not applicable (French small-business scheme)",
+      legal:"Monthly pricing, no commitment. The service generates professional-purpose text; proofreading before publishing is recommended.",
+      p1:{n:"Discovery",p:"Free",per:"",d:"To try, risk-free.",l:["5 listings / month","Headline + 3 tones","French & English"]},
+      p2:{n:"Solo",p:"€19",per:" / month",d:"For an independent agent.",b:"Most popular",l:["Unlimited listings","Headline + 3 tones","French & English","History of your listings","Email support"]},
+      p3:{n:"Agency",p:"€49",per:" / month",d:"For a whole team.",l:["Everything in Solo","Multiple users","Custom tone & style","Priority support"]}
+    }
+  };
+  function ul(id,arr){document.getElementById(id).innerHTML=arr.map(function(x){return '<li>'+x+'</li>';}).join('');}
+  function setLang(l){
+    var t=D[l];document.documentElement.lang=l;document.title=t.title;
+    document.getElementById('lg-fr').classList.toggle('on',l==='fr');
+    document.getElementById('lg-en').classList.toggle('on',l==='en');
+    document.getElementById('t-ey').textContent=t.ey;
+    document.getElementById('t-h1').textContent=t.h1;
+    document.getElementById('t-sub').textContent=t.sub;
+    document.getElementById('t-role').textContent=t.role;
+    document.getElementById('t-vat').textContent=t.vat;
+    document.getElementById('t-legal').textContent=t.legal;
+    [['1',t.p1],['2',t.p2],['3',t.p3]].forEach(function(x){
+      var k=x[0],p=x[1];
+      document.getElementById('p'+k+'-n').textContent=p.n;
+      document.getElementById('p'+k+'-p').textContent=p.p;
+      document.getElementById('p'+k+'-d').textContent=p.d;
+      var per=document.getElementById('p'+k+'-per');if(per)per.textContent=p.per;
+      var b=document.getElementById('p'+k+'-b');if(b&&p.b)b.textContent=p.b;
+      ul('p'+k+'-l',p.l);
+    });
+  }
+  (function(){var d='fr';try{if(/^en/i.test(navigator.language||''))d='en';}catch(e){}setLang(d);})();
+</script>
+</body>
+</html>

@@ -171,6 +171,9 @@
   .pa-msg{max-width:84%;padding:10px 14px;border-radius:15px;font-size:.9rem;line-height:1.5;white-space:pre-wrap;}
   .pa-bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;}
   .pa-me{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:4px;}
+  .pa-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;}
+  .pa-chip{background:#fff;border:1.5px solid var(--gold);color:var(--gold-d);font-family:inherit;font-size:.84rem;font-weight:600;padding:8px 13px;border-radius:20px;cursor:pointer;transition:.2s;}
+  .pa-chip:hover{background:var(--gold);color:#fff;}
   .pa-bar{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:#fff;}
   .pa-bar input{flex:1;border:1px solid var(--line);border-radius:30px;padding:11px 15px;font-family:inherit;font-size:.9rem;outline:none;}
   .pa-bar button{border:none;background:var(--gold);color:#fff;border-radius:30px;padding:0 17px;cursor:pointer;font-size:1rem;}
@@ -377,21 +380,42 @@
     });}});},{threshold:.4});
     io2.observe(document.querySelector('.stats'));
     var thread=document.getElementById('paThread'),input=document.getElementById('paInput'),sendB=document.getElementById('paSend'),btn=document.getElementById('paBtn'),panel=document.getElementById('paPanel'),greeted=false;
+    var lead={type:'',budget:'',secteur:''},awaitingContact=false;
     function bub(t,w){var d=document.createElement('div');d.className='pa-msg '+(w==='me'?'pa-me':'pa-bot');d.textContent=t;thread.appendChild(d);thread.scrollTop=thread.scrollHeight;}
-    function reply(q){q=q.toLowerCase();
-      if(/\d{2}.?\d{2}.?\d{2}.?\d{2}.?\d{2}|@/.test(q))return "Parfait, c'est bien noté ✅ Un conseiller de JPS Concept vous recontacte très vite. Merci !";
-      if(/horaire|ouvert|ferm/.test(q))return "Nos horaires : lundi 14h-17h30, mardi au vendredi 10h-12h et 14h-17h30, samedi sur RDV. Mais je reste joignable ici à toute heure 🙂 Un projet d'achat, de vente ou de location ?";
-      if(/vend|estim/.test(q))return "Avec plaisir — l'estimation est gratuite et sans engagement. Dans quel secteur se trouve votre bien, et à quel prénom + numéro un conseiller peut vous joindre ?";
-      if(/invest|locatif|rendement/.test(q))return "C'est notre spécialité : l'investissement locatif à Metz, neuf ou rénové. Quel budget envisagez-vous ? Je transmets votre projet à un conseiller.";
-      if(/achat|acheter|cherche|appartement|maison|louer|location|studio/.test(q))return "Très bien ! Pour vous orienter, quel est votre budget approximatif et le secteur qui vous intéresse ? Et à quel numéro un conseiller peut vous recontacter ?";
-      if(/honoraire|prix|tarif|frais|commission/.test(q))return "Pour une vente : 4 % jusqu'à 200 000 €, 3 % au-delà. L'estimation et le premier échange sont gratuits. Vous souhaitez vendre un bien ?";
-      return "Je peux vous renseigner sur l'achat, la vente, la location ou l'investissement à Metz 🙂 Quel est votre projet ?";
-    }
-    function openPanel(){if(!panel.classList.contains('open')){panel.classList.add('open');}if(!greeted){bub("Bonjour 👋 Je suis l'assistant de JPS Concept. Un projet d'achat, de vente, de location ou d'investissement à Metz ? Dites-moi tout — même en dehors des horaires de l'agence.",'bot');greeted=true;}input.focus();}
+    function say(t){setTimeout(function(){bub(t,'bot');},300);}
+    function clearChips(){Array.prototype.forEach.call(thread.querySelectorAll('.pa-chips'),function(c){c.remove();});}
+    function chips(opts){clearChips();setTimeout(function(){var w=document.createElement('div');w.className='pa-chips';opts.forEach(function(o){var b=document.createElement('button');b.className='pa-chip';b.textContent=o.label;b.onclick=function(){clearChips();bub(o.label,'me');awaitingContact=false;setTimeout(o.go,350);};w.appendChild(b);});thread.appendChild(w);thread.scrollTop=thread.scrollHeight;},420);}
+    function menu(){chips([
+      {label:'🔑 Louer un bien',go:function(){lead={type:'Location',budget:'',secteur:''};say('Quel budget mensuel environ ?');chips([
+        {label:'≤ 500 €',go:function(){lead.budget='≤ 500 €/mois';secteur();}},
+        {label:'500 – 700 €',go:function(){lead.budget='500–700 €/mois';secteur();}},
+        {label:'700 – 1 000 €',go:function(){lead.budget='700–1 000 €/mois';secteur();}},
+        {label:'+ 1 000 €',go:function(){lead.budget='+ 1 000 €/mois';secteur();}}
+      ]);}},
+      {label:'🏠 Acheter',go:function(){lead={type:'Achat',budget:'',secteur:''};budgetAchat();}},
+      {label:'📈 Investir',go:function(){lead={type:'Investissement',budget:'',secteur:''};say('Notre spécialité 🙂 Quel budget envisagez-vous ?');budgetAchat(true);}},
+      {label:'💰 Estimer mon bien',go:function(){lead={type:'Estimation',budget:'',secteur:''};say("L'estimation est gratuite et sans engagement.");secteur();}},
+      {label:'🕐 Horaires',go:function(){say('Nos horaires : lundi 14h-17h30, mardi au vendredi 10h-12h et 14h-17h30, samedi sur RDV. Mais ici je reste joignable 24/7 🙂');setTimeout(function(){say('Autre chose ?');menu();},900);}}
+    ]);}
+    function budgetAchat(skip){if(!skip)say('Quel budget environ ?');chips([
+      {label:'≤ 150 000 €',go:function(){lead.budget='≤ 150 000 €';secteur();}},
+      {label:'150 – 250 000 €',go:function(){lead.budget='150–250 000 €';secteur();}},
+      {label:'250 – 400 000 €',go:function(){lead.budget='250–400 000 €';secteur();}},
+      {label:'+ 400 000 €',go:function(){lead.budget='+ 400 000 €';secteur();}}
+    ]);}
+    function secteur(){say('Sur quel secteur ?');chips([
+      {label:'Metz-Centre',go:function(){lead.secteur='Metz-Centre';contact();}},
+      {label:'Le Sablon',go:function(){lead.secteur='Le Sablon';contact();}},
+      {label:'Montigny-lès-Metz',go:function(){lead.secteur='Montigny-lès-Metz';contact();}},
+      {label:'Magny',go:function(){lead.secteur='Magny';contact();}},
+      {label:'Autre secteur',go:function(){lead.secteur='autre secteur';contact();}}
+    ]);}
+    function contact(){var r=[lead.type];if(lead.budget)r.push(lead.budget);if(lead.secteur)r.push(lead.secteur);say('Parfait, je récapitule : '+r.join(' · ')+'. Laissez-moi votre prénom et un numéro, un conseiller vous recontacte avec les biens qui correspondent 🙂');setTimeout(function(){awaitingContact=true;input.focus();},600);}
+    function openPanel(){if(!panel.classList.contains('open')){panel.classList.add('open');}if(!greeted){greeted=true;bub("Bonjour 👋 Je suis l'assistant de JPS Concept. Que puis-je faire pour vous ?",'bot');menu();}input.focus();}
     btn.onclick=function(){if(panel.classList.contains('open')){panel.classList.remove('open');}else{openPanel();}};
-    function ask(){var t=input.value.trim();if(!t)return;input.value='';bub(t,'me');setTimeout(function(){bub(reply(t),'bot');},450);}
+    function ask(){var t=input.value.trim();if(!t)return;input.value='';bub(t,'me');if(awaitingContact){awaitingContact=false;say('Merci ✅ C’est bien noté, un conseiller de JPS Concept vous recontacte très vite. Excellente journée !');}else{say("Je vous guide en un clic 🙂 Choisissez ci-dessous :");menu();}}
     sendB.onclick=ask;input.addEventListener('keydown',function(e){if(e.key==='Enter')ask();});
-    document.querySelectorAll('.card[data-msg]').forEach(function(c){c.addEventListener('click',function(){var m=c.getAttribute('data-msg');openPanel();setTimeout(function(){bub(m,'me');setTimeout(function(){bub(reply(m),'bot');},500);},greeted?60:260);});});
+    document.querySelectorAll('.card[data-msg]').forEach(function(c){c.addEventListener('click',function(){var m=c.getAttribute('data-msg');openPanel();setTimeout(function(){clearChips();bub(m,'me');say('Excellent choix 👍 Ce bien est disponible. Laissez-moi votre prénom et un numéro, un conseiller vous recontacte rapidement pour une visite.');setTimeout(function(){awaitingContact=true;input.focus();},700);},greeted?80:500);});});
     var cf=document.getElementById('cform');if(cf){cf.addEventListener('submit',function(e){e.preventDefault();cf.style.display='none';document.getElementById('cdone').style.display='block';});}
   </script>
 </body>

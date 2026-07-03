@@ -8,15 +8,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--navy:#0e1c28;--navy-s:#1a2c40;--gold:#bd9a5a;--gold-d:#a5843f;--cream:#f7f4ec;--ink:#1b2530;--muted:#6c7683;--line:#e9e2d6;}
+  :root{--navy:#123a5c;--navy-s:#1a2c40;--gold:#c67a5a;--gold-d:#b26647;--cream:#f6f8fa;--ink:#1c2733;--muted:#6c7683;--line:#e4e8ed;}
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.65;overflow-x:hidden;}
   h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.13;color:var(--navy);letter-spacing:-.005em;}
   a{text-decoration:none;color:inherit;}
   .wrap{max-width:1200px;margin:0 auto;padding:0 26px;}
-  .btn{display:inline-block;background:var(--gold);color:#fff;padding:14px 30px;border-radius:7px;font-weight:600;font-size:.92rem;letter-spacing:.01em;transition:.25s;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(199,161,90,.28);}
-  .btn:hover{background:var(--gold-d);transform:translateY(-2px);box-shadow:0 10px 26px rgba(199,161,90,.38);}
+  .btn{display:inline-block;background:var(--gold);color:#fff;padding:14px 30px;border-radius:7px;font-weight:600;font-size:.92rem;letter-spacing:.01em;transition:.25s;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(198,122,90,.28);}
+  .btn:hover{background:var(--gold-d);transform:translateY(-2px);box-shadow:0 10px 26px rgba(198,122,90,.38);}
   .btn-ghost{background:transparent;border:1.5px solid rgba(255,255,255,.55);color:#fff;box-shadow:none;}
   .btn-ghost:hover{background:#fff;color:var(--navy);}
   .eyebrow{text-transform:uppercase;letter-spacing:.24em;font-size:.72rem;color:var(--gold);font-weight:700;}
@@ -90,7 +90,7 @@
   @media(max-width:880px){.serv{grid-template-columns:repeat(2,1fr);}}
   .serv .it{background:#fff;border-radius:14px;padding:34px 26px;text-align:center;transition:.3s;}
   .serv .it:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,30,46,.1);}
-  .serv .ic{width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,rgba(199,161,90,.18),rgba(199,161,90,.06));color:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.5rem;}
+  .serv .ic{width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,rgba(198,122,90,.18),rgba(198,122,90,.06));color:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.5rem;}
   .serv h3{font-size:1.1rem;margin-bottom:9px;}
   .serv p{font-size:.88rem;color:var(--muted);}
 
@@ -147,8 +147,8 @@
   footer .logo{color:#fff;font-size:1.35rem;}
   footer a:hover{color:var(--gold);}
 
-  .pa-btn{position:fixed;bottom:26px;right:26px;width:64px;height:64px;border-radius:50%;background:var(--gold);color:#fff;border:none;cursor:pointer;z-index:600;box-shadow:0 12px 32px rgba(199,161,90,.5);font-size:26px;display:flex;align-items:center;justify-content:center;animation:pulse 2.6s infinite;}
-  @keyframes pulse{0%{box-shadow:0 12px 32px rgba(199,161,90,.5),0 0 0 0 rgba(199,161,90,.4)}70%{box-shadow:0 12px 32px rgba(199,161,90,.5),0 0 0 16px rgba(199,161,90,0)}100%{box-shadow:0 12px 32px rgba(199,161,90,.5),0 0 0 0 rgba(199,161,90,0)}}
+  .pa-btn{position:fixed;bottom:26px;right:26px;width:64px;height:64px;border-radius:50%;background:var(--gold);color:#fff;border:none;cursor:pointer;z-index:600;box-shadow:0 12px 32px rgba(198,122,90,.5);font-size:26px;display:flex;align-items:center;justify-content:center;animation:pulse 2.6s infinite;}
+  @keyframes pulse{0%{box-shadow:0 12px 32px rgba(198,122,90,.5),0 0 0 0 rgba(198,122,90,.4)}70%{box-shadow:0 12px 32px rgba(198,122,90,.5),0 0 0 16px rgba(198,122,90,0)}100%{box-shadow:0 12px 32px rgba(198,122,90,.5),0 0 0 0 rgba(198,122,90,0)}}
   .pa-btn:hover{transform:scale(1.06);}
   .pa-panel{position:fixed;bottom:104px;right:26px;width:376px;max-width:calc(100vw - 34px);height:530px;max-height:calc(100vh - 150px);background:#fff;border-radius:18px;overflow:hidden;z-index:600;display:none;flex-direction:column;box-shadow:0 28px 70px rgba(0,0,0,.34);}
   .pa-panel.open{display:flex;animation:rise .3s ease;}

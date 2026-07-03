@@ -202,7 +202,7 @@
       <p>Achat, vente, location et investissement — un accompagnement humain, du premier rendez-vous à la remise des clés.</p>
       <div class="search">
         <div class="f"><label>Projet</label><select><option>Acheter</option><option>Louer</option><option>Investir</option></select></div>
-        <div class="f"><label>Secteur</label><select><option>Metz & alentours</option><option>Metz-Centre</option><option>Le Sablon</option><option>Montigny-lès-Metz</option><option>Woippy</option></select></div>
+        <div class="f"><label>Secteur</label><select><option>Metz & alentours</option><option>Metz-Centre</option><option>Montigny-lès-Metz</option><option>Ennery</option><option>Pagny-sur-Moselle</option></select></div>
         <div class="f"><label>Budget max</label><input type="text" placeholder="ex : 250 000 €"></div>
         <button class="btn">Rechercher</button>
       </div>
@@ -213,8 +213,8 @@
   <section class="stats"><div class="wrap"><div class="row">
     <div><div class="num">+20</div><div class="lbl">Ans d'expérience</div></div>
     <div><div class="num" data-count="84">0</div><div class="lbl">Avis Google</div></div>
+    <div><div class="num">Location</div><div class="lbl">Notre spécialité</div></div>
     <div><div class="num">Metz</div><div class="lbl">& Moselle</div></div>
-    <div><div class="num">Indépendante</div><div class="lbl">À taille humaine</div></div>
   </div></div></section>
 
   <section class="pad" id="biens"><div class="wrap">
@@ -386,7 +386,7 @@
     function clearChips(){Array.prototype.forEach.call(thread.querySelectorAll('.pa-chips'),function(c){c.remove();});}
     function chips(opts){clearChips();setTimeout(function(){var w=document.createElement('div');w.className='pa-chips';opts.forEach(function(o){var b=document.createElement('button');b.className='pa-chip';b.textContent=o.label;b.onclick=function(){clearChips();bub(o.label,'me');awaitingContact=false;setTimeout(o.go,350);};w.appendChild(b);});thread.appendChild(w);thread.scrollTop=thread.scrollHeight;},420);}
     function menu(){chips([
-      {label:'🔑 Louer un bien',go:function(){lead={type:'Location',budget:'',secteur:''};say('Quel budget mensuel environ ?');chips([
+      {label:'🔑 Louer un bien',go:function(){lead={type:'Location',budget:'',secteur:''};say('La location, c’est notre spécialité 🙂 Quel budget mensuel environ ?');chips([
         {label:'≤ 500 €',go:function(){lead.budget='≤ 500 €/mois';secteur();}},
         {label:'500 – 700 €',go:function(){lead.budget='500–700 €/mois';secteur();}},
         {label:'700 – 1 000 €',go:function(){lead.budget='700–1 000 €/mois';secteur();}},
@@ -405,9 +405,9 @@
     ]);}
     function secteur(){say('Sur quel secteur ?');chips([
       {label:'Metz-Centre',go:function(){lead.secteur='Metz-Centre';contact();}},
-      {label:'Le Sablon',go:function(){lead.secteur='Le Sablon';contact();}},
       {label:'Montigny-lès-Metz',go:function(){lead.secteur='Montigny-lès-Metz';contact();}},
-      {label:'Magny',go:function(){lead.secteur='Magny';contact();}},
+      {label:'Ennery',go:function(){lead.secteur='Ennery';contact();}},
+      {label:'Pagny-sur-Moselle',go:function(){lead.secteur='Pagny-sur-Moselle';contact();}},
       {label:'Autre secteur',go:function(){lead.secteur='autre secteur';contact();}}
     ]);}
     function contact(){var r=[lead.type];if(lead.budget)r.push(lead.budget);if(lead.secteur)r.push(lead.secteur);say('Parfait, je récapitule : '+r.join(' · ')+'. Laissez-moi votre prénom et un numéro, un conseiller vous recontacte avec les biens qui correspondent 🙂');setTimeout(function(){awaitingContact=true;input.focus();},600);}

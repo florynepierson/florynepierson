@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /jps
+
+Sitemap: https://florynepierson.com/sitemap.xml

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Malta — prospection privée</title>
+<title>Malta — QG prospection (privé)</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,63 +11,172 @@
 <style>
   :root{--ink:#161a1d;--paper:#f4f1ea;--card:#fffdf9;--gold:#b0895a;--gold-d:#98723f;--line:#e7e0d4;--muted:#8a8072;--soft:#6b6357;--wa:#25925a;}
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;padding:22px 15px 60px;}
-  .wrap{max-width:640px;margin:0 auto;}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;padding:22px 15px 70px;}
+  .wrap{max-width:660px;margin:0 auto;}
   h1{font-family:'Fraunces',serif;font-weight:600;font-size:1.7rem;margin-bottom:4px;}
   .priv{font-size:.76rem;color:var(--gold-d);background:rgba(176,137,90,.12);border:1px solid var(--line);border-radius:8px;padding:7px 11px;margin:10px 0 20px;}
-  .quick{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px;}
-  .quick a{flex:1;min-width:130px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px;font-size:.85rem;font-weight:600;color:var(--gold-d);text-decoration:none;}
-  .tmpl{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:26px;font-size:.86rem;color:var(--soft);}
-  .tmpl h3{font-family:'Fraunces',serif;font-size:1rem;color:var(--ink);margin-bottom:8px;}
-  .tmpl .b{background:var(--paper);border-radius:8px;padding:9px 11px;margin:6px 0;}
-  h2{font-family:'Fraunces',serif;font-weight:500;font-size:1.15rem;margin:26px 0 12px;color:var(--soft);}
-  .agency{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 17px;margin-bottom:13px;}
+  .quick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;}
+  .quick a{flex:1 1 30%;min-width:120px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 8px;font-size:.82rem;font-weight:600;color:var(--gold-d);text-decoration:none;}
+  h2{font-family:'Fraunces',serif;font-weight:500;font-size:1.22rem;margin:30px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line);}
+  .prices{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px;font-size:.87rem;color:var(--soft);margin-bottom:6px;}
+  .prices div{padding:4px 0;}
+  .prices b{color:var(--ink);}
+  .prices .free{color:#2f8f5b;font-weight:600;}
+  .msg{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px;margin-bottom:14px;}
+  .msg .lbl{font-family:'Fraunces',serif;font-size:1rem;color:var(--ink);margin-bottom:4px;}
+  .msg .tip{font-size:.78rem;color:var(--muted);margin-bottom:10px;}
+  .mtxt{background:var(--paper);border-radius:9px;padding:12px 14px;font-size:.88rem;color:var(--ink);white-space:pre-wrap;line-height:1.6;}
+  .copy{margin-top:9px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.82rem;padding:8px 16px;border-radius:8px;}
+  .copy:active{transform:scale(.97);}
+  .hooks{font-size:.84rem;color:var(--soft);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:14px;}
+  .hooks b{color:var(--ink);}
+  .hooks div{padding:5px 0;border-bottom:1px solid var(--line);}
+  .hooks div:last-child{border-bottom:none;}
+  .agency{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px 16px;margin-bottom:12px;}
   .agency .h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
-  .agency .n{font-family:'Fraunces',serif;font-weight:600;font-size:1.12rem;}
-  .badge{font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;}
+  .agency .n{font-family:'Fraunces',serif;font-weight:600;font-size:1.1rem;}
+  .badge{font-size:.64rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;}
   .b-hot{background:rgba(47,143,91,.14);color:#2f8f5b;}
   .b-mid{background:rgba(176,137,90,.16);color:var(--gold-d);}
-  .note{font-size:.8rem;color:var(--muted);margin:5px 0 11px;}
-  .acts{display:flex;gap:8px;flex-wrap:wrap;}
-  .acts a{font-size:.82rem;font-weight:600;text-decoration:none;padding:8px 13px;border-radius:9px;border:1px solid var(--line);color:var(--ink);}
+  .note{font-size:.8rem;color:var(--muted);margin:5px 0 10px;}
+  .acts{display:flex;gap:7px;flex-wrap:wrap;}
+  .acts a{font-size:.8rem;font-weight:600;text-decoration:none;padding:8px 12px;border-radius:9px;border:1px solid var(--line);color:var(--ink);}
   .acts a.wa{background:var(--wa);color:#fff;border-color:var(--wa);}
   .acts a.em{background:var(--gold);color:#fff;border-color:var(--gold);}
-  .more{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin-top:20px;font-size:.85rem;color:var(--soft);}
+  .more{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin-top:16px;font-size:.85rem;color:var(--soft);}
   .more a{color:var(--gold-d);}
-  .more h3{font-family:'Fraunces',serif;font-size:1rem;color:var(--ink);margin-bottom:8px;}
   ol{margin:8px 0 0 18px;}ol li{margin-bottom:5px;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Malta — agences à prospecter</h1>
-  <div class="priv">🔒 Page privée · ne partage pas ce lien · vérifie chaque contact avant d'envoyer</div>
+  <h1>QG prospection — Malte</h1>
+  <div class="priv">🔒 Page privée · ne partage pas ce lien. Ordre gagnant : ouvre avec Plume (gratuit) → puis l'assistant.</div>
 
   <div class="quick">
     <a href="/solara" target="_blank">▶ Démo assistant</a>
-    <a href="/plume" target="_blank">✒ Plume (annonces)</a>
-    <a href="/devis" target="_blank">💰 Devis</a>
+    <a href="/plume" target="_blank">✒ Plume</a>
     <a href="/immo/en" target="_blank">📊 Preuve tech</a>
+    <a href="/devis" target="_blank">💰 Devis assistant</a>
+    <a href="/devis-plume" target="_blank">💰 Devis Plume</a>
+    <a href="/devis-web" target="_blank">💰 Devis site</a>
   </div>
 
-  <div class="tmpl">
-    <h3>Message WhatsApp (2 bulles)</h3>
-    <div class="b">Hi 👋 I'm Floryne — I build AI assistants for estate agencies here in Malta. I made a quick live demo you can try in 30 sec: florynepierson.com/solara (tap the chat bubble).</div>
-    <div class="b">It answers your website visitors 24/7 and captures qualified leads even when you're closed. I'd love to set the same up for [Agency] — free 2-week trial. Worth a quick look? 🙂</div>
-    <div class="b"><b>Relance J+4 :</b> Hi again 🙂 did you get a chance to try the demo? Curious what you think!</div>
+  <h2>Tes offres &amp; prix</h2>
+  <div class="prices">
+    <div>✒ <b>Plume</b> (annonces illimitées, EN/FR) — <b>€49/mois</b> · le « oui facile »</div>
+    <div>🤖 <b>Assistant 24/7</b> (capte les leads) — <b>€149/mois</b> · le vrai revenu</div>
+    <div>🎁 <b>Bundle</b> Plume + Assistant — <b>€179/mois</b> (au lieu de €198)</div>
+    <div>🌐 <b>Site web</b> — dès <b>€1 490</b></div>
+    <div class="free">Toujours : essai gratuit 14 jours + installation offerte</div>
   </div>
 
-  <h2>Priorité — petites / indépendantes</h2>
+  <h2>Messages WhatsApp</h2>
+
+  <div class="msg">
+    <div class="lbl">Ouverture — Plume (recommandé)</div>
+    <div class="tip">Le plus facile : gratuit, utile tout de suite. Remplace [Name] et [Agency].</div>
+    <div class="mtxt">Hello [Name], I'm Floryne Pierson — I build AI tools for estate agencies in Malta. I've made a small tool, Plume, that writes professional property listings in seconds (English &amp; French). It's free to try here: florynepierson.com/plume
+
+If it's useful to your team, I'd be glad to show you what else I can set up for [Agency]. Would you be open to a quick look?</div>
+    <button class="copy" onclick="cp(this)">Copier</button>
+  </div>
+
+  <div class="msg">
+    <div class="lbl">Ouverture — Assistant (leads)</div>
+    <div class="tip">Si tu préfères viser la capture de leads.</div>
+    <div class="mtxt">Hello [Name], I'm Floryne Pierson — I build AI assistants for estate agencies in Malta. I've prepared a short live demo of an assistant that answers your website visitors 24/7 and captures qualified leads, even outside office hours: florynepierson.com/solara
+
+I'd be happy to set the same up for [Agency] on a free two-week trial. Would a quick look suit you?</div>
+    <button class="copy" onclick="cp(this)">Copier</button>
+  </div>
+
+  <div class="msg">
+    <div class="lbl">Relance (J+4)</div>
+    <div class="tip">Sobre, une ligne.</div>
+    <div class="mtxt">Hello [Name], just following up on my message — happy to walk you through it whenever convenient. Kind regards, Floryne</div>
+    <button class="copy" onclick="cp(this)">Copier</button>
+  </div>
+
+  <h2>Modèles d'emails</h2>
+
+  <div class="msg">
+    <div class="lbl">Modèle A — agence avec site</div>
+    <div class="tip">Simon Mamo, Excel Homes, Giovanni. Colle une phrase perso (voir plus bas) à [PHRASE PERSO].</div>
+    <div class="mtxt">Subject: A 24/7 assistant for [Agency] — free two-week trial
+
+Dear [Name],
+
+I'm Floryne Pierson, and I build AI tools for estate agencies here in Malta.
+
+[PHRASE PERSO]. I've prepared a short live demo you can try in under a minute: florynepierson.com/solara (tap the chat bubble at the bottom right). It answers your website visitors instantly, 24/7, and captures qualified buyer and renter leads even when your office is closed.
+
+I'd be glad to set the same up for [Agency], trained on your own listings, on a free two-week trial — with no obligation. I also offer Plume, a tool that writes professional property listings in seconds (florynepierson.com/plume).
+
+Would you be open to a quick look?
+
+Kind regards,
+Floryne Pierson
+florynepierson.com · hello@florynepierson.com</div>
+    <button class="copy" onclick="cp(this)">Copier</button>
+  </div>
+
+  <div class="msg">
+    <div class="lbl">Modèle B — agence sans site</div>
+    <div class="tip">Malta Prime, Bonavia.</div>
+    <div class="mtxt">Subject: Capture your enquiries 24/7 — even without a website
+
+Dear [Name],
+
+I'm Floryne Pierson — I build AI tools for estate agencies in Malta.
+
+Even without a full website, I can set you up a simple page with an assistant that answers and captures buyer and renter enquiries around the clock, from Facebook and Google — so nothing is lost after hours. Here's a live demo: florynepierson.com/solara.
+
+I also offer Plume, which writes professional property listings in seconds (florynepierson.com/plume) — free to try. Both come with no obligation.
+
+Would you be open to a short call or a quick look?
+
+Kind regards,
+Floryne Pierson · florynepierson.com · hello@florynepierson.com</div>
+    <button class="copy" onclick="cp(this)">Copier</button>
+  </div>
+
+  <div class="msg">
+    <div class="lbl">Modèle C — agence avec déjà un chatbot</div>
+    <div class="tip">Perry. On positionne en upgrade, sans vexer.</div>
+    <div class="mtxt">Subject: An assistant that qualifies your leads, not just answers them
+
+Dear [Name],
+
+I'm Floryne Pierson — I build AI assistants for estate agencies in Malta. I noticed [Agency] already offers a chat on your site, which is great.
+
+Mine goes a step further: rather than only answering questions, it qualifies each visitor (budget, area, timing) and hands a ready, warm lead to your team, 24/7. Here's a live demo: florynepierson.com/solara.
+
+I'd be glad to set it up for [Agency] on a free two-week trial, so you can compare. Would you be open to a quick look?
+
+Kind regards,
+Floryne Pierson · florynepierson.com · hello@florynepierson.com</div>
+    <button class="copy" onclick="cp(this)">Copier</button>
+  </div>
+
+  <div class="hooks">
+    <b>Phrases perso (pour [PHRASE PERSO]) :</b>
+    <div><b>Simon Mamo :</b> With seven offices across Malta, a good share of your enquiries must arrive after hours or at weekends</div>
+    <div><b>Excel Homes :</b> With a team of your size, it's a shame when an after-hours enquiry goes cold before an agent can reply</div>
+    <div><b>Giovanni Estates :</b> Between Malta and Gozo, many of your buyers browse in the evening or from abroad</div>
+  </div>
+
+  <h2>Agences — priorité</h2>
 
   <div class="agency">
     <div class="h"><span class="n">Malta Prime Properties</span><span class="badge b-hot">Priorité</span></div>
-    <div class="note">St Julian's · pas de WhatsApp / pas de site → par EMAIL (angle « sans site »).</div>
+    <div class="note">St Julian's · pas de WhatsApp / pas de site → EMAIL (Modèle B).</div>
     <div class="acts"><a class="em" href="mailto:admin@maltaprimeproperties.com">✉ Email</a></div>
   </div>
 
   <div class="agency">
     <div class="h"><span class="n">Perry Estate Agents</span><span class="badge b-hot">Priorité</span></div>
-    <div class="note">Familiale, Sliema/St Julian's · a déjà un chatbot → positionne en UPGRADE.</div>
+    <div class="note">Familiale, Sliema/St Julian's · a déjà un chatbot → Modèle C (upgrade).</div>
     <div class="acts"><a class="wa" href="https://wa.me/35699491074" target="_blank">💬 WhatsApp</a><a href="https://wa.me/35679444960" target="_blank">💬 #2</a><a class="em" href="mailto:perry@perry.com.mt">✉ Email</a><a href="https://www.perry.com.mt" target="_blank">🌐 Site</a></div>
   </div>
 
@@ -79,35 +188,41 @@
 
   <div class="agency">
     <div class="h"><span class="n">Bonavia Investments</span><span class="badge b-hot">Priorité</span></div>
-    <div class="note">Petite indépendante · pas de site → EMAIL / Facebook (angle « sans site »). Cherche le contact sur Google/FB.</div>
+    <div class="note">Petite indépendante · pas de site → EMAIL / Facebook (Modèle B).</div>
     <div class="acts"><a href="https://www.google.com/search?q=Bonavia+Investments+Malta+estate+agents+contact" target="_blank">🔎 Trouver contact</a></div>
   </div>
 
-  <h2>À tenter ensuite — plus grosses</h2>
+  <h2>Agences — ensuite</h2>
 
   <div class="agency">
     <div class="h"><span class="n">Simon Mamo</span><span class="badge b-mid">Moyenne</span></div>
-    <div class="note">7 bureaux depuis 1987. Angle : beaucoup de demandes hors horaires.</div>
+    <div class="note">7 bureaux depuis 1987 · Modèle A.</div>
     <div class="acts"><a class="wa" href="https://wa.me/35677020657" target="_blank">💬 WhatsApp</a><a class="em" href="mailto:info@simonmamo.com">✉ Email</a><a href="https://www.simonmamo.com" target="_blank">🌐 Site</a></div>
   </div>
 
   <div class="agency">
     <div class="h"><span class="n">Excel Homes</span><span class="badge b-mid">Moyenne</span></div>
-    <div class="note">~30 agents, 4 bureaux. Angle : une grande équipe = dommage de perdre un lead du soir.</div>
+    <div class="note">~30 agents, 4 bureaux · Modèle A.</div>
     <div class="acts"><a href="https://excel.com.mt" target="_blank">🌐 Site</a></div>
   </div>
 
   <div class="more">
-    <h3>Compléter jusqu'à 20 agences</h3>
-    Ces annuaires listent toutes les agences maltaises + contacts :
+    <b>Compléter jusqu'à 20 agences</b> — ces annuaires listent toutes les agences maltaises :
     <ol>
       <li><a href="https://www.yellow.com.mt/estate-agents/" target="_blank">yellow.com.mt/estate-agents</a></li>
       <li><a href="https://www.realestates.mt/real-estate-agencies-list/malta/" target="_blank">realestates.mt — liste complète</a></li>
       <li><a href="https://malta-homes.com/agencies/" target="_blank">malta-homes.com/agencies</a></li>
     </ol>
-    Vise les petites (1-2 bureaux), note nom + WhatsApp/email, envoie 5-8 par jour.
+    Vise les petites (1-2 bureaux) · envoie 5-8 par jour · relance à J+4.
   </div>
 
 </div>
+<script>
+  function cp(b){var t=b.previousElementSibling.innerText;
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(b);},function(){fb(t,b);});}
+    else{fb(t,b);}}
+  function done(b){var o=b.textContent;b.textContent='Copié ✓';setTimeout(function(){b.textContent=o;},1500);}
+  function fb(t,b){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');done(b);}catch(e){}document.body.removeChild(ta);}
+</script>
 </body>
 </html>

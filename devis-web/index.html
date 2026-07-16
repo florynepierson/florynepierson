@@ -11,10 +11,22 @@
 <style>
   :root{--ink:#161a1d;--paper:#f4f1ea;--card:#fffdf9;--gold:#b0895a;--gold-d:#98723f;--line:#e7e0d4;--muted:#8a8072;--soft:#6b6357;}
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;padding:28px 16px;}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;padding:20px 16px 28px;}
   .serif{font-family:'Fraunces',Georgia,serif;}
   .sheet{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(60,45,25,.08);padding:44px 46px 40px;}
+
+  /* controls (hidden on print) */
+  .toolbar{max-width:760px;margin:0 auto 14px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;}
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--card);}
+  .lang button{background:none;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.82rem;padding:8px 16px;color:var(--muted);}
+  .lang button.active{background:var(--gold);color:#fff;}
+  .formulas{display:inline-flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  .formulas .flabel{font-size:.78rem;color:var(--muted);font-weight:600;}
+  .formulas button{background:var(--card);border:1px solid var(--line);border-radius:9px;cursor:pointer;font-family:inherit;font-weight:600;font-size:.8rem;padding:8px 13px;color:var(--soft);transition:.2s;}
+  .formulas button:hover{border-color:var(--gold);}
+  .formulas button.active{background:var(--gold);color:#fff;border-color:var(--gold);}
   .edithint{max-width:760px;margin:0 auto 14px;font-size:.82rem;color:var(--gold-d);text-align:center;}
+
   .top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:26px;}
   .brand b{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;display:block;}
   .brand span{font-size:.82rem;color:var(--muted);}
@@ -56,90 +68,211 @@
   .sign .line{border-bottom:1px solid var(--line);height:34px;margin-bottom:6px;}
   .btnrow{max-width:760px;margin:18px auto 0;text-align:center;}
   .pbtn{background:var(--gold);color:#fff;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.95rem;padding:13px 30px;border-radius:10px;box-shadow:0 8px 22px rgba(176,137,90,.3);}
-  @media print{body{background:#fff;padding:0;}.sheet{border:none;box-shadow:none;border-radius:0;max-width:100%;padding:10px 6px;}.edithint,.btnrow{display:none !important;}[contenteditable]{border-bottom:none;}}
+  @media print{body{background:#fff;padding:0;}.sheet{border:none;box-shadow:none;border-radius:0;max-width:100%;padding:10px 6px;}.edithint,.btnrow,.toolbar{display:none !important;}[contenteditable]{border-bottom:none;}}
 </style>
 </head>
 <body>
-  <div class="edithint">✎ Cliquez les champs en pointillés pour remplir le client, la date, la formule et les montants. Puis « Enregistrer en PDF ».</div>
+  <div class="toolbar">
+    <div class="lang">
+      <button data-lang="fr" class="active">FR</button>
+      <button data-lang="en">EN</button>
+    </div>
+    <div class="formulas">
+      <span class="flabel" data-i18n="pick">Formule :</span>
+      <button data-f="ess"></button>
+      <button data-f="loc" class="active"></button>
+      <button data-f="full"></button>
+    </div>
+  </div>
+  <div class="edithint" data-i18n="hint">✎ Choisissez la langue et la formule ci-dessus, puis cliquez les champs en pointillés pour remplir le client, la date et les montants. Puis « Enregistrer en PDF ».</div>
+
   <div class="sheet">
 
     <div class="top">
       <div class="brand">
         <b class="serif">Floryne Pierson</b>
-        <span>Création de sites web</span>
+        <span data-i18n="brandsub">Création de sites web</span>
         <div class="c">
           <a href="https://florynepierson.com">florynepierson.com</a><br>
           <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
         </div>
       </div>
       <div class="qmeta">
-        <span class="qt serif">Devis</span>
-        <div>N° <span contenteditable="true">2026-001</span></div>
-        <div>Date : <span contenteditable="true">16 juillet 2026</span></div>
-        <div>Valable 30 jours</div>
+        <span class="qt serif" data-i18n="qt">Devis</span>
+        <div><span data-i18n="qn">N°</span> <span contenteditable="true">2026-001</span></div>
+        <div><span data-i18n="qdate">Date :</span> <span contenteditable="true">16 juillet 2026</span></div>
+        <div data-i18n="qvalid">Valable 30 jours</div>
       </div>
     </div>
 
     <div class="to">
-      <div class="lbl">Établi pour</div>
+      <div class="lbl" data-i18n="tolbl">Établi pour</div>
       <b contenteditable="true">[ Nom du client / entreprise ]</b>
     </div>
 
-    <p class="intro">Un site vitrine moderne, rapide et adapté au mobile, pensé pour refléter votre métier et transformer vos visiteurs en demandes de devis — conçu, réalisé et livré prêt à être mis en ligne.</p>
+    <p class="intro" data-i18n="intro">Un site vitrine moderne, rapide et adapté au mobile, pensé pour refléter votre métier et transformer vos visiteurs en demandes de devis — conçu, réalisé et livré prêt à être mis en ligne.</p>
 
     <table>
-      <thead><tr><th>Prestation</th><th class="r">Montant</th></tr></thead>
+      <thead><tr><th data-i18n="thService">Prestation</th><th class="r" data-i18n="thAmount">Montant</th></tr></thead>
       <tbody>
         <tr>
-          <td><div class="d">Création du site — formule « <span contenteditable="true">Visibilité locale</span> »</div><div class="s">Site vitrine sur-mesure, responsive, structuré et optimisé pour les recherches Google locales. Textes, photos &amp; sections intégrés.</div></td>
-          <td class="r"><div class="d">€<span contenteditable="true">690</span></div></td>
+          <td><div class="d" id="row1title"></div><div class="s" data-i18n="row1s">Site vitrine sur-mesure, responsive, structuré et optimisé pour les recherches Google locales. Textes, photos &amp; sections intégrés.</div></td>
+          <td class="r"><div class="d">€<span id="fPrice" contenteditable="true">690</span></div></td>
         </tr>
         <tr>
-          <td><div class="d">Mise en ligne &amp; référencement de base</div><div class="s">Nom de domaine, indexation Google, fiche Google Business, formulaire relié à votre email.</div></td>
-          <td class="r incl-tag">Inclus</td>
+          <td><div class="d" data-i18n="row2d">Mise en ligne &amp; référencement de base</div><div class="s" data-i18n="row2s">Nom de domaine, indexation Google, fiche Google Business, formulaire relié à votre email.</div></td>
+          <td class="r incl-tag" data-i18n="included">Inclus</td>
         </tr>
         <tr>
-          <td><div class="d">Maintenance &amp; hébergement <span style="font-weight:400;color:var(--muted);">(option)</span></div><div class="s">Hébergement, mises à jour, 2 modifications/mois &amp; support prioritaire.</div></td>
-          <td class="r"><div class="d">€<span contenteditable="true">29</span><span style="font-weight:400;color:var(--muted);">/mois</span></div></td>
+          <td><div class="d"><span data-i18n="row3d">Maintenance &amp; hébergement</span> <span style="font-weight:400;color:var(--muted);" data-i18n="optional">(option)</span></div><div class="s" data-i18n="row3s">Hébergement, mises à jour, 2 modifications/mois &amp; support prioritaire.</div></td>
+          <td class="r"><div class="d">€<span contenteditable="true">29</span><span style="font-weight:400;color:var(--muted);" data-i18n="permo">/mois</span></div></td>
         </tr>
       </tbody>
     </table>
 
-    <div class="tiers">Formules disponibles : <b>Essentiel</b> (1 page) dès 390 € · <b>Visibilité locale</b> dès 690 € · <b>Site complet multi-pages</b> dès 990 €. Ajustez la formule et le montant ci-dessus selon le projet.</div>
+    <div class="tiers" id="tiersLine"></div>
 
     <div class="totals">
-      <div class="row"><span>Total du site (une fois)</span><span>€<span contenteditable="true">690</span></span></div>
-      <div class="row"><span>Acompte 50 % à la commande</span><span>€<span contenteditable="true">345</span></span></div>
-      <div class="row"><span>Solde 50 % à la livraison</span><span>€<span contenteditable="true">345</span></span></div>
-      <div class="grand"><span>Option mensuelle</span><span>€29 / mois</span></div>
-      <div class="sub">Paiement en 2 fois · échelonnement possible sur demande</div>
+      <div class="row"><span data-i18n="tTotalLbl">Total du site (une fois)</span><span>€<span id="tTotal" contenteditable="true">690</span></span></div>
+      <div class="row"><span data-i18n="tDepLbl">Acompte 50 % à la commande</span><span>€<span id="tDeposit" contenteditable="true">345</span></span></div>
+      <div class="row"><span data-i18n="tBalLbl">Solde 50 % à la livraison</span><span>€<span id="tBalance" contenteditable="true">345</span></span></div>
+      <div class="grand"><span data-i18n="tMonthLbl">Option mensuelle</span><span>€29 <span data-i18n="permo2">/ mois</span></span></div>
+      <div class="sub" data-i18n="tsub">Paiement en 2 fois · échelonnement possible sur demande</div>
     </div>
 
     <div class="incl">
-      <h3>Compris dans votre site</h3>
+      <h3 data-i18n="inclh3">Compris dans votre site</h3>
       <ul>
-        <li>Design sur-mesure à votre image</li>
-        <li>100 % responsive (mobile &amp; tablette)</li>
-        <li>Optimisé Google local (SEO)</li>
-        <li>Formulaire de contact relié à votre email</li>
-        <li>Carte Google Maps + zone d'intervention</li>
-        <li>Boutons WhatsApp &amp; Facebook</li>
-        <li>Espace avis Google</li>
-        <li>2 séries de retouches incluses</li>
-        <li>Site à votre nom, propriété transférée</li>
-        <li>Accompagnement de A à Z</li>
+        <li data-i18n="i1">Design sur-mesure à votre image</li>
+        <li data-i18n="i2">100 % responsive (mobile &amp; tablette)</li>
+        <li data-i18n="i3">Optimisé Google local (SEO)</li>
+        <li data-i18n="i4">Formulaire de contact relié à votre email</li>
+        <li data-i18n="i5">Carte Google Maps + zone d'intervention</li>
+        <li data-i18n="i6">Boutons WhatsApp &amp; Facebook</li>
+        <li data-i18n="i7">Espace avis Google</li>
+        <li data-i18n="i8">2 séries de retouches incluses</li>
+        <li data-i18n="i9">Site à votre nom, propriété transférée</li>
+        <li data-i18n="i10">Accompagnement de A à Z</li>
       </ul>
     </div>
 
     <div class="terms">
-      <b>Conditions.</b> Un acompte de 50 % confirme la commande ; le solde est réglé à la livraison, avant mise en ligne. Un échelonnement supplémentaire est possible sur simple demande. Délai estimé : <span contenteditable="true">2 à 3</span> semaines après réception de vos contenus (textes, photos, coordonnées). 2 séries de retouches incluses. À la livraison, le site vous appartient. La maintenance est optionnelle, mensuelle et sans engagement. Devis valable 30 jours.
+      <span data-i18n="termsPre"><b>Conditions.</b> Un acompte de 50 % confirme la commande ; le solde est réglé à la livraison, avant mise en ligne. Un échelonnement supplémentaire est possible sur simple demande. Délai estimé : </span><span contenteditable="true">2 à 3</span><span data-i18n="termsPost"> semaines après réception de vos contenus (textes, photos, coordonnées). 2 séries de retouches incluses. À la livraison, le site vous appartient. La maintenance est optionnelle, mensuelle et sans engagement. Devis valable 30 jours.</span>
       <div class="sign">
         <div class="box"><div class="line"></div>Floryne Pierson</div>
-        <div class="box"><div class="line"></div>Le client (nom, date &amp; « bon pour accord »)</div>
+        <div class="box"><div class="line"></div><span data-i18n="signClient">Le client (nom, date &amp; « bon pour accord »)</span></div>
       </div>
     </div>
 
   </div>
-  <div class="btnrow"><button class="pbtn" onclick="window.print()">⬇ Enregistrer ce devis en PDF</button></div>
+  <div class="btnrow"><button class="pbtn" onclick="window.print()" data-i18n="printbtn">⬇ Enregistrer ce devis en PDF</button></div>
+
+<script>
+  var F={
+    ess:{fr:'Essentiel',en:'Essential',price:390},
+    loc:{fr:'Visibilité locale',en:'Local visibility',price:690},
+    full:{fr:'Site complet multi-pages',en:'Full multi-page site',price:990}
+  };
+  var T={
+    fr:{
+      pick:'Formule :',
+      hint:'✎ Choisissez la langue et la formule ci-dessus, puis cliquez les champs en pointillés pour remplir le client, la date et les montants. Puis « Enregistrer en PDF ».',
+      brandsub:'Création de sites web',
+      qt:'Devis', qn:'N°', qdate:'Date :', qvalid:'Valable 30 jours',
+      tolbl:'Établi pour',
+      intro:'Un site vitrine moderne, rapide et adapté au mobile, pensé pour refléter votre métier et transformer vos visiteurs en demandes de devis — conçu, réalisé et livré prêt à être mis en ligne.',
+      thService:'Prestation', thAmount:'Montant',
+      row1s:'Site vitrine sur-mesure, responsive, structuré et optimisé pour les recherches Google locales. Textes, photos & sections intégrés.',
+      row2d:'Mise en ligne & référencement de base',
+      row2s:'Nom de domaine, indexation Google, fiche Google Business, formulaire relié à votre email.',
+      included:'Inclus',
+      row3d:'Maintenance & hébergement', optional:'(option)',
+      row3s:'Hébergement, mises à jour, 2 modifications/mois & support prioritaire.',
+      permo:'/mois', permo2:'/ mois',
+      tTotalLbl:'Total du site (une fois)',
+      tDepLbl:'Acompte 50 % à la commande',
+      tBalLbl:'Solde 50 % à la livraison',
+      tMonthLbl:'Option mensuelle',
+      tsub:'Paiement en 2 fois · échelonnement possible sur demande',
+      inclh3:'Compris dans votre site',
+      i1:'Design sur-mesure à votre image', i2:'100 % responsive (mobile & tablette)',
+      i3:'Optimisé Google local (SEO)', i4:'Formulaire de contact relié à votre email',
+      i5:"Carte Google Maps + zone d'intervention", i6:'Boutons WhatsApp & Facebook',
+      i7:'Espace avis Google', i8:'2 séries de retouches incluses',
+      i9:'Site à votre nom, propriété transférée', i10:'Accompagnement de A à Z',
+      termsPre:'<b>Conditions.</b> Un acompte de 50 % confirme la commande ; le solde est réglé à la livraison, avant mise en ligne. Un échelonnement supplémentaire est possible sur simple demande. Délai estimé : ',
+      termsPost:' semaines après réception de vos contenus (textes, photos, coordonnées). 2 séries de retouches incluses. À la livraison, le site vous appartient. La maintenance est optionnelle, mensuelle et sans engagement. Devis valable 30 jours.',
+      signClient:'Le client (nom, date & « bon pour accord »)',
+      printbtn:'⬇ Enregistrer ce devis en PDF',
+      row1:function(n){return 'Création du site — formule « '+n+' »';},
+      tiers:function(){return 'Formules disponibles : <b>Essentiel</b> (1 page) dès 390 € · <b>Visibilité locale</b> dès 690 € · <b>Site complet multi-pages</b> dès 990 €. Choisissez la formule ci-dessus ou ajustez les montants.';}
+    },
+    en:{
+      pick:'Package:',
+      hint:'✎ Pick the language and package above, then click the dotted fields to fill in the client, date and amounts. Then “Save as PDF”.',
+      brandsub:'Web design & development',
+      qt:'Quotation', qn:'No.', qdate:'Date:', qvalid:'Valid for 30 days',
+      tolbl:'Prepared for',
+      intro:'A modern, fast, mobile-friendly showcase website, built to reflect your trade and turn visitors into quote requests — designed, built and delivered ready to go live.',
+      thService:'Service', thAmount:'Amount',
+      row1s:'Bespoke, responsive showcase site, structured and optimised for local Google searches. Text, photos & sections included.',
+      row2d:'Launch & basic SEO',
+      row2s:'Domain name, Google indexing, Google Business profile, form connected to your email.',
+      included:'Included',
+      row3d:'Maintenance & hosting', optional:'(optional)',
+      row3s:'Hosting, updates, 2 edits/month & priority support.',
+      permo:'/mo', permo2:'/ mo',
+      tTotalLbl:'Website total (one-off)',
+      tDepLbl:'50% deposit on order',
+      tBalLbl:'50% balance on delivery',
+      tMonthLbl:'Monthly option',
+      tsub:'Payment in 2 instalments · further staggering available on request',
+      inclh3:'Included in your website',
+      i1:'Bespoke design in your image', i2:'100% responsive (mobile & tablet)',
+      i3:'Optimised for local Google (SEO)', i4:'Contact form connected to your email',
+      i5:'Google Maps + service area', i6:'WhatsApp & Facebook buttons',
+      i7:'Google reviews section', i8:'2 rounds of revisions included',
+      i9:'Site in your name, ownership transferred', i10:'Guided from start to finish',
+      termsPre:'<b>Terms.</b> A 50% deposit confirms the order; the balance is due on delivery, before going live. Further staggering is available on request. Estimated timeline: ',
+      termsPost:' weeks after we receive your content (text, photos, contact details). 2 rounds of revisions included. On delivery, the website is yours. Maintenance is optional, monthly and commitment-free. Quote valid for 30 days.',
+      signClient:'The client (name, date & “agreed”)',
+      printbtn:'⬇ Save this quote as PDF',
+      row1:function(n){return 'Website build — “'+n+'” package';},
+      tiers:function(){return 'Available packages: <b>Essential</b> (1 page) from €390 · <b>Local visibility</b> from €690 · <b>Full multi-page site</b> from €990. Pick a package above or adjust the amounts.';}
+    }
+  };
+  var lang='fr', curF='loc';
+  function render(){
+    var d=T[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k=el.getAttribute('data-i18n');
+      if(d[k]==null) return;
+      if(k==='termsPre'||k==='termsPost') el.innerHTML=d[k]; else el.textContent=d[k];
+    });
+    var f=F[curF], dep=Math.round(f.price/2);
+    document.getElementById('row1title').textContent=d.row1(f[lang]);
+    document.getElementById('fPrice').textContent=f.price;
+    document.getElementById('tTotal').textContent=f.price;
+    document.getElementById('tDeposit').textContent=dep;
+    document.getElementById('tBalance').textContent=f.price-dep;
+    document.getElementById('tiersLine').innerHTML=d.tiers();
+    document.querySelectorAll('.formulas button').forEach(function(b){
+      var k=b.getAttribute('data-f');
+      b.textContent=F[k][lang]+' · €'+F[k].price;
+      b.classList.toggle('active',k===curF);
+    });
+    document.querySelectorAll('.lang button').forEach(function(b){
+      b.classList.toggle('active',b.getAttribute('data-lang')===lang);
+    });
+    document.documentElement.lang=lang;
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click',function(){lang=b.getAttribute('data-lang');render();});
+  });
+  document.querySelectorAll('.formulas button').forEach(function(b){
+    b.addEventListener('click',function(){curF=b.getAttribute('data-f');render();});
+  });
+  render();
+</script>
 </body>
 </html>

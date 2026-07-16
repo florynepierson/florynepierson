@@ -55,10 +55,8 @@
   .totals .grand{border-top:1.5px solid var(--gold);margin-top:6px;padding-top:12px;font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600;color:var(--ink);}
   .totals .grand span:last-child{color:var(--gold-d);}
   .totals .sub{font-size:.8rem;color:var(--muted);text-align:right;margin-top:2px;}
-  .optck{display:inline-flex;align-items:center;gap:8px;margin-top:9px;font-size:.84rem;color:var(--soft);cursor:pointer;user-select:none;}
-  .optck input{width:16px;height:16px;accent-color:var(--gold-d);cursor:pointer;margin:0;flex:none;}
-  .maint-status{font-weight:600;}
-  .sheet.maint-off .maint-amt{opacity:.4;text-decoration:line-through;}
+  .selectors{display:flex;gap:18px;flex-wrap:wrap;align-items:center;}
+  .sheet.maint-off .maint-row{display:none;}
   .incl{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:26px 0;}
   .incl h3{font-family:'Fraunces',serif;font-size:1.05rem;margin-bottom:10px;}
   .incl ul{list-style:none;columns:2;column-gap:26px;}
@@ -81,11 +79,18 @@
       <button data-lang="fr" class="active">FR</button>
       <button data-lang="en">EN</button>
     </div>
-    <div class="formulas">
-      <span class="flabel" data-i18n="pick">Formule :</span>
-      <button data-f="ess"></button>
-      <button data-f="loc" class="active"></button>
-      <button data-f="full"></button>
+    <div class="selectors">
+      <div class="formulas">
+        <span class="flabel" data-i18n="pick">Formule :</span>
+        <button data-f="ess"></button>
+        <button data-f="loc" class="active"></button>
+        <button data-f="full"></button>
+      </div>
+      <div class="formulas maint-toggle">
+        <span class="flabel" data-i18n="maintLbl">Maintenance :</span>
+        <button data-m="on" data-i18n="mOn">Avec</button>
+        <button data-m="off" class="active" data-i18n="mOff">Sans</button>
+      </div>
     </div>
   </div>
   <div class="edithint" data-i18n="hint">✎ Choisissez la langue et la formule ci-dessus, puis cliquez les champs en pointillés pour remplir le client, la date et les montants. Puis « Enregistrer en PDF ».</div>
@@ -127,9 +132,9 @@
           <td><div class="d" data-i18n="row2d">Mise en ligne &amp; référencement de base</div><div class="s" data-i18n="row2s">Nom de domaine, indexation Google, fiche Google Business, formulaire relié à votre email.</div></td>
           <td class="r incl-tag" data-i18n="included">Inclus</td>
         </tr>
-        <tr>
-          <td><div class="d"><span data-i18n="row3d">Maintenance &amp; hébergement</span> <span style="font-weight:400;color:var(--muted);" data-i18n="optional">(option)</span></div><div class="s" data-i18n="row3s">Hébergement, mises à jour, 2 modifications/mois &amp; support prioritaire.</div><label class="optck"><input type="checkbox" id="maintChk"> <span data-i18n="maintCk">Je souhaite ajouter la maintenance</span> <span class="maint-status" id="maintStatus"></span></label></td>
-          <td class="r"><div class="d maint-amt">€<span contenteditable="true">29</span><span style="font-weight:400;color:var(--muted);" data-i18n="permo">/mois</span></div></td>
+        <tr class="maint-row">
+          <td><div class="d"><span data-i18n="row3d">Maintenance &amp; hébergement</span> <span style="font-weight:400;color:var(--muted);" data-i18n="optional">(option)</span></div><div class="s" data-i18n="row3s">Hébergement, mises à jour, 2 modifications/mois &amp; support prioritaire.</div></td>
+          <td class="r"><div class="d">€<span contenteditable="true">29</span><span style="font-weight:400;color:var(--muted);" data-i18n="permo">/mois</span></div></td>
         </tr>
       </tbody>
     </table>
@@ -141,8 +146,8 @@
       <div class="row"><span data-i18n="tBalLbl">Solde 50 % à la livraison</span><span>€<span id="tBalance" contenteditable="true">345</span></span></div>
       <div class="grand"><span data-i18n="tTotalLbl">Total du site (une fois)</span><span>€<span id="tTotal" contenteditable="true">690</span></span></div>
       <div class="sub" data-i18n="tsub">soit 50 % + 50 % du prix du site — payé en 2 fois, sans supplément</div>
-      <div class="row maint-amt" style="margin-top:14px;"><span data-i18n="tMonthLbl">Option maintenance &amp; hébergement</span><span>€<span contenteditable="true">29</span> <span data-i18n="permo2">/ mois</span></span></div>
-      <div class="sub" data-i18n="tMonthNote">facturée séparément, sans engagement — non incluse dans le total du site</div>
+      <div class="row maint-row" style="margin-top:14px;"><span data-i18n="tMonthLbl">Option maintenance &amp; hébergement</span><span>€<span contenteditable="true">29</span> <span data-i18n="permo2">/ mois</span></span></div>
+      <div class="sub maint-row" data-i18n="tMonthNote">facturée séparément, sans engagement — non incluse dans le total du site</div>
     </div>
 
     <div class="incl">
@@ -200,7 +205,7 @@
       tMonthLbl:'Option maintenance & hébergement',
       tsub:'soit 50 % + 50 % du prix du site — payé en 2 fois, sans supplément',
       tMonthNote:'facturée séparément, sans engagement — non incluse dans le total du site',
-      maintCk:'Je souhaite ajouter la maintenance', maintOn:'✓ retenue', maintOff:'— non retenue',
+      maintLbl:'Maintenance :', mOn:'Avec', mOff:'Sans',
       inclh3:'Compris dans votre site',
       i1:'Design sur-mesure à votre image', i2:'100 % responsive (mobile & tablette)',
       i3:'Optimisé Google local (SEO)', i4:'Formulaire de contact relié à votre email',
@@ -235,7 +240,7 @@
       tMonthLbl:'Maintenance & hosting option',
       tsub:'i.e. 50% + 50% of the site price — paid in 2 instalments, no extra cost',
       tMonthNote:'billed separately, no commitment — not included in the website total',
-      maintCk:'I’d like to add maintenance', maintOn:'✓ selected', maintOff:'— not selected',
+      maintLbl:'Maintenance:', mOn:'With', mOff:'Without',
       inclh3:'Included in your website',
       i1:'Bespoke design in your image', i2:'100% responsive (mobile & tablet)',
       i3:'Optimised for local Google (SEO)', i4:'Contact form connected to your email',
@@ -250,7 +255,7 @@
       tiers:function(){return 'Available packages: <b>Essential</b> (1 page) from €390 · <b>Local visibility</b> from €690 · <b>Full multi-page site</b> from €990. Pick a package above or adjust the amounts.';}
     }
   };
-  var lang='fr', curF='loc';
+  var lang='fr', curF='loc', curM='off';
   function render(){
     var d=T[lang];
     document.querySelectorAll('[data-i18n]').forEach(function(el){
@@ -265,7 +270,7 @@
     document.getElementById('tDeposit').textContent=dep;
     document.getElementById('tBalance').textContent=f.price-dep;
     document.getElementById('tiersLine').innerHTML=d.tiers();
-    document.querySelectorAll('.formulas button').forEach(function(b){
+    document.querySelectorAll('.formulas button[data-f]').forEach(function(b){
       var k=b.getAttribute('data-f');
       b.textContent=F[k][lang]+' · €'+F[k].price;
       b.classList.toggle('active',k===curF);
@@ -273,18 +278,15 @@
     document.querySelectorAll('.lang button').forEach(function(b){
       b.classList.toggle('active',b.getAttribute('data-lang')===lang);
     });
+    document.querySelector('.sheet').classList.toggle('maint-off',curM==='off');
+    document.querySelectorAll('.maint-toggle button').forEach(function(b){
+      b.classList.toggle('active',b.getAttribute('data-m')===curM);
+    });
     document.documentElement.lang=lang;
-    renderMaint();
   }
-  var maintChk=document.getElementById('maintChk');
-  function renderMaint(){
-    var on=maintChk.checked, d=T[lang];
-    document.querySelector('.sheet').classList.toggle('maint-off',!on);
-    var st=document.getElementById('maintStatus');
-    st.textContent=on?d.maintOn:d.maintOff;
-    st.style.color=on?'#2f8f5b':'var(--muted)';
-  }
-  maintChk.addEventListener('change',renderMaint);
+  document.querySelectorAll('.maint-toggle button').forEach(function(b){
+    b.addEventListener('click',function(){curM=b.getAttribute('data-m');render();});
+  });
   document.querySelectorAll('.lang button').forEach(function(b){
     b.addEventListener('click',function(){lang=b.getAttribute('data-lang');render();});
   });

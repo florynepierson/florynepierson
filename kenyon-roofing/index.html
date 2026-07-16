@@ -82,7 +82,7 @@
   .stmt p{color:var(--muted);margin-bottom:16px;}
   .stmt .imgwrap{position:relative;}
   .stmt img{width:100%;height:520px;object-fit:cover;border-radius:4px;}
-  .stmt .tag{position:absolute;left:-26px;bottom:34px;background:var(--amber);color:#1a1205;padding:20px 26px;border-radius:2px;max-width:200px;}
+  .stmt .tag{position:absolute;left:-26px;top:28px;background:var(--amber);color:#1a1205;padding:20px 26px;border-radius:2px;max-width:200px;}
   .stmt .tag b{font-family:'Fraunces';font-size:2.4rem;font-weight:400;display:block;line-height:1;}
   .stmt .tag span{font-size:.8rem;font-weight:600;}
   @media(max-width:880px){.stmt .tag{left:16px;}}
@@ -131,6 +131,18 @@
   .ba .c img{width:100%;height:100%;object-fit:cover;}
   .ba .c .tag{position:absolute;top:20px;left:20px;background:rgba(9,15,26,.85);color:#fff;font-family:'Inter';text-transform:uppercase;font-weight:700;font-size:.72rem;letter-spacing:.16em;padding:8px 16px;border-radius:2px;}
   .ba .c.after .tag{background:var(--amber);color:#1a1205;}
+  /* draggable before/after slider */
+  .ba-slider{position:relative;width:100%;height:520px;border-radius:4px;overflow:hidden;user-select:none;touch-action:none;margin-bottom:16px;background:#d8d3ca;}
+  @media(max-width:640px){.ba-slider{height:360px;}}
+  .ba-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+  .ba-before{clip-path:inset(0 50% 0 0);}
+  .ba-divider{position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--amber);transform:translateX(-50%);pointer-events:none;box-shadow:0 0 0 1px rgba(9,15,26,.25);}
+  .ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--amber);color:#1a1205;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;box-shadow:0 4px 16px rgba(9,15,26,.4);}
+  .ba-tag{position:absolute;top:20px;font-family:'Inter';text-transform:uppercase;font-weight:700;font-size:.72rem;letter-spacing:.16em;padding:8px 16px;border-radius:2px;color:#fff;background:rgba(9,15,26,.85);pointer-events:none;z-index:2;}
+  .ba-tag.before{left:20px;}
+  .ba-tag.after{right:20px;background:var(--amber);color:#1a1205;}
+  .ba-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;}
+  .ba-hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font-size:.72rem;letter-spacing:.08em;color:#fff;background:rgba(9,15,26,.7);padding:6px 14px;border-radius:30px;pointer-events:none;z-index:2;}
 
   /* guarantee */
   .guar{background:var(--amber);color:#1a1205;text-align:center;}
@@ -305,6 +317,16 @@
 <section class="pad"><div class="wrap">
   <div class="shead">
     <div class="l"><span class="idx">(04) — The difference</span><h2 style="margin-top:16px;">Before &amp; <em>after</em>.</h2></div>
+    <div class="r">Drag the slider to see the transformation.</div>
+  </div>
+  <div class="ba-slider reveal" id="baSlider">
+    <img class="ba-img ba-after" src="/kenyon-roofing/images/roof-finished.jpeg" alt="After — brand new tiled roof">
+    <img class="ba-img ba-before" src="/kenyon-roofing/images/roof-inprogress.jpeg" alt="Before — old roof stripped off">
+    <div class="ba-divider" id="baDiv"><div class="ba-knob">‹ ›</div></div>
+    <span class="ba-tag before">Before</span>
+    <span class="ba-tag after">After</span>
+    <span class="ba-hint" id="baHint">◄ Drag to compare ►</span>
+    <input type="range" min="0" max="100" value="50" id="baRange" class="ba-range" aria-label="Slide to compare before and after">
   </div>
   <div class="ba">
     <div class="c reveal"><img src="/kenyon-roofing/images/loft-before.jpeg" alt="Loft before conversion"><span class="tag">Before</span></div>
@@ -396,6 +418,10 @@
 <div class="mbar"><a href="tel:07541836665">Call us</a><a class="quote" href="#contact">Free quote</a></div>
 
 <script>
+  (function(){var r=document.getElementById('baRange'),b=document.querySelector('.ba-before'),d=document.getElementById('baDiv'),h=document.getElementById('baHint');if(!r||!b)return;
+    function upd(){var v=r.value;b.style.clipPath='inset(0 '+(100-v)+'% 0 0)';d.style.left=v+'%';}
+    r.addEventListener('input',function(){if(h){h.style.opacity='0';}upd();});
+    upd();})();
   var f=document.getElementById('ctForm');
   if(f){ f.addEventListener('submit',function(e){ e.preventDefault(); f.style.display='none'; document.getElementById('ctDone').style.display='block'; }); }
   (function(){var done=false;var s=document.querySelector('.band');if(!s||!window.IntersectionObserver)return;

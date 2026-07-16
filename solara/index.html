@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solara Estates — Real Estate Agency in Malta</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500;1,6..96,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#123a5c;--navy-s:#1a2c40;--gold:#c67a5a;--gold-d:#b26647;--cream:#f6f8fa;--ink:#1c2733;--muted:#6c7683;--line:#e4e8ed;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.65;overflow-x:hidden;}
+  h1,h2,h3{font-family:'Bodoni Moda',Georgia,serif;font-weight:600;line-height:1.13;color:var(--navy);letter-spacing:-.005em;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 26px;}
+  .btn{display:inline-block;background:var(--gold);color:#fff;padding:14px 30px;border-radius:7px;font-weight:600;font-size:.92rem;letter-spacing:.01em;transition:.25s;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(198,122,90,.28);}
+  .btn:hover{background:var(--gold-d);transform:translateY(-2px);box-shadow:0 10px 26px rgba(198,122,90,.38);}
+  .btn-ghost{background:transparent;border:1.5px solid rgba(255,255,255,.55);color:#fff;box-shadow:none;}
+  .btn-ghost:hover{background:#fff;color:var(--navy);}
+  .eyebrow{text-transform:uppercase;letter-spacing:.24em;font-size:.72rem;color:var(--gold);font-weight:700;}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+  .reveal.d1{transition-delay:.1s;}.reveal.d2{transition-delay:.2s;}.reveal.d3{transition-delay:.3s;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;transition:.35s;}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:82px;}
+  .logo{font-family:'Bodoni Moda',serif;font-size:1.55rem;font-weight:700;color:#fff;letter-spacing:.02em;transition:.35s;}
+  .logo span{color:var(--gold);}
+  .nav-links{display:flex;gap:32px;font-size:.9rem;font-weight:500;color:rgba(255,255,255,.92);transition:.35s;}
+  .nav-links a{position:relative;}
+  .nav-links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--gold);transition:.25s;}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{display:flex;align-items:center;gap:20px;}
+  .nav-phone{font-weight:600;color:#fff;font-size:.9rem;transition:.35s;}
+  nav.scrolled{background:rgba(255,255,255,.98);box-shadow:0 4px 24px rgba(16,30,46,.08);}
+  nav.scrolled .nav-in{height:70px;}
+  nav.scrolled .logo{color:var(--navy);}
+  nav.scrolled .nav-links{color:var(--ink);}
+  nav.scrolled .nav-phone{color:var(--navy);}
+  @media(max-width:880px){.nav-links,.nav-phone{display:none;}}
+
+  .hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;color:#fff;overflow:hidden;}
+  .hero .bg{position:absolute;inset:0;background:#123a5c url('https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1600&q=80') center/cover;animation:kb 26s ease-in-out infinite alternate;}
+  .hero .bg::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(10,18,28,.5),rgba(10,18,28,.68));}
+  @keyframes kb{from{transform:scale(1)}to{transform:scale(1.12)}}
+  .hero .in{position:relative;z-index:2;}
+  .hero .eyebrow{margin-bottom:20px;display:block;color:var(--gold);}
+  .hero h1{color:#fff;font-size:clamp(2.2rem,5vw,4rem);font-weight:600;max-width:840px;margin-bottom:22px;text-shadow:0 2px 24px rgba(0,0,0,.3);}
+  .hero h1 em{font-style:italic;color:var(--gold);font-weight:500;}
+  .hero p{font-size:1.18rem;max-width:580px;color:rgba(255,255,255,.92);font-weight:300;margin-bottom:34px;text-shadow:0 1px 12px rgba(0,0,0,.3);}
+  .scrolldown{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.75);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;animation:bob 2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+  .search{background:#fff;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.3);padding:15px;display:flex;gap:11px;flex-wrap:wrap;max-width:840px;}
+  .search .f{flex:1;min-width:135px;}
+  .search label{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;margin:0 0 5px 4px;}
+  .search select,.search input{width:100%;border:1px solid var(--line);border-radius:7px;padding:12px 13px;font-family:inherit;font-size:.9rem;color:var(--ink);background:#fbfaf7;}
+  .search .btn{align-self:flex-end;height:46px;}
+
+  .stats{background:var(--navy);color:#fff;}
+  .stats .row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:52px 0;text-align:center;}
+  @media(max-width:700px){.stats .row{grid-template-columns:repeat(2,1fr);gap:34px;}}
+  .stats .num{font-family:'Bodoni Moda',serif;font-size:2.9rem;font-weight:700;color:#eaa47f;}
+  .stats .lbl{font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.7);margin-top:6px;}
+
+  section.pad{padding:100px 0;}
+  .center{text-align:center;max-width:660px;margin:0 auto 58px;}
+  .center h2{font-size:clamp(1.9rem,3.5vw,2.6rem);margin:12px 0 14px;}
+  .center p{color:var(--muted);}
+  .rule{width:56px;height:3px;background:var(--gold);margin:20px auto 0;}
+
+  .props{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+  @media(max-width:880px){.props{grid-template-columns:1fr;}}
+  .card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 26px rgba(16,30,46,.07);transition:transform .3s,box-shadow .3s;cursor:pointer;}
+  .card .more{margin-top:12px;font-size:.8rem;font-weight:700;color:var(--gold);letter-spacing:.02em;}
+  .card:hover .more{text-decoration:underline;}
+  .cform{max-width:520px;margin:28px auto 0;display:flex;flex-direction:column;gap:12px;text-align:left;}
+  .cform .crow{display:flex;gap:12px;}
+  .cform input,.cform textarea{width:100%;padding:13px 15px;border-radius:10px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font-family:inherit;font-size:.92rem;}
+  .cform input::placeholder,.cform textarea::placeholder{color:rgba(255,255,255,.72);}
+  .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.18);}
+  .cform textarea{resize:vertical;}
+  .cform button{margin-top:4px;align-self:flex-start;}
+  .cdone{max-width:520px;margin:28px auto 0;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);border-radius:12px;padding:20px 22px;color:#fff;font-weight:600;}
+  @media(max-width:520px){.cform .crow{flex-direction:column;}}
+  .card:hover{transform:translateY(-8px);box-shadow:0 22px 50px rgba(16,30,46,.16);}
+  .card .imgwrap{height:230px;overflow:hidden;position:relative;}
+  .card .img{width:100%;height:100%;background-size:cover;background-position:center;transition:transform .6s ease;}
+  .card:hover .img{transform:scale(1.08);}
+  .card .tag{position:absolute;top:15px;left:15px;background:var(--navy);color:#fff;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600;padding:6px 12px;border-radius:5px;}
+  .card .body{padding:22px 24px 26px;}
+  .card .price{font-family:'Bodoni Moda',serif;font-size:1.6rem;color:var(--navy);font-weight:700;}
+  .card h3{font-size:1.14rem;margin:7px 0 12px;}
+  .card .feat{display:flex;gap:18px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:14px;}
+  .card .feat span{display:flex;align-items:center;gap:6px;}
+
+  .serv-sec{background:var(--cream);}
+  .serv{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
+  @media(max-width:880px){.serv{grid-template-columns:repeat(2,1fr);}}
+  .serv .it{background:#fff;border-radius:14px;padding:34px 26px;text-align:center;transition:.3s;}
+  .serv .it:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,30,46,.1);}
+  .serv .ic{width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,rgba(198,122,90,.18),rgba(198,122,90,.06));color:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.5rem;}
+  .serv h3{font-size:1.1rem;margin-bottom:9px;}
+  .serv p{font-size:.88rem;color:var(--muted);}
+
+  .hoods{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  @media(max-width:880px){.hoods{grid-template-columns:repeat(2,1fr);}}
+  .hood{position:relative;height:230px;border-radius:12px;overflow:hidden;color:#fff;display:flex;align-items:flex-end;}
+  .hood .img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s;}
+  .hood:hover .img{transform:scale(1.09);}
+  .hood::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(10,18,28,.8));}
+  .hood .t{position:relative;z-index:2;padding:18px;font-family:'Bodoni Moda',serif;font-size:1.15rem;font-weight:600;}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  @media(max-width:880px){.split{grid-template-columns:1fr;gap:34px;}}
+  .split img{width:100%;border-radius:16px;height:460px;object-fit:cover;box-shadow:0 20px 50px rgba(16,30,46,.14);}
+  .why-list{list-style:none;margin-top:22px;}
+  .why-list li{display:flex;gap:16px;margin-bottom:22px;}
+  .why-list .n{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;font-family:'Bodoni Moda',serif;}
+  .why-list b{color:var(--navy);font-size:1.02rem;}
+  .why-list p{color:var(--muted);font-size:.92rem;margin-top:3px;}
+
+  .test-sec{background:var(--cream);}
+  .tests{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media(max-width:880px){.tests{grid-template-columns:1fr;}}
+  .test{background:#fff;border-radius:14px;padding:32px 28px;box-shadow:0 6px 22px rgba(16,30,46,.06);color:inherit;display:block;transition:box-shadow .25s,transform .25s;} .test:hover{box-shadow:0 16px 40px rgba(16,30,46,.14);transform:translateY(-4px);}
+  .test .stars{color:var(--gold);letter-spacing:.15em;margin-bottom:14px;}
+  .test p{font-size:.96rem;color:var(--ink);font-style:italic;line-height:1.7;}
+  .test .who{margin-top:16px;font-weight:600;color:var(--navy);font-size:.9rem;}
+  .test .who span{display:block;color:var(--muted);font-weight:400;font-size:.82rem;}
+
+  .ai-sec{background:var(--navy);color:#fff;overflow:hidden;}
+  .ai-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;}
+  @media(max-width:880px){.ai-grid{grid-template-columns:1fr;gap:36px;}}
+  .ai-sec h2{color:#fff;font-size:clamp(1.9rem,3.5vw,2.6rem);margin:14px 0 16px;}
+  .ai-sec p{color:rgba(255,255,255,.82);margin-bottom:22px;}
+  .ai-sec .chk{list-style:none;}
+  .ai-sec .chk li{margin-bottom:12px;padding-left:30px;position:relative;color:rgba(255,255,255,.9);}
+  .ai-sec .chk li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-weight:700;}
+  .ai-phone{justify-self:center;width:270px;background:#05101c;border-radius:34px;padding:12px;box-shadow:0 30px 70px rgba(0,0,0,.5);}
+  .ai-phone .scr{background:#fff;border-radius:26px;overflow:hidden;}
+  .ai-phone .ph-h{background:var(--navy);color:#fff;padding:14px 16px;}
+  .ai-phone .ph-h b{font-size:.9rem;}.ai-phone .ph-h small{opacity:.7;font-size:.66rem;display:block;}
+  .ai-phone .ph-b{background:var(--cream);padding:14px;display:flex;flex-direction:column;gap:9px;min-height:250px;}
+  .ai-phone .mu{align-self:flex-end;background:var(--navy);color:#fff;padding:8px 11px;border-radius:12px;border-bottom-right-radius:3px;font-size:.72rem;max-width:82%;}
+  .ai-phone .mb{align-self:flex-start;background:#fff;color:var(--ink);border:1px solid var(--line);padding:8px 11px;border-radius:12px;border-bottom-left-radius:3px;font-size:.72rem;max-width:86%;}
+
+  .cta-sec{position:relative;color:#fff;text-align:center;overflow:hidden;}
+  .cta-sec .bg{position:absolute;inset:0;background-color:#0a141e;background-image:linear-gradient(rgba(10,18,28,.82),rgba(10,18,28,.9)),url('https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center;}
+  .cta-sec .in{position:relative;z-index:2;}
+  .cta-sec h2{color:#fff;font-size:clamp(2rem,4vw,2.8rem);margin-bottom:16px;}
+  .cta-sec p{color:rgba(255,255,255,.82);max-width:540px;margin:0 auto 30px;}
+
+  footer{background:#0a141e;color:rgba(255,255,255,.6);padding:52px 0;font-size:.85rem;}
+  .foot-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+  footer .logo{color:#fff;font-size:1.35rem;}
+  footer a:hover{color:var(--gold);}
+  .demo-ribbon{background:var(--gold);color:#fff;text-align:center;font-size:.8rem;font-weight:600;padding:8px 16px;letter-spacing:.01em;}
+  .demo-ribbon a{color:#fff;text-decoration:underline;}
+
+  .pa-btn{position:fixed;bottom:26px;right:26px;width:64px;height:64px;border-radius:50%;background:var(--gold);color:#fff;border:none;cursor:pointer;z-index:600;box-shadow:0 12px 32px rgba(198,122,90,.5);font-size:26px;display:flex;align-items:center;justify-content:center;animation:pulse 2.6s infinite;}
+  @keyframes pulse{0%{box-shadow:0 12px 32px rgba(198,122,90,.5),0 0 0 0 rgba(198,122,90,.4)}70%{box-shadow:0 12px 32px rgba(198,122,90,.5),0 0 0 16px rgba(198,122,90,0)}100%{box-shadow:0 12px 32px rgba(198,122,90,.5),0 0 0 0 rgba(198,122,90,0)}}
+  .pa-btn:hover{transform:scale(1.06);}
+  .pa-panel{position:fixed;bottom:104px;right:26px;width:376px;max-width:calc(100vw - 34px);height:530px;max-height:calc(100vh - 150px);background:#fff;border-radius:18px;overflow:hidden;z-index:600;display:none;flex-direction:column;box-shadow:0 28px 70px rgba(0,0,0,.34);}
+  .pa-panel.open{display:flex;animation:rise .3s ease;}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .pa-head{background:var(--navy);color:#fff;padding:17px 19px;}
+  .pa-head b{font-size:1.04rem;}
+  .pa-head span{display:block;font-size:.74rem;opacity:.72;margin-top:2px;}
+  .pa-thread{flex:1;overflow-y:auto;padding:17px;display:flex;flex-direction:column;gap:11px;background:var(--cream);}
+  .pa-msg{max-width:84%;padding:10px 14px;border-radius:15px;font-size:.9rem;line-height:1.5;white-space:pre-wrap;}
+  .pa-bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;}
+  .pa-me{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:4px;}
+  .pa-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;}
+  .pa-chip{background:#fff;border:1.5px solid var(--gold);color:var(--gold-d);font-family:inherit;font-size:.84rem;font-weight:600;padding:8px 13px;border-radius:20px;cursor:pointer;transition:.2s;}
+  .pa-chip:hover{background:var(--gold);color:#fff;}
+  .pa-bar{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:#fff;}
+  .pa-bar input{flex:1;border:1px solid var(--line);border-radius:30px;padding:11px 15px;font-family:inherit;font-size:.9rem;outline:none;}
+  .pa-bar button{border:none;background:var(--gold);color:#fff;border-radius:30px;padding:0 17px;cursor:pointer;font-size:1rem;}
+  .pa-foot{text-align:center;font-size:.66rem;color:var(--muted);padding:6px;background:#fff;}
+</style>
+</head>
+<body>
+
+  <div class="demo-ribbon">Demo site built by Floryne Pierson — your agency's version uses your own branding, listings &amp; contacts. <a href="/immo/en">See the tech →</a></div>
+
+  <nav id="nav"><div class="wrap nav-in">
+    <div class="logo">Solara<span>·</span>Estates</div>
+    <div class="nav-links">
+      <a href="#listings">Buy</a><a href="#listings">Rent</a><a href="#services">Sell</a>
+      <a href="#services">Invest</a><a href="#contact">Valuation</a><a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <span class="nav-phone">+356 2010 3000</span>
+      <a href="#contact" class="btn">Value my property</a>
+    </div>
+  </div></nav>
+
+  <header class="hero">
+    <div class="bg"></div>
+    <div class="wrap in">
+      <span class="eyebrow">Independent estate agency · Malta</span>
+      <h1>Your property journey in Malta, <em>in good hands.</em></h1>
+      <p>Buying, selling, letting and investing — personal guidance from the first viewing to the keys in your hand.</p>
+      <div class="search">
+        <div class="f"><label>Looking to</label><select><option>Buy</option><option>Rent</option><option>Invest</option></select></div>
+        <div class="f"><label>Area</label><select><option>Malta &amp; Gozo</option><option>Sliema</option><option>St Julian's</option><option>Valletta</option><option>Gozo</option></select></div>
+        <div class="f"><label>Max budget</label><input type="text" placeholder="e.g. €350,000"></div>
+        <button class="btn">Search</button>
+      </div>
+    </div>
+    <div class="scrolldown">Scroll ↓</div>
+  </header>
+
+  <section class="stats"><div class="wrap"><div class="row">
+    <div><div class="num">+15</div><div class="lbl">Years of experience</div></div>
+    <div><div class="num" data-count="120">0</div><div class="lbl">Google reviews</div></div>
+    <div><div class="num">Lettings</div><div class="lbl">Our specialty</div></div>
+    <div><div class="num">Malta</div><div class="lbl">&amp; Gozo</div></div>
+  </div></div></section>
+
+  <section class="pad" id="listings"><div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Featured listings</span>
+      <h2>A selection of homes across Malta</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="props">
+      <div class="card reveal d1" data-msg="Hi, I'm interested in the Apartment in Sliema (€385,000).">
+        <div class="imgwrap"><div class="img" style="background-image:url('/prop1.jpg')"></div><span class="tag">For sale</span></div>
+        <div class="body"><div class="price">€385,000</div><h3>Apartment · Sliema</h3>
+          <div class="feat"><span>◫ 95 m²</span><span>⌂ 2 bed</span><span>❋ Sea views</span></div>
+          <div class="more">View property →</div></div>
+      </div>
+      <div class="card reveal d2" data-msg="Hi, I'm interested in the Townhouse in Valletta (€520,000).">
+        <div class="imgwrap"><div class="img" style="background-image:url('/prop2.jpg')"></div><span class="tag">For sale</span></div>
+        <div class="body"><div class="price">€520,000</div><h3>Townhouse · Valletta</h3>
+          <div class="feat"><span>◫ 140 m²</span><span>⌂ 3 bed</span><span>✦ Character</span></div>
+          <div class="more">View property →</div></div>
+      </div>
+      <div class="card reveal d3" data-msg="Hi, I'm interested in the St Julian's apartment (€295,000) as an investment.">
+        <div class="imgwrap"><div class="img" style="background-image:url('/prop3.jpg')"></div><span class="tag">Investment</span></div>
+        <div class="body"><div class="price">€295,000</div><h3>Apartment · St Julian's</h3>
+          <div class="feat"><span>◫ 70 m²</span><span>⌂ 1 bed</span><span>↗ Rental yield</span></div>
+          <div class="more">View property →</div></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="pad serv-sec" id="services"><div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Our services</span>
+      <h2>Guidance from start to finish</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="serv">
+      <div class="it reveal d1"><div class="ic">⌂</div><h3>Selling</h3><p>An honest valuation and the right exposure for your property.</p></div>
+      <div class="it reveal d1"><div class="ic">🔑</div><h3>Letting</h3><p>Short and long lets, tenancies handled from A to Z.</p></div>
+      <div class="it reveal d2"><div class="ic">◷</div><h3>Property management</h3><p>We handle everything — you simply collect your rent.</p></div>
+      <div class="it reveal d2"><div class="ic">↗</div><h3>Investment</h3><p>High-yield properties across Malta and Gozo.</p></div>
+    </div>
+  </div></section>
+
+  <section class="pad"><div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Malta &amp; Gozo</span>
+      <h2>The areas we know best</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="hoods">
+      <div class="hood reveal d1"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=600&q=80')"></div><div class="t">Sliema</div></div>
+      <div class="hood reveal d1"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80')"></div><div class="t">St Julian's</div></div>
+      <div class="hood reveal d2"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=600&q=80')"></div><div class="t">Valletta</div></div>
+      <div class="hood reveal d2"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&q=80')"></div><div class="t">Gozo</div></div>
+    </div>
+  </div></section>
+
+  <section class="pad"><div class="wrap split">
+    <img class="reveal" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Interior" onerror="this.style.background='#e8e3d9'">
+    <div class="reveal d1">
+      <span class="eyebrow">Why Solara Estates</span>
+      <h2 style="font-size:2.2rem;margin-top:12px;">An independent agency, on a human scale.</h2>
+      <ul class="why-list">
+        <li><span class="n">1</span><div><b>A first meeting, just for you</b><p>We take the time to understand your property and your plans, with no obligation.</p></div></li>
+        <li><span class="n">2</span><div><b>Local expertise across Malta</b><p>A close knowledge of the market and every area, from Sliema to Gozo.</p></div></li>
+        <li><span class="n">3</span><div><b>One dedicated contact</b><p>The same person follows you, from first hello to signing day.</p></div></li>
+        <li><span class="n">4</span><div><b>An assistant available 24/7</b><p>A question in the evening or at the weekend? Our assistant replies at any hour.</p></div></li>
+      </ul>
+    </div>
+  </div></section>
+
+  <section class="pad test-sec"><div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">They trusted us</span>
+      <h2>What our clients say</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="tests">
+      <div class="test reveal d1"><div class="stars">★★★★★</div><p>“A wonderful experience. Our agent was available and responsive, with clear answers throughout. I recommend Solara without hesitation.”</p><div class="who">James <span>Google review · 5 months ago</span></div></div>
+      <div class="test reveal d2"><div class="stars">★★★★★</div><p>“Thank you to the whole team — always attentive, available and quick to reply. I wouldn't hesitate to use their services again.”</p><div class="who">Marija <span>Google review · 5 months ago</span></div></div>
+      <div class="test reveal d3"><div class="stars">★★★★★</div><p>“A brilliant agency. Very professional from the first phone call to signing the lease. Smooth and pleasant throughout.”</p><div class="who">Andrea <span>Google review · 5 months ago</span></div></div>
+    </div>
+  </div></section>
+
+  <section class="pad ai-sec"><div class="wrap ai-grid">
+    <div class="reveal">
+      <span class="eyebrow">New · Online assistant</span>
+      <h2>A virtual adviser, day and night.</h2>
+      <p>Most of your future buyers browse the site in the evening, at the weekend or from abroad. Our assistant answers them instantly and passes their details to the team — so you never lose an enquiry again.</p>
+      <ul class="chk">
+        <li>Answers questions on listings, fees and paperwork</li>
+        <li>Captures prospect details 24/7</li>
+        <li>Even when the office is closed, no enquiry slips away</li>
+      </ul>
+      <p style="margin-top:22px;font-size:.9rem;color:var(--gold);">→ Try it: tap the bubble at the bottom right.</p>
+    </div>
+    <div class="ai-phone reveal d1">
+      <div class="scr">
+        <div class="ph-h"><b>Solara Estates · Assistant</b><small>● online 24/7</small></div>
+        <div class="ph-b">
+          <div class="mu">Hi, any studios to rent?</div>
+          <div class="mb">Of course! What's your budget and preferred area? I'll connect you with an adviser.</div>
+          <div class="mu">€900, Sliema</div>
+          <div class="mb">Perfect ✅ Your name and a number, and an adviser will call you back?</div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="pad cta-sec" id="contact">
+    <div class="bg"></div>
+    <div class="wrap in">
+      <h2 class="reveal">A property project? Let's talk.</h2>
+      <p class="reveal d1">Personal advice for your property plans, with no obligation. Write to us or drop by the office — Tower Road, Sliema, Malta.</p>
+      <form class="cform reveal d2" id="cform">
+        <div class="crow"><input name="name" placeholder="Your name" required><input name="tel" placeholder="Phone" required></div>
+        <input name="email" type="email" placeholder="Email" required>
+        <textarea name="msg" rows="3" placeholder="Your project (buying, selling, letting, valuation…)"></textarea>
+        <button type="submit" class="btn">Send my enquiry</button>
+      </form>
+      <div class="cdone" id="cdone" style="display:none;">Thank you ✅ Your enquiry has been sent — a Solara Estates adviser will be in touch very soon.</div>
+    </div>
+  </section>
+
+  <footer><div class="wrap foot-in">
+    <div>
+      <div class="logo">Solara<span style="color:var(--gold)">·</span>Estates</div>
+      <p style="margin-top:12px;max-width:340px;">Independent estate agency in Malta — buying, selling, letting and investment across Malta &amp; Gozo.</p>
+      <p style="margin-top:14px;font-size:.78rem;color:rgba(255,255,255,.4);">Demo site · built by Floryne Pierson · fictional agency &amp; data.</p>
+    </div>
+    <div style="font-size:.85rem;line-height:1.9;">
+      Tower Road, Sliema SLM 1601, Malta<br>
+      +356 2010 3000<br>
+      <a href="mailto:hello@solara-estates.mt" style="color:var(--gold);text-decoration:none;">hello@solara-estates.mt</a><br>
+      Mon–Fri 9:00–18:00 · Sat 9:00–13:00
+    </div>
+  </div></footer>
+
+  <button class="pa-btn" id="paBtn" aria-label="Open the assistant">
+    <svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4 3.2V16.5A1.5 1.5 0 0 1 3.5 15V7A1.5 1.5 0 0 1 4 5.5z"/>
+      <circle cx="8.5" cy="11" r="1" fill="currentColor" stroke="none"/>
+      <circle cx="12" cy="11" r="1" fill="currentColor" stroke="none"/>
+      <circle cx="15.5" cy="11" r="1" fill="currentColor" stroke="none"/>
+    </svg>
+  </button>
+  <div class="pa-panel" id="paPanel">
+    <div class="pa-head"><b>Solara Estates · Assistant</b><span>● online 24/7</span></div>
+    <div class="pa-thread" id="paThread"></div>
+    <div class="pa-bar"><input id="paInput" placeholder="A question? A project?"><button id="paSend">➤</button></div>
+    <div class="pa-foot">AI assistant — replies at any hour</div>
+  </div>
+
+  <script>
+    var nav=document.getElementById('nav');
+    window.addEventListener('scroll',function(){ nav.classList.toggle('scrolled', window.scrollY>60); });
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+    var counted=false;
+    var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!counted){counted=true;document.querySelectorAll('.num').forEach(function(n){
+      var target=parseFloat(n.getAttribute('data-count')),suf=n.getAttribute('data-suffix')||'',dec=target%1!==0,steps=45,i=0; if(isNaN(target)){return;}
+      var t=setInterval(function(){i++;var v=target*(i/steps);n.textContent=(dec?v.toFixed(1):Math.round(v))+suf;if(i>=steps){n.textContent=(dec?target.toFixed(1):target)+suf;clearInterval(t);}},22);
+    });}});},{threshold:.4});
+    io2.observe(document.querySelector('.stats'));
+    var thread=document.getElementById('paThread'),input=document.getElementById('paInput'),sendB=document.getElementById('paSend'),btn=document.getElementById('paBtn'),panel=document.getElementById('paPanel'),greeted=false;
+    var lead={type:'',budget:'',area:''},awaitingContact=false;
+    function bub(t,w){var d=document.createElement('div');d.className='pa-msg '+(w==='me'?'pa-me':'pa-bot');d.textContent=t;thread.appendChild(d);thread.scrollTop=thread.scrollHeight;}
+    function say(t){setTimeout(function(){bub(t,'bot');},300);}
+    function clearChips(){Array.prototype.forEach.call(thread.querySelectorAll('.pa-chips'),function(c){c.remove();});}
+    function chips(opts){clearChips();setTimeout(function(){var w=document.createElement('div');w.className='pa-chips';opts.forEach(function(o){var b=document.createElement('button');b.className='pa-chip';b.textContent=o.label;b.onclick=function(){clearChips();bub(o.label,'me');awaitingContact=false;setTimeout(o.go,350);};w.appendChild(b);});thread.appendChild(w);thread.scrollTop=thread.scrollHeight;},420);}
+    function menu(){chips([
+      {label:'🔑 Rent a property',go:function(){lead={type:'Letting',budget:'',area:''};say('Letting is our specialty 🙂 Roughly what monthly budget?');chips([
+        {label:'≤ €800',go:function(){lead.budget='≤ €800/mo';area();}},
+        {label:'€800 – 1,200',go:function(){lead.budget='€800–1,200/mo';area();}},
+        {label:'€1,200 – 1,800',go:function(){lead.budget='€1,200–1,800/mo';area();}},
+        {label:'€1,800+',go:function(){lead.budget='€1,800+/mo';area();}}
+      ]);}},
+      {label:'🏠 Buy',go:function(){lead={type:'Purchase',budget:'',area:''};budgetBuy();}},
+      {label:'📈 Invest',go:function(){lead={type:'Investment',budget:'',area:''};say('Great 🙂 What budget are you considering?');budgetBuy(true);}},
+      {label:'💰 Value my property',go:function(){lead={type:'Valuation',budget:'',area:''};say('Of course — an adviser will value your property with no obligation.');area();}},
+      {label:'🕐 Opening hours',go:function(){say('Our hours: Monday to Friday 9:00–18:00, Saturday 9:00–13:00. But here I stay reachable 24/7 🙂');setTimeout(function(){say('Anything else?');menu();},900);}}
+    ]);}
+    function budgetBuy(skip){if(!skip)say('Roughly what budget?');chips([
+      {label:'≤ €200,000',go:function(){lead.budget='≤ €200,000';area();}},
+      {label:'€200 – 350k',go:function(){lead.budget='€200–350k';area();}},
+      {label:'€350 – 550k',go:function(){lead.budget='€350–550k';area();}},
+      {label:'€550k+',go:function(){lead.budget='€550k+';area();}}
+    ]);}
+    function area(){say('Which area?');chips([
+      {label:'Sliema',go:function(){lead.area='Sliema';contact();}},
+      {label:"St Julian's",go:function(){lead.area="St Julian's";contact();}},
+      {label:'Valletta',go:function(){lead.area='Valletta';contact();}},
+      {label:'Gozo',go:function(){lead.area='Gozo';contact();}},
+      {label:'Other area',go:function(){lead.area='another area';contact();}}
+    ]);}
+    function contact(){var r=[lead.type];if(lead.budget)r.push(lead.budget);if(lead.area)r.push(lead.area);say('Perfect, to recap: '+r.join(' · ')+'. Leave me your name and a number, and an adviser will get back to you with matching properties 🙂');setTimeout(function(){awaitingContact=true;input.focus();},600);}
+    function openPanel(){if(!panel.classList.contains('open')){panel.classList.add('open');}if(!greeted){greeted=true;bub("Hi 👋 I'm the Solara Estates assistant. How can I help you today?",'bot');menu();}input.focus();}
+    btn.onclick=function(){if(panel.classList.contains('open')){panel.classList.remove('open');}else{openPanel();}};
+    function nameFrom(t){var w=t.match(/[A-Za-zÀ-ÖØ-öø-ÿ'’\-]{2,}/g)||[];var stop=['im','i','my','name','is','hi','hello','hey','this','yes','no','its','it','call','me','the','and','please','thanks','thank','number','phone','mobile','tel'];for(var k=0;k<w.length;k++){if(stop.indexOf(w[k].toLowerCase())===-1)return w[k].charAt(0).toUpperCase()+w[k].slice(1).toLowerCase();}return '';}
+    function ask(){var t=input.value.trim();if(!t)return;input.value='';bub(t,'me');if(awaitingContact){awaitingContact=false;var p=nameFrom(t);say('Thank you'+(p?' '+p:'')+' ✅ That's noted — a Solara Estates adviser will get back to you very soon. Have a lovely day!');}else{say('I can guide you in one tap 🙂 Choose below:');menu();}}
+    sendB.onclick=ask;input.addEventListener('keydown',function(e){if(e.key==='Enter')ask();});
+    document.querySelectorAll('.card[data-msg]').forEach(function(c){c.addEventListener('click',function(){var m=c.getAttribute('data-msg');openPanel();setTimeout(function(){clearChips();bub(m,'me');say('Excellent choice 👍 This property is available. Leave me your name and a number, and an adviser will get back to you shortly to arrange a viewing.');setTimeout(function(){awaitingContact=true;input.focus();},700);},greeted?80:500);});});
+    var cf=document.getElementById('cform');if(cf){cf.addEventListener('submit',function(e){e.preventDefault();cf.style.display='none';document.getElementById('cdone').style.display='block';});}
+  </script>
+</body>
+</html>

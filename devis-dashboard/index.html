@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quotation — Online valuation tool · Floryne Pierson</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#161a1d;--paper:#f4f1ea;--card:#fffdf9;--gold:#b0895a;--gold-d:#98723f;--line:#e7e0d4;--muted:#8a8072;--soft:#6b6357;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;padding:20px 16px 28px;}
+  .serif{font-family:'Fraunces',Georgia,serif;}
+  .sheet{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(60,45,25,.08);padding:44px 46px 40px;}
+  .toolbar{max-width:760px;margin:0 auto 14px;display:flex;justify-content:flex-end;align-items:center;gap:14px;flex-wrap:wrap;}
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--card);}
+  .lang button{background:none;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.82rem;padding:8px 16px;color:var(--muted);}
+  .lang button.active{background:var(--gold);color:#fff;}
+  .edithint{max-width:760px;margin:0 auto 14px;font-size:.82rem;color:var(--gold-d);text-align:center;}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:26px;}
+  .brand b{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;display:block;}
+  .brand span{font-size:.82rem;color:var(--muted);}
+  .brand .c{margin-top:8px;font-size:.82rem;color:var(--soft);line-height:1.7;}
+  .brand .c a{color:var(--gold-d);text-decoration:none;}
+  .qmeta{text-align:right;font-size:.84rem;color:var(--soft);}
+  .qmeta .qt{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--gold-d);font-weight:600;display:block;margin-bottom:6px;}
+  .qmeta div{margin-bottom:3px;}
+  [contenteditable]{outline:none;border-bottom:1px dashed var(--gold);padding:0 3px;min-width:34px;display:inline-block;}
+  [contenteditable]:focus{background:rgba(176,137,90,.08);}
+  .to{margin-bottom:24px;font-size:.92rem;}
+  .to .lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);font-weight:600;margin-bottom:4px;}
+  .to b{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;}
+  .intro{font-size:.92rem;color:var(--soft);margin-bottom:26px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:8px;}
+  th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:600;padding:0 0 10px;border-bottom:1.5px solid var(--line);}
+  th.r,td.r{text-align:right;}
+  td{padding:14px 0;border-bottom:1px solid var(--line);font-size:.92rem;vertical-align:top;}
+  td .d{font-weight:600;}
+  td .s{font-size:.82rem;color:var(--muted);margin-top:3px;}
+  .incl-tag{color:#2f8f5b;font-weight:600;}
+  .totals{margin:20px 0 6px;margin-left:auto;width:340px;}
+  .totals .row{display:flex;justify-content:space-between;font-size:.9rem;padding:6px 0;color:var(--soft);}
+  .totals .grand{border-top:1.5px solid var(--gold);margin-top:6px;padding-top:12px;font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600;color:var(--ink);}
+  .totals .grand span:last-child{color:var(--gold-d);}
+  .totals .sub{font-size:.8rem;color:var(--muted);text-align:right;margin-top:2px;}
+  .incl{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:26px 0;}
+  .incl h3{font-family:'Fraunces',serif;font-size:1.05rem;margin-bottom:10px;}
+  .incl ul{list-style:none;columns:2;column-gap:26px;}
+  @media(max-width:560px){.incl ul{columns:1;}}
+  .incl li{font-size:.86rem;color:var(--soft);padding:4px 0 4px 20px;position:relative;break-inside:avoid;}
+  .incl li::before{content:'✓';position:absolute;left:0;color:var(--gold-d);font-weight:700;}
+  .terms{font-size:.8rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--line);padding-top:20px;}
+  .terms b{color:var(--soft);}
+  .sign{display:flex;justify-content:space-between;gap:30px;margin-top:30px;flex-wrap:wrap;}
+  .sign .box{flex:1;min-width:200px;font-size:.8rem;color:var(--muted);}
+  .sign .line{border-bottom:1px solid var(--line);height:34px;margin-bottom:6px;}
+  .btnrow{max-width:760px;margin:18px auto 0;text-align:center;}
+  .pbtn{background:var(--gold);color:#fff;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.95rem;padding:13px 30px;border-radius:10px;box-shadow:0 8px 22px rgba(176,137,90,.3);}
+  @media print{body{background:#fff;padding:0;}.sheet{border:none;box-shadow:none;border-radius:0;max-width:100%;padding:10px 6px;}.edithint,.btnrow,.toolbar{display:none !important;}[contenteditable]{border-bottom:none;}}
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="lang">
+      <button data-lang="en" class="active">EN</button>
+      <button data-lang="fr">FR</button>
+    </div>
+  </div>
+  <div class="edithint" data-i18n="hint">✎ Pick the language, then click the dotted fields to fill in the client, date and amounts. Then “Save as PDF”.</div>
+
+  <div class="sheet">
+    <div class="top">
+      <div class="brand">
+        <b class="serif">Floryne Pierson</b>
+        <span data-i18n="brandsub">AI tools for estate agencies</span>
+        <div class="c">
+          <a href="https://florynepierson.com">florynepierson.com</a><br>
+          <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+        </div>
+      </div>
+      <div class="qmeta">
+        <span class="qt serif" data-i18n="qt">Quotation</span>
+        <div><span data-i18n="qn">No.</span> <span contenteditable="true">2026-001</span></div>
+        <div><span data-i18n="qdate">Date:</span> <span contenteditable="true">16 July 2026</span></div>
+        <div data-i18n="qvalid">Valid for 30 days</div>
+      </div>
+    </div>
+
+    <div class="to">
+      <div class="lbl" data-i18n="tolbl">Prepared for</div>
+      <b contenteditable="true">[ Client / agency name ]</b>
+    </div>
+
+    <p class="intro" data-i18n="intro">An instant online valuation tool for your website — visitors get an estimated value for their property in seconds, and you capture their details as a qualified seller lead, even outside office hours.</p>
+
+    <table>
+      <thead><tr><th data-i18n="thService">Service</th><th class="r" data-i18n="thAmount">Amount</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><div class="d" data-i18n="row1d">Online valuation tool — setup &amp; integration</div><div class="s" data-i18n="row1s">A branded “What's my property worth?” estimator embedded on your site, powered by a price model tuned to your local market.</div></td>
+          <td class="r"><div class="d">€<span id="setup" contenteditable="true">690</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="d" data-i18n="row2d">Seller-lead capture &amp; inbox / CRM connection</div><div class="s" data-i18n="row2s">Every estimate captures the visitor's name, email &amp; phone and sends the lead straight to you.</div></td>
+          <td class="r incl-tag" data-i18n="included">Included</td>
+        </tr>
+        <tr>
+          <td><div class="d"><span data-i18n="row3d">Hosting, model updates &amp; support</span> <span style="font-weight:400;color:var(--muted);" data-i18n="optional">(monthly)</span></div><div class="s" data-i18n="row3s">Hosting, quarterly model refresh with new market data &amp; priority support.</div></td>
+          <td class="r"><div class="d">€<span contenteditable="true">39</span><span style="font-weight:400;color:var(--muted);" data-i18n="permo">/mo</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="totals">
+      <div class="row"><span data-i18n="tTotalLbl">Setup total (one-off)</span><span>€<span contenteditable="true">690</span></span></div>
+      <div class="row"><span data-i18n="tDepLbl">50% deposit on order</span><span>€<span contenteditable="true">345</span></span></div>
+      <div class="row"><span data-i18n="tBalLbl">50% balance on delivery</span><span>€<span contenteditable="true">345</span></span></div>
+      <div class="grand"><span data-i18n="tMonthLbl">Monthly option</span><span>€39 <span data-i18n="permo2">/ mo</span></span></div>
+      <div class="sub" data-i18n="tsub">Payment in 2 instalments · further staggering available on request</div>
+    </div>
+
+    <div class="incl">
+      <h3 data-i18n="inclh3">What's included</h3>
+      <ul>
+        <li data-i18n="i1">Branded to your agency</li>
+        <li data-i18n="i2">Instant estimate from a few property details</li>
+        <li data-i18n="i3">Captures seller name, email &amp; phone</li>
+        <li data-i18n="i4">Works 24/7, even after hours</li>
+        <li data-i18n="i5">Lead sent straight to your inbox / CRM</li>
+        <li data-i18n="i6">Price model tuned to your local market</li>
+        <li data-i18n="i7">100% responsive (mobile &amp; tablet)</li>
+        <li data-i18n="i8">Simple, GDPR-friendly consent</li>
+        <li data-i18n="i9">2 rounds of revisions included</li>
+        <li data-i18n="i10">Guided setup from start to finish</li>
+      </ul>
+    </div>
+
+    <div class="terms">
+      <span data-i18n="termsPre"><b>Terms.</b> A 50% deposit confirms the order; the balance is due on delivery, before going live. Estimated setup time: </span><span contenteditable="true">1 to 2</span><span data-i18n="termsPost"> weeks after we agree on the fields and branding. The price model is indicative and for lead-generation, not a formal valuation. 2 rounds of revisions included. Hosting &amp; model updates are optional, monthly and commitment-free. Quote valid for 30 days.</span>
+      <div class="sign">
+        <div class="box"><div class="line"></div>Floryne Pierson</div>
+        <div class="box"><div class="line"></div><span data-i18n="signClient">The client (name, date &amp; “agreed”)</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="btnrow"><button class="pbtn" onclick="window.print()" data-i18n="printbtn">⬇ Save this quote as PDF</button></div>
+
+<script>
+  var T={
+    en:{
+      hint:'✎ Pick the language, then click the dotted fields to fill in the client, date and amounts. Then “Save as PDF”.',
+      brandsub:'AI tools for estate agencies',
+      qt:'Quotation', qn:'No.', qdate:'Date:', qvalid:'Valid for 30 days',
+      tolbl:'Prepared for',
+      intro:'An instant online valuation tool for your website — visitors get an estimated value for their property in seconds, and you capture their details as a qualified seller lead, even outside office hours.',
+      thService:'Service', thAmount:'Amount',
+      row1d:'Online valuation tool — setup & integration',
+      row1s:'A branded “What’s my property worth?” estimator embedded on your site, powered by a price model tuned to your local market.',
+      row2d:'Seller-lead capture & inbox / CRM connection',
+      row2s:'Every estimate captures the visitor’s name, email & phone and sends the lead straight to you.',
+      included:'Included',
+      row3d:'Hosting, model updates & support', optional:'(monthly)',
+      row3s:'Hosting, quarterly model refresh with new market data & priority support.',
+      permo:'/mo', permo2:'/ mo',
+      tTotalLbl:'Setup total (one-off)', tDepLbl:'50% deposit on order', tBalLbl:'50% balance on delivery',
+      tMonthLbl:'Monthly option', tsub:'Payment in 2 instalments · further staggering available on request',
+      inclh3:'What’s included',
+      i1:'Branded to your agency', i2:'Instant estimate from a few property details',
+      i3:'Captures seller name, email & phone', i4:'Works 24/7, even after hours',
+      i5:'Lead sent straight to your inbox / CRM', i6:'Price model tuned to your local market',
+      i7:'100% responsive (mobile & tablet)', i8:'Simple, GDPR-friendly consent',
+      i9:'2 rounds of revisions included', i10:'Guided setup from start to finish',
+      termsPre:'<b>Terms.</b> A 50% deposit confirms the order; the balance is due on delivery, before going live. Estimated setup time: ',
+      termsPost:' weeks after we agree on the fields and branding. The price model is indicative and for lead-generation, not a formal valuation. 2 rounds of revisions included. Hosting & model updates are optional, monthly and commitment-free. Quote valid for 30 days.',
+      signClient:'The client (name, date & “agreed”)',
+      printbtn:'⬇ Save this quote as PDF'
+    },
+    fr:{
+      hint:'✎ Choisissez la langue, puis cliquez les champs en pointillés pour remplir le client, la date et les montants. Puis « Enregistrer en PDF ».',
+      brandsub:'Outils IA pour agences immobilières',
+      qt:'Devis', qn:'N°', qdate:'Date :', qvalid:'Valable 30 jours',
+      tolbl:'Établi pour',
+      intro:'Un estimateur en ligne pour votre site — vos visiteurs obtiennent une estimation de leur bien en quelques secondes, et vous récupérez leurs coordonnées comme un lead vendeur qualifié, même en dehors des heures d’ouverture.',
+      thService:'Prestation', thAmount:'Montant',
+      row1d:'Estimateur en ligne — installation & intégration',
+      row1s:'Un estimateur « Combien vaut mon bien ? » à vos couleurs, intégré à votre site, propulsé par un modèle de prix calibré sur votre marché local.',
+      row2d:'Capture des leads vendeurs & connexion email / CRM',
+      row2s:'Chaque estimation récupère le nom, l’email & le téléphone du visiteur et vous envoie le lead directement.',
+      included:'Inclus',
+      row3d:'Hébergement, mises à jour du modèle & support', optional:'(mensuel)',
+      row3s:'Hébergement, mise à jour trimestrielle du modèle avec les nouvelles données du marché & support prioritaire.',
+      permo:'/mois', permo2:'/ mois',
+      tTotalLbl:'Total installation (une fois)', tDepLbl:'Acompte 50 % à la commande', tBalLbl:'Solde 50 % à la livraison',
+      tMonthLbl:'Option mensuelle', tsub:'Paiement en 2 fois · échelonnement possible sur demande',
+      inclh3:'Compris dans l’offre',
+      i1:'À vos couleurs (votre agence)', i2:'Estimation instantanée à partir de quelques infos',
+      i3:'Capture nom, email & téléphone du vendeur', i4:'Fonctionne 24/7, même hors horaires',
+      i5:'Lead envoyé directement dans votre boîte / CRM', i6:'Modèle de prix calibré sur votre marché',
+      i7:'100 % responsive (mobile & tablette)', i8:'Consentement simple, conforme RGPD',
+      i9:'2 séries de retouches incluses', i10:'Installation accompagnée de A à Z',
+      termsPre:'<b>Conditions.</b> Un acompte de 50 % confirme la commande ; le solde est réglé à la livraison, avant mise en ligne. Délai d’installation estimé : ',
+      termsPost:' semaines après accord sur les champs et le branding. Le modèle de prix est indicatif et destiné à la génération de leads, pas à une estimation officielle. 2 séries de retouches incluses. L’hébergement & les mises à jour sont optionnels, mensuels et sans engagement. Devis valable 30 jours.',
+      signClient:'Le client (nom, date & « bon pour accord »)',
+      printbtn:'⬇ Enregistrer ce devis en PDF'
+    }
+  };
+  var lang='en';
+  function render(){
+    var d=T[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k=el.getAttribute('data-i18n');
+      if(d[k]==null) return;
+      if(k==='termsPre'||k==='termsPost') el.innerHTML=d[k]; else el.textContent=d[k];
+    });
+    document.querySelectorAll('.lang button').forEach(function(b){
+      b.classList.toggle('active',b.getAttribute('data-lang')===lang);
+    });
+    document.documentElement.lang=lang;
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click',function(){lang=b.getAttribute('data-lang');render();});
+  });
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quotation — AI Assistant · Floryne Pierson</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#161a1d;--paper:#f4f1ea;--card:#fffdf9;--gold:#b0895a;--gold-d:#98723f;--line:#e7e0d4;--muted:#8a8072;--soft:#6b6357;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;padding:28px 16px;}
+  .serif{font-family:'Fraunces',Georgia,serif;}
+  .sheet{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(60,45,25,.08);padding:44px 46px 40px;}
+  .edithint{max-width:760px;margin:0 auto 14px;font-size:.82rem;color:var(--gold-d);text-align:center;}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:26px;}
+  .brand b{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;display:block;}
+  .brand span{font-size:.82rem;color:var(--muted);}
+  .brand .c{margin-top:8px;font-size:.82rem;color:var(--soft);line-height:1.7;}
+  .brand .c a{color:var(--gold-d);text-decoration:none;}
+  .qmeta{text-align:right;font-size:.84rem;color:var(--soft);}
+  .qmeta .qt{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--gold-d);font-weight:600;display:block;margin-bottom:6px;}
+  .qmeta div{margin-bottom:3px;}
+  [contenteditable]{outline:none;border-bottom:1px dashed var(--gold);padding:0 3px;min-width:40px;display:inline-block;}
+  [contenteditable]:focus{background:rgba(176,137,90,.08);}
+  .to{margin-bottom:24px;font-size:.92rem;}
+  .to .lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);font-weight:600;margin-bottom:4px;}
+  .to b{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;}
+  .intro{font-size:.92rem;color:var(--soft);margin-bottom:26px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:8px;}
+  th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:600;padding:0 0 10px;border-bottom:1.5px solid var(--line);}
+  th.r,td.r{text-align:right;}
+  td{padding:14px 0;border-bottom:1px solid var(--line);font-size:.92rem;vertical-align:top;}
+  td .d{font-weight:600;}
+  td .s{font-size:.82rem;color:var(--muted);margin-top:3px;}
+  .free{color:#2f8f5b;font-weight:600;}
+  .strike{color:var(--muted);text-decoration:line-through;font-size:.85rem;}
+  .totals{margin:20px 0 6px;margin-left:auto;width:290px;}
+  .totals .row{display:flex;justify-content:space-between;font-size:.9rem;padding:6px 0;color:var(--soft);}
+  .totals .grand{border-top:1.5px solid var(--gold);margin-top:6px;padding-top:12px;font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600;color:var(--ink);}
+  .totals .grand span:last-child{color:var(--gold-d);}
+  .totals .sub{font-size:.8rem;color:var(--muted);text-align:right;margin-top:2px;}
+  .incl{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:26px 0;}
+  .incl h3{font-family:'Fraunces',serif;font-size:1.05rem;margin-bottom:10px;}
+  .incl ul{list-style:none;columns:2;column-gap:26px;}
+  @media(max-width:560px){.incl ul{columns:1;}}
+  .incl li{font-size:.86rem;color:var(--soft);padding:4px 0 4px 20px;position:relative;break-inside:avoid;}
+  .incl li::before{content:'✓';position:absolute;left:0;color:var(--gold-d);font-weight:700;}
+  .terms{font-size:.8rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--line);padding-top:20px;}
+  .terms b{color:var(--soft);}
+  .sign{display:flex;justify-content:space-between;gap:30px;margin-top:30px;flex-wrap:wrap;}
+  .sign .box{flex:1;min-width:200px;font-size:.8rem;color:var(--muted);}
+  .sign .line{border-bottom:1px solid var(--line);height:34px;margin-bottom:6px;}
+  .btnrow{max-width:760px;margin:18px auto 0;text-align:center;}
+  .pbtn{background:var(--gold);color:#fff;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.95rem;padding:13px 30px;border-radius:10px;box-shadow:0 8px 22px rgba(176,137,90,.3);}
+  @media print{body{background:#fff;padding:0;}.sheet{border:none;box-shadow:none;border-radius:0;max-width:100%;padding:10px 6px;}.edithint,.btnrow{display:none !important;}[contenteditable]{border-bottom:none;}}
+</style>
+</head>
+<body>
+  <div class="edithint">✎ Click the dashed fields to fill in the agency name, date &amp; number. Then “Save as PDF”.</div>
+  <div class="sheet">
+
+    <div class="top">
+      <div class="brand">
+        <b class="serif">Floryne Pierson</b>
+        <span>AI Assistants for Estate Agencies</span>
+        <div class="c">
+          <a href="https://florynepierson.com">florynepierson.com</a><br>
+          <span contenteditable="true">your@email.com</span><br>
+          Malta
+        </div>
+      </div>
+      <div class="qmeta">
+        <span class="qt serif">Quotation</span>
+        <div>No. <span contenteditable="true">2026-001</span></div>
+        <div>Date: <span contenteditable="true">16 July 2026</span></div>
+        <div>Valid 30 days</div>
+      </div>
+    </div>
+
+    <div class="to">
+      <div class="lbl">Prepared for</div>
+      <b contenteditable="true">[ Agency name ]</b>
+    </div>
+
+    <p class="intro">A 24/7 AI assistant embedded on your website — it answers visitors instantly, in English, and captures qualified buyer &amp; renter leads even when your office is closed, then forwards their details to your team. Set up and trained on your own listings.</p>
+
+    <table>
+      <thead><tr><th>Item</th><th class="r">Amount</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><div class="d">14-day free trial</div><div class="s">Live assistant on your site, trained on a few of your listings — no cost, no commitment.</div></td>
+          <td class="r free">€0</td>
+        </tr>
+        <tr>
+          <td><div class="d">Setup &amp; integration</div><div class="s">Installation on your website, styling to your brand, connection to your listings &amp; lead notifications.</div></td>
+          <td class="r"><span class="strike">€390</span> &nbsp;<span class="free">€0</span><div class="s">Waived — launch offer</div></td>
+        </tr>
+        <tr>
+          <td><div class="d">AI Assistant — monthly subscription</div><div class="s">24/7 replies, lead qualification &amp; capture, email alerts, hosting, updates &amp; support.</div></td>
+          <td class="r"><div class="d">€149<span style="font-weight:400;color:var(--muted);">/month</span></div><div class="s">No commitment · cancel anytime</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="totals">
+      <div class="row"><span>Setup (today)</span><span>€0</span></div>
+      <div class="row"><span>Trial period</span><span>Free · 14 days</span></div>
+      <div class="grand"><span>Then</span><span>€149 / month</span></div>
+      <div class="sub">Billed monthly · VAT not included</div>
+    </div>
+
+    <div class="incl">
+      <h3>Included in your subscription</h3>
+      <ul>
+        <li>Answers 24/7, even out of hours</li>
+        <li>Buyer &amp; renter lead qualification</li>
+        <li>Instant lead alerts to your team</li>
+        <li>Trained on your own listings</li>
+        <li>Styled to your brand</li>
+        <li>Hosting &amp; maintenance</li>
+        <li>Updates &amp; improvements</li>
+        <li>Direct support from Floryne</li>
+      </ul>
+    </div>
+
+    <div class="terms">
+      <b>Terms.</b> The 14-day trial is free with no obligation. Setup is waived as a launch offer. The subscription is billed monthly with no lock-in — you may cancel at any time. All lead data stays yours and is handled in line with GDPR. This quotation is valid for 30 days from the date above.
+      <div class="sign">
+        <div class="box"><div class="line"></div>Floryne Pierson</div>
+        <div class="box"><div class="line"></div>For the agency (name &amp; date)</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="btnrow"><button class="pbtn" onclick="window.print()">⬇ Save this quote as PDF</button></div>
+</body>
+</html>

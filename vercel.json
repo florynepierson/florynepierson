@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/toitures", "destination": "/kenyon-roofing", "permanent": true },
+    { "source": "/toitures/:path*", "destination": "/kenyon-roofing/:path*", "permanent": true }
+  ]
+}

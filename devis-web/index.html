@@ -125,7 +125,7 @@
       <thead><tr><th data-i18n="thService">Prestation</th><th class="r" data-i18n="thAmount">Montant</th></tr></thead>
       <tbody>
         <tr>
-          <td><div class="d" id="row1title"></div><div class="s" data-i18n="row1s">Site vitrine sur-mesure, responsive, structuré et optimisé pour les recherches Google locales. Textes, photos &amp; sections intégrés.</div></td>
+          <td><div class="d" id="row1title"></div><div class="s" id="row1desc"></div></td>
           <td class="r"><div class="d">€<span id="fPrice" contenteditable="true">690</span></div></td>
         </tr>
         <tr>
@@ -192,7 +192,7 @@
       tolbl:'Établi pour',
       intro:'Un site vitrine moderne, rapide et adapté au mobile, pensé pour refléter votre métier et transformer vos visiteurs en demandes de devis — conçu, réalisé et livré prêt à être mis en ligne.',
       thService:'Prestation', thAmount:'Montant',
-      row1s:'Site vitrine sur-mesure, responsive, structuré et optimisé pour les recherches Google locales. Textes, photos & sections intégrés.',
+      row1s:function(k){return {ess:'Site vitrine 1 page sur-mesure, responsive et rapide : présentation, services & contact. Nom de domaine, mise en ligne et indexation Google inclus.',loc:'Site sur-mesure jusqu\'à 3 pages, optimisé pour les recherches Google locales. Comprend la création de votre fiche Google Business et des textes rédigés pour générer des demandes de contact.',full:'Site complet de 5 pages ou plus (dont une galerie), au design entièrement personnalisé. Structure évolutive, optimisée pour une visibilité durable sur Google.'}[k];},
       row2d:'Mise en ligne & référencement de base',
       row2s:'Nom de domaine, indexation Google, fiche Google Business, formulaire relié à votre email.',
       included:'Inclus',
@@ -227,7 +227,7 @@
       tolbl:'Prepared for',
       intro:'A modern, fast, mobile-friendly showcase website, built to reflect your trade and turn visitors into quote requests — designed, built and delivered ready to go live.',
       thService:'Service', thAmount:'Amount',
-      row1s:'Bespoke, responsive showcase site, structured and optimised for local Google searches. Text, photos & sections included.',
+      row1s:function(k){return {ess:'Bespoke, responsive 1-page showcase site: about, services & contact. Domain name, going live and Google indexing included.',loc:'Bespoke site of up to 3 pages, optimised for local Google searches. Includes creating your Google Business profile and copy written to drive enquiries.',full:'Complete 5+ page site (including a gallery), fully customised design. Scalable structure optimised for lasting Google visibility.'}[k];},
       row2d:'Launch & basic SEO',
       row2s:'Domain name, Google indexing, Google Business profile, form connected to your email.',
       included:'Included',
@@ -265,6 +265,7 @@
     });
     var f=F[curF], dep=Math.round(f.price/2);
     document.getElementById('row1title').textContent=d.row1(f[lang]);
+    document.getElementById('row1desc').textContent=d.row1s(curF);
     document.getElementById('fPrice').textContent=f.price;
     document.getElementById('tTotal').textContent=f.price;
     document.getElementById('tDeposit').textContent=dep;

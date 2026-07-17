@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prestige Immobilier — Agence immobilière de caractère · Metz (démo)</title>
+<meta name="description" content="Site démo premium réalisé par Floryne Pierson — agence immobilière : hero vidéo, biens d'exception, assistant IA 24/7, estimation.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#14120e;--ink2:#1d1a15;--cream:#f6f2ea;--sand:#c9bca6;--gold:#b98f52;--gold2:#e0c193;--stone:#928872;--line:rgba(210,190,150,.16);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html.lenis,html.lenis body{height:auto;}
+  .lenis.lenis-smooth{scroll-behavior:auto !important;}
+  body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .serif{font-family:'Playfair Display',serif;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 30px;}
+  section{position:relative;}
+
+  .grain{position:fixed;inset:-50%;z-index:300;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .cursor{position:fixed;top:0;left:0;width:9px;height:9px;border-radius:50%;background:var(--gold);z-index:350;pointer-events:none;transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s;}
+  .cursor.big{width:56px;height:56px;background:rgba(185,143,82,.22);}
+  @media(hover:none){.cursor{display:none;}}
+  .demo-badge{position:fixed;bottom:16px;right:16px;z-index:200;background:rgba(20,18,14,.9);border:1px solid var(--line);backdrop-filter:blur(8px);color:var(--gold2);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:50px;}
+  .demo-badge b{color:var(--cream);}
+
+  /* nav */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:.4s;padding:24px 0;}
+  .nav.scrolled{background:rgba(246,242,234,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 0;}
+  .nav .row{display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:'Playfair Display',serif;font-size:1.4rem;letter-spacing:.02em;color:#fff;transition:color .4s;}
+  .nav.scrolled .logo{color:var(--ink);}
+  .logo b{color:var(--gold2);}
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{font-size:.86rem;letter-spacing:.03em;color:rgba(255,255,255,.85);transition:color .25s;}
+  .nav.scrolled .nav-links a{color:var(--ink);}
+  .nav-links a:hover{color:var(--gold2);}
+  .nav-cta{border:1px solid var(--gold2);color:var(--gold2)!important;padding:9px 20px;border-radius:50px;transition:all .3s;}
+  .nav-cta:hover{background:var(--gold);border-color:var(--gold);color:#fff!important;}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:110;}
+  .burger span{width:24px;height:2px;background:#fff;transition:.3s;}
+  .nav.scrolled .burger span{background:var(--ink);}
+  @media(max-width:900px){
+    .nav-links{position:fixed;inset:0 0 0 auto;width:80%;max-width:320px;background:var(--ink);flex-direction:column;justify-content:center;gap:26px;transform:translateX(100%);transition:transform .5s cubic-bezier(.6,.05,.2,1);}
+    .nav-links a{color:var(--cream)!important;}
+    .nav-links.open{transform:none;}
+    .burger{display:flex;}
+    .burger.x span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .burger.x span:nth-child(2){opacity:0;}
+    .burger.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  }
+
+  /* hero video */
+  .hero{height:100vh;min-height:640px;display:flex;align-items:center;overflow:hidden;color:#fff;}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+  .hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(15,12,9,.85),rgba(15,12,9,.5) 55%,rgba(15,12,9,.35));}
+  .hero-content{position:relative;z-index:2;max-width:820px;}
+  .eyebrow{display:inline-block;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2);margin-bottom:22px;}
+  .eyebrow::before{content:"";display:inline-block;width:32px;height:1px;background:var(--gold2);vertical-align:middle;margin-right:14px;}
+  .hero h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(2.7rem,7vw,5.4rem);line-height:1.05;margin-bottom:24px;}
+  .hero h1 em{font-style:italic;color:var(--gold2);}
+  .hero p{font-size:1.16rem;color:rgba(255,255,255,.82);max-width:540px;margin-bottom:34px;font-weight:300;}
+  .btns{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{padding:16px 34px;border-radius:50px;font-size:.92rem;font-weight:500;transition:transform .25s,box-shadow .25s,background .3s;cursor:pointer;border:none;display:inline-block;}
+  .btn-gold{background:linear-gradient(135deg,#d3a862,#a9772f);color:#1a1510;box-shadow:0 14px 40px rgba(185,143,82,.35);}
+  .btn-gold:hover{transform:translateY(-3px);}
+  .btn-ghost{border:1px solid rgba(255,255,255,.5);color:#fff;background:transparent;}
+  .btn-ghost:hover{border-color:var(--gold2);color:var(--gold2);}
+
+  /* search bar */
+  .search{position:relative;z-index:2;margin-top:44px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:12px;display:flex;flex-wrap:wrap;gap:8px;max-width:640px;}
+  .search .f{flex:1;min-width:120px;background:rgba(255,255,255,.9);border:none;border-radius:10px;padding:12px 16px;font-family:inherit;font-size:.92rem;color:var(--ink);}
+  .search .go{background:var(--gold);color:#fff;border:none;border-radius:10px;padding:12px 24px;font-weight:600;cursor:pointer;}
+
+  .sec{padding:120px 0;}
+  .sec-head{max-width:640px;margin-bottom:56px;}
+  .sec-head.center{margin:0 auto 56px;text-align:center;}
+  .sec-label{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+  .sec-title{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(2rem,5vw,3.3rem);line-height:1.1;margin-bottom:16px;}
+  .sec-title em{font-style:italic;color:var(--gold);}
+  .sec-intro{color:var(--stone);font-weight:300;font-size:1.05rem;}
+
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* properties */
+  .props{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media(max-width:900px){.props{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.props{grid-template-columns:1fr;}}
+  .prop{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px rgba(30,20,10,.07);transition:transform .4s,box-shadow .4s;}
+  .prop:hover{transform:translateY(-8px);box-shadow:0 30px 70px rgba(30,20,10,.14);}
+  .prop .im{position:relative;aspect-ratio:4/3;overflow:hidden;}
+  .prop .im img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1);}
+  .prop:hover .im img{transform:scale(1.08);}
+  .prop .tag{position:absolute;top:14px;left:14px;background:rgba(20,18,14,.82);color:#fff;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;border-radius:50px;}
+  .prop .body{padding:22px 24px 26px;}
+  .prop .price{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);margin-bottom:4px;}
+  .prop h3{font-family:'Playfair Display',serif;font-weight:500;font-size:1.25rem;margin-bottom:4px;}
+  .prop .loc{font-size:.9rem;color:var(--stone);margin-bottom:14px;}
+  .prop .meta{display:flex;gap:16px;font-size:.86rem;color:var(--ink);border-top:1px solid var(--line);padding-top:14px;}
+  .prop .meta span{color:var(--stone);}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:56px 0;}
+  .stat{text-align:center;}
+  .stat .n{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.4rem);color:var(--gold);line-height:1;}
+  .stat .l{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);margin-top:10px;}
+  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr);gap:36px 20px;}}
+
+  /* services */
+  .svc{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  @media(max-width:900px){.svc{grid-template-columns:repeat(2,1fr);}}
+  .svc .c{background:#fff;border:1px solid var(--line);border-radius:16px;padding:32px 26px;transition:.4s;}
+  .svc .c:hover{transform:translateY(-6px);border-color:rgba(185,143,82,.5);}
+  .svc .ic{font-size:1.6rem;margin-bottom:16px;}
+  .svc h4{font-family:'Playfair Display',serif;font-weight:500;font-size:1.25rem;margin-bottom:8px;}
+  .svc p{color:var(--stone);font-weight:300;font-size:.95rem;}
+
+  /* AI section */
+  .ai{background:var(--ink);color:var(--cream);}
+  .ai-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;}
+  @media(max-width:900px){.ai-grid{grid-template-columns:1fr;gap:40px;}}
+  .ai .sec-title{color:#fff;}
+  .ai .sec-intro{color:rgba(246,242,234,.65);}
+  .ai ul{list-style:none;margin:24px 0 0;}
+  .ai li{position:relative;padding-left:30px;margin-bottom:14px;color:rgba(246,242,234,.85);}
+  .ai li::before{content:'✦';position:absolute;left:0;color:var(--gold2);}
+  .phone{background:#0d0b08;border:1px solid var(--line);border-radius:26px;padding:14px;max-width:340px;margin:0 auto;box-shadow:0 30px 70px rgba(0,0,0,.5);}
+  .phone .top{display:flex;align-items:center;gap:10px;padding:8px 10px 14px;border-bottom:1px solid var(--line);}
+  .phone .dot{width:9px;height:9px;border-radius:50%;background:#4ade80;}
+  .phone .top b{font-family:'Playfair Display',serif;font-size:.98rem;color:var(--cream);}
+  .phone .top span{font-size:.68rem;color:var(--stone);}
+  .chat{padding:16px 8px 6px;display:flex;flex-direction:column;gap:10px;}
+  .msg{max-width:82%;padding:10px 14px;border-radius:15px;font-size:.86rem;line-height:1.5;}
+  .msg.u{align-self:flex-end;background:#2a2620;color:var(--cream);border-bottom-right-radius:4px;}
+  .msg.a{align-self:flex-start;background:linear-gradient(135deg,#d3a862,#a9772f);color:#1a1510;border-bottom-left-radius:4px;}
+
+  /* quote */
+  .quote{text-align:center;max-width:820px;margin:0 auto;}
+  .quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.5rem,3.5vw,2.2rem);line-height:1.4;margin-bottom:22px;}
+  .quote .who{font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
+  .stars{color:var(--gold);letter-spacing:4px;margin-bottom:20px;}
+
+  /* CTA / contact */
+  .cta{background:var(--ink2);color:var(--cream);border-radius:24px;padding:60px;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+  @media(max-width:860px){.cta{grid-template-columns:1fr;gap:36px;padding:40px 30px;}}
+  .cta .sec-title{color:#fff;}
+  .field{width:100%;padding:15px 20px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;color:var(--cream);font-family:inherit;font-size:1rem;margin-bottom:13px;outline:none;transition:border-color .3s;}
+  .field:focus{border-color:var(--gold);}
+
+  footer{padding:40px 0;text-align:center;color:var(--stone);font-size:.85rem;border-top:1px solid var(--line);}
+  footer b{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="cursor" id="cursor"></div>
+<a class="demo-badge" href="https://florynepierson.com" target="_blank" data-cursor>✦ Site démo · <b>Floryne Pierson</b></a>
+
+<nav class="nav" id="nav">
+  <div class="wrap row">
+    <div class="logo">Prestige <b>Immobilier</b></div>
+    <div class="nav-links" id="menu">
+      <a href="#biens">Nos biens</a>
+      <a href="#services">Services</a>
+      <a href="#assistant">Assistant IA</a>
+      <a href="#estimation">Estimation</a>
+      <a class="nav-cta" href="#estimation" data-cursor>Nous contacter</a>
+    </div>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1600&auto=format&fit=crop">
+    <source src="/demo-immo-hero.mp4" type="video/mp4">
+  </video>
+  <div class="wrap hero-content">
+    <span class="eyebrow" data-fade>Immobilier de caractère · Metz &amp; Moselle</span>
+    <h1 class="serif" data-split>Votre prochaine adresse,<br><em>à la hauteur de vos rêves.</em></h1>
+    <p data-fade>Achat, vente, estimation — un accompagnement d'exception, pour des biens d'exception, dans toute la Moselle.</p>
+    <div class="btns" data-fade>
+      <a class="btn btn-gold mag" href="#biens" data-cursor>Découvrir nos biens</a>
+      <a class="btn btn-ghost mag" href="#estimation" data-cursor>Estimer mon bien</a>
+    </div>
+    <div class="search" data-fade>
+      <select class="f"><option>Acheter</option><option>Louer</option></select>
+      <input class="f" placeholder="Ville (Metz, Montigny…)">
+      <select class="f"><option>Tout type</option><option>Maison</option><option>Appartement</option><option>Villa</option></select>
+      <button class="go" type="button">Rechercher</button>
+    </div>
+  </div>
+</section>
+
+<!-- BIENS -->
+<section class="sec" id="biens">
+  <div class="wrap">
+    <div class="sec-head center">
+      <div class="sec-label reveal">Sélection</div>
+      <h2 class="sec-title serif reveal">Nos <em>biens d'exception</em></h2>
+      <p class="sec-intro reveal">Une sélection confidentielle, mise à jour chaque semaine. Chaque bien est visité et validé par nos soins.</p>
+    </div>
+    <div class="props">
+      <article class="prop reveal"><div class="im"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=800&auto=format&fit=crop" alt=""><span class="tag">À vendre</span></div><div class="body"><div class="price">780 000 €</div><h3 class="serif">Villa contemporaine</h3><div class="loc">Metz · Queuleu</div><div class="meta">4 ch <span>·</span> 3 sdb <span>·</span> 220 m²</div></div></article>
+      <article class="prop reveal"><div class="im"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop" alt=""><span class="tag">À vendre</span></div><div class="body"><div class="price">495 000 €</div><h3 class="serif">Maison de charme</h3><div class="loc">Montigny-lès-Metz</div><div class="meta">5 ch <span>·</span> 2 sdb <span>·</span> 175 m²</div></div></article>
+      <article class="prop reveal"><div class="im"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=800&auto=format&fit=crop" alt=""><span class="tag">Exclusivité</span></div><div class="body"><div class="price">1 250 000 €</div><h3 class="serif">Demeure d'architecte</h3><div class="loc">Scy-Chazelles</div><div class="meta">6 ch <span>·</span> 4 sdb <span>·</span> 340 m²</div></div></article>
+      <article class="prop reveal"><div class="im"><img src="https://images.unsplash.com/photo-1627141234469-24711efb373c?q=80&w=800&auto=format&fit=crop" alt=""><span class="tag">À louer</span></div><div class="body"><div class="price">1 450 € / mois</div><h3 class="serif">Appartement lumineux</h3><div class="loc">Metz · Centre</div><div class="meta">3 ch <span>·</span> 1 sdb <span>·</span> 92 m²</div></div></article>
+      <article class="prop reveal"><div class="im"><img src="https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?q=80&w=800&auto=format&fit=crop" alt=""><span class="tag">À vendre</span></div><div class="body"><div class="price">625 000 €</div><h3 class="serif">Maison familiale</h3><div class="loc">Longeville-lès-Metz</div><div class="meta">4 ch <span>·</span> 2 sdb <span>·</span> 195 m²</div></div></article>
+      <article class="prop reveal"><div class="im"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop" alt=""><span class="tag">Exclusivité</span></div><div class="body"><div class="price">890 000 €</div><h3 class="serif">Villa avec piscine</h3><div class="loc">Woippy</div><div class="meta">5 ch <span>·</span> 3 sdb <span>·</span> 260 m²</div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="sec" style="padding:0;">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="n"><span class="count" data-target="320">0</span></div><div class="l">Biens vendus</div></div>
+      <div class="stat"><div class="n"><span class="count" data-target="18">0</span></div><div class="l">Ans d'expérience</div></div>
+      <div class="stat"><div class="n"><span class="count" data-target="98">0</span>%</div><div class="l">Clients satisfaits</div></div>
+      <div class="stat"><div class="n"><span class="count" data-target="4.9">0</span>/5</div><div class="l">Avis Google</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec-head center">
+      <div class="sec-label reveal">Notre accompagnement</div>
+      <h2 class="sec-title serif reveal">Un service <em>complet</em>, de A à Z</h2>
+    </div>
+    <div class="svc">
+      <div class="c reveal"><div class="ic">🔑</div><h4 class="serif">Achat</h4><p>On cherche pour vous le bien qui correspond vraiment à votre vie, votre budget, vos envies.</p></div>
+      <div class="c reveal"><div class="ic">🏡</div><h4 class="serif">Vente</h4><p>Photos pro, diffusion large, visites qualifiées : votre bien vendu au meilleur prix, sans stress.</p></div>
+      <div class="c reveal"><div class="ic">📊</div><h4 class="serif">Estimation</h4><p>Une estimation gratuite, précise et honnête de la valeur de votre bien, sous 48h.</p></div>
+      <div class="c reveal"><div class="ic">🗝️</div><h4 class="serif">Gestion locative</h4><p>On gère tout pour vous : locataires, loyers, entretien. Vous encaissez, sereinement.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSISTANT IA -->
+<section class="sec ai" id="assistant">
+  <div class="wrap ai-grid">
+    <div>
+      <div class="sec-label reveal" style="color:var(--gold2);">Nouveau · exclusif</div>
+      <h2 class="sec-title serif reveal">Votre agence, disponible <em>24h/24</em></h2>
+      <p class="sec-intro reveal">Notre assistant intelligent répond à vos prospects, qualifie leurs demandes et prend les rendez-vous de visite — même le soir et le week-end. <b style="color:var(--gold2);font-weight:500;">Plus aucune demande ne se perd.</b></p>
+      <ul class="reveal">
+        <li>Répond instantanément, jour et nuit</li>
+        <li>Qualifie : achat / vente / location, budget, secteur</li>
+        <li>Propose et cale les créneaux de visite</li>
+        <li>Vous transmet des contacts déjà chauds</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="phone">
+        <div class="top"><span class="dot"></span><b>Prestige Immobilier</b> <span>· en ligne</span></div>
+        <div class="chat">
+          <div class="msg u">Bonjour, l'appartement rue Serpenoise est-il toujours dispo ? 🙂</div>
+          <div class="msg a">Bonjour ! Oui, il est toujours disponible ✦ Souhaitez-vous le visiter cette semaine ?</div>
+          <div class="msg u">Oui avec plaisir</div>
+          <div class="msg a">Parfait 🙌 Je peux vous proposer <b>mercredi 18h</b> ou <b>samedi 10h</b>. Lequel vous conviendrait le mieux ?</div>
+          <div class="msg u">Samedi 10h !</div>
+          <div class="msg a">C'est noté pour samedi 10h ✅ Puis-je avoir votre prénom et un numéro pour vous confirmer ?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section class="sec" id="avis">
+  <div class="wrap quote reveal">
+    <div class="stars">★★★★★</div>
+    <p class="serif">« Une agence à l'écoute, réactive et d'une élégance rare. Notre maison a été vendue en trois semaines, au prix. On recommande sans réserve. »</p>
+    <div class="who">Famille Klein · Metz</div>
+  </div>
+</section>
+
+<!-- ESTIMATION / CONTACT -->
+<section class="sec" id="estimation">
+  <div class="wrap">
+    <div class="cta reveal">
+      <div>
+        <div class="sec-label" style="color:var(--gold2);">Estimation gratuite</div>
+        <h2 class="sec-title serif">Combien vaut <em>votre bien</em> ?</h2>
+        <p class="sec-intro" style="color:rgba(246,242,234,.65);margin-bottom:8px;">Recevez une estimation gratuite et sans engagement, sous 48h. On vous rappelle rapidement.</p>
+      </div>
+      <form onsubmit="event.preventDefault();this.querySelector('.done').style.display='block';">
+        <input class="field" placeholder="Votre nom" required>
+        <input class="field" type="tel" placeholder="Téléphone" required>
+        <input class="field" placeholder="Adresse du bien">
+        <button class="btn btn-gold mag" style="width:100%;" data-cursor>Recevoir mon estimation</button>
+        <p class="done" style="display:none;color:var(--gold2);margin-top:14px;text-align:center;">✦ Merci ! (démo — relié à l'email de l'agence sur un vrai site)</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Prestige Immobilier · Site <b>démo</b> conçu par <b>Floryne Pierson</b> — <a href="https://florynepierson.com" style="color:var(--gold2);" data-cursor>florynepierson.com</a></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/split-type@0.3.4/umd/index.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav=document.getElementById('nav'), burger=document.getElementById('burger'), menu=document.getElementById('menu');
+  window.addEventListener('scroll',function(){ nav.classList.toggle('scrolled', window.scrollY>40); },{passive:true});
+  burger.addEventListener('click',function(){ menu.classList.toggle('open'); burger.classList.toggle('x'); });
+
+  var cur=document.getElementById('cursor'), tx=0,ty=0,cx=0,cy=0;
+  if(window.matchMedia('(hover:hover)').matches){
+    window.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;});
+    (function loop(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cur.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,button,[data-cursor]').forEach(function(el){el.addEventListener('mouseenter',function(){cur.classList.add('big');});el.addEventListener('mouseleave',function(){cur.classList.remove('big');});});
+    document.querySelectorAll('.mag').forEach(function(b){b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.35)+'px)';});b.addEventListener('mouseleave',function(){b.style.transform='';});});
+  } else { cur.style.display='none'; }
+
+  var lenis=null;
+  if(window.Lenis && !reduce){ lenis=new Lenis({lerp:.09}); function raf(t){lenis.raf(t);requestAnimationFrame(raf);} requestAnimationFrame(raf); if(window.ScrollTrigger) lenis.on('scroll',ScrollTrigger.update); }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length<2)return;var t=document.querySelector(id);if(!t)return;e.preventDefault();menu.classList.remove('open');burger.classList.remove('x');if(lenis)lenis.scrollTo(t,{offset:-60});else t.scrollIntoView({behavior:'smooth'});});});
+
+  if(!window.gsap || reduce){ document.querySelectorAll('.reveal,[data-fade],[data-split]').forEach(function(el){el.style.opacity=1;el.style.transform='none';}); return; }
+  try{
+    var h1=document.querySelector('[data-split]');
+    if(h1 && window.SplitType){ var s=new SplitType(h1,{types:'words,chars'}); gsap.from(s.chars,{yPercent:120,opacity:0,stagger:.02,duration:.9,ease:'power4.out',delay:.15}); }
+    gsap.from('[data-fade]',{y:26,opacity:0,duration:1,stagger:.12,ease:'power3.out',delay:.4});
+    if(window.ScrollTrigger){
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.utils.toArray('.reveal').forEach(function(el){ gsap.fromTo(el,{y:38,opacity:0},{y:0,opacity:1,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 86%'}}); });
+      gsap.utils.toArray('.count').forEach(function(el){ var t=parseFloat(el.getAttribute('data-target')),dec=(t%1!==0),o={v:0};
+        ScrollTrigger.create({trigger:el,start:'top 88%',once:true,onEnter:function(){ gsap.to(o,{v:t,duration:1.6,ease:'power2.out',onUpdate:function(){el.textContent=dec?o.v.toFixed(1):Math.round(o.v);}}); }}); });
+    }
+  }catch(e){ document.querySelectorAll('.reveal,[data-fade]').forEach(function(el){el.style.opacity=1;el.style.transform='none';}); }
+})();
+</script>
+</body>
+</html>

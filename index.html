@@ -634,8 +634,7 @@
     </section>
 
     <!-- AVIS -->
-    <!-- AVIS masqués tant qu'il n'y a pas de vrai témoignage — retirer style="display:none" dès le 1er avis (ex: Claire) -->
-    <section class="py-24 bg-brand-sageLight/20 border-b border-brand-gold/10" id="avis" style="display:none">
+    <section class="py-24 bg-brand-sageLight/20 border-b border-brand-gold/10" id="avis">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <span class="text-xs uppercase tracking-widest text-brand-gold font-bold mb-3 block" data-i18n="avis_label">Retours d'expérience</span>
@@ -644,16 +643,17 @@
                 <div class="w-16 h-[2px] bg-brand-gold mx-auto mt-6"></div>
             </div>
 
-            <div id="malt-placeholder" class="text-center py-16 bg-white rounded-3xl border border-brand-gold/20 shadow-sm">
+            <div class="max-w-xl mx-auto text-center py-12 px-8 bg-white rounded-3xl border border-brand-gold/20 shadow-sm">
                 <div class="w-16 h-16 bg-brand-sageLight rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fa-solid fa-star text-brand-gold text-2xl"></i>
                 </div>
-                <p class="font-serif text-2xl text-brand-dark/70 mb-2" data-i18n="avis_ph_h">Mes avis vérifiés sont sur Malt</p>
-                <p class="text-sm text-brand-dark/50 font-light max-w-sm mx-auto" data-i18n="avis_ph_p">Chaque mission est évaluée sur mon profil Malt — la garantie d'avis authentiques et vérifiés par la plateforme.</p>
-                <a href="https://www.malt.fr/profile/florynepierson" target="_blank" class="inline-flex items-center space-x-2 mt-6 text-sm font-semibold text-orange-500 hover:text-orange-400 transition-colors duration-200">
-                    <i class="fa-solid fa-shield"></i>
-                    <span data-i18n="avis_ph_link">Voir mon profil Malt</span>
-                </a>
+                <p class="font-serif text-2xl text-brand-dark/70 mb-2" data-i18n="avis_ph_h">Vous avez fait appel à moi ?</p>
+                <p class="text-sm text-brand-dark/50 font-light max-w-sm mx-auto mb-6" data-i18n="avis_ph_p">Votre avis compte — partagez votre expérience sur Trustpilot en quelques secondes.</p>
+                <!-- TrustBox widget - Review Collector -->
+                <div class="trustpilot-widget" data-locale="fr-FR" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="6a59658f579fc3b59f22c57c" data-style-height="52px" data-style-width="100%" data-token="2a081d0c-db9d-4169-8bda-277b29fd280c">
+                  <a href="https://www.trustpilot.com/review/florynepierson.com" target="_blank" rel="noopener">Trustpilot</a>
+                </div>
+                <!-- End TrustBox widget -->
             </div>
         </div>
     </section>
@@ -1351,9 +1351,9 @@
             avis_label: "Retours d'expérience",
             avis_h: "Ce que mes clients disent",
             avis_sub: "Des avis authentiques, vérifiés à chaque mission.",
-            avis_ph_h: "Mes avis vérifiés sont sur Malt",
-            avis_ph_p: "Chaque mission est évaluée sur mon profil Malt — la garantie d'avis authentiques et vérifiés par la plateforme.",
-            avis_ph_link: "Voir mon profil Malt",
+            avis_ph_h: "Vous avez fait appel à moi ?",
+            avis_ph_p: "Votre avis compte — partagez votre expérience sur Trustpilot en quelques secondes.",
+            avis_ph_link: "Voir mes avis Trustpilot",
             // About
             about_native: "Maternelle",
             about_linkedin: "Me suivre sur LinkedIn",
@@ -1551,9 +1551,9 @@
             avis_label: "Client feedback",
             avis_h: "What my clients say",
             avis_sub: "Authentic reviews, verified on every project.",
-            avis_ph_h: "My verified reviews are on Malt",
-            avis_ph_p: "Every project is reviewed on my Malt profile — a guarantee of authentic feedback verified by the platform.",
-            avis_ph_link: "View my Malt profile",
+            avis_ph_h: "Have you worked with me?",
+            avis_ph_p: "Your review matters — share your experience on Trustpilot in seconds.",
+            avis_ph_link: "See my Trustpilot reviews",
             // About
             about_native: "Native",
             about_linkedin: "Follow me on LinkedIn",
@@ -1733,6 +1733,9 @@
       input.addEventListener('keydown',function(e){ if(e.key==='Enter') ask(); });
     })();
     </script>
+
+    <!-- Trustpilot widget bootstrap -->
+    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
 
 </body>
 </html>

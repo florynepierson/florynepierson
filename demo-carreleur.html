@@ -4,43 +4,59 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>L'Atelier du Carrelage — Rénovation de salle de bains · Metz (démo)</title>
-<meta name="description" content="Site démo réalisé par Floryne Pierson — carreleur / rénovation de salle de bains à Metz. Design premium, animé, avec galerie et avant/après.">
+<meta name="description" content="Site démo premium réalisé par Floryne Pierson — carreleur / rénovation de salle de bains à Metz. Motion design GSAP, smooth scroll, avant/après.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--ink:#14110d;--ink2:#1e1a15;--cream:#f4efe6;--sand:#cdbfa8;--gold:#c39a5b;--gold2:#e3c48a;--muted:#a99c88;--line:rgba(210,190,150,.16);}
+  :root{--ink:#100d09;--ink2:#181410;--cream:#f4efe6;--sand:#c8b99f;--gold:#c39a5b;--gold2:#e6c78d;--muted:#8f8371;--line:rgba(210,190,150,.14);}
   *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{font-family:'Inter',sans-serif;background:var(--ink);color:var(--cream);line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-  .serif{font-family:'Playfair Display',serif;}
+  html.lenis,html.lenis body{height:auto;}
+  .lenis.lenis-smooth{scroll-behavior:auto !important;}
+  body{font-family:'Inter',sans-serif;background:var(--ink);color:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .serif{font-family:'Fraunces',serif;}
   img{display:block;max-width:100%;}
   a{color:inherit;text-decoration:none;}
-  .wrap{max-width:1140px;margin:0 auto;padding:0 26px;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
   section{position:relative;}
 
+  /* grain overlay */
+  .grain{position:fixed;inset:-50%;z-index:300;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  /* preloader */
+  .pre{position:fixed;inset:0;z-index:400;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-direction:column;}
+  .pre .pw{font-family:'Fraunces',serif;font-size:clamp(1.6rem,4vw,2.4rem);color:var(--cream);overflow:hidden;}
+  .pre .pn{font-family:'Fraunces',serif;font-size:clamp(3rem,9vw,6rem);color:var(--gold2);line-height:1;margin-top:6px;}
+  .pre .bar{width:min(280px,60vw);height:2px;background:var(--line);margin-top:26px;overflow:hidden;}
+  .pre .bar i{display:block;height:100%;width:0;background:var(--gold2);}
+
+  /* custom cursor */
+  .cursor{position:fixed;top:0;left:0;width:10px;height:10px;border-radius:50%;background:var(--gold2);z-index:350;pointer-events:none;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .3s,height .3s,background .3s;}
+  .cursor.big{width:64px;height:64px;background:rgba(230,199,141,.25);}
+  @media(hover:none){.cursor{display:none;}}
+
   /* demo badge */
-  .demo-badge{position:fixed;bottom:16px;right:16px;z-index:200;background:rgba(20,17,13,.86);border:1px solid var(--line);backdrop-filter:blur(8px);color:var(--gold2);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:50px;}
+  .demo-badge{position:fixed;bottom:16px;right:16px;z-index:200;background:rgba(16,13,9,.86);border:1px solid var(--line);backdrop-filter:blur(8px);color:var(--gold2);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:50px;}
   .demo-badge b{color:var(--cream);}
 
   /* nav */
-  .nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,border-color .4s,padding .4s;padding:22px 0;border-bottom:1px solid transparent;}
-  .nav.scrolled{background:rgba(15,12,9,.86);backdrop-filter:blur(12px);border-color:var(--line);padding:14px 0;}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,border-color .4s,padding .4s;padding:24px 0;border-bottom:1px solid transparent;}
+  .nav.scrolled{background:rgba(16,13,9,.82);backdrop-filter:blur(14px);border-color:var(--line);padding:15px 0;}
   .nav .row{display:flex;align-items:center;justify-content:space-between;}
-  .logo{font-family:'Playfair Display',serif;font-size:1.35rem;letter-spacing:.02em;}
+  .logo{font-family:'Fraunces',serif;font-size:1.35rem;}
   .logo b{color:var(--gold2);}
-  .nav-links{display:flex;gap:32px;align-items:center;}
-  .nav-links a{font-size:.86rem;letter-spacing:.04em;color:var(--sand);transition:color .25s;}
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{font-size:.85rem;letter-spacing:.03em;color:var(--sand);transition:color .25s;}
   .nav-links a:hover{color:var(--gold2);}
-  .nav-cta{border:1px solid var(--gold);color:var(--gold2);padding:9px 20px;border-radius:50px;font-size:.82rem;transition:all .3s;}
+  .nav-cta{border:1px solid var(--gold);color:var(--gold2);padding:9px 20px;border-radius:50px;transition:all .3s;}
   .nav-cta:hover{background:var(--gold);color:var(--ink);}
-  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:110;}
   .burger span{width:24px;height:2px;background:var(--cream);transition:.3s;}
   @media(max-width:820px){
-    .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:320px;background:var(--ink2);flex-direction:column;justify-content:center;gap:26px;transform:translateX(100%);transition:transform .4s cubic-bezier(.6,.05,.2,1);border-left:1px solid var(--line);}
+    .nav-links{position:fixed;inset:0 0 0 auto;width:80%;max-width:330px;background:var(--ink2);flex-direction:column;justify-content:center;gap:28px;transform:translateX(100%);transition:transform .5s cubic-bezier(.6,.05,.2,1);border-left:1px solid var(--line);}
     .nav-links.open{transform:none;}
-    .burger{display:flex;z-index:110;}
+    .burger{display:flex;}
     .burger.x span:nth-child(1){transform:translateY(7px) rotate(45deg);}
     .burger.x span:nth-child(2){opacity:0;}
     .burger.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
@@ -48,96 +64,111 @@
 
   /* hero */
   .hero{height:100vh;min-height:640px;display:flex;align-items:center;overflow:hidden;}
-  .hero-bg{position:absolute;inset:0;z-index:0;}
-  .hero-bg img{width:100%;height:100%;object-fit:cover;animation:kenburns 22s ease-out infinite alternate;}
-  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(15,12,9,.92) 0%,rgba(15,12,9,.6) 45%,rgba(15,12,9,.25) 100%);}
-  @keyframes kenburns{from{transform:scale(1.04) translateY(0);}to{transform:scale(1.16) translateY(-2%);}}
-  .hero-content{position:relative;z-index:2;max-width:680px;}
-  .eyebrow{display:inline-block;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2);margin-bottom:22px;}
-  .eyebrow::before{content:"";display:inline-block;width:30px;height:1px;background:var(--gold);vertical-align:middle;margin-right:14px;}
-  .hero h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(2.8rem,7vw,5.2rem);line-height:1.04;margin-bottom:24px;}
+  .hero-bg{position:absolute;inset:0;z-index:0;will-change:transform;}
+  .hero-bg img{width:100%;height:120%;object-fit:cover;}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(16,13,9,.94),rgba(16,13,9,.55) 48%,rgba(16,13,9,.2));}
+  .hero-content{position:relative;z-index:2;max-width:760px;}
+  .eyebrow{display:inline-block;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2);margin-bottom:24px;}
+  .eyebrow::before{content:"";display:inline-block;width:32px;height:1px;background:var(--gold);vertical-align:middle;margin-right:14px;}
+  .hero h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(3rem,8vw,6rem);line-height:1.02;margin-bottom:26px;}
   .hero h1 em{font-style:italic;color:var(--gold2);}
-  .hero p{font-size:1.15rem;color:var(--sand);max-width:520px;margin-bottom:34px;font-weight:300;}
+  .hero p{font-size:1.18rem;color:var(--sand);max-width:520px;margin-bottom:36px;font-weight:300;}
   .btns{display:flex;gap:16px;flex-wrap:wrap;}
-  .btn{padding:15px 34px;border-radius:50px;font-size:.92rem;font-weight:500;letter-spacing:.02em;transition:transform .25s,box-shadow .25s,background .3s;cursor:pointer;border:none;}
-  .btn-gold{background:linear-gradient(135deg,#d9b06e,#b8863f);color:var(--ink);box-shadow:0 14px 40px rgba(195,154,91,.32);}
-  .btn-gold:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(195,154,91,.45);}
+  .btn{position:relative;padding:16px 36px;border-radius:50px;font-size:.92rem;font-weight:500;letter-spacing:.02em;transition:transform .25s,box-shadow .25s,background .3s,color .3s;cursor:pointer;border:none;display:inline-block;}
+  .btn-gold{background:linear-gradient(135deg,#dcb572,#b8863f);color:var(--ink);box-shadow:0 16px 44px rgba(195,154,91,.34);}
   .btn-ghost{border:1px solid var(--sand);color:var(--cream);background:transparent;}
   .btn-ghost:hover{border-color:var(--gold2);color:var(--gold2);}
-  .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);animation:bob 2s ease-in-out infinite;}
-  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,8px);}}
+  .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);}
 
-  /* generic section */
-  .sec{padding:120px 0;}
-  .sec-label{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:14px;}
-  .sec-title{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin-bottom:20px;}
+  /* marquee */
+  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;overflow:hidden;white-space:nowrap;background:var(--ink2);}
+  .marquee .track{display:inline-block;animation:scrollx 26s linear infinite;font-family:'Fraunces',serif;font-size:clamp(1.6rem,4vw,2.6rem);color:var(--cream);}
+  .marquee .track span{color:var(--gold2);margin:0 6px;}
+  @keyframes scrollx{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  .sec{padding:130px 0;}
+  .sec-label{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:16px;}
+  .sec-title{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2.1rem,5.5vw,3.6rem);line-height:1.08;margin-bottom:22px;}
   .sec-title em{font-style:italic;color:var(--gold2);}
-  .sec-intro{color:var(--muted);max-width:560px;font-weight:300;font-size:1.05rem;}
-  .center{text-align:center;margin:0 auto 60px;}
+  .sec-intro{color:var(--muted);max-width:580px;font-weight:300;font-size:1.06rem;}
+  .center{text-align:center;margin:0 auto 66px;}
   .center .sec-intro{margin:0 auto;}
 
-  /* reveal on scroll */
-  .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
-  .reveal.in{opacity:1;transform:none;}
+  /* intro split */
+  .intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center;}
+  @media(max-width:860px){.intro-grid{grid-template-columns:1fr;gap:44px;}}
+  .intro-media{border-radius:20px;overflow:hidden;aspect-ratio:4/5;}
+  .intro-media img{width:100%;height:120%;object-fit:cover;will-change:transform;}
+  .big-line{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.4;}
+  .big-line .word{display:inline-block;}
 
   /* stats */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:56px 0;}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:60px 0;}
   .stat{text-align:center;}
-  .stat .n{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.4rem);color:var(--gold2);line-height:1;}
-  .stat .l{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:10px;}
-  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr);gap:36px 20px;}}
+  .stat .n{font-family:'Fraunces',serif;font-size:clamp(2.6rem,5vw,3.8rem);color:var(--gold2);line-height:1;}
+  .stat .l{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:12px;}
+  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr);gap:40px 20px;}}
 
   /* services */
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   @media(max-width:860px){.cards{grid-template-columns:1fr;}}
-  .card{background:var(--ink2);border:1px solid var(--line);border-radius:18px;padding:38px 32px;transition:transform .4s,border-color .4s;}
-  .card:hover{transform:translateY(-8px);border-color:rgba(195,154,91,.5);}
-  .card .ic{font-size:1.8rem;margin-bottom:18px;}
-  .card h3{font-family:'Playfair Display',serif;font-weight:500;font-size:1.5rem;margin-bottom:12px;}
+  .card{background:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:40px 34px;transition:transform .4s,border-color .4s;}
+  .card:hover{transform:translateY(-10px);border-color:rgba(195,154,91,.5);}
+  .card .ic{font-size:1.9rem;margin-bottom:20px;}
+  .card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.55rem;margin-bottom:12px;}
   .card p{color:var(--muted);font-weight:300;font-size:.98rem;}
 
+  /* horizontal scroll gallery */
+  .hgal{overflow:hidden;}
+  .hgal .htrack{display:flex;gap:26px;padding:0 28px;will-change:transform;}
+  .hcard{flex:0 0 clamp(280px,42vw,520px);}
+  .hcard .im{border-radius:18px;overflow:hidden;aspect-ratio:4/3;margin-bottom:16px;}
+  .hcard .im img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1);}
+  .hcard:hover .im img{transform:scale(1.08);}
+  .hcard h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.3rem;}
+  .hcard span{color:var(--muted);font-size:.9rem;}
+
   /* before / after */
-  .ba{position:relative;max-width:900px;margin:0 auto;border-radius:18px;overflow:hidden;aspect-ratio:16/10;user-select:none;box-shadow:0 30px 80px rgba(0,0,0,.5);}
+  .ba{position:relative;max-width:940px;margin:0 auto;border-radius:20px;overflow:hidden;aspect-ratio:16/10;user-select:none;box-shadow:0 40px 90px rgba(0,0,0,.55);}
   .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;}
-  .ba .after{filter:saturate(1.08) contrast(1.03);}
-  .ba .before{clip-path:inset(0 50% 0 0);filter:grayscale(.85) brightness(.62) contrast(.95);}
-  .ba .tag{position:absolute;top:16px;z-index:4;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;background:rgba(15,12,9,.72);padding:6px 12px;border-radius:50px;color:var(--cream);}
+  .ba .after{filter:saturate(1.1) contrast(1.04);}
+  .ba .before{clip-path:inset(0 50% 0 0);filter:grayscale(.85) brightness(.6) contrast(.95);}
+  .ba .tag{position:absolute;top:16px;z-index:4;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;background:rgba(16,13,9,.72);padding:6px 12px;border-radius:50px;color:var(--cream);}
   .ba .tag.b{left:16px;}.ba .tag.a{right:16px;color:var(--gold2);}
   .ba .divider{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--gold2);z-index:5;transform:translateX(-1px);}
-  .ba .handle{position:absolute;top:50%;left:50%;z-index:6;width:46px;height:46px;border-radius:50%;background:var(--gold2);color:var(--ink);display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);cursor:ew-resize;box-shadow:0 6px 20px rgba(0,0,0,.4);font-size:1rem;}
+  .ba .handle{position:absolute;top:50%;left:50%;z-index:6;width:48px;height:48px;border-radius:50%;background:var(--gold2);color:var(--ink);display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);cursor:ew-resize;box-shadow:0 8px 24px rgba(0,0,0,.45);}
 
-  /* gallery */
-  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-  @media(max-width:860px){.gal{grid-template-columns:repeat(2,1fr);}}
-  .gal figure{position:relative;overflow:hidden;border-radius:14px;aspect-ratio:1;cursor:pointer;}
-  .gal img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1);}
-  .gal figure:hover img{transform:scale(1.12);}
-  .gal figcaption{position:absolute;inset:auto 0 0 0;padding:16px;background:linear-gradient(transparent,rgba(15,12,9,.85));font-family:'Playfair Display',serif;font-size:1.05rem;opacity:0;transform:translateY(10px);transition:.4s;}
-  .gal figure:hover figcaption{opacity:1;transform:none;}
-
-  /* quote */
-  .quote{text-align:center;max-width:800px;margin:0 auto;}
-  .quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.5rem,3.5vw,2.2rem);line-height:1.4;color:var(--cream);margin-bottom:24px;}
-  .quote .who{font-size:.86rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);}
+  .quote{text-align:center;max-width:820px;margin:0 auto;}
+  .quote p{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(1.5rem,3.5vw,2.3rem);line-height:1.4;margin-bottom:24px;}
+  .quote .who{font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);}
   .stars{color:var(--gold2);letter-spacing:4px;margin-bottom:22px;font-size:1.1rem;}
 
-  /* contact */
   .contact{background:var(--ink2);border-top:1px solid var(--line);}
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
-  @media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:40px;}}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+  @media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:44px;}}
   .field{width:100%;padding:15px 20px;background:var(--ink);border:1px solid var(--line);border-radius:12px;color:var(--cream);font-family:inherit;font-size:1rem;margin-bottom:14px;outline:none;transition:border-color .3s;}
   .field:focus{border-color:var(--gold);}
   textarea.field{resize:vertical;min-height:120px;}
   .info-line{display:flex;align-items:center;gap:14px;margin-bottom:18px;color:var(--sand);}
   .info-line .ic{width:44px;height:44px;border-radius:50%;background:rgba(195,154,91,.12);display:flex;align-items:center;justify-content:center;color:var(--gold2);flex:none;}
 
-  footer{padding:40px 0;text-align:center;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;}
+  footer{padding:44px 0;text-align:center;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;}
   footer b{color:var(--gold2);}
 </style>
 </head>
 <body>
 
-<a class="demo-badge" href="https://florynepierson.com" target="_blank">✦ Site démo · <b>Floryne Pierson</b></a>
+<div class="grain"></div>
+<div class="cursor" id="cursor"></div>
+
+<!-- PRELOADER -->
+<div class="pre" id="pre">
+  <div class="pw"><span id="preword">L'Atelier</span></div>
+  <div class="pn serif">du Carrelage</div>
+  <div class="bar"><i id="prebar"></i></div>
+</div>
+
+<a class="demo-badge" href="https://florynepierson.com" target="_blank" data-cursor>✦ Site démo · <b>Floryne Pierson</b></a>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
@@ -148,7 +179,7 @@
       <a href="#services">Services</a>
       <a href="#avant-apres">Avant / Après</a>
       <a href="#avis">Avis</a>
-      <a class="nav-cta" href="#devis">Devis gratuit</a>
+      <a class="nav-cta" href="#devis" data-cursor>Devis gratuit</a>
     </div>
     <div class="burger" id="burger"><span></span><span></span><span></span></div>
   </div>
@@ -156,23 +187,37 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"><img src="https://picsum.photos/seed/bathroomtiles/1600/1000" alt=""></div>
+  <div class="hero-bg" id="heroBg"><img src="https://picsum.photos/seed/bathroomtiles/1700/1100" alt=""></div>
   <div class="wrap hero-content">
-    <span class="eyebrow">Carrelage & rénovation · Metz</span>
-    <h1 class="serif">L'art du carrelage,<br><em>sublimé.</em></h1>
-    <p>Salles de bains, sols, faïence : je transforme vos espaces avec une pose précise et des finitions impeccables, depuis 15 ans en Moselle.</p>
-    <div class="btns">
-      <a class="btn btn-gold" href="#devis">Demander un devis gratuit</a>
-      <a class="btn btn-ghost" href="#realisations">Voir mes réalisations</a>
+    <span class="eyebrow" data-fade>Carrelage & rénovation · Metz</span>
+    <h1 class="serif" data-split>L'art du carrelage, <em>sublimé.</em></h1>
+    <p data-fade>Salles de bains, sols, faïence : je transforme vos espaces avec une pose précise et des finitions impeccables, depuis 15 ans en Moselle.</p>
+    <div class="btns" data-fade>
+      <a class="btn btn-gold mag" href="#devis" data-cursor>Demander un devis gratuit</a>
+      <a class="btn btn-ghost mag" href="#realisations" data-cursor>Voir mes réalisations</a>
     </div>
   </div>
-  <div class="scroll-hint">Découvrir ↓</div>
+  <div class="scroll-hint">Scroll ↓</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee"><div class="track">Carrelage <span>✦</span> Salle de bains <span>✦</span> Douche à l'italienne <span>✦</span> Faïence <span>✦</span> Rénovation <span>✦</span> Metz &amp; Moselle <span>✦</span> Carrelage <span>✦</span> Salle de bains <span>✦</span> Douche à l'italienne <span>✦</span> Faïence <span>✦</span> Rénovation <span>✦</span> Metz &amp; Moselle <span>✦</span> </div></div>
+
+<!-- INTRO -->
+<section class="sec">
+  <div class="wrap intro-grid">
+    <div>
+      <div class="sec-label" data-reveal>L'artisan</div>
+      <div class="big-line serif" data-words>Chaque carreau posé raconte une exigence : celle du détail juste, de la ligne nette et du travail qui dure. Je conçois et je réalise vos espaces, du premier croquis à la dernière finition.</div>
+    </div>
+    <div class="intro-media"><img id="introImg" src="https://picsum.photos/seed/tilecraft/800/1000" alt=""></div>
+  </div>
 </section>
 
 <!-- STATS -->
 <section class="sec" style="padding:0;">
   <div class="wrap">
-    <div class="stats reveal">
+    <div class="stats">
       <div class="stat"><div class="n"><span class="count" data-target="15">0</span></div><div class="l">Ans d'expérience</div></div>
       <div class="stat"><div class="n"><span class="count" data-target="480">0</span></div><div class="l">Chantiers réalisés</div></div>
       <div class="stat"><div class="n"><span class="count" data-target="100">0</span>%</div><div class="l">Clients satisfaits</div></div>
@@ -185,15 +230,30 @@
 <section class="sec" id="services">
   <div class="wrap">
     <div class="center">
-      <div class="sec-label reveal">Ce que je fais</div>
-      <h2 class="sec-title serif reveal">Un savoir-faire, <em>trois spécialités</em></h2>
-      <p class="sec-intro reveal">De la petite réfection à la rénovation complète, chaque chantier est traité avec le même soin du détail.</p>
+      <div class="sec-label" data-reveal>Ce que je fais</div>
+      <h2 class="sec-title serif" data-reveal>Un savoir-faire, <em>trois spécialités</em></h2>
+      <p class="sec-intro" data-reveal>De la petite réfection à la rénovation complète, chaque chantier reçoit le même soin du détail.</p>
     </div>
     <div class="cards">
-      <div class="card reveal"><div class="ic">🛁</div><h3 class="serif">Salles de bains</h3><p>Rénovation complète clé en main : dépose, étanchéité, carrelage mural et sol, finitions. Une salle de bains neuve, sans stress.</p></div>
-      <div class="card reveal" style="transition-delay:.12s"><div class="ic">◧</div><h3 class="serif">Carrelage & faïence</h3><p>Pose de sols et murs, grand format, mosaïque, chevrons. Une découpe nette, des joints réguliers, un rendu durable.</p></div>
-      <div class="card reveal" style="transition-delay:.24s"><div class="ic">✦</div><h3 class="serif">Rénovation sur-mesure</h3><p>Douche à l'italienne, terrasse, cuisine : je conçois avec vous et je réalise, dans le respect des délais et du budget.</p></div>
+      <div class="card" data-reveal><div class="ic">🛁</div><h3 class="serif">Salles de bains</h3><p>Rénovation complète clé en main : dépose, étanchéité, carrelage mural et sol, finitions. Une salle de bains neuve, sans stress.</p></div>
+      <div class="card" data-reveal><div class="ic">◧</div><h3 class="serif">Carrelage &amp; faïence</h3><p>Pose de sols et murs, grand format, mosaïque, chevrons. Une découpe nette, des joints réguliers, un rendu durable.</p></div>
+      <div class="card" data-reveal><div class="ic">✦</div><h3 class="serif">Rénovation sur-mesure</h3><p>Douche à l'italienne, terrasse, cuisine : je conçois avec vous et je réalise, dans le respect des délais et du budget.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- HORIZONTAL GALLERY -->
+<section class="sec hgal" id="realisations" style="padding-bottom:150px;">
+  <div class="wrap center">
+    <div class="sec-label" data-reveal>Portfolio</div>
+    <h2 class="sec-title serif" data-reveal>Mes <em>réalisations</em></h2>
+  </div>
+  <div class="htrack" id="htrack">
+    <div class="hcard"><div class="im"><img src="https://picsum.photos/seed/tileA/900/680" alt=""></div><h4 class="serif">Douche à l'italienne</h4><span>Metz centre · 2024</span></div>
+    <div class="hcard"><div class="im"><img src="https://picsum.photos/seed/tileB/900/680" alt=""></div><h4 class="serif">Salle de bains grand format</h4><span>Montigny-lès-Metz</span></div>
+    <div class="hcard"><div class="im"><img src="https://picsum.photos/seed/tileC/900/680" alt=""></div><h4 class="serif">Faïence chevrons</h4><span>Woippy</span></div>
+    <div class="hcard"><div class="im"><img src="https://picsum.photos/seed/tileD/900/680" alt=""></div><h4 class="serif">Sol effet marbre</h4><span>Longeville</span></div>
+    <div class="hcard"><div class="im"><img src="https://picsum.photos/seed/tileE/900/680" alt=""></div><h4 class="serif">Crédence cuisine</h4><span>Metz Queuleu</span></div>
   </div>
 </section>
 
@@ -201,41 +261,22 @@
 <section class="sec" id="avant-apres" style="background:var(--ink2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
   <div class="wrap">
     <div class="center">
-      <div class="sec-label reveal">La transformation</div>
-      <h2 class="sec-title serif reveal">Faites glisser pour voir <em>avant / après</em></h2>
+      <div class="sec-label" data-reveal>La transformation</div>
+      <h2 class="sec-title serif" data-reveal>Faites glisser · <em>avant / après</em></h2>
     </div>
-    <div class="ba reveal" id="ba">
+    <div class="ba" id="ba" data-reveal>
       <img class="after" src="https://picsum.photos/seed/bathroomtiles/1200/750" alt="Après">
       <img class="before" id="baBefore" src="https://picsum.photos/seed/bathroomtiles/1200/750" alt="Avant">
       <span class="tag b">Avant</span><span class="tag a">Après</span>
       <div class="divider" id="baDivider"></div>
-      <div class="handle" id="baHandle">⟷</div>
-    </div>
-  </div>
-</section>
-
-<!-- RÉALISATIONS -->
-<section class="sec" id="realisations">
-  <div class="wrap">
-    <div class="center">
-      <div class="sec-label reveal">Portfolio</div>
-      <h2 class="sec-title serif reveal">Mes <em>réalisations</em></h2>
-      <p class="sec-intro reveal">Un aperçu de chantiers récents en Moselle. Chaque projet est unique.</p>
-    </div>
-    <div class="gal">
-      <figure class="reveal"><img src="https://picsum.photos/seed/tileA/700/700" alt=""><figcaption>Douche à l'italienne · Metz</figcaption></figure>
-      <figure class="reveal" style="transition-delay:.08s"><img src="https://picsum.photos/seed/tileB/700/700" alt=""><figcaption>Salle de bains grand format</figcaption></figure>
-      <figure class="reveal" style="transition-delay:.16s"><img src="https://picsum.photos/seed/tileC/700/700" alt=""><figcaption>Faïence chevrons · Montigny</figcaption></figure>
-      <figure class="reveal"><img src="https://picsum.photos/seed/tileD/700/700" alt=""><figcaption>Sol effet marbre</figcaption></figure>
-      <figure class="reveal" style="transition-delay:.08s"><img src="https://picsum.photos/seed/tileE/700/700" alt=""><figcaption>Crédence cuisine</figcaption></figure>
-      <figure class="reveal" style="transition-delay:.16s"><img src="https://picsum.photos/seed/tileF/700/700" alt=""><figcaption>Rénovation complète · Woippy</figcaption></figure>
+      <div class="handle" id="baHandle" data-cursor>⟷</div>
     </div>
   </div>
 </section>
 
 <!-- AVIS -->
-<section class="sec" id="avis" style="background:var(--ink2);border-top:1px solid var(--line);">
-  <div class="wrap quote reveal">
+<section class="sec" id="avis">
+  <div class="wrap quote" data-reveal>
     <div class="stars">★★★★★</div>
     <p class="serif">« Travail d'une propreté remarquable. Ma salle de bains a été refaite en une semaine, dans les délais, et le rendu est magnifique. Je recommande les yeux fermés. »</p>
     <div class="who">Sophie L. · Metz</div>
@@ -245,71 +286,154 @@
 <!-- DEVIS -->
 <section class="sec contact" id="devis">
   <div class="wrap contact-grid">
-    <div class="reveal">
+    <div data-reveal>
       <div class="sec-label">Parlons de votre projet</div>
       <h2 class="sec-title serif">Un devis <em>gratuit</em>, sous 48h</h2>
       <p class="sec-intro" style="margin-bottom:30px;">Décrivez-moi votre projet — je vous réponds rapidement avec une estimation claire, sans engagement.</p>
       <div class="info-line"><span class="ic">✆</span> 06 00 00 00 00</div>
       <div class="info-line"><span class="ic">✉</span> contact@atelier-carrelage.fr</div>
-      <div class="info-line"><span class="ic">⌖</span> Metz & agglomération · Moselle (57)</div>
+      <div class="info-line"><span class="ic">⌖</span> Metz &amp; agglomération · Moselle (57)</div>
     </div>
-    <form class="reveal" onsubmit="event.preventDefault();this.querySelector('.done').style.display='block';">
+    <form data-reveal onsubmit="event.preventDefault();this.querySelector('.done').style.display='block';">
       <input class="field" placeholder="Votre nom" required>
       <input class="field" type="tel" placeholder="Téléphone">
       <input class="field" type="email" placeholder="Email" required>
       <textarea class="field" placeholder="Votre projet (salle de bains, sol, surface…)"></textarea>
-      <button class="btn btn-gold" style="width:100%;">Envoyer ma demande</button>
+      <button class="btn btn-gold mag" style="width:100%;" data-cursor>Envoyer ma demande</button>
       <p class="done" style="display:none;color:var(--gold2);margin-top:14px;text-align:center;">✦ Merci ! (démo — le formulaire serait relié à votre email)</p>
     </form>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">
-    L'Atelier du Carrelage · Site <b>démo</b> conçu par <b>Floryne Pierson</b> — <a href="https://florynepierson.com" style="color:var(--gold2);">florynepierson.com</a>
-  </div>
+  <div class="wrap">L'Atelier du Carrelage · Site <b>démo</b> conçu par <b>Floryne Pierson</b> — <a href="https://florynepierson.com" style="color:var(--gold2);" data-cursor>florynepierson.com</a></div>
 </footer>
 
+<!-- premium motion stack (CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/split-type@0.3.4/umd/index.min.js"></script>
 <script>
-  // nav scroll state
-  var nav=document.getElementById('nav');
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGSAP = !!(window.gsap), hasST = !!(window.ScrollTrigger), hasLenis = !!(window.Lenis);
+
+  // ---- nav + mobile menu (always) ----
+  var nav=document.getElementById('nav'), burger=document.getElementById('burger'), menu=document.getElementById('menu');
   window.addEventListener('scroll',function(){ nav.classList.toggle('scrolled', window.scrollY>40); },{passive:true});
-
-  // mobile menu
-  var burger=document.getElementById('burger'), menu=document.getElementById('menu');
   burger.addEventListener('click',function(){ menu.classList.toggle('open'); burger.classList.toggle('x'); });
-  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ menu.classList.remove('open'); burger.classList.remove('x'); }); });
 
-  // reveal on scroll
-  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{threshold:.16});
-  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  // ---- custom cursor ----
+  var cur=document.getElementById('cursor'), cx=0,cy=0,tx=0,ty=0;
+  if(window.matchMedia('(hover:hover)').matches){
+    window.addEventListener('mousemove',function(e){ tx=e.clientX; ty=e.clientY; });
+    (function loop(){ cx+=(tx-cx)*.18; cy+=(ty-cy)*.18; cur.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)'; requestAnimationFrame(loop); })();
+    document.querySelectorAll('a,button,[data-cursor]').forEach(function(el){
+      el.addEventListener('mouseenter',function(){cur.classList.add('big');});
+      el.addEventListener('mouseleave',function(){cur.classList.remove('big');});
+    });
+  } else { cur.style.display='none'; }
 
-  // animated counters
-  function runCount(el){
-    var target=parseFloat(el.getAttribute('data-target')), dec=(target%1!==0), dur=1500, t0=null;
-    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1), val=target*(1-Math.pow(1-p,3));
-      el.textContent=dec?val.toFixed(1):Math.round(val); if(p<1)requestAnimationFrame(step); else el.textContent=dec?target.toFixed(1):target; }
-    requestAnimationFrame(step);
+  // ---- magnetic buttons ----
+  if(window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.mag').forEach(function(b){
+      b.addEventListener('mousemove',function(e){ var r=b.getBoundingClientRect(); b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.35)+'px)'; });
+      b.addEventListener('mouseleave',function(){ b.style.transform=''; });
+    });
   }
-  var cio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ runCount(e.target); cio.unobserve(e.target);} }); },{threshold:.6});
-  document.querySelectorAll('.count').forEach(function(el){ cio.observe(el); });
 
-  // before / after slider
+  // ---- before / after slider (vanilla) ----
   (function(){
-    var ba=document.getElementById('ba'), before=document.getElementById('baBefore'),
-        divider=document.getElementById('baDivider'), handle=document.getElementById('baHandle'), dragging=false;
-    function setPos(x){
-      var r=ba.getBoundingClientRect(), pct=Math.max(2,Math.min(98,((x-r.left)/r.width)*100));
-      before.style.clipPath='inset(0 '+(100-pct)+'% 0 0)';
-      divider.style.left=pct+'%'; handle.style.left=pct+'%';
-    }
-    function start(){dragging=true;} function end(){dragging=false;}
-    function move(e){ if(!dragging)return; var x=(e.touches?e.touches[0].clientX:e.clientX); setPos(x); }
-    handle.addEventListener('mousedown',start); handle.addEventListener('touchstart',start,{passive:true});
-    window.addEventListener('mouseup',end); window.addEventListener('touchend',end);
-    window.addEventListener('mousemove',move); window.addEventListener('touchmove',move,{passive:true});
+    var ba=document.getElementById('ba'), before=document.getElementById('baBefore'), divider=document.getElementById('baDivider'), handle=document.getElementById('baHandle'), dragging=false;
+    function setPos(x){ var r=ba.getBoundingClientRect(), pct=Math.max(2,Math.min(98,((x-r.left)/r.width)*100)); before.style.clipPath='inset(0 '+(100-pct)+'% 0 0)'; divider.style.left=pct+'%'; handle.style.left=pct+'%'; }
+    handle.addEventListener('mousedown',function(){dragging=true;}); handle.addEventListener('touchstart',function(){dragging=true;},{passive:true});
+    window.addEventListener('mouseup',function(){dragging=false;}); window.addEventListener('touchend',function(){dragging=false;});
+    window.addEventListener('mousemove',function(e){ if(dragging) setPos(e.clientX); });
+    window.addEventListener('touchmove',function(e){ if(dragging) setPos(e.touches[0].clientX); },{passive:true});
     ba.addEventListener('click',function(e){ setPos(e.clientX); });
   })();
+
+  // ---- smooth scroll (Lenis) ----
+  var lenis=null;
+  if(hasLenis && !reduce){
+    lenis=new Lenis({ lerp:.09, wheelMultiplier:1 });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+    if(hasST){ lenis.on('scroll', ScrollTrigger.update); }
+  }
+  // anchor smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href'); if(id.length<2)return;
+      var t=document.querySelector(id); if(!t)return; e.preventDefault();
+      menu.classList.remove('open'); burger.classList.remove('x');
+      if(lenis) lenis.scrollTo(t,{offset:-60}); else t.scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  // ---- GSAP animations ----
+  function runGSAP(){
+    if(hasST) gsap.registerPlugin(ScrollTrigger);
+
+    // hero text split reveal
+    var h1=document.querySelector('[data-split]');
+    if(h1 && window.SplitType){
+      var s=new SplitType(h1,{types:'words,chars'});
+      gsap.set(h1,{opacity:1});
+      gsap.from(s.chars,{yPercent:120,opacity:0,stagger:.02,duration:.9,ease:'power4.out',delay:.1});
+    }
+    gsap.from('[data-fade]',{y:26,opacity:0,duration:1,stagger:.12,ease:'power3.out',delay:.35});
+
+    if(!hasST) return;
+
+    // hero parallax
+    gsap.to('#heroBg img',{yPercent:18,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+    gsap.to('#introImg',{yPercent:-14,ease:'none',scrollTrigger:{trigger:'.intro-media',start:'top bottom',end:'bottom top',scrub:true}});
+
+    // generic reveals
+    gsap.utils.toArray('[data-reveal]').forEach(function(el){
+      gsap.from(el,{y:40,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%'}});
+    });
+
+    // word-by-word intro line
+    var wl=document.querySelector('[data-words]');
+    if(wl && window.SplitType){
+      var sw=new SplitType(wl,{types:'words'});
+      gsap.from(sw.words,{opacity:.12,stagger:.05,ease:'none',scrollTrigger:{trigger:wl,start:'top 80%',end:'bottom 55%',scrub:true}});
+    }
+
+    // counters
+    gsap.utils.toArray('.count').forEach(function(el){
+      var target=parseFloat(el.getAttribute('data-target')), dec=(target%1!==0), o={v:0};
+      ScrollTrigger.create({trigger:el,start:'top 85%',once:true,onEnter:function(){
+        gsap.to(o,{v:target,duration:1.6,ease:'power2.out',onUpdate:function(){ el.textContent=dec?o.v.toFixed(1):Math.round(o.v); }});
+      }});
+    });
+
+    // horizontal scroll gallery
+    var track=document.getElementById('htrack');
+    if(track && window.innerWidth>720){
+      var dist=function(){ return track.scrollWidth - window.innerWidth + 56; };
+      gsap.to(track,{x:function(){return -dist();},ease:'none',scrollTrigger:{
+        trigger:'.hgal',start:'top top',end:function(){return '+='+dist();},scrub:1,pin:true,invalidateOnRefresh:true
+      }});
+    }
+  }
+  if(hasGSAP && !reduce){ try{ runGSAP(); }catch(e){ document.querySelectorAll('[data-split],[data-fade],[data-reveal]').forEach(function(el){el.style.opacity=1;}); } }
+
+  // ---- preloader ----
+  var pre=document.getElementById('pre'), bar=document.getElementById('prebar');
+  function finishPre(){
+    if(hasGSAP && !reduce){ gsap.to(pre,{yPercent:-100,duration:.9,ease:'power4.inOut',onComplete:function(){pre.style.display='none';if(hasST)ScrollTrigger.refresh();}}); }
+    else { pre.style.display='none'; }
+  }
+  if(hasGSAP && !reduce){
+    gsap.to(bar,{width:'100%',duration:1.2,ease:'power2.inOut',onComplete:function(){ setTimeout(finishPre,180); }});
+  } else {
+    bar.style.width='100%'; setTimeout(finishPre,300);
+  }
+  window.addEventListener('load',function(){ if(hasST) setTimeout(function(){ScrollTrigger.refresh();},400); });
+})();
 </script>
 </body>
 </html>

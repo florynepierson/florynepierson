@@ -78,9 +78,11 @@
 
   /* intro immersive (zoom au scroll) */
   .intro-exp{height:100vh;overflow:hidden;position:relative;background:#0d0b08;cursor:pointer;}
-  .ie-img{position:absolute;inset:0;}
-  .ie-img img{width:100%;height:100%;object-fit:cover;transform-origin:52% 46%;will-change:transform;}
-  .ie-img::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(15,12,9,.3),rgba(15,12,9,.6));}
+  .ie-layer{position:absolute;inset:0;}
+  .ie-layer img{width:100%;height:100%;object-fit:cover;transform-origin:52% 44%;will-change:transform;}
+  .ie-out::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(15,12,9,.28),rgba(15,12,9,.6));}
+  .ie-in{opacity:0;}
+  .ie-in::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(15,12,9,.12),rgba(15,12,9,.42));}
   .ie-text{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;pointer-events:none;}
   .ie-eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2);margin-bottom:16px;}
   .ie-t1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(2.4rem,6.5vw,4.6rem);line-height:1.05;}
@@ -191,7 +193,8 @@
 
 <!-- INTRO IMMERSIVE (zoom au scroll) -->
 <section class="intro-exp" id="introExp">
-  <div class="ie-img"><img id="ieImg" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1800&auto=format&fit=crop" alt=""></div>
+  <div class="ie-layer ie-out" id="ieOut"><img id="ieImg" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1800&auto=format&fit=crop" alt=""></div>
+  <div class="ie-layer ie-in" id="ieInLayer"><img id="ieInside" src="https://images.unsplash.com/photo-1704040686428-7534b262d0d8?q=80&w=1800&auto=format&fit=crop" alt=""></div>
   <div class="ie-text">
     <div>
       <div class="ie-eyebrow" id="ieEyebrow">Prestige Immobilier · Metz &amp; Moselle</div>
@@ -367,12 +370,14 @@
       // Intro immersive : la villa zoome au scroll, "Bienvenue" se révèle (scroll in/out)
       var ie=document.getElementById('introExp');
       if(ie){
-        gsap.timeline({scrollTrigger:{trigger:ie,start:'top top',end:'+=170%',scrub:.6,pin:true,anticipatePin:1}})
-          .to('#ieImg',{scale:2.7,ease:'none'},0)
-          .to(['#ieEyebrow','#ieT1','#ieHint'],{opacity:0,ease:'none'},0)
-          .fromTo('#ieWelcome',{opacity:0,scale:.9},{opacity:1,scale:1,ease:'none'},.32)
-          .to('#ieWelcome',{opacity:0,ease:'none'},.82);
-        ie.addEventListener('click',function(){ var t=document.querySelector('.hero'); if(lenis)lenis.scrollTo(t,{duration:1.8}); else if(t)t.scrollIntoView({behavior:'smooth'}); });
+        gsap.timeline({scrollTrigger:{trigger:ie,start:'top top',end:'+=220%',scrub:.5,pin:true,anticipatePin:1}})
+          .to('#ieImg',{scale:3.4,duration:1,ease:'none'},0)                                  // on zoome vers la villa
+          .to(['#ieEyebrow','#ieT1','#ieHint'],{opacity:0,duration:.35,ease:'none'},0)         // le titre d'entrée s'efface
+          .to('#ieInLayer',{opacity:1,duration:.5,ease:'none'},.35)                            // l'intérieur apparaît (on entre)
+          .fromTo('#ieInside',{scale:1.55},{scale:1,duration:.7,ease:'none'},.35)              // l'intérieur se pose
+          .to('#ieOut',{opacity:0,duration:.4,ease:'none'},.6)                                 // l'extérieur disparaît → on est dedans
+          .fromTo('#ieWelcome',{opacity:0,y:18},{opacity:1,y:0,duration:.35,ease:'none'},.82); // "Bienvenue"
+        ie.addEventListener('click',function(){ var t=document.querySelector('.hero'); if(lenis)lenis.scrollTo(t,{duration:2}); else if(t)t.scrollIntoView({behavior:'smooth'}); });
       }
       gsap.utils.toArray('.reveal').forEach(function(el){ gsap.fromTo(el,{y:38,opacity:0},{y:0,opacity:1,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 86%'}}); });
       gsap.utils.toArray('.count').forEach(function(el){ var t=parseFloat(el.getAttribute('data-target')),dec=(t%1!==0),o={v:0};

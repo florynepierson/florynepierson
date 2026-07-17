@@ -91,6 +91,13 @@
         <button data-m="on" data-i18n="mOn">Avec</button>
         <button data-m="off" class="active" data-i18n="mOff">Sans</button>
       </div>
+      <div class="formulas pay-toggle">
+        <span class="flabel" data-i18n="payLbl">Paiement :</span>
+        <button data-p="2" class="active">2×</button>
+        <button data-p="3">3×</button>
+        <button data-p="4">4×</button>
+        <button data-p="5">5×</button>
+      </div>
     </div>
   </div>
   <div class="edithint" data-i18n="hint">✎ Choisissez la langue et la formule ci-dessus, puis cliquez les champs en pointillés pour remplir le client, la date et les montants. Puis « Enregistrer en PDF ».</div>
@@ -142,10 +149,9 @@
     <div class="tiers" id="tiersLine"></div>
 
     <div class="totals">
-      <div class="row"><span data-i18n="tDepLbl">Acompte 50 % à la commande</span><span>€<span id="tDeposit" contenteditable="true">345</span></span></div>
-      <div class="row"><span data-i18n="tBalLbl">Solde 50 % à la livraison</span><span>€<span id="tBalance" contenteditable="true">345</span></span></div>
+      <div id="instRows"></div>
       <div class="grand"><span data-i18n="tTotalLbl">Total du site (une fois)</span><span>€<span id="tTotal" contenteditable="true">690</span></span></div>
-      <div class="sub" data-i18n="tsub">soit 50 % + 50 % du prix du site — payé en 2 fois, sans supplément</div>
+      <div class="sub" id="instSub"></div>
       <div class="row maint-row" style="margin-top:14px;"><span data-i18n="tMonthLbl">Option maintenance &amp; hébergement</span><span>€<span contenteditable="true">29</span> <span data-i18n="permo2">/ mois</span></span></div>
       <div class="sub maint-row" data-i18n="tMonthNote">facturée séparément, sans engagement — non incluse dans le total du site</div>
     </div>
@@ -216,6 +222,9 @@
       termsPost:' semaines après réception de vos contenus (textes, photos, coordonnées). 2 séries de retouches incluses. À la livraison, le site vous appartient. La maintenance est optionnelle, mensuelle et sans engagement. Devis valable 30 jours.',
       signClient:'Le client (nom, date & « bon pour accord »)',
       printbtn:'⬇ Enregistrer ce devis en PDF',
+      payLbl:'Paiement :',
+      instVers:'Versement', instFirst:'à la commande', instLast:'à la livraison',
+      instSubPre:'soit ', instSubPost:' versements égaux, sans frais',
       row1:function(n){return 'Création du site — formule « '+n+' »';},
       tiers:function(){return 'Formules disponibles : <b>Essentiel</b> (1 page) dès 390 € · <b>Visibilité locale</b> (jusqu\'à 3 pages + fiche Google Business) dès 690 € · <b>Site complet</b> (5 pages ou plus, galerie) dès 990 €. Paiement possible jusqu\'en 5 fois sans frais. Choisissez la formule ci-dessus ou ajustez les montants.';}
     },
@@ -251,11 +260,14 @@
       termsPost:' weeks after we receive your content (text, photos, contact details). 2 rounds of revisions included. On delivery, the website is yours. Maintenance is optional, monthly and commitment-free. Quote valid for 30 days.',
       signClient:'The client (name, date & “agreed”)',
       printbtn:'⬇ Save this quote as PDF',
+      payLbl:'Payment:',
+      instVers:'Instalment', instFirst:'on order', instLast:'on delivery',
+      instSubPre:'i.e. ', instSubPost:' equal instalments, interest-free',
       row1:function(n){return 'Website build — “'+n+'” package';},
       tiers:function(){return 'Available packages: <b>Essential</b> (1 page) from €390 · <b>Local visibility</b> (up to 3 pages + Google Business profile) from €690 · <b>Full multi-page site</b> (5+ pages, gallery) from €990. Payment available in up to 5 interest-free instalments. Pick a package above or adjust the amounts.';}
     }
   };
-  var lang='fr', curF='loc', curM='off';
+  var lang='fr', curF='loc', curM='off', curP=2;
   function render(){
     var d=T[lang];
     document.querySelectorAll('[data-i18n]').forEach(function(el){
@@ -263,13 +275,24 @@
       if(d[k]==null) return;
       if(k==='termsPre'||k==='termsPost') el.innerHTML=d[k]; else el.textContent=d[k];
     });
-    var f=F[curF], dep=Math.round(f.price/2);
+    var f=F[curF];
     document.getElementById('row1title').textContent=d.row1(f[lang]);
     document.getElementById('row1desc').textContent=d.row1s(curF);
     document.getElementById('fPrice').textContent=f.price;
     document.getElementById('tTotal').textContent=f.price;
-    document.getElementById('tDeposit').textContent=dep;
-    document.getElementById('tBalance').textContent=f.price-dep;
+    var n=curP, per=Math.round(f.price/n), amts=[], html='';
+    for(var i=0;i<n;i++) amts.push(per);
+    amts[n-1]=f.price-per*(n-1);
+    for(var i=0;i<n;i++){
+      var lbl=d.instVers+' '+(i+1)+'/'+n;
+      if(i===0) lbl+=' — '+d.instFirst; else if(i===n-1) lbl+=' — '+d.instLast;
+      html+='<div class="row"><span>'+lbl+'</span><span>€'+amts[i]+'</span></div>';
+    }
+    document.getElementById('instRows').innerHTML=html;
+    document.getElementById('instSub').textContent=(n>1?d.instSubPre+n+d.instSubPost:'');
+    document.querySelectorAll('.pay-toggle button').forEach(function(b){
+      b.classList.toggle('active',b.getAttribute('data-p')===String(curP));
+    });
     document.getElementById('tiersLine').innerHTML=d.tiers();
     document.querySelectorAll('.formulas button[data-f]').forEach(function(b){
       var k=b.getAttribute('data-f');
@@ -291,8 +314,11 @@
   document.querySelectorAll('.lang button').forEach(function(b){
     b.addEventListener('click',function(){lang=b.getAttribute('data-lang');render();});
   });
-  document.querySelectorAll('.formulas button').forEach(function(b){
+  document.querySelectorAll('.formulas button[data-f]').forEach(function(b){
     b.addEventListener('click',function(){curF=b.getAttribute('data-f');render();});
+  });
+  document.querySelectorAll('.pay-toggle button').forEach(function(b){
+    b.addEventListener('click',function(){curP=parseInt(b.getAttribute('data-p'),10);render();});
   });
   render();
 </script>

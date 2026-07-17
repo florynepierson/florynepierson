@@ -1740,5 +1740,31 @@
     <!-- Trustpilot widget bootstrap -->
     <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
 
+    <!-- Premium motion (GSAP) — couche additive, dégradation propre -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+    (function(){
+      if(!window.gsap) return;                                   // pas de GSAP → rien, contenu intact
+      if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // Entrée du hero au chargement (ne dépend pas de ScrollTrigger)
+      var heroKids = gsap.utils.toArray('#accueil .max-w-5xl.mx-auto > *');
+      if(heroKids.length){
+        gsap.from(heroKids,{y:32,opacity:0,duration:1,stagger:.13,ease:'power3.out',clearProps:'all'});
+      }
+
+      if(!window.ScrollTrigger) return;                          // pas de ScrollTrigger → on s'arrête, rien masqué
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Révélations au scroll : titres de section + cartes (hors hero, dans les sections)
+      var targets = gsap.utils.toArray('section:not(#accueil) h2, section:not(#accueil) h3, section:not(#accueil) .rounded-3xl, section:not(#accueil) .rounded-2xl');
+      targets.forEach(function(el){
+        gsap.from(el,{y:40,opacity:0,duration:.9,ease:'power3.out',clearProps:'all',
+          scrollTrigger:{trigger:el,start:'top 88%'}});
+      });
+    })();
+    </script>
+
 </body>
 </html>

@@ -113,6 +113,32 @@ section.pad{padding:110px 0;}
 .card .more{margin-top:12px;font-size:.78rem;font-weight:700;color:var(--gold);}
 .card:hover .more{text-decoration:underline;}
 
+/* ── HERO CHAT PREVIEW ── */
+.hero-preview{position:absolute;right:max(28px,calc((100% - 1200px)/2 + 20px));top:50%;transform:translateY(-50%);width:288px;background:#fff;border-radius:18px;box-shadow:0 36px 90px rgba(0,0,0,.38),0 0 0 1px rgba(255,255,255,.08);overflow:hidden;z-index:3;pointer-events:none;}
+@media(max-width:1160px){.hero-preview{display:none;}}
+.hp-head{background:var(--navy);padding:13px 15px;display:flex;align-items:center;gap:10px;color:#fff;}
+.hp-avatar{width:30px;height:30px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.hp-info b{font-size:.83rem;display:block;}
+.hp-info span{font-size:.6rem;color:#7bc87b;}
+.hp-body{padding:11px;display:flex;flex-direction:column;gap:8px;background:#f3f5f8;min-height:210px;}
+.hp-msg{max-width:86%;padding:8px 11px;border-radius:13px;font-size:.78rem;line-height:1.48;}
+.hp-bot{align-self:flex-start;background:#fff;border:1px solid rgba(0,0,0,.07);border-bottom-left-radius:3px;}
+.hp-user{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:3px;}
+.hp-capture{background:rgba(15,160,100,.09);border:1px solid rgba(15,160,100,.22);color:#0a8055;border-radius:9px;font-size:.7rem;padding:7px 11px;text-align:center;font-weight:600;}
+.hp-bar{padding:9px;background:#fff;border-top:1px solid #ebebeb;display:flex;gap:6px;align-items:center;}
+.hp-bar input{flex:1;border:1px solid #ddd;border-radius:100px;padding:7px 12px;font-family:inherit;font-size:.76rem;background:#fafafa;color:var(--muted);}
+.hp-bar button{width:28px;height:28px;border-radius:50%;background:var(--gold);border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+@keyframes hpFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hp-a1{animation:hpFade .4s .5s both;}
+.hp-a2{animation:hpFade .4s 1.2s both;}
+.hp-a3{animation:hpFade .4s 2.2s both;}
+.hp-a4{animation:hpFade .4s 3s both;}
+.hp-a5{animation:hpFade .4s 4.1s both;}
+
+/* ── NOTIF BADGE ── */
+.pa-notif{position:absolute;top:-4px;right:-4px;background:#e44;color:#fff;border-radius:50%;width:19px;height:19px;font-size:.58rem;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;animation:notifPop .4s 5s both;}
+@keyframes notifPop{from{transform:scale(0)}to{transform:scale(1)}}
+
 /* ── SERVICES ── */
 .serv-sec{background:var(--cream);}
 .serv{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
@@ -287,6 +313,25 @@ footer a:hover{color:var(--gold);}
     </div>
   </div>
   <div class="scrolldown" id="scrollDown">Défiler ↓</div>
+
+  <!-- Hero chat preview (decorative, aria-hidden) -->
+  <div class="hero-preview" aria-hidden="true">
+    <div class="hp-head">
+      <div class="hp-avatar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-9.5z"/><path d="M9 21V13h6v8"/></svg></div>
+      <div class="hp-info"><b>Solara Estates · Assistant</b><span>● en ligne 24h/24</span></div>
+    </div>
+    <div class="hp-body">
+      <div class="hp-msg hp-user hp-a1">Vous avez des appartements à Ixelles ?</div>
+      <div class="hp-msg hp-bot hp-a2">Oui — un 95 m² au 3ème étage, parquet, vue dégagée, à <strong>1 350 €/mois</strong>. Je vous en dis plus ?</div>
+      <div class="hp-msg hp-user hp-a3">Oui, je suis intéressée !</div>
+      <div class="hp-msg hp-bot hp-a4">Super ! Quel est votre prénom pour qu'un conseiller vous rappelle ?</div>
+      <div class="hp-capture hp-a5">✓ Contact capturé · 21h47 · hors heures d'ouverture</div>
+    </div>
+    <div class="hp-bar">
+      <input placeholder="Votre message…" disabled>
+      <button><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" stroke="none"><polygon points="22 2 15 22 11 13 2 9 22 2" fill="#fff"/></svg></button>
+    </div>
+  </div>
 </header>
 
 <section class="stats"><div class="wrap"><div class="row">
@@ -304,7 +349,7 @@ footer a:hover{color:var(--gold);}
   </div>
   <div class="props">
     <div class="card reveal d1" data-msg-fr="Bonjour, je suis intéressé(e) par l'appartement à Ixelles (385 000 €)." data-msg-en="Hi, I'm interested in the apartment in Ixelles (€385,000).">
-      <div class="imgwrap"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?auto=format&fit=crop&w=700&q=85')"></div><span class="tag" id="tag1">À vendre</span></div>
+      <div class="imgwrap"><div class="img" style="background-image:url('/prop1.jpg')"></div><span class="tag" id="tag1">À vendre</span></div>
       <div class="body"><div class="price">385 000 €</div><h3 id="c1t">Appartement · Ixelles</h3>
         <div class="feat"><span>◫ 95 m²</span><span>⌂ 2 ch.</span><span>❋ Lumières</span></div>
         <div class="more" id="c1m">Voir le bien →</div></div>
@@ -462,7 +507,8 @@ footer a:hover{color:var(--gold);}
 </div></footer>
 
 <!-- CHATBOT -->
-<button class="pa-btn" id="paBtn" aria-label="Ouvrir l'assistant">
+<button class="pa-btn" id="paBtn" aria-label="Ouvrir l'assistant" style="position:relative;">
+  <span class="pa-notif">2</span>
   <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
     <path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4 3.2V16.5A1.5 1.5 0 0 1 3.5 15V7A1.5 1.5 0 0 1 4 5.5z"/>
     <circle cx="8.5" cy="11" r="1" fill="currentColor" stroke="none"/>

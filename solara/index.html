@@ -267,6 +267,7 @@ footer a:hover{color:var(--gold);}
       <span class="nav-phone">+32 2 000 00 00</span>
       <div class="lang-tog">
         <button id="langFR" class="active" onclick="setLang('fr')">FR</button>
+        <button id="langNL" onclick="setLang('nl')">NL</button>
         <button id="langEN" onclick="setLang('en')">EN</button>
       </div>
       <a href="#contact" class="btn" id="navBtn" style="padding:10px 18px;border-radius:8px;">Estimation</a>
@@ -482,6 +483,7 @@ footer a:hover{color:var(--gold);}
     <div class="pa-info"><b id="paHeadName">Solara Estates · Assistant</b><span id="paHeadSub">● en ligne 24h/24</span></div>
     <div class="pa-lang">
       <button id="chatFR" class="active" onclick="setChatLang('fr')">FR</button>
+      <button id="chatNL" onclick="setChatLang('nl')">NL</button>
       <button id="chatEN" onclick="setChatLang('en')">EN</button>
     </div>
   </div>
@@ -634,6 +636,74 @@ var T = {
     sayFallback:'I can guide you in one tap 🙂 Choose below:',
     sayView:'Excellent choice 👍 This property is available. Leave me your name and a number, and an adviser will get back to you shortly to arrange a viewing.',
     letType:'Letting',buyType:'Purchase',investType:'Investment',valuationType:'Valuation',
+  },
+  nl: {
+    navBuy:'Kopen',navRent:'Huren',navSell:'Verkopen',navInv:'Investeren',navVal:'Schatting',navCt:'Contact',navBtn:'Schatting',
+    heroEye:'Onafhankelijk vastgoedkantoor · Brussel',
+    heroH1:'Uw vastgoedproject<br>in Brussel, <em>in goede handen.</em>',
+    heroP:'Kopen, verkopen, huren, investeren — persoonlijke begeleiding van het eerste contact tot de sleutels.',
+    heroCta1:'Bekijk de panden',heroCta2:'Gratis schatting',
+    sLbl1:'Ik wil',sO1:'Kopen',sO2:'Huren',sO3:'Investeren',sLbl2:'Gemeente',sLbl3:'Max. budget',sBtn:'Zoeken',sInp:'bijv. 400 000 €',
+    scrollDown:'Scrollen ↓',
+    st1:'Jaar ervaring',st2:'Google-reviews',st3:'19 gemeenten',st3n:'Brussel',st4:'Onafhankelijk',st4n:'100%',
+    listEye:'Uitgelichte panden',listH2:'Een selectie in Brussel',
+    tag1:'Te koop',tag2:'Te koop',tag3:'Investering',tag4:'Te huur',tag5:'Te koop',tag6:'Te koop',
+    c1t:'Appartement · Elsene',c2t:'Huis · Ukkel',c3t:'Studio · Sint-Gillis',c4t:'Appartement · Woluwé',c5t:'Huis · Etterbeek',c6t:'Penthouse · Elsene',
+    cMore:'Bekijk pand →',
+    servEye:'Onze diensten',servH2:'Begeleiding van A tot Z',
+    s1h:'Verkoop',s1p:'Eerlijke schatting en optimale marktplaatsing voor uw pand.',
+    s2h:'Verhuur',s2p:'Langetermijnverhuur en huurcontracten van A tot Z beheerd.',
+    s3h:'Beheer',s3p:'Wij regelen alles — u ontvangt gewoon uw huur.',
+    s4h:'Investering',s4p:'Panden met hoog huurrendement in de 19 Brusselse gemeenten.',
+    hoodEye:'Brussel',hoodH2:'De gemeenten die we het best kennen',
+    whyEye:'Waarom Solara Estates',whyH2:'Een onafhankelijk kantoor, op menselijke maat.',
+    w1h:'Een eerste afspraak, speciaal voor u',w1p:'Wij nemen de tijd om uw project te begrijpen, zonder enige verplichting.',
+    w2h:'Lokale expertise in Brussel',w2p:'Grondige kennis van de markt en elke gemeente, van Elsene tot Woluwé.',
+    w3h:'Eén vaste contactpersoon',w3p:'Dezelfde persoon begeleidt u van het eerste gesprek tot de ondertekening.',
+    w4h:'Een assistent 24/7 beschikbaar',w4p:'Een vraag \'s avonds of in het weekend? Onze assistent antwoordt op elk uur.',
+    testEye:'Ze vertrouwden ons',testH2:'Wat onze klanten zeggen',
+    t1p:'"Een uitstekende ervaring. Onze makelaar was beschikbaar en responsief, met duidelijke antwoorden in elke fase. Ik raad Solara ten zeerste aan."',t1s:'Google-review · 4 maanden geleden',
+    t2p:'"Dank aan het hele team — altijd attent, beschikbaar en snel om te antwoorden. Ik zou niet aarzelen om opnieuw beroep op hen te doen."',t2s:'Google-review · 5 maanden geleden',
+    t3p:'"Een uitstekend kantoor. Zeer professioneel van het eerste telefoontje tot de ondertekening. Vlot, aangenaam en perfect beheerd."',t3s:'Google-review · 3 maanden geleden',
+    aiEye:'Nieuw · Online assistent',aiH2:'Een virtuele adviseur, dag en nacht.',
+    aiP1:'De meeste toekomstige kopers bekijken panden \'s avonds, in het weekend of vanuit het buitenland. Onze assistent antwoordt hen meteen en stuurt hun gegevens door naar het team.',
+    ai1:'Beantwoordt vragen over panden, kosten en procedures',ai2:'Legt prospectengegevens vast 24/7',ai3:'Zelfs als het kantoor gesloten is, gaat geen aanvraag verloren',
+    aiTry:'→ Probeer het: tik op de bel rechtsonder.',
+    phName:'Solara Estates · Assistent',phSub:'● online 24/7',
+    ph1:'Hallo, heeft u studio\'s te huur?',ph2:'Natuurlijk! Wat is uw budget en voorkeursgemeente?',ph3:'€1.200, Elsene',ph4:'Perfect ✅ Uw naam en een nummer, en een adviseur belt u terug?',
+    phc1:'🔑 Huren',phc2:'🏠 Kopen',
+    ctaH2:'Een vastgoedproject? Laten we praten.',ctaP:'Persoonlijk advies voor uw vastgoedplannen, zonder verplichting. Schrijf ons of kom langs — Louizalaan 54, Brussel.',
+    fi1:'Uw naam',fi2:'Telefoon',fi3:'E-mail',fi4:'Uw project (kopen, verkopen, huren, schatting…)',fBtn:'Stuur mijn aanvraag',
+    cdone:'Dank u ✅ Uw aanvraag is verstuurd — een Solara Estates-adviseur neemt zeer snel contact met u op.',
+    ftDesc:'Onafhankelijk vastgoedkantoor in Brussel — kopen, verkopen, huren en investeren in de 19 gemeenten.',
+    ftDemo:'Demosite · gemaakt door Floryne Pierson · fictief kantoor en fictieve gegevens.',ftHours:'Ma–Vr 9u–18u · Za 9u–13u',
+    ribbon:'Demosite gemaakt door Floryne Pierson — uw versie met uw kantoor, uw panden en uw contacten.',ribbonLink:'Meer info →',
+    chatHi:'Hallo 👋 Ik ben de assistent van Solara Estates. Hoe kan ik u helpen?',
+    chatFoot:'AI-assistent — antwoordt op elk uur',
+    chatInput:'Een vraag? Een project?',
+    chatLangSwitch:'Overschakelen naar het Nederlands 🇧🇪',
+    menu:[
+      {l:'🔑 Een pand huren',t:'letting'},
+      {l:'🏠 Kopen',t:'buy'},
+      {l:'📈 Investeren',t:'invest'},
+      {l:'💰 Mijn pand schatten',t:'valuation'},
+      {l:'🕐 Openingsuren',t:'hours'}
+    ],
+    sayLetting:'Verhuur is onze specialiteit 🙂 Wat is uw maandelijks budget bij benadering?',
+    sayBuy:'Natuurlijk 🙂 Wat is uw budget bij benadering?',
+    sayInvest:'Uitstekend 🙂 Welk budget overweegt u?',
+    sayValuation:'Natuurlijk — een adviseur schat uw pand zonder verplichting.',
+    sayHours:'Onze openingsuren: maandag tot vrijdag 9u–18u, zaterdag 9u–13u. Maar hier blijf ik 24/7 bereikbaar 🙂',
+    sayAnything:'Nog iets anders?',
+    budgetsLet:['≤ €900/maand','€900 – 1.400','€1.400 – 2.000','€2.000+'],
+    budgetsBuy:['≤ €250.000','€250 – 400k','€400 – 600k','€600k+'],
+    sayArea:'Welke gemeente?',
+    areas:['Elsene','Ukkel','Etterbeek','Woluwé','Sint-Gillis','Schaarbeek','Andere gemeente'],
+    sayContact:function(r){return 'Perfect, samenvatting: '+r+'. Geef me uw naam en een telefoonnummer — een adviseur neemt zeer snel contact op 🙂';},
+    sayThanks:function(n){return 'Dank u'+(n?' '+n:'')+' ✅ Genoteerd — een Solara Estates-adviseur neemt zeer snel contact met u op. Fijne dag!';},
+    sayFallback:'Ik kan u in één klik begeleiden 🙂 Kies hieronder:',
+    sayView:'Uitstekende keuze 👍 Dit pand is beschikbaar. Geef me uw naam en een nummer, dan neemt een adviseur snel contact op om een bezichtiging te plannen.',
+    letType:'Verhuur',buyType:'Aankoop',investType:'Investering',valuationType:'Schatting',
   }
 };
 
@@ -643,6 +713,7 @@ function setLang(l) {
   siteLang = l;
   document.documentElement.lang = l;
   document.getElementById('langFR').classList.toggle('active', l==='fr');
+  document.getElementById('langNL').classList.toggle('active', l==='nl');
   document.getElementById('langEN').classList.toggle('active', l==='en');
   applyText(T[l]);
 }
@@ -688,6 +759,7 @@ var chatLang = 'fr';
 function setChatLang(l) {
   chatLang = l;
   document.getElementById('chatFR').classList.toggle('active', l==='fr');
+  document.getElementById('chatNL').classList.toggle('active', l==='nl');
   document.getElementById('chatEN').classList.toggle('active', l==='en');
   document.getElementById('paFoot').textContent = T[l].chatFoot;
   document.getElementById('paInput').placeholder = T[l].chatInput;

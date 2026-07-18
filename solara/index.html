@@ -1,448 +1,781 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Solara Estates — Real Estate Agency in Malta</title>
+<title>Solara Estates — Agence immobilière à Bruxelles</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500;1,6..96,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--navy:#123a5c;--navy-s:#1a2c40;--gold:#c67a5a;--gold-d:#b26647;--cream:#f6f8fa;--ink:#1c2733;--muted:#6c7683;--line:#e4e8ed;}
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.65;overflow-x:hidden;}
-  h1,h2,h3{font-family:'Bodoni Moda',Georgia,serif;font-weight:600;line-height:1.13;color:var(--navy);letter-spacing:-.005em;}
-  a{text-decoration:none;color:inherit;}
-  .wrap{max-width:1200px;margin:0 auto;padding:0 26px;}
-  .btn{display:inline-block;background:var(--gold);color:#fff;padding:14px 30px;border-radius:7px;font-weight:600;font-size:.92rem;letter-spacing:.01em;transition:.25s;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(198,122,90,.28);}
-  .btn:hover{background:var(--gold-d);transform:translateY(-2px);box-shadow:0 10px 26px rgba(198,122,90,.38);}
-  .btn-ghost{background:transparent;border:1.5px solid rgba(255,255,255,.55);color:#fff;box-shadow:none;}
-  .btn-ghost:hover{background:#fff;color:var(--navy);}
-  .eyebrow{text-transform:uppercase;letter-spacing:.24em;font-size:.72rem;color:var(--gold);font-weight:700;}
-  .reveal{animation:rvl .7s ease both;}
-  @keyframes rvl{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
-  .reveal.in{opacity:1;transform:none;}
-  .reveal.d1{animation-delay:.08s;}.reveal.d2{animation-delay:.16s;}.reveal.d3{animation-delay:.24s;}
+:root{
+  --navy:#0b1d2e;
+  --navy-s:#122538;
+  --gold:#b8893a;
+  --gold-d:#a07230;
+  --gold-l:#d4aa6a;
+  --cream:#f7f5f0;
+  --ink:#1a2330;
+  --muted:#697585;
+  --line:#e0dbd2;
+  --ease:cubic-bezier(0.23,1,0.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.68;overflow-x:hidden;}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1.12;color:var(--navy);letter-spacing:-.01em;}
+a{text-decoration:none;color:inherit;}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px;}
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:#fff;padding:13px 13px 13px 22px;border-radius:100px;font-weight:600;font-size:.84rem;letter-spacing:.01em;transition:opacity 200ms,transform 160ms var(--ease);border:none;cursor:pointer;}
+.btn:hover{opacity:.9;}
+.btn:active{transform:scale(.97);}
+.btn .iring{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+.btn-ghost{background:transparent;border:1.5px solid rgba(255,255,255,.5);color:#fff;padding:12px 22px;border-radius:100px;}
+.btn-ghost:hover{background:rgba(255,255,255,.1);}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+.eyebrow::before{content:'';display:inline-block;width:20px;height:1.5px;background:var(--gold);}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 700ms var(--ease),transform 700ms var(--ease);}
+.reveal.in{opacity:1;transform:none;}
+.reveal.d1{transition-delay:.09s;}.reveal.d2{transition-delay:.18s;}.reveal.d3{transition-delay:.27s;}
 
-  nav{position:fixed;top:0;left:0;right:0;z-index:200;transition:.35s;}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;height:82px;}
-  .logo{font-family:'Bodoni Moda',serif;font-size:1.55rem;font-weight:700;color:#fff;letter-spacing:.02em;transition:.35s;}
-  .logo span{color:var(--gold);}
-  .nav-links{display:flex;gap:32px;font-size:.9rem;font-weight:500;color:rgba(255,255,255,.92);transition:.35s;}
-  .nav-links a{position:relative;}
-  .nav-links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--gold);transition:.25s;}
-  .nav-links a:hover::after{width:100%;}
-  .nav-cta{display:flex;align-items:center;gap:20px;}
-  .nav-phone{font-weight:600;color:#fff;font-size:.9rem;transition:.35s;}
-  nav.scrolled{background:rgba(255,255,255,.98);box-shadow:0 4px 24px rgba(16,30,46,.08);}
-  nav.scrolled .nav-in{height:70px;}
-  nav.scrolled .logo{color:var(--navy);}
-  nav.scrolled .nav-links{color:var(--ink);}
-  nav.scrolled .nav-phone{color:var(--navy);}
-  @media(max-width:880px){.nav-links,.nav-phone{display:none;}}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 28px;transition:background 350ms,box-shadow 350ms;}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:80px;max-width:1200px;margin:0 auto;}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:#fff;letter-spacing:.04em;transition:color 350ms;}
+.logo span{color:var(--gold);}
+.nav-links{display:flex;gap:6px;font-size:.82rem;font-weight:500;transition:color 350ms;}
+.nav-links a{color:rgba(255,255,255,.88);padding:8px 14px;border-radius:100px;transition:background 200ms,color 200ms;}
+.nav-links a:hover{background:rgba(255,255,255,.1);color:#fff;}
+.nav-right{display:flex;align-items:center;gap:14px;}
+.nav-phone{font-weight:600;color:rgba(255,255,255,.9);font-size:.84rem;transition:color 350ms;}
+.lang-tog{display:flex;gap:2px;background:rgba(255,255,255,.12);border-radius:100px;padding:3px;}
+.lang-tog button{background:none;border:none;color:rgba(255,255,255,.7);font-family:inherit;font-size:.72rem;font-weight:600;letter-spacing:.06em;padding:4px 10px;border-radius:100px;cursor:pointer;transition:background 200ms,color 200ms;}
+.lang-tog button.active{background:rgba(255,255,255,.22);color:#fff;}
+nav.scrolled{background:rgba(255,255,255,.97);box-shadow:0 2px 28px rgba(13,33,55,.09);}
+nav.scrolled .logo{color:var(--navy);}
+nav.scrolled .nav-links a{color:var(--ink);}
+nav.scrolled .nav-links a:hover{background:var(--cream);}
+nav.scrolled .nav-phone{color:var(--navy);}
+nav.scrolled .lang-tog{background:var(--cream);}
+nav.scrolled .lang-tog button{color:var(--muted);}
+nav.scrolled .lang-tog button.active{background:#fff;color:var(--navy);box-shadow:0 1px 4px rgba(0,0,0,.08);}
+@media(max-width:900px){.nav-links,.nav-phone{display:none;}}
 
-  .hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;color:#fff;overflow:hidden;}
-  .hero .bg{position:absolute;inset:0;background:#123a5c url('https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1600&q=80') center/cover;animation:kb 26s ease-in-out infinite alternate;}
-  .hero .bg::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(10,18,28,.5),rgba(10,18,28,.68));}
-  @keyframes kb{from{transform:scale(1)}to{transform:scale(1.12)}}
-  .hero .in{position:relative;z-index:2;}
-  .hero .eyebrow{margin-bottom:20px;display:block;color:var(--gold);}
-  .hero h1{color:#fff;font-size:clamp(2.2rem,5vw,4rem);font-weight:600;max-width:840px;margin-bottom:22px;text-shadow:0 2px 24px rgba(0,0,0,.3);}
-  .hero h1 em{font-style:italic;color:var(--gold);font-weight:500;}
-  .hero p{font-size:1.18rem;max-width:580px;color:rgba(255,255,255,.92);font-weight:300;margin-bottom:34px;text-shadow:0 1px 12px rgba(0,0,0,.3);}
-  .scrolldown{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.75);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;animation:bob 2s ease-in-out infinite;}
-  @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+/* ── HERO ── */
+.hero{position:relative;min-height:100dvh;display:flex;align-items:center;color:#fff;overflow:hidden;}
+.hero .bg{position:absolute;inset:0;background:var(--navy) url('https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?auto=format&fit=crop&w=1800&q=85') center/cover;animation:kb 24s ease-in-out infinite alternate;}
+.hero .bg::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(5,12,22,.78) 0%,rgba(5,12,22,.38) 65%,rgba(5,12,22,.18) 100%);}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.1)}}
+.hero .in{position:relative;z-index:2;padding-top:90px;}
+.hero .eyebrow{margin-bottom:24px;color:var(--gold);}
+.hero h1{color:#fff;font-size:clamp(2.6rem,5.5vw,4.6rem);font-weight:500;max-width:800px;margin-bottom:22px;text-shadow:0 2px 20px rgba(0,0,0,.25);}
+.hero h1 em{font-style:italic;color:#e8c898;}
+.hero > .in > p{font-size:1.12rem;max-width:520px;color:rgba(255,255,255,.88);font-weight:300;margin-bottom:36px;}
+.hero-ctas{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+.hero-ctas .btn-ghost{font-size:.84rem;font-weight:500;}
+.search{background:#fff;border-radius:14px;box-shadow:0 24px 56px rgba(0,0,0,.28);padding:16px;display:flex;gap:12px;flex-wrap:wrap;max-width:820px;margin-top:44px;}
+.search .f{flex:1;min-width:140px;}
+.search label{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700;margin:0 0 5px 4px;}
+.search select,.search input{width:100%;border:1px solid var(--line);border-radius:8px;padding:11px 13px;font-family:inherit;font-size:.88rem;color:var(--ink);background:#fafbfc;}
+.search .btn{align-self:flex-end;height:44px;padding:0 22px;border-radius:8px;}
+.scrolldown{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.6);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;animation:bob 2.2s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
 
-  .search{background:#fff;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.3);padding:15px;display:flex;gap:11px;flex-wrap:wrap;max-width:840px;}
-  .search .f{flex:1;min-width:135px;}
-  .search label{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;margin:0 0 5px 4px;}
-  .search select,.search input{width:100%;border:1px solid var(--line);border-radius:7px;padding:12px 13px;font-family:inherit;font-size:.9rem;color:var(--ink);background:#fbfaf7;}
-  .search .btn{align-self:flex-end;height:46px;}
+/* ── STATS ── */
+.stats{background:var(--navy);color:#fff;}
+.stats .row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:56px 0;text-align:center;}
+@media(max-width:700px){.stats .row{grid-template-columns:repeat(2,1fr);gap:36px;}}
+.stats .num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:500;color:#e8b882;line-height:1;}
+.stats .lbl{font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.6);margin-top:8px;}
 
-  .stats{background:var(--navy);color:#fff;}
-  .stats .row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:52px 0;text-align:center;}
-  @media(max-width:700px){.stats .row{grid-template-columns:repeat(2,1fr);gap:34px;}}
-  .stats .num{font-family:'Bodoni Moda',serif;font-size:2.9rem;font-weight:700;color:#eaa47f;}
-  .stats .lbl{font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.7);margin-top:6px;}
+/* ── SECTIONS ── */
+section.pad{padding:110px 0;}
+.center{text-align:center;max-width:620px;margin:0 auto 60px;}
+.center h2{font-size:clamp(2rem,3.8vw,2.8rem);margin:14px 0 16px;}
+.center p{color:var(--muted);font-size:.96rem;}
+.rule{width:44px;height:2px;background:var(--gold);margin:20px auto 0;}
 
-  section.pad{padding:100px 0;}
-  .center{text-align:center;max-width:660px;margin:0 auto 58px;}
-  .center h2{font-size:clamp(1.9rem,3.5vw,2.6rem);margin:12px 0 14px;}
-  .center p{color:var(--muted);}
-  .rule{width:56px;height:3px;background:var(--gold);margin:20px auto 0;}
+/* ── PROPERTY CARDS ── */
+.props{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+@media(max-width:900px){.props{grid-template-columns:1fr;}}
+.card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line);transition:transform 350ms var(--ease),box-shadow 350ms var(--ease),border-color 300ms;cursor:pointer;}
+.card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(13,33,55,.14);border-color:rgba(200,133,74,.3);}
+.card:active{transform:translateY(-3px) scale(.99);}
+.card .imgwrap{height:235px;overflow:hidden;position:relative;}
+.card .img{width:100%;height:100%;background-size:cover;background-position:center;transition:transform 600ms var(--ease);}
+.card:hover .img{transform:scale(1.07);}
+.card .tag{position:absolute;top:13px;left:13px;background:var(--navy);color:#fff;font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;padding:5px 12px;border-radius:100px;}
+.card .body{padding:22px 24px 26px;}
+.card .price{font-family:'Cormorant Garamond',serif;font-size:1.65rem;color:var(--navy);font-weight:500;}
+.card h3{font-size:1.08rem;margin:7px 0 13px;}
+.card .feat{display:flex;gap:16px;color:var(--muted);font-size:.82rem;border-top:1px solid var(--line);padding-top:13px;}
+.card .more{margin-top:12px;font-size:.78rem;font-weight:700;color:var(--gold);}
+.card:hover .more{text-decoration:underline;}
 
-  .props{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
-  @media(max-width:880px){.props{grid-template-columns:1fr;}}
-  .card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 26px rgba(16,30,46,.07);transition:transform .3s,box-shadow .3s;cursor:pointer;}
-  .card .more{margin-top:12px;font-size:.8rem;font-weight:700;color:var(--gold);letter-spacing:.02em;}
-  .card:hover .more{text-decoration:underline;}
-  .cform{max-width:520px;margin:28px auto 0;display:flex;flex-direction:column;gap:12px;text-align:left;}
-  .cform .crow{display:flex;gap:12px;}
-  .cform input,.cform textarea{width:100%;padding:13px 15px;border-radius:10px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font-family:inherit;font-size:.92rem;}
-  .cform input::placeholder,.cform textarea::placeholder{color:rgba(255,255,255,.72);}
-  .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.18);}
-  .cform textarea{resize:vertical;}
-  .cform button{margin-top:4px;align-self:flex-start;}
-  .cdone{max-width:520px;margin:28px auto 0;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);border-radius:12px;padding:20px 22px;color:#fff;font-weight:600;}
-  @media(max-width:520px){.cform .crow{flex-direction:column;}}
-  .card:hover{transform:translateY(-8px);box-shadow:0 22px 50px rgba(16,30,46,.16);}
-  .card .imgwrap{height:230px;overflow:hidden;position:relative;}
-  .card .img{width:100%;height:100%;background-size:cover;background-position:center;transition:transform .6s ease;}
-  .card:hover .img{transform:scale(1.08);}
-  .card .tag{position:absolute;top:15px;left:15px;background:var(--navy);color:#fff;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600;padding:6px 12px;border-radius:5px;}
-  .card .body{padding:22px 24px 26px;}
-  .card .price{font-family:'Bodoni Moda',serif;font-size:1.6rem;color:var(--navy);font-weight:700;}
-  .card h3{font-size:1.14rem;margin:7px 0 12px;}
-  .card .feat{display:flex;gap:18px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:14px;}
-  .card .feat span{display:flex;align-items:center;gap:6px;}
+/* ── SERVICES ── */
+.serv-sec{background:var(--cream);}
+.serv{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+@media(max-width:900px){.serv{grid-template-columns:repeat(2,1fr);}}
+.serv .it{background:#fff;border-radius:14px;padding:32px 24px;text-align:center;border:1px solid var(--line);transition:transform 300ms var(--ease),box-shadow 300ms var(--ease);}
+.serv .it:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(13,33,55,.09);}
+.serv .ic{width:54px;height:54px;border-radius:14px;background:rgba(200,133,74,.1);color:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.4rem;}
+.serv h3{font-size:1.06rem;margin-bottom:8px;}
+.serv p{font-size:.86rem;color:var(--muted);}
 
-  .serv-sec{background:var(--cream);}
-  .serv{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
-  @media(max-width:880px){.serv{grid-template-columns:repeat(2,1fr);}}
-  .serv .it{background:#fff;border-radius:14px;padding:34px 26px;text-align:center;transition:.3s;}
-  .serv .it:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,30,46,.1);}
-  .serv .ic{width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,rgba(198,122,90,.18),rgba(198,122,90,.06));color:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.5rem;}
-  .serv h3{font-size:1.1rem;margin-bottom:9px;}
-  .serv p{font-size:.88rem;color:var(--muted);}
+/* ── NEIGHBORHOODS ── */
+.hoods{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:900px){.hoods{grid-template-columns:repeat(2,1fr);}}
+.hood{position:relative;height:220px;border-radius:12px;overflow:hidden;color:#fff;display:flex;align-items:flex-end;cursor:pointer;}
+.hood .img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 600ms var(--ease);}
+.hood:hover .img{transform:scale(1.08);}
+.hood::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(8,18,32,.78));}
+.hood .t{position:relative;z-index:2;padding:18px;font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;}
+.hood .sub{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-size:.7rem;opacity:.8;margin-top:1px;font-weight:400;}
 
-  .hoods{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-  @media(max-width:880px){.hoods{grid-template-columns:repeat(2,1fr);}}
-  .hood{position:relative;height:230px;border-radius:12px;overflow:hidden;color:#fff;display:flex;align-items:flex-end;}
-  .hood .img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s;}
-  .hood:hover .img{transform:scale(1.09);}
-  .hood::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(10,18,28,.8));}
-  .hood .t{position:relative;z-index:2;padding:18px;font-family:'Bodoni Moda',serif;font-size:1.15rem;font-weight:600;}
+/* ── WHY SPLIT ── */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+@media(max-width:900px){.split{grid-template-columns:1fr;gap:36px;}}
+.split img{width:100%;border-radius:16px;height:480px;object-fit:cover;box-shadow:0 24px 56px rgba(13,33,55,.15);}
+.why-list{list-style:none;margin-top:24px;}
+.why-list li{display:flex;gap:16px;margin-bottom:22px;}
+.why-list .n{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#e8b882;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.88rem;font-family:'Cormorant Garamond',serif;}
+.why-list b{color:var(--navy);font-size:1rem;}
+.why-list p{color:var(--muted);font-size:.9rem;margin-top:3px;}
 
-  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
-  @media(max-width:880px){.split{grid-template-columns:1fr;gap:34px;}}
-  .split img{width:100%;border-radius:16px;height:460px;object-fit:cover;box-shadow:0 20px 50px rgba(16,30,46,.14);}
-  .why-list{list-style:none;margin-top:22px;}
-  .why-list li{display:flex;gap:16px;margin-bottom:22px;}
-  .why-list .n{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;font-family:'Bodoni Moda',serif;}
-  .why-list b{color:var(--navy);font-size:1.02rem;}
-  .why-list p{color:var(--muted);font-size:.92rem;margin-top:3px;}
+/* ── TESTIMONIALS ── */
+.test-sec{background:var(--cream);}
+.tests{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+@media(max-width:900px){.tests{grid-template-columns:1fr;}}
+.test{background:#fff;border-radius:14px;padding:30px 26px;border:1px solid var(--line);transition:box-shadow 250ms,transform 250ms;}
+.test:hover{box-shadow:0 14px 36px rgba(13,33,55,.1);transform:translateY(-4px);}
+.test .stars{color:var(--gold);margin-bottom:14px;letter-spacing:.1em;}
+.test p{font-size:.93rem;color:var(--ink);font-style:italic;line-height:1.72;}
+.test .who{margin-top:16px;font-weight:600;color:var(--navy);font-size:.86rem;}
+.test .who span{display:block;color:var(--muted);font-weight:400;font-size:.8rem;}
 
-  .test-sec{background:var(--cream);}
-  .tests{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
-  @media(max-width:880px){.tests{grid-template-columns:1fr;}}
-  .test{background:#fff;border-radius:14px;padding:32px 28px;box-shadow:0 6px 22px rgba(16,30,46,.06);color:inherit;display:block;transition:box-shadow .25s,transform .25s;} .test:hover{box-shadow:0 16px 40px rgba(16,30,46,.14);transform:translateY(-4px);}
-  .test .stars{color:var(--gold);letter-spacing:.15em;margin-bottom:14px;}
-  .test p{font-size:.96rem;color:var(--ink);font-style:italic;line-height:1.7;}
-  .test .who{margin-top:16px;font-weight:600;color:var(--navy);font-size:.9rem;}
-  .test .who span{display:block;color:var(--muted);font-weight:400;font-size:.82rem;}
+/* ── AI SECTION ── */
+.ai-sec{background:var(--navy);color:#fff;overflow:hidden;position:relative;}
+.ai-sec::before{content:'';position:absolute;top:-120px;right:-120px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(200,133,74,.12),transparent 70%);pointer-events:none;}
+.ai-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:60px;align-items:center;}
+@media(max-width:900px){.ai-grid{grid-template-columns:1fr;gap:40px;}}
+.ai-sec h2{color:#fff;font-size:clamp(2rem,3.8vw,2.8rem);margin:16px 0 18px;}
+.ai-sec > div > .eyebrow::before{background:var(--gold);}
+.ai-sec p{color:rgba(255,255,255,.8);margin-bottom:22px;line-height:1.72;}
+.ai-sec .chk{list-style:none;}
+.ai-sec .chk li{margin-bottom:11px;padding-left:28px;position:relative;color:rgba(255,255,255,.88);font-size:.93rem;}
+.ai-sec .chk li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-weight:700;}
+/* Phone mockup */
+.ai-phone{justify-self:center;width:282px;background:#040d18;border-radius:36px;padding:10px;box-shadow:0 32px 72px rgba(0,0,0,.55),inset 0 1px 1px rgba(255,255,255,.06);}
+.ai-phone .scr{background:#fff;border-radius:28px;overflow:hidden;}
+.ai-phone .ph-h{background:var(--navy);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px;}
+.ai-phone .ph-avatar{width:32px;height:32px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+.ai-phone .ph-info b{font-size:.86rem;display:block;}.ai-phone .ph-info small{font-size:.64rem;opacity:.7;color:#7bc87b;}
+.ai-phone .ph-b{background:#f0f2f5;padding:14px;display:flex;flex-direction:column;gap:9px;min-height:240px;}
+.ai-phone .mu{align-self:flex-end;background:var(--navy);color:#fff;padding:9px 12px;border-radius:14px;border-bottom-right-radius:3px;font-size:.72rem;max-width:82%;line-height:1.45;}
+.ai-phone .mb{align-self:flex-start;background:#fff;color:var(--ink);border:1px solid rgba(0,0,0,.08);padding:9px 12px;border-radius:14px;border-bottom-left-radius:3px;font-size:.72rem;max-width:86%;line-height:1.45;}
+.ai-phone .ph-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+.ai-phone .ph-chip{background:#fff;border:1.5px solid var(--gold);color:var(--gold-d);font-size:.65rem;font-weight:600;padding:5px 10px;border-radius:100px;}
 
-  .ai-sec{background:var(--navy);color:#fff;overflow:hidden;}
-  .ai-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;}
-  @media(max-width:880px){.ai-grid{grid-template-columns:1fr;gap:36px;}}
-  .ai-sec h2{color:#fff;font-size:clamp(1.9rem,3.5vw,2.6rem);margin:14px 0 16px;}
-  .ai-sec p{color:rgba(255,255,255,.82);margin-bottom:22px;}
-  .ai-sec .chk{list-style:none;}
-  .ai-sec .chk li{margin-bottom:12px;padding-left:30px;position:relative;color:rgba(255,255,255,.9);}
-  .ai-sec .chk li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-weight:700;}
-  .ai-phone{justify-self:center;width:270px;background:#05101c;border-radius:34px;padding:12px;box-shadow:0 30px 70px rgba(0,0,0,.5);}
-  .ai-phone .scr{background:#fff;border-radius:26px;overflow:hidden;}
-  .ai-phone .ph-h{background:var(--navy);color:#fff;padding:14px 16px;}
-  .ai-phone .ph-h b{font-size:.9rem;}.ai-phone .ph-h small{opacity:.7;font-size:.66rem;display:block;}
-  .ai-phone .ph-b{background:var(--cream);padding:14px;display:flex;flex-direction:column;gap:9px;min-height:250px;}
-  .ai-phone .mu{align-self:flex-end;background:var(--navy);color:#fff;padding:8px 11px;border-radius:12px;border-bottom-right-radius:3px;font-size:.72rem;max-width:82%;}
-  .ai-phone .mb{align-self:flex-start;background:#fff;color:var(--ink);border:1px solid var(--line);padding:8px 11px;border-radius:12px;border-bottom-left-radius:3px;font-size:.72rem;max-width:86%;}
+/* ── CTA SEC ── */
+.cta-sec{position:relative;color:#fff;text-align:center;overflow:hidden;}
+.cta-sec .bg{position:absolute;inset:0;background:linear-gradient(rgba(6,14,26,.82),rgba(6,14,26,.88)),url('https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1600&q=85') center/cover;}
+.cta-sec .in{position:relative;z-index:2;}
+.cta-sec h2{color:#fff;font-size:clamp(2.2rem,4vw,3rem);margin-bottom:16px;}
+.cta-sec p{color:rgba(255,255,255,.8);max-width:520px;margin:0 auto 32px;font-size:.96rem;}
+.cform{max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:12px;text-align:left;}
+.cform .crow{display:flex;gap:12px;}
+.cform input,.cform textarea{width:100%;padding:13px 15px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);color:#fff;font-family:inherit;font-size:.9rem;outline:none;transition:border-color 200ms,background 200ms;}
+.cform input::placeholder,.cform textarea::placeholder{color:rgba(255,255,255,.55);}
+.cform input:focus,.cform textarea:focus{border-color:var(--gold);background:rgba(255,255,255,.15);}
+.cform textarea{resize:vertical;min-height:90px;}
+.cform button{align-self:flex-start;margin-top:4px;}
+.cdone{max-width:500px;margin:0 auto;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:20px 24px;color:#fff;font-weight:500;}
+@media(max-width:520px){.cform .crow{flex-direction:column;}}
 
-  .cta-sec{position:relative;color:#fff;text-align:center;overflow:hidden;}
-  .cta-sec .bg{position:absolute;inset:0;background-color:#0a141e;background-image:linear-gradient(rgba(10,18,28,.82),rgba(10,18,28,.9)),url('https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center;}
-  .cta-sec .in{position:relative;z-index:2;}
-  .cta-sec h2{color:#fff;font-size:clamp(2rem,4vw,2.8rem);margin-bottom:16px;}
-  .cta-sec p{color:rgba(255,255,255,.82);max-width:540px;margin:0 auto 30px;}
+/* ── FOOTER ── */
+footer{background:#060e18;color:rgba(255,255,255,.55);padding:56px 0;font-size:.84rem;}
+.foot-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:28px;}
+footer .logo{color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.4rem;}
+footer a:hover{color:var(--gold);}
+.demo-ribbon{background:var(--gold);color:#fff;text-align:center;font-size:.78rem;font-weight:600;padding:9px 16px;letter-spacing:.01em;}
+.demo-ribbon a{color:#fff;text-decoration:underline;margin-left:4px;}
 
-  footer{background:#0a141e;color:rgba(255,255,255,.6);padding:52px 0;font-size:.85rem;}
-  .foot-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;}
-  footer .logo{color:#fff;font-size:1.35rem;}
-  footer a:hover{color:var(--gold);}
-  .demo-ribbon{background:var(--gold);color:#fff;text-align:center;font-size:.8rem;font-weight:600;padding:8px 16px;letter-spacing:.01em;}
-  .demo-ribbon a{color:#fff;text-decoration:underline;}
+/* ── CHATBOT ── */
+.pa-btn{position:fixed;bottom:26px;right:26px;width:62px;height:62px;border-radius:50%;background:var(--gold);color:#fff;border:none;cursor:pointer;z-index:600;box-shadow:0 10px 30px rgba(200,133,74,.5);font-size:25px;display:flex;align-items:center;justify-content:center;animation:pulse 2.8s infinite;transition:transform 200ms;}
+.pa-btn:hover{transform:scale(1.06);}
+@keyframes pulse{0%{box-shadow:0 10px 30px rgba(200,133,74,.5),0 0 0 0 rgba(200,133,74,.35)}70%{box-shadow:0 10px 30px rgba(200,133,74,.5),0 0 0 16px rgba(200,133,74,0)}100%{box-shadow:0 10px 30px rgba(200,133,74,.5),0 0 0 0 rgba(200,133,74,0)}}
+.pa-panel{position:fixed;bottom:104px;right:26px;width:372px;max-width:calc(100vw - 32px);height:530px;max-height:calc(100dvh - 148px);background:#fff;border-radius:18px;overflow:hidden;z-index:600;display:none;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.32);}
+.pa-panel.open{display:flex;animation:rise .28s var(--ease);}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.pa-head{background:var(--navy);color:#fff;padding:15px 18px;display:flex;align-items:center;gap:11px;}
+.pa-avatar{width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.pa-info{flex:1;}
+.pa-info b{font-size:.95rem;display:block;}
+.pa-info span{font-size:.68rem;opacity:.7;color:#7bc87b;}
+.pa-lang{display:flex;gap:2px;background:rgba(255,255,255,.12);border-radius:100px;padding:3px;}
+.pa-lang button{background:none;border:none;color:rgba(255,255,255,.65);font-family:inherit;font-size:.66rem;font-weight:700;letter-spacing:.05em;padding:3px 9px;border-radius:100px;cursor:pointer;transition:background 150ms,color 150ms;}
+.pa-lang button.active{background:rgba(255,255,255,.22);color:#fff;}
+.pa-thread{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px;background:#f3f5f8;}
+.pa-msg{max-width:85%;padding:10px 13px;border-radius:15px;font-size:.88rem;line-height:1.52;white-space:pre-wrap;}
+.pa-bot{align-self:flex-start;background:#fff;border:1px solid rgba(0,0,0,.07);border-bottom-left-radius:4px;}
+.pa-me{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:4px;}
+.pa-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px;}
+.pa-chip{background:#fff;border:1.5px solid var(--gold);color:var(--gold-d);font-family:inherit;font-size:.82rem;font-weight:600;padding:7px 13px;border-radius:100px;cursor:pointer;transition:background 180ms,color 180ms;}
+.pa-chip:hover{background:var(--gold);color:#fff;}
+.pa-bar{display:flex;gap:8px;padding:11px;border-top:1px solid var(--line);background:#fff;}
+.pa-bar input{flex:1;border:1px solid var(--line);border-radius:100px;padding:10px 15px;font-family:inherit;font-size:.88rem;outline:none;transition:border-color 200ms;}
+.pa-bar input:focus{border-color:var(--gold);}
+.pa-bar button{border:none;background:var(--gold);color:#fff;border-radius:100px;width:38px;height:38px;cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity 200ms,transform 160ms;}
+.pa-bar button:hover{opacity:.9;}
+.pa-bar button:active{transform:scale(.95);}
+.pa-typing{display:flex;gap:5px;align-items:center;padding:12px 16px !important;}
+.pa-typing span{width:7px;height:7px;background:#bbb;border-radius:50%;animation:ptDot 1.2s infinite;}
+.pa-typing span:nth-child(2){animation-delay:.2s;}
+.pa-typing span:nth-child(3){animation-delay:.4s;}
+@keyframes ptDot{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+.pa-foot{text-align:center;font-size:.63rem;color:var(--muted);padding:6px;background:#fff;}
 
-  .pa-btn{position:fixed;bottom:26px;right:26px;width:64px;height:64px;border-radius:50%;background:var(--gold);color:#fff;border:none;cursor:pointer;z-index:600;box-shadow:0 12px 32px rgba(198,122,90,.5);font-size:26px;display:flex;align-items:center;justify-content:center;animation:pulse 2.6s infinite;}
-  @keyframes pulse{0%{box-shadow:0 12px 32px rgba(198,122,90,.5),0 0 0 0 rgba(198,122,90,.4)}70%{box-shadow:0 12px 32px rgba(198,122,90,.5),0 0 0 16px rgba(198,122,90,0)}100%{box-shadow:0 12px 32px rgba(198,122,90,.5),0 0 0 0 rgba(198,122,90,0)}}
-  .pa-btn:hover{transform:scale(1.06);}
-  .pa-panel{position:fixed;bottom:104px;right:26px;width:376px;max-width:calc(100vw - 34px);height:530px;max-height:calc(100vh - 150px);background:#fff;border-radius:18px;overflow:hidden;z-index:600;display:none;flex-direction:column;box-shadow:0 28px 70px rgba(0,0,0,.34);}
-  .pa-panel.open{display:flex;animation:rise .3s ease;}
-  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-  .pa-head{background:var(--navy);color:#fff;padding:17px 19px;}
-  .pa-head b{font-size:1.04rem;}
-  .pa-head span{display:block;font-size:.74rem;opacity:.72;margin-top:2px;}
-  .pa-thread{flex:1;overflow-y:auto;padding:17px;display:flex;flex-direction:column;gap:11px;background:var(--cream);}
-  .pa-msg{max-width:84%;padding:10px 14px;border-radius:15px;font-size:.9rem;line-height:1.5;white-space:pre-wrap;}
-  .pa-bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;}
-  .pa-me{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:4px;}
-  .pa-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;}
-  .pa-chip{background:#fff;border:1.5px solid var(--gold);color:var(--gold-d);font-family:inherit;font-size:.84rem;font-weight:600;padding:8px 13px;border-radius:20px;cursor:pointer;transition:.2s;}
-  .pa-chip:hover{background:var(--gold);color:#fff;}
-  .pa-bar{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:#fff;}
-  .pa-bar input{flex:1;border:1px solid var(--line);border-radius:30px;padding:11px 15px;font-family:inherit;font-size:.9rem;outline:none;}
-  .pa-bar button{border:none;background:var(--gold);color:#fff;border-radius:30px;padding:0 17px;cursor:pointer;font-size:1rem;}
-  .pa-foot{text-align:center;font-size:.66rem;color:var(--muted);padding:6px;background:#fff;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+.reveal{opacity:1;transform:none;}}
 </style>
 </head>
 <body>
 
-  <div class="demo-ribbon">Demo site built by Floryne Pierson — your agency's version uses your own branding, listings &amp; contacts. <a href="/immo/en">See the tech →</a></div>
+<div class="demo-ribbon" id="demoRibbon">Site démo réalisé par Floryne Pierson — votre version avec votre agence, vos biens et vos contacts.<a href="/immo/fr">En savoir plus →</a></div>
 
-  <nav id="nav"><div class="wrap nav-in">
+<nav id="nav">
+  <div class="nav-in">
     <div class="logo">Solara<span>·</span>Estates</div>
-    <div class="nav-links">
-      <a href="#listings">Buy</a><a href="#listings">Rent</a><a href="#services">Sell</a>
-      <a href="#services">Invest</a><a href="#contact">Valuation</a><a href="#contact">Contact</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#listings" id="nl-buy">Acheter</a>
+      <a href="#listings" id="nl-rent">Louer</a>
+      <a href="#services" id="nl-sell">Vendre</a>
+      <a href="#services" id="nl-inv">Investir</a>
+      <a href="#contact" id="nl-val">Estimation</a>
+      <a href="#contact" id="nl-ct">Contact</a>
     </div>
-    <div class="nav-cta">
-      <span class="nav-phone">+356 2010 3000</span>
-      <a href="#contact" class="btn">Value my property</a>
-    </div>
-  </div></nav>
-
-  <header class="hero">
-    <div class="bg"></div>
-    <div class="wrap in">
-      <span class="eyebrow">Independent estate agency · Malta</span>
-      <h1>Your property journey in Malta, <em>in good hands.</em></h1>
-      <p>Buying, selling, letting and investing — personal guidance from the first viewing to the keys in your hand.</p>
-      <div class="search">
-        <div class="f"><label>Looking to</label><select><option>Buy</option><option>Rent</option><option>Invest</option></select></div>
-        <div class="f"><label>Area</label><select><option>Malta &amp; Gozo</option><option>Sliema</option><option>St Julian's</option><option>Valletta</option><option>Gozo</option></select></div>
-        <div class="f"><label>Max budget</label><input type="text" placeholder="e.g. €350,000"></div>
-        <button class="btn">Search</button>
+    <div class="nav-right">
+      <span class="nav-phone">+32 2 000 00 00</span>
+      <div class="lang-tog">
+        <button id="langFR" class="active" onclick="setLang('fr')">FR</button>
+        <button id="langEN" onclick="setLang('en')">EN</button>
       </div>
+      <a href="#contact" class="btn" id="navBtn" style="padding:10px 18px;border-radius:8px;">Estimation</a>
     </div>
-    <div class="scrolldown">Scroll ↓</div>
-  </header>
+  </div>
+</nav>
 
-  <section class="stats"><div class="wrap"><div class="row">
-    <div><div class="num">+15</div><div class="lbl">Years of experience</div></div>
-    <div><div class="num" data-count="120">0</div><div class="lbl">Google reviews</div></div>
-    <div><div class="num">Lettings</div><div class="lbl">Our specialty</div></div>
-    <div><div class="num">Malta</div><div class="lbl">&amp; Gozo</div></div>
-  </div></div></section>
-
-  <section class="pad" id="listings"><div class="wrap">
-    <div class="center reveal">
-      <span class="eyebrow">Featured listings</span>
-      <h2>A selection of homes across Malta</h2>
-      <div class="rule"></div>
+<header class="hero">
+  <div class="bg"></div>
+  <div class="wrap in">
+    <span class="eyebrow" id="heroEye">Agence indépendante · Bruxelles</span>
+    <h1 id="heroH1">Votre projet immobilier<br>à Bruxelles, <em>en bonnes mains.</em></h1>
+    <p id="heroP">Achat, vente, location, investissement — un accompagnement personnalisé du premier contact jusqu'aux clés.</p>
+    <div class="hero-ctas">
+      <a href="#listings" class="btn" id="heroCta1">Voir les biens <span class="iring">→</span></a>
+      <a href="#contact" class="btn btn-ghost" id="heroCta2">Estimation gratuite</a>
     </div>
-    <div class="props">
-      <div class="card reveal d1" data-msg="Hi, I'm interested in the Apartment in Sliema (€385,000).">
-        <div class="imgwrap"><div class="img" style="background-color:#dfe4ea;background-image:url('https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=600&q=80')"></div><span class="tag">For sale</span></div>
-        <div class="body"><div class="price">€385,000</div><h3>Apartment · Sliema</h3>
-          <div class="feat"><span>◫ 95 m²</span><span>⌂ 2 bed</span><span>❋ Sea views</span></div>
-          <div class="more">View property →</div></div>
+    <div class="search">
+      <div class="f"><label id="sLbl1">Je recherche</label><select id="sS1"><option id="sO1">Acheter</option><option id="sO2">Louer</option><option id="sO3">Investir</option></select></div>
+      <div class="f"><label id="sLbl2">Commune</label><select id="sS2"><option>Bruxelles</option><option>Ixelles</option><option>Uccle</option><option>Etterbeek</option><option>Woluwe</option><option>Saint-Gilles</option><option>Schaerbeek</option></select></div>
+      <div class="f"><label id="sLbl3">Budget max.</label><input type="text" id="sInp" placeholder="ex. 400 000 €"></div>
+      <button class="btn" id="sBtn" style="border-radius:8px;padding:0 22px;">Rechercher</button>
+    </div>
+  </div>
+  <div class="scrolldown" id="scrollDown">Défiler ↓</div>
+</header>
+
+<section class="stats"><div class="wrap"><div class="row">
+  <div><div class="num">+18</div><div class="lbl" id="st1">Ans d'expertise</div></div>
+  <div><div class="num" data-count="240">0</div><div class="lbl" id="st2">Avis Google</div></div>
+  <div><div class="num" id="st3n">Bruxelles</div><div class="lbl" id="st3">19 communes</div></div>
+  <div><div class="num" id="st4n">100%</div><div class="lbl" id="st4">Indépendant</div></div>
+</div></div></section>
+
+<section class="pad" id="listings"><div class="wrap">
+  <div class="center reveal">
+    <span class="eyebrow" id="listEye">Biens en vedette</span>
+    <h2 id="listH2">Une sélection à Bruxelles</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="props">
+    <div class="card reveal d1" data-msg-fr="Bonjour, je suis intéressé(e) par l'appartement à Ixelles (385 000 €)." data-msg-en="Hi, I'm interested in the apartment in Ixelles (€385,000).">
+      <div class="imgwrap"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?auto=format&fit=crop&w=700&q=85')"></div><span class="tag" id="tag1">À vendre</span></div>
+      <div class="body"><div class="price">385 000 €</div><h3 id="c1t">Appartement · Ixelles</h3>
+        <div class="feat"><span>◫ 95 m²</span><span>⌂ 2 ch.</span><span>❋ Lumières</span></div>
+        <div class="more" id="c1m">Voir le bien →</div></div>
+    </div>
+    <div class="card reveal d2" data-msg-fr="Bonjour, je suis intéressé(e) par la maison à Uccle (620 000 €)." data-msg-en="Hi, I'm interested in the house in Uccle (€620,000).">
+      <div class="imgwrap"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=700&q=85')"></div><span class="tag" id="tag2">À vendre</span></div>
+      <div class="body"><div class="price">620 000 €</div><h3 id="c2t">Maison · Uccle</h3>
+        <div class="feat"><span>◫ 220 m²</span><span>⌂ 4 ch.</span><span>✦ Jardin</span></div>
+        <div class="more" id="c2m">Voir le bien →</div></div>
+    </div>
+    <div class="card reveal d3" data-msg-fr="Bonjour, je suis intéressé(e) par le studio à Saint-Gilles (175 000 €) en investissement." data-msg-en="Hi, I'm interested in the studio in Saint-Gilles (€175,000) as an investment.">
+      <div class="imgwrap"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=700&q=85')"></div><span class="tag" id="tag3">Investissement</span></div>
+      <div class="body"><div class="price">175 000 €</div><h3 id="c3t">Studio · Saint-Gilles</h3>
+        <div class="feat"><span>◫ 45 m²</span><span>⌂ 1 ch.</span><span>↗ Rendement</span></div>
+        <div class="more" id="c3m">Voir le bien →</div></div>
+    </div>
+    <div class="card reveal d1" data-msg-fr="Bonjour, je suis intéressé(e) par l'appartement à Woluwe à louer (1 400 €/mois)." data-msg-en="Hi, I'm interested in the apartment to let in Woluwe (€1,400/month).">
+      <div class="imgwrap"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=85')"></div><span class="tag" id="tag4">À louer</span></div>
+      <div class="body"><div class="price">1 400 €<span style="font-size:.88rem;color:var(--muted);font-family:'Plus Jakarta Sans';font-weight:400;">/mois</span></div><h3 id="c4t">Appartement · Woluwe</h3>
+        <div class="feat"><span>◫ 90 m²</span><span>⌂ 2 ch.</span><span>❋ Terasse</span></div>
+        <div class="more" id="c4m">Voir le bien →</div></div>
+    </div>
+    <div class="card reveal d2" data-msg-fr="Bonjour, je suis intéressé(e) par la maison à Etterbeek (520 000 €)." data-msg-en="Hi, I'm interested in the house in Etterbeek (€520,000).">
+      <div class="imgwrap"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=700&q=85')"></div><span class="tag" id="tag5">À vendre</span></div>
+      <div class="body"><div class="price">520 000 €</div><h3 id="c5t">Maison · Etterbeek</h3>
+        <div class="feat"><span>◫ 190 m²</span><span>⌂ 3 ch.</span><span>✦ Calme</span></div>
+        <div class="more" id="c5m">Voir le bien →</div></div>
+    </div>
+    <div class="card reveal d3" data-msg-fr="Bonjour, je suis intéressé(e) par le penthouse à Ixelles (495 000 €)." data-msg-en="Hi, I'm interested in the penthouse in Ixelles (€495,000).">
+      <div class="imgwrap"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=85')"></div><span class="tag" id="tag6">À vendre</span></div>
+      <div class="body"><div class="price">495 000 €</div><h3 id="c6t">Penthouse · Ixelles</h3>
+        <div class="feat"><span>◫ 130 m²</span><span>⌂ 3 ch.</span><span>❋ Vue</span></div>
+        <div class="more" id="c6m">Voir le bien →</div></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="pad serv-sec" id="services"><div class="wrap">
+  <div class="center reveal">
+    <span class="eyebrow" id="servEye">Nos services</span>
+    <h2 id="servH2">Un accompagnement de A à Z</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="serv">
+    <div class="it reveal d1"><div class="ic">⌂</div><h3 id="s1h">Vente</h3><p id="s1p">Estimation honnête et mise en marché optimale pour votre bien.</p></div>
+    <div class="it reveal d1"><div class="ic">🔑</div><h3 id="s2h">Location</h3><p id="s2p">Locations longue durée et gestion des baux de A à Z.</p></div>
+    <div class="it reveal d2"><div class="ic">◷</div><h3 id="s3h">Gestion locative</h3><p id="s3p">Nous gérons tout — vous percevez simplement votre loyer.</p></div>
+    <div class="it reveal d2"><div class="ic">↗</div><h3 id="s4h">Investissement</h3><p id="s4p">Biens à haut rendement locatif dans les 19 communes bruxelloises.</p></div>
+  </div>
+</div></section>
+
+<section class="pad"><div class="wrap">
+  <div class="center reveal">
+    <span class="eyebrow" id="hoodEye">Bruxelles</span>
+    <h2 id="hoodH2">Les communes que nous connaissons le mieux</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="hoods">
+    <div class="hood reveal d1"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=700&q=85')"></div><div class="t">Ixelles<span class="sub">Élégant & vivant</span></div></div>
+    <div class="hood reveal d1"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=700&q=85')"></div><div class="t">Uccle<span class="sub">Résidentiel & vert</span></div></div>
+    <div class="hood reveal d2"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=700&q=85')"></div><div class="t">Saint-Gilles<span class="sub">Bohème & Art Nouveau</span></div></div>
+    <div class="hood reveal d2"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=700&q=85')"></div><div class="t">Woluwe<span class="sub">Calme & familial</span></div></div>
+  </div>
+</div></section>
+
+<section class="pad"><div class="wrap split">
+  <img class="reveal" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=85" alt="Intérieur" onerror="this.style.background='#e8e3d9'">
+  <div class="reveal d1">
+    <span class="eyebrow" id="whyEye">Pourquoi Solara Estates</span>
+    <h2 style="font-size:2.3rem;margin-top:14px;" id="whyH2">Une agence indépendante, à taille humaine.</h2>
+    <ul class="why-list">
+      <li><span class="n">1</span><div><b id="w1h">Un premier rendez-vous pour vous</b><p id="w1p">Nous prenons le temps de comprendre votre projet, sans engagement.</p></div></li>
+      <li><span class="n">2</span><div><b id="w2h">Une expertise locale à Bruxelles</b><p id="w2p">Une connaissance fine du marché et de chaque commune, d'Ixelles à Woluwe.</p></div></li>
+      <li><span class="n">3</span><div><b id="w3h">Un interlocuteur unique</b><p id="w3p">La même personne vous suit du premier contact jusqu'à la signature.</p></div></li>
+      <li><span class="n">4</span><div><b id="w4h">Un assistant disponible 24h/24</b><p id="w4p">Une question le soir ou le week-end ? Notre assistant répond à toute heure.</p></div></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="pad test-sec"><div class="wrap">
+  <div class="center reveal">
+    <span class="eyebrow" id="testEye">Ils nous ont fait confiance</span>
+    <h2 id="testH2">Ce que disent nos clients</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="tests">
+    <div class="test reveal d1"><div class="stars">★★★★★</div><p id="t1p">"Une expérience remarquable. Notre conseiller était disponible et réactif, avec des réponses claires à chaque étape. Je recommande Solara sans hésitation."</p><div class="who">Marie-Sophie <span id="t1s">Avis Google · il y a 4 mois</span></div></div>
+    <div class="test reveal d2"><div class="stars">★★★★★</div><p id="t2p">"Merci à toute l'équipe — toujours attentifs, disponibles et prompts à répondre. Je n'hésiterais pas à faire appel à eux de nouveau."</p><div class="who">Thomas <span id="t2s">Avis Google · il y a 5 mois</span></div></div>
+    <div class="test reveal d3"><div class="stars">★★★★★</div><p id="t3p">"Agence très professionnelle, du premier appel jusqu'à la signature. Suivi irréprochable et conseils avisés tout au long du processus."</p><div class="who">Camille <span id="t3s">Avis Google · il y a 3 mois</span></div></div>
+  </div>
+</div></section>
+
+<section class="pad ai-sec"><div class="wrap ai-grid">
+  <div class="reveal">
+    <span class="eyebrow" id="aiEye">Nouveau · Assistant en ligne</span>
+    <h2 id="aiH2">Un conseiller virtuel, jour et nuit.</h2>
+    <p id="aiP1">La plupart de vos futurs acquéreurs consultent les annonces le soir, le week-end ou depuis l'étranger. Notre assistant leur répond instantanément et transmet leurs coordonnées à l'équipe — vous ne ratez plus aucune prise de contact.</p>
+    <ul class="chk">
+      <li id="ai1">Répond aux questions sur les biens, les frais et les démarches</li>
+      <li id="ai2">Capture les coordonnées des prospects 24h/24</li>
+      <li id="ai3">Même quand le bureau est fermé, aucune demande ne se perd</li>
+    </ul>
+    <p style="margin-top:22px;font-size:.88rem;color:var(--gold);" id="aiTry">→ Essayez-le : appuyez sur la bulle en bas à droite.</p>
+  </div>
+  <div class="ai-phone reveal d1">
+    <div class="scr">
+      <div class="ph-h">
+        <div class="ph-avatar">🏠</div>
+        <div class="ph-info"><b id="phName">Solara Estates · Assistant</b><small>● en ligne 24h/24</small></div>
       </div>
-      <div class="card reveal d2" data-msg="Hi, I'm interested in the Townhouse in Valletta (€520,000).">
-        <div class="imgwrap"><div class="img" style="background-color:#dfe4ea;background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80')"></div><span class="tag">For sale</span></div>
-        <div class="body"><div class="price">€520,000</div><h3>Townhouse · Valletta</h3>
-          <div class="feat"><span>◫ 140 m²</span><span>⌂ 3 bed</span><span>✦ Character</span></div>
-          <div class="more">View property →</div></div>
-      </div>
-      <div class="card reveal d3" data-msg="Hi, I'm interested in the St Julian's apartment (€295,000) as an investment.">
-        <div class="imgwrap"><div class="img" style="background-color:#dfe4ea;background-image:url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=600&q=80')"></div><span class="tag">Investment</span></div>
-        <div class="body"><div class="price">€295,000</div><h3>Apartment · St Julian's</h3>
-          <div class="feat"><span>◫ 70 m²</span><span>⌂ 1 bed</span><span>↗ Rental yield</span></div>
-          <div class="more">View property →</div></div>
-      </div>
-      <div class="card reveal d1" data-msg="Hi, I'm interested in the Penthouse to let in St Julian's (€1,600/month).">
-        <div class="imgwrap"><div class="img" style="background-color:#dfe4ea;background-image:url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80')"></div><span class="tag">To let</span></div>
-        <div class="body"><div class="price">€1,600<span style="font-size:.9rem;color:var(--muted);font-family:'Inter';font-weight:500;">/mo</span></div><h3>Penthouse · St Julian's</h3>
-          <div class="feat"><span>◫ 110 m²</span><span>⌂ 2 bed</span><span>❋ Terrace</span></div>
-          <div class="more">View property →</div></div>
-      </div>
-      <div class="card reveal d2" data-msg="Hi, I'm interested in the Maisonette in Mellieħa (€245,000).">
-        <div class="imgwrap"><div class="img" style="background-color:#dfe4ea;background-image:url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=600&q=80')"></div><span class="tag">For sale</span></div>
-        <div class="body"><div class="price">€245,000</div><h3>Maisonette · Mellieħa</h3>
-          <div class="feat"><span>◫ 85 m²</span><span>⌂ 2 bed</span><span>✦ Quiet</span></div>
-          <div class="more">View property →</div></div>
-      </div>
-      <div class="card reveal d3" data-msg="Hi, I'm interested in the seafront apartment in Gozo (€430,000).">
-        <div class="imgwrap"><div class="img" style="background-color:#dfe4ea;background-image:url('https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=600&q=80')"></div><span class="tag">For sale</span></div>
-        <div class="body"><div class="price">€430,000</div><h3>Seafront apartment · Gozo</h3>
-          <div class="feat"><span>◫ 120 m²</span><span>⌂ 3 bed</span><span>❋ Marsalforn</span></div>
-          <div class="more">View property →</div></div>
-      </div>
-    </div>
-  </div></section>
-
-  <section class="pad serv-sec" id="services"><div class="wrap">
-    <div class="center reveal">
-      <span class="eyebrow">Our services</span>
-      <h2>Guidance from start to finish</h2>
-      <div class="rule"></div>
-    </div>
-    <div class="serv">
-      <div class="it reveal d1"><div class="ic">⌂</div><h3>Selling</h3><p>An honest valuation and the right exposure for your property.</p></div>
-      <div class="it reveal d1"><div class="ic">🔑</div><h3>Letting</h3><p>Short and long lets, tenancies handled from A to Z.</p></div>
-      <div class="it reveal d2"><div class="ic">◷</div><h3>Property management</h3><p>We handle everything — you simply collect your rent.</p></div>
-      <div class="it reveal d2"><div class="ic">↗</div><h3>Investment</h3><p>High-yield properties across Malta and Gozo.</p></div>
-    </div>
-  </div></section>
-
-  <section class="pad"><div class="wrap">
-    <div class="center reveal">
-      <span class="eyebrow">Malta &amp; Gozo</span>
-      <h2>The areas we know best</h2>
-      <div class="rule"></div>
-    </div>
-    <div class="hoods">
-      <div class="hood reveal d1"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=600&q=80')"></div><div class="t">Sliema</div></div>
-      <div class="hood reveal d1"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80')"></div><div class="t">St Julian's</div></div>
-      <div class="hood reveal d2"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=600&q=80')"></div><div class="t">Valletta</div></div>
-      <div class="hood reveal d2"><div class="img" style="background-image:url('https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&q=80')"></div><div class="t">Gozo</div></div>
-    </div>
-  </div></section>
-
-  <section class="pad"><div class="wrap split">
-    <img class="reveal" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Interior" onerror="this.style.background='#e8e3d9'">
-    <div class="reveal d1">
-      <span class="eyebrow">Why Solara Estates</span>
-      <h2 style="font-size:2.2rem;margin-top:12px;">An independent agency, on a human scale.</h2>
-      <ul class="why-list">
-        <li><span class="n">1</span><div><b>A first meeting, just for you</b><p>We take the time to understand your property and your plans, with no obligation.</p></div></li>
-        <li><span class="n">2</span><div><b>Local expertise across Malta</b><p>A close knowledge of the market and every area, from Sliema to Gozo.</p></div></li>
-        <li><span class="n">3</span><div><b>One dedicated contact</b><p>The same person follows you, from first hello to signing day.</p></div></li>
-        <li><span class="n">4</span><div><b>An assistant available 24/7</b><p>A question in the evening or at the weekend? Our assistant replies at any hour.</p></div></li>
-      </ul>
-    </div>
-  </div></section>
-
-  <section class="pad test-sec"><div class="wrap">
-    <div class="center reveal">
-      <span class="eyebrow">They trusted us</span>
-      <h2>What our clients say</h2>
-      <div class="rule"></div>
-    </div>
-    <div class="tests">
-      <div class="test reveal d1"><div class="stars">★★★★★</div><p>“A wonderful experience. Our agent was available and responsive, with clear answers throughout. I recommend Solara without hesitation.”</p><div class="who">James <span>Google review · 5 months ago</span></div></div>
-      <div class="test reveal d2"><div class="stars">★★★★★</div><p>“Thank you to the whole team — always attentive, available and quick to reply. I wouldn't hesitate to use their services again.”</p><div class="who">Marija <span>Google review · 5 months ago</span></div></div>
-      <div class="test reveal d3"><div class="stars">★★★★★</div><p>“A brilliant agency. Very professional from the first phone call to signing the lease. Smooth and pleasant throughout.”</p><div class="who">Andrea <span>Google review · 5 months ago</span></div></div>
-    </div>
-  </div></section>
-
-  <section class="pad ai-sec"><div class="wrap ai-grid">
-    <div class="reveal">
-      <span class="eyebrow">New · Online assistant</span>
-      <h2>A virtual adviser, day and night.</h2>
-      <p>Most of your future buyers browse the site in the evening, at the weekend or from abroad. Our assistant answers them instantly and passes their details to the team — so you never lose an enquiry again.</p>
-      <ul class="chk">
-        <li>Answers questions on listings, fees and paperwork</li>
-        <li>Captures prospect details 24/7</li>
-        <li>Even when the office is closed, no enquiry slips away</li>
-      </ul>
-      <p style="margin-top:22px;font-size:.9rem;color:var(--gold);">→ Try it: tap the bubble at the bottom right.</p>
-    </div>
-    <div class="ai-phone reveal d1">
-      <div class="scr">
-        <div class="ph-h"><b>Solara Estates · Assistant</b><small>● online 24/7</small></div>
-        <div class="ph-b">
-          <div class="mu">Hi, any studios to rent?</div>
-          <div class="mb">Of course! What's your budget and preferred area? I'll connect you with an adviser.</div>
-          <div class="mu">€900, Sliema</div>
-          <div class="mb">Perfect ✅ Your name and a number, and an adviser will call you back?</div>
+      <div class="ph-b">
+        <div class="mu" id="ph1">Bonjour, vous avez des studios à louer ?</div>
+        <div class="mb" id="ph2">Bien sûr ! Quel est votre budget et votre commune préférée ? Je vous mets en contact avec un conseiller.</div>
+        <div class="mu" id="ph3">1 200 €, Ixelles</div>
+        <div class="mb" id="ph4">Parfait ✅ Votre prénom et un numéro, et un conseiller vous rappelle ?</div>
+        <div class="ph-chips">
+          <span class="ph-chip" id="phc1">🔑 Louer</span>
+          <span class="ph-chip" id="phc2">🏠 Acheter</span>
         </div>
       </div>
     </div>
-  </div></section>
-
-  <section class="pad cta-sec" id="contact">
-    <div class="bg"></div>
-    <div class="wrap in">
-      <h2 class="reveal">A property project? Let's talk.</h2>
-      <p class="reveal d1">Personal advice for your property plans, with no obligation. Write to us or drop by the office — Tower Road, Sliema, Malta.</p>
-      <form class="cform reveal d2" id="cform">
-        <div class="crow"><input name="name" placeholder="Your name" required><input name="tel" placeholder="Phone" required></div>
-        <input name="email" type="email" placeholder="Email" required>
-        <textarea name="msg" rows="3" placeholder="Your project (buying, selling, letting, valuation…)"></textarea>
-        <button type="submit" class="btn">Send my enquiry</button>
-      </form>
-      <div class="cdone" id="cdone" style="display:none;">Thank you ✅ Your enquiry has been sent — a Solara Estates adviser will be in touch very soon.</div>
-    </div>
-  </section>
-
-  <footer><div class="wrap foot-in">
-    <div>
-      <div class="logo">Solara<span style="color:var(--gold)">·</span>Estates</div>
-      <p style="margin-top:12px;max-width:340px;">Independent estate agency in Malta — buying, selling, letting and investment across Malta &amp; Gozo.</p>
-      <p style="margin-top:14px;font-size:.78rem;color:rgba(255,255,255,.4);">Demo site · built by Floryne Pierson · fictional agency &amp; data.</p>
-    </div>
-    <div style="font-size:.85rem;line-height:1.9;">
-      Tower Road, Sliema SLM 1601, Malta<br>
-      +356 2010 3000<br>
-      <a href="mailto:hello@solara-estates.mt" style="color:var(--gold);text-decoration:none;">hello@solara-estates.mt</a><br>
-      Mon–Fri 9:00–18:00 · Sat 9:00–13:00
-    </div>
-  </div></footer>
-
-  <button class="pa-btn" id="paBtn" aria-label="Open the assistant">
-    <svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4 3.2V16.5A1.5 1.5 0 0 1 3.5 15V7A1.5 1.5 0 0 1 4 5.5z"/>
-      <circle cx="8.5" cy="11" r="1" fill="currentColor" stroke="none"/>
-      <circle cx="12" cy="11" r="1" fill="currentColor" stroke="none"/>
-      <circle cx="15.5" cy="11" r="1" fill="currentColor" stroke="none"/>
-    </svg>
-  </button>
-  <div class="pa-panel" id="paPanel">
-    <div class="pa-head"><b>Solara Estates · Assistant</b><span>● online 24/7</span></div>
-    <div class="pa-thread" id="paThread"></div>
-    <div class="pa-bar"><input id="paInput" placeholder="A question? A project?"><button id="paSend">➤</button></div>
-    <div class="pa-foot">AI assistant — replies at any hour</div>
   </div>
+</div></section>
 
-  <script>
-    var nav=document.getElementById('nav');
-    window.addEventListener('scroll',function(){ nav.classList.toggle('scrolled', window.scrollY>60); });
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
-    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-    var counted=false;
-    var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!counted){counted=true;document.querySelectorAll('.num').forEach(function(n){
-      var target=parseFloat(n.getAttribute('data-count')),suf=n.getAttribute('data-suffix')||'',dec=target%1!==0,steps=45,i=0; if(isNaN(target)){return;}
-      var t=setInterval(function(){i++;var v=target*(i/steps);n.textContent=(dec?v.toFixed(1):Math.round(v))+suf;if(i>=steps){n.textContent=(dec?target.toFixed(1):target)+suf;clearInterval(t);}},22);
-    });}});},{threshold:.4});
-    io2.observe(document.querySelector('.stats'));
-    var thread=document.getElementById('paThread'),input=document.getElementById('paInput'),sendB=document.getElementById('paSend'),btn=document.getElementById('paBtn'),panel=document.getElementById('paPanel'),greeted=false;
-    var lead={type:'',budget:'',area:''},awaitingContact=false;
-    function bub(t,w){var d=document.createElement('div');d.className='pa-msg '+(w==='me'?'pa-me':'pa-bot');d.textContent=t;thread.appendChild(d);thread.scrollTop=thread.scrollHeight;}
-    function say(t){setTimeout(function(){bub(t,'bot');},300);}
-    function clearChips(){Array.prototype.forEach.call(thread.querySelectorAll('.pa-chips'),function(c){c.remove();});}
-    function chips(opts){clearChips();setTimeout(function(){var w=document.createElement('div');w.className='pa-chips';opts.forEach(function(o){var b=document.createElement('button');b.className='pa-chip';b.textContent=o.label;b.onclick=function(){clearChips();bub(o.label,'me');awaitingContact=false;setTimeout(o.go,350);};w.appendChild(b);});thread.appendChild(w);thread.scrollTop=thread.scrollHeight;},420);}
-    function menu(){chips([
-      {label:'🔑 Rent a property',go:function(){lead={type:'Letting',budget:'',area:''};say('Letting is our specialty 🙂 Roughly what monthly budget?');chips([
-        {label:'≤ €800',go:function(){lead.budget='≤ €800/mo';area();}},
-        {label:'€800 – 1,200',go:function(){lead.budget='€800–1,200/mo';area();}},
-        {label:'€1,200 – 1,800',go:function(){lead.budget='€1,200–1,800/mo';area();}},
-        {label:'€1,800+',go:function(){lead.budget='€1,800+/mo';area();}}
-      ]);}},
-      {label:'🏠 Buy',go:function(){lead={type:'Purchase',budget:'',area:''};budgetBuy();}},
-      {label:'📈 Invest',go:function(){lead={type:'Investment',budget:'',area:''};say('Great 🙂 What budget are you considering?');budgetBuy(true);}},
-      {label:'💰 Value my property',go:function(){lead={type:'Valuation',budget:'',area:''};say('Of course — an adviser will value your property with no obligation.');area();}},
-      {label:'🕐 Opening hours',go:function(){say('Our hours: Monday to Friday 9:00–18:00, Saturday 9:00–13:00. But here I stay reachable 24/7 🙂');setTimeout(function(){say('Anything else?');menu();},900);}}
-    ]);}
-    function budgetBuy(skip){if(!skip)say('Roughly what budget?');chips([
-      {label:'≤ €200,000',go:function(){lead.budget='≤ €200,000';area();}},
-      {label:'€200 – 350k',go:function(){lead.budget='€200–350k';area();}},
-      {label:'€350 – 550k',go:function(){lead.budget='€350–550k';area();}},
-      {label:'€550k+',go:function(){lead.budget='€550k+';area();}}
-    ]);}
-    function area(){say('Which area?');chips([
-      {label:'Sliema',go:function(){lead.area='Sliema';contact();}},
-      {label:"St Julian's",go:function(){lead.area="St Julian's";contact();}},
-      {label:'Valletta',go:function(){lead.area='Valletta';contact();}},
-      {label:'Gozo',go:function(){lead.area='Gozo';contact();}},
-      {label:'Other area',go:function(){lead.area='another area';contact();}}
-    ]);}
-    function contact(){var r=[lead.type];if(lead.budget)r.push(lead.budget);if(lead.area)r.push(lead.area);say('Perfect, to recap: '+r.join(' · ')+'. Leave me your name and a number, and an adviser will get back to you with matching properties 🙂');setTimeout(function(){awaitingContact=true;input.focus();},600);}
-    function openPanel(){if(!panel.classList.contains('open')){panel.classList.add('open');}if(!greeted){greeted=true;bub("Hi 👋 I'm the Solara Estates assistant. How can I help you today?",'bot');menu();}input.focus();}
-    btn.onclick=function(){if(panel.classList.contains('open')){panel.classList.remove('open');}else{openPanel();}};
-    function nameFrom(t){var w=t.match(/[A-Za-zÀ-ÖØ-öø-ÿ'’\-]{2,}/g)||[];var stop=['im','i','my','name','is','hi','hello','hey','this','yes','no','its','it','call','me','the','and','please','thanks','thank','number','phone','mobile','tel'];for(var k=0;k<w.length;k++){if(stop.indexOf(w[k].toLowerCase())===-1)return w[k].charAt(0).toUpperCase()+w[k].slice(1).toLowerCase();}return '';}
-    function ask(){var t=input.value.trim();if(!t)return;input.value='';bub(t,'me');if(awaitingContact){awaitingContact=false;var p=nameFrom(t);say('Thank you'+(p?' '+p:'')+' ✅ Noted — a Solara Estates adviser will get back to you very soon. Have a lovely day!');}else{say('I can guide you in one tap 🙂 Choose below:');menu();}}
-    sendB.onclick=ask;input.addEventListener('keydown',function(e){if(e.key==='Enter')ask();});
-    document.querySelectorAll('.card[data-msg]').forEach(function(c){c.addEventListener('click',function(){var m=c.getAttribute('data-msg');openPanel();setTimeout(function(){clearChips();bub(m,'me');say('Excellent choice 👍 This property is available. Leave me your name and a number, and an adviser will get back to you shortly to arrange a viewing.');setTimeout(function(){awaitingContact=true;input.focus();},700);},greeted?80:500);});});
-    var cf=document.getElementById('cform');if(cf){cf.addEventListener('submit',function(e){e.preventDefault();cf.style.display='none';document.getElementById('cdone').style.display='block';});}
-  </script>
+<section class="pad cta-sec" id="contact">
+  <div class="bg"></div>
+  <div class="wrap in">
+    <h2 class="reveal" id="ctaH2">Un projet immobilier ? Parlons-en.</h2>
+    <p class="reveal d1" id="ctaP">Conseils personnalisés pour votre projet, sans engagement. Écrivez-nous ou passez à l'agence — Avenue Louise 54, Bruxelles.</p>
+    <form class="cform reveal d2" id="cform">
+      <div class="crow">
+        <input name="name" id="fi1" placeholder="Votre nom" required>
+        <input name="tel" id="fi2" placeholder="Téléphone" required>
+      </div>
+      <input name="email" type="email" id="fi3" placeholder="Email" required>
+      <textarea name="msg" id="fi4" rows="3" placeholder="Votre projet (achat, vente, location, estimation…)"></textarea>
+      <button type="submit" class="btn" id="fBtn">Envoyer ma demande <span class="iring">→</span></button>
+    </form>
+    <div class="cdone" id="cdone" style="display:none;"></div>
+  </div>
+</section>
+
+<footer><div class="wrap foot-in">
+  <div>
+    <div class="logo">Solara<span style="color:var(--gold)">·</span>Estates</div>
+    <p style="margin-top:12px;max-width:340px;" id="ftDesc">Agence immobilière indépendante à Bruxelles — achat, vente, location et investissement dans les 19 communes.</p>
+    <p style="margin-top:14px;font-size:.76rem;color:rgba(255,255,255,.35);" id="ftDemo">Site démo · réalisé par Floryne Pierson · agence et données fictives.</p>
+  </div>
+  <div style="font-size:.84rem;line-height:2;" id="ftContact">
+    Avenue Louise 54, 1050 Bruxelles<br>
+    +32 2 000 00 00<br>
+    <a href="mailto:hello@solara-estates.be" style="color:var(--gold);">hello@solara-estates.be</a><br>
+    <span id="ftHours">Lun–Ven 9h–18h · Sam 9h–13h</span>
+  </div>
+</div></footer>
+
+<!-- CHATBOT -->
+<button class="pa-btn" id="paBtn" aria-label="Ouvrir l'assistant">
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4 3.2V16.5A1.5 1.5 0 0 1 3.5 15V7A1.5 1.5 0 0 1 4 5.5z"/>
+    <circle cx="8.5" cy="11" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="11" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="15.5" cy="11" r="1" fill="currentColor" stroke="none"/>
+  </svg>
+</button>
+<div class="pa-panel" id="paPanel">
+  <div class="pa-head">
+    <div class="pa-avatar">🏠</div>
+    <div class="pa-info"><b id="paHeadName">Solara Estates · Assistant</b><span id="paHeadSub">● en ligne 24h/24</span></div>
+    <div class="pa-lang">
+      <button id="chatFR" class="active" onclick="setChatLang('fr')">FR</button>
+      <button id="chatEN" onclick="setChatLang('en')">EN</button>
+    </div>
+  </div>
+  <div class="pa-thread" id="paThread"></div>
+  <div class="pa-bar"><input id="paInput" placeholder="Une question ? Un projet ?"><button id="paSend">➤</button></div>
+  <div class="pa-foot" id="paFoot">Assistant IA — répond à toute heure</div>
+</div>
+
+<script>
+/* ── STRINGS ── */
+var T = {
+  fr: {
+    navBuy:'Acheter',navRent:'Louer',navSell:'Vendre',navInv:'Investir',navVal:'Estimation',navCt:'Contact',navBtn:'Estimation',
+    heroEye:'Agence indépendante · Bruxelles',
+    heroH1:'Votre projet immobilier<br>à Bruxelles, <em>en bonnes mains.</em>',
+    heroP:'Achat, vente, location, investissement — un accompagnement personnalisé du premier contact jusqu\'aux clés.',
+    heroCta1:'Voir les biens',heroCta2:'Estimation gratuite',
+    sLbl1:'Je recherche',sO1:'Acheter',sO2:'Louer',sO3:'Investir',sLbl2:'Commune',sLbl3:'Budget max.',sBtn:'Rechercher',sInp:'ex. 400 000 €',
+    scrollDown:'Défiler ↓',
+    st1:'Ans d\'expertise',st2:'Avis Google',st3:'19 communes',st3n:'Bruxelles',st4:'Indépendant',st4n:'100%',
+    listEye:'Biens en vedette',listH2:'Une sélection à Bruxelles',
+    tag1:'À vendre',tag2:'À vendre',tag3:'Investissement',tag4:'À louer',tag5:'À vendre',tag6:'À vendre',
+    c1t:'Appartement · Ixelles',c2t:'Maison · Uccle',c3t:'Studio · Saint-Gilles',c4t:'Appartement · Woluwe',c5t:'Maison · Etterbeek',c6t:'Penthouse · Ixelles',
+    cMore:'Voir le bien →',
+    servEye:'Nos services',servH2:'Un accompagnement de A à Z',
+    s1h:'Vente',s1p:'Estimation honnête et mise en marché optimale pour votre bien.',
+    s2h:'Location',s2p:'Locations longue durée et gestion des baux de A à Z.',
+    s3h:'Gestion locative',s3p:'Nous gérons tout — vous percevez simplement votre loyer.',
+    s4h:'Investissement',s4p:'Biens à haut rendement locatif dans les 19 communes bruxelloises.',
+    hoodEye:'Bruxelles',hoodH2:'Les communes que nous connaissons le mieux',
+    whyEye:'Pourquoi Solara Estates',whyH2:'Une agence indépendante, à taille humaine.',
+    w1h:'Un premier rendez-vous pour vous',w1p:'Nous prenons le temps de comprendre votre projet, sans engagement.',
+    w2h:'Une expertise locale à Bruxelles',w2p:'Une connaissance fine du marché et de chaque commune, d\'Ixelles à Woluwe.',
+    w3h:'Un interlocuteur unique',w3p:'La même personne vous suit du premier contact jusqu\'à la signature.',
+    w4h:'Un assistant disponible 24h/24',w4p:'Une question le soir ou le week-end ? Notre assistant répond à toute heure.',
+    testEye:'Ils nous ont fait confiance',testH2:'Ce que disent nos clients',
+    t1p:'"Une expérience remarquable. Notre conseiller était disponible et réactif, avec des réponses claires à chaque étape. Je recommande Solara sans hésitation."',
+    t1s:'Avis Google · il y a 4 mois',
+    t2p:'"Merci à toute l\'équipe — toujours attentifs, disponibles et prompts à répondre. Je n\'hésiterais pas à faire appel à eux de nouveau."',
+    t2s:'Avis Google · il y a 5 mois',
+    t3p:'"Agence très professionnelle, du premier appel jusqu\'à la signature. Suivi irréprochable et conseils avisés tout au long du processus."',
+    t3s:'Avis Google · il y a 3 mois',
+    aiEye:'Nouveau · Assistant en ligne',aiH2:'Un conseiller virtuel, jour et nuit.',
+    aiP1:'La plupart de vos futurs acquéreurs consultent les annonces le soir, le week-end ou depuis l\'étranger. Notre assistant leur répond instantanément et transmet leurs coordonnées à l\'équipe.',
+    ai1:'Répond aux questions sur les biens, les frais et les démarches',
+    ai2:'Capture les coordonnées des prospects 24h/24',
+    ai3:'Même quand le bureau est fermé, aucune demande ne se perd',
+    aiTry:'→ Essayez-le : appuyez sur la bulle en bas à droite.',
+    phName:'Solara Estates · Assistant',phSub:'● en ligne 24h/24',
+    ph1:'Bonjour, vous avez des studios à louer ?',ph2:'Bien sûr ! Quel est votre budget et votre commune préférée ?',ph3:'1 200 €, Ixelles',ph4:'Parfait ✅ Votre prénom et un numéro, et un conseiller vous rappelle ?',
+    phc1:'🔑 Louer',phc2:'🏠 Acheter',
+    ctaH2:'Un projet immobilier ? Parlons-en.',ctaP:'Conseils personnalisés pour votre projet, sans engagement. Écrivez-nous ou passez à l\'agence — Avenue Louise 54, Bruxelles.',
+    fi1:'Votre nom',fi2:'Téléphone',fi3:'Email',fi4:'Votre projet (achat, vente, location, estimation…)',fBtn:'Envoyer ma demande',
+    cdone:'Merci ✅ Votre demande a bien été envoyée — un conseiller Solara Estates vous contactera très rapidement.',
+    ftDesc:'Agence immobilière indépendante à Bruxelles — achat, vente, location et investissement dans les 19 communes.',
+    ftDemo:'Site démo · réalisé par Floryne Pierson · agence et données fictives.',ftHours:'Lun–Ven 9h–18h · Sam 9h–13h',
+    ribbon:'Site démo réalisé par Floryne Pierson — votre version avec votre agence, vos biens et vos contacts.',ribbonLink:'En savoir plus →',
+    // chatbot
+    chatHi:'Bonjour 👋 Je suis l\'assistant de Solara Estates. Comment puis-je vous aider ?',
+    chatFoot:'Assistant IA — répond à toute heure',
+    chatInput:'Une question ? Un projet ?',
+    chatLangSwitch:'Passage en français 🇫🇷',
+    menu:[
+      {l:'🔑 Louer',t:'letting'},
+      {l:'🏠 Acheter',t:'buy'},
+      {l:'📈 Investir',t:'invest'},
+      {l:'💰 Estimer mon bien',t:'valuation'},
+      {l:'🕐 Horaires',t:'hours'}
+    ],
+    sayLetting:'La location est notre spécialité 🙂 Quel est votre budget mensuel approximatif ?',
+    sayBuy:'Bien sûr 🙂 Quel est votre budget approximatif ?',
+    sayInvest:'Excellent 🙂 Quel budget envisagez-vous ?',
+    sayValuation:'Bien sûr — un conseiller estimera votre bien sans engagement.',
+    sayHours:'Nos horaires : Lundi au Vendredi 9h–18h, Samedi 9h–13h. Mais ici je reste joignable 24h/24 🙂',
+    sayAnything:'Autre chose ?',
+    budgetsLet:['≤ 900 €/mois','900 – 1 400 €','1 400 – 2 000 €','2 000 €+'],
+    budgetsBuy:['≤ 250 000 €','250 – 400 000 €','400 – 600 000 €','600 000 €+'],
+    sayArea:'Quelle commune ?',
+    areas:['Ixelles','Uccle','Etterbeek','Woluwe','Saint-Gilles','Schaerbeek','Autre commune'],
+    sayContact:function(r){return 'Parfait ! Pour récap : '+r+'. Laissez-moi votre prénom et un numéro, un conseiller vous rappelle très vite 🙂';},
+    sayThanks:function(n){return 'Merci'+(n?' '+n:'')+' ✅ C\'est noté — un conseiller Solara Estates vous contactera très rapidement. Bonne journée !';},
+    sayFallback:'Je peux vous guider en un clic 🙂 Choisissez ci-dessous :',
+    sayView:'Excellent choix 👍 Ce bien est disponible. Laissez-moi votre prénom et un numéro, un conseiller vous rappelle pour organiser une visite.',
+    letType:'Location',buyType:'Achat',investType:'Investissement',valuationType:'Estimation',
+  },
+  en: {
+    navBuy:'Buy',navRent:'Rent',navSell:'Sell',navInv:'Invest',navVal:'Valuation',navCt:'Contact',navBtn:'Valuation',
+    heroEye:'Independent estate agency · Brussels',
+    heroH1:'Your property project<br>in Brussels, <em>in good hands.</em>',
+    heroP:'Buying, selling, letting and investing — personal guidance from the first contact to the keys in your hand.',
+    heroCta1:'View listings',heroCta2:'Free valuation',
+    sLbl1:'I\'m looking to',sO1:'Buy',sO2:'Rent',sO3:'Invest',sLbl2:'Area',sLbl3:'Max. budget',sBtn:'Search',sInp:'e.g. €400,000',
+    scrollDown:'Scroll ↓',
+    st1:'Years of experience',st2:'Google reviews',st3:'19 communes',st3n:'Brussels',st4:'Independent',st4n:'100%',
+    listEye:'Featured listings',listH2:'A selection across Brussels',
+    tag1:'For sale',tag2:'For sale',tag3:'Investment',tag4:'To let',tag5:'For sale',tag6:'For sale',
+    c1t:'Apartment · Ixelles',c2t:'House · Uccle',c3t:'Studio · Saint-Gilles',c4t:'Apartment · Woluwe',c5t:'House · Etterbeek',c6t:'Penthouse · Ixelles',
+    cMore:'View property →',
+    servEye:'Our services',servH2:'Full guidance from start to finish',
+    s1h:'Selling',s1p:'An honest valuation and the right exposure for your property.',
+    s2h:'Letting',s2p:'Long-term lets and tenancies handled from A to Z.',
+    s3h:'Property management',s3p:'We handle everything — you simply collect your rent.',
+    s4h:'Investment',s4p:'High-yield properties across all 19 Brussels communes.',
+    hoodEye:'Brussels',hoodH2:'The areas we know best',
+    whyEye:'Why Solara Estates',whyH2:'An independent agency, on a human scale.',
+    w1h:'A first meeting, just for you',w1p:'We take the time to understand your project, with no obligation.',
+    w2h:'Local expertise across Brussels',w2p:'A close knowledge of the market and every commune, from Ixelles to Woluwe.',
+    w3h:'One dedicated contact',w3p:'The same person follows you, from first hello to signing day.',
+    w4h:'An assistant available 24/7',w4p:'A question in the evening or at the weekend? Our assistant replies at any hour.',
+    testEye:'They trusted us',testH2:'What our clients say',
+    t1p:'"A wonderful experience. Our agent was available and responsive, with clear answers throughout. I recommend Solara without hesitation."',t1s:'Google review · 4 months ago',
+    t2p:'"Thank you to the whole team — always attentive, available and quick to reply. I wouldn\'t hesitate to use their services again."',t2s:'Google review · 5 months ago',
+    t3p:'"A brilliant agency. Very professional from the first phone call to signing. Smooth, pleasant and impeccably managed throughout."',t3s:'Google review · 3 months ago',
+    aiEye:'New · Online assistant',aiH2:'A virtual adviser, day and night.',
+    aiP1:'Most of your future buyers browse listings in the evening, at the weekend or from abroad. Our assistant answers them instantly and passes their details to the team.',
+    ai1:'Answers questions on listings, fees and paperwork',ai2:'Captures prospect details 24/7',ai3:'Even when the office is closed, no enquiry slips away',
+    aiTry:'→ Try it: tap the bubble at the bottom right.',
+    phName:'Solara Estates · Assistant',phSub:'● online 24/7',
+    ph1:'Hi, do you have studios to rent?',ph2:'Of course! What\'s your budget and preferred area?',ph3:'€1,200, Ixelles',ph4:'Perfect ✅ Your name and a number, and an adviser will call you back?',
+    phc1:'🔑 Rent',phc2:'🏠 Buy',
+    ctaH2:'A property project? Let\'s talk.',ctaP:'Personal advice for your property plans, with no obligation. Write to us or drop by — Avenue Louise 54, Brussels.',
+    fi1:'Your name',fi2:'Phone',fi3:'Email',fi4:'Your project (buying, selling, letting, valuation…)',fBtn:'Send my enquiry',
+    cdone:'Thank you ✅ Your enquiry has been sent — a Solara Estates adviser will be in touch very soon.',
+    ftDesc:'Independent estate agency in Brussels — buying, selling, letting and investment across all 19 communes.',
+    ftDemo:'Demo site · built by Floryne Pierson · fictional agency & data.',ftHours:'Mon–Fri 9:00–18:00 · Sat 9:00–13:00',
+    ribbon:'Demo site built by Floryne Pierson — your version with your own agency, listings & contacts.',ribbonLink:'Learn more →',
+    chatHi:'Hi 👋 I\'m the Solara Estates assistant. How can I help you today?',
+    chatFoot:'AI assistant — replies at any hour',
+    chatInput:'A question? A project?',
+    chatLangSwitch:'Switching to English 🇬🇧',
+    menu:[
+      {l:'🔑 Rent a property',t:'letting'},
+      {l:'🏠 Buy',t:'buy'},
+      {l:'📈 Invest',t:'invest'},
+      {l:'💰 Value my property',t:'valuation'},
+      {l:'🕐 Opening hours',t:'hours'}
+    ],
+    sayLetting:'Letting is our speciality 🙂 Roughly what monthly budget?',
+    sayBuy:'Of course 🙂 Roughly what budget?',
+    sayInvest:'Great 🙂 What budget are you considering?',
+    sayValuation:'Of course — an adviser will value your property with no obligation.',
+    sayHours:'Our hours: Monday to Friday 9:00–18:00, Saturday 9:00–13:00. But here I stay reachable 24/7 🙂',
+    sayAnything:'Anything else?',
+    budgetsLet:['≤ €900/mo','€900 – 1,400','€1,400 – 2,000','€2,000+'],
+    budgetsBuy:['≤ €250,000','€250 – 400k','€400 – 600k','€600k+'],
+    sayArea:'Which area?',
+    areas:['Ixelles','Uccle','Etterbeek','Woluwe','Saint-Gilles','Schaerbeek','Another area'],
+    sayContact:function(r){return 'Perfect, to recap: '+r+'. Leave me your name and a number, and an adviser will get back to you very soon 🙂';},
+    sayThanks:function(n){return 'Thank you'+(n?' '+n:'')+' ✅ Noted — a Solara Estates adviser will be in touch very soon. Have a lovely day!';},
+    sayFallback:'I can guide you in one tap 🙂 Choose below:',
+    sayView:'Excellent choice 👍 This property is available. Leave me your name and a number, and an adviser will get back to you shortly to arrange a viewing.',
+    letType:'Letting',buyType:'Purchase',investType:'Investment',valuationType:'Valuation',
+  }
+};
+
+/* ── SITE LANGUAGE ── */
+var siteLang = 'fr';
+function setLang(l) {
+  siteLang = l;
+  document.documentElement.lang = l;
+  document.getElementById('langFR').classList.toggle('active', l==='fr');
+  document.getElementById('langEN').classList.toggle('active', l==='en');
+  applyText(T[l]);
+}
+function applyText(t) {
+  var ids = ['navBuy','navRent','navSell','navInv','navVal','navCt','navBtn',
+    'heroEye','heroP','heroCta1','heroCta2','sLbl1','sO1','sO2','sO3','sLbl2','sLbl3','sBtn','scrollDown',
+    'st1','st2','st3','st3n','st4','st4n',
+    'listEye','listH2','tag1','tag2','tag3','tag4','tag5','tag6',
+    'c1t','c2t','c3t','c4t','c5t','c6t',
+    'c1m','c2m','c3m','c4m','c5m','c6m',
+    'servEye','servH2','s1h','s1p','s2h','s2p','s3h','s3p','s4h','s4p',
+    'hoodEye','hoodH2','whyEye','whyH2','w1h','w1p','w2h','w2p','w3h','w3p','w4h','w4p',
+    'testEye','testH2','t1p','t1s','t2p','t2s','t3p','t3s',
+    'aiEye','aiH2','aiP1','ai1','ai2','ai3','aiTry',
+    'phName','ph1','ph2','ph3','ph4','phc1','phc2',
+    'ctaH2','ctaP','fBtn','ftDesc','ftDemo','ftHours',
+    'paHeadSub','paFoot'];
+  ids.forEach(function(id){
+    var el=document.getElementById(id);
+    if(el&&t[id]!==undefined) el.textContent=t[id];
+  });
+  // innerHTML for hero h1 (has em), heroEye override, heroH1
+  var h1=document.getElementById('heroH1');
+  if(h1) h1.innerHTML=t.heroH1;
+  // placeholders
+  var inp=document.getElementById('sInp'); if(inp) inp.placeholder=t.sInp;
+  var fi1=document.getElementById('fi1'); if(fi1) fi1.placeholder=t.fi1;
+  var fi2=document.getElementById('fi2'); if(fi2) fi2.placeholder=t.fi2;
+  var fi3=document.getElementById('fi3'); if(fi3) fi3.placeholder=t.fi3;
+  var fi4=document.getElementById('fi4'); if(fi4) fi4.placeholder=t.fi4;
+  var pai=document.getElementById('paInput'); if(pai) pai.placeholder=t.chatInput;
+  // ribbon
+  var r=document.getElementById('demoRibbon');
+  if(r) r.innerHTML=t.ribbon+'<a href="/immo/'+(siteLang==='fr'?'fr':'en')+'" style="color:#fff;text-decoration:underline;margin-left:4px;">'+t.ribbonLink+'</a>';
+  // phone mockup
+  var phn=document.getElementById('phName'); if(phn) phn.textContent=t.phName;
+  var phs=document.querySelector('.ai-phone .ph-info small'); if(phs) phs.textContent=t.phSub;
+  var paHN=document.getElementById('paHeadName'); if(paHN) paHN.textContent=t.phName;
+}
+
+/* ── CHAT LANGUAGE ── */
+var chatLang = 'fr';
+function setChatLang(l) {
+  chatLang = l;
+  document.getElementById('chatFR').classList.toggle('active', l==='fr');
+  document.getElementById('chatEN').classList.toggle('active', l==='en');
+  document.getElementById('paFoot').textContent = T[l].chatFoot;
+  document.getElementById('paInput').placeholder = T[l].chatInput;
+  if(greeted) {
+    clearChips();
+    say(T[l].chatLangSwitch);
+    setTimeout(function(){say(T[l].chatHi);setTimeout(function(){menu();},500);},700);
+  }
+}
+
+/* ── CHATBOT LOGIC ── */
+var thread=document.getElementById('paThread'),
+    input=document.getElementById('paInput'),
+    sendB=document.getElementById('paSend'),
+    btn=document.getElementById('paBtn'),
+    panel=document.getElementById('paPanel'),
+    greeted=false,
+    chatHistory=[],
+    busy=false;
+
+function bub(t,w){var d=document.createElement('div');d.className='pa-msg '+(w==='me'?'pa-me':'pa-bot');d.textContent=t;thread.appendChild(d);thread.scrollTop=thread.scrollHeight;}
+function clearChips(){Array.prototype.forEach.call(thread.querySelectorAll('.pa-chips'),function(c){c.remove();});}
+function showTyping(){var d=document.createElement('div');d.className='pa-msg pa-bot pa-typing';d.id='pa-typing';d.innerHTML='<span></span><span></span><span></span>';thread.appendChild(d);thread.scrollTop=thread.scrollHeight;}
+function hideTyping(){var d=document.getElementById('pa-typing');if(d)d.remove();}
+
+function chips(opts){
+  clearChips();
+  setTimeout(function(){
+    var w=document.createElement('div');w.className='pa-chips';
+    opts.forEach(function(o){
+      var b=document.createElement('button');b.className='pa-chip';b.textContent=o.label;
+      b.onclick=function(){clearChips();sendMsg(o.label);};
+      w.appendChild(b);
+    });
+    thread.appendChild(w);thread.scrollTop=thread.scrollHeight;
+  },400);
+}
+function suggestChips(){chips(T[chatLang].menu.map(function(m){return {label:m.l};}));}
+
+async function sendMsg(text){
+  if(busy||!text.trim())return;
+  clearChips();
+  bub(text,'me');
+  input.value='';
+  busy=true;sendB.disabled=true;
+  chatHistory.push({role:'user',content:text});
+  showTyping();
+  try{
+    var r=await fetch('/api/solara-chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:chatHistory})});
+    var d=await r.json();
+    hideTyping();
+    var reply=d.reply||'…';
+    bub(reply,'bot');
+    chatHistory.push({role:'assistant',content:reply});
+  }catch(e){
+    hideTyping();
+    bub('Une erreur est survenue — n\'hésitez pas à nous appeler directement.','bot');
+  }
+  busy=false;sendB.disabled=false;
+  input.focus();
+}
+
+function openPanel(){
+  if(!panel.classList.contains('open'))panel.classList.add('open');
+  if(!greeted){greeted=true;bub(T[chatLang].chatHi,'bot');setTimeout(suggestChips,500);}
+  input.focus();
+}
+btn.onclick=function(){panel.classList.contains('open')?panel.classList.remove('open'):openPanel();};
+
+function ask(){sendMsg(input.value.trim());}
+sendB.onclick=ask;
+input.addEventListener('keydown',function(e){if(e.key==='Enter')ask();});
+
+document.querySelectorAll('.card[data-msg-fr]').forEach(function(c){c.addEventListener('click',function(){
+  var m=c.getAttribute('data-msg-'+chatLang)||c.getAttribute('data-msg-fr');
+  openPanel();
+  setTimeout(function(){sendMsg(m);},greeted?80:600);
+});});
+
+var cf=document.getElementById('cform');
+if(cf){cf.addEventListener('submit',function(e){e.preventDefault();cf.style.display='none';var d=document.getElementById('cdone');d.textContent=T[siteLang].cdone;d.style.display='block';});}
+
+/* ── NAV SCROLL ── */
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60);},{passive:true});
+
+/* ── REVEAL ── */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+/* ── COUNTER ── */
+var counted=false;
+var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!counted){counted=true;document.querySelectorAll('.num[data-count]').forEach(function(n){var target=parseFloat(n.getAttribute('data-count')),steps=50,i=0;if(isNaN(target))return;var t=setInterval(function(){i++;n.textContent=Math.round(target*(i/steps));if(i>=steps){n.textContent=target;clearInterval(t);}},20);});}});},{threshold:.4});
+io2.observe(document.querySelector('.stats'));
+
+/* ── INIT ── */
+setLang('fr');
+</script>
 </body>
 </html>

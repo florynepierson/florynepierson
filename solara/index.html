@@ -206,8 +206,8 @@ footer a:hover{color:var(--gold);}
 .pa-btn:hover{transform:scale(1.06);}
 @keyframes pulse{0%{box-shadow:0 10px 30px rgba(200,133,74,.5),0 0 0 0 rgba(200,133,74,.35)}70%{box-shadow:0 10px 30px rgba(200,133,74,.5),0 0 0 16px rgba(200,133,74,0)}100%{box-shadow:0 10px 30px rgba(200,133,74,.5),0 0 0 0 rgba(200,133,74,0)}}
 .pa-panel{position:fixed;bottom:104px;right:26px;width:372px;max-width:calc(100vw - 32px);height:530px;max-height:calc(100dvh - 148px);background:#fff;border-radius:18px;overflow:hidden;z-index:600;display:none;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.32);}
-.pa-panel.open{display:flex;animation:rise .28s var(--ease);}
-@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.pa-panel.open{display:flex;animation:rise .4s cubic-bezier(.34,1.46,.64,1);}
+@keyframes rise{from{opacity:0;transform:translateY(22px) scale(.96)}to{opacity:1;transform:none}}
 .pa-head{background:var(--navy);color:#fff;padding:15px 18px;display:flex;align-items:center;gap:11px;}
 .pa-avatar{width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
 .pa-info{flex:1;}
@@ -217,7 +217,10 @@ footer a:hover{color:var(--gold);}
 .pa-lang button{background:none;border:none;color:rgba(255,255,255,.65);font-family:inherit;font-size:.66rem;font-weight:700;letter-spacing:.05em;padding:3px 9px;border-radius:100px;cursor:pointer;transition:background 150ms,color 150ms;}
 .pa-lang button.active{background:rgba(255,255,255,.22);color:#fff;}
 .pa-thread{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px;background:#f3f5f8;}
-.pa-msg{max-width:85%;padding:10px 13px;border-radius:15px;font-size:.88rem;line-height:1.52;white-space:pre-wrap;}
+.pa-msg{max-width:85%;padding:10px 13px;border-radius:15px;font-size:.88rem;line-height:1.52;}
+.pa-bot p{margin:0 0 6px;}.pa-bot p:last-child{margin:0;}
+.pa-bot ul{margin:4px 0 6px 16px;}.pa-bot li{margin-bottom:2px;}
+.pa-bot strong{color:#0b1d2e;}
 .pa-bot{align-self:flex-start;background:#fff;border:1px solid rgba(0,0,0,.07);border-bottom-left-radius:4px;}
 .pa-me{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:4px;}
 .pa-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px;}
@@ -469,7 +472,7 @@ footer a:hover{color:var(--gold);}
 </button>
 <div class="pa-panel" id="paPanel">
   <div class="pa-head">
-    <div class="pa-avatar">🏠</div>
+    <div class="pa-avatar"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-9.5z"/><path d="M9 21V13h6v8"/></svg></div>
     <div class="pa-info"><b id="paHeadName">Solara Estates · Assistant</b><span id="paHeadSub">● en ligne 24h/24</span></div>
     <div class="pa-lang">
       <button id="chatFR" class="active" onclick="setChatLang('fr')">FR</button>
@@ -477,7 +480,7 @@ footer a:hover{color:var(--gold);}
     </div>
   </div>
   <div class="pa-thread" id="paThread"></div>
-  <div class="pa-bar"><input id="paInput" placeholder="Une question ? Un projet ?"><button id="paSend">➤</button></div>
+  <div class="pa-bar"><input id="paInput" placeholder="Une question ? Un projet ?"><button id="paSend"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor" stroke="none"/></svg></button></div>
   <div class="pa-foot" id="paFoot">Assistant IA — répond à toute heure</div>
 </div>
 
@@ -699,7 +702,20 @@ var thread=document.getElementById('paThread'),
     chatHistory=[],
     busy=false;
 
-function bub(t,w){var d=document.createElement('div');d.className='pa-msg '+(w==='me'?'pa-me':'pa-bot');d.textContent=t;thread.appendChild(d);thread.scrollTop=thread.scrollHeight;}
+function safeMarkdown(t){
+  var s=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  s=s.replace(/^#{1,3} (.+)$/gm,'<strong>$1</strong>');
+  s=s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  s=s.replace(/\*([^*\n]+)\*/g,'<em>$1</em>');
+  s=s.replace(/((?:^- .+\n?)+)/gm,function(m){
+    return '<ul>'+m.trim().split('\n').map(function(l){return '<li>'+l.replace(/^- /,'')+'</li>';}).join('')+'</ul>';
+  });
+  s=s.replace(/\n\n+/g,'</p><p>').replace(/\n/g,'<br>');
+  s='<p>'+s+'</p>';
+  s=s.replace(/<p>(<ul>[\s\S]*?<\/ul>)<\/p>/g,'$1').replace(/<p><\/p>/g,'');
+  return s;
+}
+function bub(t,w){var d=document.createElement('div');d.className='pa-msg '+(w==='me'?'pa-me':'pa-bot');if(w==='me'){d.textContent=t;}else{d.innerHTML=safeMarkdown(t);}thread.appendChild(d);thread.scrollTop=thread.scrollHeight;}
 function clearChips(){Array.prototype.forEach.call(thread.querySelectorAll('.pa-chips'),function(c){c.remove();});}
 function showTyping(){var d=document.createElement('div');d.className='pa-msg pa-bot pa-typing';d.id='pa-typing';d.innerHTML='<span></span><span></span><span></span>';thread.appendChild(d);thread.scrollTop=thread.scrollHeight;}
 function hideTyping(){var d=document.getElementById('pa-typing');if(d)d.remove();}

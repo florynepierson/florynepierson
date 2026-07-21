@@ -50,6 +50,7 @@
   .seg{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap;}
   .seg a{padding:9px 18px;border-radius:10px;font-weight:600;font-size:.85rem;text-decoration:none;border:2px solid var(--line);color:var(--muted);}
   .seg a.act{border-color:var(--gold);color:var(--gold-d);background:rgba(176,137,90,.08);}
+  .c-panel{display:none;}.c-panel.active{display:block;}
   .agenda{background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden;margin-bottom:22px;}
   .agenda-head{background:var(--gold);color:#fff;padding:10px 16px;font-family:'Fraunces',serif;font-size:1rem;font-weight:600;}
   .ag-day{display:flex;align-items:flex-start;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line);}
@@ -103,6 +104,7 @@
     <a href="#suisse">🇨🇭 Suisse</a>
   </div>
 
+  <div id="panel-bruxelles" class="c-panel active">
   <!-- ===== BRUXELLES ===== -->
   <h2 id="bruxelles">🇧🇪 Bruxelles — Agences immobilières</h2>
 
@@ -161,13 +163,14 @@
     </ul>
   </div>
 
-  <div style="height:30px;border-left:2px solid var(--line);margin:28px 0 20px 10px;"></div>
+  </div><!-- /panel-bruxelles -->
+  <div id="panel-malte" class="c-panel">
   <!-- ===== MALTE ===== -->
   <h2 id="malte">🇲🇹 Malte — QG prospection</h2>
   <div class="priv">Ordre gagnant : ouvre avec Plume (gratuit) → puis l'assistant.</div>
 
   <div class="quick">
-    <a href="/solara" target="_blank">▶ Démo assistant</a>
+    <a href="/solara-malta" target="_blank">▶ Démo assistant Malta</a>
     <a href="/plume" target="_blank">✒ Plume</a>
     <a href="/immo/en" target="_blank">📊 Preuve tech</a>
     <a href="/devis" target="_blank">💰 Devis assistant</a>
@@ -200,7 +203,7 @@ If it's useful to your team, I'd be glad to show you what else I can set up for 
   <div class="msg">
     <div class="lbl">Ouverture — Assistant (leads)</div>
     <div class="tip">Si tu préfères viser la capture de leads.</div>
-    <div class="mtxt">Hello [Name], I'm Floryne Pierson — I build AI assistants for estate agencies in Malta. I've prepared a short live demo of an assistant that answers your website visitors 24/7 and captures qualified leads, even outside office hours: florynepierson.com/solara
+    <div class="mtxt">Hello [Name], I'm Floryne Pierson — I build AI assistants for estate agencies in Malta. I've prepared a short live demo of an assistant that answers your website visitors 24/7 and captures qualified leads, even outside office hours: florynepierson.com/solara-malta
 
 I'd be happy to set the same up for [Agency] on a free two-week trial. Would a quick look suit you?</div>
     <button class="copy" onclick="cp(this)">Copier</button>
@@ -224,7 +227,7 @@ Dear [Name],
 
 I'm Floryne Pierson, and I build AI tools for estate agencies here in Malta.
 
-[PHRASE PERSO]. I've prepared a short live demo you can try in under a minute: florynepierson.com/solara (tap the chat bubble at the bottom right). It answers your website visitors instantly, 24/7, and captures qualified buyer and renter leads even when your office is closed.
+[PHRASE PERSO]. I've prepared a short live demo you can try in under a minute: florynepierson.com/solara-malta (tap the chat bubble at the bottom right). It answers your website visitors instantly, 24/7, and captures qualified buyer and renter leads even when your office is closed.
 
 I'd be glad to set the same up for [Agency], trained on your own listings, on a free two-week trial — with no obligation. I also offer Plume, a tool that writes professional property listings in seconds (florynepierson.com/plume).
 
@@ -245,7 +248,7 @@ Dear [Name],
 
 I'm Floryne Pierson — I build AI tools for estate agencies in Malta.
 
-Even without a full website, I can set you up a simple page with an assistant that answers and captures buyer and renter enquiries around the clock, from Facebook and Google — so nothing is lost after hours. Here's a live demo: florynepierson.com/solara.
+Even without a full website, I can set you up a simple page with an assistant that answers and captures buyer and renter enquiries around the clock, from Facebook and Google — so nothing is lost after hours. Here's a live demo: florynepierson.com/solara-malta.
 
 I also offer Plume, which writes professional property listings in seconds (florynepierson.com/plume) — free to try. Both come with no obligation.
 
@@ -265,7 +268,7 @@ Dear [Name],
 
 I'm Floryne Pierson — I build AI assistants for estate agencies in Malta. I tried the chat on your site — it took my question and placed it in a queue for your team, which is helpful, but it means a visitor waits for a reply, especially in the evening or at weekends.
 
-The assistant I build answers instantly, 24/7, and qualifies the visitor (budget, area) before handing a ready lead to your team — so nothing waits. Here's a live demo: florynepierson.com/solara.
+The assistant I build answers instantly, 24/7, and qualifies the visitor (budget, area) before handing a ready lead to your team — so nothing waits. Here's a live demo: florynepierson.com/solara-malta.
 
 I'd simply set it up on a free two-week trial, so you can compare with what you have and keep whichever works best. I also offer Plume, which writes property listings in seconds (florynepierson.com/plume).
 
@@ -285,7 +288,7 @@ Dear [Agency] team,
 
 I'm Floryne Pierson, an AI Engineer &amp; Business Analyst — I design websites and AI tools for estate agencies in Malta. Buyers increasingly search online first, so a clean, simple website — with an AI assistant that answers and captures enquiries 24/7 — could bring you leads even outside office hours.
 
-Here's an example of what I build: florynepierson.com/solara. I'd be glad to put together a simple proposal for [Agency], with no obligation.
+Here's an example of what I build: florynepierson.com/solara-malta. I'd be glad to put together a simple proposal for [Agency], with no obligation.
 
 Would you be open to a quick look?
 
@@ -479,7 +482,8 @@ If it's useful to your team across Gozo, I'd be glad to show you what else I can
     Vise les petites (1-2 bureaux) · envoie 5-8 par jour · relance à J+4.
   </div>
 
-  <div style="height:30px;border-left:2px solid var(--line);margin:28px 0 20px 10px;"></div>
+  </div><!-- /panel-malte -->
+  <div id="panel-luxembourg" class="c-panel">
 
   <!-- ===== LUXEMBOURG ===== -->
   <h2 id="luxembourg">🇱🇺 Luxembourg — Agences immobilières</h2>
@@ -542,8 +546,41 @@ Floryne Pierson · florynepierson.com · hello@florynepierson.com</div>
     <button class="copy" onclick="cp(this)">📋 Copier</button>
   </div>
 
-  <div style="height:30px;border-left:2px solid var(--line);margin:28px 0 20px 10px;"></div>
+  <h2 style="margin-top:28px;">Agences — relances</h2>
+  <div style="font-size:.78rem;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:18px;">Agences déjà contactées → à relancer. Annuaire complet : <a href="https://www.athome.lu/agences/" target="_blank">athome.lu/agences</a> · <a href="https://www.immotop.lu/" target="_blank">immotop.lu</a></div>
 
+  <div class="agency">
+    <div class="h"><span class="n">Realcorp Luxembourg</span><span class="badge b-relance">Relance</span></div>
+    <div class="note">Réseau principal au Luxembourg, plusieurs bureaux · contact par email ou LinkedIn.</div>
+    <div class="acts" style="margin-top:6px;"><a class="em" href="mailto:info@realcorp.lu">✉ Email</a><a href="https://www.realcorp.lu" target="_blank">🌐 Site</a><a href="https://www.linkedin.com/company/realcorp-luxembourg/" target="_blank">in LinkedIn</a></div>
+  </div>
+
+  <div class="agency">
+    <div class="h"><span class="n">Homefinders Luxembourg</span><span class="badge b-relance">Relance</span></div>
+    <div class="note">Boutique expat-focused · spécialisée relocation & clientèle internationale. Email + LinkedIn.</div>
+    <div class="acts" style="margin-top:6px;"><a href="https://www.google.com/search?q=Homefinders+Luxembourg+immobilier" target="_blank">🔎 Trouver contact</a></div>
+  </div>
+
+  <div class="agency">
+    <div class="h"><span class="n">Prolux Immobilier</span><span class="badge b-relance">Relance</span></div>
+    <div class="note">Agence indépendante LU · résidentiel + gestion locative. Email.</div>
+    <div class="acts" style="margin-top:6px;"><a href="https://www.google.com/search?q=Prolux+immobilier+luxembourg+contact" target="_blank">🔎 Trouver contact</a><a href="https://immotop.lu/" target="_blank">🌐 Annuaire</a></div>
+  </div>
+
+  <div class="agency">
+    <div class="h"><span class="n">Attias Immobilier</span><span class="badge b-relance">Relance</span></div>
+    <div class="note">Indépendante · contact LinkedIn ou formulaire site.</div>
+    <div class="acts" style="margin-top:6px;"><a href="https://www.google.com/search?q=Attias+immobilier+luxembourg" target="_blank">🔎 Trouver contact</a></div>
+  </div>
+
+  <div class="agency">
+    <div class="h"><span class="n">Schneider Immobilier</span><span class="badge b-relance">Relance</span></div>
+    <div class="note">Agence familiale indépendante · décision rapide. Email.</div>
+    <div class="acts" style="margin-top:6px;"><a href="https://www.google.com/search?q=Schneider+immobilier+luxembourg" target="_blank">🔎 Trouver contact</a></div>
+  </div>
+
+  </div><!-- /panel-luxembourg -->
+  <div id="panel-suisse" class="c-panel">
   <!-- ===== SUISSE ===== -->
   <h2 id="suisse">🇨🇭 Suisse — Agences immobilières (Romandie)</h2>
   <div class="priv">Romandie : Genève, Lausanne, Neuchâtel, Fribourg. Marché haut de gamme, clientèle internationale à Genève. Langue : français.</div>
@@ -605,7 +642,40 @@ Floryne Pierson · florynepierson.com · hello@florynepierson.com</div>
     <button class="copy" onclick="cp(this)">📋 Copier</button>
   </div>
 
-  <div style="height:30px;border-left:2px solid var(--line);margin:28px 0 20px 10px;"></div>
+  <h2 style="margin-top:28px;">Agences — relances (Genève/Lausanne)</h2>
+  <div style="font-size:.78rem;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:18px;">Agences déjà contactées → à relancer. Annuaire : <a href="https://www.homegate.ch/fr/agences-immobilieres" target="_blank">homegate.ch</a> · <a href="https://www.immoscout24.ch/fr/agences" target="_blank">immoscout24.ch</a></div>
+
+  <div class="agency">
+    <div class="h"><span class="n">Naef Immobilier</span><span class="badge b-relance">Relance</span></div>
+    <div class="note">Grande indépendante genevoise (résidentiel + gestion) · contact email + LinkedIn DM au gérant.</div>
+    <div class="acts" style="margin-top:6px;"><a class="em" href="mailto:info@naef.ch">✉ Email</a><a href="https://www.naef.ch" target="_blank">🌐 Site</a><a href="https://www.linkedin.com/company/naef-immobilier/" target="_blank">in LinkedIn</a></div>
+  </div>
+
+  <div class="agency">
+    <div class="h"><span class="n">Brolliet SA</span><span class="badge b-relance">Relance</span></div>
+    <div class="note">Genève · agence familiale historique, clientèle expat importante. Email ou formulaire.</div>
+    <div class="acts" style="margin-top:6px;"><a class="em" href="mailto:info@brolliet.ch">✉ Email</a><a href="https://www.brolliet.ch" target="_blank">🌐 Site</a></div>
+  </div>
+
+  <div class="agency">
+    <div class="h"><span class="n">Régie du Rhône</span><span class="badge b-relance">Relance</span></div>
+    <div class="note">Genève · gestion locative + vente, clientèle internationale. Contact via site.</div>
+    <div class="acts" style="margin-top:6px;"><a href="https://www.regiederhone.ch" target="_blank">🌐 Site / contact</a></div>
+  </div>
+
+  <div class="agency">
+    <div class="h"><span class="n">Moser Vernet & Cie</span><span class="badge b-relance">Relance</span></div>
+    <div class="note">Genève · prestige & historique, biens haut de gamme. Email.</div>
+    <div class="acts" style="margin-top:6px;"><a class="em" href="mailto:info@moser-vernet.com">✉ Email</a><a href="https://www.moser-vernet.com" target="_blank">🌐 Site</a></div>
+  </div>
+
+  <div class="agency">
+    <div class="h"><span class="n">Agence de la Bourse</span><span class="badge b-relance">Relance</span></div>
+    <div class="note">Lausanne (Place de la Bourse) · résidentiel + gestion. Email ou téléphone.</div>
+    <div class="acts" style="margin-top:6px;"><a href="https://www.agencedelabourse.ch" target="_blank">🌐 Site / contact</a></div>
+  </div>
+
+  </div><!-- /panel-suisse -->
 
   <div class="more" style="margin-top:16px;">
     <b>🎨 Mes démos &amp; modèles</b> — à montrer aux prospects (« voilà ce que je crée ») :
@@ -781,6 +851,23 @@ Floryne Pierson · florynepierson.com · hello@florynepierson.com</div>
   load();
 })();
 /* ===== FIN BRUXELLES ===== */
+
+  /* ===== TAB SWITCHING ===== */
+  (function(){
+    var tabs=document.querySelectorAll('.seg a');
+    var panels=document.querySelectorAll('.c-panel');
+    tabs.forEach(function(a){
+      a.addEventListener('click',function(e){
+        e.preventDefault();
+        var country=this.getAttribute('href').replace('#','');
+        panels.forEach(function(p){p.classList.remove('active');});
+        var panel=document.getElementById('panel-'+country);
+        if(panel){panel.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+        tabs.forEach(function(b){b.classList.remove('act');});
+        this.classList.add('act');
+      });
+    });
+  })();
 
   function cp(b){var t=b.previousElementSibling.innerText;
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(b);},function(){fb(t,b);});}

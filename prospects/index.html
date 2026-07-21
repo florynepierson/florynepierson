@@ -46,12 +46,125 @@
   .more{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin-top:16px;font-size:.85rem;color:var(--soft);}
   .more a{color:var(--gold-d);}
   ol{margin:8px 0 0 18px;}ol li{margin-bottom:5px;}
+  /* Bruxelles dynamic */
+  .seg{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap;}
+  .seg a{padding:9px 18px;border-radius:10px;font-weight:600;font-size:.85rem;text-decoration:none;border:2px solid var(--line);color:var(--muted);}
+  .seg a.act{border-color:var(--gold);color:var(--gold-d);background:rgba(176,137,90,.08);}
+  .agenda{background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden;margin-bottom:22px;}
+  .agenda-head{background:var(--gold);color:#fff;padding:10px 16px;font-family:'Fraunces',serif;font-size:1rem;font-weight:600;}
+  .ag-day{display:flex;align-items:flex-start;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line);}
+  .ag-day:last-child{border-bottom:none;}
+  .ag-date{min-width:72px;font-size:.78rem;font-weight:700;color:var(--gold-d);padding-top:2px;}
+  .ag-date.past{color:#c04030;}
+  .ag-tasks{font-size:.83rem;color:var(--ink);line-height:1.8;}
+  .ag-tasks span.relance{display:inline-block;background:rgba(220,80,60,.08);border:1px solid rgba(220,80,60,.22);color:#b03020;border-radius:6px;padding:2px 8px;margin:2px 4px 2px 0;font-size:.78rem;}
+  .b-sent{background:rgba(47,143,91,.14);color:#2f8f5b;}
+  .b-relance{background:rgba(220,130,30,.15);color:#b06010;}
+  .b-response{background:rgba(50,100,220,.12);color:#2040b0;}
+  .b-rdv{background:rgba(176,137,90,.2);color:var(--gold-d);}
+  .b-refuse{background:rgba(200,40,30,.1);color:#a02018;}
+  .relance-date{font-size:.75rem;color:var(--muted);margin-top:3px;}
+  .relance-date b{color:#b03020;}
+  .act-row{margin-top:9px;display:flex;gap:6px;flex-wrap:wrap;}
+  .act-btn{font-family:inherit;font-size:.78rem;font-weight:600;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--paper);cursor:pointer;color:var(--ink);}
+  .act-btn:active{transform:scale(.97);}
+  .act-btn.act-ok{background:#edf7f0;border-color:#94d4a8;color:#2a7a40;}
+  .act-btn.act-rdv{background:#f5f0e8;border-color:var(--gold);color:var(--gold-d);}
+  .act-btn.act-ko{background:#fdf0ee;border-color:#e8a09a;color:#a03020;}
+  #bxl-loading{font-size:.85rem;color:var(--muted);padding:16px 0;}
+  /* calendrier */
+  .cal-wrap{margin-bottom:20px;}
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .cal-title{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;color:var(--ink);}
+  .cal-nav-btn{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:5px 13px;cursor:pointer;font-size:.9rem;color:var(--soft);}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+  .cal-hdr{text-align:center;font-size:.68rem;font-weight:700;color:var(--muted);padding:4px 0 5px;}
+  .cal-cell{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:5px 5px 4px;min-height:52px;font-size:.7rem;}
+  .cal-cell.cal-empty{background:transparent;border-color:transparent;min-height:0;}
+  .cal-cell.cal-today .cal-dn{color:var(--gold-d);font-weight:700;}
+  .cal-cell.cal-today{border-color:var(--gold);}
+  .cal-cell.cal-past{opacity:.55;}
+  .cal-dn{font-size:.72rem;font-weight:600;color:var(--soft);margin-bottom:3px;}
+  .cal-ev{font-size:.6rem;font-weight:600;border-radius:4px;padding:1px 4px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .cal-ev.r{background:rgba(220,80,60,.12);color:#b03020;}
+  .cal-ev.s{background:rgba(47,143,91,.12);color:#2f8f5b;}
+  .cal-ev.d{background:rgba(50,100,220,.1);color:#2040b0;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>QG prospection — Malte</h1>
-  <div class="priv">🔒 Page privée · ne partage pas ce lien. Ordre gagnant : ouvre avec Plume (gratuit) → puis l'assistant.</div>
+  <h1>QG prospection</h1>
+  <div class="priv">🔒 Page privée · ne partage pas ce lien.</div>
+
+  <div class="seg">
+    <a href="#bruxelles" class="act">🇧🇪 Bruxelles</a>
+    <a href="#malte">🇲🇹 Malte</a>
+    <a href="#luxembourg">🇱🇺 Luxembourg</a>
+    <a href="#suisse">🇨🇭 Suisse</a>
+  </div>
+
+  <!-- ===== BRUXELLES ===== -->
+  <h2 id="bruxelles">🇧🇪 Bruxelles — Agences immobilières</h2>
+
+  <div class="quick" style="margin-bottom:14px;">
+    <a href="/solara" target="_blank">▶ Démo Solara</a>
+    <a href="https://calendly.com/floryne-pierson/15min" target="_blank">Calendly</a>
+    <a href="mailto:floryne@florynepierson.com">Email</a>
+  </div>
+
+  <div style="font-size:.78rem;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:18px;">
+    <b>Relance :</b> "Bonjour, je me permets de revenir vers vous suite à mon email du [date]. Avez-vous eu l'occasion de tester la démo ? Je reste disponible pour un échange de 15 min. Bien cordialement, Floryne"
+  </div>
+
+  <div id="bxl-cal"></div>
+  <div id="bxl-agenda"><div id="bxl-loading">Chargement…</div></div>
+  <div id="bxl-agencies"></div>
+
+  <!-- BONNES PRATIQUES -->
+  <h2 id="best-practices" style="margin-top:32px;">Bonnes pratiques</h2>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-size:.85rem;color:var(--ink);line-height:1.8;">
+
+    <div style="font-family:'Fraunces',serif;font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:10px;">Qui cibler</div>
+    <ul style="margin:0 0 16px 16px;color:var(--soft);">
+      <li><b>Agences indépendantes uniquement</b> — les franchises (Century 21, Engel &amp; Völkers, Sotheby's) décident au niveau corporate, pas local → perte de temps</li>
+      <li><b>Agences familiales</b> en priorité → décision rapide, le gérant lit ses mails</li>
+      <li><b>≥ 4.5★ et ≥ 80 avis</b> → assez établies pour payer, assez petites pour décider vite</li>
+      <li><b>Gestion locative spécialisée</b> → flood de demandes locataires à toute heure = besoin évident</li>
+      <li><b>Tech-forward / sans vitrine physique</b> → déjà convaincues par le digital, plus faciles</li>
+      <li><b>Clientèle internationale / expats</b> → besoin de réponse 24/7 multi-langues, angle fort</li>
+    </ul>
+
+    <div style="font-family:'Fraunces',serif;font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:10px;">Structure du mail</div>
+    <ol style="margin:0 0 16px 18px;color:var(--soft);">
+      <li><b>Observation spécifique</b> sur leur site / leurs avis (1 phrase) — montre que c'est pas un mail générique</li>
+      <li><b>Problème</b> : "vos clients vous cherchent en dehors de vos heures d'ouverture"</li>
+      <li><b>Phrase pivot</b> : "C'est précisément là qu'un assistant IA peut intervenir."</li>
+      <li><b>4 bullets</b> : ce que ça fait concrètement</li>
+      <li><b>Démo</b> + <b>Calendly</b> : tester → puis appel si intéressés</li>
+      <li><b>Signature sobre</b> : prénom, titre, site, email, téléphone</li>
+    </ol>
+
+    <div style="font-family:'Fraunces',serif;font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:10px;">Cadence &amp; relances</div>
+    <ul style="margin:0 0 16px 16px;color:var(--soft);">
+      <li><b>J+7</b> : relance email (une seule phrase, sobre)</li>
+      <li><b>J+10</b> : si toujours rien → appel ou LinkedIn direct au décideur</li>
+      <li><b>Max 8 à 10 prospects par semaine</b> — au-delà tu n'as plus le temps de personnaliser</li>
+      <li><b>80% des réponses viennent après la 1ère relance</b> — ne pas abandonner après le premier silence</li>
+      <li>Envoyer en semaine, <b>mardi ou mercredi matin</b> → meilleurs taux d'ouverture</li>
+    </ul>
+
+    <div style="font-family:'Fraunces',serif;font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:10px;">Si pas de réponse après relance</div>
+    <ul style="margin:0 0 0 16px;color:var(--soft);">
+      <li>LinkedIn : message court au gérant ("j'ai envoyé un mail il y a quelques jours, je voulais passer par ici aussi")</li>
+      <li>Appel : "bonjour, j'ai envoyé un email la semaine dernière concernant un assistant IA, vous l'avez bien reçu ?" → déblocage fréquent</li>
+      <li>Après 3 contacts sans réponse → passer à la suivante, revenir dans 3 mois</li>
+    </ul>
+  </div>
+
+  <div style="height:30px;border-left:2px solid var(--line);margin:28px 0 20px 10px;"></div>
+  <!-- ===== MALTE ===== -->
+  <h2 id="malte">🇲🇹 Malte — QG prospection</h2>
+  <div class="priv">Ordre gagnant : ouvre avec Plume (gratuit) → puis l'assistant.</div>
 
   <div class="quick">
     <a href="/solara" target="_blank">▶ Démo assistant</a>
@@ -366,6 +479,134 @@ If it's useful to your team across Gozo, I'd be glad to show you what else I can
     Vise les petites (1-2 bureaux) · envoie 5-8 par jour · relance à J+4.
   </div>
 
+  <div style="height:30px;border-left:2px solid var(--line);margin:28px 0 20px 10px;"></div>
+
+  <!-- ===== LUXEMBOURG ===== -->
+  <h2 id="luxembourg">🇱🇺 Luxembourg — Agences immobilières</h2>
+  <div class="priv">Marché haut de gamme, clientèle expat internationale. Langue : français (+ EN/DE selon agence). Ouvrir avec Plume puis assistant.</div>
+
+  <div class="quick">
+    <a href="/solara" target="_blank">▶ Démo assistant</a>
+    <a href="/plume" target="_blank">✒ Plume</a>
+    <a href="/immo/fr" target="_blank">📊 Preuve tech (FR)</a>
+    <a href="/devis" target="_blank">💰 Devis</a>
+    <a href="https://calendly.com/floryne-pierson/15min" target="_blank">Calendly</a>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-size:.85rem;color:var(--ink);line-height:1.8;margin-bottom:18px;">
+    <b>Contexte marché :</b> Luxembourg = marché immo le plus cher d'Europe (€/m²), clientèle 60%+ expat, agences souvent trilingues FR/DE/EN. Les agences indépendantes décident vite. Angle fort : <b>Plume écrit les annonces en FR + EN + DE</b>, et l'assistant répond aux prospects internationaux 24/7. Cibler : agences résidentielles haut de gamme, gestion locative expats, agences sans chatbot sur le site.
+  </div>
+
+  <div style="font-size:.78rem;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:20px;">
+    <b>Annuaires :</b>
+    <a href="https://www.athome.lu/agences/" target="_blank">athome.lu/agences</a> ·
+    <a href="https://www.immotop.lu/" target="_blank">immotop.lu</a> ·
+    <a href="https://www.google.com/maps/search/agence+immobili%C3%A8re+luxembourg" target="_blank">Google Maps</a>
+  </div>
+
+  <h2 style="font-size:1rem;margin-bottom:12px;">Message WhatsApp / email (FR)</h2>
+
+  <div class="agency">
+    <div class="h"><span class="n">Modèle Luxembourg — Plume (FR)</span><span class="badge b-hot">À personnaliser</span></div>
+    <div class="note">Email ou LinkedIn — adapter [Nom agence] et l'observation spécifique.</div>
+    <div class="mtxt">Objet : Un outil qui rédige vos annonces immobilières en quelques secondes
+
+Bonjour [Prénom / équipe],
+
+Je suis Floryne Pierson, ingénieure IA — je conçois des outils pour les agences immobilières. J'ai créé Plume, un outil qui génère des annonces professionnelles en quelques secondes, en français, anglais et allemand.
+
+C'est gratuit à tester ici : florynepierson.com/plume
+
+Si ça vous est utile, je serais ravie de vous montrer ce que je peux mettre en place pour [Nom agence]. Seriez-vous disponible pour un échange de 15 minutes ?
+
+Bien cordialement,
+Floryne Pierson · florynepierson.com · hello@florynepierson.com</div>
+    <button class="copy" onclick="cp(this)">📋 Copier</button>
+  </div>
+
+  <div class="agency">
+    <div class="h"><span class="n">Modèle Luxembourg — Assistant IA (FR)</span><span class="badge b-mid">Relance ou 2e contact</span></div>
+    <div class="note">À envoyer après Plume, ou directement si l'agence n'a pas de chatbot.</div>
+    <div class="mtxt">Objet : Un assistant IA pour vos prospects internationaux — disponible 24h/24
+
+Bonjour [Prénom / équipe],
+
+Je suis Floryne Pierson, ingénieure IA — je construis des assistants pour les agences immobilières. J'ai visité votre site : un visiteur qui arrive en dehors de vos heures d'ouverture ne peut pas obtenir de réponse immédiate.
+
+J'ai préparé une démo live d'un assistant qui répond aux questions de vos prospects 24h/24, en français, anglais et allemand, et capture leurs coordonnées : florynepierson.com/solara
+
+Ce serait intéressant pour vous ? Je suis disponible pour un échange de 15 minutes.
+
+Bien cordialement,
+Floryne Pierson · florynepierson.com · hello@florynepierson.com</div>
+    <button class="copy" onclick="cp(this)">📋 Copier</button>
+  </div>
+
+  <div style="height:30px;border-left:2px solid var(--line);margin:28px 0 20px 10px;"></div>
+
+  <!-- ===== SUISSE ===== -->
+  <h2 id="suisse">🇨🇭 Suisse — Agences immobilières (Romandie)</h2>
+  <div class="priv">Romandie : Genève, Lausanne, Neuchâtel, Fribourg. Marché haut de gamme, clientèle internationale à Genève. Langue : français.</div>
+
+  <div class="quick">
+    <a href="/solara" target="_blank">▶ Démo assistant</a>
+    <a href="/plume" target="_blank">✒ Plume</a>
+    <a href="/immo/fr" target="_blank">📊 Preuve tech (FR)</a>
+    <a href="/devis" target="_blank">💰 Devis</a>
+    <a href="https://calendly.com/floryne-pierson/15min" target="_blank">Calendly</a>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-size:.85rem;color:var(--ink);line-height:1.8;margin-bottom:18px;">
+    <b>Contexte marché :</b> Genève = 2e marché immo le plus cher de CH, forte demande expat (ONU, multinationales). Lausanne, Neuchâtel = bon volume, moins saturé. Agences souvent bilingues FR/EN. Angle : <b>Plume en FR + EN</b>, assistant qui répond aux expats anglophones. Éviter les grands réseaux (Engel &amp; Völkers, Sotheby's Realty) → décision corporate. Viser les agences familiales indépendantes.
+  </div>
+
+  <div style="font-size:.78rem;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:20px;">
+    <b>Annuaires :</b>
+    <a href="https://www.homegate.ch/fr/agences-immobilieres" target="_blank">homegate.ch/agences</a> ·
+    <a href="https://www.immoscout24.ch/fr/agences" target="_blank">immoscout24.ch/agences</a> ·
+    <a href="https://www.google.com/maps/search/agence+immobili%C3%A8re+gen%C3%A8ve" target="_blank">Google Maps Genève</a>
+  </div>
+
+  <h2 style="font-size:1rem;margin-bottom:12px;">Message email / LinkedIn (FR)</h2>
+
+  <div class="agency">
+    <div class="h"><span class="n">Modèle Suisse — Plume (FR)</span><span class="badge b-hot">À personnaliser</span></div>
+    <div class="note">Email ou LinkedIn — adapter [Nom agence] et observation spécifique.</div>
+    <div class="mtxt">Objet : Un outil qui rédige vos annonces immobilières en quelques secondes
+
+Bonjour [Prénom / équipe],
+
+Je suis Floryne Pierson, ingénieure IA — je conçois des outils pour les agences immobilières. J'ai créé Plume, un outil qui génère des annonces professionnelles en quelques secondes, en français et en anglais.
+
+C'est gratuit à tester ici : florynepierson.com/plume
+
+Si ça vous est utile, je serais ravie de vous montrer ce que je peux mettre en place pour [Nom agence]. Seriez-vous disponible pour un échange de 15 minutes ?
+
+Bien cordialement,
+Floryne Pierson · florynepierson.com · hello@florynepierson.com</div>
+    <button class="copy" onclick="cp(this)">📋 Copier</button>
+  </div>
+
+  <div class="agency">
+    <div class="h"><span class="n">Modèle Suisse — Assistant IA (FR)</span><span class="badge b-mid">Relance ou 2e contact</span></div>
+    <div class="note">Angle fort à Genève : clientèle internationale qui cherche en dehors des heures de bureau.</div>
+    <div class="mtxt">Objet : Un assistant IA pour vos prospects — disponible 24h/24, en français et anglais
+
+Bonjour [Prénom / équipe],
+
+Je suis Floryne Pierson, ingénieure IA — je construis des assistants pour les agences immobilières. J'ai visité votre site : une partie de vos prospects arrive en dehors des heures de bureau — et repart sans avoir eu de réponse.
+
+J'ai préparé une démo d'un assistant qui répond instantanément, en français et anglais, et capture les coordonnées des visiteurs 24h/24 : florynepierson.com/solara
+
+Ce serait pertinent pour vous ? Je suis disponible pour un échange rapide.
+
+Bien cordialement,
+Floryne Pierson · florynepierson.com · hello@florynepierson.com</div>
+    <button class="copy" onclick="cp(this)">📋 Copier</button>
+  </div>
+
+  <div style="height:30px;border-left:2px solid var(--line);margin:28px 0 20px 10px;"></div>
+
   <div class="more" style="margin-top:16px;">
     <b>🎨 Mes démos &amp; modèles</b> — à montrer aux prospects (« voilà ce que je crée ») :
     <div style="margin-top:10px;line-height:2.4;">
@@ -382,6 +623,165 @@ If it's useful to your team across Gozo, I'd be glad to show you what else I can
 
 </div>
 <script>
+/* ===== BRUXELLES — Supabase CRM ===== */
+(function(){
+  var SB='https://cddhsddtghnhcxogdgcs.supabase.co';
+  var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNkZGhzZGR0Z2huaGN4b2dkZ2NzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMjM0MjAsImV4cCI6MjA5NTc5OTQyMH0.M65-2AoIxmnI7FFyyk3RPA11vGrL_RpVk3f2mAKogC0';
+  var DAYS=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+  var MONS=['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
+  var MFULL=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  var calY=new Date().getFullYear(), calM=new Date().getMonth();
+  var _data=[];
+
+  function fmt(d){if(!d)return'';var dt=new Date(d+'T00:00:00');return DAYS[dt.getDay()]+' '+dt.getDate()+' '+MONS[dt.getMonth()];}
+  function pad(n){return String(n).padStart(2,'0');}
+  function ymd(y,m,d){return y+'-'+pad(m+1)+'-'+pad(d);}
+
+  function badge(s){
+    var m={envoyé:['b-sent','Envoyé'],relancé:['b-relance','Relancé'],répondu:['b-response','Répondu !'],rdv:['b-rdv','RDV pris'],refusé:['b-refuse','Refusé']};
+    var v=m[s]||['','?'];return '<span class="badge '+v[0]+'">'+v[1]+'</span>';
+  }
+
+  function btns(p){
+    var s=p.status,id=p.id,h='';
+    if(s==='envoyé'||s==='relancé'){
+      h+='<button class="act-btn" onclick="bxlSet('+id+',\'relancé\')">Relancer</button>';
+      h+='<button class="act-btn act-ok" onclick="bxlSet('+id+',\'répondu\')">Ils ont répondu</button>';
+      h+='<button class="act-btn act-ko" onclick="bxlSet('+id+',\'refusé\')">Refus</button>';
+    }else if(s==='répondu'){
+      h+='<button class="act-btn act-rdv" onclick="bxlSet('+id+',\'rdv\')">RDV pris !</button>';
+      h+='<button class="act-btn act-ko" onclick="bxlSet('+id+',\'refusé\')">Finalement refus</button>';
+    }
+    return h;
+  }
+
+  function buildEvents(data){
+    var ev={};
+    data.forEach(function(p){
+      if(p.sent_date){
+        if(!ev[p.sent_date])ev[p.sent_date]=[];
+        ev[p.sent_date].push({n:p.name,t:'s'});
+      }
+      if(p.follow_up_date&&(p.status==='envoyé'||p.status==='relancé')){
+        if(!ev[p.follow_up_date])ev[p.follow_up_date]=[];
+        ev[p.follow_up_date].push({n:p.name,t:'r'});
+      }
+      if(p.follow_up_date&&p.status==='répondu'){
+        if(!ev[p.follow_up_date])ev[p.follow_up_date]=[];
+        ev[p.follow_up_date].push({n:p.name,t:'d'});
+      }
+    });
+    return ev;
+  }
+
+  function renderCal(data,y,m){
+    var today=new Date();today.setHours(0,0,0,0);
+    var ev=buildEvents(data);
+    var first=new Date(y,m,1);
+    var last=new Date(y,m+1,0);
+    var offset=(first.getDay()===0)?6:first.getDay()-1; // Mon=0
+    var h='<div class="cal-wrap">';
+    h+='<div class="cal-nav"><button class="cal-nav-btn" onclick="bxlCalPrev()">&#8592;</button><span class="cal-title">'+MFULL[m]+' '+y+'</span><button class="cal-nav-btn" onclick="bxlCalNext()">&#8594;</button></div>';
+    h+='<div class="cal-grid">';
+    ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'].forEach(function(d){h+='<div class="cal-hdr">'+d+'</div>';});
+    for(var i=0;i<offset;i++)h+='<div class="cal-cell cal-empty"></div>';
+    for(var d=1;d<=last.getDate();d++){
+      var k=ymd(y,m,d);
+      var dt=new Date(y,m,d);
+      var cls='cal-cell'+(dt.getTime()===today.getTime()?' cal-today':'')+(dt<today?' cal-past':'');
+      h+='<div class="'+cls+'"><div class="cal-dn">'+d+'</div>';
+      (ev[k]||[]).forEach(function(e){
+        var short=e.n.replace(/ Real Estate| Brussels| Inthas RE/g,'').split(' ').slice(0,1).join('');
+        h+='<div class="cal-ev '+e.t+'" title="'+e.n+'">'+short+'</div>';
+      });
+      h+='</div>';
+    }
+    h+='</div>';
+    // légende
+    h+='<div style="display:flex;gap:12px;margin-top:8px;font-size:.72rem;color:var(--soft);">';
+    h+='<span><span style="display:inline-block;width:9px;height:9px;background:rgba(47,143,91,.35);border-radius:2px;margin-right:4px;"></span>Envoi</span>';
+    h+='<span><span style="display:inline-block;width:9px;height:9px;background:rgba(220,80,60,.3);border-radius:2px;margin-right:4px;"></span>Relance</span>';
+    h+='<span><span style="display:inline-block;width:9px;height:9px;background:rgba(50,100,220,.2);border-radius:2px;margin-right:4px;"></span>RDV</span>';
+    h+='</div></div>';
+    document.getElementById('bxl-cal').innerHTML=h;
+  }
+
+  function render(data){
+    _data=data;
+    var today=new Date();today.setHours(0,0,0,0);
+    renderCal(data,calY,calM);
+
+    /* agenda liste */
+    var byDate={};
+    data.forEach(function(p){
+      if((p.status==='envoyé'||p.status==='relancé')&&p.follow_up_date){
+        if(!byDate[p.follow_up_date])byDate[p.follow_up_date]=[];
+        byDate[p.follow_up_date].push(p.name);
+      }
+    });
+    var dkeys=Object.keys(byDate).sort();
+    var ah='';
+    if(!dkeys.length){ah='<div class="ag-day"><div class="ag-tasks" style="color:var(--muted)">Aucune relance prévue</div></div>';}
+    else dkeys.forEach(function(d){
+      var dt=new Date(d+'T00:00:00');
+      var cls='ag-date'+(dt<today?' past':'');
+      var tags=byDate[d].map(function(n){return'<span class="relance">'+n+'</span>';}).join('');
+      ah+='<div class="ag-day"><div class="'+cls+'">'+fmt(d)+'</div><div class="ag-tasks">Relancer '+tags+'</div></div>';
+    });
+    document.getElementById('bxl-agenda').innerHTML='<div class="agenda"><div class="agenda-head">Relances à venir</div>'+ah+'</div>';
+
+    /* fiches agences */
+    var active=data.filter(function(p){return p.status!=='refusé';});
+    var refused=data.filter(function(p){return p.status==='refusé';});
+    var html='<h2 style="margin-top:8px;">Les agences</h2>';
+    active.forEach(function(p){
+      html+='<div class="agency">';
+      html+='<div class="h"><span class="n">'+p.name+'</span>'+badge(p.status)+'</div>';
+      html+='<div class="note">'+(p.stars||'')+((p.notes)?' · '+p.notes:'')+'</div>';
+      if((p.status==='envoyé'||p.status==='relancé')&&p.follow_up_date)
+        html+='<div class="relance-date">Relance : <b>'+fmt(p.follow_up_date)+'</b></div>';
+      html+='<div class="acts" style="margin-top:8px;">';
+      if(p.website)html+='<a href="'+p.website+'" target="_blank">Site</a>';
+      if(p.phone)html+='<a href="tel:'+p.phone.replace(/\s/g,'')+'">'+p.phone+'</a>';
+      if(p.email_addr)html+='<a class="em" href="mailto:'+p.email_addr+'">Email</a>';
+      html+='</div>';
+      var b=btns(p);if(b)html+='<div class="act-row">'+b+'</div>';
+      html+='</div>';
+    });
+    if(refused.length){
+      html+='<details style="margin-top:4px;"><summary style="font-size:.82rem;color:var(--muted);cursor:pointer;">'+refused.length+' refus</summary>';
+      refused.forEach(function(p){html+='<div class="agency" style="opacity:.5;margin-top:8px;"><div class="h"><span class="n">'+p.name+'</span>'+badge(p.status)+'</div></div>';});
+      html+='</details>';
+    }
+    document.getElementById('bxl-agencies').innerHTML=html;
+  }
+
+  function load(){
+    fetch(SB+'/rest/v1/prospects_brussels?order=id',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}})
+      .then(function(r){return r.json();})
+      .then(render)
+      .catch(function(){
+        document.getElementById('bxl-agencies').innerHTML='<div style="color:#c04030;padding:12px;font-size:.85rem;">Erreur — la table prospects_brussels n\'existe pas encore dans Supabase.</div>';
+        document.getElementById('bxl-agenda').innerHTML='';
+        document.getElementById('bxl-cal').innerHTML='';
+      });
+  }
+
+  window.bxlSet=function(id,status){
+    fetch(SB+'/rest/v1/prospects_brussels?id=eq.'+id,{
+      method:'PATCH',
+      headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify({status:status})
+    }).then(load);
+  };
+
+  window.bxlCalPrev=function(){calM--;if(calM<0){calM=11;calY--;}renderCal(_data,calY,calM);};
+  window.bxlCalNext=function(){calM++;if(calM>11){calM=0;calY++;}renderCal(_data,calY,calM);};
+
+  load();
+})();
+/* ===== FIN BRUXELLES ===== */
+
   function cp(b){var t=b.previousElementSibling.innerText;
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(b);},function(){fb(t,b);});}
     else{fb(t,b);}}

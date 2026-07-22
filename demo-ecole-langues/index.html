@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malta Language Academy — AI Assistant Demo</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0d4f8c;--blue-d:#083a6a;--sky:#e8f3fc;--gold:#c8922a;--ink:#12202e;--muted:#5a6e82;--line:#dce6f0;--white:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--sky);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;}
+
+/* NAV */
+.nav{background:var(--blue-d);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:'Fraunces',serif;font-size:1.18rem;color:#fff;letter-spacing:.01em;}
+.logo span{color:#7ec8f5;}
+.nav-badge{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(200,146,42,.25);color:#f5d98a;border:1px solid rgba(200,146,42,.4);padding:4px 11px;border-radius:20px;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--blue-d) 0%,#1565a8 100%);color:#fff;padding:52px 28px 44px;text-align:center;}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:500;line-height:1.15;margin-bottom:12px;}
+.hero h1 em{font-style:italic;color:#7ec8f5;}
+.hero p{font-size:1rem;color:rgba(255,255,255,.82);max-width:480px;margin:0 auto 28px;font-weight:300;line-height:1.7;}
+.trust{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;}
+.trust div{font-size:.8rem;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:6px;}
+.trust div::before{content:'✓';color:#7ec8f5;font-weight:700;}
+
+/* MAIN */
+.main{display:flex;gap:28px;max-width:1040px;margin:0 auto;padding:36px 20px 60px;align-items:flex-start;width:100%;}
+
+/* CHAT */
+.chat-wrap{flex:1;min-width:0;}
+.chat-card{background:#fff;border-radius:18px;box-shadow:0 8px 40px rgba(13,79,140,.13);overflow:hidden;display:flex;flex-direction:column;height:520px;}
+.chat-head{background:var(--blue-d);color:#fff;padding:16px 20px;display:flex;align-items:center;gap:12px;}
+.chat-avatar{width:38px;height:38px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.chat-head-info b{display:block;font-size:.98rem;font-family:'Fraunces',serif;}
+.chat-head-info span{font-size:.75rem;color:rgba(255,255,255,.7);}
+.chat-head-dot{width:7px;height:7px;border-radius:50%;background:#5eca7e;margin-left:auto;flex-shrink:0;}
+.thread{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px;background:#f7fafd;}
+.msg{max-width:80%;padding:11px 15px;border-radius:16px;font-size:.94rem;line-height:1.55;white-space:pre-wrap;}
+.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;color:var(--ink);}
+.me{align-self:flex-end;background:var(--blue-d);color:#fff;border-bottom-right-radius:4px;}
+.typing{align-self:flex-start;color:var(--muted);font-size:.85rem;font-style:italic;padding:4px 0;}
+.bar{display:flex;gap:8px;padding:12px;background:#fff;border-top:1px solid var(--line);}
+.bar input{flex:1;border:1.5px solid var(--line);border-radius:50px;padding:11px 16px;font-size:.92rem;font-family:inherit;color:var(--ink);outline:none;transition:border-color .2s;}
+.bar input:focus{border-color:var(--blue);}
+.bar button{border:none;background:var(--blue);color:#fff;border-radius:50px;padding:0 20px;cursor:pointer;font-size:.9rem;font-family:inherit;font-weight:500;transition:background .2s;}
+.bar button:hover{background:var(--blue-d);}
+.bar button:disabled{opacity:.45;cursor:default;}
+.chat-foot{text-align:center;font-size:.7rem;color:var(--muted);padding:8px;background:#fff;}
+
+/* CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+.chip{background:var(--sky);border:1px solid var(--line);border-radius:50px;padding:7px 13px;font-size:.82rem;color:var(--blue-d);cursor:pointer;font-family:inherit;transition:background .2s,border-color .2s;}
+.chip:hover{background:#d4eaf8;border-color:#7ec8f5;}
+
+/* SIDEBAR */
+.sidebar{width:260px;flex-shrink:0;}
+.info-card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 4px 20px rgba(13,79,140,.08);margin-bottom:16px;}
+.info-card h3{font-family:'Fraunces',serif;font-size:1.05rem;color:var(--ink);margin-bottom:12px;}
+.info-row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--line);font-size:.85rem;}
+.info-row:last-child{border-bottom:none;}
+.info-row .lbl{color:var(--muted);}
+.info-row .val{font-weight:600;color:var(--ink);}
+.contact-card{background:var(--blue-d);color:#fff;border-radius:14px;padding:18px 20px;}
+.contact-card h3{font-family:'Fraunces',serif;font-size:1rem;margin-bottom:10px;color:#fff;}
+.contact-card p{font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.6;}
+.contact-card a{color:#7ec8f5;text-decoration:none;}
+
+/* DEMO BAR */
+.demo-bar{background:var(--gold);color:#fff;text-align:center;padding:11px 20px;font-size:.82rem;font-weight:600;position:sticky;bottom:0;}
+.demo-bar a{color:#fff;text-decoration:underline;}
+
+@media(max-width:720px){
+  .main{flex-direction:column;}
+  .sidebar{width:100%;}
+  .chat-card{height:440px;}
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="logo">Malta Language <span>Academy</span></div>
+  <div class="nav-badge">AI Demo</div>
+</div>
+
+<div class="hero">
+  <h1>Your English journey<br>starts <em>in Malta</em></h1>
+  <p>Intensive courses, IELTS prep and cultural immersion — 300 days of sunshine and native-English teachers included.</p>
+  <div class="trust">
+    <div>Small classes (max 12)</div>
+    <div>Courses from €220/week</div>
+    <div>Enrolment every Monday</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="chat-wrap">
+    <div class="chat-card">
+      <div class="chat-head">
+        <div class="chat-avatar">👩‍💼</div>
+        <div class="chat-head-info"><b>Sophie</b><span>Admissions assistant</span></div>
+        <div class="chat-head-dot"></div>
+      </div>
+      <div class="thread" id="thread"></div>
+      <div class="bar">
+        <input id="input" type="text" placeholder="Ask about courses, prices, Malta…" autocomplete="off">
+        <button id="send">Send</button>
+      </div>
+      <div class="chat-foot">AI assistant — available 24/7, even outside office hours</div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="info-card">
+      <h3>Quick prices</h3>
+      <div class="info-row"><span class="lbl">General English</span><span class="val">from €220/wk</span></div>
+      <div class="info-row"><span class="lbl">Intensive</span><span class="val">from €280/wk</span></div>
+      <div class="info-row"><span class="lbl">IELTS prep</span><span class="val">from €260/wk</span></div>
+      <div class="info-row"><span class="lbl">Host family</span><span class="val">from €180/wk</span></div>
+      <div class="info-row"><span class="lbl">Starts</span><span class="val">Every Monday</span></div>
+    </div>
+    <div class="contact-card">
+      <h3>Malta Language Academy</h3>
+      <p>Sliema, Malta<br><br>
+      📧 <a href="#">info@maltalanguageacademy.com</a><br>
+      💬 WhatsApp +356 2700 0000<br><br>
+      Office: Mon–Fri 8:30–17:00</p>
+    </div>
+  </div>
+</div>
+
+<div class="demo-bar">
+  Démo réalisée par <a href="https://www.florynepierson.com">Floryne Pierson</a> — assistant IA sur-mesure pour votre établissement
+</div>
+
+<script>
+var history = [];
+var greeted = false;
+
+function addMsg(text, role) {
+  var t = document.getElementById('thread');
+  var d = document.createElement('div');
+  d.className = 'msg ' + (role === 'user' ? 'me' : 'bot');
+  d.textContent = text;
+  t.appendChild(d);
+  t.scrollTop = t.scrollHeight;
+  return d;
+}
+
+function addChips(labels) {
+  var t = document.getElementById('thread');
+  var wrap = document.createElement('div');
+  wrap.className = 'chips';
+  labels.forEach(function(l) {
+    var c = document.createElement('button');
+    c.className = 'chip';
+    c.textContent = l;
+    c.onclick = function() { wrap.remove(); send(l); };
+    wrap.appendChild(c);
+  });
+  t.appendChild(wrap);
+  t.scrollTop = t.scrollHeight;
+}
+
+async function send(text) {
+  text = (text || document.getElementById('input').value).trim();
+  if (!text) return;
+  document.getElementById('input').value = '';
+  document.getElementById('send').disabled = true;
+
+  addMsg(text, 'user');
+  history.push({ role: 'user', content: text });
+
+  var t = document.getElementById('thread');
+  var typing = document.createElement('div');
+  typing.className = 'typing';
+  typing.textContent = 'Sophie is typing…';
+  t.appendChild(typing);
+  t.scrollTop = t.scrollHeight;
+
+  try {
+    var r = await fetch('/api/ecole-langues-chat', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ messages: history })
+    });
+    var data = await r.json();
+    typing.remove();
+    var reply = data.reply || '…';
+    addMsg(reply, 'bot');
+    history.push({ role: 'assistant', content: reply });
+  } catch(e) {
+    typing.remove();
+    addMsg('Sorry, something went wrong. Please try again.', 'bot');
+  }
+  document.getElementById('send').disabled = false;
+  document.getElementById('input').focus();
+}
+
+document.getElementById('send').onclick = function() { send(); };
+document.getElementById('input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') send();
+});
+
+// Greeting + quick chips
+setTimeout(function() {
+  if (greeted) return;
+  greeted = true;
+  addMsg("Hi! 👋 I'm Sophie, the Malta Language Academy assistant. Thinking about learning English in Malta? I can help you choose the right course and get a free personalised quote. What brings you here?", 'bot');
+  setTimeout(function() {
+    addChips(['Course prices', 'IELTS preparation', 'Accommodation', 'Junior programme', 'When can I start?']);
+  }, 400);
+}, 600);
+</script>
+</body>
+</html>

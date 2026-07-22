@@ -138,7 +138,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--sky);color:var(--
 </div>
 
 <script>
-var history = [];
+var chatHistory = [];
 var greeted = false;
 
 function addMsg(text, role) {
@@ -173,7 +173,7 @@ async function send(text) {
   document.getElementById('send').disabled = true;
 
   addMsg(text, 'user');
-  history.push({ role: 'user', content: text });
+  chatHistory.push({ role: 'user', content: text });
 
   var t = document.getElementById('thread');
   var typing = document.createElement('div');
@@ -186,13 +186,13 @@ async function send(text) {
     var r = await fetch('/api/ecole-langues-chat', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ messages: history })
+      body: JSON.stringify({ messages: chatHistory })
     });
     var data = await r.json();
     typing.remove();
     var reply = data.reply || '…';
     addMsg(reply, 'bot');
-    history.push({ role: 'assistant', content: reply });
+    chatHistory.push({ role: 'assistant', content: reply });
   } catch(e) {
     typing.remove();
     addMsg('Sorry, something went wrong. Please try again.', 'bot');

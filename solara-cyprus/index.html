@@ -41,7 +41,7 @@
   /* HERO */
   .hero{position:relative;color:#fff;overflow:hidden;background:
       linear-gradient(155deg,rgba(7,31,46,.86) 0%,rgba(10,44,64,.58) 45%,rgba(7,31,46,.92) 100%),
-      url('img/hero.jpg') center/cover no-repeat;}
+      url('/solara-cyprus/img/hero.jpg') center/cover no-repeat;}
   .hero:after{content:"";position:absolute;inset:0;background:
       radial-gradient(2px 2px at 20% 30%,rgba(255,255,255,.5),transparent),
       radial-gradient(2px 2px at 70% 60%,rgba(255,255,255,.35),transparent),
@@ -70,9 +70,9 @@
   .card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(13,58,82,.07);transition:.25s;}
   .card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(13,58,82,.14);}
   .photo{height:210px;position:relative;}
-  .p1{background:url('img/apartment.jpg') center/cover no-repeat;}
-  .p2{background:url('img/interior.jpg') center/cover no-repeat;}
-  .p3{background:url('img/villa.jpg') center/cover no-repeat;}
+  .p1{background:url('/solara-cyprus/img/apartment.jpg') center/cover no-repeat;}
+  .p2{background:url('/solara-cyprus/img/interior.jpg') center/cover no-repeat;}
+  .p3{background:url('/solara-cyprus/img/villa.jpg') center/cover no-repeat;}
   .photo:after{content:"";position:absolute;inset:0;background:
       radial-gradient(60% 50% at 30% 20%,rgba(255,255,255,.28),transparent),
       linear-gradient(180deg,transparent 55%,rgba(0,0,0,.35));}
@@ -204,7 +204,7 @@
     <p class="sub">Boutique real-estate advisory for buyers, investors and expats. From seafront apartments to permanent residency by investment — we handle every step, in your language.</p>
     <div class="cta">
       <a href="#properties" class="btn">Explore properties</a>
-      <button class="btn btn-ghost" onclick="openPanel()">Ask Elena, our assistant →</button>
+      <button class="btn btn-ghost" onclick="openPanel()">Ask Solara, our assistant →</button>
     </div>
     <div class="stats">
       <div class="stat"><b>€120M+</b><span>in property sold</span></div>
@@ -294,7 +294,7 @@
       <h2>Three steps to your Cyprus home</h2>
     </div>
     <div class="steps">
-      <div class="step"><div class="n">01</div><h3>Tell us your project</h3><p>Buy, rent or invest — your budget, area and timeline. Our assistant Elena can start this any time, in your language.</p></div>
+      <div class="step"><div class="n">01</div><h3>Tell us your project</h3><p>Buy, rent or invest — your budget, area and timeline. Our assistant Solara can start this any time, in your language.</p></div>
       <div class="step"><div class="n">02</div><h3>We match & guide</h3><p>A dedicated consultant sends curated options, arranges viewings (in person or virtual) and handles the paperwork.</p></div>
       <div class="step"><div class="n">03</div><h3>You settle in</h3><p>We complete the purchase, residency and setup — so you arrive to a home that's ready.</p></div>
     </div>
@@ -310,7 +310,7 @@
     </div>
     <div class="quotes">
       <div class="q"><div class="stars">★★★★★</div><p>“We bought our Limassol apartment from London without stress. Everything — legal, residency, keys — was handled. Truly boutique service.”</p><div class="who"><b>James & Olivia H.</b> · United Kingdom</div></div>
-      <div class="q"><div class="stars">★★★★★</div><p>“Elena answered my questions at midnight my time, then a consultant called the next morning. We now have residency and a home in Paphos.”</p><div class="who"><b>Dmitry K.</b> · relocated from Dubai</div></div>
+      <div class="q"><div class="stars">★★★★★</div><p>“Solara answered my questions at midnight my time, then a consultant called the next morning. We now have residency and a home in Paphos.”</p><div class="who"><b>Dmitry K.</b> · relocated from Dubai</div></div>
       <div class="q"><div class="stars">★★★★★</div><p>“Honest advice on yields, no pressure. Our off-plan investment is already rented. Highly recommend Meridian.”</p><div class="who"><b>Anna & Marios P.</b> · Cyprus & Greece</div></div>
     </div>
   </div>
@@ -321,9 +321,9 @@
   <div class="wrap">
     <div class="box">
       <h2>Let's find your place in Cyprus</h2>
-      <p>Share your project and a consultant follows up — often the same day. Prefer to explore first? Ask Elena anything, right now.</p>
+      <p>Share your project and a consultant follows up — often the same day. Prefer to explore first? Ask Solara anything, right now.</p>
       <div class="ctrow">
-        <button class="btn" onclick="openPanel()">Chat with Elena</button>
+        <button class="btn" onclick="openPanel()">Chat with Solara</button>
         <span class="info">or +357 25 000 000 · hello@meridian-estates.cy</span>
       </div>
     </div>
@@ -354,7 +354,7 @@
 <div class="pa-panel" id="paPanel">
   <div class="pa-head">
     <div class="pa-avatar"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#1a1206" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-9.5z"/><path d="M9 21V13h6v8"/></svg></div>
-    <div class="pa-info"><b>Elena · Meridian Estates</b><span>● online 24/7</span></div>
+    <div class="pa-info"><b>Solara · Meridian Estates</b><span>● online 24/7</span></div>
     <button class="pa-x" id="paClose" aria-label="Close">×</button>
   </div>
   <div class="pa-thread" id="paThread"></div>
@@ -401,7 +401,7 @@
   }
   function openPanel(){
     if(!panel.classList.contains('open'))panel.classList.add('open');
-    if(!greeted){greeted=true;bub("Hi, I'm Elena 👋 Welcome to Meridian Estates. Are you looking to buy, rent or invest in Cyprus? I can also explain residency by investment — ask me anything, in any language.",'bot');setTimeout(menu,500);}
+    if(!greeted){greeted=true;bub("Hi, I'm Solara 👋 Welcome to Meridian Estates. Are you looking to buy, rent or invest in Cyprus? I can also explain residency by investment — ask me anything, in any language.",'bot');setTimeout(menu,500);}
     input.focus();
   }
   btn.onclick=function(){panel.classList.contains('open')?panel.classList.remove('open'):openPanel();};

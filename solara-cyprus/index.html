@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meridian Estates — Property in Cyprus | Buy, Rent & Invest in Limassol, Paphos, Larnaca</title>
+<meta name="description" content="Meridian Estates — boutique real-estate agency in Limassol. Apartments, seafront villas, off-plan investments and Cyprus permanent residency by property. English, Greek & Russian.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sea:#0d3a52; --sea2:#0a2c40; --deep:#071f2e;
+    --gold:#c9a24b; --gold2:#e0c274; --sand:#f4ede1; --paper:#faf6ef;
+    --ink:#16323f; --mute:#5f7079; --line:#e6dcc9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Jost',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.15;letter-spacing:-.01em;}
+  a{color:var(--gold);text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px;}
+  .btn{display:inline-block;background:var(--gold);color:#1a1206;font-weight:600;padding:14px 26px;border-radius:50px;
+    font-size:.98rem;border:none;cursor:pointer;transition:.2s;box-shadow:0 8px 22px rgba(201,162,75,.32);}
+  .btn:hover{transform:translateY(-2px);background:var(--gold2);}
+  .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4);box-shadow:none;}
+  .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff;}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:50;background:rgba(7,31,46,.86);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;max-width:1120px;margin:0 auto;}
+  .logo{font-family:'Fraunces',serif;font-size:1.35rem;color:#fff;letter-spacing:.01em;display:flex;align-items:center;gap:9px;}
+  .logo b{color:var(--gold2);font-weight:600;}
+  .logo svg{flex:0 0 auto;}
+  .nlinks{display:flex;gap:26px;align-items:center;}
+  .nlinks a{color:#dfe7ea;font-size:.92rem;font-weight:400;}
+  .nlinks a:hover{color:var(--gold2);}
+  .nav .btn{padding:10px 20px;font-size:.9rem;}
+  @media(max-width:820px){.nlinks a:not(.btn){display:none;}}
+
+  /* HERO */
+  .hero{position:relative;background:
+      radial-gradient(120% 90% at 80% 0%,rgba(201,162,75,.18),transparent 55%),
+      linear-gradient(160deg,var(--sea) 0%,var(--sea2) 45%,var(--deep) 100%);
+    color:#fff;overflow:hidden;}
+  .hero:after{content:"";position:absolute;inset:0;background:
+      radial-gradient(2px 2px at 20% 30%,rgba(255,255,255,.5),transparent),
+      radial-gradient(2px 2px at 70% 60%,rgba(255,255,255,.35),transparent),
+      radial-gradient(1.5px 1.5px at 45% 80%,rgba(255,255,255,.3),transparent);opacity:.5;pointer-events:none;}
+  .hero .wrap{position:relative;z-index:2;padding:78px 22px 92px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'Jost';font-size:.8rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--gold2);border:1px solid rgba(224,194,116,.4);padding:6px 14px;border-radius:50px;margin-bottom:22px;}
+  .hero h1{font-size:clamp(2.3rem,6vw,4rem);color:#fff;max-width:16ch;}
+  .hero h1 em{font-style:italic;color:var(--gold2);}
+  .hero p.sub{font-size:clamp(1.05rem,2.4vw,1.28rem);color:#cfdce2;max-width:52ch;margin:22px 0 32px;font-weight:300;}
+  .hero .cta{display:flex;gap:14px;flex-wrap:wrap;}
+  .stats{display:flex;gap:40px;flex-wrap:wrap;margin-top:56px;padding-top:30px;border-top:1px solid rgba(255,255,255,.14);}
+  .stat b{font-family:'Fraunces',serif;font-size:2rem;color:var(--gold2);display:block;}
+  .stat span{font-size:.86rem;color:#b9c8ce;letter-spacing:.02em;}
+
+  /* SECTION base */
+  section.sec{padding:74px 0;}
+  .shead{text-align:center;max-width:640px;margin:0 auto 46px;}
+  .shead .kick{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+  .shead h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:12px 0;}
+  .shead p{color:var(--mute);font-size:1.05rem;}
+
+  /* PROPERTIES */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media(max-width:860px){.grid{grid-template-columns:1fr;max-width:440px;margin:0 auto;}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(13,58,82,.07);transition:.25s;}
+  .card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(13,58,82,.14);}
+  .photo{height:210px;position:relative;}
+  .p1{background:linear-gradient(160deg,#2f7fa6,#0d3a52);}
+  .p2{background:linear-gradient(160deg,#d8a15a,#a5642a);}
+  .p3{background:linear-gradient(160deg,#5aa9a0,#1f5e57);}
+  .photo:after{content:"";position:absolute;inset:0;background:
+      radial-gradient(60% 50% at 30% 20%,rgba(255,255,255,.28),transparent),
+      linear-gradient(180deg,transparent 55%,rgba(0,0,0,.35));}
+  .tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(255,255,255,.92);color:var(--sea);
+    font-size:.74rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:5px 12px;border-radius:50px;}
+  .price{position:absolute;bottom:14px;left:14px;z-index:2;color:#fff;font-family:'Fraunces',serif;font-size:1.5rem;}
+  .cbody{padding:20px 22px 24px;}
+  .cbody h3{font-size:1.22rem;}
+  .cbody .loc{color:var(--gold);font-size:.86rem;font-weight:500;margin:3px 0 12px;letter-spacing:.02em;}
+  .feats{display:flex;gap:16px;color:var(--mute);font-size:.88rem;border-top:1px solid var(--line);padding-top:13px;margin-top:4px;}
+  .feats span{display:flex;align-items:center;gap:6px;}
+
+  /* WHY CYPRUS / residency band */
+  .band{background:linear-gradient(155deg,var(--sea),var(--deep));color:#fff;}
+  .band .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:54px;align-items:center;padding:70px 22px;}
+  @media(max-width:820px){.band .wrap{grid-template-columns:1fr;gap:34px;}}
+  .band h2{font-size:clamp(1.8rem,4vw,2.5rem);color:#fff;}
+  .band h2 em{font-style:italic;color:var(--gold2);}
+  .band p{color:#cfdce2;margin-top:16px;font-weight:300;font-size:1.05rem;}
+  .perks{list-style:none;display:grid;gap:14px;margin-top:8px;}
+  .perks li{display:flex;gap:13px;align-items:flex-start;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+    padding:15px 18px;border-radius:13px;}
+  .perks b{color:var(--gold2);font-family:'Jost';font-weight:600;display:block;font-size:.98rem;}
+  .perks span{color:#bccad0;font-size:.88rem;}
+  .perks .ic{flex:0 0 auto;color:var(--gold2);margin-top:2px;}
+
+  /* SERVICES */
+  .svc{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  @media(max-width:860px){.svc{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.svc{grid-template-columns:1fr;max-width:400px;margin:0 auto;}}
+  .scard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 22px;text-align:left;}
+  .scard .ic{width:46px;height:46px;border-radius:12px;background:var(--sand);display:flex;align-items:center;justify-content:center;color:var(--sea);margin-bottom:16px;}
+  .scard h3{font-size:1.14rem;margin-bottom:7px;}
+  .scard p{color:var(--mute);font-size:.92rem;}
+
+  /* STEPS */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;counter-reset:s;}
+  @media(max-width:820px){.steps{grid-template-columns:1fr;max-width:460px;margin:0 auto;}}
+  .step{position:relative;padding-left:8px;}
+  .step .n{font-family:'Fraunces',serif;font-size:2.4rem;color:var(--gold);opacity:.55;}
+  .step h3{font-size:1.2rem;margin:4px 0 8px;}
+  .step p{color:var(--mute);font-size:.95rem;}
+
+  /* TESTIMONIALS */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media(max-width:860px){.quotes{grid-template-columns:1fr;max-width:440px;margin:0 auto;}}
+  .q{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 8px 24px rgba(13,58,82,.06);}
+  .q .stars{color:var(--gold);letter-spacing:2px;font-size:.95rem;}
+  .q p{margin:12px 0 16px;color:#33474f;font-size:.98rem;}
+  .q .who{font-size:.86rem;color:var(--mute);}
+  .q .who b{color:var(--ink);font-weight:600;}
+
+  /* CTA / CONTACT */
+  .contact{background:var(--sand);}
+  .contact .box{background:#fff;border:1px solid var(--line);border-radius:22px;padding:46px;text-align:center;box-shadow:0 16px 44px rgba(13,58,82,.09);}
+  .contact h2{font-size:clamp(1.8rem,4vw,2.5rem);}
+  .contact p{color:var(--mute);max-width:48ch;margin:14px auto 26px;font-size:1.05rem;}
+  .ctrow{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:center;}
+  .ctrow .info{color:var(--sea);font-weight:500;font-size:.96rem;}
+
+  footer{background:var(--deep);color:#9fb2ba;padding:44px 0 34px;font-size:.9rem;}
+  footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;}
+  footer .logo{font-size:1.15rem;}
+  footer a{color:var(--gold2);}
+  .fnote{font-size:.82rem;color:#6f858e;margin-top:6px;}
+
+  /* ASSISTANT WIDGET */
+  .pa-btn{position:fixed;right:20px;bottom:20px;z-index:80;background:var(--gold);color:#1a1206;border:none;border-radius:50px;
+    padding:14px 22px 14px 18px;font-family:'Jost';font-weight:600;font-size:.95rem;cursor:pointer;display:flex;align-items:center;gap:10px;
+    box-shadow:0 12px 30px rgba(201,162,75,.42);transition:.2s;}
+  .pa-btn:hover{transform:translateY(-2px);}
+  .pa-btn .pulse{width:9px;height:9px;border-radius:50%;background:#1a7a4a;box-shadow:0 0 0 0 rgba(26,122,74,.6);animation:pulse 2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(26,122,74,.5);}70%{box-shadow:0 0 0 8px rgba(26,122,74,0);}100%{box-shadow:0 0 0 0 rgba(26,122,74,0);}}
+  .panel{position:fixed;right:20px;bottom:20px;z-index:90;width:min(390px,calc(100vw - 32px));height:min(620px,calc(100vh - 40px));
+    background:#fff;border-radius:20px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 24px 70px rgba(7,31,46,.4);}
+  .panel.open{display:flex;}
+  .phead{background:linear-gradient(150deg,var(--sea),var(--deep));color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px;}
+  .avatar{width:42px;height:42px;border-radius:50%;background:var(--gold);color:#1a1206;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.2rem;flex:0 0 auto;}
+  .phead b{font-size:1.02rem;display:block;}
+  .phead span{font-size:.78rem;color:#bfd0d6;display:flex;align-items:center;gap:6px;}
+  .phead .dot{width:7px;height:7px;border-radius:50%;background:#57d38a;}
+  .phead .x{margin-left:auto;background:none;border:none;color:#cfdce2;font-size:1.5rem;cursor:pointer;line-height:1;}
+  .thread{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:11px;background:var(--paper);}
+  .msg{max-width:84%;padding:11px 15px;border-radius:15px;font-size:.95rem;line-height:1.5;white-space:pre-wrap;}
+  .bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px;color:#23414c;}
+  .me{align-self:flex-end;background:var(--sea);color:#fff;border-bottom-right-radius:5px;}
+  .typing{align-self:flex-start;color:var(--mute);font-size:.88rem;font-style:italic;}
+  .chips{display:flex;gap:7px;flex-wrap:wrap;padding:0 18px 10px;background:var(--paper);}
+  .chip{background:#fff;border:1px solid var(--line);color:var(--sea);font-size:.82rem;padding:7px 12px;border-radius:50px;cursor:pointer;transition:.15s;}
+  .chip:hover{background:var(--sand);border-color:var(--gold);}
+  .bar{display:flex;gap:8px;padding:12px;background:#fff;border-top:1px solid var(--line);}
+  .bar input{flex:1;border:1px solid var(--line);border-radius:50px;padding:12px 16px;font-size:.95rem;font-family:'Jost';outline:none;color:var(--ink);}
+  .bar input:focus{border-color:var(--gold);}
+  .bar button{border:none;background:var(--gold);color:#1a1206;border-radius:50%;width:44px;height:44px;font-size:1.1rem;cursor:pointer;flex:0 0 auto;}
+  .bar button:disabled{opacity:.5;}
+  .pfoot{text-align:center;font-size:.72rem;color:var(--mute);padding:7px;background:#fff;}
+  .pfoot a{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.9 6.3L22 9.3l-5 4.9 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.3l7.1-1z" fill="#e0c274"/></svg>
+      Meridian <b>Estates</b>
+    </div>
+    <nav class="nlinks">
+      <a href="#properties">Properties</a>
+      <a href="#cyprus">Why Cyprus</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">◆ Limassol · Paphos · Larnaca</span>
+    <h1>Your home under the <em>Cyprus sun</em> — bought with confidence.</h1>
+    <p class="sub">Boutique real-estate advisory for buyers, investors and expats. From seafront apartments to permanent residency by investment — we handle every step, in your language.</p>
+    <div class="cta">
+      <a href="#properties" class="btn">Explore properties</a>
+      <button class="btn btn-ghost" onclick="openPanel()">Ask Elena, our assistant →</button>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>€120M+</b><span>in property sold</span></div>
+      <div class="stat"><b>600+</b><span>families settled</span></div>
+      <div class="stat"><b>3</b><span>languages spoken</span></div>
+      <div class="stat"><b>24/7</b><span>assistant replies</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section class="sec" id="properties">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kick">Featured listings</div>
+      <h2>A selection from our portfolio</h2>
+      <p>Hand-picked homes and investments across the island. New properties added weekly.</p>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <div class="photo p1"><span class="tag">For sale</span><span class="price">€485,000</span></div>
+        <div class="cbody">
+          <h3>Seafront 2-bed apartment</h3>
+          <div class="loc">Limassol Marina</div>
+          <div class="feats"><span>◈ 2 bed</span><span>◒ 2 bath</span><span>▢ 96 m²</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="photo p2"><span class="tag">Investment · off-plan</span><span class="price">€268,000</span></div>
+        <div class="cbody">
+          <h3>New-build studio & 1-beds</h3>
+          <div class="loc">Kato Paphos</div>
+          <div class="feats"><span>◈ 1 bed</span><span>↗ 6% yield</span><span>▢ 54 m²</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="photo p3"><span class="tag">Residency eligible</span><span class="price">€1,250,000</span></div>
+        <div class="cbody">
+          <h3>Private villa with pool</h3>
+          <div class="loc">Amathus Hills, Limassol</div>
+          <div class="feats"><span>◈ 4 bed</span><span>◒ 3 bath</span><span>▢ 320 m²</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CYPRUS / RESIDENCY -->
+<section class="band" id="cyprus">
+  <div class="wrap">
+    <div>
+      <h2>Buy a home. Gain <em>EU residency.</em></h2>
+      <p>Cyprus grants permanent residency to families who invest from €300,000 in property — plus one of the lowest tax regimes in Europe, English spoken everywhere, and 300+ days of sunshine. We guide foreign buyers through every legal and practical step.</p>
+      <a href="#contact" class="btn" style="margin-top:24px;">Check your eligibility</a>
+    </div>
+    <ul class="perks">
+      <li><span class="ic">✓</span><div><b>Permanent residency from €300k</b><span>Fast-track for you and your family, retained for life.</span></div></li>
+      <li><span class="ic">✓</span><div><b>Low, simple taxation</b><span>No inheritance tax, attractive rates for residents and non-doms.</span></div></li>
+      <li><span class="ic">✓</span><div><b>Strong rental returns</b><span>Year-round demand from tourism and a growing tech sector.</span></div></li>
+      <li><span class="ic">✓</span><div><b>English-speaking, EU-safe</b><span>Common-law legal system and full EU membership.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kick">How we help</div>
+      <h2>Everything, under one roof</h2>
+      <p>From the first search to the keys — and beyond.</p>
+    </div>
+    <div class="svc">
+      <div class="scard"><div class="ic">🏠</div><h3>Buy & sell</h3><p>Apartments, villas and seafront homes across Cyprus, matched to your goals.</p></div>
+      <div class="scard"><div class="ic">📈</div><h3>Invest</h3><p>Off-plan and rental properties with clear yield projections and exit strategy.</p></div>
+      <div class="scard"><div class="ic">🛂</div><h3>Residency</h3><p>End-to-end support for permanent residency by property investment.</p></div>
+      <div class="scard"><div class="ic">🔑</div><h3>Aftercare</h3><p>Legal, tax, mortgage and property management — handled for you.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="sec" style="background:var(--sand);">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kick">Simple process</div>
+      <h2>Three steps to your Cyprus home</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>Tell us your project</h3><p>Buy, rent or invest — your budget, area and timeline. Our assistant Elena can start this any time, in your language.</p></div>
+      <div class="step"><div class="n">02</div><h3>We match & guide</h3><p>A dedicated consultant sends curated options, arranges viewings (in person or virtual) and handles the paperwork.</p></div>
+      <div class="step"><div class="n">03</div><h3>You settle in</h3><p>We complete the purchase, residency and setup — so you arrive to a home that's ready.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="shead">
+      <div class="kick">Client stories</div>
+      <h2>Trusted by buyers worldwide</h2>
+    </div>
+    <div class="quotes">
+      <div class="q"><div class="stars">★★★★★</div><p>“We bought our Limassol apartment from London without stress. Everything — legal, residency, keys — was handled. Truly boutique service.”</p><div class="who"><b>James & Olivia H.</b> · United Kingdom</div></div>
+      <div class="q"><div class="stars">★★★★★</div><p>“Elena answered my questions at midnight my time, then a consultant called the next morning. We now have residency and a home in Paphos.”</p><div class="who"><b>Dmitry K.</b> · relocated from Dubai</div></div>
+      <div class="q"><div class="stars">★★★★★</div><p>“Honest advice on yields, no pressure. Our off-plan investment is already rented. Highly recommend Meridian.”</p><div class="who"><b>Anna & Marios P.</b> · Cyprus & Greece</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <div class="box">
+      <h2>Let's find your place in Cyprus</h2>
+      <p>Share your project and a consultant follows up — often the same day. Prefer to explore first? Ask Elena anything, right now.</p>
+      <div class="ctrow">
+        <button class="btn" onclick="openPanel()">Chat with Elena</button>
+        <span class="info">or +357 25 000 000 · hello@meridian-estates.cy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3L22 9.3l-5 4.9 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.3l7.1-1z" fill="#e0c274"/></svg> Meridian <b style="color:var(--gold2)">Estates</b></div>
+      <div class="fnote">Boutique real estate · Limassol, Cyprus · EN · ΕΛ · RU</div>
+    </div>
+    <div style="text-align:right;">
+      <div>+357 25 000 000 · hello@meridian-estates.cy</div>
+      <div class="fnote">Demo site · AI assistant by <a href="https://florynepierson.com" target="_blank" rel="noopener">florynepierson.com</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ASSISTANT -->
+<button class="pa-btn" id="paBtn" onclick="openPanel()"><span class="pulse"></span>Ask Elena</button>
+<div class="panel" id="panel">
+  <div class="phead">
+    <div class="avatar">E</div>
+    <div><b>Elena</b><span><span class="dot"></span>Meridian Estates · online 24/7</span></div>
+    <button class="x" onclick="closePanel()" aria-label="Close">×</button>
+  </div>
+  <div class="thread" id="thread"></div>
+  <div class="chips" id="chips">
+    <button class="chip" onclick="quick('I want to invest in Cyprus property')">Invest in Cyprus</button>
+    <button class="chip" onclick="quick('Tell me about residency by investment')">Residency</button>
+    <button class="chip" onclick="quick('Show me apartments in Limassol')">Limassol apartments</button>
+  </div>
+  <div class="bar">
+    <input id="input" type="text" placeholder="Ask about property, prices, residency…" autocomplete="off">
+    <button id="send" onclick="ask()" aria-label="Send">➤</button>
+  </div>
+  <div class="pfoot">AI assistant · <a href="https://florynepierson.com" target="_blank" rel="noopener">built by florynepierson.com</a></div>
+</div>
+
+<script>
+  var thread=document.getElementById('thread'), input=document.getElementById('input'),
+      send=document.getElementById('send'), panel=document.getElementById('panel'),
+      chips=document.getElementById('chips'), greeted=false, convo=[];
+  function bubble(text,who){var d=document.createElement('div');d.className='msg '+(who==='me'?'me':'bot');d.textContent=text;thread.appendChild(d);thread.scrollTop=thread.scrollHeight;return d;}
+  function openPanel(){panel.classList.add('open');document.getElementById('paBtn').style.display='none';
+    if(!greeted){greeted=true;bubble("Hi, I'm Elena 👋 Welcome to Meridian Estates. Are you looking to buy, rent or invest in Cyprus? I can also explain residency by investment — just ask, in any language.",'bot');}
+    setTimeout(function(){input.focus();},50);}
+  function closePanel(){panel.classList.remove('open');document.getElementById('paBtn').style.display='flex';}
+  function quick(t){input.value=t;ask();}
+  async function ask(){
+    var text=input.value.trim(); if(!text) return;
+    chips.style.display='none';
+    input.value=''; bubble(text,'me'); convo.push({role:'user',content:text});
+    send.disabled=true;
+    var t=document.createElement('div');t.className='typing';t.textContent='Elena is typing…';thread.appendChild(t);thread.scrollTop=thread.scrollHeight;
+    try{
+      var r=await fetch('/api/solara-cyprus-chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:convo})});
+      var data=await r.json(); t.remove();
+      var reply=data.reply||data.error||'Sorry, something went wrong — please try again.';
+      bubble(reply,'bot'); convo.push({role:'assistant',content:reply});
+    }catch(e){ t.remove(); bubble('Connection error — please try again in a moment.','bot'); }
+    send.disabled=false; input.focus();
+  }
+  input.addEventListener('keydown',function(e){if(e.key==='Enter')ask();});
+</script>
+</body>
+</html>

@@ -138,6 +138,10 @@
   .navbtn{align-self:flex-start;background:#241c14;color:var(--gold2);border:1px solid var(--gold);border-radius:12px;padding:9px 15px;
     font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
   .navbtn:hover{background:var(--gold);color:#241c07;}
+  .cgal{align-self:flex-start;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;max-width:90%;}
+  .cgal figure{margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#fff;}
+  .cgal img{width:100%;height:78px;object-fit:cover;display:block;}
+  .cgal figcaption{font-size:.6rem;padding:4px 5px;color:#6b6249;text-align:center;}
   .ccard{align-self:flex-start;background:#fff;border:1px solid var(--gold2);border-radius:14px;padding:14px 16px;max-width:88%;overflow:hidden;}
   .ccard .cimg{width:calc(100% + 32px);height:118px;object-fit:cover;margin:-14px -16px 10px;display:block;}
   .ccard b{font-family:var(--serif);font-size:1.15rem;}
@@ -404,6 +408,11 @@
     if(!NAV[key]) return;
     var b=document.createElement('button'); b.className='navbtn'; b.innerHTML='→ View '+NAV[key][0];
     b.onclick=function(){ goTo(NAV[key][1]); }; thread.appendChild(b); thread.scrollTop=thread.scrollHeight; }
+  function renderGallery(list){ if(!list||!list.length) return;
+    var w=document.createElement('div'); w.className='cgal';
+    list.forEach(function(g){ var f=document.createElement('figure');
+      f.innerHTML='<img loading="lazy" src="'+g.img+'" alt=""><figcaption>'+esc(g.cap||'')+'</figcaption>'; w.appendChild(f); });
+    thread.appendChild(w); thread.scrollTop=thread.scrollHeight; }
   function goTo(id){ var el=document.getElementById(id); if(!el) return;
     el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('flash');
     setTimeout(function(){el.classList.remove('flash');},2200); }
@@ -433,7 +442,8 @@
       bubbleEl(reply,'bot'); convo.push({role:'assistant',content:reply});
       if(data.reco) renderReco(data.reco);
       if(data.card) renderCard(data.card);
-      if(data.nav) renderNav(data.nav);
+      if(data.gallery) renderGallery(data.gallery);
+      if(data.nav){ (Array.isArray(data.nav)?data.nav:[data.nav]).forEach(renderNav); }
       if(data.quickReplies && data.quickReplies.length) renderChips(data.quickReplies);
       else if(!/whatsapp|first name|phone number|your number|your email/i.test(reply)) renderChips(DEFAULT_CHIPS);
       updateLead(data.lead);

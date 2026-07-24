@@ -215,6 +215,12 @@ const IMG = {
   skin:    "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80",
   laser:   "https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&w=600&q=80",
 };
+// mini before/after-style gallery shown inside the chat
+const GALLERY = [
+  { img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=300&q=75", cap: "Botox · natural" },
+  { img: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=300&q=75", cap: "Fillers · subtle" },
+  { img: "https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&w=300&q=75", cap: "Skin · glow" },
+];
 function demoReply(messages){
   const q = lastUser(messages);
   const all = joinText(messages).toLowerCase();
@@ -260,7 +266,7 @@ function demoReply(messages){
   if(has("think about","reflect","later","not ready","not sure yet"))
     return { reply:"Of course — there's no rush at all. I can have our before/after results and a treatment guide sent to your WhatsApp so you have everything when the time feels right.", quickReplies:["See before & after","Send me the guide","Book a consultation"], nav:"gallery", lead:L() };
   if(has("other clinic","comparing","shopping around","somewhere else"))
-    return { reply:"That's a sensible thing to do. What tends to set us apart is that every treatment is doctor-led and results-driven toward a natural look — you can see examples of our work, and a complimentary consultation lets you judge for yourself.", quickReplies:["See before & after","Talk to a doctor","Book a consultation"], nav:"gallery", lead:L() };
+    return { reply:"That's a sensible thing to do. What sets us apart is that every treatment is doctor-led and aimed at a natural look — here's a glimpse of our work, and a complimentary consultation lets you judge for yourself.", gallery:GALLERY, quickReplies:["Talk to a doctor","Book a consultation","Ask a question"], nav:"gallery", lead:L() };
 
   // ---- Treatment flows: lock to the flow already in progress, unless the visitor names another treatment ----
   let active = "";
@@ -344,7 +350,7 @@ function demoReply(messages){
 
   // ---- Info shortcuts ----
   if(has("before & after","before and after","gallery","see results","photos","see before"))
-    return { reply:"Here are examples of our work — natural, doctor-led results that are subtle and never overdone. Would you like to arrange a consultation to discuss your own goals?", nav:"gallery", quickReplies:["Book a consultation","Which doctor?","Ask a question"], lead:L() };
+    return { reply:"Here are a few examples of our work — natural, doctor-led results, never overdone. Would you like to arrange a consultation to discuss your own goals?", gallery:GALLERY, nav:"gallery", quickReplies:["Book a consultation","Which doctor?","Ask a question"], lead:L() };
   if(has("location","hours","where are you","address","open","opening","directions"))
     return { reply:"We're in Dubai Marina, open Monday to Saturday, with private consultations by appointment. I can have a coordinator send you the exact address and available times on WhatsApp — shall I?", quickReplies:["Yes, book me in","Ask a question"], lead:L() };
 
@@ -387,16 +393,21 @@ module.exports = async function handler(req, res) {
     const data = await ar.json();
     if (!ar.ok) return res.status(500).json({ error: (data && data.error && data.error.message) || 'api error' });
     let reply = (data.content && data.content[0] && data.content[0].text) || '…';
-    // parse tags the model may append: [[nav:X]] and [[chips: A | B | C]]
+    // parse tags the model may append: [[nav:X]] / [[nav: a | b]] and [[chips: A | B | C]]
     let nav, quickReplies;
-    const nm = reply.match(/\[\[nav:\s*([a-z]+)\s*\]\]/i);
-    if (nm) { nav = nm[1].toLowerCase(); reply = reply.replace(nm[0], ''); }
-    const cm = reply.match(/\[\[chips:\s*([^\]]+)\]\]/i);
-    if (cm) {
-      quickReplies = cm[1].split('|').map(s => s.trim()).filter(Boolean).slice(0, 4);
-      reply = reply.replace(cm[0], '');
+    const validNav = new Set(['botox','fillers','skin','laser','doctors','sarah','amir','elena','gallery','pricing','book']);
+    const nm = reply.match(/\[\[\s*nav\s*:\s*([^\]]+?)\s*\]\]/i);
+    if (nm) {
+      const keys = nm[1].split(/[|,\/·\s]+/).map(s => s.trim().toLowerCase()).filter(k => validNav.has(k));
+      if (keys.length) nav = keys.length > 1 ? keys : keys[0];
     }
-    return res.status(200).json({ reply: reply.trim(), nav, quickReplies, lead: buildLead(messages) });
+    const cm = reply.match(/\[\[\s*chips\s*:\s*([^\]]+)\]\]/i);
+    if (cm) quickReplies = cm[1].split('|').map(s => s.trim()).filter(Boolean).slice(0, 4);
+    // strip ALL bracket tags, even malformed ones, so nothing leaks into the message
+    reply = reply.replace(/\[\[[^\]]*\]\]/g, '').replace(/\n{3,}/g, '\n\n').trim();
+    const navArr = Array.isArray(nav) ? nav : (nav ? [nav] : []);
+    const wantsGallery = navArr.includes('gallery') || /before\s*&?\s*and?\s*after|before\/after/i.test(reply);
+    return res.status(200).json({ reply, nav, quickReplies, gallery: wantsGallery ? GALLERY : undefined, lead: buildLead(messages) });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }

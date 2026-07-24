@@ -98,6 +98,12 @@ function detectTiming(all){
   if(/(just exploring|just looking|browsing|not sure yet)/.test(all)) return "Just exploring";
   return "";
 }
+function detectSlot(t){
+  const m = t.match(/(tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s*[·,]?\s*\d{1,2}(:\d{2})?\s*(am|pm)?/i)
+    || t.match(/\b\d{1,2}(:\d{2})?\s*(am|pm)\b/i)
+    || t.match(/\b(tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/i);
+  return m ? m[0].replace(/\s+/g," ").trim() : "";
+}
 function detectGoal(all){
   if(/dramatic|big change|very noticeable/.test(all)) return "More noticeable enhancement";
   if(/natural|subtle|soft|undetectable|refresh/.test(all)) return "Natural, subtle refresh";
@@ -173,13 +179,15 @@ function buildLead(messages){
   else if(treatment === "Laser treatment") doctor = "Dr. Amir Karimi";
   else if(treatment === "Skin & Hydrafacial") doctor = /booster|regenerat/.test(all) ? "Dr. Elena Novak" : "Dr. Amir Karimi";
   // lead score
+  const slot = detectSlot(raw);
   let score = 20;
-  if(treatment) score += 20;
-  if(goal) score += 12;
+  if(treatment) score += 18;
+  if(goal) score += 10;
   if(areas.length) score += 10;
-  if(timing) score += (timing === "Just exploring" ? 5 : 18);
-  if(budget) score += 5;
-  if(contact) score += 25;
+  if(timing) score += (timing === "Just exploring" ? 4 : 14);
+  if(slot) score += 10;
+  if(budget) score += 4;
+  if(contact) score += 24;
   score = Math.min(100, score);
 
   const summary = (name !== "Guest" ? name : "Visitor") + " is interested in " + (treatment || "aesthetic treatment")
@@ -198,6 +206,7 @@ function buildLead(messages){
     area,
     downtime,
     doctor: doctor || "To be assigned",
+    slot: slot || "",
     leadScore: score,
     likelihood,
     recommended: treatment ? treatment + " — consultation" : "Consultation",
@@ -215,12 +224,19 @@ const IMG = {
   skin:    "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80",
   laser:   "https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&w=600&q=80",
 };
-// mini before/after-style gallery shown inside the chat
+// honest "inside the clinic" preview (NOT fake before/after — those would read as "not our results")
 const GALLERY = [
-  { img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=300&q=75", cap: "Botox · natural" },
-  { img: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=300&q=75", cap: "Fillers · subtle" },
-  { img: "https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&w=300&q=75", cap: "Skin · glow" },
+  { img: "https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=300&q=75", cap: "Clinic · Dubai Marina" },
+  { img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=300&q=75", cap: "Treatment room" },
+  { img: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=300&q=75", cap: "Consultation" },
 ];
+// next available consultation slots (demo)
+const SLOTS = ["Tomorrow · 4:00 PM", "Thursday · 11:00 AM", "Saturday · 2:00 PM"];
+function offerSlots(lead, reco){
+  const r = { reply:"I can arrange your complimentary consultation. Here are the next available times — tap one, or tell me what suits you:", slots: SLOTS, lead };
+  if(reco) r.reco = reco;
+  return r;
+}
 function demoReply(messages){
   const q = lastUser(messages);
   const all = joinText(messages).toLowerCase();
@@ -229,7 +245,18 @@ function demoReply(messages){
   const L = () => buildLead(messages);
 
   // Final capture
-  if(contact) return { reply:"Thank you — that's everything the coordinator needs. They'll message you on WhatsApp shortly with two or three consultation times to choose from. We look forward to caring for you at Maison Lumière.", quickReplies:["Ask another question","Our location & hours"], lead:L() };
+  if(contact){
+    const lead=L();
+    const when = lead.slot ? " for " + lead.slot : "";
+    return { reply:"Thank you — your consultation request" + when + " is confirmed. Our coordinator will message you on WhatsApp shortly to finalise it. We look forward to caring for you at Maison Lumière.", quickReplies:["Ask another question","Our location & hours"], lead };
+  }
+
+  // ---- Slot picked (after we offered times) -> hold it + ask contact ----
+  if(botSaid(messages,"next available")){
+    const rawLast = ([...messages].reverse().find(m=>m.role==="user")||{}).content || "";
+    const slot=detectSlot(rawLast);
+    if(slot) return { reply:"Perfect — I'll hold "+slot+" for 15 minutes. To confirm, may I have your first name and the best WhatsApp number?", lead:L() };
+  }
 
   // ---- Medical / knowledge questions (this is where the clinic sees real value) ----
   if(has("dysport") || (has("difference","vs","versus","compare") && all.includes("botox")))
@@ -266,7 +293,7 @@ function demoReply(messages){
   if(has("think about","reflect","later","not ready","not sure yet"))
     return { reply:"Of course — there's no rush at all. I can have our before/after results and a treatment guide sent to your WhatsApp so you have everything when the time feels right.", quickReplies:["See before & after","Send me the guide","Book a consultation"], nav:"gallery", lead:L() };
   if(has("other clinic","comparing","shopping around","somewhere else"))
-    return { reply:"That's a sensible thing to do. What sets us apart is that every treatment is doctor-led and aimed at a natural look — here's a glimpse of our work, and a complimentary consultation lets you judge for yourself.", gallery:GALLERY, quickReplies:["Talk to a doctor","Book a consultation","Ask a question"], nav:"gallery", lead:L() };
+    return { reply:"That's sensible. What sets us apart is that every treatment is doctor-led and aimed at a natural look — here's a glimpse inside the clinic (a live site shows the clinic's own before/afters here), and a complimentary consultation lets you judge for yourself.", gallery:GALLERY, quickReplies:["Talk to a doctor","Book a consultation","Ask a question"], nav:"gallery", lead:L() };
 
   // ---- Treatment flows: lock to the flow already in progress, unless the visitor names another treatment ----
   let active = "";
@@ -293,8 +320,7 @@ function demoReply(messages){
     if(!botSaid(messages,"when would you"))
       return { reply:"Noted. I'd match you with our injectables specialist, **Dr. Sarah** — known for natural results. When would you like to visit?",
         nav:"sarah", quickReplies:["This week","This month","Next month","Just exploring"], lead };
-    return { reply:"Based on everything you've shared, here's what I'll pass to the doctor. To arrange your complimentary consultation, may I have your first name and the best WhatsApp number?",
-      reco:{concern:(lead.concerns[0]||"Expression lines"),area:lead.area,downtime:"None / minimal",treatment:"Botox — natural, minimal units",doctor:"Dr. Sarah Lawson"}, lead };
+    return offerSlots(lead, {concern:(lead.concerns[0]||"Expression lines"),area:lead.area,downtime:"None / minimal",treatment:"Botox — natural, minimal units",doctor:"Dr. Sarah Lawson"});
   }
 
   if(ctx === "Dermal fillers"){
@@ -306,8 +332,7 @@ function demoReply(messages){
     if(!botSaid(messages,"when would you"))
       return { reply:"Our doctors favour a natural, balanced look. I'd match you with **Dr. Sarah**. When would you like to visit?",
         nav:"sarah", quickReplies:["This week","This month","Next month","Just exploring"], lead };
-    return { reply:"Here's my recommendation for the doctor. To arrange your complimentary consultation, may I have your first name and WhatsApp number?",
-      reco:{concern:(lead.concerns[0]||"Volume & definition"),area:lead.area,downtime:"None / minimal",treatment:"Dermal fillers (hyaluronic acid)",doctor:"Dr. Sarah Lawson"}, lead };
+    return offerSlots(lead, {concern:(lead.concerns[0]||"Volume & definition"),area:lead.area,downtime:"None / minimal",treatment:"Dermal fillers (hyaluronic acid)",doctor:"Dr. Sarah Lawson"});
   }
 
   if(ctx === "Skin & Hydrafacial"){
@@ -319,8 +344,7 @@ function demoReply(messages){
     if(!botSaid(messages,"when would you"))
       return { reply:"Very treatable here, usually as a short course. I'd match you with **Dr. Amir**, our skin specialist. When would you like to start?",
         nav:"amir", quickReplies:["This week","This month","Next month","Just exploring"], lead };
-    return { reply:"Here's my recommendation for the doctor. To arrange it, may I have your first name and WhatsApp number?",
-      reco:{concern:(lead.concerns[0]||"Skin quality & glow"),area:lead.area,downtime:"None",treatment:"Skin programme / Hydrafacial",doctor:"Dr. Amir Karimi"}, lead };
+    return offerSlots(lead, {concern:(lead.concerns[0]||"Skin quality & glow"),area:lead.area,downtime:"None",treatment:"Skin programme / Hydrafacial",doctor:"Dr. Amir Karimi"});
   }
 
   if(ctx === "Laser treatment"){
@@ -345,12 +369,12 @@ function demoReply(messages){
         reco:{concern:"Texture & fine lines",area:lead.area,downtime:"3–5 days",treatment:"Fractional CO₂ Laser",doctor:"Dr. Amir Karimi"},
         nav:"amir", quickReplies:["Book a consultation","How much downtime?","Ask a question"], lead };
     }
-    return { reply:"To arrange your complimentary assessment with **Dr. Amir**, may I have your first name and WhatsApp number?", lead };
+    return offerSlots(lead);
   }
 
   // ---- Info shortcuts ----
   if(has("before & after","before and after","gallery","see results","photos","see before"))
-    return { reply:"Here are a few examples of our work — natural, doctor-led results, never overdone. Would you like to arrange a consultation to discuss your own goals?", gallery:GALLERY, nav:"gallery", quickReplies:["Book a consultation","Which doctor?","Ask a question"], lead:L() };
+    return { reply:"Here's a look inside the clinic. (In a live setup this shows the clinic's own before/after gallery.) Would you like a consultation to discuss your goals?", gallery:GALLERY, nav:"gallery", quickReplies:["Book a consultation","Which doctor?","Ask a question"], lead:L() };
   if(has("location","hours","where are you","address","open","opening","directions"))
     return { reply:"We're in Dubai Marina, open Monday to Saturday, with private consultations by appointment. I can have a coordinator send you the exact address and available times on WhatsApp — shall I?", quickReplies:["Yes, book me in","Ask a question"], lead:L() };
 

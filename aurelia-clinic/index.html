@@ -142,6 +142,13 @@
   .cgal figure{margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#fff;}
   .cgal img{width:100%;height:78px;object-fit:cover;display:block;}
   .cgal figcaption{font-size:.6rem;padding:4px 5px;color:#6b6249;text-align:center;}
+  .slots{align-self:flex-start;display:flex;flex-direction:column;gap:7px;max-width:82%;width:82%;}
+  .slotb{display:flex;align-items:center;gap:10px;border:1px solid var(--gold);background:#fff;border-radius:12px;
+    padding:11px 14px;font-size:.9rem;cursor:pointer;color:#3f3628;font-family:var(--sans);text-align:left;transition:.15s;}
+  .slotb:hover{background:var(--gold);color:#fff;}
+  .slotb .cal{font-size:1rem;}
+  .slotb .free{margin-left:auto;font-size:.66rem;color:var(--green);letter-spacing:.04em;}
+  .slotb:hover .free{color:#eafff2;}
   .ccard{align-self:flex-start;background:#fff;border:1px solid var(--gold2);border-radius:14px;padding:14px 16px;max-width:88%;overflow:hidden;}
   .ccard .cimg{width:calc(100% + 32px);height:118px;object-fit:cover;margin:-14px -16px 10px;display:block;}
   .ccard b{font-family:var(--serif);font-size:1.15rem;}
@@ -335,6 +342,7 @@
     <div class="lrow"><div class="k">Preferred timing</div><div class="v empty" data-f="month">—</div></div>
     <div class="lrow"><div class="k">Downtime accepted</div><div class="v empty" data-f="downtime">—</div></div>
     <div class="lrow"><div class="k">Doctor suggested</div><div class="v empty" data-f="doctor">—</div></div>
+    <div class="lrow"><div class="k">Requested slot</div><div class="v empty" data-f="slot">—</div></div>
     <div class="lrow"><div class="k">WhatsApp</div><div class="v empty" data-f="contact">—</div></div>
   </div>
   <div class="lscore"><div class="lab"><span>Lead score</span><b id="scoreNum">—</b></div><div class="track"><div class="fill" id="scoreFill"></div></div></div>
@@ -413,6 +421,12 @@
     list.forEach(function(g){ var f=document.createElement('figure');
       f.innerHTML='<img loading="lazy" src="'+g.img+'" alt=""><figcaption>'+esc(g.cap||'')+'</figcaption>'; w.appendChild(f); });
     thread.appendChild(w); thread.scrollTop=thread.scrollHeight; }
+  function renderSlots(list){ if(!list||!list.length) return;
+    var w=document.createElement('div'); w.className='slots';
+    list.forEach(function(s){ var b=document.createElement('button'); b.className='slotb';
+      b.innerHTML='<span class="cal">📅</span> '+esc(s)+' <span class="free">Available</span>';
+      b.onclick=function(){ w.remove(); ask(s); }; w.appendChild(b); });
+    thread.appendChild(w); thread.scrollTop=thread.scrollHeight; }
   function goTo(id){ var el=document.getElementById(id); if(!el) return;
     var y=el.getBoundingClientRect().top + window.pageYOffset - 84;
     window.scrollTo({top:y<0?0:y, behavior:'smooth'});
@@ -422,7 +436,7 @@
 
   function setV(f,val){ var el=document.querySelector('[data-f="'+f+'"]'); if(el&&val){ el.textContent=val; el.classList.remove('empty'); } }
   function updateLead(lead){ if(!lead) return;
-    ['name','interestedIn','area','month','downtime','doctor','contact'].forEach(function(f){ setV(f,lead[f]); });
+    ['name','interestedIn','area','month','downtime','doctor','slot','contact'].forEach(function(f){ setV(f,lead[f]); });
     var cel=document.getElementById('concerns');
     if(lead.concerns&&lead.concerns.length){ cel.innerHTML='<ul class="goals">'+lead.concerns.map(function(c){return '<li>'+c+'</li>';}).join('')+'</ul>'; cel.classList.remove('empty'); }
     if(typeof lead.leadScore==='number'){ document.getElementById('scoreNum').textContent=lead.leadScore+'/100'; document.getElementById('scoreFill').style.width=lead.leadScore+'%'; }
@@ -446,9 +460,10 @@
       if(data.reco) renderReco(data.reco);
       if(data.card) renderCard(data.card);
       if(data.gallery) renderGallery(data.gallery);
+      if(data.slots) renderSlots(data.slots);
       if(data.nav){ (Array.isArray(data.nav)?data.nav:[data.nav]).forEach(renderNav); }
       if(data.quickReplies && data.quickReplies.length) renderChips(data.quickReplies);
-      else if(!/whatsapp|first name|phone number|your number|your email/i.test(reply)) renderChips(DEFAULT_CHIPS);
+      else if(!data.slots && !/whatsapp|first name|phone number|your number|your email/i.test(reply)) renderChips(DEFAULT_CHIPS);
       updateLead(data.lead);
     }catch(e){ t.remove(); bubbleEl('Connection error — please try again.','bot'); }
     send.disabled=false; input.focus();

@@ -314,6 +314,7 @@
 <script>
   var GREETING = "Hello, I'm Aurelia — the patient concierge at Maison Lumière.\nI can explain any treatment, answer medical questions, and help you find the right option with the right doctor.\n\nWhat would you like to explore?";
   var WELCOME_CHIPS = ["💉 Botox","💋 Fillers","✨ Skin & glow","🔥 Laser","❓ Ask a question","📅 Book a consultation"];
+  var DEFAULT_CHIPS = ["💉 Botox","💋 Fillers","✨ Skin & glow","🔥 Laser","❓ Ask a question","📅 Book a consultation"];
   var NAV = {botox:["Botox treatment","botox"],fillers:["our fillers","fillers"],skin:["skin treatments","skin"],
     laser:["laser treatments","laser"],doctors:["our doctors","doctors"],sarah:["Dr. Sarah","doc-sarah"],
     gallery:["before & after results","gallery"],pricing:["our treatments","treatments"],book:["consultation booking","contact"]};
@@ -373,7 +374,8 @@
       bubbleEl(reply,'bot'); convo.push({role:'assistant',content:reply});
       if(data.card) renderCard(data.card);
       if(data.nav) renderNav(data.nav);
-      renderChips(data.quickReplies);
+      if(data.quickReplies && data.quickReplies.length) renderChips(data.quickReplies);
+      else if(!/whatsapp|first name|phone number|your number|your email/i.test(reply)) renderChips(DEFAULT_CHIPS);
       updateLead(data.lead);
     }catch(e){ t.remove(); bubbleEl('Connection error — please try again.','bot'); }
     send.disabled=false; input.focus();

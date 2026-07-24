@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maison Lumière — Dubai · Aurelia concierge</title>
+<style>
+  :root{
+    --ink:#0E0E10; --espresso:#191410; --panel:#12100E;
+    --ivory:#F8F4EC; --card:#FFFFFF; --line:#EBE3D4;
+    --champ:#EAD9B8; --gold:#C9A24B; --gold2:#E3C77E; --mute:#8A8378;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#211a12 0%,var(--ink) 60%);
+    font-family:Georgia,'Times New Roman',serif;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px;gap:22px;flex-wrap:wrap;}
+
+  /* ---------- Chat widget ---------- */
+  .widget{width:100%;max-width:430px;background:var(--ivory);border:1px solid rgba(201,162,75,.35);
+    border-radius:24px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55);
+    display:flex;flex-direction:column;height:660px;max-height:92vh;}
+  .head{background:linear-gradient(160deg,#211a12,#0f0c09);color:var(--ivory);padding:18px 20px;position:relative;}
+  .brand{font-size:1.18rem;letter-spacing:.02em;}
+  .brand small{display:block;font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--gold2);margin-bottom:4px;opacity:.9;}
+  .sub{display:block;font-size:.8rem;opacity:.8;margin-top:5px;font-family:system-ui,sans-serif;}
+  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#8fce9a;margin-right:7px;vertical-align:middle;
+    box-shadow:0 0 0 3px rgba(143,206,154,.18);}
+  .langs{position:absolute;top:16px;right:16px;font-family:system-ui,sans-serif;font-size:.62rem;letter-spacing:.12em;
+    color:var(--gold2);border:1px solid rgba(227,199,126,.4);border-radius:40px;padding:4px 9px;}
+  .thread{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:11px;background:var(--ivory);}
+  .msg{max-width:84%;padding:11px 15px;border-radius:16px;font-size:.98rem;line-height:1.5;
+    font-family:system-ui,-apple-system,sans-serif;white-space:pre-wrap;}
+  .bot{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:5px;color:#2a2620;}
+  .me{align-self:flex-end;background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;
+    border-bottom-right-radius:5px;font-weight:500;}
+  .typing{align-self:flex-start;color:var(--mute);font-size:.9rem;font-family:system-ui,sans-serif;font-style:italic;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;padding:2px 2px 4px;}
+  .chip{border:1px solid var(--gold);color:#5a4a1f;background:#fff;border-radius:40px;padding:8px 13px;
+    font-family:system-ui,sans-serif;font-size:.84rem;cursor:pointer;transition:.15s;}
+  .chip:hover{background:var(--gold);color:#fff;}
+  .bar{display:flex;gap:8px;padding:12px;background:#fff;border-top:1px solid var(--line);}
+  .bar input{flex:1;border:1px solid var(--champ);border-radius:50px;padding:12px 16px;font-size:.95rem;
+    outline:none;font-family:system-ui,sans-serif;color:var(--ink);}
+  .bar button{border:none;background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;
+    border-radius:50px;padding:0 20px;cursor:pointer;font-size:1.05rem;}
+  .bar button:disabled{opacity:.5;cursor:default;}
+  .foot{text-align:center;font-size:.7rem;color:var(--mute);padding:8px;font-family:system-ui,sans-serif;background:#fff;}
+  .foot a{color:var(--gold);text-decoration:none;}
+
+  /* ---------- Team dashboard (the closer) ---------- */
+  .team{width:100%;max-width:340px;align-self:center;}
+  .teamCard{background:linear-gradient(165deg,#17130e,#0d0b08);border:1px solid rgba(201,162,75,.3);
+    border-radius:22px;padding:0;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5);color:var(--ivory);
+    opacity:.4;transition:opacity .5s;}
+  .teamCard.live{opacity:1;}
+  .teamTop{background:#0a0806;padding:14px 18px;display:flex;align-items:center;gap:9px;
+    font-family:system-ui,sans-serif;border-bottom:1px solid rgba(201,162,75,.18);}
+  .waIcon{width:26px;height:26px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;
+    font-size:.9rem;flex:none;}
+  .teamTop b{font-size:.82rem;letter-spacing:.02em;}
+  .teamTop small{display:block;color:var(--gold2);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;}
+  .leadTag{margin:16px 18px 6px;font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--gold2);}
+  .leadTag .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#8fce9a;margin-right:6px;}
+  .rows{padding:4px 18px 8px;font-family:system-ui,sans-serif;}
+  .row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);
+    font-size:.88rem;}
+  .row .k{color:var(--mute);}
+  .row .v{color:var(--ivory);text-align:right;font-weight:500;}
+  .row .v.empty{color:#4a453d;font-weight:400;font-style:italic;}
+  .action{margin:12px 18px 18px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.35);
+    border-radius:12px;padding:12px 14px;font-family:system-ui,sans-serif;}
+  .action b{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:#8fce9a;display:block;margin-bottom:5px;}
+  .action span{font-size:.9rem;color:var(--ivory);}
+  .teamHint{text-align:center;color:var(--mute);font-family:system-ui,sans-serif;font-size:.72rem;margin-top:12px;
+    line-height:1.5;}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(30px);opacity:0;
+    background:#0a0806;color:var(--ivory);border:1px solid rgba(37,211,102,.5);border-radius:40px;
+    padding:11px 20px;font-family:system-ui,sans-serif;font-size:.85rem;transition:.4s;pointer-events:none;z-index:50;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  @media(max-width:920px){.team{max-width:430px;}}
+</style>
+</head>
+<body>
+
+  <!-- CHAT -->
+  <div class="widget">
+    <div class="head">
+      <div class="langs">EN · AR · RU</div>
+      <div class="brand"><small>Dubai · Marina</small>Maison Lumière</div>
+      <span class="sub"><span class="dot"></span>Aurelia — your aesthetic concierge · online 24/7</span>
+    </div>
+    <div class="thread" id="thread"></div>
+    <div class="bar">
+      <input id="input" type="text" placeholder="Ask Aurelia anything…" autocomplete="off">
+      <button id="send">➤</button>
+    </div>
+    <div class="foot">Aesthetic concierge by <a href="https://florynepierson.com" target="_blank">florynepierson.com</a></div>
+  </div>
+
+  <!-- TEAM DASHBOARD -->
+  <div class="team">
+    <div class="teamCard" id="teamCard">
+      <div class="teamTop">
+        <div class="waIcon">✓</div>
+        <div><b>Maison Lumière — Front Desk</b><small>WhatsApp Business</small></div>
+      </div>
+      <div class="leadTag"><span class="live-dot"></span>New qualified lead</div>
+      <div class="rows" id="rows">
+        <div class="row"><span class="k">Name</span><span class="v empty" data-f="name">—</span></div>
+        <div class="row"><span class="k">Language</span><span class="v empty" data-f="language">—</span></div>
+        <div class="row"><span class="k">Treatment</span><span class="v empty" data-f="treatment">—</span></div>
+        <div class="row"><span class="k">Location</span><span class="v empty" data-f="location">—</span></div>
+        <div class="row"><span class="k">Travel dates</span><span class="v empty" data-f="dates">—</span></div>
+        <div class="row"><span class="k">Budget</span><span class="v empty" data-f="budget">—</span></div>
+        <div class="row"><span class="k">Urgency</span><span class="v empty" data-f="urgency">—</span></div>
+        <div class="row"><span class="k">Contact</span><span class="v empty" data-f="contact">—</span></div>
+      </div>
+      <div class="action">
+        <b>Recommended action</b>
+        <span id="action">Waiting for a visitor to start a conversation…</span>
+      </div>
+    </div>
+    <div class="teamHint">↑ This is what your team receives on WhatsApp.<br>Every website visitor becomes a booking-ready lead — 24/7.</div>
+  </div>
+
+  <div class="toast" id="toast">✓ Qualified lead sent to your team’s WhatsApp</div>
+
+<script>
+  var GREETING = "Welcome to Maison Lumière. I'm Aurelia, your personal aesthetic concierge.\n\nI can help you explore treatments, answer your questions, and arrange your private consultation — 24/7, in English, Arabic or Russian.\n\nHow may I assist you today?";
+  var WELCOME_CHIPS = ["Botox & Fillers","Skin Treatments","Body Contouring","Cosmetic Surgery","Book a Consultation"];
+
+  var thread=document.getElementById('thread'), input=document.getElementById('input'), send=document.getElementById('send');
+  var teamCard=document.getElementById('teamCard'), toast=document.getElementById('toast');
+  var convo=[];
+
+  function bubble(text,who){
+    var d=document.createElement('div'); d.className='msg '+(who==='me'?'me':'bot');
+    d.textContent=text; thread.appendChild(d); thread.scrollTop=thread.scrollHeight; return d;
+  }
+  function renderChips(list){
+    if(!list||!list.length) return;
+    var wrap=document.createElement('div'); wrap.className='chips';
+    list.forEach(function(label){
+      var c=document.createElement('button'); c.className='chip'; c.textContent=label;
+      c.onclick=function(){ wrap.remove(); ask(label); };
+      wrap.appendChild(c);
+    });
+    thread.appendChild(wrap); thread.scrollTop=thread.scrollHeight;
+  }
+  function updateLead(lead){
+    if(!lead) return;
+    teamCard.classList.add('live');
+    Object.keys(lead).forEach(function(f){
+      if(f==='action') return;
+      var el=document.querySelector('[data-f="'+f+'"]');
+      if(el && lead[f]){ el.textContent=lead[f]; el.classList.remove('empty'); }
+    });
+    if(lead.action){ document.getElementById('action').textContent=lead.action; }
+    if(lead.contact){ toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},3200); }
+  }
+
+  bubble(GREETING,'bot');
+  renderChips(WELCOME_CHIPS);
+
+  async function ask(text){
+    text=(text||'').trim(); if(!text) return;
+    var open=thread.querySelectorAll('.chips'); open.forEach(function(c){c.remove();});
+    input.value=''; bubble(text,'me'); convo.push({role:'user',content:text});
+    send.disabled=true;
+    var t=document.createElement('div'); t.className='typing'; t.textContent='Aurelia is typing…';
+    thread.appendChild(t); thread.scrollTop=thread.scrollHeight;
+    try{
+      var r=await fetch('/api/aurelia-clinic-chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:convo})});
+      var data=await r.json(); t.remove();
+      var reply=data.reply||data.error||"I'm sorry, something went wrong.";
+      bubble(reply,'bot'); convo.push({role:'assistant',content:reply});
+      renderChips(data.quickReplies);
+      updateLead(data.lead);
+    }catch(e){ t.remove(); bubble('Connection error — please try again.','bot'); }
+    send.disabled=false; input.focus();
+  }
+  send.onclick=function(){ ask(input.value); };
+  input.addEventListener('keydown',function(e){ if(e.key==='Enter') ask(input.value); });
+</script>
+</body>
+</html>

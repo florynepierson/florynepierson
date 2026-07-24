@@ -453,7 +453,7 @@
     var t=document.createElement('div'); t.className='typing'; t.textContent='Aurelia is typing…';
     thread.appendChild(t); thread.scrollTop=thread.scrollHeight;
     try{
-      var r=await fetch('/api/maison-lumiere-chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:convo})});
+      var r=await fetch('/api/aesthetic-clinic-chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:convo})});
       var data=await r.json(); t.remove();
       var reply=data.reply||data.error||"I'm sorry, something went wrong.";
       bubbleEl(reply,'bot'); convo.push({role:'assistant',content:reply});

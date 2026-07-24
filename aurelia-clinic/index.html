@@ -393,7 +393,7 @@
   function renderDoctor(key){ var doc=DOCTORS[key]; if(!doc) return;
     var d=document.createElement('div'); d.className='dcard';
     d.innerHTML='<img loading="lazy" src="'+doc.img+'" alt=""><div class="di"><b>'+doc.name+'</b><span>'+doc.role+'</span><button>Meet '+doc.name.split(' ').slice(0,2).join(' ')+'</button></div>';
-    d.querySelector('button').onclick=function(){ goTo(doc.target); };
+    d.querySelector('button').onclick=function(){ jump(doc.target); };
     thread.appendChild(d); thread.scrollTop=thread.scrollHeight; }
   function renderReco(r){ if(!r) return;
     var d=document.createElement('div'); d.className='reco'; var h='<div class="rt">Recommended for you</div>';
@@ -407,15 +407,18 @@
     if(DOCTORS[key]){ renderDoctor(key); return; }
     if(!NAV[key]) return;
     var b=document.createElement('button'); b.className='navbtn'; b.innerHTML='→ View '+NAV[key][0];
-    b.onclick=function(){ goTo(NAV[key][1]); }; thread.appendChild(b); thread.scrollTop=thread.scrollHeight; }
+    b.onclick=function(){ jump(NAV[key][1]); }; thread.appendChild(b); thread.scrollTop=thread.scrollHeight; }
   function renderGallery(list){ if(!list||!list.length) return;
     var w=document.createElement('div'); w.className='cgal';
     list.forEach(function(g){ var f=document.createElement('figure');
       f.innerHTML='<img loading="lazy" src="'+g.img+'" alt=""><figcaption>'+esc(g.cap||'')+'</figcaption>'; w.appendChild(f); });
     thread.appendChild(w); thread.scrollTop=thread.scrollHeight; }
   function goTo(id){ var el=document.getElementById(id); if(!el) return;
-    el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('flash');
-    setTimeout(function(){el.classList.remove('flash');},2200); }
+    var y=el.getBoundingClientRect().top + window.pageYOffset - 84;
+    window.scrollTo({top:y<0?0:y, behavior:'smooth'});
+    el.classList.add('flash'); setTimeout(function(){el.classList.remove('flash');},2200); }
+  // close the chat so the page section is actually visible, then scroll to it
+  function jump(id){ closeChat(); setTimeout(function(){ goTo(id); },160); }
 
   function setV(f,val){ var el=document.querySelector('[data-f="'+f+'"]'); if(el&&val){ el.textContent=val; el.classList.remove('empty'); } }
   function updateLead(lead){ if(!lead) return;

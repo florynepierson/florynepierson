@@ -32,8 +32,10 @@
   @media(max-width:820px){.navlinks{display:none;}}
 
   /* Hero */
-  .hero{position:relative;background:linear-gradient(150deg,#241c14 0%,#3a2c1d 55%,#191310 100%);color:var(--ivory);overflow:hidden;}
-  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(700px 400px at 82% 12%,rgba(217,188,126,.22),transparent 60%);pointer-events:none;}
+  .hero{position:relative;color:var(--ivory);overflow:hidden;
+    background:linear-gradient(102deg,rgba(18,13,9,.96) 0%,rgba(20,15,10,.82) 40%,rgba(20,15,10,.35) 72%,rgba(20,15,10,.15) 100%),
+      url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=1600&q=80') right center/cover no-repeat,#241c14;}
+  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(700px 400px at 82% 12%,rgba(217,188,126,.18),transparent 60%);pointer-events:none;}
   .hero .wrap{position:relative;z-index:2;padding:86px 22px 96px;max-width:760px;}
   .hero h1{font-size:clamp(2.6rem,6vw,4.3rem);line-height:1.04;font-weight:500;}
   .hero p{font-size:1.12rem;color:#e7dcc6;font-weight:300;max-width:540px;margin:20px 0 32px;}
@@ -52,10 +54,11 @@
 
   /* Treatment cards */
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:20px;}
-  .tcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px;transition:.25s;position:relative;scroll-margin-top:90px;}
+  .tcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:0 24px 24px;transition:.25s;position:relative;scroll-margin-top:90px;overflow:hidden;}
   .tcard:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(120,95,40,.12);border-color:var(--gold2);}
   .tcard.flash{box-shadow:0 0 0 3px var(--gold2),0 20px 44px rgba(120,95,40,.2);border-color:var(--gold);}
-  .tcard .em{font-size:1.5rem;}
+  .tcard .thumb{width:calc(100% + 48px);margin:0 -24px 0;height:160px;object-fit:cover;display:block;}
+  .tcard .em{font-size:1.5rem;margin-top:18px;display:inline-block;}
   .tcard h3{font-size:1.5rem;margin:12px 0 4px;}
   .tcard .desc{font-size:.9rem;color:#6b6249;min-height:38px;}
   .tcard ul{list-style:none;padding:0;margin:14px 0 0;font-size:.86rem;color:#4c4636;font-family:var(--sans);}
@@ -75,13 +78,12 @@
   .doc p{font-size:.88rem;color:#6b6249;}
 
   /* Gallery */
-  .gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;scroll-margin-top:90px;}
-  .ba{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#fff;}
-  .ba .imgs{display:flex;height:160px;}
-  .ba .imgs div{flex:1;display:flex;align-items:flex-end;justify-content:center;padding:8px;font-family:var(--sans);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;}
-  .ba .b{background:linear-gradient(160deg,#8c7a63,#6f5f49);}
-  .ba .a{background:linear-gradient(160deg,#d9bc7e,#b78e42);}
-  .ba .cap{padding:12px 14px;font-size:.82rem;color:#6b6249;font-family:var(--sans);}
+  .gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;scroll-margin-top:90px;}
+  .gcard{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);height:230px;}
+  .gcard img{width:100%;height:100%;object-fit:cover;display:block;transition:.4s;}
+  .gcard:hover img{transform:scale(1.05);}
+  .gcard .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 13px;color:#fff;font-family:var(--sans);font-size:.86rem;
+    background:linear-gradient(transparent,rgba(15,11,7,.82));}
 
   /* Reviews */
   #reviews{background:var(--espresso);color:var(--ivory);}
@@ -203,19 +205,19 @@
   <div class="shead"><span class="eyebrow">What we do</span><h2>Signature treatments</h2>
     <p>Doctor-led, minimally invasive, designed around a natural result.</p></div>
   <div class="cards">
-    <div class="tcard" id="botox"><div class="em">💉</div><h3>Botox & Wrinkle Relaxers</h3>
+    <div class="tcard" id="botox"><img class="thumb" loading="lazy" alt="Botox treatment" src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80"><div class="em">💉</div><h3>Botox & Wrinkle Relaxers</h3>
       <div class="desc">Softens expression lines around the forehead, brows and eyes.</div>
       <ul><li>15–20 minutes</li><li>No downtime</li><li>Results in 3–7 days</li><li>Lasts 3–4 months</li></ul>
       <div class="price">Personalised at consultation</div></div>
-    <div class="tcard" id="fillers"><div class="em">💋</div><h3>Dermal Fillers</h3>
+    <div class="tcard" id="fillers"><img class="thumb" loading="lazy" alt="Dermal fillers" src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=600&q=80"><div class="em">💋</div><h3>Dermal Fillers</h3>
       <div class="desc">Restores volume and definition to lips, cheeks and jawline.</div>
       <ul><li>30–45 minutes</li><li>Immediate result</li><li>Hyaluronic acid</li><li>Lasts 9–18 months</li></ul>
       <div class="price">Personalised at consultation</div></div>
-    <div class="tcard" id="skin"><div class="em">✨</div><h3>Skin & Hydrafacial</h3>
+    <div class="tcard" id="skin"><img class="thumb" loading="lazy" alt="Skin treatment" src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80"><div class="em">✨</div><h3>Skin & Hydrafacial</h3>
       <div class="desc">Laser, peels and rejuvenation for tone, texture and glow.</div>
       <ul><li>45 minutes</li><li>Instant glow</li><li>No recovery</li><li>Course recommended</li></ul>
       <div class="price">Personalised at consultation</div></div>
-    <div class="tcard" id="laser"><div class="em">🔥</div><h3>Laser Treatments</h3>
+    <div class="tcard" id="laser"><img class="thumb" loading="lazy" alt="Laser treatment" src="https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&w=600&q=80"><div class="em">🔥</div><h3>Laser Treatments</h3>
       <div class="desc">Pigmentation, resurfacing and hair removal by medical laser.</div>
       <ul><li>Tailored sessions</li><li>Medical-grade devices</li><li>All skin types</li><li>Doctor-supervised</li></ul>
       <div class="price">Personalised at consultation</div></div>
@@ -241,13 +243,13 @@
 
 <!-- GALLERY -->
 <section id="gallery-sec"><div class="wrap">
-  <div class="shead"><span class="eyebrow">Real results</span><h2>Before &amp; after</h2>
-    <p>Subtle, natural outcomes — never overdone.</p></div>
+  <div class="shead"><span class="eyebrow">A glimpse inside</span><h2>Inside Maison Lumière</h2>
+    <p>A private, calm setting — and doctor-led care at every step.</p></div>
   <div class="gal" id="gallery">
-    <div class="ba"><div class="imgs"><div class="b">Before</div><div class="a">After</div></div><div class="cap">Botox · forehead & frown lines</div></div>
-    <div class="ba"><div class="imgs"><div class="b">Before</div><div class="a">After</div></div><div class="cap">Lip filler · natural enhancement</div></div>
-    <div class="ba"><div class="imgs"><div class="b">Before</div><div class="a">After</div></div><div class="cap">Hydrafacial · glow & texture</div></div>
-    <div class="ba"><div class="imgs"><div class="b">Before</div><div class="a">After</div></div><div class="cap">Laser · pigmentation</div></div>
+    <div class="gcard"><img loading="lazy" alt="Clinic interior" src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=600&q=80"><div class="cap">Our clinic · Dubai Marina</div></div>
+    <div class="gcard"><img loading="lazy" alt="Doctor-led treatment" src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80"><div class="cap">Doctor-led treatments</div></div>
+    <div class="gcard"><img loading="lazy" alt="Private consultation" src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=600&q=80"><div class="cap">Private consultations</div></div>
+    <div class="gcard"><img loading="lazy" alt="Medical-grade skincare" src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80"><div class="cap">Medical-grade skincare</div></div>
   </div>
 </div></section>
 

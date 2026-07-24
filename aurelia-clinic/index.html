@@ -71,6 +71,7 @@
   .docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;}
   .doc{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;text-align:center;scroll-margin-top:90px;}
   .doc.flash{box-shadow:0 0 0 3px var(--gold2);}
+  .doc .dp{width:100px;height:100px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:2px solid var(--gold2);}
   .mono{width:74px;height:74px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;
     font-family:var(--serif);font-size:1.7rem;color:#241c07;background:linear-gradient(160deg,var(--gold2),var(--gold));font-weight:600;}
   .doc h3{font-size:1.35rem;}
@@ -124,6 +125,9 @@
   .thread{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--cream);}
   .msg{max-width:86%;padding:10px 14px;border-radius:15px;font-size:.93rem;line-height:1.5;white-space:pre-wrap;}
   .bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;color:#2c2619;}
+  .bot ul.fl{margin:6px 0 2px;padding-left:18px;}
+  .bot ul.fl li{padding:2px 0;}
+  .bot .sp{height:7px;}
   .me{align-self:flex-end;background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;border-bottom-right-radius:4px;font-weight:400;}
   .typing{align-self:flex-start;color:var(--mute);font-size:.86rem;font-style:italic;}
   .chips{display:flex;flex-wrap:wrap;gap:7px;}
@@ -132,11 +136,27 @@
   .navbtn{align-self:flex-start;background:#241c14;color:var(--gold2);border:1px solid var(--gold);border-radius:12px;padding:9px 15px;
     font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
   .navbtn:hover{background:var(--gold);color:#241c07;}
-  .ccard{align-self:flex-start;background:#fff;border:1px solid var(--gold2);border-radius:14px;padding:14px 16px;max-width:88%;}
+  .ccard{align-self:flex-start;background:#fff;border:1px solid var(--gold2);border-radius:14px;padding:14px 16px;max-width:88%;overflow:hidden;}
+  .ccard .cimg{width:calc(100% + 32px);height:118px;object-fit:cover;margin:-14px -16px 10px;display:block;}
   .ccard b{font-family:var(--serif);font-size:1.15rem;}
   .ccard ul{list-style:none;margin:8px 0 0;padding:0;font-size:.83rem;color:#4c4636;}
   .ccard li{padding:3px 0 3px 18px;position:relative;}
   .ccard li::before{content:"✓";position:absolute;left:0;color:var(--gold);}
+  /* doctor mini-card in chat */
+  .dcard{align-self:flex-start;display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--gold2);border-radius:14px;padding:11px 14px;max-width:88%;}
+  .dcard img{width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--gold2);}
+  .dcard .di b{font-family:var(--serif);font-size:1.08rem;}
+  .dcard .di span{display:block;font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.04em;margin:1px 0 5px;}
+  .dcard .di button{background:#241c14;color:var(--gold2);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:.76rem;cursor:pointer;}
+  .dcard .di button:hover{background:var(--gold);color:#241c07;}
+  /* recommendation / reasoning card */
+  .reco{align-self:flex-start;background:linear-gradient(165deg,#fffdf8,#f8efdd);border:1px solid var(--gold);border-radius:14px;padding:14px 16px;max-width:88%;}
+  .reco .rt{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .reco .chk{font-size:.86rem;color:#4c4636;padding:4px 0 4px 22px;position:relative;}
+  .reco .chk::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700;}
+  .reco .star{margin-top:9px;padding:10px 12px;background:#241c14;color:var(--ivory);border-radius:10px;font-size:.92rem;}
+  .reco .star em{font-style:normal;color:var(--gold2);}
+  .reco .rdoc{margin-top:7px;font-size:.8rem;color:#6b6249;}
   .bar{display:flex;gap:8px;padding:11px;background:#fff;border-top:1px solid var(--line);}
   .bar input{flex:1;border:1px solid var(--gold2);border-radius:44px;padding:11px 15px;font-size:.92rem;outline:none;color:var(--ink);}
   .bar button{border:none;background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;border-radius:44px;padding:0 18px;cursor:pointer;font-size:1rem;}
@@ -167,6 +187,13 @@
   .lsum{margin:12px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(183,142,66,.2);border-radius:12px;padding:12px 14px;font-size:.86rem;color:#e7dcc6;font-style:italic;}
   .laction{margin:0 18px 20px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.35);border-radius:12px;padding:12px 14px;}
   .laction b{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#7fe0ad;display:block;margin-bottom:4px;}
+  .lscore{margin:16px 18px 6px;}
+  .lscore .lab{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);display:flex;justify-content:space-between;align-items:baseline;}
+  .lscore .lab b{color:var(--gold2);font-family:var(--serif);font-size:1.3rem;}
+  .lscore .track{height:8px;background:rgba(255,255,255,.09);border-radius:6px;margin-top:7px;overflow:hidden;}
+  .lscore .fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),#7fe0ad);border-radius:6px;transition:width .7s ease;}
+  .lrow ul.goals{margin:4px 0 0;padding-left:16px;font-size:.9rem;color:var(--ivory);}
+  .lrow ul.goals li{padding:1px 0;}
   .toast{position:fixed;bottom:96px;right:22px;z-index:80;background:#0a0806;color:var(--ivory);border:1px solid rgba(37,211,102,.5);
     border-radius:40px;padding:11px 18px;font-size:.84rem;font-family:var(--sans);opacity:0;transform:translateY(12px);transition:.35s;pointer-events:none;}
   .toast.show{opacity:1;transform:translateY(0);}
@@ -229,13 +256,13 @@
   <div class="shead"><span class="eyebrow">Your team</span><h2>Meet our doctors</h2>
     <p>Every treatment is performed by a board-certified physician.</p></div>
   <div class="docs">
-    <div class="doc" id="doc-sarah"><div class="mono">SL</div><h3>Dr. Sarah Lawson</h3>
+    <div class="doc" id="doc-sarah"><img class="dp" loading="lazy" alt="Dr. Sarah Lawson" src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=200&q=80"><h3>Dr. Sarah Lawson</h3>
       <div class="role">Injectables · Natural results</div>
       <p>15 years in aesthetic medicine, known for undetectable Botox and lip work. Speaks English & Arabic.</p></div>
-    <div class="doc" id="doc-amir"><div class="mono">AK</div><h3>Dr. Amir Karimi</h3>
-      <div class="role">Laser · Skin & surgery</div>
+    <div class="doc" id="doc-amir"><img class="dp" loading="lazy" alt="Dr. Amir Karimi" src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&q=80"><h3>Dr. Amir Karimi</h3>
+      <div class="role">Laser · Skin & resurfacing</div>
       <p>Specialist in skin resurfacing, laser and facial rejuvenation. Speaks English, Arabic & Russian.</p></div>
-    <div class="doc"><div class="mono">EN</div><h3>Dr. Elena Novak</h3>
+    <div class="doc" id="doc-elena"><img class="dp" loading="lazy" alt="Dr. Elena Novak" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=200&q=80"><h3>Dr. Elena Novak</h3>
       <div class="role">Regenerative aesthetics</div>
       <p>Focus on skin boosters, biostimulators and long-term skin health. Speaks English & Russian.</p></div>
   </div>
@@ -293,20 +320,20 @@
 <button class="cvtoggle" onclick="toggleCV()">👁 Clinic view</button>
 <div class="cvpanel" id="cvpanel">
   <div class="cvhead"><div class="wa">✓</div><div><b>Maison Lumière — Front Desk</b><small>WhatsApp Business</small></div><button class="x" onclick="toggleCV()">✕</button></div>
-  <div class="cvtag"><span class="d"></span>New qualified patient</div>
+  <div class="cvtag"><span class="d"></span>New consultation request</div>
   <div class="lrows">
-    <div class="lrow"><div class="k">Name</div><div class="v empty" data-f="name">—</div></div>
+    <div class="lrow"><div class="k">Patient</div><div class="v empty" data-f="name">—</div></div>
     <div class="lrow"><div class="k">Interested in</div><div class="v empty" data-f="interestedIn">—</div></div>
-    <div class="lrow"><div class="k">Goal</div><div class="v empty" data-f="goal">—</div></div>
-    <div class="lrow"><div class="k">Location</div><div class="v empty" data-f="location">—</div></div>
+    <div class="lrow"><div class="k">Goals</div><div class="v empty" data-f="concerns" id="concerns">—</div></div>
+    <div class="lrow"><div class="k">Treatment area</div><div class="v empty" data-f="area">—</div></div>
     <div class="lrow"><div class="k">Preferred timing</div><div class="v empty" data-f="month">—</div></div>
-    <div class="lrow"><div class="k">Concerns discussed</div><div class="v empty" data-f="concerns" id="concerns">—</div></div>
-    <div class="lrow"><div class="k">Likelihood to book</div><div class="v empty" data-f="likelihood">—</div></div>
-    <div class="lrow"><div class="k">Recommended</div><div class="v empty" data-f="recommended">—</div></div>
+    <div class="lrow"><div class="k">Downtime accepted</div><div class="v empty" data-f="downtime">—</div></div>
+    <div class="lrow"><div class="k">Doctor suggested</div><div class="v empty" data-f="doctor">—</div></div>
     <div class="lrow"><div class="k">WhatsApp</div><div class="v empty" data-f="contact">—</div></div>
   </div>
+  <div class="lscore"><div class="lab"><span>Lead score</span><b id="scoreNum">—</b></div><div class="track"><div class="fill" id="scoreFill"></div></div></div>
   <div class="lsum" id="lsum">The summary your coordinator reads in 5 seconds will appear here.</div>
-  <div class="laction"><b>Recommended action</b><span data-f="action" id="laction">Waiting for a conversation…</span></div>
+  <div class="laction"><b>Next step</b><span data-f="nextStep" id="laction">Waiting for a conversation…</span></div>
 </div>
 
 <div class="toast" id="toast">✓ Qualified patient sent to the clinic's WhatsApp</div>
@@ -315,9 +342,14 @@
   var GREETING = "Hello, I'm Aurelia — the patient concierge at Maison Lumière.\nI can explain any treatment, answer medical questions, and help you find the right option with the right doctor.\n\nWhat would you like to explore?";
   var WELCOME_CHIPS = ["💉 Botox","💋 Fillers","✨ Skin & glow","🔥 Laser","❓ Ask a question","📅 Book a consultation"];
   var DEFAULT_CHIPS = ["💉 Botox","💋 Fillers","✨ Skin & glow","🔥 Laser","❓ Ask a question","📅 Book a consultation"];
-  var NAV = {botox:["Botox treatment","botox"],fillers:["our fillers","fillers"],skin:["skin treatments","skin"],
-    laser:["laser treatments","laser"],doctors:["our doctors","doctors"],sarah:["Dr. Sarah","doc-sarah"],
+  var NAV = {botox:["Botox treatment","botox"],fillers:["Dermal fillers","fillers"],skin:["skin treatments","skin"],
+    laser:["laser treatments","laser"],doctors:["our doctors","doctors"],
     gallery:["before & after results","gallery"],pricing:["our treatments","treatments"],book:["consultation booking","contact"]};
+  var DOCTORS = {
+    sarah:{name:"Dr. Sarah Lawson",role:"Injectables · Natural results",img:"https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=160&q=80",target:"doc-sarah"},
+    amir:{name:"Dr. Amir Karimi",role:"Laser · Skin & resurfacing",img:"https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=160&q=80",target:"doc-amir"},
+    elena:{name:"Dr. Elena Novak",role:"Regenerative aesthetics",img:"https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=160&q=80",target:"doc-elena"}
+  };
 
   var thread=document.getElementById('thread'), input=document.getElementById('input'), send=document.getElementById('send');
   var panel=document.getElementById('panel'), bubble=document.getElementById('bubble'), toast=document.getElementById('toast');
@@ -329,34 +361,59 @@
   }
   function closeChat(){ panel.classList.remove('open'); bubble.style.display='flex'; }
 
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function fmt(text){ var out='',inList=false;
+    esc(text).split('\n').forEach(function(ln){
+      var bullet=/^\s*[•\-]\s+/.test(ln); ln=ln.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>');
+      if(bullet){ if(!inList){out+='<ul class="fl">';inList=true;} out+='<li>'+ln.replace(/^\s*[•\-]\s+/,'')+'</li>'; }
+      else { if(inList){out+='</ul>';inList=false;} out+= ln.trim()? '<div>'+ln+'</div>':'<div class="sp"></div>'; }
+    });
+    if(inList) out+='</ul>'; return out;
+  }
   function bubbleEl(text,who){ var d=document.createElement('div'); d.className='msg '+(who==='me'?'me':'bot');
-    d.textContent=text; thread.appendChild(d); thread.scrollTop=thread.scrollHeight; return d; }
+    if(who==='bot') d.innerHTML=fmt(text); else d.textContent=text;
+    thread.appendChild(d); thread.scrollTop=thread.scrollHeight; return d; }
   function renderChips(list){ if(!list||!list.length) return;
     var w=document.createElement('div'); w.className='chips';
     list.forEach(function(l){ var c=document.createElement('button'); c.className='chip'; c.textContent=l;
       c.onclick=function(){ w.remove(); ask(l.replace(/^[^\w]+/,'').trim()); }; w.appendChild(c); });
     thread.appendChild(w); thread.scrollTop=thread.scrollHeight; }
   function renderCard(card){ if(!card) return;
-    var d=document.createElement('div'); d.className='ccard';
-    var h='<b>'+(card.emoji||'')+' '+card.title+'</b>'; if(card.bullets) h+='<ul>'+card.bullets.map(function(b){return '<li>'+b+'</li>';}).join('')+'</ul>';
+    var d=document.createElement('div'); d.className='ccard'; var h='';
+    if(card.img) h+='<img class="cimg" loading="lazy" src="'+card.img+'" alt="">';
+    h+='<b>'+(card.emoji||'')+' '+esc(card.title)+'</b>';
+    if(card.bullets) h+='<ul>'+card.bullets.map(function(b){return '<li>'+esc(b)+'</li>';}).join('')+'</ul>';
     d.innerHTML=h; thread.appendChild(d); thread.scrollTop=thread.scrollHeight; }
-  function renderNav(key){ if(!key||!NAV[key]) return;
-    var label=NAV[key][0], target=NAV[key][1];
-    var b=document.createElement('button'); b.className='navbtn'; b.innerHTML='→ View '+label;
-    b.onclick=function(){ goTo(target); }; thread.appendChild(b); thread.scrollTop=thread.scrollHeight; }
+  function renderDoctor(key){ var doc=DOCTORS[key]; if(!doc) return;
+    var d=document.createElement('div'); d.className='dcard';
+    d.innerHTML='<img loading="lazy" src="'+doc.img+'" alt=""><div class="di"><b>'+doc.name+'</b><span>'+doc.role+'</span><button>Meet '+doc.name.split(' ').slice(0,2).join(' ')+'</button></div>';
+    d.querySelector('button').onclick=function(){ goTo(doc.target); };
+    thread.appendChild(d); thread.scrollTop=thread.scrollHeight; }
+  function renderReco(r){ if(!r) return;
+    var d=document.createElement('div'); d.className='reco'; var h='<div class="rt">Recommended for you</div>';
+    if(r.concern) h+='<div class="chk">Main concern: '+esc(r.concern)+'</div>';
+    if(r.area && r.area!=='To confirm') h+='<div class="chk">Area: '+esc(r.area)+'</div>';
+    if(r.downtime) h+='<div class="chk">Downtime: '+esc(r.downtime)+'</div>';
+    h+='<div class="star">⭐ <em>'+esc(r.treatment)+'</em></div>';
+    if(r.doctor) h+='<div class="rdoc">Suggested doctor: '+esc(r.doctor)+'</div>';
+    d.innerHTML=h; thread.appendChild(d); thread.scrollTop=thread.scrollHeight; }
+  function renderNav(key){ if(!key) return;
+    if(DOCTORS[key]){ renderDoctor(key); return; }
+    if(!NAV[key]) return;
+    var b=document.createElement('button'); b.className='navbtn'; b.innerHTML='→ View '+NAV[key][0];
+    b.onclick=function(){ goTo(NAV[key][1]); }; thread.appendChild(b); thread.scrollTop=thread.scrollHeight; }
   function goTo(id){ var el=document.getElementById(id); if(!el) return;
     el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('flash');
     setTimeout(function(){el.classList.remove('flash');},2200); }
 
   function setV(f,val){ var el=document.querySelector('[data-f="'+f+'"]'); if(el&&val){ el.textContent=val; el.classList.remove('empty'); } }
   function updateLead(lead){ if(!lead) return;
-    ['name','interestedIn','goal','location','month','likelihood','recommended','contact'].forEach(function(f){ setV(f,lead[f]); });
+    ['name','interestedIn','area','month','downtime','doctor','contact'].forEach(function(f){ setV(f,lead[f]); });
     var cel=document.getElementById('concerns');
-    if(lead.concerns&&lead.concerns.length){ cel.innerHTML='<ul>'+lead.concerns.map(function(c){return '<li>'+c+'</li>';}).join('')+'</ul>'; cel.classList.remove('empty'); }
-    var lk=document.querySelector('[data-f="likelihood"]');
-    if(lead.likelihood){ lk.innerHTML='<span class="badge '+(/high/i.test(lead.likelihood)?'high':'med')+'">'+lead.likelihood+'</span>'; }
+    if(lead.concerns&&lead.concerns.length){ cel.innerHTML='<ul class="goals">'+lead.concerns.map(function(c){return '<li>'+c+'</li>';}).join('')+'</ul>'; cel.classList.remove('empty'); }
+    if(typeof lead.leadScore==='number'){ document.getElementById('scoreNum').textContent=lead.leadScore+'/100'; document.getElementById('scoreFill').style.width=lead.leadScore+'%'; }
     if(lead.summary){ document.getElementById('lsum').textContent=lead.summary; }
-    if(lead.action){ document.getElementById('laction').textContent=lead.action; }
+    if(lead.nextStep){ document.getElementById('laction').textContent=lead.nextStep; }
     if(lead.contact){ toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},3500); }
   }
   function toggleCV(){ document.getElementById('cvpanel').classList.toggle('open'); }
@@ -372,6 +429,7 @@
       var data=await r.json(); t.remove();
       var reply=data.reply||data.error||"I'm sorry, something went wrong.";
       bubbleEl(reply,'bot'); convo.push({role:'assistant',content:reply});
+      if(data.reco) renderReco(data.reco);
       if(data.card) renderCard(data.card);
       if(data.nav) renderNav(data.nav);
       if(data.quickReplies && data.quickReplies.length) renderChips(data.quickReplies);

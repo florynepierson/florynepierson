@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maison Lumière — Aesthetic Clinic · Dubai Marina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#171310; --espresso:#241c14; --ivory:#FBF8F2; --cream:#F4EEE3;
+    --line:#E7DECB; --gold:#B78E42; --gold2:#D9BC7E; --mute:#8A8064; --green:#2f7d5a;
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6;}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.01em;margin:0;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px;}
+  .eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+
+  /* Nav */
+  .nav{position:sticky;top:0;z-index:40;background:rgba(251,248,242,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;}
+  .logo{font-family:var(--serif);font-size:1.45rem;font-weight:600;letter-spacing:.02em;}
+  .logo small{display:block;font-family:var(--sans);font-size:.56rem;letter-spacing:.34em;text-transform:uppercase;color:var(--mute);font-weight:500;margin-top:-2px;}
+  .navlinks{display:flex;gap:26px;font-size:.86rem;letter-spacing:.02em;color:#5c5340;}
+  .navlinks a:hover{color:var(--gold);}
+  .navcta{background:var(--ink);color:var(--ivory);padding:9px 18px;border-radius:40px;font-size:.82rem;letter-spacing:.03em;}
+  @media(max-width:820px){.navlinks{display:none;}}
+
+  /* Hero */
+  .hero{position:relative;color:var(--ivory);overflow:hidden;
+    background:linear-gradient(102deg,rgba(18,13,9,.96) 0%,rgba(20,15,10,.82) 40%,rgba(20,15,10,.35) 72%,rgba(20,15,10,.15) 100%),
+      url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=1600&q=80') right center/cover no-repeat,#241c14;}
+  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(700px 400px at 82% 12%,rgba(217,188,126,.18),transparent 60%);pointer-events:none;}
+  .hero .wrap{position:relative;z-index:2;padding:86px 22px 96px;max-width:760px;}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.3rem);line-height:1.04;font-weight:500;}
+  .hero p{font-size:1.12rem;color:#e7dcc6;font-weight:300;max-width:540px;margin:20px 0 32px;}
+  .hero .btns{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-gold{background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;padding:13px 26px;border-radius:44px;font-weight:500;font-size:.92rem;letter-spacing:.02em;border:none;cursor:pointer;}
+  .btn-ghost{border:1px solid rgba(217,188,126,.5);color:var(--gold2);padding:13px 24px;border-radius:44px;font-size:.92rem;cursor:pointer;background:none;}
+  .trust{display:flex;gap:26px;margin-top:44px;flex-wrap:wrap;font-family:var(--sans);}
+  .trust div{font-size:.8rem;color:#cdbf9f;}
+  .trust b{display:block;font-family:var(--serif);font-size:1.7rem;color:var(--gold2);font-weight:600;}
+
+  /* Sections */
+  section{padding:74px 0;}
+  .shead{text-align:center;max-width:620px;margin:0 auto 46px;}
+  .shead h2{font-size:clamp(1.9rem,4vw,2.7rem);margin:10px 0 12px;}
+  .shead p{color:#6b6249;font-size:1.02rem;}
+
+  /* Treatment cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:20px;}
+  .tcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:0 24px 24px;transition:.25s;position:relative;scroll-margin-top:90px;overflow:hidden;}
+  .tcard:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(120,95,40,.12);border-color:var(--gold2);}
+  .tcard.flash{box-shadow:0 0 0 3px var(--gold2),0 20px 44px rgba(120,95,40,.2);border-color:var(--gold);}
+  .tcard .thumb{width:calc(100% + 48px);margin:0 -24px 0;height:160px;object-fit:cover;display:block;}
+  .tcard .em{font-size:1.5rem;margin-top:18px;display:inline-block;}
+  .tcard h3{font-size:1.5rem;margin:12px 0 4px;}
+  .tcard .desc{font-size:.9rem;color:#6b6249;min-height:38px;}
+  .tcard ul{list-style:none;padding:0;margin:14px 0 0;font-size:.86rem;color:#4c4636;font-family:var(--sans);}
+  .tcard li{padding:5px 0 5px 22px;position:relative;}
+  .tcard li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:600;}
+  .tcard .price{margin-top:14px;font-size:.82rem;color:var(--mute);}
+
+  /* Doctors */
+  #doctors{background:var(--cream);}
+  .docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;}
+  .doc{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;text-align:center;scroll-margin-top:90px;}
+  .doc.flash{box-shadow:0 0 0 3px var(--gold2);}
+  .doc .dp{width:100px;height:100px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:2px solid var(--gold2);}
+  .mono{width:74px;height:74px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:1.7rem;color:#241c07;background:linear-gradient(160deg,var(--gold2),var(--gold));font-weight:600;}
+  .doc h3{font-size:1.35rem;}
+  .doc .role{font-size:.8rem;color:var(--gold);letter-spacing:.04em;text-transform:uppercase;margin:4px 0 10px;font-family:var(--sans);}
+  .doc p{font-size:.88rem;color:#6b6249;}
+
+  /* Gallery */
+  .gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;scroll-margin-top:90px;}
+  .gcard{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);height:230px;}
+  .gcard img{width:100%;height:100%;object-fit:cover;display:block;transition:.4s;}
+  .gcard:hover img{transform:scale(1.05);}
+  .gcard .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 13px;color:#fff;font-family:var(--sans);font-size:.86rem;
+    background:linear-gradient(transparent,rgba(15,11,7,.82));}
+
+  /* Reviews */
+  #reviews{background:var(--espresso);color:var(--ivory);}
+  #reviews .shead h2,#reviews .shead .eyebrow{color:var(--gold2);}
+  #reviews .shead p{color:#cdbf9f;}
+  .revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+  .rev{background:rgba(255,255,255,.05);border:1px solid rgba(217,188,126,.22);border-radius:16px;padding:24px;}
+  .rev .stars{color:var(--gold2);letter-spacing:.16em;}
+  .rev p{font-family:var(--serif);font-size:1.16rem;color:#f3ead6;margin:12px 0;}
+  .rev .who{font-family:var(--sans);font-size:.82rem;color:#bdae8d;}
+
+  /* Contact */
+  #contact{text-align:center;}
+  .cta-box{background:linear-gradient(150deg,#241c14,#3a2c1d);color:var(--ivory);border-radius:26px;padding:56px 28px;max-width:760px;margin:0 auto;}
+  .cta-box h2{font-size:2.2rem;color:var(--gold2);}
+  .cta-box p{color:#e7dcc6;max-width:480px;margin:14px auto 26px;}
+
+  footer{padding:34px 0;text-align:center;font-size:.78rem;color:var(--mute);font-family:var(--sans);border-top:1px solid var(--line);}
+  footer a{color:var(--gold);}
+
+  /* ---------- Aurelia widget ---------- */
+  .bubble{position:fixed;bottom:22px;right:22px;z-index:60;width:60px;height:60px;border-radius:50%;cursor:pointer;
+    background:linear-gradient(160deg,var(--gold2),var(--gold));display:flex;align-items:center;justify-content:center;
+    box-shadow:0 12px 32px rgba(120,95,40,.45);border:none;}
+  .bubble span{font-family:var(--serif);font-size:1.7rem;color:#241c07;font-weight:600;}
+  .bubble .avimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;}
+  .bubble .ping{position:absolute;top:-3px;right:-3px;width:15px;height:15px;border-radius:50%;background:var(--green);border:2px solid var(--ivory);z-index:2;}
+
+  .panel{position:fixed;bottom:22px;right:22px;z-index:61;width:390px;max-width:calc(100vw - 28px);height:600px;max-height:calc(100vh - 44px);
+    background:var(--ivory);border:1px solid rgba(183,142,66,.35);border-radius:22px;overflow:hidden;
+    box-shadow:0 26px 70px rgba(0,0,0,.34);display:none;flex-direction:column;}
+  .panel.open{display:flex;}
+  .phead{background:linear-gradient(160deg,#241c14,#171310);color:var(--ivory);padding:15px 18px;display:flex;align-items:center;gap:11px;position:relative;}
+  .avatar{position:relative;overflow:hidden;width:40px;height:40px;border-radius:50%;background:linear-gradient(160deg,var(--gold2),var(--gold));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.25rem;color:#241c07;font-weight:600;flex:none;}
+  .avatar .avimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .phead b{font-size:.98rem;}
+  .phead small{display:block;font-size:.72rem;color:#c9b795;}
+  .phead .lang{position:absolute;top:12px;right:40px;font-size:.58rem;letter-spacing:.12em;color:var(--gold2);border:1px solid rgba(217,188,126,.4);border-radius:30px;padding:3px 7px;}
+  .phead .x{position:absolute;top:14px;right:14px;cursor:pointer;color:#c9b795;font-size:1.1rem;line-height:1;background:none;border:none;}
+  .thread{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--cream);}
+  .msg{max-width:86%;padding:10px 14px;border-radius:15px;font-size:.93rem;line-height:1.5;white-space:pre-wrap;}
+  .bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;color:#2c2619;}
+  .bot ul.fl{margin:6px 0 2px;padding-left:18px;}
+  .bot ul.fl li{padding:2px 0;}
+  .bot .sp{height:7px;}
+  .me{align-self:flex-end;background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;border-bottom-right-radius:4px;font-weight:400;}
+  .typing{align-self:flex-start;color:var(--mute);font-size:.86rem;font-style:italic;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{border:1px solid var(--gold);color:#5a4a1f;background:#fff;border-radius:36px;padding:8px 13px;font-size:.83rem;cursor:pointer;transition:.15s;}
+  .chip:hover{background:var(--gold);color:#fff;}
+  .navbtn{align-self:flex-start;background:#241c14;color:var(--gold2);border:1px solid var(--gold);border-radius:12px;padding:9px 15px;
+    font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
+  .navbtn:hover{background:var(--gold);color:#241c07;}
+  .cgal{align-self:flex-start;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;max-width:90%;}
+  .cgal figure{margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#fff;}
+  .cgal img{width:100%;height:78px;object-fit:cover;display:block;}
+  .cgal figcaption{font-size:.6rem;padding:4px 5px;color:#6b6249;text-align:center;}
+  .slots{align-self:flex-start;display:flex;flex-direction:column;gap:7px;max-width:82%;width:82%;}
+  .slotb{display:flex;align-items:center;gap:10px;border:1px solid var(--gold);background:#fff;border-radius:12px;
+    padding:11px 14px;font-size:.9rem;cursor:pointer;color:#3f3628;font-family:var(--sans);text-align:left;transition:.15s;}
+  .slotb:hover{background:var(--gold);color:#fff;}
+  .slotb .cal{font-size:1rem;}
+  .slotb .free{margin-left:auto;font-size:.66rem;color:var(--green);letter-spacing:.04em;}
+  .slotb:hover .free{color:#eafff2;}
+  .ccard{align-self:flex-start;background:#fff;border:1px solid var(--gold2);border-radius:14px;padding:14px 16px;max-width:88%;overflow:hidden;}
+  .ccard .cimg{width:calc(100% + 32px);height:118px;object-fit:cover;margin:-14px -16px 10px;display:block;}
+  .ccard b{font-family:var(--serif);font-size:1.15rem;}
+  .ccard ul{list-style:none;margin:8px 0 0;padding:0;font-size:.83rem;color:#4c4636;}
+  .ccard li{padding:3px 0 3px 18px;position:relative;}
+  .ccard li::before{content:"✓";position:absolute;left:0;color:var(--gold);}
+  /* doctor mini-card in chat */
+  .dcard{align-self:flex-start;display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--gold2);border-radius:14px;padding:11px 14px;max-width:88%;}
+  .dcard img{width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--gold2);}
+  .dcard .di b{font-family:var(--serif);font-size:1.08rem;}
+  .dcard .di span{display:block;font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.04em;margin:1px 0 5px;}
+  .dcard .di button{background:#241c14;color:var(--gold2);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:.76rem;cursor:pointer;}
+  .dcard .di button:hover{background:var(--gold);color:#241c07;}
+  /* recommendation / reasoning card */
+  .reco{align-self:flex-start;background:linear-gradient(165deg,#fffdf8,#f8efdd);border:1px solid var(--gold);border-radius:14px;padding:14px 16px;max-width:88%;}
+  .reco .rt{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .reco .chk{font-size:.86rem;color:#4c4636;padding:4px 0 4px 22px;position:relative;}
+  .reco .chk::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700;}
+  .reco .star{margin-top:9px;padding:10px 12px;background:#241c14;color:var(--ivory);border-radius:10px;font-size:.92rem;}
+  .reco .star em{font-style:normal;color:var(--gold2);}
+  .reco .rdoc{margin-top:7px;font-size:.8rem;color:#6b6249;}
+  .bar{display:flex;gap:8px;padding:11px;background:#fff;border-top:1px solid var(--line);}
+  .bar input{flex:1;border:1px solid var(--gold2);border-radius:44px;padding:11px 15px;font-size:.92rem;outline:none;color:var(--ink);}
+  .bar button{border:none;background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;border-radius:44px;padding:0 18px;cursor:pointer;font-size:1rem;}
+  .pfoot{text-align:center;font-size:.66rem;color:var(--mute);padding:6px;background:#fff;}
+  .pfoot a{color:var(--gold);}
+
+  /* Clinic view (WhatsApp lead card) */
+  .cvtoggle{position:fixed;top:80px;right:22px;z-index:55;background:#0a0806;color:var(--gold2);border:1px solid var(--gold);
+    border-radius:40px;padding:8px 15px;font-size:.78rem;font-family:var(--sans);cursor:pointer;display:flex;align-items:center;gap:7px;}
+  .cvpanel{position:fixed;top:0;right:-360px;width:340px;max-width:88vw;height:100vh;z-index:70;background:linear-gradient(165deg,#17130e,#0b0906);
+    color:var(--ivory);box-shadow:-20px 0 60px rgba(0,0,0,.5);transition:right .35s;overflow-y:auto;padding:0;}
+  .cvpanel.open{right:0;}
+  .cvhead{background:#0a0806;padding:16px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(183,142,66,.2);}
+  .wa{width:30px;height:30px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:.95rem;}
+  .cvhead b{font-size:.85rem;}.cvhead small{display:block;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);}
+  .cvhead .x{margin-left:auto;background:none;border:none;color:#c9b795;font-size:1.2rem;cursor:pointer;}
+  .cvtag{margin:16px 18px 4px;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);}
+  .cvtag .d{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px;}
+  .lrows{padding:6px 18px;}
+  .lrow{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+  .lrow .k{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);}
+  .lrow .v{font-size:.94rem;color:var(--ivory);margin-top:2px;}
+  .lrow .v.empty{color:#4a453d;font-style:italic;}
+  .lrow ul{margin:5px 0 0;padding-left:16px;font-size:.86rem;color:#e7dcc6;}
+  .badge{display:inline-block;padding:2px 10px;border-radius:30px;font-size:.78rem;font-weight:500;}
+  .badge.high{background:rgba(47,125,90,.25);color:#7fe0ad;border:1px solid rgba(47,125,90,.5);}
+  .badge.med{background:rgba(183,142,66,.2);color:var(--gold2);border:1px solid rgba(183,142,66,.5);}
+  .lsum{margin:12px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(183,142,66,.2);border-radius:12px;padding:12px 14px;font-size:.86rem;color:#e7dcc6;font-style:italic;}
+  .laction{margin:0 18px 20px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.35);border-radius:12px;padding:12px 14px;}
+  .laction b{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#7fe0ad;display:block;margin-bottom:4px;}
+  .lscore{margin:16px 18px 6px;}
+  .lscore .lab{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);display:flex;justify-content:space-between;align-items:baseline;}
+  .lscore .lab b{color:var(--gold2);font-family:var(--serif);font-size:1.3rem;}
+  .lscore .track{height:8px;background:rgba(255,255,255,.09);border-radius:6px;margin-top:7px;overflow:hidden;}
+  .lscore .fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),#7fe0ad);border-radius:6px;transition:width .7s ease;}
+  .lrow ul.goals{margin:4px 0 0;padding-left:16px;font-size:.9rem;color:var(--ivory);}
+  .lrow ul.goals li{padding:1px 0;}
+  .toast{position:fixed;bottom:96px;right:22px;z-index:80;background:#0a0806;color:var(--ivory);border:1px solid rgba(37,211,102,.5);
+    border-radius:40px;padding:11px 18px;font-size:.84rem;font-family:var(--sans);opacity:0;transform:translateY(12px);transition:.35s;pointer-events:none;}
+  .toast.show{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav"><div class="wrap">
+  <a href="#home" class="logo">Maison Lumière<small>Aesthetic Clinic · Dubai</small></a>
+  <nav class="navlinks">
+    <a href="#treatments">Treatments</a><a href="#doctors">Doctors</a>
+    <a href="#gallery">Results</a><a href="#reviews">Patients</a><a href="#contact">Contact</a>
+  </nav>
+  <a href="#contact" class="navcta">Book a consultation</a>
+</div></div>
+
+<!-- HERO -->
+<header class="hero" id="home"><div class="wrap">
+  <span class="eyebrow">Dubai Marina · Est. 2014</span>
+  <h1>Refined, natural aesthetic medicine.</h1>
+  <p>A private clinic where board-certified doctors deliver subtle, elegant results — and where every question is answered before you ever walk in.</p>
+  <div class="btns">
+    <button class="btn-gold" onclick="openChat('I would like to book a consultation')">Book a consultation</button>
+    <button class="btn-ghost" onclick="openChat()">Chat with Aurelia</button>
+  </div>
+  <div class="trust">
+    <div><b>11k+</b>treatments performed</div>
+    <div><b>4.9★</b>patient rating</div>
+    <div><b>EN·AR·RU</b>spoken at the clinic</div>
+  </div>
+</div></header>
+
+<!-- TREATMENTS -->
+<section id="treatments"><div class="wrap">
+  <div class="shead"><span class="eyebrow">What we do</span><h2>Signature treatments</h2>
+    <p>Doctor-led, minimally invasive, designed around a natural result.</p></div>
+  <div class="cards">
+    <div class="tcard" id="botox"><img class="thumb" loading="lazy" alt="Botox treatment" src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80"><div class="em">💉</div><h3>Botox & Wrinkle Relaxers</h3>
+      <div class="desc">Softens expression lines around the forehead, brows and eyes.</div>
+      <ul><li>15–20 minutes</li><li>No downtime</li><li>Results in 3–7 days</li><li>Lasts 3–4 months</li></ul>
+      <div class="price">Personalised at consultation</div></div>
+    <div class="tcard" id="fillers"><img class="thumb" loading="lazy" alt="Dermal fillers" src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=600&q=80"><div class="em">💋</div><h3>Dermal Fillers</h3>
+      <div class="desc">Restores volume and definition to lips, cheeks and jawline.</div>
+      <ul><li>30–45 minutes</li><li>Immediate result</li><li>Hyaluronic acid</li><li>Lasts 9–18 months</li></ul>
+      <div class="price">Personalised at consultation</div></div>
+    <div class="tcard" id="skin"><img class="thumb" loading="lazy" alt="Skin treatment" src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80"><div class="em">✨</div><h3>Skin & Hydrafacial</h3>
+      <div class="desc">Laser, peels and rejuvenation for tone, texture and glow.</div>
+      <ul><li>45 minutes</li><li>Instant glow</li><li>No recovery</li><li>Course recommended</li></ul>
+      <div class="price">Personalised at consultation</div></div>
+    <div class="tcard" id="laser"><img class="thumb" loading="lazy" alt="Laser treatment" src="https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&w=600&q=80"><div class="em">🔥</div><h3>Laser Treatments</h3>
+      <div class="desc">Pigmentation, resurfacing and hair removal by medical laser.</div>
+      <ul><li>Tailored sessions</li><li>Medical-grade devices</li><li>All skin types</li><li>Doctor-supervised</li></ul>
+      <div class="price">Personalised at consultation</div></div>
+  </div>
+</div></section>
+
+<!-- DOCTORS -->
+<section id="doctors"><div class="wrap">
+  <div class="shead"><span class="eyebrow">Your team</span><h2>Meet our doctors</h2>
+    <p>Every treatment is performed by a board-certified physician.</p></div>
+  <div class="docs">
+    <div class="doc" id="doc-sarah"><img class="dp" loading="lazy" alt="Dr. Sarah Lawson" src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=200&q=80"><h3>Dr. Sarah Lawson</h3>
+      <div class="role">Injectables · Natural results</div>
+      <p>15 years in aesthetic medicine, known for undetectable Botox and lip work. Speaks English & Arabic.</p></div>
+    <div class="doc" id="doc-amir"><img class="dp" loading="lazy" alt="Dr. Amir Karimi" src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&q=80"><h3>Dr. Amir Karimi</h3>
+      <div class="role">Laser · Skin & resurfacing</div>
+      <p>Specialist in skin resurfacing, laser and facial rejuvenation. Speaks English, Arabic & Russian.</p></div>
+    <div class="doc" id="doc-elena"><img class="dp" loading="lazy" alt="Dr. Elena Novak" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=200&q=80"><h3>Dr. Elena Novak</h3>
+      <div class="role">Regenerative aesthetics</div>
+      <p>Focus on skin boosters, biostimulators and long-term skin health. Speaks English & Russian.</p></div>
+  </div>
+</div></section>
+
+<!-- GALLERY -->
+<section id="gallery-sec"><div class="wrap">
+  <div class="shead"><span class="eyebrow">A glimpse inside</span><h2>Inside Maison Lumière</h2>
+    <p>A private, calm setting — and doctor-led care at every step.</p></div>
+  <div class="gal" id="gallery">
+    <div class="gcard"><img loading="lazy" alt="Clinic interior" src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=600&q=80"><div class="cap">Our clinic · Dubai Marina</div></div>
+    <div class="gcard"><img loading="lazy" alt="Doctor-led treatment" src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80"><div class="cap">Doctor-led treatments</div></div>
+    <div class="gcard"><img loading="lazy" alt="Private consultation" src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=600&q=80"><div class="cap">Private consultations</div></div>
+    <div class="gcard"><img loading="lazy" alt="Medical-grade skincare" src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80"><div class="cap">Medical-grade skincare</div></div>
+  </div>
+</div></section>
+
+<!-- REVIEWS -->
+<section id="reviews"><div class="wrap">
+  <div class="shead"><span class="eyebrow">Patient stories</span><h2>Trusted across Dubai</h2></div>
+  <div class="revs">
+    <div class="rev"><div class="stars">★★★★★</div><p>“Natural, never frozen. Dr. Sarah understood exactly the look I wanted.”</p><div class="who">— Layla, Dubai Marina</div></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>“I flew in from London. Everything was arranged before I arrived — seamless.”</p><div class="who">— Emma, United Kingdom</div></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>“The most professional clinic I've been to. My questions were answered instantly.”</p><div class="who">— Anastasia, Downtown</div></div>
+  </div>
+</div></section>
+
+<!-- CONTACT -->
+<section id="contact"><div class="wrap">
+  <div class="cta-box">
+    <span class="eyebrow" style="color:var(--gold2)">Book</span>
+    <h2>Your consultation, arranged in minutes</h2>
+    <p>Ask Aurelia anything — treatments, safety, pricing — and she'll arrange a complimentary consultation with the right doctor.</p>
+    <button class="btn-gold" onclick="openChat()">Chat with Aurelia</button>
+  </div>
+</div></section>
+
+<footer>Maison Lumière · Dubai Marina, UAE · +971 4 000 0000 &nbsp;·&nbsp; Demo experience by <a href="https://florynepierson.com" target="_blank">florynepierson.com</a></footer>
+
+<!-- AURELIA WIDGET -->
+<button class="bubble" id="bubble" onclick="openChat()"><img class="avimg" src="aurelia.png" alt="Aurelia" onerror="this.remove()"><span>A</span><i class="ping"></i></button>
+<div class="panel" id="panel">
+  <div class="phead">
+    <div class="avatar"><img class="avimg" src="aurelia.png" alt="" onerror="this.remove()">A</div>
+    <div><b>Aurelia</b><small>Patient concierge · online</small></div>
+    <span class="lang">EN·AR·RU</span>
+    <button class="x" onclick="closeChat()">✕</button>
+  </div>
+  <div class="thread" id="thread"></div>
+  <div class="bar"><input id="input" type="text" placeholder="Ask a question…" autocomplete="off"><button id="send">➤</button></div>
+  <div class="pfoot">Aesthetic concierge by <a href="https://florynepierson.com" target="_blank">florynepierson.com</a></div>
+</div>
+
+<!-- CLINIC VIEW (WhatsApp lead the team receives) -->
+<button class="cvtoggle" onclick="toggleCV()">👁 Clinic view</button>
+<div class="cvpanel" id="cvpanel">
+  <div class="cvhead"><div class="wa">✓</div><div><b>Maison Lumière — Front Desk</b><small>WhatsApp Business</small></div><button class="x" onclick="toggleCV()">✕</button></div>
+  <div class="cvtag"><span class="d"></span>New consultation request</div>
+  <div class="lrows">
+    <div class="lrow"><div class="k">Patient</div><div class="v empty" data-f="name">—</div></div>
+    <div class="lrow"><div class="k">Interested in</div><div class="v empty" data-f="interestedIn">—</div></div>
+    <div class="lrow"><div class="k">Goals</div><div class="v empty" data-f="concerns" id="concerns">—</div></div>
+    <div class="lrow"><div class="k">Treatment area</div><div class="v empty" data-f="area">—</div></div>
+    <div class="lrow"><div class="k">Preferred timing</div><div class="v empty" data-f="month">—</div></div>
+    <div class="lrow"><div class="k">Downtime accepted</div><div class="v empty" data-f="downtime">—</div></div>
+    <div class="lrow"><div class="k">Doctor suggested</div><div class="v empty" data-f="doctor">—</div></div>
+    <div class="lrow"><div class="k">Requested slot</div><div class="v empty" data-f="slot">—</div></div>
+    <div class="lrow"><div class="k">WhatsApp</div><div class="v empty" data-f="contact">—</div></div>
+  </div>
+  <div class="lscore"><div class="lab"><span>Lead score</span><b id="scoreNum">—</b></div><div class="track"><div class="fill" id="scoreFill"></div></div></div>
+  <div class="lsum" id="lsum">The summary your coordinator reads in 5 seconds will appear here.</div>
+  <div class="laction"><b>Next step</b><span data-f="nextStep" id="laction">Waiting for a conversation…</span></div>
+</div>
+
+<div class="toast" id="toast">✓ Qualified patient sent to the clinic's WhatsApp</div>
+
+<script>
+  var GREETING = "Hello, I'm Aurelia — the patient concierge at Maison Lumière.\nI can explain any treatment, answer medical questions, and help you find the right option with the right doctor.\n\nWhat would you like to explore?";
+  var WELCOME_CHIPS = ["💉 Botox","💋 Fillers","✨ Skin & glow","🔥 Laser","❓ Ask a question","📅 Book a consultation"];
+  var DEFAULT_CHIPS = ["💉 Botox","💋 Fillers","✨ Skin & glow","🔥 Laser","❓ Ask a question","📅 Book a consultation"];
+  var NAV = {botox:["Botox treatment","botox"],fillers:["Dermal fillers","fillers"],skin:["skin treatments","skin"],
+    laser:["laser treatments","laser"],doctors:["our doctors","doctors"],
+    gallery:["before & after results","gallery"],pricing:["our treatments","treatments"],book:["consultation booking","contact"]};
+  var DOCTORS = {
+    sarah:{name:"Dr. Sarah Lawson",role:"Injectables · Natural results",img:"https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=160&q=80",target:"doc-sarah"},
+    amir:{name:"Dr. Amir Karimi",role:"Laser · Skin & resurfacing",img:"https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=160&q=80",target:"doc-amir"},
+    elena:{name:"Dr. Elena Novak",role:"Regenerative aesthetics",img:"https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=160&q=80",target:"doc-elena"}
+  };
+
+  var thread=document.getElementById('thread'), input=document.getElementById('input'), send=document.getElementById('send');
+  var panel=document.getElementById('panel'), bubble=document.getElementById('bubble'), toast=document.getElementById('toast');
+  var convo=[], started=false;
+
+  function openChat(seed){ panel.classList.add('open'); bubble.style.display='none';
+    if(!started){ started=true; bubbleEl(GREETING,'bot'); renderChips(WELCOME_CHIPS); }
+    if(seed) ask(seed); else input.focus();
+  }
+  function closeChat(){ panel.classList.remove('open'); bubble.style.display='flex'; }
+
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function fmt(text){ var out='',inList=false;
+    esc(text).split('\n').forEach(function(ln){
+      var bullet=/^\s*[•\-]\s+/.test(ln); ln=ln.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>');
+      if(bullet){ if(!inList){out+='<ul class="fl">';inList=true;} out+='<li>'+ln.replace(/^\s*[•\-]\s+/,'')+'</li>'; }
+      else { if(inList){out+='</ul>';inList=false;} out+= ln.trim()? '<div>'+ln+'</div>':'<div class="sp"></div>'; }
+    });
+    if(inList) out+='</ul>'; return out;
+  }
+  function bubbleEl(text,who){ var d=document.createElement('div'); d.className='msg '+(who==='me'?'me':'bot');
+    if(who==='bot') d.innerHTML=fmt(text); else d.textContent=text;
+    thread.appendChild(d); thread.scrollTop=thread.scrollHeight; return d; }
+  function renderChips(list){ if(!list||!list.length) return;
+    var w=document.createElement('div'); w.className='chips';
+    list.forEach(function(l){ var c=document.createElement('button'); c.className='chip'; c.textContent=l;
+      c.onclick=function(){ w.remove(); ask(l.replace(/^[^\w]+/,'').trim()); }; w.appendChild(c); });
+    thread.appendChild(w); thread.scrollTop=thread.scrollHeight; }
+  function renderCard(card){ if(!card) return;
+    var d=document.createElement('div'); d.className='ccard'; var h='';
+    if(card.img) h+='<img class="cimg" loading="lazy" src="'+card.img+'" alt="">';
+    h+='<b>'+(card.emoji||'')+' '+esc(card.title)+'</b>';
+    if(card.bullets) h+='<ul>'+card.bullets.map(function(b){return '<li>'+esc(b)+'</li>';}).join('')+'</ul>';
+    d.innerHTML=h; thread.appendChild(d); thread.scrollTop=thread.scrollHeight; }
+  function renderDoctor(key){ var doc=DOCTORS[key]; if(!doc) return;
+    var d=document.createElement('div'); d.className='dcard';
+    d.innerHTML='<img loading="lazy" src="'+doc.img+'" alt=""><div class="di"><b>'+doc.name+'</b><span>'+doc.role+'</span><button>Meet '+doc.name.split(' ').slice(0,2).join(' ')+'</button></div>';
+    d.querySelector('button').onclick=function(){ jump(doc.target); };
+    thread.appendChild(d); thread.scrollTop=thread.scrollHeight; }
+  function renderReco(r){ if(!r) return;
+    var d=document.createElement('div'); d.className='reco'; var h='<div class="rt">Recommended for you</div>';
+    if(r.concern) h+='<div class="chk">Main concern: '+esc(r.concern)+'</div>';
+    if(r.area && r.area!=='To confirm') h+='<div class="chk">Area: '+esc(r.area)+'</div>';
+    if(r.downtime) h+='<div class="chk">Downtime: '+esc(r.downtime)+'</div>';
+    h+='<div class="star">⭐ <em>'+esc(r.treatment)+'</em></div>';
+    if(r.doctor) h+='<div class="rdoc">Suggested doctor: '+esc(r.doctor)+'</div>';
+    d.innerHTML=h; thread.appendChild(d); thread.scrollTop=thread.scrollHeight; }
+  function renderNav(key){ if(!key) return;
+    if(DOCTORS[key]){ renderDoctor(key); return; }
+    if(!NAV[key]) return;
+    var b=document.createElement('button'); b.className='navbtn'; b.innerHTML='→ View '+NAV[key][0];
+    b.onclick=function(){ jump(NAV[key][1]); }; thread.appendChild(b); thread.scrollTop=thread.scrollHeight; }
+  function renderGallery(list){ if(!list||!list.length) return;
+    var w=document.createElement('div'); w.className='cgal';
+    list.forEach(function(g){ var f=document.createElement('figure');
+      f.innerHTML='<img loading="lazy" src="'+g.img+'" alt=""><figcaption>'+esc(g.cap||'')+'</figcaption>'; w.appendChild(f); });
+    thread.appendChild(w); thread.scrollTop=thread.scrollHeight; }
+  function renderSlots(list){ if(!list||!list.length) return;
+    var w=document.createElement('div'); w.className='slots';
+    list.forEach(function(s){ var b=document.createElement('button'); b.className='slotb';
+      b.innerHTML='<span class="cal">📅</span> '+esc(s)+' <span class="free">Available</span>';
+      b.onclick=function(){ w.remove(); ask(s); }; w.appendChild(b); });
+    thread.appendChild(w); thread.scrollTop=thread.scrollHeight; }
+  function goTo(id){ var el=document.getElementById(id); if(!el) return;
+    var y=el.getBoundingClientRect().top + window.pageYOffset - 84;
+    window.scrollTo({top:y<0?0:y, behavior:'smooth'});
+    el.classList.add('flash'); setTimeout(function(){el.classList.remove('flash');},2200); }
+  // close the chat so the page section is actually visible, then scroll to it
+  function jump(id){ closeChat(); setTimeout(function(){ goTo(id); },160); }
+
+  function setV(f,val){ var el=document.querySelector('[data-f="'+f+'"]'); if(el&&val){ el.textContent=val; el.classList.remove('empty'); } }
+  function updateLead(lead){ if(!lead) return;
+    ['name','interestedIn','area','month','downtime','doctor','slot','contact'].forEach(function(f){ setV(f,lead[f]); });
+    var cel=document.getElementById('concerns');
+    if(lead.concerns&&lead.concerns.length){ cel.innerHTML='<ul class="goals">'+lead.concerns.map(function(c){return '<li>'+c+'</li>';}).join('')+'</ul>'; cel.classList.remove('empty'); }
+    if(typeof lead.leadScore==='number'){ document.getElementById('scoreNum').textContent=lead.leadScore+'/100'; document.getElementById('scoreFill').style.width=lead.leadScore+'%'; }
+    if(lead.summary){ document.getElementById('lsum').textContent=lead.summary; }
+    if(lead.nextStep){ document.getElementById('laction').textContent=lead.nextStep; }
+    if(lead.contact){ toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},3500); }
+  }
+  function toggleCV(){ document.getElementById('cvpanel').classList.toggle('open'); }
+
+  async function ask(text){ text=(text||'').trim(); if(!text) return;
+    thread.querySelectorAll('.chips').forEach(function(c){c.remove();});
+    input.value=''; bubbleEl(text,'me'); convo.push({role:'user',content:text});
+    send.disabled=true;
+    var t=document.createElement('div'); t.className='typing'; t.textContent='Aurelia is typing…';
+    thread.appendChild(t); thread.scrollTop=thread.scrollHeight;
+    try{
+      var r=await fetch('/api/maison-lumiere-chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:convo})});
+      var data=await r.json(); t.remove();
+      var reply=data.reply||data.error||"I'm sorry, something went wrong.";
+      bubbleEl(reply,'bot'); convo.push({role:'assistant',content:reply});
+      if(data.reco) renderReco(data.reco);
+      if(data.card) renderCard(data.card);
+      if(data.gallery) renderGallery(data.gallery);
+      if(data.slots) renderSlots(data.slots);
+      if(data.nav){ (Array.isArray(data.nav)?data.nav:[data.nav]).forEach(renderNav); }
+      if(data.quickReplies && data.quickReplies.length) renderChips(data.quickReplies);
+      else if(!data.slots && !/whatsapp|first name|phone number|your number|your email/i.test(reply)) renderChips(DEFAULT_CHIPS);
+      updateLead(data.lead);
+    }catch(e){ t.remove(); bubbleEl('Connection error — please try again.','bot'); }
+    send.disabled=false; input.focus();
+  }
+  send.onclick=function(){ ask(input.value); };
+  input.addEventListener('keydown',function(e){ if(e.key==='Enter') ask(input.value); });
+</script>
+</body>
+</html>

@@ -3,171 +3,364 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Maison Lumière — Dubai · Aurelia concierge</title>
+<title>Maison Lumière — Aesthetic Clinic · Dubai Marina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0E0E10; --espresso:#191410; --panel:#12100E;
-    --ivory:#F8F4EC; --card:#FFFFFF; --line:#EBE3D4;
-    --champ:#EAD9B8; --gold:#C9A24B; --gold2:#E3C77E; --mute:#8A8378;
+    --ink:#171310; --espresso:#241c14; --ivory:#FBF8F2; --cream:#F4EEE3;
+    --line:#E7DECB; --gold:#B78E42; --gold2:#D9BC7E; --mute:#8A8064; --green:#2f7d5a;
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',system-ui,-apple-system,sans-serif;
   }
   *{box-sizing:border-box;}
-  body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#211a12 0%,var(--ink) 60%);
-    font-family:Georgia,'Times New Roman',serif;color:var(--ink);
-    display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px;gap:22px;flex-wrap:wrap;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6;}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.01em;margin:0;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px;}
+  .eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:500;}
 
-  /* ---------- Chat widget ---------- */
-  .widget{width:100%;max-width:430px;background:var(--ivory);border:1px solid rgba(201,162,75,.35);
-    border-radius:24px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55);
-    display:flex;flex-direction:column;height:660px;max-height:92vh;}
-  .head{background:linear-gradient(160deg,#211a12,#0f0c09);color:var(--ivory);padding:18px 20px;position:relative;}
-  .brand{font-size:1.18rem;letter-spacing:.02em;}
-  .brand small{display:block;font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.28em;
-    text-transform:uppercase;color:var(--gold2);margin-bottom:4px;opacity:.9;}
-  .sub{display:block;font-size:.8rem;opacity:.8;margin-top:5px;font-family:system-ui,sans-serif;}
-  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#8fce9a;margin-right:7px;vertical-align:middle;
-    box-shadow:0 0 0 3px rgba(143,206,154,.18);}
-  .langs{position:absolute;top:16px;right:16px;font-family:system-ui,sans-serif;font-size:.62rem;letter-spacing:.12em;
-    color:var(--gold2);border:1px solid rgba(227,199,126,.4);border-radius:40px;padding:4px 9px;}
-  .thread{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:11px;background:var(--ivory);}
-  .msg{max-width:84%;padding:11px 15px;border-radius:16px;font-size:.98rem;line-height:1.5;
-    font-family:system-ui,-apple-system,sans-serif;white-space:pre-wrap;}
-  .bot{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:5px;color:#2a2620;}
-  .me{align-self:flex-end;background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;
-    border-bottom-right-radius:5px;font-weight:500;}
-  .typing{align-self:flex-start;color:var(--mute);font-size:.9rem;font-family:system-ui,sans-serif;font-style:italic;}
-  .chips{display:flex;flex-wrap:wrap;gap:7px;padding:2px 2px 4px;}
-  .chip{border:1px solid var(--gold);color:#5a4a1f;background:#fff;border-radius:40px;padding:8px 13px;
-    font-family:system-ui,sans-serif;font-size:.84rem;cursor:pointer;transition:.15s;}
+  /* Nav */
+  .nav{position:sticky;top:0;z-index:40;background:rgba(251,248,242,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;}
+  .logo{font-family:var(--serif);font-size:1.45rem;font-weight:600;letter-spacing:.02em;}
+  .logo small{display:block;font-family:var(--sans);font-size:.56rem;letter-spacing:.34em;text-transform:uppercase;color:var(--mute);font-weight:500;margin-top:-2px;}
+  .navlinks{display:flex;gap:26px;font-size:.86rem;letter-spacing:.02em;color:#5c5340;}
+  .navlinks a:hover{color:var(--gold);}
+  .navcta{background:var(--ink);color:var(--ivory);padding:9px 18px;border-radius:40px;font-size:.82rem;letter-spacing:.03em;}
+  @media(max-width:820px){.navlinks{display:none;}}
+
+  /* Hero */
+  .hero{position:relative;background:linear-gradient(150deg,#241c14 0%,#3a2c1d 55%,#191310 100%);color:var(--ivory);overflow:hidden;}
+  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(700px 400px at 82% 12%,rgba(217,188,126,.22),transparent 60%);pointer-events:none;}
+  .hero .wrap{position:relative;z-index:2;padding:86px 22px 96px;max-width:760px;}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.3rem);line-height:1.04;font-weight:500;}
+  .hero p{font-size:1.12rem;color:#e7dcc6;font-weight:300;max-width:540px;margin:20px 0 32px;}
+  .hero .btns{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-gold{background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;padding:13px 26px;border-radius:44px;font-weight:500;font-size:.92rem;letter-spacing:.02em;border:none;cursor:pointer;}
+  .btn-ghost{border:1px solid rgba(217,188,126,.5);color:var(--gold2);padding:13px 24px;border-radius:44px;font-size:.92rem;cursor:pointer;background:none;}
+  .trust{display:flex;gap:26px;margin-top:44px;flex-wrap:wrap;font-family:var(--sans);}
+  .trust div{font-size:.8rem;color:#cdbf9f;}
+  .trust b{display:block;font-family:var(--serif);font-size:1.7rem;color:var(--gold2);font-weight:600;}
+
+  /* Sections */
+  section{padding:74px 0;}
+  .shead{text-align:center;max-width:620px;margin:0 auto 46px;}
+  .shead h2{font-size:clamp(1.9rem,4vw,2.7rem);margin:10px 0 12px;}
+  .shead p{color:#6b6249;font-size:1.02rem;}
+
+  /* Treatment cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:20px;}
+  .tcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px;transition:.25s;position:relative;scroll-margin-top:90px;}
+  .tcard:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(120,95,40,.12);border-color:var(--gold2);}
+  .tcard.flash{box-shadow:0 0 0 3px var(--gold2),0 20px 44px rgba(120,95,40,.2);border-color:var(--gold);}
+  .tcard .em{font-size:1.5rem;}
+  .tcard h3{font-size:1.5rem;margin:12px 0 4px;}
+  .tcard .desc{font-size:.9rem;color:#6b6249;min-height:38px;}
+  .tcard ul{list-style:none;padding:0;margin:14px 0 0;font-size:.86rem;color:#4c4636;font-family:var(--sans);}
+  .tcard li{padding:5px 0 5px 22px;position:relative;}
+  .tcard li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:600;}
+  .tcard .price{margin-top:14px;font-size:.82rem;color:var(--mute);}
+
+  /* Doctors */
+  #doctors{background:var(--cream);}
+  .docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;}
+  .doc{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;text-align:center;scroll-margin-top:90px;}
+  .doc.flash{box-shadow:0 0 0 3px var(--gold2);}
+  .mono{width:74px;height:74px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:1.7rem;color:#241c07;background:linear-gradient(160deg,var(--gold2),var(--gold));font-weight:600;}
+  .doc h3{font-size:1.35rem;}
+  .doc .role{font-size:.8rem;color:var(--gold);letter-spacing:.04em;text-transform:uppercase;margin:4px 0 10px;font-family:var(--sans);}
+  .doc p{font-size:.88rem;color:#6b6249;}
+
+  /* Gallery */
+  .gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;scroll-margin-top:90px;}
+  .ba{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#fff;}
+  .ba .imgs{display:flex;height:160px;}
+  .ba .imgs div{flex:1;display:flex;align-items:flex-end;justify-content:center;padding:8px;font-family:var(--sans);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;}
+  .ba .b{background:linear-gradient(160deg,#8c7a63,#6f5f49);}
+  .ba .a{background:linear-gradient(160deg,#d9bc7e,#b78e42);}
+  .ba .cap{padding:12px 14px;font-size:.82rem;color:#6b6249;font-family:var(--sans);}
+
+  /* Reviews */
+  #reviews{background:var(--espresso);color:var(--ivory);}
+  #reviews .shead h2,#reviews .shead .eyebrow{color:var(--gold2);}
+  #reviews .shead p{color:#cdbf9f;}
+  .revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+  .rev{background:rgba(255,255,255,.05);border:1px solid rgba(217,188,126,.22);border-radius:16px;padding:24px;}
+  .rev .stars{color:var(--gold2);letter-spacing:.16em;}
+  .rev p{font-family:var(--serif);font-size:1.16rem;color:#f3ead6;margin:12px 0;}
+  .rev .who{font-family:var(--sans);font-size:.82rem;color:#bdae8d;}
+
+  /* Contact */
+  #contact{text-align:center;}
+  .cta-box{background:linear-gradient(150deg,#241c14,#3a2c1d);color:var(--ivory);border-radius:26px;padding:56px 28px;max-width:760px;margin:0 auto;}
+  .cta-box h2{font-size:2.2rem;color:var(--gold2);}
+  .cta-box p{color:#e7dcc6;max-width:480px;margin:14px auto 26px;}
+
+  footer{padding:34px 0;text-align:center;font-size:.78rem;color:var(--mute);font-family:var(--sans);border-top:1px solid var(--line);}
+  footer a{color:var(--gold);}
+
+  /* ---------- Aurelia widget ---------- */
+  .bubble{position:fixed;bottom:22px;right:22px;z-index:60;width:60px;height:60px;border-radius:50%;cursor:pointer;
+    background:linear-gradient(160deg,var(--gold2),var(--gold));display:flex;align-items:center;justify-content:center;
+    box-shadow:0 12px 32px rgba(120,95,40,.45);border:none;}
+  .bubble span{font-family:var(--serif);font-size:1.7rem;color:#241c07;font-weight:600;}
+  .bubble .ping{position:absolute;top:-3px;right:-3px;width:15px;height:15px;border-radius:50%;background:var(--green);border:2px solid var(--ivory);}
+
+  .panel{position:fixed;bottom:22px;right:22px;z-index:61;width:390px;max-width:calc(100vw - 28px);height:600px;max-height:calc(100vh - 44px);
+    background:var(--ivory);border:1px solid rgba(183,142,66,.35);border-radius:22px;overflow:hidden;
+    box-shadow:0 26px 70px rgba(0,0,0,.34);display:none;flex-direction:column;}
+  .panel.open{display:flex;}
+  .phead{background:linear-gradient(160deg,#241c14,#171310);color:var(--ivory);padding:15px 18px;display:flex;align-items:center;gap:11px;position:relative;}
+  .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(160deg,var(--gold2),var(--gold));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.25rem;color:#241c07;font-weight:600;flex:none;}
+  .phead b{font-size:.98rem;}
+  .phead small{display:block;font-size:.72rem;color:#c9b795;}
+  .phead .lang{position:absolute;top:12px;right:40px;font-size:.58rem;letter-spacing:.12em;color:var(--gold2);border:1px solid rgba(217,188,126,.4);border-radius:30px;padding:3px 7px;}
+  .phead .x{position:absolute;top:14px;right:14px;cursor:pointer;color:#c9b795;font-size:1.1rem;line-height:1;background:none;border:none;}
+  .thread{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--cream);}
+  .msg{max-width:86%;padding:10px 14px;border-radius:15px;font-size:.93rem;line-height:1.5;white-space:pre-wrap;}
+  .bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;color:#2c2619;}
+  .me{align-self:flex-end;background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;border-bottom-right-radius:4px;font-weight:400;}
+  .typing{align-self:flex-start;color:var(--mute);font-size:.86rem;font-style:italic;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{border:1px solid var(--gold);color:#5a4a1f;background:#fff;border-radius:36px;padding:8px 13px;font-size:.83rem;cursor:pointer;transition:.15s;}
   .chip:hover{background:var(--gold);color:#fff;}
-  .bar{display:flex;gap:8px;padding:12px;background:#fff;border-top:1px solid var(--line);}
-  .bar input{flex:1;border:1px solid var(--champ);border-radius:50px;padding:12px 16px;font-size:.95rem;
-    outline:none;font-family:system-ui,sans-serif;color:var(--ink);}
-  .bar button{border:none;background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;
-    border-radius:50px;padding:0 20px;cursor:pointer;font-size:1.05rem;}
-  .bar button:disabled{opacity:.5;cursor:default;}
-  .foot{text-align:center;font-size:.7rem;color:var(--mute);padding:8px;font-family:system-ui,sans-serif;background:#fff;}
-  .foot a{color:var(--gold);text-decoration:none;}
+  .navbtn{align-self:flex-start;background:#241c14;color:var(--gold2);border:1px solid var(--gold);border-radius:12px;padding:9px 15px;
+    font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
+  .navbtn:hover{background:var(--gold);color:#241c07;}
+  .ccard{align-self:flex-start;background:#fff;border:1px solid var(--gold2);border-radius:14px;padding:14px 16px;max-width:88%;}
+  .ccard b{font-family:var(--serif);font-size:1.15rem;}
+  .ccard ul{list-style:none;margin:8px 0 0;padding:0;font-size:.83rem;color:#4c4636;}
+  .ccard li{padding:3px 0 3px 18px;position:relative;}
+  .ccard li::before{content:"✓";position:absolute;left:0;color:var(--gold);}
+  .bar{display:flex;gap:8px;padding:11px;background:#fff;border-top:1px solid var(--line);}
+  .bar input{flex:1;border:1px solid var(--gold2);border-radius:44px;padding:11px 15px;font-size:.92rem;outline:none;color:var(--ink);}
+  .bar button{border:none;background:linear-gradient(160deg,var(--gold2),var(--gold));color:#241c07;border-radius:44px;padding:0 18px;cursor:pointer;font-size:1rem;}
+  .pfoot{text-align:center;font-size:.66rem;color:var(--mute);padding:6px;background:#fff;}
+  .pfoot a{color:var(--gold);}
 
-  /* ---------- Team dashboard (the closer) ---------- */
-  .team{width:100%;max-width:340px;align-self:center;}
-  .teamCard{background:linear-gradient(165deg,#17130e,#0d0b08);border:1px solid rgba(201,162,75,.3);
-    border-radius:22px;padding:0;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5);color:var(--ivory);
-    opacity:.4;transition:opacity .5s;}
-  .teamCard.live{opacity:1;}
-  .teamTop{background:#0a0806;padding:14px 18px;display:flex;align-items:center;gap:9px;
-    font-family:system-ui,sans-serif;border-bottom:1px solid rgba(201,162,75,.18);}
-  .waIcon{width:26px;height:26px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;
-    font-size:.9rem;flex:none;}
-  .teamTop b{font-size:.82rem;letter-spacing:.02em;}
-  .teamTop small{display:block;color:var(--gold2);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;}
-  .leadTag{margin:16px 18px 6px;font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.22em;
-    text-transform:uppercase;color:var(--gold2);}
-  .leadTag .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#8fce9a;margin-right:6px;}
-  .rows{padding:4px 18px 8px;font-family:system-ui,sans-serif;}
-  .row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);
-    font-size:.88rem;}
-  .row .k{color:var(--mute);}
-  .row .v{color:var(--ivory);text-align:right;font-weight:500;}
-  .row .v.empty{color:#4a453d;font-weight:400;font-style:italic;}
-  .action{margin:12px 18px 18px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.35);
-    border-radius:12px;padding:12px 14px;font-family:system-ui,sans-serif;}
-  .action b{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:#8fce9a;display:block;margin-bottom:5px;}
-  .action span{font-size:.9rem;color:var(--ivory);}
-  .teamHint{text-align:center;color:var(--mute);font-family:system-ui,sans-serif;font-size:.72rem;margin-top:12px;
-    line-height:1.5;}
-  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(30px);opacity:0;
-    background:#0a0806;color:var(--ivory);border:1px solid rgba(37,211,102,.5);border-radius:40px;
-    padding:11px 20px;font-family:system-ui,sans-serif;font-size:.85rem;transition:.4s;pointer-events:none;z-index:50;}
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-  @media(max-width:920px){.team{max-width:430px;}}
+  /* Clinic view (WhatsApp lead card) */
+  .cvtoggle{position:fixed;top:80px;right:22px;z-index:55;background:#0a0806;color:var(--gold2);border:1px solid var(--gold);
+    border-radius:40px;padding:8px 15px;font-size:.78rem;font-family:var(--sans);cursor:pointer;display:flex;align-items:center;gap:7px;}
+  .cvpanel{position:fixed;top:0;right:-360px;width:340px;max-width:88vw;height:100vh;z-index:70;background:linear-gradient(165deg,#17130e,#0b0906);
+    color:var(--ivory);box-shadow:-20px 0 60px rgba(0,0,0,.5);transition:right .35s;overflow-y:auto;padding:0;}
+  .cvpanel.open{right:0;}
+  .cvhead{background:#0a0806;padding:16px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(183,142,66,.2);}
+  .wa{width:30px;height:30px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:.95rem;}
+  .cvhead b{font-size:.85rem;}.cvhead small{display:block;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);}
+  .cvhead .x{margin-left:auto;background:none;border:none;color:#c9b795;font-size:1.2rem;cursor:pointer;}
+  .cvtag{margin:16px 18px 4px;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);}
+  .cvtag .d{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px;}
+  .lrows{padding:6px 18px;}
+  .lrow{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+  .lrow .k{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);}
+  .lrow .v{font-size:.94rem;color:var(--ivory);margin-top:2px;}
+  .lrow .v.empty{color:#4a453d;font-style:italic;}
+  .lrow ul{margin:5px 0 0;padding-left:16px;font-size:.86rem;color:#e7dcc6;}
+  .badge{display:inline-block;padding:2px 10px;border-radius:30px;font-size:.78rem;font-weight:500;}
+  .badge.high{background:rgba(47,125,90,.25);color:#7fe0ad;border:1px solid rgba(47,125,90,.5);}
+  .badge.med{background:rgba(183,142,66,.2);color:var(--gold2);border:1px solid rgba(183,142,66,.5);}
+  .lsum{margin:12px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(183,142,66,.2);border-radius:12px;padding:12px 14px;font-size:.86rem;color:#e7dcc6;font-style:italic;}
+  .laction{margin:0 18px 20px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.35);border-radius:12px;padding:12px 14px;}
+  .laction b{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#7fe0ad;display:block;margin-bottom:4px;}
+  .toast{position:fixed;bottom:96px;right:22px;z-index:80;background:#0a0806;color:var(--ivory);border:1px solid rgba(37,211,102,.5);
+    border-radius:40px;padding:11px 18px;font-size:.84rem;font-family:var(--sans);opacity:0;transform:translateY(12px);transition:.35s;pointer-events:none;}
+  .toast.show{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
 
-  <!-- CHAT -->
-  <div class="widget">
-    <div class="head">
-      <div class="langs">EN · AR · RU</div>
-      <div class="brand"><small>Dubai · Marina</small>Maison Lumière</div>
-      <span class="sub"><span class="dot"></span>Aurelia — your aesthetic concierge · online 24/7</span>
-    </div>
-    <div class="thread" id="thread"></div>
-    <div class="bar">
-      <input id="input" type="text" placeholder="Ask Aurelia anything…" autocomplete="off">
-      <button id="send">➤</button>
-    </div>
-    <div class="foot">Aesthetic concierge by <a href="https://florynepierson.com" target="_blank">florynepierson.com</a></div>
-  </div>
+<!-- NAV -->
+<div class="nav"><div class="wrap">
+  <a href="#home" class="logo">Maison Lumière<small>Aesthetic Clinic · Dubai</small></a>
+  <nav class="navlinks">
+    <a href="#treatments">Treatments</a><a href="#doctors">Doctors</a>
+    <a href="#gallery">Results</a><a href="#reviews">Patients</a><a href="#contact">Contact</a>
+  </nav>
+  <a href="#contact" class="navcta">Book a consultation</a>
+</div></div>
 
-  <!-- TEAM DASHBOARD -->
-  <div class="team">
-    <div class="teamCard" id="teamCard">
-      <div class="teamTop">
-        <div class="waIcon">✓</div>
-        <div><b>Maison Lumière — Front Desk</b><small>WhatsApp Business</small></div>
-      </div>
-      <div class="leadTag"><span class="live-dot"></span>New qualified lead</div>
-      <div class="rows" id="rows">
-        <div class="row"><span class="k">Name</span><span class="v empty" data-f="name">—</span></div>
-        <div class="row"><span class="k">Language</span><span class="v empty" data-f="language">—</span></div>
-        <div class="row"><span class="k">Treatment</span><span class="v empty" data-f="treatment">—</span></div>
-        <div class="row"><span class="k">Location</span><span class="v empty" data-f="location">—</span></div>
-        <div class="row"><span class="k">Travel dates</span><span class="v empty" data-f="dates">—</span></div>
-        <div class="row"><span class="k">Budget</span><span class="v empty" data-f="budget">—</span></div>
-        <div class="row"><span class="k">Urgency</span><span class="v empty" data-f="urgency">—</span></div>
-        <div class="row"><span class="k">Contact</span><span class="v empty" data-f="contact">—</span></div>
-      </div>
-      <div class="action">
-        <b>Recommended action</b>
-        <span id="action">Waiting for a visitor to start a conversation…</span>
-      </div>
-    </div>
-    <div class="teamHint">↑ This is what your team receives on WhatsApp.<br>Every website visitor becomes a booking-ready lead — 24/7.</div>
+<!-- HERO -->
+<header class="hero" id="home"><div class="wrap">
+  <span class="eyebrow">Dubai Marina · Est. 2014</span>
+  <h1>Refined, natural aesthetic medicine.</h1>
+  <p>A private clinic where board-certified doctors deliver subtle, elegant results — and where every question is answered before you ever walk in.</p>
+  <div class="btns">
+    <button class="btn-gold" onclick="openChat('I would like to book a consultation')">Book a consultation</button>
+    <button class="btn-ghost" onclick="openChat()">Chat with Aurelia</button>
   </div>
+  <div class="trust">
+    <div><b>11k+</b>treatments performed</div>
+    <div><b>4.9★</b>patient rating</div>
+    <div><b>EN·AR·RU</b>spoken at the clinic</div>
+  </div>
+</div></header>
 
-  <div class="toast" id="toast">✓ Qualified lead sent to your team’s WhatsApp</div>
+<!-- TREATMENTS -->
+<section id="treatments"><div class="wrap">
+  <div class="shead"><span class="eyebrow">What we do</span><h2>Signature treatments</h2>
+    <p>Doctor-led, minimally invasive, designed around a natural result.</p></div>
+  <div class="cards">
+    <div class="tcard" id="botox"><div class="em">💉</div><h3>Botox & Wrinkle Relaxers</h3>
+      <div class="desc">Softens expression lines around the forehead, brows and eyes.</div>
+      <ul><li>15–20 minutes</li><li>No downtime</li><li>Results in 3–7 days</li><li>Lasts 3–4 months</li></ul>
+      <div class="price">Personalised at consultation</div></div>
+    <div class="tcard" id="fillers"><div class="em">💋</div><h3>Dermal Fillers</h3>
+      <div class="desc">Restores volume and definition to lips, cheeks and jawline.</div>
+      <ul><li>30–45 minutes</li><li>Immediate result</li><li>Hyaluronic acid</li><li>Lasts 9–18 months</li></ul>
+      <div class="price">Personalised at consultation</div></div>
+    <div class="tcard" id="skin"><div class="em">✨</div><h3>Skin & Hydrafacial</h3>
+      <div class="desc">Laser, peels and rejuvenation for tone, texture and glow.</div>
+      <ul><li>45 minutes</li><li>Instant glow</li><li>No recovery</li><li>Course recommended</li></ul>
+      <div class="price">Personalised at consultation</div></div>
+    <div class="tcard" id="laser"><div class="em">🔥</div><h3>Laser Treatments</h3>
+      <div class="desc">Pigmentation, resurfacing and hair removal by medical laser.</div>
+      <ul><li>Tailored sessions</li><li>Medical-grade devices</li><li>All skin types</li><li>Doctor-supervised</li></ul>
+      <div class="price">Personalised at consultation</div></div>
+  </div>
+</div></section>
+
+<!-- DOCTORS -->
+<section id="doctors"><div class="wrap">
+  <div class="shead"><span class="eyebrow">Your team</span><h2>Meet our doctors</h2>
+    <p>Every treatment is performed by a board-certified physician.</p></div>
+  <div class="docs">
+    <div class="doc" id="doc-sarah"><div class="mono">SL</div><h3>Dr. Sarah Lawson</h3>
+      <div class="role">Injectables · Natural results</div>
+      <p>15 years in aesthetic medicine, known for undetectable Botox and lip work. Speaks English & Arabic.</p></div>
+    <div class="doc" id="doc-amir"><div class="mono">AK</div><h3>Dr. Amir Karimi</h3>
+      <div class="role">Laser · Skin & surgery</div>
+      <p>Specialist in skin resurfacing, laser and facial rejuvenation. Speaks English, Arabic & Russian.</p></div>
+    <div class="doc"><div class="mono">EN</div><h3>Dr. Elena Novak</h3>
+      <div class="role">Regenerative aesthetics</div>
+      <p>Focus on skin boosters, biostimulators and long-term skin health. Speaks English & Russian.</p></div>
+  </div>
+</div></section>
+
+<!-- GALLERY -->
+<section id="gallery-sec"><div class="wrap">
+  <div class="shead"><span class="eyebrow">Real results</span><h2>Before &amp; after</h2>
+    <p>Subtle, natural outcomes — never overdone.</p></div>
+  <div class="gal" id="gallery">
+    <div class="ba"><div class="imgs"><div class="b">Before</div><div class="a">After</div></div><div class="cap">Botox · forehead & frown lines</div></div>
+    <div class="ba"><div class="imgs"><div class="b">Before</div><div class="a">After</div></div><div class="cap">Lip filler · natural enhancement</div></div>
+    <div class="ba"><div class="imgs"><div class="b">Before</div><div class="a">After</div></div><div class="cap">Hydrafacial · glow & texture</div></div>
+    <div class="ba"><div class="imgs"><div class="b">Before</div><div class="a">After</div></div><div class="cap">Laser · pigmentation</div></div>
+  </div>
+</div></section>
+
+<!-- REVIEWS -->
+<section id="reviews"><div class="wrap">
+  <div class="shead"><span class="eyebrow">Patient stories</span><h2>Trusted across Dubai</h2></div>
+  <div class="revs">
+    <div class="rev"><div class="stars">★★★★★</div><p>“Natural, never frozen. Dr. Sarah understood exactly the look I wanted.”</p><div class="who">— Layla, Dubai Marina</div></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>“I flew in from London. Everything was arranged before I arrived — seamless.”</p><div class="who">— Emma, United Kingdom</div></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>“The most professional clinic I've been to. My questions were answered instantly.”</p><div class="who">— Anastasia, Downtown</div></div>
+  </div>
+</div></section>
+
+<!-- CONTACT -->
+<section id="contact"><div class="wrap">
+  <div class="cta-box">
+    <span class="eyebrow" style="color:var(--gold2)">Book</span>
+    <h2>Your consultation, arranged in minutes</h2>
+    <p>Ask Aurelia anything — treatments, safety, pricing — and she'll arrange a complimentary consultation with the right doctor.</p>
+    <button class="btn-gold" onclick="openChat()">Chat with Aurelia</button>
+  </div>
+</div></section>
+
+<footer>Maison Lumière · Dubai Marina, UAE · +971 4 000 0000 &nbsp;·&nbsp; Demo experience by <a href="https://florynepierson.com" target="_blank">florynepierson.com</a></footer>
+
+<!-- AURELIA WIDGET -->
+<button class="bubble" id="bubble" onclick="openChat()"><span>A</span><i class="ping"></i></button>
+<div class="panel" id="panel">
+  <div class="phead">
+    <div class="avatar">A</div>
+    <div><b>Aurelia</b><small>Patient concierge · online</small></div>
+    <span class="lang">EN·AR·RU</span>
+    <button class="x" onclick="closeChat()">✕</button>
+  </div>
+  <div class="thread" id="thread"></div>
+  <div class="bar"><input id="input" type="text" placeholder="Ask a question…" autocomplete="off"><button id="send">➤</button></div>
+  <div class="pfoot">Aesthetic concierge by <a href="https://florynepierson.com" target="_blank">florynepierson.com</a></div>
+</div>
+
+<!-- CLINIC VIEW (WhatsApp lead the team receives) -->
+<button class="cvtoggle" onclick="toggleCV()">👁 Clinic view</button>
+<div class="cvpanel" id="cvpanel">
+  <div class="cvhead"><div class="wa">✓</div><div><b>Maison Lumière — Front Desk</b><small>WhatsApp Business</small></div><button class="x" onclick="toggleCV()">✕</button></div>
+  <div class="cvtag"><span class="d"></span>New qualified patient</div>
+  <div class="lrows">
+    <div class="lrow"><div class="k">Name</div><div class="v empty" data-f="name">—</div></div>
+    <div class="lrow"><div class="k">Interested in</div><div class="v empty" data-f="interestedIn">—</div></div>
+    <div class="lrow"><div class="k">Goal</div><div class="v empty" data-f="goal">—</div></div>
+    <div class="lrow"><div class="k">Location</div><div class="v empty" data-f="location">—</div></div>
+    <div class="lrow"><div class="k">Preferred timing</div><div class="v empty" data-f="month">—</div></div>
+    <div class="lrow"><div class="k">Concerns discussed</div><div class="v empty" data-f="concerns" id="concerns">—</div></div>
+    <div class="lrow"><div class="k">Likelihood to book</div><div class="v empty" data-f="likelihood">—</div></div>
+    <div class="lrow"><div class="k">Recommended</div><div class="v empty" data-f="recommended">—</div></div>
+    <div class="lrow"><div class="k">WhatsApp</div><div class="v empty" data-f="contact">—</div></div>
+  </div>
+  <div class="lsum" id="lsum">The summary your coordinator reads in 5 seconds will appear here.</div>
+  <div class="laction"><b>Recommended action</b><span data-f="action" id="laction">Waiting for a conversation…</span></div>
+</div>
+
+<div class="toast" id="toast">✓ Qualified patient sent to the clinic's WhatsApp</div>
 
 <script>
-  var GREETING = "Welcome to Maison Lumière. I'm Aurelia, your personal aesthetic concierge.\n\nI can help you explore treatments, answer your questions, and arrange your private consultation — 24/7, in English, Arabic or Russian.\n\nHow may I assist you today?";
-  var WELCOME_CHIPS = ["Botox & Fillers","Skin Treatments","Body Contouring","Cosmetic Surgery","Book a Consultation"];
+  var GREETING = "Hello, I'm Aurelia — the patient concierge at Maison Lumière.\nI can explain any treatment, answer medical questions, and help you find the right option with the right doctor.\n\nWhat would you like to explore?";
+  var WELCOME_CHIPS = ["💉 Botox","💋 Fillers","✨ Skin & glow","🔥 Laser","❓ Ask a question","📅 Book a consultation"];
+  var NAV = {botox:["Botox treatment","botox"],fillers:["our fillers","fillers"],skin:["skin treatments","skin"],
+    laser:["laser treatments","laser"],doctors:["our doctors","doctors"],sarah:["Dr. Sarah","doc-sarah"],
+    gallery:["before & after results","gallery"],pricing:["our treatments","treatments"],book:["consultation booking","contact"]};
 
   var thread=document.getElementById('thread'), input=document.getElementById('input'), send=document.getElementById('send');
-  var teamCard=document.getElementById('teamCard'), toast=document.getElementById('toast');
-  var convo=[];
+  var panel=document.getElementById('panel'), bubble=document.getElementById('bubble'), toast=document.getElementById('toast');
+  var convo=[], started=false;
 
-  function bubble(text,who){
-    var d=document.createElement('div'); d.className='msg '+(who==='me'?'me':'bot');
-    d.textContent=text; thread.appendChild(d); thread.scrollTop=thread.scrollHeight; return d;
+  function openChat(seed){ panel.classList.add('open'); bubble.style.display='none';
+    if(!started){ started=true; bubbleEl(GREETING,'bot'); renderChips(WELCOME_CHIPS); }
+    if(seed) ask(seed); else input.focus();
   }
-  function renderChips(list){
-    if(!list||!list.length) return;
-    var wrap=document.createElement('div'); wrap.className='chips';
-    list.forEach(function(label){
-      var c=document.createElement('button'); c.className='chip'; c.textContent=label;
-      c.onclick=function(){ wrap.remove(); ask(label); };
-      wrap.appendChild(c);
-    });
-    thread.appendChild(wrap); thread.scrollTop=thread.scrollHeight;
-  }
-  function updateLead(lead){
-    if(!lead) return;
-    teamCard.classList.add('live');
-    Object.keys(lead).forEach(function(f){
-      if(f==='action') return;
-      var el=document.querySelector('[data-f="'+f+'"]');
-      if(el && lead[f]){ el.textContent=lead[f]; el.classList.remove('empty'); }
-    });
-    if(lead.action){ document.getElementById('action').textContent=lead.action; }
-    if(lead.contact){ toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},3200); }
-  }
+  function closeChat(){ panel.classList.remove('open'); bubble.style.display='flex'; }
 
-  bubble(GREETING,'bot');
-  renderChips(WELCOME_CHIPS);
+  function bubbleEl(text,who){ var d=document.createElement('div'); d.className='msg '+(who==='me'?'me':'bot');
+    d.textContent=text; thread.appendChild(d); thread.scrollTop=thread.scrollHeight; return d; }
+  function renderChips(list){ if(!list||!list.length) return;
+    var w=document.createElement('div'); w.className='chips';
+    list.forEach(function(l){ var c=document.createElement('button'); c.className='chip'; c.textContent=l;
+      c.onclick=function(){ w.remove(); ask(l.replace(/^[^\w]+/,'').trim()); }; w.appendChild(c); });
+    thread.appendChild(w); thread.scrollTop=thread.scrollHeight; }
+  function renderCard(card){ if(!card) return;
+    var d=document.createElement('div'); d.className='ccard';
+    var h='<b>'+(card.emoji||'')+' '+card.title+'</b>'; if(card.bullets) h+='<ul>'+card.bullets.map(function(b){return '<li>'+b+'</li>';}).join('')+'</ul>';
+    d.innerHTML=h; thread.appendChild(d); thread.scrollTop=thread.scrollHeight; }
+  function renderNav(key){ if(!key||!NAV[key]) return;
+    var label=NAV[key][0], target=NAV[key][1];
+    var b=document.createElement('button'); b.className='navbtn'; b.innerHTML='→ View '+label;
+    b.onclick=function(){ goTo(target); }; thread.appendChild(b); thread.scrollTop=thread.scrollHeight; }
+  function goTo(id){ var el=document.getElementById(id); if(!el) return;
+    el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('flash');
+    setTimeout(function(){el.classList.remove('flash');},2200); }
 
-  async function ask(text){
-    text=(text||'').trim(); if(!text) return;
-    var open=thread.querySelectorAll('.chips'); open.forEach(function(c){c.remove();});
-    input.value=''; bubble(text,'me'); convo.push({role:'user',content:text});
+  function setV(f,val){ var el=document.querySelector('[data-f="'+f+'"]'); if(el&&val){ el.textContent=val; el.classList.remove('empty'); } }
+  function updateLead(lead){ if(!lead) return;
+    ['name','interestedIn','goal','location','month','likelihood','recommended','contact'].forEach(function(f){ setV(f,lead[f]); });
+    var cel=document.getElementById('concerns');
+    if(lead.concerns&&lead.concerns.length){ cel.innerHTML='<ul>'+lead.concerns.map(function(c){return '<li>'+c+'</li>';}).join('')+'</ul>'; cel.classList.remove('empty'); }
+    var lk=document.querySelector('[data-f="likelihood"]');
+    if(lead.likelihood){ lk.innerHTML='<span class="badge '+(/high/i.test(lead.likelihood)?'high':'med')+'">'+lead.likelihood+'</span>'; }
+    if(lead.summary){ document.getElementById('lsum').textContent=lead.summary; }
+    if(lead.action){ document.getElementById('laction').textContent=lead.action; }
+    if(lead.contact){ toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},3500); }
+  }
+  function toggleCV(){ document.getElementById('cvpanel').classList.toggle('open'); }
+
+  async function ask(text){ text=(text||'').trim(); if(!text) return;
+    thread.querySelectorAll('.chips').forEach(function(c){c.remove();});
+    input.value=''; bubbleEl(text,'me'); convo.push({role:'user',content:text});
     send.disabled=true;
     var t=document.createElement('div'); t.className='typing'; t.textContent='Aurelia is typing…';
     thread.appendChild(t); thread.scrollTop=thread.scrollHeight;
@@ -175,10 +368,12 @@
       var r=await fetch('/api/aurelia-clinic-chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:convo})});
       var data=await r.json(); t.remove();
       var reply=data.reply||data.error||"I'm sorry, something went wrong.";
-      bubble(reply,'bot'); convo.push({role:'assistant',content:reply});
+      bubbleEl(reply,'bot'); convo.push({role:'assistant',content:reply});
+      if(data.card) renderCard(data.card);
+      if(data.nav) renderNav(data.nav);
       renderChips(data.quickReplies);
       updateLead(data.lead);
-    }catch(e){ t.remove(); bubble('Connection error — please try again.','bot'); }
+    }catch(e){ t.remove(); bubbleEl('Connection error — please try again.','bot'); }
     send.disabled=false; input.focus();
   }
   send.onclick=function(){ ask(input.value); };

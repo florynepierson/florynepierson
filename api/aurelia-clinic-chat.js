@@ -36,8 +36,11 @@ const SYSTEM = `You are Aurelia, the senior patient concierge for Maison Lumièr
 - Refined, warm, concise — max 3–4 sentences. At most ONE emoji, usually none. Avoid gushing words like "wonderful", "lovely", "beautifully".
 - Reply in the visitor's language (English, Arabic or Russian).
 
+## Quick replies (ALWAYS include)
+End EVERY message with 2–4 short tappable suggestions so the visitor can click instead of typing (they may still type freely). Put them as ONE tag on its own line: [[chips: Option one | Option two | Option three]]. Each option under ~4 words, relevant to what you just asked or said — e.g. the answer choices to your question, "Book a consultation", "Ask another question", "Is it safe?". The only time to omit them is the final step where you ask for their first name and WhatsApp number (they must type that).
+
 ## Site navigation
-To guide the visitor to the right part of the website, you MAY end a message with ONE tag on its own line: [[nav:X]] where X is one of: botox, fillers, skin, laser, doctors, sarah, gallery, book. Use it when you recommend a treatment, a doctor, results, or booking — the interface turns it into a button. Only one tag, only at the very end.`;
+To guide the visitor to the right part of the website, you MAY also end a message with a tag: [[nav:X]] where X is one of: botox, fillers, skin, laser, doctors, sarah, gallery, book. Use it when you recommend a treatment, a doctor, results, or booking — the interface turns it into a button.`;
 
 // ---------- shared detectors ----------
 const SURG = ["surgery","surgical","rhino","nose","facelift","lipo","liposuction"];
@@ -174,25 +177,25 @@ function demoReply(messages){
   const L = () => buildLead(messages);
 
   // Final capture
-  if(contact) return { reply:"Thank you — that's everything the coordinator needs. They'll message you on WhatsApp shortly with two or three consultation times to choose from. We look forward to caring for you at Maison Lumière.", lead:L() };
+  if(contact) return { reply:"Thank you — that's everything the coordinator needs. They'll message you on WhatsApp shortly with two or three consultation times to choose from. We look forward to caring for you at Maison Lumière.", quickReplies:["Ask another question","Our location & hours"], lead:L() };
 
   // ---- Medical / knowledge questions (this is where the clinic sees real value) ----
   if(has("dysport") || (has("difference","vs","versus","compare") && all.includes("botox")))
-    return { reply:"Both relax the muscles behind expression lines and share the same active family (botulinum toxin). Dysport tends to diffuse a little more, which can suit broader areas like the forehead, while Botox is often preferred for precise areas such as frown lines. Our doctors select whichever fits your anatomy and goal best.", lead:L() };
+    return { reply:"Both relax the muscles behind expression lines and share the same active family (botulinum toxin). Dysport tends to diffuse a little more, which can suit broader areas like the forehead, while Botox is often preferred for precise areas such as frown lines. Our doctors select whichever fits your anatomy and goal best.", quickReplies:["Is it safe?","Which doctor?","Book a consultation"], lead:L() };
   if(has("exercise","gym","workout","sport","run ") )
-    return { reply:"We ask you to avoid intense exercise for 24 hours after Botox, so the product settles exactly where it's placed. Light walking and normal daily activity are perfectly fine.", lead:L() };
+    return { reply:"We ask you to avoid intense exercise for 24 hours after Botox, so the product settles exactly where it's placed. Light walking and normal daily activity are perfectly fine.", quickReplies:["Any downtime?","Does it hurt?","Book a consultation"], lead:L() };
   if(has("pregnan","breastfeed","breast feeding","nursing","expecting"))
-    return { reply:"As a precaution, Botox and fillers aren't recommended during pregnancy or breastfeeding. Our doctors would gladly suggest safe skincare in the meantime and revisit treatment afterwards — it's something we'd confirm with you at consultation.", lead:L() };
+    return { reply:"As a precaution, Botox and fillers aren't recommended during pregnancy or breastfeeding. Our doctors would gladly suggest safe skincare in the meantime and revisit treatment afterwards — it's something we'd confirm with you at consultation.", quickReplies:["Safe skincare options","Ask another question","Book a consultation"], lead:L() };
   if(has("pain","hurt","painful","does it hurt"))
-    return { reply:"Most patients describe it as a quick pinch. We use very fine needles and can apply numbing cream for comfort, so it's well tolerated.", lead:L() };
+    return { reply:"Most patients describe it as a quick pinch. We use very fine needles and can apply numbing cream for comfort, so it's well tolerated.", quickReplies:["Any downtime?","Is it safe?","Book a consultation"], lead:L() };
   if(has("safe","danger","risk","side effect","side-effect"))
-    return { reply:"When performed by an experienced doctor it's very safe — temporary redness or a small bruise is the most common effect. Every treatment here is doctor-led, and we review your history first to make sure it's suitable for you.", lead:L() };
+    return { reply:"When performed by an experienced doctor it's very safe — temporary redness or a small bruise is the most common effect. Every treatment here is doctor-led, and we review your history first to make sure it's suitable for you.", quickReplies:["Which doctor?","How long does it last?","Book a consultation"], lead:L() };
   if(has("how long","last","longevity","permanent","wear off"))
-    return { reply:"Botox results appear within 3–7 days and typically last 3–4 months; with regular treatment many patients find the effect lasts a little longer over time. Fillers last considerably longer — usually 9–18 months.", lead:L() };
+    return { reply:"Botox results appear within 3–7 days and typically last 3–4 months; with regular treatment many patients find the effect lasts a little longer over time. Fillers last considerably longer — usually 9–18 months.", quickReplies:["Any downtime?","Is it safe?","Book a consultation"], lead:L() };
   if(has("which doctor","best doctor","recommend a doctor","who does","natural result","natural results"))
-    return { reply:"For very natural, undetectable results, patients are most often matched with Dr. Sarah Lawson, who's known for her light, refined approach to injectables.", nav:"sarah", lead:L() };
+    return { reply:"For very natural, undetectable results, patients are most often matched with Dr. Sarah Lawson, who's known for her light, refined approach to injectables.", nav:"sarah", quickReplies:["Book with Dr. Sarah","See before & after","Ask another question"], lead:L() };
   if(has("downtime","recovery","time off","back to work"))
-    return { reply:"There's no downtime with Botox — you can return to work or dinner the same day. We simply ask you to avoid intense heat, exercise and lying flat for a few hours.", lead:L() };
+    return { reply:"There's no downtime with Botox — you can return to work or dinner the same day. We simply ask you to avoid intense heat, exercise and lying flat for a few hours.", quickReplies:["Does it hurt?","How long does it last?","Book a consultation"], lead:L() };
 
   // ---- Budget: reframe, never push ----
   if(has("price","pricing","how much","cost","budget","expensive","cheap","range","regardless")){
@@ -254,6 +257,12 @@ function demoReply(messages){
     return { reply:"A quick assessment lets the doctor set the right number of sessions for your skin. I can arrange a complimentary one — may I have your first name and WhatsApp number?", lead:L() };
   }
 
+  // ---- Info shortcuts ----
+  if(has("before & after","before and after","gallery","see results","photos","see before"))
+    return { reply:"Here are examples of our work — natural, doctor-led results that are subtle and never overdone. Would you like to arrange a consultation to discuss your own goals?", nav:"gallery", quickReplies:["Book a consultation","Which doctor?","Ask a question"], lead:L() };
+  if(has("location","hours","where are you","address","open","opening","directions"))
+    return { reply:"We're in Dubai Marina, open Monday to Saturday, with private consultations by appointment. I can have a coordinator send you the exact address and available times on WhatsApp — shall I?", quickReplies:["Yes, book me in","Ask a question"], lead:L() };
+
   // ---- Booking / doctors (only when no treatment context is active) ----
   if(has("book","consultation","appointment","reserve","rendez"))
     return { reply:"With pleasure — consultations are complimentary and private. To help the doctor prepare, which treatment is it about? I'll then arrange a time.",
@@ -293,11 +302,16 @@ module.exports = async function handler(req, res) {
     const data = await ar.json();
     if (!ar.ok) return res.status(500).json({ error: (data && data.error && data.error.message) || 'api error' });
     let reply = (data.content && data.content[0] && data.content[0].text) || '…';
-    // parse a trailing [[nav:X]] tag the model may add to guide the visitor
-    let nav;
-    const m = reply.match(/\[\[nav:\s*([a-z]+)\s*\]\]/i);
-    if (m) { nav = m[1].toLowerCase(); reply = reply.replace(m[0], '').trim(); }
-    return res.status(200).json({ reply: reply.trim(), nav, lead: buildLead(messages) });
+    // parse tags the model may append: [[nav:X]] and [[chips: A | B | C]]
+    let nav, quickReplies;
+    const nm = reply.match(/\[\[nav:\s*([a-z]+)\s*\]\]/i);
+    if (nm) { nav = nm[1].toLowerCase(); reply = reply.replace(nm[0], ''); }
+    const cm = reply.match(/\[\[chips:\s*([^\]]+)\]\]/i);
+    if (cm) {
+      quickReplies = cm[1].split('|').map(s => s.trim()).filter(Boolean).slice(0, 4);
+      reply = reply.replace(cm[0], '');
+    }
+    return res.status(200).json({ reply: reply.trim(), nav, quickReplies, lead: buildLead(messages) });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }

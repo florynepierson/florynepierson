@@ -373,7 +373,7 @@ function demoReply(messages){
   }
 
   // ---- Info shortcuts ----
-  if(has("before & after","before and after","gallery","see results","photos","see before"))
+  if(has("before & after","before and after","gallery","see results","results","photos","see before","examples","your work","portfolio"))
     return { reply:"Here's a look inside the clinic. (In a live setup this shows the clinic's own before/after gallery.) Would you like a consultation to discuss your goals?", gallery:GALLERY, nav:"gallery", quickReplies:["Book a consultation","Which doctor?","Ask a question"], lead:L() };
   if(has("location","hours","where are you","address","open","opening","directions"))
     return { reply:"We're in Dubai Marina, open Monday to Saturday, with private consultations by appointment. I can have a coordinator send you the exact address and available times on WhatsApp — shall I?", quickReplies:["Yes, book me in","Ask a question"], lead:L() };
@@ -389,8 +389,8 @@ function demoReply(messages){
     return { reply:"Of course — ask me anything: how a treatment works, whether it's suitable for you, recovery, safety, or which doctor is best for a natural result. What would you like to know?",
       quickReplies:["Botox vs Dysport?","Is it safe?","Any downtime?","Which doctor for natural results?"] };
 
-  // default
-  return { reply:"I'd be glad to help. I can explain any treatment, answer medical questions, or arrange a private consultation with the right doctor. Where would you like to start?",
+  // default (nothing matched) — flagged so the handler can hand off to Haiku for a smart answer
+  return { _default:true, reply:"I'd be glad to help. I can explain any treatment, answer medical questions, or arrange a private consultation with the right doctor. Where would you like to start?",
     quickReplies:["💉 Botox","💋 Fillers","✨ Skin & glow","🔥 Laser","❓ Ask a question"] };
 }
 
@@ -405,8 +405,12 @@ module.exports = async function handler(req, res) {
     .map(m => ({ role: m.role, content: m.content.slice(0, 1000) }));
   if (!messages.length) return res.status(400).json({ error: 'no message' });
 
+  // Scripted brain FIRST — it carries the rich UI (cards, reco, slots, gallery,
+  // doctor cards) and is reliable for a live sales demo. Only hand off to Haiku
+  // when the scripted brain didn't understand the message.
+  const scripted = demoReply(messages);
   const ak = process.env.ANTHROPIC_API_KEY;
-  if (!ak) return res.status(200).json(demoReply(messages)); // free scripted demo
+  if (!scripted._default || !ak) { delete scripted._default; return res.status(200).json(scripted); }
 
   try {
     const ar = await fetch('https://api.anthropic.com/v1/messages', {
@@ -415,7 +419,7 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 400, system: SYSTEM, messages })
     });
     const data = await ar.json();
-    if (!ar.ok) return res.status(500).json({ error: (data && data.error && data.error.message) || 'api error' });
+    if (!ar.ok) { delete scripted._default; return res.status(200).json(scripted); }
     let reply = (data.content && data.content[0] && data.content[0].text) || '…';
     // parse tags the model may append: [[nav:X]] / [[nav: a | b]] and [[chips: A | B | C]]
     let nav, quickReplies;
@@ -430,9 +434,13 @@ module.exports = async function handler(req, res) {
     // strip ALL bracket tags, even malformed ones, so nothing leaks into the message
     reply = reply.replace(/\[\[[^\]]*\]\]/g, '').replace(/\n{3,}/g, '\n\n').trim();
     const navArr = Array.isArray(nav) ? nav : (nav ? [nav] : []);
-    const wantsGallery = navArr.includes('gallery') || /before\s*&?\s*and?\s*after|before\/after/i.test(reply);
+    const lastU = (messages.filter(m => m.role === 'user').pop() || {}).content || '';
+    const wantsGallery = navArr.includes('gallery')
+      || /before\s*&?\s*and?\s*after|before\/after/i.test(reply)
+      || /gallery|before\s*&?\s*and?\s*after|results|photos|examples|your work|portfolio/i.test(lastU);
+    if (wantsGallery && !navArr.includes('gallery')) nav = navArr.length ? navArr.concat('gallery') : 'gallery';
     return res.status(200).json({ reply, nav, quickReplies, gallery: wantsGallery ? GALLERY : undefined, lead: buildLead(messages) });
   } catch (e) {
-    return res.status(500).json({ error: e.message });
+    delete scripted._default; return res.status(200).json(scripted);
   }
 };

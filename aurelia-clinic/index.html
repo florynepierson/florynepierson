@@ -110,14 +110,16 @@
     background:linear-gradient(160deg,var(--gold2),var(--gold));display:flex;align-items:center;justify-content:center;
     box-shadow:0 12px 32px rgba(120,95,40,.45);border:none;}
   .bubble span{font-family:var(--serif);font-size:1.7rem;color:#241c07;font-weight:600;}
-  .bubble .ping{position:absolute;top:-3px;right:-3px;width:15px;height:15px;border-radius:50%;background:var(--green);border:2px solid var(--ivory);}
+  .bubble .avimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;}
+  .bubble .ping{position:absolute;top:-3px;right:-3px;width:15px;height:15px;border-radius:50%;background:var(--green);border:2px solid var(--ivory);z-index:2;}
 
   .panel{position:fixed;bottom:22px;right:22px;z-index:61;width:390px;max-width:calc(100vw - 28px);height:600px;max-height:calc(100vh - 44px);
     background:var(--ivory);border:1px solid rgba(183,142,66,.35);border-radius:22px;overflow:hidden;
     box-shadow:0 26px 70px rgba(0,0,0,.34);display:none;flex-direction:column;}
   .panel.open{display:flex;}
   .phead{background:linear-gradient(160deg,#241c14,#171310);color:var(--ivory);padding:15px 18px;display:flex;align-items:center;gap:11px;position:relative;}
-  .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(160deg,var(--gold2),var(--gold));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.25rem;color:#241c07;font-weight:600;flex:none;}
+  .avatar{position:relative;overflow:hidden;width:40px;height:40px;border-radius:50%;background:linear-gradient(160deg,var(--gold2),var(--gold));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.25rem;color:#241c07;font-weight:600;flex:none;}
+  .avatar .avimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
   .phead b{font-size:.98rem;}
   .phead small{display:block;font-size:.72rem;color:#c9b795;}
   .phead .lang{position:absolute;top:12px;right:40px;font-size:.58rem;letter-spacing:.12em;color:var(--gold2);border:1px solid rgba(217,188,126,.4);border-radius:30px;padding:3px 7px;}
@@ -303,10 +305,10 @@
 <footer>Maison Lumière · Dubai Marina, UAE · +971 4 000 0000 &nbsp;·&nbsp; Demo experience by <a href="https://florynepierson.com" target="_blank">florynepierson.com</a></footer>
 
 <!-- AURELIA WIDGET -->
-<button class="bubble" id="bubble" onclick="openChat()"><span>A</span><i class="ping"></i></button>
+<button class="bubble" id="bubble" onclick="openChat()"><img class="avimg" src="aurelia.png" alt="Aurelia" onerror="this.remove()"><span>A</span><i class="ping"></i></button>
 <div class="panel" id="panel">
   <div class="phead">
-    <div class="avatar">A</div>
+    <div class="avatar"><img class="avimg" src="aurelia.png" alt="" onerror="this.remove()">A</div>
     <div><b>Aurelia</b><small>Patient concierge · online</small></div>
     <span class="lang">EN·AR·RU</span>
     <button class="x" onclick="closeChat()">✕</button>

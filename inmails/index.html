@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Priorités InMail — QG prospection</title>
+<style>
+:root{--bg:#f4f1ea;--card:#fffdf9;--ink:#171a1d;--muted:#746d62;--line:#e3dbcf;--gold:#a9793e;--green:#287b4b;--blue:#345aa8;--red:#a23a31}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 Inter,system-ui,sans-serif}.wrap{max-width:980px;margin:auto;padding:24px 16px 70px}h1,h2{font-family:Georgia,serif}h1{margin:0;font-size:clamp(1.8rem,5vw,2.7rem)}.lead{color:var(--muted);max-width:760px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}.stat,.box,.card{background:var(--card);border:1px solid var(--line);border-radius:14px}.stat{padding:15px}.num{font:700 1.55rem Georgia,serif;color:var(--gold)}.lbl{font-size:.76rem;color:var(--muted)}.bar{height:8px;background:#e7e0d6;border-radius:20px;overflow:hidden;margin-top:9px}.bar span{display:block;height:100%;background:var(--gold);width:0}.tabs,.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tabs button,.filters button,.copy,.linkedin{border:1px solid var(--line);border-radius:9px;background:var(--card);padding:9px 13px;font:600 .8rem inherit;cursor:pointer;color:var(--ink);text-decoration:none}.tabs button.on,.filters button.on{background:var(--ink);color:white}.panel{display:none}.panel.on{display:block}.notice{padding:14px 16px;background:#fff8e9;border:1px solid #ead4a8;border-radius:12px;color:#75531f;margin:15px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:16px;position:relative}.card.done{opacity:.55}.top{display:flex;gap:10px;justify-content:space-between}.name{font:700 1.05rem Georgia,serif}.company{font-weight:650;margin-top:2px}.meta{color:var(--muted);font-size:.78rem;margin-top:3px}.badge{font-size:.65rem;font-weight:750;text-transform:uppercase;letter-spacing:.06em;padding:4px 8px;border-radius:20px;height:max-content;white-space:nowrap}.b1{background:#e7f5ec;color:var(--green)}.b2{background:#e9eefb;color:var(--blue)}.free{background:#f4e9e7;color:var(--red)}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}.copy{background:var(--gold);color:white;border-color:var(--gold)}.donebtn{border:1px solid var(--line);background:white;border-radius:9px;padding:9px 12px;cursor:pointer}.done .donebtn{background:var(--green);color:white}.box{padding:17px;margin:15px 0}.msg{white-space:pre-wrap;background:#f7f3ec;border-radius:10px;padding:13px;font-size:.82rem;margin-top:10px}.country{margin:26px 0 10px}.small{font-size:.78rem;color:var(--muted)}@media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main class="wrap">
+<h1>49 InMails — ordre de tir</h1>
+<p class="lead">Une ouverture d’e-mail est un signal, pas une preuve d’intérêt. On contacte d’abord les décideurs confirmés, on apprend des réponses, puis seulement on ouvre la deuxième vague. Les pistes incertaines passent par une connexion gratuite.</p>
+<div class="stats">
+ <div class="stat"><div class="num" id="remaining">49</div><div class="lbl">crédits encore disponibles</div><div class="bar"><span id="spentbar"></span></div></div>
+ <div class="stat"><div class="num" id="sent">0</div><div class="lbl">InMails envoyés</div></div>
+ <div class="stat"><div class="num">15</div><div class="lbl">vague 1 maintenant</div></div>
+ <div class="stat"><div class="num">20</div><div class="lbl">crédits à conserver</div></div>
+</div>
+<div class="notice"><b>Cadence :</b> envoie la vague 1 sur plusieurs jours, puis attends 5 jours ouvrés avant la vague 2. Un refus ou une réponse rend normalement le crédit ; un message ignoré le consomme.</div>
+<div class="tabs"><button class="on" data-panel="wave1">Vague 1 · 15</button><button data-panel="wave2">Vague 2 · 14</button><button data-panel="free">Connexion gratuite</button><button data-panel="templates">Messages</button></div>
+<section id="wave1" class="panel on"><h2>Priorité A — maintenant</h2><div id="grid1" class="grid"></div></section>
+<section id="wave2" class="panel"><h2>Priorité B — après les premiers résultats</h2><div id="grid2" class="grid"></div></section>
+<section id="free" class="panel"><h2>Pas d’InMail avant vérification</h2><p class="lead">Envoie seulement une invitation gratuite. Si elle est acceptée, utilise le message complet sans consommer de crédit.</p><div id="gridfree" class="grid"></div></section>
+<section id="templates" class="panel"><h2>Messages courts</h2><div id="templatesBox"></div></section>
+</main>
+<script>
+const leads=[
+['1','Richard Grieve','Luxfolio Real Estate','Dubaï','CEO & Co-founder','https://florynepierson.com/solara-dubai'],
+['1','Loai Al Fakir','Provident','Dubaï','CEO & Founder','https://florynepierson.com/solara-dubai'],
+['1','Calum White','White & Co','Dubaï','Founder & CEO','https://florynepierson.com/solara-dubai'],
+['1','Antonis Loizou','Antonis Loizou & Associates','Chypre','Managing Partner','https://florynepierson.com/solara-cyprus'],
+['1','Yiannis Misirlis','Imperio Properties','Chypre','Founder & Chairman','https://florynepierson.com/solara-cyprus'],
+['1','Gaby Kempenaar','The Property House','Chypre','Owner / Director','https://florynepierson.com/solara-cyprus'],
+['1','David Knafo','Nessell','Suisse','Director','https://www.florynepierson.com/solara-ch'],
+['1','Guy Kartheiser','Immo Nord','Luxembourg','Fondateur','https://www.florynepierson.com/solara-lux'],
+['1','Ludovic Thienpont','Bathim & Co','Belgique','Fondateur / Gérant','https://www.florynepierson.com/solara'],
+['1','Jeremy Caron','Caron Real Estate','Belgique','Fondateur','https://www.florynepierson.com/solara'],
+['1','David Teuwis','Sky Realty','Belgique','Fondateur','https://www.florynepierson.com/solara'],
+['1','Bernard Bugeja','Bernards Real Estate','Malte','Founder / Managing Director','https://www.florynepierson.com/solara-malta'],
+['1','Jeffrey Buttigieg','JK Properties','Malte','CEO','https://www.florynepierson.com/solara-malta'],
+['1','Joe Aquilina','Clubclass Malta','Malte · école','Founder','https://florynepierson.com/demo-ecole-langues'],
+['1','Daniel Mangani','IELS Malta','Malte · école','General Manager','https://florynepierson.com/demo-ecole-langues'],
+['2','John Lyons','Espace Real Estate','Dubaï','Managing Director','https://florynepierson.com/solara-dubai'],
+['2','Richard Waind','Betterhomes','Dubaï','CEO · à confirmer','https://florynepierson.com/solara-dubai'],
+['2','Daniel Hadi','Engel & Völkers Dubai','Dubaï','CEO Middle East · à confirmer','https://florynepierson.com/solara-dubai'],
+['2','Pantelis Leptos','Leptos Estates','Chypre','Co-President','https://florynepierson.com/solara-cyprus'],
+['2','Eva Eliadou','Pafilia','Chypre','Executive Director','https://florynepierson.com/solara-cyprus'],
+['2','Alex Apostolou','Nicosia Residential','Chypre','Property Consultant','https://florynepierson.com/solara-cyprus'],
+['2','Xavier Payet','Invest & Immo','Suisse','Contact principal','https://www.florynepierson.com/solara-ch'],
+['2','Sandra Coutinho Dos Santos','Chaves','Luxembourg','Gérante','https://www.florynepierson.com/solara-lux'],
+['2','Matthias May','Engel & Völkers Luxembourg','Luxembourg','Directeur général · à confirmer','https://www.florynepierson.com/solara-lux'],
+['2','Marianne van den Eerenbeemt','Livinlux','Luxembourg','Fondatrice','https://www.florynepierson.com/solara-lux'],
+['2','Morgan Bonnet','Immo2gether','Belgique','Owner / Agent','https://www.florynepierson.com/solara'],
+['2','Miguel Bonello',"Christie's International Real Estate Malta",'Malte','Managing Director / Co-founder','https://www.florynepierson.com/solara-malta'],
+['2','Michael J. Zammit',"Malta Sotheby's International Realty",'Malte','Director & Joint Owner','https://www.florynepierson.com/solara-malta'],
+['2','Luisa Sammut','inlingua Malta','Malte · école','Managing Director','https://florynepierson.com/demo-ecole-langues']
+];
+const free=['CRC Real Estate — Behnam Bargh (incertain)','haus & haus — vérifier le bon fondateur','Blue Orange Properties — société à confirmer','Blue Sky Houses — Elena Davison à confirmer','Blue Sky Properties — contact absent','BuySell Cyprus — Marios Nikou à confirmer','Cornerstone Real Estate — contact absent','Down Town Properties — contact absent','Galaxia Estate Agencies — rôle à confirmer','Ktimatiki Real Estate — mauvais contact trouvé','KW Seven — contact absent','Touloupis Real Estate — Antonis Touloupis à confirmer','Zyprus — contact absent','Bordier-Schmidhauser — décideur à confirmer','Global Relocation — rôle à confirmer','Service Immobilier Genevois — rôle à confirmer','Speedimmo — contact absent','Home Consult — identité ambiguë','IMMOTRIO — contact absent','Livinghome — contact absent','Pavimmo — Hana Amour à confirmer','Dhalia — ancien CEO, trouver le nouveau','EasySale — contact absent','J&J Properties — entreprise ambiguë','AM Language — rôle non confirmé','EF Malta — contact absent','Nexus Point — contact absent','Nirvana Realty — mauvaise piste trouvée','Nobel Casa — Shahnawaz Shah à confirmer','Noble Star — contact absent','Nucasa — contact absent','Pearcey & Co — contact absent'];
+const saved=JSON.parse(localStorage.getItem('inmail-priority-v1')||'{}');
+function isFR(c){return ['Belgique','Suisse','Luxembourg'].includes(c)}
+function isSchool(c){return c.includes('école')}
+function message(l){const [w,n,co,c,r,demo]=l, first=n.split(' ')[0];if(isFR(c))return `Objet : Une idée rapide pour les demandes reçues par ${co}\n\nBonjour ${first},\n\nJe vous ai récemment envoyé un court email au sujet de ${co}.\n\nJ’ai remarqué qu’un visiteur ayant une question n’a pas toujours de moyen d’obtenir une première réponse ou d’être qualifié avant d’échanger avec votre équipe. J’ai préparé une démonstration montrant comment un assistant IA peut répondre aux premières questions et transmettre un contact prêt à être rappelé :\n\n${demo}\n\nPensez-vous que cela pourrait être utile à votre équipe ? Même un simple « pas pertinent » m’aiderait.\n\nBien à vous,\nFloryne Pierson`;
+if(isSchool(c))return `Subject: A quick idea for ${co}'s student enquiries\n\nHi ${first},\n\nI recently sent a short email about a potential improvement for ${co}.\n\nA prospective student with questions about courses, accommodation or enrolment may not always find an immediate answer. I built a tailored demo showing how an AI assistant could answer initial questions in the student's language and pass your admissions team a qualified enquiry:\n\n${demo}\n\nWould this be useful for your team? Even a quick “not relevant” would help.\n\nBest,\nFloryne Pierson`;
+return `Subject: A quick idea for ${co}'s website enquiries\n\nHi ${first},\n\nI recently sent a short email about a potential improvement for ${co}.\n\nI noticed that a visitor with a question about a listing has no immediate way to be qualified before speaking with your team. I built a tailored demo showing how an AI assistant could answer initial questions and pass your agents a ready-to-call enquiry:\n\n${demo}\n\nWould this be useful for your team? Even a quick “not relevant” would help.\n\nBest,\nFloryne Pierson`}
+function search(l){return 'https://www.linkedin.com/search/results/people/?keywords='+encodeURIComponent(l[1]+' '+l[2])}
+function renderLead(l){const id=(l[1]+'-'+l[2]).toLowerCase().replace(/[^a-z0-9]+/g,'-'), done=!!saved[id];return `<article class="card ${done?'done':''}" data-id="${id}"><div class="top"><div><div class="name">${l[1]}</div><div class="company">${l[2]}</div><div class="meta">${l[3]} · ${l[4]}</div></div><span class="badge b${l[0]}">Vague ${l[0]}</span></div><div class="actions"><button class="copy" data-copy="${id}">Copier l’InMail</button><a class="linkedin" href="${search(l)}" target="_blank">LinkedIn ↗</a><button class="donebtn" data-done="${id}">${done?'✓ Envoyé':'Marquer envoyé'}</button></div></article>`}
+document.querySelector('#grid1').innerHTML=leads.filter(x=>x[0]==='1').map(renderLead).join('');document.querySelector('#grid2').innerHTML=leads.filter(x=>x[0]==='2').map(renderLead).join('');
+document.querySelector('#gridfree').innerHTML=free.map(x=>`<article class="card"><div class="top"><div class="company">${x}</div><span class="badge free">Connexion</span></div><div class="small">Ne consomme pas de crédit tant que l’identité et le rôle ne sont pas confirmés.</div></article>`).join('')+`<article class="card"><div class="company">⛔ Maxime Real Estate</div><div class="small">Ne pas contacter « Maxime Verstappen » : attribution manifestement douteuse. Rechercher le véritable dirigeant.</div></article>`;
+document.querySelector('#templatesBox').innerHTML=['1','2'].map(w=>{const l=leads.find(x=>x[0]===w);return `<div class="box"><b>Exemple vague ${w}</b><div class="msg">${message(l)}</div><button class="copy" data-copy="${(l[1]+'-'+l[2]).toLowerCase().replace(/[^a-z0-9]+/g,'-')}">Copier l’exemple</button></div>`}).join('');
+function update(){const n=Object.keys(saved).filter(k=>saved[k]).length;document.querySelector('#sent').textContent=n;document.querySelector('#remaining').textContent=Math.max(0,49-n);document.querySelector('#spentbar').style.width=Math.min(100,n/49*100)+'%'}update();
+document.addEventListener('click',e=>{const tab=e.target.closest('[data-panel]');if(tab){document.querySelectorAll('[data-panel]').forEach(x=>x.classList.toggle('on',x===tab));document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on',x.id===tab.dataset.panel));return}const cp=e.target.closest('[data-copy]');if(cp){const l=leads.find(x=>(x[1]+'-'+x[2]).toLowerCase().replace(/[^a-z0-9]+/g,'-')===cp.dataset.copy);if(l)navigator.clipboard.writeText(message(l)).then(()=>{const t=cp.textContent;cp.textContent='✓ Copié';setTimeout(()=>cp.textContent=t,1400)});return}const b=e.target.closest('[data-done]');if(b){saved[b.dataset.done]=!saved[b.dataset.done];localStorage.setItem('inmail-priority-v1',JSON.stringify(saved));const c=b.closest('.card');c.classList.toggle('done',saved[b.dataset.done]);b.textContent=saved[b.dataset.done]?'✓ Envoyé':'Marquer envoyé';update()}});
+</script></body></html>

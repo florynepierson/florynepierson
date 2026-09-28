@@ -10,8 +10,7 @@ function rateLimited(req) {
   r.count++; return r.count > 30;
 }
 function allowed(req) {
-  const h = ((req.headers.origin || '') + ' ' + (req.headers.referer || '')).toLowerCase();
-  return !h.trim() || h.includes('florynepierson.com') || h.includes('localhost') || h.includes('127.0.0.1') || h.includes('vercel.app');
+  return require('./security.js').allowed(req);
 }
 
 const SYSTEM = `You are Aurelia, the senior patient concierge for Maison Lumière, a premium aesthetic clinic in Dubai Marina. You speak like an experienced patient coordinator — knowledgeable, calm and reassuring — NEVER like a chatbot or a form.

@@ -8,8 +8,7 @@ function rateLimited(req, max, windowSec) {
   r.count++; return r.count > max;
 }
 function allowed(req) {
-  const h = ((req.headers.origin || '') + ' ' + (req.headers.referer || '')).toLowerCase();
-  return !h.trim() || h.includes('florynepierson.com') || h.includes('localhost') || h.includes('127.0.0.1') || h.includes('vercel.app');
+  return require('./security.js').allowed(req);
 }
 
 const SYSTEM = `You are the AI assistant on the website of Floryne Pierson — an AI Engineer & Business Analyst who builds custom websites, web apps, and AI assistants for businesses.

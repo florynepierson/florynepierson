@@ -6,8 +6,7 @@ function rateLimited(req) {
   r.count++; return r.count > 25;
 }
 function allowed(req) {
-  const h = ((req.headers.origin || '') + ' ' + (req.headers.referer || '')).toLowerCase();
-  return !h.trim() || h.includes('florynepierson.com') || h.includes('localhost') || h.includes('127.0.0.1') || h.includes('vercel.app');
+  return require('./security.js').allowed(req);
 }
 
 const SYSTEM = `Tu es l'assistant IA d'Atrium Estates, une agence immobilière indépendante basée à Luxembourg-Ville.

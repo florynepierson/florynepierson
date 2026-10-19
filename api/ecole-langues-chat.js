@@ -6,7 +6,7 @@ function rateLimited(req) {
   r.count++; return r.count > 25;
 }
 function allowed(req) {
-  return require('./security.js').allowed(req);
+  return require('../lib/security.js').allowed(req);
 }
 
 const SYSTEM = `You are Sophie, the AI assistant for Malta Language Academy, a friendly English language school based in Sliema, Malta.

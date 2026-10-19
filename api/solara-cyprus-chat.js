@@ -6,7 +6,7 @@ function rateLimited(req) {
   r.count++; return r.count > 25;
 }
 function allowed(req) {
-  return require('./security.js').allowed(req);
+  return require('../lib/security.js').allowed(req);
 }
 
 const SYSTEM = `You are Solara, the assistant for Meridian Estates, a boutique real-estate agency based in Limassol, Cyprus.

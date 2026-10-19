@@ -6,7 +6,7 @@ function rateLimited(req) {
   r.count++; return r.count > 25;
 }
 function allowed(req) {
-  return require('./security.js').allowed(req);
+  return require('../lib/security.js').allowed(req);
 }
 
 const SYSTEM = `Tu es l'assistant IA de Solara Estates, une agence immobilière indépendante à Bruxelles.

@@ -6,7 +6,7 @@ function rateLimited(req) {
   r.count++; return r.count > 25;
 }
 function allowed(req) {
-  return require('./security.js').allowed(req);
+  return require('../lib/security.js').allowed(req);
 }
 
 const SYSTEM = `Tu es l'assistant IA d'Atrium Estates, une agence immobilière indépendante basée à Luxembourg-Ville.

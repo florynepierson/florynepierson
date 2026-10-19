@@ -8,7 +8,7 @@ function rateLimited(req, max, windowSec) {
   r.count++; return r.count > max;
 }
 function allowed(req) {
-  return require('./security.js').allowed(req);
+  return require('../lib/security.js').allowed(req);
 }
 
 const SYSTEM = `You are the AI assistant on the website of Floryne Pierson — an AI Engineer & Business Analyst who builds custom websites, web apps, and AI assistants for businesses.

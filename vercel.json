@@ -54,6 +54,14 @@
   ],
   "rewrites": [
     {
+      "source": "/prospects/",
+      "destination": "/api/lead?doc=prospects"
+    },
+    {
+      "source": "/journal/",
+      "destination": "/api/lead?doc=journal"
+    },
+    {
       "source": "/prospects/:path*",
       "destination": "/api/lead?doc=prospects"
     },

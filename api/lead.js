@@ -1,21 +1,22 @@
 // Capte un email de prospect (email-gate Plume) et l'ajoute à une liste Brevo.
 // Fonctionne même sans clé (renvoie ok) pour ne jamais casser l'UX ; pour STOCKER
 // réellement les leads, ajoute BREVO_API_KEY (+ BREVO_PLUME_LIST_ID) dans Vercel.
-function allowed(req) {
-  const values = [req.headers.origin, req.headers.referer].filter(Boolean);
-  if (!values.length) return true;
-  return values.some((value) => {
-    try {
-      const origin = new URL(value).origin;
-      return ['https://www.florynepierson.com', 'https://florynepierson.com', 'http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173'].includes(origin);
-    } catch (_) { return false; }
-  });
-}
+const { allowed, rateLimit } = require('../lib/security.js');
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'method' });
   if (!allowed(req)) return res.status(403).json({ error: 'forbidden' });
+  const quota = rateLimit(req, 'lead', 6, 60 * 60 * 1000);
+  if (!quota.allowed) {
+    res.setHeader('Retry-After', String(quota.retryAfter));
+    return res.status(429).json({ error: 'rate_limit' });
+  }
+  if (Number(req.headers['content-length'] || 0) > 2_000) return res.status(413).json({ error: 'payload_too_large' });
   let b = req.body;
   if (typeof b === 'string') { try { b = JSON.parse(b); } catch (_) { b = {}; } }
+  if (b && typeof b === 'object' && Buffer.byteLength(JSON.stringify(b), 'utf8') > 2_000) {
+    return res.status(413).json({ error: 'payload_too_large' });
+  }
   b = b || {};
   const email = (b.email || '').toString().trim().toLowerCase();
   const lang = (b.lang === 'en') ? 'en' : 'fr';

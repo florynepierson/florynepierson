@@ -8,7 +8,7 @@
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https:; connect-src 'self' https:; frame-src 'self' https://checkout.stripe.com; form-action 'self' https://checkout.stripe.com; upgrade-insecure-requests" }
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://unpkg.com https://widget.trustpilot.com https://www.googletagmanager.com; connect-src 'self' https://api.anthropic.com https://api.brevo.com https://cddhsddtghnhcxogdgcs.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://formspree.io; frame-src 'self' https://checkout.stripe.com https://www.googletagmanager.com; form-action 'self' https://checkout.stripe.com https://formspree.io; upgrade-insecure-requests" }
       ]
     }
   ],

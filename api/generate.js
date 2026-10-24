@@ -1,12 +1,25 @@
 // Serverless (Vercel) — génère une annonce immobilière via Claude Haiku (FR ou EN).
 // Coût ~fraction de centime par appel. Nécessite ANTHROPIC_API_KEY dans le projet Vercel.
+const { allowed, rateLimit } = require('../lib/security.js');
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (!allowed(req)) return res.status(403).json({ error: 'forbidden' });
+  const quota = rateLimit(req, 'generate', 8, 10 * 60 * 1000);
+  if (!quota.allowed) {
+    res.setHeader('Retry-After', String(quota.retryAfter));
+    return res.status(429).json({ error: 'rate_limit' });
+  }
+  const declaredSize = Number(req.headers['content-length'] || 0);
+  if (declaredSize > 12_000) return res.status(413).json({ error: 'payload_too_large' });
   const KEY = process.env.ANTHROPIC_API_KEY;
   if (!KEY) return res.status(500).json({ error: 'no_key' });
 
   let b = req.body;
   if (typeof b === 'string') { try { b = JSON.parse(b); } catch (_) { b = {}; } }
+  if (b && typeof b === 'object' && Buffer.byteLength(JSON.stringify(b), 'utf8') > 12_000) {
+    return res.status(413).json({ error: 'payload_too_large' });
+  }
   b = b || {};
 
   const lang = (b.lang === 'en') ? 'en' : 'fr';
@@ -18,7 +31,7 @@ export default async function handler(req, res) {
   const beds = clip(b.beds, 10);
   const place = clip(b.place, 80);
   const price = clip(b.price, 30);
-  const atouts = Array.isArray(b.atouts) ? b.atouts.slice(0, 15).map(String).join(', ') : '';
+  const atouts = Array.isArray(b.atouts) ? b.atouts.slice(0, 15).map((v) => String(v).slice(0, 160)).join(', ') : '';
   const notes = clip(b.notes, 600);
   const length = b.length === 'court' ? 'court' : (b.length === 'long' ? 'long' : 'moyen');
 

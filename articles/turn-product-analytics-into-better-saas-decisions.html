@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Learn how to measure a SaaS checkout funnel, define reliable conversion events, diagnose drop-off and connect confirmed payments to product access.">
+  <link rel="canonical" href="https://florynepierson.com/articles/turn-product-analytics-into-better-saas-decisions.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to Measure a SaaS Checkout Funnel">
+  <meta property="og:description" content="A practical guide to tracking checkout intent, confirmed payment and paid product access.">
+  <meta property="og:url" content="https://florynepierson.com/articles/turn-product-analytics-into-better-saas-decisions.html">
+  <title>How to Measure a SaaS Checkout Funnel: From Intent to Paid Activation | Floryne Pierson</title>
+  <meta name="theme-color" content="#FAF7F2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; --ink:#162521; --muted:#52615a; --paper:#FAF7F2; --gold:#B09A7A; --gold-light:#D1C4B0; --sage:#8F9E8B; --sage-light:#E8EDE7; --line:#e5dfd5; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:15px/1.8 'Plus Jakarta Sans',sans-serif; }
+    a { color:inherit; text-underline-offset:4px; }
+    .site-nav { position:sticky; top:0; z-index:10; background:rgba(250,247,242,.88); backdrop-filter:blur(14px); border-bottom:1px solid rgba(176,154,122,.18); }
+    .nav-inner { width:min(1280px,calc(100% - 48px)); min-height:78px; margin:auto; display:flex; align-items:center; justify-content:space-between; gap:28px; }
+    .brand { display:flex; flex-direction:column; text-decoration:none; flex-shrink:0; }
+    .brand strong { font:600 24px/1.1 'Cormorant Garamond',serif; letter-spacing:.09em; }
+    .brand span { margin-top:3px; color:var(--gold); font-size:9px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+    .nav-links { display:flex; align-items:center; justify-content:flex-end; gap:clamp(12px,2vw,28px); color:rgba(22,37,33,.78); font-size:11px; font-weight:600; }
+    .nav-links a { text-decoration:none; white-space:nowrap; transition:color .2s; }
+    .nav-links a:hover { color:var(--gold); }
+    .nav-links .cta { padding:10px 16px; border-radius:999px; background:var(--ink); color:white; }
+    .nav-links .cta:hover { background:var(--gold); color:var(--ink); }
+    .lang { display:flex; gap:3px; padding:3px; border:1px solid rgba(176,154,122,.28); border-radius:999px; font-size:9px; }
+    .lang a { padding:3px 6px; border-radius:999px; text-decoration:none; }
+    .lang .active { background:var(--sage-light); color:var(--ink); }
+    .hero { position:relative; overflow:hidden; padding:86px 24px 72px; text-align:center; background:radial-gradient(ellipse at 18% 20%,rgba(232,237,231,.9),transparent 33%),radial-gradient(ellipse at 85% 75%,rgba(209,196,176,.34),transparent 35%),var(--paper); }
+    .hero-inner { position:relative; max-width:850px; margin:auto; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; padding:7px 13px; border-radius:999px; background:var(--sage-light); color:rgba(22,37,33,.8); font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .eyebrow:before { width:6px; height:6px; border-radius:50%; background:var(--sage); content:''; }
+    h1,h2,h3 { font-family:'Cormorant Garamond',serif; line-height:1.08; }
+    h1 { max-width:840px; margin:22px auto 20px; font-size:clamp(48px,7.2vw,82px); font-weight:400; letter-spacing:-.025em; }
+    h1 em { color:var(--gold); font-weight:400; }
+    .dek { max-width:700px; margin:0 auto 24px; color:rgba(22,37,33,.7); font-size:clamp(16px,2vw,20px); font-weight:300; line-height:1.7; }
+    .byline { color:rgba(22,37,33,.56); font-size:11px; letter-spacing:.03em; }
+    .hero-art { display:block; width:min(100%,510px); height:auto; margin:25px auto 22px; overflow:visible; }
+    .brief-strip { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); max-width:790px; margin:23px auto 0; padding:14px 0 0; border-top:1px solid rgba(176,154,122,.25); text-align:left; }
+    .brief-strip div { padding:0 18px; border-right:1px solid rgba(176,154,122,.22); }
+    .brief-strip div:first-child { padding-left:0; }
+    .brief-strip div:last-child { padding-right:0; border:0; }
+    .brief-strip dt { margin-bottom:4px; color:#71816f; font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .brief-strip dd { margin:0; color:rgba(22,37,33,.78); font-size:11px; line-height:1.5; }
+    .sample-download { display:inline-block; margin-top:13px; color:#6e765e; font-size:10px; font-weight:700; text-decoration:none; }
+    .sample-download:hover { color:var(--gold); }
+    .article-wrap { width:min(820px,calc(100% - 44px)); margin:0 auto; padding:0 0 76px; }
+    .article-body { padding:48px clamp(22px,6vw,64px) 56px; border:1px solid rgba(176,154,122,.16); border-radius:28px; background:rgba(255,255,255,.62); box-shadow:0 20px 65px rgba(22,37,33,.045); }
+    .article-body p,.article-body li { color:rgba(22,37,33,.8); font-size:14px; font-weight:300; line-height:1.95; }
+    .article-body p { margin:0 0 19px; }
+    .article-body a { color:#6e765e; font-weight:500; }
+    h2 { margin:48px 0 15px; color:var(--ink); font-size:clamp(30px,4vw,40px); font-weight:500; letter-spacing:-.015em; }
+    h3 { margin:28px 0 9px; font-size:26px; }
+    .article-body ul,.article-body ol { padding-left:23px; margin:0 0 21px; }
+    .article-body li { padding:3px 0; }
+    .callout { margin:34px 0; padding:23px 26px; border:1px solid rgba(176,154,122,.24); border-left:3px solid var(--gold); border-radius:0 16px 16px 0; background:linear-gradient(110deg,rgba(232,237,231,.8),rgba(250,247,242,.72)); }
+    .callout p { margin:0; }
+    .sources { margin-top:40px; padding:24px 26px; border-radius:18px; background:var(--sage-light); }
+    .sources h2 { margin:0 0 14px; font-size:31px; }
+    .sources li { margin:6px 0; font-size:12px; line-height:1.75; }
+    .flow-figure { margin:34px 0 38px; padding:25px 23px 20px; border:1px solid rgba(176,154,122,.2); border-radius:20px; background:rgba(232,237,231,.55); }
+    .flow-figure figcaption { margin-top:17px; color:rgba(22,37,33,.62); font-size:11px; line-height:1.65; text-align:center; }
+    .flow { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:20px; margin:0; padding:0; list-style:none; counter-reset:flow; }
+    .flow li { position:relative; min-height:115px; padding:16px 12px 13px; border:1px solid rgba(176,154,122,.26); border-radius:14px; background:rgba(255,255,255,.82); text-align:center; counter-increment:flow; }
+    .flow li:before { display:block; width:25px; height:25px; margin:0 auto 10px; border-radius:50%; background:var(--ink); color:white; content:counter(flow); font-size:11px; font-weight:700; line-height:25px; }
+    .flow li:not(:last-child):after { position:absolute; top:50%; right:-18px; color:var(--gold); content:'→'; font-size:20px; font-weight:600; transform:translateY(-50%); }
+    .flow strong { display:block; margin-bottom:5px; font-size:11px; line-height:1.45; }
+    .flow span { display:block; color:var(--muted); font-size:10px; line-height:1.5; }
+    .site-footer { padding:38px 24px 44px; background:var(--ink); color:rgba(250,247,242,.75); text-align:center; font-size:11px; }
+    .site-footer a { color:var(--gold-light); text-decoration:none; }
+    .footer-brand { display:block; margin-bottom:8px; color:var(--paper); font:600 24px/1.1 'Cormorant Garamond',serif; letter-spacing:.1em; }
+    @media(max-width:900px) { .nav-inner{width:calc(100% - 32px);gap:16px}.brand strong{font-size:21px}.nav-links{gap:12px}.nav-links a:not(.cta){font-size:10px}.nav-links .hide-mid{display:none} }
+    @media(max-width:760px) { .flow{grid-template-columns:1fr;gap:12px}.flow li{min-height:0;display:grid;grid-template-columns:30px 1fr;column-gap:11px;align-items:center;text-align:left;padding:12px 14px}.flow li:before{grid-row:span 2;margin:0}.flow li:not(:last-child):after{top:auto;right:auto;bottom:-17px;left:20px;z-index:1;content:'↓';font-size:15px;transform:none}.flow strong{margin:0}.flow span{grid-column:2}.flow-figure{padding:19px 16px 16px} }
+    @media(max-width:640px) { .nav-inner{min-height:68px;flex-wrap:wrap;padding:10px 0}.brand strong{font-size:19px}.brand span{font-size:8px}.nav-links{width:100%;justify-content:space-between;gap:6px;padding-bottom:5px}.nav-links a:not(.cta){font-size:9px}.nav-links .hide-small{display:none}.nav-links .cta{padding:8px 11px;font-size:9px}.hero{padding:58px 18px 47px}.article-wrap{width:calc(100% - 24px)}.article-body{padding:30px 20px 38px;border-radius:21px}.article-body p,.article-body li{font-size:13px}.sources{padding:20px}.sources h2{font-size:28px} }
+    @media(max-width:640px) { .brief-strip{grid-template-columns:1fr;gap:10px;text-align:center}.brief-strip div,.brief-strip div:first-child,.brief-strip div:last-child{padding:0;border:0}.sample-download{font-size:11px} }
+    @media print { @page{size:A4;margin:17mm 18mm} body{background:#fff;font-size:11pt}.site-nav,.site-footer,.sample-download{display:none!important}.hero{padding:12mm 0 7mm;background:#fff}.hero-art{width:min(100%,430px);margin:7mm auto}.brief-strip{margin-top:6mm}.article-wrap{width:100%;padding:0}.article-body{padding:8mm 0;border:0;border-radius:0;background:#fff;box-shadow:none}.article-body p,.article-body li{color:#222;font-size:10.5pt;line-height:1.65}h2{break-after:avoid;margin-top:9mm}.flow-figure{break-inside:avoid;background:#f3f4f0}.flow{gap:8px}.flow li{min-height:95px;padding:10px 7px}.flow li:after{right:-12px!important}.sources{break-inside:avoid;background:#eef1ed}a{color:#344b3c} }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="Floryne Pierson, homepage"><strong>FLORYNE PIERSON</strong><span>Sites web &amp; Assistants IA</span></a>
+      <div class="nav-links">
+        <a class="hide-small" href="/#services">Services</a><a class="hide-mid" href="/#ia">IA</a><a class="hide-mid" href="/#constat">La Vision</a><a href="/portfolio/#writing">Réalisations</a><a class="hide-small" href="/#a-propos">À Propos</a><a class="hide-small" href="/#contact">Contact</a>
+        <span class="lang" aria-label="Language"><a href="/">FR</a><a class="active" href="#top" aria-current="page">EN</a></span>
+        <a class="cta" href="/#contact">Let’s talk</a>
+      </div>
+    </div>
+  </nav>
+  <main id="top">
+    <section class="hero"><div class="hero-inner">
+      <p class="eyebrow">SaaS · Product analytics · Conversion</p>
+      <h1>How to Measure a<br><em>SaaS Checkout Funnel</em></h1>
+      <p class="dek">A practical guide to tracking the journey from checkout intent to confirmed payment and paid product access—so your team can find friction without mistaking a click for a customer outcome.</p>
+      <svg class="hero-art" viewBox="0 0 800 250" role="img" aria-labelledby="hero-art-title hero-art-desc" focusable="false">
+        <title id="hero-art-title">From product signals to paid access</title>
+        <desc id="hero-art-desc">An editorial illustration of an analytics dashboard linking product events, a confirmed payment and an active account entitlement.</desc>
+        <defs>
+          <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="9" stdDeviation="10" flood-color="#162521" flood-opacity=".10"/></filter>
+          <linearGradient id="sage-wash" x1="80" y1="35" x2="716" y2="222" gradientUnits="userSpaceOnUse"><stop stop-color="#E8EDE7"/><stop offset="1" stop-color="#F0E8DC"/></linearGradient>
+        </defs>
+        <ellipse cx="397" cy="132" rx="365" ry="103" fill="url(#sage-wash)" opacity=".72"/>
+        <path d="M191 130C231 130 236 94 273 94h52m173 0h42c37 0 37 39 75 39" fill="none" stroke="#B09A7A" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 8"/>
+        <circle cx="210" cy="126" r="4" fill="#B09A7A"/><circle cx="574" cy="132" r="4" fill="#B09A7A"/>
+        <g filter="url(#soft-shadow)">
+          <rect x="152" y="31" width="496" height="188" rx="20" fill="#FFFEFC" stroke="#DED7CB"/>
+          <path d="M172 31h456a20 20 0 0 1 20 20v16H152V51a20 20 0 0 1 20-20Z" fill="#F5F1EA"/>
+          <circle cx="174" cy="49" r="3.5" fill="#C7B8A5"/><circle cx="187" cy="49" r="3.5" fill="#D9CCBC"/><circle cx="200" cy="49" r="3.5" fill="#E4DCD1"/>
+          <rect x="224" y="44" width="144" height="10" rx="5" fill="#E4DED4"/>
+          <path d="M152 67h496" stroke="#E8E2D8"/>
+          <rect x="171" y="83" width="104" height="119" rx="10" fill="#F7F6F1"/>
+          <rect x="184" y="96" width="63" height="6" rx="3" fill="#A4B09F"/>
+          <rect x="184" y="112" width="76" height="5" rx="2.5" fill="#DDD8CE"/>
+          <rect x="184" y="127" width="55" height="5" rx="2.5" fill="#DDD8CE"/>
+          <rect x="184" y="142" width="67" height="5" rx="2.5" fill="#DDD8CE"/>
+          <rect x="184" y="165" width="76" height="24" rx="7" fill="#E8EDE7"/>
+          <path d="M194 181v-6m9 6v-11m9 11v-8m9 8v-15" stroke="#71816F" stroke-width="2" stroke-linecap="round"/>
+          <text x="295" y="96" fill="#8A8B7D" font-family="Plus Jakarta Sans,Arial,sans-serif" font-size="9" font-weight="700" letter-spacing="1.2">CHECKOUT JOURNEY</text>
+          <text x="295" y="119" fill="#162521" font-family="Cormorant Garamond,Georgia,serif" font-size="20">Signals to outcome</text>
+          <path d="M295 137h319" stroke="#EEE9E0"/>
+          <circle cx="303" cy="156" r="5" fill="#8F9E8B"/><path d="M315 156h133" stroke="#D6D9D0" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="466" cy="156" r="5" fill="#B09A7A"/><path d="M478 156h93" stroke="#D6D9D0" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="588" cy="156" r="5" fill="#162521"/>
+          <rect x="295" y="176" width="100" height="20" rx="10" fill="#E8EDE7"/><text x="308" y="189.5" fill="#536652" font-family="Plus Jakarta Sans,Arial,sans-serif" font-size="8" font-weight="700" letter-spacing=".7">EVENTS</text>
+          <rect x="402" y="176" width="100" height="20" rx="10" fill="#F0E8DC"/><text x="415" y="189.5" fill="#88765E" font-family="Plus Jakarta Sans,Arial,sans-serif" font-size="8" font-weight="700" letter-spacing=".7">PAYMENT</text>
+          <rect x="509" y="176" width="105" height="20" rx="10" fill="#162521"/><text x="521" y="189.5" fill="#F7F4ED" font-family="Plus Jakarta Sans,Arial,sans-serif" font-size="8" font-weight="700" letter-spacing=".6">ACCESS</text>
+        </g>
+        <g filter="url(#soft-shadow)">
+          <rect x="22" y="91" width="176" height="83" rx="15" fill="#FFFEFC" stroke="#DED7CB"/>
+          <circle cx="45" cy="116" r="9" fill="#E8EDE7"/><path d="M42 116h6m-3-3v6" stroke="#71816F" stroke-width="1.5" stroke-linecap="round"/>
+          <text x="62" y="119" fill="#162521" font-family="Plus Jakarta Sans,Arial,sans-serif" font-size="9" font-weight="700" letter-spacing=".8">PRODUCT EVENTS</text>
+          <path d="M40 139h129m-129 13h92" stroke="#E3DED5" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="164" cy="152" r="3" fill="#B09A7A"/>
+        </g>
+        <g filter="url(#soft-shadow)">
+          <rect x="592" y="91" width="186" height="83" rx="15" fill="#162521"/>
+          <circle cx="618" cy="117" r="11" fill="#293E35"/><path d="m613 117 3.5 3.5 6.5-7" stroke="#D1C4B0" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="639" y="120" fill="#F7F4ED" font-family="Plus Jakarta Sans,Arial,sans-serif" font-size="9" font-weight="700" letter-spacing=".8">PAID ACCESS</text>
+          <text x="613" y="148" fill="#D1C4B0" font-family="Cormorant Garamond,Georgia,serif" font-size="16">Entitlement active</text>
+          <path d="M613 159h122" stroke="#52675B" stroke-width="3" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <p class="byline">By Floryne Pierson · Independent SEO writing sample · Approx. 2,150 words · 9-minute read</p>
+      <dl class="brief-strip" aria-label="SEO writing brief">
+        <div><dt>Target query</dt><dd>SaaS checkout funnel</dd></div>
+        <div><dt>Audience</dt><dd>SaaS product and growth teams</dd></div>
+        <div><dt>Search intent</dt><dd>Informational how-to · US English</dd></div>
+      </dl>
+      <a class="sample-download" href="/articles/how-to-measure-saas-checkout-funnel.pdf" download>Download this writing sample as a PDF ↓</a>
+    </div></section>
+    <div class="article-wrap"><article class="article-body">
+
+    <p>A SaaS checkout funnel should answer two linked questions: where do prospective customers stop progressing, and do the people who pay receive the access they expected? Answering either one takes more than counting visits to a pricing page and clicks on a checkout button. Those actions show intent. They do not, by themselves, confirm a sale or a successful customer experience.</p>
+    <p>I learned that distinction while running <a href="https://www.magicalchart.com/">Magical Chart</a>, my subscription product. In one real incident, a payment succeeded but the account stayed on the free plan because a Stripe webhook failed to update the Premium entitlement in the database. I traced the event, corrected the webhook-to-database connection, resent the failed event and checked access in the product. I’ve left out customer and payment details. The experience is a short example in this guide; the focus is how to measure the complete checkout journey.</p>
+    <p>This guide is for SaaS teams that want a useful first funnel: a clear sequence, reliable conversion rates, a way to investigate drop-off and a distinction between buyer behavior and technical failures.</p>
+
+    <h2>What a SaaS checkout funnel measures</h2>
+    <p>A funnel is a defined sequence of actions or states that a person or account is expected to complete. It shows how many reach each step, where progression slows or stops, and how the result changes over time. It helps locate a question; it does not explain why someone dropped off.</p>
+    <p>Keep the question narrow enough to guide a decision. “How is revenue doing?” blends acquisition, pricing, payment, product use and retention into one vague prompt. “What share of accounts that start checkout receive paid access within the expected payment window?” names a start, an outcome and a timeframe. The answer can guide an investigation into checkout friction or billing reliability.</p>
+    <p>Funnel tools can show overall conversion, conversion between adjacent steps, time to convert and changes over time. Overall conversion summarizes the journey; step conversion helps locate friction. <a href="https://posthog.com/docs/product-analytics/funnels">PostHog’s funnel documentation</a> describes these views and recommends beginning with a simple flow, without optional steps that can distort the result.</p>
+
+    <h2>Map the journey from intent to access</h2>
+    <p>For a self-serve subscription product, a useful starting model might look like this:</p>
+    <figure class="flow-figure" aria-labelledby="payment-flow-caption">
+      <ol class="flow" aria-label="Five stages from checkout to paid product access">
+        <li><strong>Checkout</strong><span>The customer starts a purchase</span></li>
+        <li><strong>Payment confirmed</strong><span>The billing provider records the change</span></li>
+        <li><strong>Webhook processed</strong><span>The application handles the event</span></li>
+        <li><strong>Entitlement updated</strong><span>The account receives the right plan</span></li>
+        <li><strong>Access available</strong><span>The paid features unlock</span></li>
+      </ol>
+      <figcaption id="payment-flow-caption">A measurement model for the full journey. Not every step belongs in a customer-facing analytics tool; billing and access states may need operational monitoring.</figcaption>
+    </figure>
+    <p>Not every business needs these exact stages. A trial-first product may start with trial activation; an enterprise purchase may involve a sales handoff and invoice instead of online checkout. Start with the shortest sequence that reflects how customers actually buy. Add a step only when it helps answer the question.</p>
+    <p>Also decide where the funnel ends. “Payment confirmed” is a useful commercial outcome. “Paid access available” checks that the application delivered what the customer bought. For some questions you need both, because they are different outcomes. The term <em>paid activation</em> in this article means that access is available to the right account after a confirmed purchase; teams should define the term for their own product rather than assume it has one universal meaning.</p>
+
+    <h2>Define events before calculating conversion</h2>
+    <p>For each step, document when it fires, which system sends it, whether it represents a person or an account, and which properties are needed to interpret it. For example, <code>checkout_started</code> should fire when a checkout session is created—not when someone merely opens a pricing modal. A payment event should reflect a confirmed billing state, not a front-end click.</p>
+    <p>Use names that describe what happened, not what the team hopes it means. “Subscription active” and “Premium access granted” can be separate events if they come from different systems. Make the distinction clear in the event dictionary. This gives product, marketing and engineering teams a shared definition when they discuss conversion.</p>
+    <p>Google Analytics provides recommended event names and parameters for online sales, including <code>begin_checkout</code> and <code>purchase</code>. Use platform conventions where they fit, but verify that the events are triggered at the correct point in your product. <a href="https://support.google.com/analytics/answer/9267735?hl=en-EN">Google’s recommended events reference</a> explains the intended use of these events.</p>
+
+    <h2>Choose the right unit, denominator and window</h2>
+    <p>Decide whether the funnel counts unique users, accounts, sessions or purchase attempts. These are not interchangeable. One person may open checkout several times before paying; counting every attempt answers a different question from counting each account once. For a B2B product, an account-level funnel may better reflect how a company buys, while a user-level funnel can help diagnose the experience of an individual buyer.</p>
+    <p>Choose the denominator that matches your question. Step-to-step conversion divides the number reaching a step by the number at the previous step. End-to-end conversion divides the number reaching the chosen outcome by the number entering the funnel. Both can be useful: one helps locate friction between adjacent actions, the other summarizes the whole journey. Label the rate, unit and date range so readers do not compare unlike numbers.</p>
+    <p>Set a conversion window that gives a typical buyer enough time to complete the journey. A very short window can make a normal delay look like failure; an excessively long one can associate a later purchase with an unrelated visit. The right window depends on the buying cycle, product and payment method. Keep incomplete recent periods out of trend comparisons until the full window has elapsed.</p>
+    <p>Be careful with small samples. A rate can swing sharply when only a few accounts enter the funnel. Show counts beside percentages, avoid drawing strong conclusions from thin data, and look for a pattern over an appropriate period before changing the checkout. The aim is not to make every number look statistically impressive; it is to understand how much confidence the evidence supports.</p>
+
+    <h2>Keep analytics separate from billing truth</h2>
+    <p>Product analytics is useful for behavior: pricing views, checkout starts, plan selection and time between steps. It is not automatically the financial source of truth. Browser events can be blocked, duplicated or sent before a payment is confirmed. Use the payment provider’s server-side state to verify billing, then the application’s entitlement record to verify that the customer can use what they bought.</p>
+    <p>Stripe describes events as records of changes to resources and webhooks as a way to send those events to an application. The application must process the event and associate it with the correct account. A gap between analytics and billing could be abandonment or tracking loss; a confirmed billing change without a matching entitlement points to a different investigation. <a href="https://docs.stripe.com/api/events">Stripe’s Events documentation</a> explains the event model, and its <a href="https://docs.stripe.com/webhooks">webhook guide</a> covers delivery and handling.</p>
+    <p>In my own product, that distinction changed the question I asked. I treated the gap as a handoff to investigate, not a conversion rate to optimize. A funnel can surface the symptom; the billing and application records are what help explain it.</p>
+
+    <h2>Investigate drop-off without guessing</h2>
+    <p>A funnel points to a step; it does not tell you what to change. If many people leave after selecting a plan, possible explanations include unclear pricing, an unavailable payment method, a confusing form, unexpected taxes, low trust or a technical error. The chart cannot rank those explanations on its own.</p>
+    <p>Start with a small set of plausible causes. Check whether the pattern differs by device, country, plan or acquisition source, but only where there is a product reason to expect a difference. Compare absolute counts as well as rates: a striking percentage from a handful of accounts may be less urgent than a modest drop affecting many buyers. Avoid slicing the data repeatedly until one interesting result appears.</p>
+    <p>Then bring in evidence that explains behavior. Review support questions, speak with a few users, inspect error logs or use session replay where privacy and consent practices allow it. Look for concrete friction before changing copy or adding another step. If the evidence points to a technical failure, fix and verify it before treating the issue as a conversion-optimization experiment.</p>
+    <p>PostHog’s guidance suggests inspecting the users who drop off and the paths they take. That is a useful next step after the chart: move from “where did they stop?” to “what did they encounter?”—and keep the answer grounded in observed evidence.</p>
+
+    <h2>Turn a finding into a focused test</h2>
+    <p>Imagine a B2B SaaS team sees a large drop between checkout start and confirmed payment. Before redesigning the page, it checks whether payment attempts are failing technically, whether buyers return later, and whether the drop is concentrated on one device or plan. If users say billing terms are unclear, the team could test clearer plan and renewal language.</p>
+    <p>Write down the change, target audience, primary outcome and guardrail before release. The primary outcome might be the share of eligible checkout starts that lead to confirmed payment within the defined window. Guardrails could include refunds, support contacts or checkout errors, depending on the change. Avoid claiming a win based on a few conversions or a period that does not cover the full buying cycle.</p>
+    <p>When a controlled experiment is not practical, a limited rollout or a before-and-after comparison can still guide a decision. Record what changed and what else may have affected the result. The goal is not to make every product decision statistically perfect; it is to be clear about what the evidence can and cannot support.</p>
+
+    <h2>Account for the subscription lifecycle</h2>
+    <p>The checkout is only the start of a subscription relationship. Customers may renew, change plans, cancel, pause or reach the end of a paid period. Those changes affect what the product should allow, and a single permanent <code>is_premium</code> flag may not express the policy clearly enough.</p>
+    <p>Define which plan is active, when access starts and whether access continues through a paid period after cancellation. Then map relevant billing events to those rules and test the transitions. Stripe documents separate subscription events for creation, updates, pauses, resumption and ending; the application needs to interpret the specific change rather than treat every notification as “turn Premium on” or “turn Premium off.” <a href="https://docs.stripe.com/api/events/types">Stripe’s event types reference</a> lists examples.</p>
+    <p>This is a product decision as much as an integration detail. If someone cancels renewal, does access end immediately or at the period already paid for? If a plan changes, when do new limits apply? Make the rule consistent across the billing page, account record, access checks and customer communication. Test a new purchase, a plan change, a cancellation, and an event that arrives late or more than once. For each case, check the billing record, the entitlement on the intended account and the features the product unlocks.</p>
+
+    <h2>Build a small measurement plan</h2>
+    <p>Before adding more events or dashboards, write a short plan that answers six questions:</p>
+    <ol><li><strong>Goal:</strong> What customer or business outcome should this funnel clarify?</li><li><strong>Entry and success:</strong> Which exact actions begin and complete it?</li><li><strong>Unit:</strong> Are you counting users, accounts, sessions or purchase attempts?</li><li><strong>Window:</strong> How long does a typical buyer have to complete the sequence?</li><li><strong>Sources:</strong> Which systems own behavior, billing and product access?</li><li><strong>Next action:</strong> What will the team investigate if a step changes?</li></ol>
+    <p>Keep event properties minimal. Product analytics rarely needs card details, full billing addresses or raw customer notes. Restrict operational logs, use a stable account reference where appropriate, and avoid copying sensitive payment information into general-purpose analytics tools.</p>
+    <p>A failed webhook and a confirmed payment without an entitlement are actionable operational signals. Document where to inspect the event, who can replay it safely, and how to confirm that access has been restored. A simple dashboard or alert can make the mismatch visible; a brief runbook helps the team respond consistently.</p>
+
+    <h2>Use the funnel to learn, not just report</h2>
+    <p>For a first-hand example of a webhook failure after payment, read <a href="/articles/when-payment-succeeds-but-access-doesnt.html">When Payment Succeeds but Access Doesn’t</a>. A useful SaaS checkout funnel needs a clear start and success, consistent definitions, a fair conversion window and a path from an observed drop-off to an investigation. Product analytics can show behavior; billing records confirm payment; entitlement checks show whether the product delivered access.</p>
+    <p>I built <a href="/funnel-doctor/">Funnel Doctor</a> as a portfolio prototype around that distinction. Its sample sessions and payment statuses are fictional, and it is not connected to live Stripe, GA4 or Clarity data. My webhook incident informed the questions behind the design, but the prototype does not present the incident as a measured business result.</p>
+    <p>Start simple, inspect the step that changes, and choose the next action based on evidence. The point of measuring the checkout funnel is not a prettier conversion chart. It is understanding whether buyers can move from intent to a completed purchase—and whether the product keeps its promise once they do.</p>
+
+    <div class="callout note"><p><strong>About this sample:</strong> This is an original long-form writing sample informed by an incident in my own product. Funnel Doctor is a separate portfolio prototype using fictional sample records; it is not connected to live payment or analytics data. No customer names, payment amounts or identifiers are included.</p></div>
+    <section class="sources" aria-labelledby="sources-heading">
+      <h2 id="sources-heading">Sources</h2>
+      <ul>
+        <li><a href="https://docs.stripe.com/api/events">Stripe, Events API</a> — event objects and the resource state they represent.</li>
+        <li><a href="https://docs.stripe.com/api/events/types">Stripe, Event types reference</a> — examples of subscription lifecycle events.</li>
+        <li><a href="https://docs.stripe.com/webhooks">Stripe, Webhooks</a> — receiving and handling events sent to an application.</li>
+        <li><a href="https://posthog.com/docs/product-analytics/funnels">PostHog, Funnels documentation</a> — defining steps and interpreting conversion.</li>
+        <li><a href="https://support.google.com/analytics/answer/9267735?hl=en-EN">Google Analytics, Recommended events</a> — recommended event names and parameters for online sales.</li>
+      </ul>
+    </section>
+    </article></div>
+  </main>
+  <footer class="site-footer"><a class="footer-brand" href="/">FLORYNE PIERSON</a><span>Independent writing sample · </span><a href="mailto:hello@florynepierson.com">Contact</a><span> · </span><a href="/portfolio/#writing">Portfolio</a></footer>
+</body>
+</html>

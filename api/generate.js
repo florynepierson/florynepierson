@@ -106,11 +106,11 @@ async function walletRisk(req, res) {
     // skewing every downstream signal (volume, diversity, the chart) toward old history.
     // So: one cheap call (offset=1) for the true first transaction (wallet age), and the
     // main call sorted "desc" (most recent 1000) for everything about current activity.
-    const [firstTxData, txData, tokenData] = await Promise.all([
-      etherscan({ module: 'account', action: 'txlist', address, startblock: 0, endblock: 99999999, sort: 'asc', page: 1, offset: 1 }, KEY),
-      etherscan({ module: 'account', action: 'txlist', address, startblock: 0, endblock: 99999999, sort: 'desc', page: 1, offset: 1000 }, KEY),
-      etherscan({ module: 'account', action: 'tokentx', address, startblock: 0, endblock: 99999999, sort: 'desc', page: 1, offset: 1000 }, KEY),
-    ]);
+    // Sequential, not Promise.all: the free-tier key intermittently rejects bursts of
+    // concurrent requests with a misleading "Invalid API Key" instead of a rate-limit error.
+    const firstTxData = await etherscan({ module: 'account', action: 'txlist', address, startblock: 0, endblock: 99999999, sort: 'asc', page: 1, offset: 1 }, KEY);
+    const txData = await etherscan({ module: 'account', action: 'txlist', address, startblock: 0, endblock: 99999999, sort: 'desc', page: 1, offset: 1000 }, KEY);
+    const tokenData = await etherscan({ module: 'account', action: 'tokentx', address, startblock: 0, endblock: 99999999, sort: 'desc', page: 1, offset: 1000 }, KEY);
 
     const firstTx = Array.isArray(firstTxData.result) ? firstTxData.result : [];
     const txs = Array.isArray(txData.result) ? txData.result : [];

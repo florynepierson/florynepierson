@@ -15,7 +15,8 @@ const FLAGGED = new Set([
 ]);
 
 async function etherscan(params, key) {
-  const url = new URL('https://api.etherscan.io/api');
+  const url = new URL('https://api.etherscan.io/v2/api');
+  url.searchParams.set('chainid', '1'); // Ethereum mainnet
   Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
   url.searchParams.set('apikey', key);
   const r = await fetch(url.toString());

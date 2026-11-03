@@ -23,7 +23,7 @@ async function etherscan(params, key) {
   return r.json();
 }
 
-function walletScore(txs, tokenTxs) {
+function walletScore(txs, tokenTxs, firstTimestamp) {
   const signals = [];
   let points = 50;
 
@@ -32,13 +32,14 @@ function walletScore(txs, tokenTxs) {
   }
 
   const timestamps = txs.map((t) => Number(t.timeStamp)).sort((a, b) => a - b);
-  const ageDays = Math.max(0, (Date.now() / 1000 - timestamps[0]) / 86400);
+  const ageDays = Math.max(0, (Date.now() / 1000 - (firstTimestamp || timestamps[0])) / 86400);
   if (ageDays > 365) { points += 20; signals.push(`Wallet active for over a year (${Math.round(ageDays)} days).`); }
   else if (ageDays > 30) { points += 10; signals.push(`Wallet active for ${Math.round(ageDays)} days.`); }
   else { points -= 10; signals.push(`Recently created wallet (${Math.round(ageDays)} days) — limited history.`); }
 
   const txCount = txs.length;
-  if (txCount > 200) { points += 15; signals.push(`Sustained activity: ${txCount} transactions.`); }
+  if (txCount >= 1000) { points += 15; signals.push(`High recent volume: ${txCount}+ transactions in the most recent window.`); }
+  else if (txCount > 200) { points += 15; signals.push(`Sustained activity: ${txCount} transactions.`); }
   else if (txCount > 20) { points += 8; signals.push(`${txCount} transactions on record.`); }
   else { signals.push(`Low volume: ${txCount} transactions.`); }
 
@@ -100,11 +101,18 @@ async function walletRisk(req, res) {
   if (!ADDRESS_RE.test(address)) return res.status(400).json({ error: 'invalid_address' });
 
   try {
-    const [txData, tokenData] = await Promise.all([
-      etherscan({ module: 'account', action: 'txlist', address, startblock: 0, endblock: 99999999, sort: 'asc' }, KEY),
-      etherscan({ module: 'account', action: 'tokentx', address, startblock: 0, endblock: 99999999, sort: 'asc' }, KEY),
+    // Etherscan caps a single txlist/tokentx call at ~1000 records. For wallets with more
+    // activity than that, "sort=asc" alone would only ever return the EARLIEST slice —
+    // skewing every downstream signal (volume, diversity, the chart) toward old history.
+    // So: one cheap call (offset=1) for the true first transaction (wallet age), and the
+    // main call sorted "desc" (most recent 1000) for everything about current activity.
+    const [firstTxData, txData, tokenData] = await Promise.all([
+      etherscan({ module: 'account', action: 'txlist', address, startblock: 0, endblock: 99999999, sort: 'asc', page: 1, offset: 1 }, KEY),
+      etherscan({ module: 'account', action: 'txlist', address, startblock: 0, endblock: 99999999, sort: 'desc', page: 1, offset: 1000 }, KEY),
+      etherscan({ module: 'account', action: 'tokentx', address, startblock: 0, endblock: 99999999, sort: 'desc', page: 1, offset: 1000 }, KEY),
     ]);
 
+    const firstTx = Array.isArray(firstTxData.result) ? firstTxData.result : [];
     const txs = Array.isArray(txData.result) ? txData.result : [];
     const tokenTxs = Array.isArray(tokenData.result) ? tokenData.result : [];
 
@@ -112,7 +120,7 @@ async function walletRisk(req, res) {
       return res.status(502).json({ error: 'upstream', detail: txData.message || 'Etherscan error' });
     }
 
-    const result = walletScore(txs, tokenTxs);
+    const result = walletScore(txs, tokenTxs, firstTx[0] ? Number(firstTx[0].timeStamp) : null);
     const activity = monthlyActivity(txs);
     return res.status(200).json({ address, txCount: txs.length, ...result, ...activity });
   } catch (e) {

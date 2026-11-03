@@ -84,7 +84,7 @@
     btn.disabled = true;
     loading.classList.add('show');
     try {
-      const r = await fetch(`/api/wallet-risk?address=${encodeURIComponent(address)}`);
+      const r = await fetch(`/api/generate?tool=wallet-risk&address=${encodeURIComponent(address)}`);
       const data = await r.json();
       if (!r.ok) throw new Error(data.error || 'request_failed');
       render(data);

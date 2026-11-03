@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Floryne Pierson - AI Product Builder (source)</title>
 <style>
-@page{size:A4;margin:11mm 16mm}
+@page{size:A4;margin:9mm 16mm}
 body{font-family:Arial,Helvetica,sans-serif;color:#1f2937;font-size:9.7pt;line-height:1.32;margin:0}
 h1{font-size:20pt;margin:0 0 2px;color:#1e3a8a;letter-spacing:.3px}
-h2{font-size:10.3pt;letter-spacing:.5px;text-transform:uppercase;margin:17px 0 6px;color:#1e3a8a;border-bottom:1px solid #cbd5e1;padding-bottom:2px}
+h2{font-size:10.3pt;letter-spacing:.5px;text-transform:uppercase;margin:13px 0 5px;color:#1e3a8a;border-bottom:1px solid #cbd5e1;padding-bottom:2px}
 .title{font-size:11pt;font-weight:bold;margin:2px 0 5px;color:#1e3a8a}
 .contact{font-size:8.8pt;margin:1px 0;color:#334155}
 .contact a{color:#0369a1;text-decoration:none}
-.role{font-weight:bold;margin:13px 0 0;color:#1e3a8a;font-size:10.1pt}
+.role{font-weight:bold;margin:0;color:#1e3a8a;font-size:10.1pt}
+.role-row{display:flex;gap:9px;align-items:center;margin:10px 0 0}
+.role-logo{width:28px;height:28px;object-fit:contain;flex-shrink:0;border-radius:4px}
 .meta{font-size:8.8pt;font-style:italic;color:#0369a1;margin:0 0 3px}
 p{margin:3px 0}
 ul{margin:2px 0 6px;padding-left:16px}
 li{margin:0 0 2px}
 b{color:#111827}
-.edu-entry{margin:0 0 11px;display:flex;gap:9px;align-items:flex-start}
-.edu-logo{width:22px;height:22px;object-fit:contain;flex-shrink:0;margin-top:1px}
+.edu-entry{margin:0 0 10px;display:flex;gap:10px;align-items:flex-start}
+.edu-logo{width:34px;height:34px;object-fit:contain;flex-shrink:0;margin-top:1px}
 .edu-text{flex:1}
 </style></head><body>
 
@@ -30,12 +32,13 @@ b{color:#111827}
 
 <h2>Experience</h2>
 
-<div class="role">Founder &amp; Product Lead &mdash; Magical Chart</div>
+<div class="role-row"><img class="role-logo" src="/portfolio/assets/magical-chart-favicon.png" alt=""><div class="role">Founder &amp; Product Lead &mdash; Magical Chart</div></div>
 <div class="meta">May 2026&ndash;Present | Independent digital product | Remote | <a href="https://www.magicalchart.com">magicalchart.com</a></div>
 <ul>
 <li>Conceived and launched a bilingual AI-powered product with interactive tarot, astrology and numerology experiences; own its product direction, roadmap, user journeys and iteration.</li>
 <li>Shape pricing and the free-to-paid journey; use product analytics and customer feedback to prioritize improvements.</li>
-<li>Built an interactive, location-aware <a href="https://www.magicalchart.com/star-map">3D Star Map</a>, connecting the product's astronomy engine to a 3D sky and landscape with named stars and touch-friendly controls.</li>
+<li>Built an interactive, location-aware 3D Star Map (<a href="https://www.magicalchart.com/star-map">https://www.magicalchart.com/star-map</a>), connecting the product's astronomy engine to a 3D sky with named stars and touch-friendly controls.</li>
+<li>Added a 3D landscape mode to the same Star Map (<a href="https://www.magicalchart.com/star-map">https://www.magicalchart.com/star-map</a>) rendering the real horizon and terrain, so the sky feels grounded in a specific place instead of abstract.</li>
 <li>Scoped and shipped a multi-step AI agent (Anthropic tool-calling), deliberately contained: isolated page, daily usage quota, hard monthly spend cap read from usage logs before every call &mdash; validating demand before committing budget, not just a technical build.</li>
 <li>Built and published an open-source MCP (Model Context Protocol) server exposing the product's astronomical engine as callable tools for any AI agent, verified with a real client handshake before release.</li>
 <li>Build and deploy with Claude Code, Codex and Cursor, leading product decisions and AI-assisted workflows.</li>
@@ -44,7 +47,7 @@ b{color:#111827}
 <li>Latest 30-day analytics: <b>3,828 users and 5,011 sessions</b> in GA4 (12 Sep&ndash;11 Oct 2026); Search Console recorded <b>1,604 clicks</b> (12 Sep&ndash;10 Oct 2026).</li>
 </ul>
 
-<div class="role">Freelance Web &amp; AI Consultant &mdash; Independent</div>
+<div class="role-row"><img class="role-logo" src="/portfolio/assets/florynepierson-favicon.png" alt=""><div class="role">Freelance Web &amp; AI Consultant &mdash; Independent</div></div>
 <div class="meta">September 2025&ndash;Present | Remote | <a href="https://florynepierson.com">florynepierson.com</a></div>
 <ul>
 <li>Create websites for clients and advise on practical ways to use AI in their work.</li>
@@ -54,14 +57,14 @@ b{color:#111827}
 <li>Prospect for projects, clarify needs and scope solutions with prospective clients.</li>
 </ul>
 
-<div class="role">Private Tutor &mdash; Mathematics &amp; English</div>
+<div class="role-row"><img class="role-logo" src="/portfolio/assets/superprof-logo.png" alt=""><div class="role">Private Tutor &mdash; Mathematics &amp; English</div></div>
 <div class="meta">September 2025&ndash;Present | Middle school and high school level | France</div>
 <ul>
 <li>Provide one-to-one tutoring in mathematics and English for secondary-school students.</li>
 <li>Adapt explanations and practice to each student's level and learning goals.</li>
 </ul>
 
-<div class="role">Business Data Analyst &mdash; LOBELLIA Conseil / ASTILLIA</div>
+<div class="role-row"><img class="role-logo" src="/portfolio/assets/lobellia-logo.png" alt=""><img class="role-logo" src="/portfolio/assets/urssaf-logo.jpg" alt=""><div class="role">Business Data Analyst &mdash; LOBELLIA Conseil / ASTILLIA</div></div>
 <div class="meta">September 2024&ndash;July 2025 | Permanent | Client assignment: URSSAF | Montrouge, France</div>
 <ul>
 <li>Analyzed and processed business data to support operational decision-making and reporting.</li>
@@ -70,7 +73,7 @@ b{color:#111827}
 <li><b>Tools:</b> SQL, PostgreSQL, Power BI, Git, pgAdmin.</li>
 </ul>
 
-<div class="role">Business Data Analyst Intern &mdash; LOBELLIA Conseil / ASTILLIA</div>
+<div class="role-row"><img class="role-logo" src="/portfolio/assets/lobellia-logo.png" alt=""><div class="role">Business Data Analyst Intern &mdash; LOBELLIA Conseil / ASTILLIA</div></div>
 <div class="meta">February 2024&ndash;August 2024 | Internship | Montrouge, France</div>
 <ul>
 <li>Developed and maintained Power BI dashboards for business users.</li>
@@ -79,7 +82,7 @@ b{color:#111827}
 <li><b>Tools:</b> Power BI, VBA.</li>
 </ul>
 
-<div class="role">AI &amp; Data Science Intern &mdash; Viaticum</div>
+<div class="role-row"><img class="role-logo" src="/portfolio/assets/viaticum-logo.png" alt=""><div class="role">AI &amp; Data Science Intern &mdash; Viaticum</div></div>
 <div class="meta">May 2023&ndash;August 2023 | Paris, France</div>
 <ul>
 <li>Independently designed and developed an AI-based approach to personalize travel offers using consumer profiles and preferences.</li>
@@ -88,7 +91,7 @@ b{color:#111827}
 <li><b>Tools:</b> Python, Deep Learning, NLP, Power BI.</li>
 </ul>
 
-<div class="role">Engineering Studies Intern &mdash; SNCF R&eacute;seau</div>
+<div class="role-row"><img class="role-logo" src="/portfolio/assets/sncf-logo.png" alt=""><div class="role">Engineering Studies Intern &mdash; SNCF R&eacute;seau</div></div>
 <div class="meta">June 2022&ndash;July 2022 | Metz, France</div>
 <ul>
 <li>Supported engineering teams with operational reporting, organization and analysis of information.</li>
@@ -114,8 +117,13 @@ General Engineering Degree, Data &amp; Artificial Intelligence major | 2021&ndas
 <div class="edu-entry">
 <div class="edu-text"><b>Lyc&eacute;e Fabert</b> &mdash; CPGE MPSI/MP* (Classes Pr&eacute;paratoires aux Grandes &Eacute;coles)<br>
 <i>Metz, France | 2018&ndash;2021</i><br>
-Two-year intensive preparatory program in advanced mathematics, physics and engineering sciences, admission by national competitive examination into France's top engineering and business schools &mdash; widely regarded as one of the most selective and academically demanding tracks in French higher education.<br>
-<u>Baccalaur&eacute;at:</u> Highest Honors.</div>
+Two-year intensive preparatory program in advanced mathematics, physics and engineering sciences, admission by national competitive examination into France's top engineering and business schools &mdash; widely regarded as one of the most selective and academically demanding tracks in French higher education.</div>
+</div>
+
+<div class="edu-entry">
+<div class="edu-text"><b>Lyc&eacute;e Georges de la Tour</b> &mdash; <u>Baccalaur&eacute;at</u> (French national secondary-school diploma)<br>
+<i>Metz, France | 2018</i><br>
+Scientific track (S), Mathematics specialization &mdash; Highest Honors.</div>
 </div>
 
 <h2>Skills</h2>

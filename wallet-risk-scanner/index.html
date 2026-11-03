@@ -134,7 +134,7 @@
     const ring = document.getElementById('ringFill');
     ring.setAttribute('stroke-dasharray', String(RING_C));
     ring.setAttribute('stroke-dashoffset', String(RING_C * (1 - data.score / 100)));
-    ring.className = 'fill' + (warn ? ' warn' : '');
+    ring.setAttribute('class', 'fill' + (warn ? ' warn' : ''));
     const labelEl = document.getElementById('scoreLabel');
     labelEl.textContent = data.label;
     labelEl.className = 'score-label' + (warn ? ' warn' : '');

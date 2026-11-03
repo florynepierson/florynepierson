@@ -117,7 +117,7 @@ async function walletRisk(req, res) {
     const tokenTxs = Array.isArray(tokenData.result) ? tokenData.result : [];
 
     if (txData.status === '0' && txData.message !== 'No transactions found') {
-      return res.status(502).json({ error: 'upstream', detail: txData.message || 'Etherscan error' });
+      return res.status(502).json({ error: 'upstream', detail: txData.result || txData.message || 'Etherscan error' });
     }
 
     const result = walletScore(txs, tokenTxs, firstTx[0] ? Number(firstTx[0].timeStamp) : null);

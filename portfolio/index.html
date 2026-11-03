@@ -192,16 +192,17 @@
             <div class="meta">Real astronomical calculations, exposed as tools for any AI agent</div>
             <p>A small server built on the <a class="text-link" href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" style="display:inline">Model Context Protocol</a> (MCP), the open standard for connecting AI agents to external tools, exposing real astronomical calculations as callable tools rather than a one-off script.</p>
             <ul>
-              <li>Built natal chart and planet-position tools on the open-source astronomy-engine library, with typed tool schemas any MCP-compatible AI client can call.</li>
+              <li>One tool runs locally on the open-source astronomy-engine library; the other, <code>get_natal_chart</code>, calls Magical Chart's live production astrology API over HTTP, surfacing the real engine's results without exposing its source.</li>
+              <li>Typed tool schemas (zod) any MCP-compatible AI client can call, with clear errors instead of silent failures if the live API is unreachable or rate-limited.</li>
               <li>Verified the server with a real MCP client handshake and a live tool call before publishing, not just a schema definition.</li>
               <li>Published open-source so any MCP client (Claude Desktop and others) can query real astronomical data directly.</li>
             </ul>
-            <div class="skill-tags" aria-label="Skills shown"><span>MCP protocol</span><span>Tool schemas</span><span>Astronomical computation</span></div>
+            <div class="skill-tags" aria-label="Skills shown"><span>MCP protocol</span><span>Tool schemas</span><span>Live API integration</span></div>
             <p style="margin-top:18px"><a class="text-link" href="https://github.com/florynepierson/mcp-astrology-demo" target="_blank" rel="noopener noreferrer">View the repository ↗</a></p>
           </div>
           <div class="case-visual">
-            <img class="feature-shot" src="/portfolio/assets/mcp-astrology-demo-terminal.png" alt="Terminal showing a real MCP tools/call exchange: get_natal_chart returning planetary placements and aspects" loading="lazy">
-            <div class="visual-caption">A real tools/call exchange: get_natal_chart returning planetary placements and aspects.</div>
+            <img class="feature-shot" src="/portfolio/assets/mcp-astrology-demo-terminal.png" alt="Terminal showing a real MCP tools/call exchange: get_natal_chart fetching planetary placements, houses and chart angles from the live production API" loading="lazy">
+            <div class="visual-caption">A real tools/call exchange: get_natal_chart fetching a live chart, including houses and angles, from magicalchart.com/api/v1/natal.</div>
           </div>
         </article>
 

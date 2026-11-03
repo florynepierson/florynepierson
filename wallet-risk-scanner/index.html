@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wallet Risk Scanner — Ethereum activity heuristics demo</title>
+  <meta name="description" content="A portfolio tool that scores the on-chain activity of an Ethereum address using transparent statistical heuristics, built on the Etherscan API.">
+  <style>
+    :root{--ink:#17251f;--muted:#6e7c73;--paper:#f7f5ef;--card:#fff;--line:#e4e6df;--sage:#78947d;--deep:#263d31;--gold:#b28b52;--red:#b85c52;--blue:#5d7e91;--green:#477252}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}button{font:inherit}
+    .shell{max-width:860px;margin:auto;padding:28px 30px 42px}
+    .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}.brand{display:flex;gap:11px;align-items:center;font-weight:750;letter-spacing:-.02em}.mark{width:34px;height:34px;border-radius:11px;background:var(--deep);color:#f3dfae;display:grid;place-items:center;font-size:18px}.demo{font-size:11px;color:#795c32;border:1px solid #dbc9a8;border-radius:99px;padding:7px 12px;background:#fffaf0;letter-spacing:.08em;font-weight:750}
+    .eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--sage);font-weight:750;margin:0 0 11px}
+    h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(34px,4.6vw,50px);line-height:1.02;letter-spacing:-.045em;margin:0 0 15px}
+    h1 em{color:var(--sage);font-style:normal}
+    .lede{font-size:16px;line-height:1.55;color:var(--muted);max-width:640px;margin:0 0 22px}
+    .method{display:flex;align-items:flex-start;gap:10px;margin-bottom:24px;padding:12px 14px;border:1px solid #d8e2d8;background:#eef3ed;border-radius:12px;color:#405f48;font-size:12px;line-height:1.5}.method b{white-space:nowrap}
+    .form{display:flex;gap:10px;margin-bottom:22px}
+    .form input{flex:1;font:inherit;font-size:14px;padding:13px 15px;border:1px solid var(--line);border-radius:11px;background:var(--card);color:var(--ink)}
+    .form button{font-size:14px;font-weight:750;padding:13px 20px;border-radius:11px;border:none;background:var(--deep);color:#f3dfae;cursor:pointer}
+    .form button:disabled{opacity:.5;cursor:default}
+    .examples{font-size:12px;color:var(--muted);margin:-12px 0 22px}
+    .examples button{background:none;border:none;color:var(--blue);text-decoration:underline;cursor:pointer;font:inherit;padding:0}
+    .result{display:none;border:1px solid var(--line);border-radius:15px;background:var(--card);padding:22px 24px;box-shadow:0 5px 20px #20352c06}
+    .result.show{display:block}
+    .score-row{display:flex;align-items:center;gap:18px;margin-bottom:16px}
+    .score-num{font-family:Georgia,serif;font-size:48px;letter-spacing:-.03em}
+    .score-label{font-size:13px;font-weight:750;padding:6px 12px;border-radius:99px;background:#eef3ed;color:var(--deep)}
+    .score-label.warn{background:#f5e4e1;color:var(--red)}
+    .meta{font-size:12px;color:var(--muted);margin-bottom:14px}
+    .signals{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+    .signals li{font-size:13px;line-height:1.5;padding:10px 12px;border-radius:10px;background:#fbfbf8;border:1px solid var(--line)}
+    .error{display:none;color:#99514a;font-size:13px;margin-bottom:16px}
+    .error.show{display:block}
+    .loading{display:none;color:var(--muted);font-size:13px;margin-bottom:16px}
+    .loading.show{display:block}
+    .footer-note{font-size:11px;color:var(--muted);margin-top:28px;line-height:1.5}
+    @media(max-width:560px){.shell{padding:20px 15px 35px}.form{flex-direction:column}.score-row{flex-wrap:wrap}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <header class="top"><div class="brand"><span class="mark" aria-hidden="true">◈</span> Wallet Risk Scanner</div><span class="demo">PORTFOLIO TOOL · LIVE DATA</span></header>
+  <p class="eyebrow">Ethereum on-chain activity heuristics</p>
+  <h1>How established is this <em>wallet?</em></h1>
+  <p class="lede">Enter any public Ethereum address. The tool pulls its real transaction history from Etherscan and scores it using transparent, rule-based heuristics — wallet age, transaction volume and regularity, token diversity, and known flagged addresses.</p>
+  <div class="method"><b>Method note</b><span>This is statistical scoring, not a trained machine-learning model: each signal below is a simple, inspectable rule. Built to be honest about what it is — a data-analysis exercise, not a fraud-detection product.</span></div>
+  <div class="form">
+    <input id="address" type="text" placeholder="0x..." autocomplete="off" spellcheck="false">
+    <button id="scan">Scan</button>
+  </div>
+  <p class="examples">Try an example: <button data-addr="0x1f9090aaE28b8a3dCeaDf281B0F12828e676c326">a known exchange hot wallet</button></p>
+  <div class="loading" id="loading">Fetching on-chain history…</div>
+  <div class="error" id="error"></div>
+  <section class="result" id="result">
+    <div class="score-row"><div class="score-num" id="scoreNum">—</div><div class="score-label" id="scoreLabel"></div></div>
+    <div class="meta" id="meta"></div>
+    <ul class="signals" id="signals"></ul>
+  </section>
+  <p class="footer-note">Portfolio tool · Reads public on-chain data via the Etherscan API · No wallet connection, no private keys, no transactions ever requested.</p>
+</main>
+<script>
+  const input = document.getElementById('address');
+  const btn = document.getElementById('scan');
+  const loading = document.getElementById('loading');
+  const errorBox = document.getElementById('error');
+  const result = document.getElementById('result');
+
+  document.querySelectorAll('.examples button[data-addr]').forEach((b) => {
+    b.addEventListener('click', () => { input.value = b.dataset.addr; scan(); });
+  });
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') scan(); });
+  btn.addEventListener('click', scan);
+
+  async function scan() {
+    const address = input.value.trim();
+    errorBox.classList.remove('show');
+    result.classList.remove('show');
+    if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
+      errorBox.textContent = 'That doesn\'t look like a valid Ethereum address (expected 0x followed by 40 hex characters).';
+      errorBox.classList.add('show');
+      return;
+    }
+    btn.disabled = true;
+    loading.classList.add('show');
+    try {
+      const r = await fetch(`/api/wallet-risk?address=${encodeURIComponent(address)}`);
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || 'request_failed');
+      render(data);
+    } catch (e) {
+      errorBox.textContent = 'Could not fetch this wallet\'s history right now. Please try again in a moment.';
+      errorBox.classList.add('show');
+    } finally {
+      btn.disabled = false;
+      loading.classList.remove('show');
+    }
+  }
+
+  function render(data) {
+    document.getElementById('scoreNum').textContent = data.score;
+    const labelEl = document.getElementById('scoreLabel');
+    labelEl.textContent = data.label;
+    labelEl.className = 'score-label' + (data.label === 'Suspicious activity' ? ' warn' : '');
+    document.getElementById('meta').textContent = `${data.txCount} transaction${data.txCount === 1 ? '' : 's'} found for ${data.address}`;
+    document.getElementById('signals').innerHTML = (data.signals || []).map((s) => `<li>${s}</li>`).join('');
+    result.classList.add('show');
+  }
+</script>
+</body>
+</html>

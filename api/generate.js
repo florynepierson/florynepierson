@@ -1,7 +1,7 @@
 // Serverless (Vercel) — génère une annonce immobilière via Claude Haiku (FR ou EN).
 // Coût ~fraction de centime par appel. Nécessite ANTHROPIC_API_KEY dans le projet Vercel.
 const { allowed, rateLimit } = require('../lib/security.js');
-const { remainingBudgetCents, recordSpendCents, debugEnvPresence } = require('../lib/budget.js');
+const { remainingBudgetCents, recordSpendCents } = require('../lib/budget.js');
 
 // --- Wallet Risk Scanner (voir wallet-risk-scanner/index.html) -----------------------------
 // Routé via ?tool=wallet-risk sur ce même endpoint plutôt qu'un fichier api/ séparé : le plan
@@ -199,8 +199,6 @@ async function walletAgent(req, res) {
   const ETHERSCAN_KEY = process.env.ETHERSCAN_API_KEY;
   const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
   if (!ETHERSCAN_KEY || !ANTHROPIC_KEY) return res.status(500).json({ error: 'no_key' });
-
-  if (req.query.debug === '1') return res.status(200).json(await debugEnvPresence());
 
   const address = String(req.query.address || '').trim();
   if (!ADDRESS_RE.test(address)) return res.status(400).json({ error: 'invalid_address' });

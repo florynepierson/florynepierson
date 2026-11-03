@@ -199,6 +199,26 @@
           </div>
         </article>
 
+        <article class="case">
+          <div class="case-copy">
+            <div class="case-type">Open-source · RAG pipeline</div>
+            <h3>RAG demo</h3>
+            <div class="meta">Vector embeddings and semantic search, the retrieval side I hadn't worked with in production</div>
+            <p>Magical Chart's assistant, Wooly, retrieves knowledge with keyword and logic-based matching, not vector search. I built this small pipeline end to end to get hands-on with the embeddings/pgvector side of RAG specifically, using a knowledge base about Magical Chart itself.</p>
+            <ul>
+              <li>Ingests short facts, embeds them with Voyage AI (<code>voyage-4-lite</code>), and stores them in Supabase Postgres with the pgvector extension.</li>
+              <li>At query time: embed the question, retrieve the most similar stored facts by cosine similarity, then send the question plus retrieved context to Claude so the answer is grounded in that context rather than the model's general knowledge.</li>
+              <li>Verified retrieval quality by checking similarity scores against expected matches before trusting the generated answer &mdash; the screenshot is a real run, not a scripted example.</li>
+            </ul>
+            <div class="skill-tags" aria-label="Skills shown"><span>Vector embeddings</span><span>pgvector</span><span>Grounded generation</span></div>
+            <p style="margin-top:18px"><a class="text-link" href="https://github.com/florynepierson/rag-demo-provectus" target="_blank" rel="noopener noreferrer">View the repository ↗</a></p>
+          </div>
+          <div class="case-visual">
+            <img class="feature-shot" src="/portfolio/assets/rag-demo-provectus-terminal.png" alt="Terminal showing a real RAG query: embedding a question, retrieving the top 3 matches by similarity score from pgvector, then Claude's grounded answer" loading="lazy">
+            <div class="visual-caption">A real run: retrieval ranks the right passage first (similarity 0.713) and Claude answers using only that context.</div>
+          </div>
+        </article>
+
       </div>
     </section>
 

@@ -85,12 +85,13 @@
             <div class="meta">Bilingual B2C product · English &amp; French</div>
             <p>I build and operate a content-led product for tarot, astrology and self-reflection. The work combines a large editorial library with interactive tools and an AI companion.</p>
             <ul>
+              <li>Built the astronomical calculation engine itself, from scratch: planetary positions validated against Swiss Ephemeris reference data across 10 bodies (mean error &lt;0.003°, worst case &lt;0.02°), 141 automated tests. Every chart, reading and the MCP server below runs on this engine.</li>
               <li>Shipped a multi-step AI agent (Anthropic tool-calling) that decides at runtime which internal tool to call before answering, with a hard monthly spend cap read from usage logs before every call.</li>
               <li>Created and maintain a library of 1,000+ editorial pages, guides and tool pages.</li>
               <li>Organize pages around search intent; improve internal links, templates and selected landing pages.</li>
               <li>Review query and page data to identify overlap, content gaps and practical updates.</li>
             </ul>
-            <div class="skill-tags" aria-label="Skills shown"><span>Editorial SEO</span><span>Content planning</span><span>Search Console</span><span>Clarity</span><span>AI agents</span></div><p style="margin-top:18px"><a class="text-link" href="https://www.magicalchart.com" target="_blank" rel="noopener noreferrer">Explore the live product ↗</a></p>
+            <div class="skill-tags" aria-label="Skills shown"><span>Astronomical computation</span><span>Editorial SEO</span><span>Content planning</span><span>Search Console</span><span>Clarity</span><span>AI agents</span></div><p style="margin-top:18px"><a class="text-link" href="https://www.magicalchart.com" target="_blank" rel="noopener noreferrer">Explore the live product ↗</a></p>
           </div>
           <div class="case-visual">
             <button class="image-link image-preview-trigger" type="button" data-magical-preview="0" aria-label="View Magical Chart homepage image"><img class="feature-shot" src="/portfolio/assets/magical-chart-homepage.png" alt="Magical Chart homepage showing Wooly, the product navigation and a free tarot reading" loading="lazy"></button>
@@ -183,7 +184,7 @@
             <div class="meta">Real astronomical calculations, exposed as tools for any AI agent</div>
             <p>A small server built on the <a class="text-link" href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" style="display:inline">Model Context Protocol</a> (MCP), the open standard for connecting AI agents to external tools, exposing real astronomical calculations as callable tools rather than a one-off script.</p>
             <ul>
-              <li>One tool runs locally on the open-source astronomy-engine library; the other, <code>get_natal_chart</code>, calls Magical Chart's live production astrology API over HTTP, surfacing the real engine's results without exposing its source.</li>
+              <li>One tool runs locally on the open-source astronomy-engine library; the other, <code>get_natal_chart</code>, calls my own proprietary astronomical engine (the Swiss Ephemeris-validated one powering Magical Chart, see above) live over HTTP, surfacing its real results without exposing its source.</li>
               <li>Typed tool schemas (zod) any MCP-compatible AI client can call, with clear errors instead of silent failures if the live API is unreachable or rate-limited.</li>
               <li>Verified the server with a real MCP client handshake and a live tool call before publishing, not just a schema definition.</li>
               <li>Published open-source so any MCP client (Claude Desktop and others) can query real astronomical data directly.</li>

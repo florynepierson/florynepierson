@@ -98,8 +98,9 @@
               <li>Created and maintain a library of 1,000+ editorial pages, guides and tool pages.</li>
               <li>Organize pages around search intent; improve internal links, templates and selected landing pages.</li>
               <li>Review query and page data to identify overlap, content gaps and practical updates.</li>
+              <li>Shipped a multi-step AI agent (Anthropic tool-calling) that decides at runtime which internal tool to call before answering, with a hard monthly spend cap read from usage logs before every call.</li>
             </ul>
-            <div class="skill-tags" aria-label="Skills shown"><span>Editorial SEO</span><span>Content planning</span><span>Search Console</span><span>Clarity</span></div><p style="margin-top:18px"><a class="text-link" href="https://www.magicalchart.com" target="_blank" rel="noopener noreferrer">Explore the live product ↗</a></p>
+            <div class="skill-tags" aria-label="Skills shown"><span>Editorial SEO</span><span>Content planning</span><span>Search Console</span><span>Clarity</span><span>AI agents</span></div><p style="margin-top:18px"><a class="text-link" href="https://www.magicalchart.com" target="_blank" rel="noopener noreferrer">Explore the live product ↗</a></p>
           </div>
           <div class="case-visual">
             <button class="image-link image-preview-trigger" type="button" data-magical-preview="0" aria-label="View Magical Chart homepage image"><img class="feature-shot" src="/portfolio/assets/magical-chart-homepage.png" alt="Magical Chart homepage showing Wooly, the product navigation and a free tarot reading" loading="lazy"></button>
@@ -263,7 +264,7 @@
     <section class="more-work" id="projects" aria-labelledby="projects-title">
       <div class="section-head"><h2 id="projects-title">More things I’ve built</h2><p>Interactive tools, AI demos and product prototypes</p></div>
       <details class="project-disclosure">
-      <summary>Browse 5 projects <span class="disclosure-chevron" aria-hidden="true">⌄</span></summary>
+      <summary>Browse 6 projects <span class="disclosure-chevron" aria-hidden="true">⌄</span></summary>
       <div class="disclosure-content">
       <div class="project-grid">
         <article class="project funnel-project">
@@ -283,15 +284,14 @@
           <div class="project-body"><div class="case-type">Interactive data &amp; ML demo</div><h3 class="title-with-mark"><img class="title-mark" src="/portfolio/assets/logo-simulator.svg" alt="" aria-hidden="true"><span>Real-estate agency simulator</span></h3><p>A dashboard prototype using sample data to explore lead scoring, estimated time to sale and commission forecasting. It brings the analysis into an interface an agency team can interact with.</p><div class="skill-tags" aria-label="Skills shown"><span>Data analysis</span><span>Forecasting</span><span>Dashboard design</span></div><a class="text-link" href="https://floryne-immo.streamlit.app/" target="_blank" rel="noopener noreferrer">Open the interactive simulator ↗</a><p><a class="text-link" href="/immo/" target="_blank" rel="noopener noreferrer">Read about the demo and models ↗</a></p><div class="visual-caption">Demo only; the figures and records are fictional.</div></div>
         </article>
         <article class="project">
+          <a class="project-cover" href="https://github.com/florynepierson/mcp-astrology-demo" target="_blank" rel="noopener noreferrer" aria-label="Open the MCP astrology demo repository"><img src="/portfolio/assets/mcp-astrology-demo-terminal.png" alt="Terminal showing a real MCP tools/call exchange: get_natal_chart returning planetary placements and aspects" loading="lazy"></a>
+          <div class="project-body"><div class="case-type">MCP server · Open-source demo</div><h3>Astrology MCP server</h3><p>A small <a class="text-link" href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" style="display:inline">MCP</a> server exposing real astronomical calculations (natal chart, planet positions) as tools for any MCP-compatible AI client, built on the open-source astronomy-engine library. Verified with a real client handshake before publishing.</p><div class="skill-tags" aria-label="Skills shown"><span>MCP protocol</span><span>Tool schemas</span><span>Astronomical computation</span></div><a class="text-link" href="https://github.com/florynepierson/mcp-astrology-demo" target="_blank" rel="noopener noreferrer">View the repository ↗</a></div>
+        </article>
+        <article class="project">
           <div class="project-cover"><img src="/portfolio/assets/looker-ethereum-volume.png" alt="Looker Studio chart of daily ETH transaction volume for Q1 2023, showing a sharp spike around mid-March" loading="lazy"></div>
           <div class="project-body"><div class="case-type">Looker Studio dashboard · Personal data analysis</div><h3>Ethereum value analysis</h3><p>A personal data analysis project tracking daily Ethereum transaction volume, built in Google Looker Studio out of genuine interest in crypto markets. This view covers Q1 2023 and surfaces a sharp mid-March volume spike against an otherwise steady baseline.</p><div class="skill-tags" aria-label="Skills shown"><span>Data analysis</span><span>Dashboard design</span><span>Crypto markets</span></div>
-            <details class="project-disclosure" style="margin-top:12px">
-              <summary>Open the live dashboard <span class="disclosure-chevron" aria-hidden="true">⌄</span></summary>
-              <div class="disclosure-content" style="margin-top:10px">
-                <iframe src="https://datastudio.google.com/embed/reporting/ed3866a3-c04a-4a82-b4cf-015ea4415870/page/p_3mhus2ozzd" style="border:0;width:100%;height:420px" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" title="Ethereum value analysis Looker Studio report" loading="lazy"></iframe>
-                <div class="visual-caption">The live dashboard may require a Google account to load.</div>
-              </div>
-            </details>
+            <a class="text-link" href="https://datastudio.google.com/reporting/ed3866a3-c04a-4a82-b4cf-015ea4415870/page/p_3mhus2ozzd" target="_blank" rel="noopener noreferrer">Open the live dashboard ↗</a>
+            <div class="visual-caption">The live dashboard requires a Google account to view.</div>
           </div>
         </article>
       </div>

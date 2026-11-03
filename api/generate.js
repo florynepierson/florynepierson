@@ -200,7 +200,7 @@ async function walletAgent(req, res) {
   const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
   if (!ETHERSCAN_KEY || !ANTHROPIC_KEY) return res.status(500).json({ error: 'no_key' });
 
-  if (req.query.debug === '1') return res.status(200).json(debugEnvPresence());
+  if (req.query.debug === '1') return res.status(200).json(await debugEnvPresence());
 
   const address = String(req.query.address || '').trim();
   if (!ADDRESS_RE.test(address)) return res.status(400).json({ error: 'invalid_address' });

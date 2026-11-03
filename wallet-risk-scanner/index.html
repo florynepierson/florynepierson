@@ -52,6 +52,15 @@
     .signals{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
     .signals li{font-size:12.5px;line-height:1.55;padding:11px 13px;border-radius:8px;background:rgba(255,255,255,.015);border:1px solid var(--line2);color:#c9e8e0;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
     .signals li::before{content:'▸ ';color:var(--cyan)}
+    .chart{margin:20px 0 22px}
+    .chart-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+    .chart-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);font-weight:700}
+    .chart-note{font-size:11px;color:var(--muted)}
+    .bars{display:flex;align-items:flex-end;gap:3px;height:92px;padding:0 2px;border-bottom:1px solid var(--line2)}
+    .bar{flex:1;min-width:4px;background:linear-gradient(180deg,var(--cyan),var(--green-dim));border-radius:2px 2px 0 0;position:relative;cursor:default;opacity:.85;transition:opacity .15s}
+    .bar:hover{opacity:1}
+    .bar[data-zero="1"]{background:var(--line2);opacity:.4}
+    .bar-labels{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--muted);font-family:Inter,ui-sans-serif,system-ui,sans-serif}
     .error{display:none;color:var(--red);font-size:13px;margin-bottom:16px;font-family:Inter,ui-sans-serif,system-ui,sans-serif;border-left:2px solid var(--red);padding-left:10px}
     .error.show{display:block}
     .loading{display:none;color:var(--cyan);font-size:13px;margin-bottom:16px}
@@ -83,6 +92,11 @@
         <div class="score-num-wrap" id="scoreNumWrap"><span id="scoreNum">—</span></div>
       </div>
       <div class="score-meta"><div class="score-label" id="scoreLabel"></div><div class="meta" id="meta"></div></div>
+    </div>
+    <div class="chart" id="chart">
+      <div class="chart-head"><span class="chart-title">Monthly transaction activity</span><span class="chart-note" id="chartNote"></span></div>
+      <div class="bars" id="bars"></div>
+      <div class="bar-labels" id="barLabels"></div>
     </div>
     <ul class="signals" id="signals"></ul>
   </section>
@@ -140,7 +154,28 @@
     labelEl.className = 'score-label' + (warn ? ' warn' : '');
     document.getElementById('meta').textContent = `${data.txCount} transaction${data.txCount === 1 ? '' : 's'} · ${data.address}`;
     document.getElementById('signals').innerHTML = (data.signals || []).map((s) => `<li>${s}</li>`).join('');
+    renderChart(data.buckets || [], data.droppedMonths || 0);
     result.classList.add('show');
+  }
+
+  const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function monthLabel(key) {
+    const [y, m] = key.split('-');
+    return `${MONTH_NAMES[Number(m) - 1]}'${y.slice(2)}`;
+  }
+
+  function renderChart(buckets, dropped) {
+    const chart = document.getElementById('chart');
+    const bars = document.getElementById('bars');
+    const labels = document.getElementById('barLabels');
+    const note = document.getElementById('chartNote');
+    if (!buckets.length) { chart.style.display = 'none'; return; }
+    chart.style.display = '';
+    const max = Math.max(1, ...buckets.map((b) => b.count));
+    bars.innerHTML = buckets.map((b) => `<div class="bar" data-zero="${b.count === 0 ? '1' : '0'}" style="height:${Math.max(3, Math.round((b.count / max) * 92))}px" title="${monthLabel(b.month)}: ${b.count} tx"></div>`).join('');
+    const step = Math.ceil(buckets.length / 6);
+    labels.innerHTML = buckets.map((b, i) => (i % step === 0 || i === buckets.length - 1) ? `<span>${monthLabel(b.month)}</span>` : '<span></span>').join('');
+    note.textContent = dropped > 0 ? `last 24 months shown · ${dropped} earlier month${dropped === 1 ? '' : 's'} not displayed` : `${buckets.length} month${buckets.length === 1 ? '' : 's'}`;
   }
 </script>
 </body>

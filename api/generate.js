@@ -68,6 +68,22 @@ function walletScore(txs, tokenTxs) {
   return { score: Math.round(points), label, signals };
 }
 
+// Buckets tx counts by month (YYYY-MM) and caps the series to the most recent 24 buckets,
+// reporting how many earlier months were dropped instead of silently truncating.
+function monthlyActivity(txs) {
+  const counts = new Map();
+  for (const t of txs) {
+    const d = new Date(Number(t.timeStamp) * 1000);
+    const key = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
+    counts.set(key, (counts.get(key) || 0) + 1);
+  }
+  const months = [...counts.keys()].sort();
+  const MAX = 24;
+  const dropped = Math.max(0, months.length - MAX);
+  const kept = months.slice(-MAX);
+  return { buckets: kept.map((m) => ({ month: m, count: counts.get(m) })), droppedMonths: dropped };
+}
+
 async function walletRisk(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
   if (!allowed(req)) return res.status(403).json({ error: 'forbidden' });
@@ -97,7 +113,8 @@ async function walletRisk(req, res) {
     }
 
     const result = walletScore(txs, tokenTxs);
-    return res.status(200).json({ address, txCount: txs.length, ...result });
+    const activity = monthlyActivity(txs);
+    return res.status(200).json({ address, txCount: txs.length, ...result, ...activity });
   } catch (e) {
     return res.status(500).json({ error: 'server' });
   }

@@ -108,6 +108,7 @@
               <figure><button class="image-preview-trigger" type="button" data-magical-preview="1" aria-label="View Birth chart image"><img src="/portfolio/assets/magical-chart-birth-chart.jpg" alt="Magical Chart birth chart page" loading="lazy"></button><figcaption>Birth chart</figcaption></figure>
               <figure><button class="image-preview-trigger" type="button" data-magical-preview="2" aria-label="View Akashic reading image"><img src="/portfolio/assets/magical-chart-akashic.jpg" alt="Magical Chart Akashic Records reading page" loading="lazy"></button><figcaption>Akashic reading</figcaption></figure>
               <figure><button class="image-preview-trigger" type="button" data-magical-preview="3" aria-label="View Wooly image"><img src="/portfolio/assets/wooly-small.png" alt="Wooly the sheep mascot on a starry night" loading="lazy"></button><figcaption>Wooly · AI companion</figcaption></figure>
+              <figure><button class="image-preview-trigger" type="button" data-magical-preview="5" aria-label="View AI reading example image"><img src="/portfolio/assets/magical-chart-tarot-reading-example.jpg" alt="Example of Wooly's contextual AI tarot reading, connecting three cards to the specific question asked" loading="lazy"></button><figcaption>AI reading example</figcaption></figure>
             </div>
             <div class="wooly-feature"><button class="image-preview-trigger" type="button" data-magical-preview="4" aria-label="View Wooly feature image"><img src="/portfolio/assets/wooly-magical-chart.png" alt="Wooly, the friendly sheep mascot from Magical Chart" loading="lazy"></button><div><strong>Meet Wooly</strong><span>The friendly AI companion inside Magical Chart.</span></div></div>
           </div>
@@ -180,6 +181,26 @@
               </div>
             </div>
             <div class="visual-caption">Click a screenshot to browse the Star Map carousel.</div>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-copy">
+            <div class="case-type">Open-source · MCP server</div>
+            <h3>Astrology MCP server</h3>
+            <div class="meta">Real astronomical calculations, exposed as tools for any AI agent</div>
+            <p>A small server built on the <a class="text-link" href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" style="display:inline">Model Context Protocol</a> (MCP), the open standard for connecting AI agents to external tools, exposing real astronomical calculations as callable tools rather than a one-off script.</p>
+            <ul>
+              <li>Built natal chart and planet-position tools on the open-source astronomy-engine library, with typed tool schemas any MCP-compatible AI client can call.</li>
+              <li>Verified the server with a real MCP client handshake and a live tool call before publishing, not just a schema definition.</li>
+              <li>Published open-source so any MCP client (Claude Desktop and others) can query real astronomical data directly.</li>
+            </ul>
+            <div class="skill-tags" aria-label="Skills shown"><span>MCP protocol</span><span>Tool schemas</span><span>Astronomical computation</span></div>
+            <p style="margin-top:18px"><a class="text-link" href="https://github.com/florynepierson/mcp-astrology-demo" target="_blank" rel="noopener noreferrer">View the repository ↗</a></p>
+          </div>
+          <div class="case-visual">
+            <img class="feature-shot" src="/portfolio/assets/mcp-astrology-demo-terminal.png" alt="Terminal showing a real MCP tools/call exchange: get_natal_chart returning planetary placements and aspects" loading="lazy">
+            <div class="visual-caption">A real tools/call exchange: get_natal_chart returning planetary placements and aspects.</div>
           </div>
         </article>
 
@@ -266,10 +287,6 @@
           <div class="project-body"><div class="case-type">Interactive data &amp; ML demo</div><h3 class="title-with-mark"><img class="title-mark" src="/portfolio/assets/logo-simulator.svg" alt="" aria-hidden="true"><span>Real-estate agency simulator</span></h3><p>A dashboard prototype using sample data to explore lead scoring, estimated time to sale and commission forecasting. It brings the analysis into an interface an agency team can interact with.</p><div class="skill-tags" aria-label="Skills shown"><span>Data analysis</span><span>Forecasting</span><span>Dashboard design</span></div><a class="text-link" href="https://floryne-immo.streamlit.app/" target="_blank" rel="noopener noreferrer">Open the interactive simulator ↗</a><p><a class="text-link" href="/immo/" target="_blank" rel="noopener noreferrer">Read about the demo and models ↗</a></p><div class="visual-caption">Demo only; the figures and records are fictional.</div></div>
         </article>
         <article class="project">
-          <a class="project-cover" href="https://github.com/florynepierson/mcp-astrology-demo" target="_blank" rel="noopener noreferrer" aria-label="Open the MCP astrology demo repository"><img src="/portfolio/assets/mcp-astrology-demo-terminal.png" alt="Terminal showing a real MCP tools/call exchange: get_natal_chart returning planetary placements and aspects" loading="lazy"></a>
-          <div class="project-body"><div class="case-type">MCP server · Open-source demo</div><h3>Astrology MCP server</h3><p>A small <a class="text-link" href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" style="display:inline">MCP</a> server exposing real astronomical calculations (natal chart, planet positions) as tools for any MCP-compatible AI client, built on the open-source astronomy-engine library. Verified with a real client handshake before publishing.</p><div class="skill-tags" aria-label="Skills shown"><span>MCP protocol</span><span>Tool schemas</span><span>Astronomical computation</span></div><a class="text-link" href="https://github.com/florynepierson/mcp-astrology-demo" target="_blank" rel="noopener noreferrer">View the repository ↗</a></div>
-        </article>
-        <article class="project">
           <a class="project-cover" href="/wallet-risk-scanner/" target="_blank" rel="noopener noreferrer" aria-label="Open the Wallet Risk Scanner"><img src="/portfolio/assets/wallet-risk-scanner.png" alt="Wallet Risk Scanner showing an activity score and signals for an Ethereum address" loading="lazy"></a>
           <div class="project-body"><div class="case-type">Interactive on-chain data tool · Live Etherscan API</div><h3>Wallet Risk Scanner</h3><p>A tool that scores the real on-chain activity of any Ethereum address — wallet age, transaction volume and regularity, token diversity, known flagged addresses — using transparent, rule-based heuristics rather than a black-box model.</p><div class="skill-tags" aria-label="Skills shown"><span>On-chain data analysis</span><span>API integration</span><span>Heuristic scoring</span><span>Crypto markets</span></div>
             <a class="text-link" href="/wallet-risk-scanner/" target="_blank" rel="noopener noreferrer">Try the scanner ↗</a>
@@ -298,15 +315,15 @@
     <section class="process" id="approach" aria-labelledby="approach-title">
       <h2 id="approach-title">How I work</h2>
       <div class="steps">
-        <div><h3>Understand</h3><p>Start with the audience, the question they have, and the role the page should play.</p></div>
-        <div><h3>Build &amp; improve</h3><p>Research, outline and write content; create publishing calendars for Facebook and X/Twitter; then implement useful SEO improvements.</p></div>
-        <div><h3>Measure</h3><p>Read queries, page performance and user journeys. Share what changed and what the data can—and cannot—tell us.</p></div>
+        <div><h3>Understand</h3><p>Start with the user, the problem they have, and what the product or agent needs to do about it.</p></div>
+        <div><h3>Build &amp; improve</h3><p>Design and ship the product: AI agents and tool-calling, the application around them, and the content and pages that support it.</p></div>
+        <div><h3>Measure</h3><p>Read usage, query and behaviour data. Share what changed and what the data can—and cannot—tell us.</p></div>
       </div>
-      <div class="tools" aria-label="Tools"><span>Google Search Console</span><span>GA4</span><span>Microsoft Clarity</span><span>Ahrefs (free)</span><span>WordPress</span><span>SQL</span><span>Power BI</span></div>
+      <div class="tools" aria-label="Tools"><span>Claude Code</span><span>Anthropic API</span><span>MCP</span><span>SQL</span><span>Google Search Console</span><span>GA4</span><span>Microsoft Clarity</span><span>Power BI</span></div>
     </section>
 
     <section class="contact" id="contact" aria-label="Contact">
-      <div><h2><span>Let’s talk about content and search.</span><svg class="contact-quill" viewBox="0 0 80 80" aria-hidden="true"><defs><linearGradient id="quill-feather" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#fa4fc8"/><stop offset=".52" stop-color="#625bff"/><stop offset="1" stop-color="#00e5ff"/></linearGradient></defs><path d="M64 7C40 10 19 27 18 50c10-8 20-15 34-20C39 41 27 54 17 68c18 0 33-10 42-26 7-12 8-25 5-35Z" fill="url(#quill-feather)" stroke="#c5faff" stroke-width="2" stroke-linejoin="round"/><path d="M17 69 62 13M34 48l-2-14m12 2-1-13m-9 29 11 1m-18 8 12 2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="m17 69 4 8 3-10" fill="#fff1a6" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><circle cx="69" cy="14" r="3" fill="#fff1a6"/><path d="m69 7 1.4 5.5L76 14l-5.6 1.5L69 21l-1.5-5.5L62 14l5.5-1.5Z" fill="#00e5ff"/></svg></h2><p>Based in France · Open to fully remote roles across Europe</p>
+      <div><h2><span>Let’s talk about AI products.</span><svg class="contact-quill" viewBox="0 0 80 80" aria-hidden="true"><defs><linearGradient id="quill-feather" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#fa4fc8"/><stop offset=".52" stop-color="#625bff"/><stop offset="1" stop-color="#00e5ff"/></linearGradient></defs><path d="M64 7C40 10 19 27 18 50c10-8 20-15 34-20C39 41 27 54 17 68c18 0 33-10 42-26 7-12 8-25 5-35Z" fill="url(#quill-feather)" stroke="#c5faff" stroke-width="2" stroke-linejoin="round"/><path d="M17 69 62 13M34 48l-2-14m12 2-1-13m-9 29 11 1m-18 8 12 2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="m17 69 4 8 3-10" fill="#fff1a6" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><circle cx="69" cy="14" r="3" fill="#fff1a6"/><path d="m69 7 1.4 5.5L76 14l-5.6 1.5L69 21l-1.5-5.5L62 14l5.5-1.5Z" fill="#00e5ff"/></svg></h2><p>Based in France · Open to fully remote roles across Europe</p>
         <form class="contact-form" id="contact-form"><input type="hidden" name="_subject" value="Portfolio contact — Floryne Pierson">
           <label>Your name<input name="name" autocomplete="name" required placeholder="Your name"></label>
           <label>Your email<input name="_replyto" type="email" autocomplete="email" required placeholder="you@example.com"></label>
@@ -389,7 +406,8 @@
     { image: '/portfolio/assets/magical-chart-birth-chart.jpg', alt: 'Magical Chart birth chart page', caption: 'Birth chart', url: 'https://www.magicalchart.com/birth-chart' },
     { image: '/portfolio/assets/magical-chart-akashic.jpg', alt: 'Magical Chart Akashic Records reading page', caption: 'Akashic reading', url: 'https://www.magicalchart.com/akashic-records-reading' },
     { image: '/portfolio/assets/wooly-small.png', alt: 'Wooly the sheep mascot on a starry night', caption: 'Wooly · AI companion', url: 'https://www.magicalchart.com/' },
-    { image: '/portfolio/assets/wooly-magical-chart.png', alt: 'Wooly, the friendly sheep mascot from Magical Chart', caption: 'Meet Wooly', url: 'https://www.magicalchart.com/' }
+    { image: '/portfolio/assets/wooly-magical-chart.png', alt: 'Wooly, the friendly sheep mascot from Magical Chart', caption: 'Meet Wooly', url: 'https://www.magicalchart.com/' },
+    { image: '/portfolio/assets/magical-chart-tarot-reading-example.jpg', alt: 'Example of Wooly\'s contextual AI tarot reading, connecting three cards to the specific question asked', caption: 'AI reading example', url: 'https://www.magicalchart.com/tarot-reading-examples' }
   ];
   const magicalModal = document.querySelector('#magical-gallery-modal');
   let magicalIndex = 0;

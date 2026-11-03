@@ -129,8 +129,57 @@ async function walletRisk(req, res) {
 }
 // --- fin Wallet Risk Scanner -----------------------------------------------------------------
 
+// --- Gas Tracker (voir gas-tracker/index.html) ------------------------------------------------
+// Même routage que Wallet Risk Scanner : ?tool=gas-tracker sur cet endpoint, pas de fichier
+// api/ dédié (plafond de 12 fonctions serverless du plan Vercel Hobby).
+async function gasTracker(req, res) {
+  if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
+  if (!allowed(req)) return res.status(403).json({ error: 'forbidden' });
+  // Limite plus large que wallet-risk : la page sonde ce endpoint en direct toutes les
+  // ~20s tant que l'onglet reste ouvert, pour tracer une tendance live.
+  const quota = rateLimit(req, 'gas-tracker', 40, 10 * 60 * 1000);
+  if (!quota.allowed) {
+    res.setHeader('Retry-After', String(quota.retryAfter));
+    return res.status(429).json({ error: 'rate_limit' });
+  }
+
+  const KEY = process.env.ETHERSCAN_API_KEY;
+  if (!KEY) return res.status(500).json({ error: 'no_key' });
+
+  try {
+    // Séquentiel (pas Promise.all) : même précaution que wallet-risk face aux pics
+    // de requêtes simultanées sur la clé gratuite.
+    const oracle = await etherscan({ module: 'gastracker', action: 'gasoracle' }, KEY);
+    const ethPriceData = await etherscan({ module: 'stats', action: 'ethprice' }, KEY);
+    if (oracle.status === '0') return res.status(502).json({ error: 'upstream', detail: oracle.result || oracle.message });
+
+    const safe = Number(oracle.result.SafeGasPrice);
+    const propose = Number(oracle.result.ProposeGasPrice);
+    const fast = Number(oracle.result.FastGasPrice);
+    const ethUsd = ethPriceData && ethPriceData.result ? Number(ethPriceData.result.ethusd) : null;
+
+    // Coût estimé d'un simple transfert ETH (21000 gas), en $.
+    const costUsd = (gwei) => (ethUsd ? (gwei * 21000 * 1e-9 * ethUsd) : null);
+
+    let verdict = 'Moderate';
+    if (propose <= 10) verdict = 'Cheap — good time to transact';
+    else if (propose <= 30) verdict = 'Moderate — normal range';
+    else verdict = 'Expensive — consider waiting';
+
+    return res.status(200).json({
+      safe, propose, fast,
+      safeUsd: costUsd(safe), proposeUsd: costUsd(propose), fastUsd: costUsd(fast),
+      ethUsd, verdict, ts: Math.floor(Date.now() / 1000),
+    });
+  } catch (e) {
+    return res.status(500).json({ error: 'server' });
+  }
+}
+// --- fin Gas Tracker -----------------------------------------------------------------------
+
 export default async function handler(req, res) {
   if (req.query && req.query.tool === 'wallet-risk') return walletRisk(req, res);
+  if (req.query && req.query.tool === 'gas-tracker') return gasTracker(req, res);
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   if (!allowed(req)) return res.status(403).json({ error: 'forbidden' });
   const quota = rateLimit(req, 'generate', 8, 10 * 60 * 1000);

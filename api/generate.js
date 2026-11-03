@@ -1,6 +1,7 @@
 // Serverless (Vercel) — génère une annonce immobilière via Claude Haiku (FR ou EN).
 // Coût ~fraction de centime par appel. Nécessite ANTHROPIC_API_KEY dans le projet Vercel.
 const { allowed, rateLimit } = require('../lib/security.js');
+const { remainingBudgetCents, recordSpendCents } = require('../lib/budget.js');
 
 // --- Wallet Risk Scanner (voir wallet-risk-scanner/index.html) -----------------------------
 // Routé via ?tool=wallet-risk sur ce même endpoint plutôt qu'un fichier api/ séparé : le plan
@@ -129,6 +130,135 @@ async function walletRisk(req, res) {
 }
 // --- fin Wallet Risk Scanner -----------------------------------------------------------------
 
+// --- AI Wallet Agent (voir wallet-risk-scanner/index.html, bouton "AI Explain") -------------
+// Agent Claude Haiku avec tool use : prend le score déjà calculé par walletScore() comme point
+// de départ, et peut creuser via deux outils (code source d'un contrat, transactions récentes)
+// avant de rendre une explication en langage naturel. Plafonné à 1 €/mois (voir lib/budget.js) :
+// échec fermé si le plafond est atteint ou si Upstash est indisponible/non configuré.
+const WALLET_AGENT_MODEL = 'claude-haiku-4-5-20251001';
+const WALLET_AGENT_MAX_STEPS = 3;
+
+// Tarifs Haiku 4.5 : 1 $/MTok en entrée, 5 $/MTok en sortie.
+function haikuCostCents(usage) {
+  const input = Number(usage && usage.input_tokens) || 0;
+  const output = Number(usage && usage.output_tokens) || 0;
+  return input * 0.0001 + output * 0.0005;
+}
+
+const WALLET_AGENT_TOOLS = [
+  {
+    name: 'get_contract_source',
+    description: 'Fetch the verified source code and metadata of a smart contract address, if available. Use when the target address might be a contract (not a plain wallet) or when a counterparty in a transaction looks like a contract worth inspecting.',
+    input_schema: { type: 'object', properties: { address: { type: 'string', description: 'Ethereum address (0x...)' } }, required: ['address'] },
+  },
+  {
+    name: 'get_recent_transactions',
+    description: 'Fetch up to 25 of the most recent transactions for an address (counterparties, values, timestamps, success/failure). Use to investigate a specific activity pattern beyond the summary already provided.',
+    input_schema: { type: 'object', properties: { address: { type: 'string', description: 'Ethereum address (0x...)' } }, required: ['address'] },
+  },
+];
+
+async function runWalletAgentTool(name, input, KEY) {
+  const address = String((input && input.address) || '').trim();
+  if (!ADDRESS_RE.test(address)) return { error: 'invalid_address' };
+  if (name === 'get_contract_source') {
+    const data = await etherscan({ module: 'contract', action: 'getsourcecode', address }, KEY);
+    const r = Array.isArray(data.result) ? data.result[0] : null;
+    if (!r || !r.SourceCode) return { is_contract: false };
+    return {
+      is_contract: true,
+      contract_name: r.ContractName || null,
+      is_proxy: r.Proxy === '1',
+      implementation_address: r.Implementation || null,
+      // Tronqué pour rester raisonnable en tokens côté modèle.
+      source_excerpt: String(r.SourceCode).slice(0, 4000),
+    };
+  }
+  if (name === 'get_recent_transactions') {
+    const data = await etherscan({ module: 'account', action: 'txlist', address, startblock: 0, endblock: 99999999, sort: 'desc', page: 1, offset: 25 }, KEY);
+    const txs = Array.isArray(data.result) ? data.result : [];
+    return {
+      transactions: txs.map((t) => ({
+        to: t.to, from: t.from, valueEth: Number(t.value) / 1e18,
+        timeStamp: t.timeStamp, failed: t.isError === '1',
+      })),
+    };
+  }
+  return { error: 'unknown_tool' };
+}
+
+async function walletAgent(req, res) {
+  if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
+  if (!allowed(req)) return res.status(403).json({ error: 'forbidden' });
+  const quota = rateLimit(req, 'wallet-agent', 5, 10 * 60 * 1000);
+  if (!quota.allowed) {
+    res.setHeader('Retry-After', String(quota.retryAfter));
+    return res.status(429).json({ error: 'rate_limit' });
+  }
+
+  const ETHERSCAN_KEY = process.env.ETHERSCAN_API_KEY;
+  const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
+  if (!ETHERSCAN_KEY || !ANTHROPIC_KEY) return res.status(500).json({ error: 'no_key' });
+
+  const address = String(req.query.address || '').trim();
+  if (!ADDRESS_RE.test(address)) return res.status(400).json({ error: 'invalid_address' });
+
+  const remaining = await remainingBudgetCents();
+  if (remaining === null || remaining <= 0) {
+    return res.status(503).json({ error: remaining === null ? 'budget_unavailable' : 'monthly_budget_reached' });
+  }
+
+  try {
+    const firstTxData = await etherscan({ module: 'account', action: 'txlist', address, startblock: 0, endblock: 99999999, sort: 'asc', page: 1, offset: 1 }, ETHERSCAN_KEY);
+    const txData = await etherscan({ module: 'account', action: 'txlist', address, startblock: 0, endblock: 99999999, sort: 'desc', page: 1, offset: 1000 }, ETHERSCAN_KEY);
+    const tokenData = await etherscan({ module: 'account', action: 'tokentx', address, startblock: 0, endblock: 99999999, sort: 'desc', page: 1, offset: 1000 }, ETHERSCAN_KEY);
+    const firstTx = Array.isArray(firstTxData.result) ? firstTxData.result : [];
+    const txs = Array.isArray(txData.result) ? txData.result : [];
+    const tokenTxs = Array.isArray(tokenData.result) ? tokenData.result : [];
+    const score = walletScore(txs, tokenTxs, firstTx[0] ? Number(firstTx[0].timeStamp) : null);
+
+    const systemPrompt = 'You are a blockchain analyst explaining wallet risk to a non-technical reader. You are given a pre-computed statistical risk summary and two tools to investigate further: get_contract_source and get_recent_transactions. Only call a tool if it would materially change your answer — most of the time the summary is enough. Never fabricate on-chain data you have not retrieved. Respond with a short explanation (3-5 sentences, plain English, no jargon) followed by a one-line verdict.';
+    const userMsg = `Address: ${address}\nPre-computed score: ${score.score}/100 (${score.label})\nSignals:\n- ${score.signals.join('\n- ')}\nTotal recent transactions analyzed: ${txs.length}`;
+
+    let messages = [{ role: 'user', content: userMsg }];
+    let spentCents = 0;
+    let finalText = '';
+
+    for (let i = 0; i < WALLET_AGENT_MAX_STEPS; i++) {
+      const r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-api-key': ANTHROPIC_KEY, 'anthropic-version': '2023-06-01' },
+        body: JSON.stringify({ model: WALLET_AGENT_MODEL, max_tokens: 500, system: systemPrompt, tools: WALLET_AGENT_TOOLS, messages }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error((data && data.error && data.error.message) || 'anthropic_api_error');
+      spentCents += haikuCostCents(data.usage);
+      messages.push({ role: 'assistant', content: data.content });
+
+      if (data.stop_reason !== 'tool_use') {
+        finalText = (data.content || []).filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
+        break;
+      }
+
+      const toolUses = (data.content || []).filter((b) => b.type === 'tool_use');
+      const toolResults = [];
+      for (const tu of toolUses) {
+        const result = await runWalletAgentTool(tu.name, tu.input, ETHERSCAN_KEY);
+        toolResults.push({ type: 'tool_result', tool_use_id: tu.id, content: JSON.stringify(result) });
+      }
+      messages.push({ role: 'user', content: toolResults });
+    }
+
+    await recordSpendCents(spentCents);
+
+    if (!finalText) finalText = 'Analysis stopped before a conclusion was reached (step limit).';
+    return res.status(200).json({ address, score, explanation: finalText });
+  } catch (e) {
+    return res.status(500).json({ error: 'server' });
+  }
+}
+// --- fin AI Wallet Agent -----------------------------------------------------------------
+
 // --- Gas Tracker (voir gas-tracker/index.html) ------------------------------------------------
 // Même routage que Wallet Risk Scanner : ?tool=gas-tracker sur cet endpoint, pas de fichier
 // api/ dédié (plafond de 12 fonctions serverless du plan Vercel Hobby).
@@ -179,6 +309,7 @@ async function gasTracker(req, res) {
 
 export default async function handler(req, res) {
   if (req.query && req.query.tool === 'wallet-risk') return walletRisk(req, res);
+  if (req.query && req.query.tool === 'wallet-agent') return walletAgent(req, res);
   if (req.query && req.query.tool === 'gas-tracker') return gasTracker(req, res);
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   if (!allowed(req)) return res.status(403).json({ error: 'forbidden' });

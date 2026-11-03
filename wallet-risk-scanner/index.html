@@ -68,6 +68,12 @@
     .loading::after{content:'';display:inline-block;width:1ch;animation:dots 1.2s steps(4) infinite}
     @keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
     .footer-note{font-size:11px;color:var(--muted);margin-top:30px;line-height:1.6;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+    .ai-explain{margin-top:20px;padding-top:18px;border-top:1px dashed var(--line2)}
+    .ai-explain button{font-size:12px;font-weight:700;letter-spacing:.05em;padding:10px 16px;border-radius:9px;border:1px solid var(--line2);background:rgba(57,208,255,.08);color:var(--cyan);cursor:pointer;text-transform:uppercase}
+    .ai-explain button:hover:not(:disabled){box-shadow:0 0 14px rgba(57,208,255,.25)}
+    .ai-explain button:disabled{opacity:.4;cursor:default}
+    .ai-explain-text{display:none;margin-top:14px;font-size:13px;line-height:1.65;color:#c9e8e0;font-family:Inter,ui-sans-serif,system-ui,sans-serif;white-space:pre-wrap}
+    .ai-explain-text.show{display:block}
     @media(max-width:560px){.shell{padding:22px 16px 38px}.form{flex-direction:column}.score-row{flex-wrap:wrap}}
   </style>
 </head>
@@ -99,6 +105,12 @@
       <div class="bar-labels" id="barLabels"></div>
     </div>
     <ul class="signals" id="signals"></ul>
+    <div class="ai-explain">
+      <button id="aiExplainBtn">AI Explain ▸</button>
+      <div class="loading" id="aiLoading">asking the AI analyst</div>
+      <div class="ai-explain-text" id="aiExplainText"></div>
+      <div class="error" id="aiExplainError"></div>
+    </div>
   </section>
   <p class="footer-note">$ portfolio tool · reads public on-chain data via the Etherscan API · no wallet connection, no private keys, no transactions ever requested.</p>
 </main>
@@ -160,7 +172,42 @@
     throw lastErr;
   }
 
+  const aiBtn = document.getElementById('aiExplainBtn');
+  const aiLoading = document.getElementById('aiLoading');
+  const aiText = document.getElementById('aiExplainText');
+  const aiError = document.getElementById('aiExplainError');
+  aiBtn.addEventListener('click', async () => {
+    const address = input.value.trim();
+    aiError.classList.remove('show');
+    aiText.classList.remove('show');
+    aiBtn.disabled = true;
+    aiLoading.classList.add('show');
+    try {
+      const r = await fetch(`/api/generate?tool=wallet-agent&address=${encodeURIComponent(address)}`);
+      const data = await r.json();
+      if (!r.ok) {
+        if (data.error === 'monthly_budget_reached' || data.error === 'budget_unavailable') {
+          aiError.textContent = 'The AI explanation feature has reached its monthly usage cap for this demo. The statistical score above is unaffected.';
+        } else {
+          aiError.textContent = 'Could not get an AI explanation right now. Please try again in a moment.';
+        }
+        aiError.classList.add('show');
+        return;
+      }
+      aiText.textContent = data.explanation;
+      aiText.classList.add('show');
+    } catch (e) {
+      aiError.textContent = 'Could not get an AI explanation right now. Please try again in a moment.';
+      aiError.classList.add('show');
+    } finally {
+      aiBtn.disabled = false;
+      aiLoading.classList.remove('show');
+    }
+  });
+
   function render(data) {
+    aiText.classList.remove('show');
+    aiError.classList.remove('show');
     const warn = data.label === 'Suspicious activity';
     document.getElementById('scoreNum').textContent = data.score;
     document.getElementById('scoreNumWrap').className = 'score-num-wrap' + (warn ? ' warn' : '');

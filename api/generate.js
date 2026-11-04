@@ -307,10 +307,118 @@ async function gasTracker(req, res) {
 }
 // --- fin Gas Tracker -----------------------------------------------------------------------
 
+// --- Invest Watch (voir invest-watch/index.html) ----------------------------------------------
+// Même routage que les autres outils : ?tool=invest-watch, pas de fichier api/ dédié (plafond
+// de 12 fonctions serverless du plan Vercel Hobby).
+// Ne prédit jamais une remontée : signale une baisse hors norme (écart au plus haut 52 sem +
+// RSI survendu) et classe le contexte chiffré (croissance résultats, valorisation) en
+// POSITIF/NÉGATIF/NEUTRE. Aucune recommandation d'achat/vente.
+const TICKER_RE = /^[A-Z.]{1,10}$/;
+const DEFAULT_TICKERS = ['GOOGL', 'AAPL', 'NVDA', 'MSFT', 'AMZN', 'META'];
+const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36';
+const DROP_THRESHOLD = 0.15;
+const RSI_OVERSOLD = 30;
+
+async function yahooCookieCrumb() {
+  const r1 = await fetch('https://fc.yahoo.com', { headers: { 'User-Agent': UA }, redirect: 'manual' });
+  const cookie = (r1.headers.get('set-cookie') || '').split(';')[0];
+  const r2 = await fetch('https://query2.finance.yahoo.com/v1/test/getcrumb', { headers: { 'User-Agent': UA, Cookie: cookie } });
+  const crumb = await r2.text();
+  return { cookie, crumb };
+}
+
+function computeRsi(closes, period = 14) {
+  if (closes.length < period + 1) return null;
+  const recent = closes.slice(-(period + 1));
+  let gains = 0, losses = 0;
+  for (let i = 1; i < recent.length; i++) {
+    const delta = recent[i] - recent[i - 1];
+    if (delta > 0) gains += delta; else losses += -delta;
+  }
+  const avgGain = gains / period;
+  const avgLoss = losses / period;
+  if (avgLoss === 0) return 100;
+  const rs = avgGain / avgLoss;
+  return 100 - 100 / (1 + rs);
+}
+
+async function analyzeTicker(ticker, cookie, crumb) {
+  const chartRes = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=1y&interval=1d`, { headers: { 'User-Agent': UA } });
+  const chart = await chartRes.json();
+  const result = chart && chart.chart && chart.chart.result && chart.chart.result[0];
+  if (!result) return { ticker, error: 'no_data' };
+
+  const meta = result.meta;
+  const closes = (result.indicators.quote[0].close || []).filter((v) => v != null);
+  const currentPrice = meta.regularMarketPrice;
+  const high52w = meta.fiftyTwoWeekHigh;
+  const dropPct = (high52w - currentPrice) / high52w;
+  const rsi = computeRsi(closes);
+  const anomaly = dropPct >= DROP_THRESHOLD && rsi !== null && rsi <= RSI_OVERSOLD;
+
+  let revenueGrowth = null, earningsGrowth = null, trailingPE = null, forwardPE = null;
+  try {
+    const qsRes = await fetch(`https://query2.finance.yahoo.com/v10/finance/quoteSummary/${ticker}?modules=financialData,defaultKeyStatistics&crumb=${encodeURIComponent(crumb)}`, { headers: { 'User-Agent': UA, Cookie: cookie } });
+    const qs = await qsRes.json();
+    const fd = qs && qs.quoteSummary && qs.quoteSummary.result && qs.quoteSummary.result[0];
+    if (fd) {
+      revenueGrowth = fd.financialData && fd.financialData.revenueGrowth ? fd.financialData.revenueGrowth.raw : null;
+      earningsGrowth = fd.financialData && fd.financialData.earningsGrowth ? fd.financialData.earningsGrowth.raw : null;
+      trailingPE = fd.defaultKeyStatistics && fd.defaultKeyStatistics.trailingPE ? fd.defaultKeyStatistics.trailingPE.raw : null;
+      forwardPE = fd.defaultKeyStatistics && fd.defaultKeyStatistics.forwardPE ? fd.defaultKeyStatistics.forwardPE.raw : null;
+    }
+  } catch (_) { /* fondamentaux indisponibles : on garde le signal technique seul */ }
+
+  let context = 'NEUTRE';
+  let contextDetail = 'données de croissance insuffisantes ou mixtes';
+  if (revenueGrowth != null && earningsGrowth != null) {
+    if (revenueGrowth > 0 && earningsGrowth > 0) {
+      context = 'POSITIF';
+      contextDetail = 'croissance revenus/bénéfices toujours positive malgré la baisse de prix';
+    } else if (revenueGrowth < 0 || earningsGrowth < 0) {
+      context = 'NEGATIF';
+      contextDetail = 'revenus ou bénéfices en baisse : la chute du prix suit possiblement les fondamentaux';
+    }
+  }
+
+  return {
+    ticker, currentPrice, high52w, dropPct, rsi, anomaly,
+    revenueGrowth, earningsGrowth, trailingPE, forwardPE, context, contextDetail,
+  };
+}
+
+async function investWatch(req, res) {
+  if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
+  if (!allowed(req)) return res.status(403).json({ error: 'forbidden' });
+  const quota = rateLimit(req, 'invest-watch', 10, 10 * 60 * 1000);
+  if (!quota.allowed) {
+    res.setHeader('Retry-After', String(quota.retryAfter));
+    return res.status(429).json({ error: 'rate_limit' });
+  }
+
+  const raw = String(req.query.tickers || '').trim();
+  const requested = raw ? raw.split(',').map((t) => t.trim().toUpperCase()).filter(Boolean) : DEFAULT_TICKERS;
+  const tickers = requested.filter((t) => TICKER_RE.test(t)).slice(0, 10);
+  if (!tickers.length) return res.status(400).json({ error: 'invalid_tickers' });
+
+  try {
+    const { cookie, crumb } = await yahooCookieCrumb();
+    const results = [];
+    for (const t of tickers) {
+      results.push(await analyzeTicker(t, cookie, crumb));
+    }
+    return res.status(200).json({ results, disclaimer: 'Anomaly signal, not a buy or sell recommendation.' });
+  } catch (e) {
+    return res.status(500).json({ error: 'server' });
+  }
+}
+// --- fin Invest Watch ----------------------------------------------------------------------
+
 export default async function handler(req, res) {
   if (req.query && req.query.tool === 'wallet-risk') return walletRisk(req, res);
   if (req.query && req.query.tool === 'wallet-agent') return walletAgent(req, res);
   if (req.query && req.query.tool === 'gas-tracker') return gasTracker(req, res);
+  if (req.query && req.query.tool === 'invest-watch') return investWatch(req, res);
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   if (!allowed(req)) return res.status(403).json({ error: 'forbidden' });
   const quota = rateLimit(req, 'generate', 8, 10 * 60 * 1000);

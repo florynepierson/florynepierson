@@ -314,7 +314,7 @@ async function gasTracker(req, res) {
 // RSI survendu) et classe le contexte chiffré (croissance résultats, valorisation) en
 // POSITIF/NÉGATIF/NEUTRE. Aucune recommandation d'achat/vente.
 const TICKER_RE = /^[A-Z.]{1,10}$/;
-const DEFAULT_TICKERS = ['GOOGL', 'AAPL', 'NVDA', 'MSFT', 'AMZN', 'META'];
+const DEFAULT_TICKERS = ['GOOGL', 'AAPL', 'NVDA', 'MSFT', 'AMZN', 'META', 'TSLA', 'AMD', 'NFLX', 'AVGO'];
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36';
 const DROP_THRESHOLD = 0.15;
 const RSI_OVERSOLD = 30;
@@ -356,6 +356,11 @@ async function analyzeTicker(ticker, cookie, crumb) {
   const rsi = computeRsi(closes);
   const anomaly = dropPct >= DROP_THRESHOLD && rsi !== null && rsi <= RSI_OVERSOLD;
 
+  // Downsample to ~60 points for the sparkline: plenty for a 1-year trend shape, keeps payload small.
+  const SPARK_POINTS = 60;
+  const step = Math.max(1, Math.floor(closes.length / SPARK_POINTS));
+  const spark = closes.filter((_, i) => i % step === 0);
+
   let revenueGrowth = null, earningsGrowth = null, trailingPE = null, forwardPE = null;
   try {
     const qsRes = await fetch(`https://query2.finance.yahoo.com/v10/finance/quoteSummary/${ticker}?modules=financialData,defaultKeyStatistics&crumb=${encodeURIComponent(crumb)}`, { headers: { 'User-Agent': UA, Cookie: cookie } });
@@ -383,7 +388,7 @@ async function analyzeTicker(ticker, cookie, crumb) {
 
   return {
     ticker, currentPrice, high52w, dropPct, rsi, anomaly,
-    revenueGrowth, earningsGrowth, trailingPE, forwardPE, context, contextDetail,
+    revenueGrowth, earningsGrowth, trailingPE, forwardPE, context, contextDetail, spark,
   };
 }
 

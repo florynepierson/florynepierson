@@ -54,6 +54,12 @@
     .context.negatif{color:var(--red)}
     .context.neutre{color:var(--muted)}
     .context-detail{font-size:12px;color:var(--muted);font-family:Inter,ui-sans-serif,system-ui,sans-serif;line-height:1.5}
+    .spark{position:relative;height:56px;margin:10px 0}
+    .spark svg{width:100%;height:100%;overflow:visible}
+    .spark polyline.price{fill:none;stroke:var(--cyan);stroke-width:1.6}
+    .spark polyline.price.anomaly-line{stroke:var(--gold)}
+    .spark line.high{stroke:var(--muted);stroke-width:1;stroke-dasharray:3,3}
+    .spark-label{font-size:9.5px;color:var(--muted);font-family:Inter,ui-sans-serif,system-ui,sans-serif}
     .footer-note{font-size:11px;color:var(--muted);margin-top:30px;line-height:1.6;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
     @media(max-width:560px){.shell{padding:22px 16px 38px}}
   </style>
@@ -68,7 +74,7 @@
   <div class="disclaimer"><b>[ not advice ]</b><span>This tool does not predict future prices and is not investment advice. A flagged anomaly is a prompt to look closer, not a signal to buy or sell. Always verify independently.</span></div>
 
   <div class="controls">
-    <input id="tickerInput" type="text" placeholder="GOOGL,AAPL,NVDA,MSFT,AMZN,META" spellcheck="false">
+    <input id="tickerInput" type="text" placeholder="GOOGL,AAPL,NVDA,MSFT,AMZN,META,TSLA,AMD,NFLX,AVGO" spellcheck="false">
     <button id="runBtn">Scan</button>
     <span class="hint">Comma-separated tickers, up to 10. Leave empty for the default watchlist.</span>
   </div>
@@ -91,6 +97,27 @@
   function fmtPct(v) { return v == null ? 'n/a' : `${(v * 100).toFixed(1)}%`; }
   function fmtPE(v) { return v == null ? 'n/a' : v.toFixed(1); }
 
+  function sparkSvg(spark, high52w, anomaly) {
+    if (!Array.isArray(spark) || spark.length < 2) return '';
+    const W = 300, H = 56;
+    const vals = spark.concat([high52w]);
+    const max = Math.max(...vals);
+    const min = Math.min(...vals);
+    const range = Math.max(1e-6, max - min);
+    const stepX = W / (spark.length - 1);
+    const y = (v) => H - ((v - min) / range) * (H - 6) - 3;
+    const points = spark.map((v, i) => `${(i * stepX).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+    const highY = y(high52w).toFixed(1);
+    return `
+      <div class="spark">
+        <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+          <line class="high" x1="0" y1="${highY}" x2="${W}" y2="${highY}"></line>
+          <polyline class="price${anomaly ? ' anomaly-line' : ''}" points="${points}"></polyline>
+        </svg>
+      </div>
+      <div class="spark-label">1-year trend · dashed line = 52-week high</div>`;
+  }
+
   function card(r) {
     if (r.error) {
       return `<div class="card"><div class="card-head"><span class="ticker">${r.ticker}</span></div><div class="context-detail">No data available for this ticker.</div></div>`;
@@ -108,6 +135,7 @@
       <div class="card ${r.anomaly ? 'anomaly' : ''}">
         <div class="card-head"><span class="ticker">${r.ticker}</span><span class="tag ${tagClass}">${tagText}</span></div>
         <div class="price-row">Price <b>$${r.currentPrice.toFixed(2)}</b> · 52w high <b>$${r.high52w.toFixed(2)}</b> · drop <b>-${fmtPct(r.dropPct)}</b></div>
+        ${sparkSvg(r.spark, r.high52w, r.anomaly)}
         <div class="price-row">RSI(14) <b>${r.rsi != null ? r.rsi.toFixed(1) : 'n/a'}</b> (oversold ≤ 30)</div>
         <div class="price-row">Revenue growth <b>${fmtPct(r.revenueGrowth)}</b> · Earnings growth <b>${fmtPct(r.earningsGrowth)}</b></div>
         <div class="price-row">P/E trailing <b>${fmtPE(r.trailingPE)}</b> · forward <b>${fmtPE(r.forwardPE)}</b></div>

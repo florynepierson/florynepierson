@@ -84,7 +84,7 @@
   <div class="summary" id="summary"></div>
   <section class="grid" id="grid"></section>
 
-  <p class="footer-note">$ portfolio tool · reads public market data (quotes, 52-week range, reported financials) · no portfolio connection, no trading, no personal data stored.</p>
+  <p class="footer-note">$ portfolio tool · reads public market data (quotes, 52-week range, reported financials) via Yahoo Finance · growth figures are the company's own most recently reported quarter vs. the same quarter a year earlier · no portfolio connection, no trading, no personal data stored.</p>
 </main>
 <script>
   const loading = document.getElementById('loading');
@@ -126,18 +126,28 @@
     const tagText = r.anomaly ? 'Anomaly' : 'Normal range';
     const ctxClass = r.context === 'POSITIF' ? 'positif' : (r.context === 'NEGATIF' ? 'negatif' : 'neutre');
     const ctxLabel = r.context === 'POSITIF' ? 'Positive' : (r.context === 'NEGATIF' ? 'Negative' : 'Neutral');
-    const ctxDetailEn = r.context === 'POSITIF'
-      ? 'revenue and earnings growth still positive despite the price drop'
-      : (r.context === 'NEGATIF'
-        ? 'revenue or earnings declining: the price drop may be tracking the fundamentals'
-        : 'growth data insufficient or mixed');
+
+    // Names the specific metric(s) driving the verdict, instead of a generic "revenue or earnings" —
+    // the whole point of the context flag is to say WHERE the number comes from.
+    const revBad = r.revenueGrowth != null && r.revenueGrowth < 0;
+    const earnBad = r.earningsGrowth != null && r.earningsGrowth < 0;
+    let ctxDetailEn;
+    if (r.context === 'POSITIF') {
+      ctxDetailEn = `revenue (${fmtPct(r.revenueGrowth)}) and earnings (${fmtPct(r.earningsGrowth)}) both grew last reported quarter vs. a year earlier`;
+    } else if (r.context === 'NEGATIF') {
+      const which = revBad && earnBad ? 'revenue and earnings both fell' : (revBad ? 'revenue fell' : 'earnings fell');
+      ctxDetailEn = `${which} last reported quarter vs. a year earlier (revenue ${fmtPct(r.revenueGrowth)}, earnings ${fmtPct(r.earningsGrowth)}) — the price drop may be tracking the fundamentals, not just sentiment`;
+    } else {
+      ctxDetailEn = 'growth figures unavailable or mixed for the last reported quarter';
+    }
+
     return `
       <div class="card ${r.anomaly ? 'anomaly' : ''}">
         <div class="card-head"><span class="ticker">${r.ticker}</span><span class="tag ${tagClass}">${tagText}</span></div>
         <div class="price-row">Price <b>$${r.currentPrice.toFixed(2)}</b> · 52w high <b>$${r.high52w.toFixed(2)}</b> · drop <b>-${fmtPct(r.dropPct)}</b></div>
         ${sparkSvg(r.spark, r.high52w, r.anomaly)}
         <div class="price-row">RSI(14) <b>${r.rsi != null ? r.rsi.toFixed(1) : 'n/a'}</b> (oversold ≤ 30)</div>
-        <div class="price-row">Revenue growth <b>${fmtPct(r.revenueGrowth)}</b> · Earnings growth <b>${fmtPct(r.earningsGrowth)}</b></div>
+        <div class="price-row">Revenue growth <b>${fmtPct(r.revenueGrowth)}</b> · Earnings growth <b>${fmtPct(r.earningsGrowth)}</b> <span class="spark-label">(quarterly, year-over-year)</span></div>
         <div class="price-row">P/E trailing <b>${fmtPE(r.trailingPE)}</b> · forward <b>${fmtPE(r.forwardPE)}</b></div>
         <div class="context ${ctxClass}">${ctxLabel} context</div>
         <div class="context-detail">${ctxDetailEn}</div>

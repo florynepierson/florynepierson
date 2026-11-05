@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Générateur d'annonces immobilières par IA — Plume</title>
-<link rel="icon" type="image/svg+xml" href="/plume/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="/plume/favicon.svg?v=20261022-milky-blue-4">
 <meta name="description" content="Plume rédige vos annonces immobilières en quelques secondes : une accroche et trois versions de description, en français ou en anglais. Gratuit, propulsé par l'IA.">
 <link rel="canonical" href="https://florynepierson.com/plume">
 <meta property="og:type" content="website">
@@ -18,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{--ink:#161a1d;--ink2:#2b3138;--paper:#f4f1ea;--card:#fffdf9;--gold:#b0895a;--gold-d:#98723f;--line:#e7e0d4;--line2:#efe9dd;--muted:#8a8072;--soft:#6b6357;}
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -106,6 +107,64 @@
   .gate .gbtn{width:100%;margin-top:12px;background:var(--ink);color:#fff;border:none;border-radius:11px;padding:13px;font-family:'Fraunces',serif;font-size:1rem;font-weight:500;cursor:pointer;}
   .gate .gbtn:hover{background:var(--gold-d);}
   .gate .err{color:#b3402f;font-size:.82rem;margin-top:8px;min-height:16px;}
+  /* Laiteux & bleu brume — nouvelle direction visuelle */
+  :root{--ink:#153d5e;--ink2:#245171;--paper:#d7effd;--card:rgba(233,247,254,.97);--gold:#2687c0;--gold-d:#176fa8;--line:#96cae8;--line2:#b6def2;--muted:#397fa9;--soft:#2f6f98;}
+  body{background:linear-gradient(135deg,#92cbed 0%,#bce3f7 48%,#9fd5f3 100%);}
+  ::selection{background:#8bc9ec;color:#173b59;}
+  .bar{border-bottom-color:rgba(127,190,222,.98);background:rgba(211,239,252,.97);backdrop-filter:blur(16px);}
+  .brand .mark,.gate .gmark{background:linear-gradient(145deg,#56b4e8,#1e79b4);box-shadow:0 5px 16px rgba(31,120,176,.3);}
+  .brand .tag{border-color:var(--line);}
+  .lang{background:rgba(255,255,255,.6);}
+  .lang button.on{background:#29445d;}
+  .hero{position:relative;overflow:hidden;padding:44px 0 34px;}
+  .hero:before,.hero:after{content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(2px);pointer-events:none;}
+  .hero:before{width:380px;height:380px;left:calc(50% - 500px);top:-120px;background:radial-gradient(circle,rgba(111,191,232,.42),rgba(111,191,232,0) 70%);}
+  .hero:after{width:460px;height:460px;right:calc(50% - 570px);top:-120px;background:radial-gradient(circle,rgba(128,203,238,.46),rgba(128,203,238,0) 70%);}
+  .feather{width:56px;height:56px;margin:0 auto 13px;border:1px solid rgba(133,194,222,.95);border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#f1fbff,#d0edfa);box-shadow:0 8px 24px rgba(53,133,179,.2);color:#367ca8;}
+  .feather svg{width:29px;height:29px;}
+  .hero .ey{color:#1675a9;letter-spacing:.24em;}
+  .hero h1{color:#153d5e;font-size:clamp(2.2rem,5vw,3.65rem);letter-spacing:-.025em;}
+  .hero h1 em{color:#1683bd;}
+  .hero p{color:#286c96;}
+  .grid{gap:22px;margin-top:16px;}
+  .card{background:rgba(225,244,253,.97);border:1px solid rgba(133,194,226,.98);border-radius:22px;padding:28px;box-shadow:0 22px 60px rgba(29,104,153,.2),inset 0 1px 0 rgba(255,255,255,.92);backdrop-filter:blur(12px);}
+  .card>h2{color:#2b4358;font-size:1.28rem;}
+  .card .sub{color:#71889a;}
+  label{color:#506d83;}
+  input,select,textarea{border-color:#a2d2ec;background:rgba(213,238,250,.99);color:#1e4462;border-radius:12px;}
+  input::placeholder,textarea::placeholder{color:#3e83ab;}
+  input:focus,select:focus,textarea:focus{border-color:#238bc3;background:#f8fdff;box-shadow:0 0 0 4px rgba(43,151,206,.22);}
+  select{background-color:rgba(213,238,250,.99);}
+  .chip,.len button{border-color:#a2d2ec;background:rgba(210,237,250,.99);color:#286687;}
+  .chip:hover,.len button:hover{border-color:#2387bd;}
+  .chip.on,.len button.on{background:#304e67;border-color:#304e67;color:#fff;}
+  .go{background:linear-gradient(120deg,#176fa8,#238dc5);border-radius:12px;box-shadow:0 9px 20px rgba(24,118,174,.25);}
+  .go:hover{background:linear-gradient(120deg,#238dc5,#42a9dc);}
+  .out-empty .big{color:#278fc3;}
+  .out-empty b{color:#206d97;}
+  .accroche{border-color:#a3cfe4;background:linear-gradient(145deg,rgba(239,250,255,.99),rgba(211,238,249,.98));}
+  .accroche .k{color:#367ca5;}
+  .accroche .v{color:#2d465b;}
+  .tabs{border-bottom-color:#e1eaf0;}
+  .tabs button.on{color:#246b96;border-bottom-color:#4194bf;}
+  .acts button{border-color:#acd2e6;color:#285d7e;background:rgba(223,241,249,.94);}
+  .acts button:hover{border-color:#66acd0;color:#236c96;}
+  .seo{border-top-color:#dce7ee;}
+  .seo h2,.seo h3{color:#2b4358;}
+  footer{border-top-color:#dce7ee;}
+  footer a,.bar .by a{color:#246b96;}
+  .gate-ov{background:rgba(25,49,69,.48);backdrop-filter:blur(8px);}
+  .gate{border:1px solid rgba(220,233,241,.9);box-shadow:0 30px 80px rgba(31,52,70,.2);}
+  .gate .gbtn{background:#304e67;}
+  .gate .gbtn:hover{background:#246b96;}
+  @media(max-width:620px){.hero{padding:34px 0 25px;}.card{padding:22px 18px;border-radius:18px;}.grid{gap:16px;}}
+  /* Titres uniquement : manuscrite naturelle, sans ligatures serrées */
+  .brand b,.hero h1,.card>h2,.accroche .v,.out-empty .big,.seo h2,.seo h3,.gate h3{font-family:'Kalam',cursive;}
+  .brand b{font-weight:500;letter-spacing:0;}
+  .hero h1{font-size:clamp(2.7rem,5.7vw,4.2rem);font-weight:400;letter-spacing:0;line-height:1.1;}
+  .hero h1 em{font-weight:400;font-style:normal;}
+  .card>h2,.seo h2,.seo h3,.gate h3{font-weight:500;letter-spacing:0;}
+  .accroche .v{font-weight:400;letter-spacing:0;}
 </style>
 </head>
 <body>
@@ -118,6 +177,7 @@
   </div></div>
 
   <section class="hero"><div class="wrap">
+    <div class="feather" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M26.8 4.8C18 4.5 9.2 9 7.1 16.1c-1.2 4.1.9 7.2 4.1 7.3 7.8.2 14.6-9.6 15.6-18.6Z"/><path d="M5.3 28c4.4-7.8 10.5-13.9 18.2-19.2M10 21.7l-2.4-5.1m6.6 1.1-1.6-5m5.9.1-1-4.2m-1.1 13.3 4.5.2m-1.1-5.2 4.3-.3"/></svg></div>
     <span class="ey" id="t-ey">Rédaction immobilière augmentée</span>
     <h1 id="t-h1">Des annonces qui donnent <em>envie</em>,<br>en quelques secondes.</h1>
     <p id="t-heroP">Renseignez le bien, choisissez le ton — Plume rédige une annonce élégante et prête à publier.</p>

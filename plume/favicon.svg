@@ -1,10 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#b0895a"/>
-      <stop offset="1" stop-color="#98723f"/>
+    <linearGradient id="milk" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5fcff"/>
+      <stop offset="1" stop-color="#d9effb"/>
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="15" fill="url(#g)"/>
-  <text x="32" y="45.5" font-family="Fraunces, Georgia, serif" font-weight="600" font-size="40" fill="#fffdf9" text-anchor="middle">P</text>
+  <rect width="64" height="64" rx="16" fill="url(#milk)"/>
+  <path fill="#3288b8" d="M52.8 8.5C41.2 9.2 28.4 13.2 20.7 21c-7.2 7.3-10.1 17.6-4.2 23.1 4.9 4.5 13.7 1.6 20.2-3.5C47.4 32 51.4 18.4 52.8 8.5Z"/>
+  <path d="M11.7 56.1c8.2-14.4 20-27.6 36.7-42.3M22.5 42.1l-8.2-2.9m13.2-5-6.7-7.4m15.3.2-2.3-9.2m-.2 22.4 9.6.4m-2.4-10.1 8.1-1.2" fill="none" stroke="#f5fcff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M11.7 56.1c8.2-14.4 20-27.6 36.7-42.3" fill="none" stroke="#1e658e" stroke-width="1.7" stroke-linecap="round"/>
 </svg>

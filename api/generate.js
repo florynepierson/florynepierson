@@ -349,6 +349,7 @@ async function analyzeTicker(ticker, cookie, crumb) {
   if (!result) return { ticker, error: 'no_data' };
 
   const meta = result.meta;
+  const companyName = meta.longName || meta.shortName || ticker;
   const closes = (result.indicators.quote[0].close || []).filter((v) => v != null);
   const currentPrice = meta.regularMarketPrice;
   const high52w = meta.fiftyTwoWeekHigh;
@@ -387,7 +388,7 @@ async function analyzeTicker(ticker, cookie, crumb) {
   }
 
   return {
-    ticker, currentPrice, high52w, dropPct, rsi, anomaly,
+    ticker, companyName, currentPrice, high52w, dropPct, rsi, anomaly,
     revenueGrowth, earningsGrowth, trailingPE, forwardPE, context, contextDetail, spark,
   };
 }

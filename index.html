@@ -945,6 +945,8 @@
             <div class="flex items-center flex-wrap justify-center gap-x-5 gap-y-3 text-xs">
                 <a href="#services" class="hover:text-brand-cream transition-colors duration-200" data-i18n="footer_services">Services & Tarifs</a>
                 <span class="text-brand-cream/20">•</span>
+                <a href="/portfolio/#writing" class="hover:text-brand-cream transition-colors duration-200" data-i18n="footer_articles">Articles</a>
+                <span class="text-brand-cream/20">•</span>
                 <a href="https://www.linkedin.com/in/floryne-pierson" target="_blank" class="hover:text-brand-cream transition-colors duration-200">LinkedIn</a>
                 <span class="text-brand-cream/20">•</span>
                 <a href="https://www.malt.fr/profile/florynepierson" target="_blank" class="text-orange-400 hover:text-orange-300 transition-colors duration-200 flex items-center gap-1">
@@ -967,15 +969,12 @@
     </footer>
 
     <!-- FLOATING WHATSAPP -->
-    <a href="https://wa.me/33638482539?text=Bonjour%20Floryne,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services%20de%20cr%C3%A9ation%20web." 
-       target="_blank" 
-       class="fixed bottom-24 right-6 z-50 bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 group"
-       title="Parlons-en sur WhatsApp !">
-        <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 border-2 border-white rounded-full flex items-center justify-center">
-            <span class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span>
-        </span>
-        <i class="fa-brands fa-whatsapp text-3xl"></i>
-        <span class="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-3 transition-all duration-300 font-semibold text-sm whitespace-nowrap" data-i18n="wa_float">
+    <a href="https://wa.me/33638482539?text=Bonjour%20Floryne,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services%20de%20cr%C3%A9ation%20web."
+       target="_blank" rel="noopener noreferrer"
+       class="fixed bottom-24 right-5 z-[99997] flex items-center gap-3 rounded-full border border-brand-gold/50 bg-brand-dark px-5 py-3 text-brand-cream shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#263b32] hover:shadow-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-gold/40"
+       title="Parlons-en sur WhatsApp !" aria-label="Discuter avec Floryne sur WhatsApp">
+        <i class="fa-brands fa-whatsapp text-2xl text-brand-gold" aria-hidden="true"></i>
+        <span class="font-semibold text-sm whitespace-nowrap" data-i18n="wa_float">
             Discuter sur WhatsApp
         </span>
     </a>
@@ -1435,6 +1434,7 @@
             // Footer
             footer_rights: "© 2026. Tous droits réservés.",
             footer_services: "Services & Tarifs",
+            footer_articles: "Articles",
             footer_legal: "Mentions légales",
             footer_privacy: "Politique de confidentialité",
             footer_cgv: "CGV",
@@ -1639,6 +1639,7 @@
             // Footer
             footer_rights: "© 2026. All rights reserved.",
             footer_services: "Services & Pricing",
+            footer_articles: "Articles",
             footer_legal: "Legal notice",
             footer_privacy: "Privacy policy",
             footer_cgv: "Terms of sale",
@@ -1695,6 +1696,7 @@
             document.getElementById('btn-fr').classList.add('active');
             document.getElementById('btn-en').classList.remove('active');
         }
+        if (window.location.hash === '#privacy-policy') openModal('modal-privacy');
     });
     </script>
 

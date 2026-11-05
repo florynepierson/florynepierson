@@ -1,0 +1,103 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><meta name="description" content="Building an MCP server with two tools on purpose: one local calculation, one fronting a live production API, to learn the Model Context Protocol from the inside."><link rel="canonical" href="https://florynepierson.com/articles/building-an-mcp-server-for-real-astronomical-data.html"><title>Building an MCP Server for Real Astronomical Data | Floryne Pierson</title><meta property="og:type" content="article"><meta property="og:title" content="Building an MCP Server for Real Astronomical Data"><meta property="og:description" content="Two tools, two computation sources, one protocol: what building an MCP server taught me about exposing real systems to AI agents."><meta property="og:url" content="https://florynepierson.com/articles/building-an-mcp-server-for-real-astronomical-data.html"><meta name="theme-color" content="#FAF7F2"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>
+    :root { color-scheme: light; --ink:#162521; --muted:#52615a; --paper:#FAF7F2; --gold:#B09A7A; --gold-light:#D1C4B0; --sage:#8F9E8B; --sage-light:#E8EDE7; --line:#e5dfd5; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:15px/1.8 'Plus Jakarta Sans',sans-serif; }
+    a { color:inherit; text-underline-offset:4px; }
+    .site-nav { position:sticky; top:0; z-index:10; background:rgba(250,247,242,.88); backdrop-filter:blur(14px); border-bottom:1px solid rgba(176,154,122,.18); }
+    .nav-inner { width:min(1280px,calc(100% - 48px)); min-height:78px; margin:auto; display:flex; align-items:center; justify-content:space-between; gap:28px; }
+    .brand { display:flex; flex-direction:column; text-decoration:none; flex-shrink:0; }
+    .brand strong { font:600 24px/1.1 'Cormorant Garamond',serif; letter-spacing:.09em; }
+    .brand span { margin-top:3px; color:var(--gold); font-size:9px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+    .nav-links { display:flex; align-items:center; justify-content:flex-end; gap:clamp(12px,2vw,28px); color:rgba(22,37,33,.78); font-size:11px; font-weight:600; }
+    .nav-links a { text-decoration:none; white-space:nowrap; transition:color .2s; }
+    .nav-links a:hover { color:var(--gold); }
+    .nav-links .cta { padding:10px 16px; border-radius:999px; background:var(--ink); color:white; }
+    .nav-links .cta:hover { background:var(--gold); color:var(--ink); }
+    .lang { display:flex; gap:3px; padding:3px; border:1px solid rgba(176,154,122,.28); border-radius:999px; font-size:9px; }
+    .lang a { padding:3px 6px; border-radius:999px; text-decoration:none; }
+    .lang .active { background:var(--sage-light); color:var(--ink); }
+    .hero { position:relative; overflow:hidden; padding:86px 24px 72px; text-align:center; background:radial-gradient(ellipse at 18% 20%,rgba(232,237,231,.9),transparent 33%),radial-gradient(ellipse at 85% 75%,rgba(209,196,176,.34),transparent 35%),var(--paper); }
+    .hero-inner { position:relative; max-width:850px; margin:auto; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; padding:7px 13px; border-radius:999px; background:var(--sage-light); color:rgba(22,37,33,.8); font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .eyebrow:before { width:6px; height:6px; border-radius:50%; background:var(--sage); content:''; }
+    h1,h2,h3 { font-family:'Cormorant Garamond',serif; line-height:1.08; }
+    h1 { max-width:840px; margin:22px auto 20px; font-size:clamp(48px,7.2vw,82px); font-weight:400; letter-spacing:-.025em; }
+    h1 em { color:var(--gold); font-weight:400; }
+    .dek { max-width:700px; margin:0 auto 24px; color:rgba(22,37,33,.7); font-size:clamp(16px,2vw,20px); font-weight:300; line-height:1.7; }
+    .byline { color:rgba(22,37,33,.56); font-size:11px; letter-spacing:.03em; }
+    .brief-strip { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); max-width:790px; margin:23px auto 0; padding:14px 0 0; border-top:1px solid rgba(176,154,122,.25); text-align:left; }
+    .brief-strip div { padding:0 18px; border-right:1px solid rgba(176,154,122,.22); }
+    .brief-strip div:first-child { padding-left:0; }
+    .brief-strip div:last-child { padding-right:0; border:0; }
+    .brief-strip dt { margin-bottom:4px; color:#71816f; font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .brief-strip dd { margin:0; color:rgba(22,37,33,.78); font-size:11px; line-height:1.5; }
+    .article-wrap { width:min(820px,calc(100% - 44px)); margin:0 auto; padding:0 0 76px; }
+    .article-body { padding:48px clamp(22px,6vw,64px) 56px; border:1px solid rgba(176,154,122,.16); border-radius:28px; background:rgba(255,255,255,.62); box-shadow:0 20px 65px rgba(22,37,33,.045); }
+    .article-body p,.article-body li { color:rgba(22,37,33,.8); font-size:14px; font-weight:300; line-height:1.95; }
+    .article-body p { margin:0 0 19px; }
+    .article-body a { color:#6e765e; font-weight:500; }
+    .article-body code { background:rgba(232,237,231,.7); padding:2px 6px; border-radius:6px; font-size:.92em; }
+    h2 { margin:48px 0 15px; color:var(--ink); font-size:clamp(30px,4vw,40px); font-weight:500; letter-spacing:-.015em; }
+    h3 { margin:28px 0 9px; font-size:26px; }
+    .article-body ul,.article-body ol { padding-left:23px; margin:0 0 21px; }
+    .article-body li { padding:3px 0; }
+    .callout { margin:34px 0; padding:23px 26px; border:1px solid rgba(176,154,122,.24); border-left:3px solid var(--gold); border-radius:0 16px 16px 0; background:linear-gradient(110deg,rgba(232,237,231,.8),rgba(250,247,242,.72)); }
+    .callout p { margin:0; }
+    .sources { margin-top:40px; padding:24px 26px; border-radius:18px; background:var(--sage-light); }
+    .sources h2 { margin:0 0 14px; font-size:31px; }
+    .sources li { margin:6px 0; font-size:12px; line-height:1.75; }
+    .site-footer { padding:38px 24px 44px; background:var(--ink); color:rgba(250,247,242,.75); text-align:center; font-size:11px; }
+    .site-footer a { color:var(--gold-light); text-decoration:none; }
+    .footer-brand { display:block; margin-bottom:8px; color:var(--paper); font:600 24px/1.1 'Cormorant Garamond',serif; letter-spacing:.1em; }
+    @media(max-width:900px) { .nav-inner{width:calc(100% - 32px);gap:16px}.brand strong{font-size:21px}.nav-links{gap:12px}.nav-links a:not(.cta){font-size:10px}.nav-links .hide-mid{display:none} }
+    @media(max-width:640px) { .nav-inner{min-height:68px;flex-wrap:wrap;padding:10px 0}.brand strong{font-size:19px}.brand span{font-size:8px}.nav-links{width:100%;justify-content:space-between;gap:6px;padding-bottom:5px}.nav-links a:not(.cta){font-size:9px}.nav-links .hide-small{display:none}.nav-links .cta{padding:8px 11px;font-size:9px}.hero{padding:58px 18px 47px}.article-wrap{width:calc(100% - 24px)}.article-body{padding:30px 20px 38px;border-radius:21px}.article-body p,.article-body li{font-size:13px}.sources{padding:20px}.sources h2{font-size:28px} }
+    @media(max-width:640px) { .brief-strip{grid-template-columns:1fr;gap:10px;text-align:center}.brief-strip div,.brief-strip div:first-child,.brief-strip div:last-child{padding:0;border:0} }
+    @media print { @page{size:A4;margin:17mm 18mm} body{background:#fff;font-size:11pt}.site-nav,.site-footer{display:none!important}.hero{padding:12mm 0 7mm;background:#fff}.brief-strip{margin-top:6mm}.article-wrap{width:100%;padding:0}.article-body{padding:8mm 0;border:0;border-radius:0;background:#fff;box-shadow:none}.article-body p,.article-body li{color:#222;font-size:10.5pt;line-height:1.65}h2{break-after:avoid;margin-top:9mm}.sources{break-inside:avoid;background:#eef1ed}a{color:#344b3c} }
+    .spec{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:26px 0}.spec div{background:#f1eee7;border:1px solid var(--line);border-radius:14px;padding:17px}.spec b{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}.spec span{font:20px/1.2 'Cormorant Garamond',serif}@media(max-width:640px){.spec{grid-template-columns:1fr}}
+</style></head><body>  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="Floryne Pierson, homepage"><strong>FLORYNE PIERSON</strong><span>Sites web &amp; Assistants IA</span></a>
+      <div class="nav-links">
+        <a class="hide-small" href="/#services">Services</a><a class="hide-mid" href="/#ia">IA</a><a class="hide-mid" href="/#constat">La Vision</a><a href="/portfolio/#writing">Réalisations</a><a class="hide-small" href="/#a-propos">À Propos</a><a class="hide-small" href="/#contact">Contact</a>
+        <span class="lang" aria-label="Language"><a href="/">FR</a><a class="active" href="#top" aria-current="page">EN</a></span>
+        <a class="cta" href="/#contact">Let’s talk</a>
+      </div>
+    </div>
+  </nav><main id="top">
+<section class="hero"><div class="hero-inner">
+<p class="eyebrow">MCP · AI agents · Build log</p>
+<h1>Building an MCP Server<br><em>for Real Astronomical Data</em></h1>
+<p class="dek">Two tools, two computation sources, one protocol: what building a Model Context Protocol server taught me about exposing a real production system to AI agents without exposing its source.</p>
+<div class="spec" aria-label="Project overview"><div><b>Protocol</b><span>MCP, stdio transport</span></div><div><b>Tools</b><span>2, different sources</span></div><div><b>Verified by</b><span>Real client handshake</span></div></div>
+<div class="brief-strip"><div><dt>Format</dt><dd>First-hand build log</dd></div><div><dt>Audience</dt><dd>AI engineers &amp; agent-tooling teams</dd></div><div><dt>Focus</dt><dd>MCP servers, structured tool outputs</dd></div></div>
+</div></section>
+<div class="article-wrap"><article class="article-body">
+<p class="lead">I wanted to understand the Model Context Protocol by building against it, not by reading about it.</p>
+<p>I run <a href="https://www.magicalchart.com/">Magical Chart</a>, an astrology product in production with real paying users, built on a proprietary astronomical engine I validated against Swiss Ephemeris reference data. <a href="https://modelcontextprotocol.io">MCP</a> is the open standard for connecting AI agents to external tools, so I built a small server that exposes astronomical calculations as callable tools for any MCP-compatible client, Claude Desktop, Claude Code, or otherwise.</p>
+<p>The interesting decision was not the astronomy. It was giving the server two tools with two deliberately different computation sources, so the project would actually exercise the protocol itself rather than just wrap one API call.</p>
+<h2>Two tools, on purpose</h2>
+<p><code>get_planet_position</code> runs entirely locally, on the open-source <a href="https://github.com/cosinekitty/astronomy">astronomy-engine</a> library, with a small, independently written astrology layer on top for sign boundaries. No network call, no cost, a standalone calculation.</p>
+<p><code>get_natal_chart</code> does something different: it calls Magical Chart's own live, public, unauthenticated natal-chart API over HTTP, the real Swiss Ephemeris-validated engine behind my production reports. It exposes that engine's results, houses, aspects, chart angles, without exposing its source. That distinction, local computation versus fronting a live production API, is the part I think matters for anyone building MCP servers around a real product: the protocol does not care where the answer comes from, but your design should be explicit about it.</p>
+<p>Both tools return structured, schema-validated outputs (I used Zod for the input schemas) rather than loose text, because an agent calling a tool needs to trust the shape of what comes back, not just parse a sentence.</p>
+<h2>A production API still needs defensive handling behind the protocol</h2>
+<p>Because <code>get_natal_chart</code> calls a real endpoint, it inherits that endpoint's real constraints. The API is rate-limited server-side (60 requests per minute for anonymous callers), so the tool surfaces a clear error if the limit is hit, rather than retrying silently and hiding the failure from the agent calling it. Latitude and longitude are optional, since houses and angles only mean something with a real birth location, so without them the response carries an explicit <code>notice</code> field saying the coordinates are placeholder values. An MCP tool is still a contract: if the input is incomplete or the backend is unavailable, the agent calling it needs to know that, not receive a confident-looking wrong answer.</p>
+<h2>The gotcha that cost the most time</h2>
+<p>The <code>astronomy-engine</code> package points its <code>"import"</code> condition at an ESM file without a nested <code>package.json</code> marking that folder <code>"type": "module"</code>. Node's native ESM resolver mis-loads it as a result. The fix was to pull in the CommonJS build directly with <code>createRequire</code> instead of a plain <code>import</code>, since Node's <code>"require"</code> condition resolves correctly where <code>"import"</code> does not. It is a small, specific bug, and it is exactly the kind of thing that does not show up until you actually run the server end to end.</p>
+<h2>Verifying against a real handshake, not a syntax check</h2>
+<p>A tool schema that parses is not the same as a tool that works. Before publishing, I verified the server against a real MCP client handshake: <code>initialize</code>, then <code>tools/list</code>, then an actual <code>tools/call</code> against both tools, confirming the live API path and the local computation path separately. That last step is the one I would flag to anyone building MCP servers quickly: a client that can see your tool definitions is not proof that a call against them returns what you expect.</p>
+<h2>What I would take into exposing other systems to agents</h2>
+<ol>
+<li><strong>Decide, explicitly, where each tool's answer comes from</strong>, local computation, a cache, or a live backend, and let that decision shape the tool's error handling, not just its happy path.</li>
+<li><strong>Return structured, schema-validated outputs</strong>, so an agent can act on the shape of the response instead of parsing prose.</li>
+<li><strong>Surface backend constraints as explicit signals</strong>, rate limits, missing inputs, partial results, rather than retrying silently or returning a plausible-looking default.</li>
+<li><strong>Verify with a real client call before publishing.</strong> A passing schema definition and a working tool call are two different claims.</li>
+</ol>
+<p>The server is open source, with both tools and the ESM/CJS workaround visible in the code.</p>
+<div class="callout note"><p><strong>About this project:</strong> This is a demo built to learn MCP hands-on, not a repackaging of Magical Chart's production astrology logic. <code>get_natal_chart</code> exposes that engine's live results over its existing public API; it does not expose the engine's source.</p></div>
+<section class="sources" aria-labelledby="sources-heading"><h2 id="sources-heading">Further reading</h2><ul>
+<li><a href="https://modelcontextprotocol.io">Model Context Protocol</a> — the open specification this server implements.</li>
+<li><a href="https://github.com/florynepierson/mcp-astrology-demo">GitHub, mcp-astrology-demo</a> — the server's source, including the ESM/CJS workaround.</li>
+<li><a href="https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview">Anthropic, Tool use overview</a> — the tool-calling model this server's tools are designed to be called from.</li>
+</ul><p>For the agent that calls tools like these at runtime, see <a href="/articles/when-payment-succeeds-but-access-doesnt.html">When Payment Succeeds but Access Doesn't</a>, a first-hand case study from the same production product.</p></section>
+</article></div></main>  <footer class="site-footer"><a class="footer-brand" href="/">FLORYNE PIERSON</a><span>Independent writing sample · </span><a href="mailto:hello@florynepierson.com">Contact</a><span> · </span><a href="/portfolio/#writing">Portfolio</a></footer>
+</body></html>

@@ -48,10 +48,23 @@
     .sources li { margin:6px 0; font-size:12px; line-height:1.75; }
     .figure { margin:32px 0 38px; }
     .figure img { display:block; width:100%; border:1px solid rgba(176,154,122,.22); border-radius:16px; }
+    .figure.figure-narrow img { max-width:420px; margin:0 auto; }
     .figure figcaption { margin-top:12px; color:rgba(22,37,33,.6); font-size:11.5px; line-height:1.6; text-align:center; }
-    .site-footer { padding:38px 24px 44px; background:var(--ink); color:rgba(250,247,242,.75); text-align:center; font-size:11px; }
-    .site-footer a { color:var(--gold-light); text-decoration:none; }
-    .footer-brand { display:block; margin-bottom:8px; color:var(--paper); font:600 24px/1.1 'Cormorant Garamond',serif; letter-spacing:.1em; }
+    .site-footer { padding:40px 24px; background:var(--ink); color:rgba(250,247,242,.5); font-size:13px; font-weight:300; }
+    .site-footer .footer-inner { max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; }
+    .site-footer .footer-id { display:flex; flex-direction:column; align-items:center; }
+    .footer-brand { display:block; color:var(--paper); font:600 18px/1.1 'Cormorant Garamond',serif; letter-spacing:.09em; }
+    .site-footer .footer-rights { margin-top:4px; font-size:11px; color:rgba(250,247,242,.4); }
+    .site-footer .footer-links { display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:9px 16px; font-size:12px; }
+    .site-footer .footer-links a,.site-footer .footer-links button { color:rgba(250,247,242,.72); background:none; border:0; padding:0; font:inherit; cursor:pointer; text-decoration:none; }
+    .site-footer .footer-links a:hover,.site-footer .footer-links button:hover { color:var(--gold-light); }
+    .site-footer .footer-links .sep { color:rgba(250,247,242,.2); }
+    .site-footer .footer-links .malt { color:#fb923c; display:inline-flex; align-items:center; gap:5px; }
+    .wa-float { position:fixed; bottom:24px; right:18px; z-index:99997; display:flex; align-items:center; gap:10px; border:1px solid rgba(176,154,122,.5); border-radius:999px; background:var(--ink); padding:12px 18px; color:var(--paper); text-decoration:none; box-shadow:0 10px 30px rgba(0,0,0,.25); transition:transform .25s,background .25s; }
+    .wa-float:hover { transform:scale(1.05); background:#223531; }
+    .wa-float svg { width:21px; height:21px; fill:var(--gold); flex-shrink:0; }
+    .wa-float span { font-size:13px; font-weight:600; white-space:nowrap; }
+    @media(max-width:560px) { .wa-float span{display:none} .wa-float{padding:12px;bottom:18px;right:14px} }
     @media(max-width:900px) { .nav-inner{width:calc(100% - 32px);gap:16px}.brand strong{font-size:21px}.nav-links{gap:12px}.nav-links a:not(.cta){font-size:10px}.nav-links .hide-mid{display:none} }
     @media(max-width:640px) { .nav-inner{min-height:68px;flex-wrap:wrap;padding:10px 0}.brand strong{font-size:19px}.brand span{font-size:8px}.nav-links{width:100%;justify-content:space-between;gap:6px;padding-bottom:5px}.nav-links a:not(.cta){font-size:9px}.nav-links .hide-small{display:none}.nav-links .cta{padding:8px 11px;font-size:9px}.hero{padding:58px 18px 47px}.article-wrap{width:calc(100% - 24px)}.article-body{padding:30px 20px 38px;border-radius:21px}.article-body p,.article-body li{font-size:13px}.sources{padding:20px}.sources h2{font-size:28px} }
     @media(max-width:640px) { .brief-strip{grid-template-columns:1fr;gap:10px;text-align:center}.brief-strip div,.brief-strip div:first-child,.brief-strip div:last-child{padding:0;border:0} }
@@ -78,7 +91,7 @@
 <p class="lead">I kept reading about MCP before I had actually called a tool through it, and that bothered me enough to go build one.</p>
 <p>I run <a href="https://www.magicalchart.com/">Magical Chart</a>, an astrology product with real paying users, sitting on top of an astronomical engine I validated against Swiss Ephemeris reference data across ten bodies. <a href="https://modelcontextprotocol.io">MCP</a> is the open standard for connecting AI agents to external tools, and every explanation of it I had read made sense on paper. What I did not have yet was the feeling of it: what it is actually like to define a tool, have a client discover it, and watch a call go through end to end. The only way I know to get that feeling is to build something and watch it fail a few times first.</p>
 <p>So I wrote a small server with two tools, and I made sure the two tools were not just cosmetic variations of each other. One does its own math locally. The other reaches into my own production system and asks it for a real answer. That gap between them turned out to be where most of the actual learning happened.</p>
-<figure class="figure"><img src="/portfolio/assets/magical-chart-birth-chart.jpg" alt="The natal chart interface in Magical Chart, showing planetary placements and house positions" loading="lazy"><figcaption>This is where the numbers eventually land for a human: the natal chart view in Magical Chart. <code>get_natal_chart</code> asks the same backend for the same kind of result, just over MCP instead of a web page.</figcaption></figure>
+<figure class="figure figure-narrow"><img src="/portfolio/assets/star-map-interface.png" alt="The Star Map interface in Magical Chart, showing a natal chart with planetary placements and house positions" loading="lazy"><figcaption>This is where the numbers eventually land for a human: the Star Map view in Magical Chart. <code>get_natal_chart</code> asks the same backend for the same kind of result, just over MCP instead of a web page.</figcaption></figure>
 <h2>Two tools, on purpose</h2>
 <p><code>get_planet_position</code> is the simple one. It runs entirely on the open-source <a href="https://github.com/cosinekitty/astronomy">astronomy-engine</a> library, with a thin astrology layer I wrote on top to map a longitude onto a zodiac sign. No network call, no API key, nothing that can go down. Give it a body and a date, it hands back a position. This tool exists mostly so the server has a baseline: something I can trust completely, to compare against when the other tool starts doing something strange.</p>
 <p><code>get_natal_chart</code> is the one I actually cared about. It calls Magical Chart's own live, public, unauthenticated natal-chart API over HTTP, the same Swiss Ephemeris-validated engine that generates the reports my paying customers read. The tool does not reimplement any of that logic. It makes a real HTTP request, gets back real placements, houses, aspects and chart angles, and hands that straight to whatever agent asked for it. The engine's results are exposed; the engine itself is not.</p>
@@ -102,5 +115,25 @@
 <li><a href="https://github.com/florynepierson/mcp-astrology-demo">GitHub, mcp-astrology-demo</a> — the server's source, including the ESM/CJS workaround.</li>
 <li><a href="https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview">Anthropic, Tool use overview</a> — the tool-calling model this server's tools are designed to be called from.</li>
 </ul><p>For the agent that calls tools like these at runtime, see <a href="/articles/when-payment-succeeds-but-access-doesnt.html">When Payment Succeeds but Access Doesn't</a>, a first-hand case study from the same production product.</p></section>
-</article></div></main>  <footer class="site-footer"><a class="footer-brand" href="/">FLORYNE PIERSON</a><span>Independent writing sample · </span><a href="mailto:hello@florynepierson.com">Contact</a><span> · </span><a href="/portfolio/#writing">Portfolio</a></footer>
+</article></div></main>  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-id"><a class="footer-brand" href="/">FLORYNE PIERSON</a><p class="footer-rights">© 2026. All rights reserved.</p></div>
+      <div class="footer-links">
+        <a href="/#services">Services &amp; Pricing</a><span class="sep">•</span>
+        <a href="/articles/building-an-mcp-server-for-real-astronomical-data.html">Articles</a><span class="sep">•</span>
+        <a href="https://www.linkedin.com/in/floryne-pierson" target="_blank" rel="noopener noreferrer">LinkedIn</a><span class="sep">•</span>
+        <a class="malt" href="https://www.malt.fr/profile/florynepierson" target="_blank" rel="noopener noreferrer">Malt</a><span class="sep">•</span>
+        <a href="https://wa.me/33638482539" target="_blank" rel="noopener noreferrer">WhatsApp</a><span class="sep">•</span>
+        <a href="/#mentions-legales">Legal notice</a><span class="sep">•</span>
+        <a href="/#privacy-policy">Privacy policy</a><span class="sep">•</span>
+        <a href="/#cookies">Cookies</a><span class="sep">•</span>
+        <a href="/#cgv">Terms of sale</a><span class="sep">•</span>
+        <a href="https://www.magicalchart.com" target="_blank" rel="noopener noreferrer" title="Magical Chart — a web &amp; AI platform I designed and built solo">Magical Chart ↗</a>
+      </div>
+    </div>
+  </footer>
+  <a class="wa-float" href="https://wa.me/33638482539?text=Hi%20Floryne%2C%20I%20read%20your%20MCP%20article%20and%20wanted%20to%20reach%20out." target="_blank" rel="noopener noreferrer" aria-label="Chat with Floryne on WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.9 14.2c-.3.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.5.7 1.7.7 1.8.1.1.1.3 0 .4-.4.8-.9 1-.7 1.4.9 1.7 1.7 2.3 3.1 3 .2.1.4.1.5-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.7.8.2.1.4.2.4.3.1.3.1.7-.2 1.1Z"/></svg>
+    <span>Chat on WhatsApp</span>
+  </a>
 </body></html>

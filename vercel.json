@@ -32,11 +32,6 @@
   ],
   "redirects": [
     {
-      "source": "/portfolio",
-      "destination": "/#portfolio",
-      "permanent": false
-    },
-    {
       "source": "/toitures",
       "destination": "/kenyon-roofing",
       "permanent": true

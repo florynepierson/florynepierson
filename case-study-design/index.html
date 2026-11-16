@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Designing Magical Chart — Brand &amp; Visual Direction · Floryne Pierson</title>
+  <meta name="description" content="The visual and editorial decisions behind Magical Chart: a dreamy night universe built for reading, not spectacle.">
+  <link rel="canonical" href="https://florynepierson.com/case-study-design">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#080b1d;--cyan:#00e5ff;--pink:#fa4fc8;--berry:#625bff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background-color:var(--paper);
+      background-image:
+        radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 36%),
+        radial-gradient(ellipse at 92% 20%,rgba(0,217,255,.18),transparent 32%),
+        radial-gradient(ellipse at 10% 70%,rgba(234,47,197,.14),transparent 34%);
+      background-attachment:fixed;
+      color:#e0e4f8;
+      font:15px/1.75 'Plus Jakarta Sans',sans-serif;
+    }
+    a{color:inherit}
+    a:focus-visible{outline:3px solid var(--pink);outline-offset:4px}
+    .wrap{width:min(820px,calc(100% - 44px));margin:auto}
+
+    .top{
+      position:sticky;top:0;z-index:500;
+      width:100vw;margin-left:calc(50% - 50vw);
+      padding:18px max(22px,calc((100vw - 820px)/2));
+      display:flex;justify-content:space-between;align-items:center;
+      background:rgba(8,11,29,.88);backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(0,229,255,.16);font-size:12px;
+    }
+    .brand{font-weight:700;text-decoration:none;color:#f6f4ff;letter-spacing:.02em}
+    .brand:after{content:' ✿';color:var(--cyan)}
+    .back{color:var(--cyan);text-decoration:none;font-weight:600;font-size:11px;letter-spacing:.03em}
+    .back:hover{color:#fff}
+
+    /* Hero */
+    .hero{
+      margin:48px 0 60px;padding:52px 56px;
+      border:1px solid rgba(0,229,255,.4);border-radius:30px;
+      background:
+        radial-gradient(ellipse at 90% 10%,rgba(0,229,255,.18),transparent 38%),
+        radial-gradient(ellipse at 10% 90%,rgba(250,79,200,.14),transparent 38%),
+        linear-gradient(130deg,#111638,#1b1248 55%,#102d49);
+      box-shadow:0 20px 64px rgba(0,0,0,.3),0 0 36px rgba(0,229,255,.08);
+    }
+    .case-type{text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;color:var(--cyan)}
+    .hero h1{
+      font:500 clamp(42px,7vw,68px)/1.05 'Cormorant Garamond',serif;
+      color:#fff;margin:14px 0 20px;letter-spacing:-.02em;
+    }
+    .hero h1 em{color:var(--pink);font-style:italic}
+    .hero p{color:#c8d4f7;font-size:14px;max-width:580px;margin:0;line-height:1.75}
+
+    /* Sections */
+    h2{font:500 clamp(30px,5vw,44px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 16px}
+    p{color:#c8d0ee;font-size:14px;line-height:1.8;margin:0 0 16px}
+    strong{color:#e8ecff}
+    .section{margin:0 0 60px}
+    .section-label{
+      display:inline-block;margin-bottom:18px;padding:6px 12px;
+      border:1px solid rgba(0,229,255,.3);border-radius:999px;
+      background:rgba(0,229,255,.07);
+      color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    }
+    .divider{border:none;border-top:1px solid rgba(0,229,255,.12);margin:48px 0}
+
+    /* Decision blocks */
+    .decision{
+      display:grid;grid-template-columns:1fr 1fr;gap:0;
+      margin:28px 0;border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;overflow:hidden;
+    }
+    .decision-question{
+      padding:28px 30px;
+      background:rgba(255,255,255,.03);
+      border-right:1px solid rgba(255,255,255,.08);
+    }
+    .decision-answer{padding:28px 30px;background:rgba(0,229,255,.04)}
+    .decision-question .label{
+      font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+      color:rgba(255,255,255,.35);margin-bottom:10px;display:block;
+    }
+    .decision-answer .label{
+      font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--cyan);opacity:.7;margin-bottom:10px;display:block;
+    }
+    .decision-question p,.decision-answer p{
+      font:italic 500 18px/1.6 'Cormorant Garamond',serif;
+      color:#e8ecff;margin:0;
+    }
+    .decision-answer p{color:#dffaff}
+
+    /* Colour swatch */
+    .palette{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 28px}
+    .swatch{
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+    }
+    .swatch-dot{
+      width:52px;height:52px;border-radius:50%;
+      border:2px solid rgba(255,255,255,.12);
+      box-shadow:0 4px 16px rgba(0,0,0,.3);
+    }
+    .swatch span{font-size:9px;color:#9eacd8;letter-spacing:.06em;font-weight:600}
+
+    /* Type specimen */
+    .type-specimen{
+      margin:24px 0;padding:28px 32px;
+      border:1px solid rgba(255,255,255,.08);border-radius:20px;
+      background:rgba(255,255,255,.03);
+    }
+    .specimen-serif{
+      font:500 42px/1.1 'Cormorant Garamond',serif;
+      color:#fff;margin:0 0 6px;
+    }
+    .specimen-serif em{color:var(--cyan);font-style:italic}
+    .specimen-sans{
+      font:600 13px/1.5 'Plus Jakarta Sans',sans-serif;
+      color:#9eacd8;letter-spacing:.08em;text-transform:uppercase;margin:0;
+    }
+    .type-note{font-size:11px;color:#8090c0;margin:14px 0 0;line-height:1.6}
+
+    /* Mascot section */
+    .mascot-block{
+      display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
+      margin:24px 0;padding:28px 30px;
+      border:1px solid rgba(250,79,200,.25);border-radius:22px;
+      background:linear-gradient(130deg,rgba(250,79,200,.06),rgba(98,91,255,.06));
+    }
+    .mascot-block img{width:96px;height:96px;object-fit:contain}
+    .mascot-block p{margin:0;font-size:14px;color:#c8d0ee;line-height:1.75}
+
+    /* Principle cards */
+    .principles{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}
+    .principle{
+      padding:20px 22px;
+      border:1px solid rgba(255,255,255,.08);border-radius:18px;
+      background:rgba(255,255,255,.03);
+    }
+    .principle strong{
+      display:block;font-size:13px;color:#fff;margin-bottom:6px;
+    }
+    .principle p{font-size:12px;color:#9eacd8;margin:0;line-height:1.6}
+
+    /* Screenshot */
+    .screenshot{
+      display:block;width:100%;border-radius:18px;
+      border:1px solid rgba(0,229,255,.2);
+      box-shadow:0 12px 36px rgba(0,0,0,.35);
+      margin:20px 0;
+    }
+
+    /* Pull quote */
+    .pull-quote{
+      margin:28px 0;padding:24px 30px;
+      border-left:3px solid var(--pink);
+      border-radius:0 16px 16px 0;
+      background:rgba(250,79,200,.05);
+    }
+    .pull-quote p{
+      font:italic 500 20px/1.6 'Cormorant Garamond',serif;
+      color:#f0e8ff;margin:0;
+    }
+
+    /* CTA */
+    .cta-row{
+      display:flex;justify-content:space-between;align-items:center;
+      margin:56px 0 32px;padding:28px 32px;
+      border:1px solid rgba(250,79,200,.4);border-radius:22px;
+      background:linear-gradient(130deg,#1f1248,#112744);
+    }
+    .cta-row h2{font-size:28px;color:#fff;margin:0}
+    .cta-row p{color:#c8d4f7;font-size:12px;margin:6px 0 0}
+    .button{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:11px 18px;border-radius:999px;
+      background:var(--pink);color:#1a102e;
+      text-decoration:none;font-size:12px;font-weight:700;white-space:nowrap;
+    }
+    .button:hover{background:var(--cyan);color:#071126}
+
+    footer{
+      padding:30px 0 38px;text-align:center;color:#8090c0;font-size:11px;
+      border-top:1px solid rgba(0,229,255,.12);margin-top:16px;
+    }
+    footer a{color:var(--cyan)}
+
+    @media(max-width:640px){
+      .hero{padding:34px 26px;margin:32px 0 44px}
+      .hero h1{font-size:40px}
+      .decision{grid-template-columns:1fr}
+      .decision-question{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+      .principles{grid-template-columns:1fr}
+      .cta-row{flex-direction:column;align-items:flex-start;gap:16px}
+      .mascot-block{grid-template-columns:1fr;text-align:center}
+      .mascot-block img{margin:0 auto}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <a class="back" href="/portfolio">← Back to portfolio</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="case-type">Visual Direction · Brand Voice · Product Design</div>
+    <h1>Designing<br><em>Magical Chart</em></h1>
+    <p>Every visual and editorial decision in Magical Chart was made to serve one goal: a space that feels safe enough to be honest in. Here is how the universe was built, and why each choice was made the way it was.</p>
+  </section>
+
+
+  <section class="section">
+    <span class="section-label">01 · The constraint</span>
+    <h2>Not mystical. Not clinical. Something in between.</h2>
+    <p>Tarot and astrology products usually go one of two directions: dark and esoteric (crystal energy, moon rituals, dramatic fonts), or stripped-back and rational (data, charts, cold UI). Both feel wrong for what Magical Chart is.</p>
+    <p>The brief I gave myself: <strong>a night universe — dreamy, calm, immersive — that makes reading feel natural, not performative.</strong> The spectacle should be the content, not the interface.</p>
+
+    <div class="pull-quote">
+      <p>"Not a guru in spirituality. A space where you can be honest with yourself — and read without distraction."</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <span class="section-label">02 · The background</span>
+    <h2>Why dark navy, not black or white</h2>
+
+    <div class="decision">
+      <div class="decision-question">
+        <span class="label">The question</span>
+        <p>Why not a white or parchment background — the standard for editorial and "calm" products?</p>
+      </div>
+      <div class="decision-answer">
+        <span class="label">The decision</span>
+        <p>White reads as clinical. Parchment reads as vintage occult. Dark navy is the sky at night — it creates the dreamy, immersive feeling without signalling danger or mysticism.</p>
+      </div>
+    </div>
+
+    <div class="decision">
+      <div class="decision-question">
+        <span class="label">The question</span>
+        <p>Why not pure black — the standard for "premium dark mode"?</p>
+      </div>
+      <div class="decision-answer">
+        <span class="label">The decision</span>
+        <p>Black feels cold and contracted. Navy has depth — it suggests infinity, the cosmos, the feeling of lying on the grass and looking up. The gradient radials reinforce this: each page has its own subtle glow, like stars in different positions.</p>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch"><div class="swatch-dot" style="background:#080b1d"></div><span>#080b1d · base</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#111638"></div><span>#111638 · cards</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#1b1248"></div><span>#1b1248 · depth</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#00e5ff;border-color:rgba(0,229,255,.4)"></div><span>#00e5ff · accent</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#fa4fc8;border-color:rgba(250,79,200,.4)"></div><span>#fa4fc8 · warmth</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#625bff;border-color:rgba(98,91,255,.4)"></div><span>#625bff · focus</span></div>
+    </div>
+
+    <img src="/case-study-ux/magical-chart-homepage.png" alt="Magical Chart homepage — dark navy universe with Wooly and the free tarot reading interface" class="screenshot">
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <span class="section-label">03 · The accent colour</span>
+    <h2>One colour for everything that matters</h2>
+    <p>The constraint was: dark navy universe, minimal colour, maximum contrast. Too many colours and the night feeling breaks.</p>
+    <p>Cyan <strong>#00e5ff</strong> was chosen because it reads as starlight — it has the right luminosity against dark navy without warming the palette toward orange or red, which would shift the mood toward fire, urgency, warning. Cyan stays cold and clear: the light of the sky at 4am, not the light of a candle.</p>
+
+    <div class="decision">
+      <div class="decision-question">
+        <span class="label">The rule</span>
+        <p>Cyan is used for one thing: what deserves attention right now.</p>
+      </div>
+      <div class="decision-answer">
+        <span class="label">The result</span>
+        <p>Links, active states, the most important number on a screen. Never decorative. The eye follows it automatically — which means it has to earn its use every time.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <span class="section-label">04 · Typography</span>
+    <h2>A typeface for reading, not for looking at</h2>
+
+    <div class="type-specimen">
+      <p class="specimen-serif">Your free <em>tarot reading</em></p>
+      <p class="specimen-sans">Free · 3 cards · Instant · No account needed</p>
+      <p class="type-note">Cormorant Garamond for headings and reading content. Plus Jakarta Sans for UI labels, metadata, small text. The contrast between the two is intentional: the serif carries the content, the sans carries the structure.</p>
+    </div>
+
+    <div class="decision">
+      <div class="decision-question">
+        <span class="label">The question</span>
+        <p>Why Cormorant Garamond and not a more contemporary serif — or no serif at all?</p>
+      </div>
+      <div class="decision-answer">
+        <span class="label">The decision</span>
+        <p>Cormorant is elegant without being precious. It has the feeling of a book you read by a lamp at night — the right register for tarot interpretations and astrological reports. Modern serifs (like Playfair) have too much display personality; they draw attention to themselves. Cormorant recedes and lets the words carry the weight.</p>
+      </div>
+    </div>
+
+    <div class="decision">
+      <div class="decision-question">
+        <span class="label">The constraint</span>
+        <p>Users come to read long interpretations — sometimes 500-1,000 words. The typography has to support that.</p>
+      </div>
+      <div class="decision-answer">
+        <span class="label">The rule</span>
+        <p>No fantasy fonts, no decorative display type in body copy. Ornamentation belongs to the mascot, not to the letters. Reading comfort comes first.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <span class="section-label">05 · The mascot</span>
+    <h2>Why a sheep, and why this sheep</h2>
+
+    <div class="mascot-block">
+      <img src="/portfolio/assets/wooly-magical-chart.png" alt="Wooly, the Magical Chart sheep mascot — round, soft, floating on a cloud">
+      <div>
+        <p><strong>Wooly</strong> is a small sheep floating on a cloud above a starry sky. Round, soft, slightly luminous. The design decisions were entirely guided by what the product needs to feel like.</p>
+      </div>
+    </div>
+
+    <div class="principles">
+      <div class="principle">
+        <strong>Why a sheep</strong>
+        <p>Sheep are associated with dreams — counting sheep, drifting off. The mascot had to live in the liminal space between waking and sleeping, where you let yourself think about what you actually feel. A sheep on a cloud does that without explanation.</p>
+      </div>
+      <div class="principle">
+        <strong>Why round and soft</strong>
+        <p>Tarot is emotionally vulnerable territory. People come with real questions about relationships, decisions, doubts. A sharp, angular or "cool" character would create distance. Wooly is approachable because the product needs you to feel safe being honest.</p>
+      </div>
+      <div class="principle">
+        <strong>Why not a human or a mystical figure</strong>
+        <p>A human character would imply authority — a guru, a reader, someone who knows things you don't. That is exactly the dynamic the product rejects. A mascot has no power over you. It reflects; it doesn't judge.</p>
+      </div>
+      <div class="principle">
+        <strong>Why Wooly is the only ornament</strong>
+        <p>The UI has no illustrations, no decorative elements, no crystal balls or pentagram borders. All the visual personality is concentrated in Wooly. This keeps the reading content primary — the mascot is the warmth, the rest is the space to think.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <span class="section-label">06 · Brand voice</span>
+    <h2>What Wooly says and doesn't say</h2>
+    <p>The visual direction and the editorial voice were designed together. A dreamy, non-judgmental universe needs a voice that matches — which meant defining what Wooly would never say as much as what it would.</p>
+
+    <div class="decision">
+      <div class="decision-question">
+        <span class="label">Never</span>
+        <p>"The cards predict…" / "Your destiny is…" / "The universe is telling you…"</p>
+      </div>
+      <div class="decision-answer">
+        <span class="label">Always</span>
+        <p>"The cards reflect…" / "This might be worth sitting with…" / "Wooly wonders if…"</p>
+      </div>
+    </div>
+
+    <p>The rule: Wooly mirrors, it doesn't tell. Every reading ends with the user's own agency intact. The visual softness and the editorial restraint are the same decision in two different forms.</p>
+
+    <div class="pull-quote">
+      <p>"It doesn't feel manipulative — you actually know what you're signing up for."<br><span style="font-size:12px;color:#9eacd8;font-style:normal">— User email, unsolicited, after cancellation</span></p>
+    </div>
+  </section>
+
+
+  <div class="cta-row">
+    <div>
+      <h2>See more work</h2>
+      <p>AI products, analytics, and client projects</p>
+    </div>
+    <a class="button" href="/portfolio">Back to portfolio ↗</a>
+  </div>
+
+</main>
+
+<footer>
+  <p><a href="/">Floryne Pierson</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a></p>
+</footer>
+
+</body>
+</html>

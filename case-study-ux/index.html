@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why satisfied users don't return — Research · Floryne Pierson</title>
+  <meta name="description" content="A product research case study: uncovering the gap between satisfaction and retention in a freemium AI product.">
+  <link rel="canonical" href="https://florynepierson.com/case-study-ux">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why satisfied users don't return — Research · Floryne Pierson">
+  <meta property="og:description" content="A product research case study on the gap between satisfaction and retention in a freemium AI product.">
+  <meta property="og:url" content="https://florynepierson.com/case-study-ux">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#080b1d;--ink:#302a4b;--berry:#625bff;--pink:#fa4fc8;
+      --muted:#c3c9ec;--white:#fff;--cyan:#00e5ff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background-color:var(--paper);
+      background-image:
+        radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 36%),
+        radial-gradient(ellipse at 92% 20%,rgba(0,217,255,.18),transparent 32%),
+        radial-gradient(ellipse at 10% 70%,rgba(234,47,197,.14),transparent 34%);
+      background-attachment:fixed;
+      color:#e0e4f8;
+      font:15px/1.75 'Plus Jakarta Sans',sans-serif;
+    }
+    a{color:inherit}
+    a:focus-visible{outline:3px solid var(--pink);outline-offset:4px}
+    .wrap{width:min(820px,calc(100% - 44px));margin:auto}
+
+    /* Nav */
+    .top{
+      position:sticky;top:0;z-index:500;
+      width:100vw;margin-left:calc(50% - 50vw);
+      padding:18px max(22px,calc((100vw - 820px)/2));
+      display:flex;justify-content:space-between;align-items:center;
+      background:rgba(8,11,29,.88);backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(0,229,255,.16);
+      font-size:12px;
+    }
+    .brand{font-weight:700;text-decoration:none;color:#f6f4ff;letter-spacing:.02em}
+    .brand:after{content:' ✿';color:var(--cyan)}
+    .back{color:var(--cyan);text-decoration:none;font-weight:600;font-size:11px;letter-spacing:.03em}
+    .back:hover{color:#fff}
+
+    /* Hero */
+    .hero{
+      margin:48px 0 60px;
+      padding:52px 56px;
+      border:1px solid rgba(0,229,255,.4);
+      border-radius:30px;
+      background:
+        radial-gradient(ellipse at 90% 10%,rgba(0,229,255,.18),transparent 38%),
+        radial-gradient(ellipse at 10% 90%,rgba(250,79,200,.14),transparent 38%),
+        linear-gradient(130deg,#111638,#1b1248 55%,#102d49);
+      box-shadow:0 20px 64px rgba(0,0,0,.3),0 0 36px rgba(0,229,255,.08);
+    }
+    .case-type{text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;color:var(--cyan)}
+    .hero h1{
+      font:500 clamp(42px,7vw,68px)/1.05 'Cormorant Garamond',serif;
+      color:#fff;margin:14px 0 20px;letter-spacing:-.02em;
+    }
+    .hero h1 em{color:var(--pink);font-style:italic}
+    .hero-sub{color:#c8d4f7;font-size:14px;max-width:580px;margin:0 0 32px;line-height:1.75}
+    .overview-row{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+      margin-top:36px;padding-top:32px;
+      border-top:1px solid rgba(0,229,255,.18);
+    }
+    .ov{display:flex;flex-direction:column;gap:4px}
+    .ov-label{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,229,255,.7)}
+    .ov-value{font-size:13px;color:#e8ecff;font-weight:500;line-height:1.4}
+
+    /* Content sections */
+    h2{
+      font:500 clamp(32px,5vw,46px)/1.08 'Cormorant Garamond',serif;
+      color:#fff;margin:0 0 16px;
+    }
+    h3{
+      font:600 18px/1.3 'Plus Jakarta Sans',serif;
+      color:#fff;margin:0 0 10px;
+    }
+    p{color:#c8d0ee;font-size:14px;line-height:1.8;margin:0 0 16px}
+    strong{color:#e8ecff}
+
+    .section{margin:0 0 56px}
+    .section-label{
+      display:inline-block;
+      margin-bottom:18px;
+      padding:6px 12px;
+      border:1px solid rgba(0,229,255,.3);
+      border-radius:999px;
+      background:rgba(0,229,255,.07);
+      color:var(--cyan);
+      font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    }
+
+    /* Stat cards */
+    .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0}
+    .stat-card{
+      padding:22px 20px;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:20px;
+      background:rgba(255,255,255,.04);
+    }
+    .stat-card strong{
+      display:block;
+      font:600 44px/1.05 'Cormorant Garamond',serif;
+      color:var(--cyan);margin-bottom:5px;
+    }
+    .stat-card span{font-size:11px;color:#9eacd8;line-height:1.5}
+    .stat-card.pink strong{color:var(--pink)}
+    .stat-card.berry strong{color:#a89cff}
+    .stat-card.amber strong{color:#ffd56b}
+
+    /* Finding blocks */
+    .finding{
+      margin:20px 0;
+      padding:24px 26px;
+      border-left:3px solid var(--cyan);
+      border-radius:0 16px 16px 0;
+      background:rgba(0,229,255,.05);
+    }
+    .finding.pink{border-color:var(--pink);background:rgba(250,79,200,.05)}
+    .finding.berry{border-color:#a89cff;background:rgba(98,91,255,.06)}
+    .finding h3{font-size:15px;color:var(--cyan);margin-bottom:8px}
+    .finding.pink h3{color:var(--pink)}
+    .finding.berry h3{color:#a89cff}
+    .finding p{font-size:13px;margin:0}
+
+    /* Verbatim */
+    .verbatim{
+      margin:28px 0;
+      padding:28px 32px;
+      border:1px solid rgba(250,79,200,.35);
+      border-radius:22px;
+      background:
+        radial-gradient(ellipse at 100% 0,rgba(250,79,200,.14),transparent 48%),
+        linear-gradient(130deg,#1a1140,#1a1140);
+    }
+    .verbatim blockquote{
+      margin:0;padding:0;
+      font:italic 500 18px/1.75 'Cormorant Garamond',serif;
+      color:#f0e8ff;
+    }
+    .verbatim blockquote em{color:var(--pink);font-style:normal;font-weight:600}
+    .verbatim cite{
+      display:block;margin-top:14px;
+      font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      color:rgba(250,79,200,.7);font-style:normal;
+    }
+
+    /* Warning / insight callout */
+    .callout{
+      display:flex;gap:14px;align-items:flex-start;
+      margin:20px 0;
+      padding:18px 20px;
+      border:1px solid rgba(255,213,107,.35);
+      border-radius:16px;
+      background:rgba(255,213,107,.06);
+    }
+    .callout-icon{font-size:20px;flex:0 0 auto;line-height:1}
+    .callout p{margin:0;font-size:12px;color:#ffe4a0}
+
+    /* Method pills */
+    .methods{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 24px}
+    .method{
+      padding:7px 13px;
+      border:1px solid rgba(0,229,255,.3);
+      border-radius:999px;
+      background:rgba(0,229,255,.07);
+      color:#dffaff;font-size:11px;font-weight:600;
+    }
+
+    /* Divider */
+    .divider{
+      border:none;
+      border-top:1px solid rgba(0,229,255,.12);
+      margin:48px 0;
+    }
+
+    /* Decisions */
+    .decision-list{list-style:none;margin:16px 0;padding:0;display:flex;flex-direction:column;gap:12px}
+    .decision-list li{
+      display:flex;gap:12px;align-items:flex-start;
+      padding:16px 18px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      font-size:13px;color:#c8d0ee;
+    }
+    .decision-list li span{
+      flex:0 0 20px;height:20px;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:999px;background:rgba(0,229,255,.18);
+      color:var(--cyan);font-size:9px;font-weight:700;
+    }
+
+    /* Reflection */
+    .reflection{
+      padding:30px 34px;
+      border:1px solid rgba(98,91,255,.35);
+      border-radius:22px;
+      background:linear-gradient(130deg,rgba(98,91,255,.1),rgba(17,20,55,.6));
+    }
+    .reflection h3{font-size:14px;color:#a89cff;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
+
+    /* Back link */
+    .cta-row{
+      display:flex;justify-content:space-between;align-items:center;
+      margin:56px 0 32px;padding:28px 32px;
+      border:1px solid rgba(250,79,200,.4);border-radius:22px;
+      background:linear-gradient(130deg,#1f1248,#112744);
+    }
+    .cta-row h2{font-size:28px;color:#fff;margin:0}
+    .cta-row p{color:#c8d4f7;font-size:12px;margin:6px 0 0}
+    .button{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:11px 18px;border-radius:999px;
+      background:var(--pink);color:#1a102e;
+      text-decoration:none;font-size:12px;font-weight:700;
+      white-space:nowrap;
+    }
+    .button:hover{background:var(--cyan);color:#071126}
+
+    footer{
+      padding:30px 0 38px;text-align:center;
+      color:#8090c0;font-size:11px;
+      border-top:1px solid rgba(0,229,255,.12);
+      margin-top:16px;
+    }
+    footer a{color:var(--cyan)}
+
+    @media(max-width:640px){
+      .hero{padding:34px 26px;margin:32px 0 44px}
+      .hero h1{font-size:40px}
+      .overview-row{grid-template-columns:1fr 1fr;gap:10px}
+      .stat-grid{grid-template-columns:1fr}
+      .cta-row{flex-direction:column;align-items:flex-start;gap:16px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <a class="back" href="/portfolio">← Back to portfolio</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="case-type">Product Research · Behavioral Analytics · Freemium SaaS</div>
+    <h1>Why satisfied users<br><em>don't return</em></h1>
+    <p class="hero-sub">A research study on the gap between satisfaction and retention in a live GenAI product — and how three measurement errors had to be corrected before any real finding could be trusted.</p>
+
+    <div class="overview-row">
+      <div class="ov">
+        <span class="ov-label">Product</span>
+        <span class="ov-value">Magical Chart — AI-powered astrology &amp; tarot SaaS</span>
+      </div>
+      <div class="ov">
+        <span class="ov-label">My role</span>
+        <span class="ov-value">Solo founder — research, product, analytics, engineering</span>
+      </div>
+      <div class="ov">
+        <span class="ov-label">Methods</span>
+        <span class="ov-value">Behavioral analytics, funnel analysis, in-product ratings, unsolicited user feedback</span>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <span class="section-label">01 · Context</span>
+    <h2>The product and the question</h2>
+    <p>Magical Chart is a freemium AI tarot and astrology product. Free users can get one reading per day; a paid subscription unlocks unlimited readings, a 165-lesson course, and additional reports. The core product loop is: visit &rarr; free reading &rarr; return &rarr; subscribe.</p>
+    <p>After several months of live traffic, the data showed a stable pattern I couldn't explain: <strong>the people who paid rated the product 5 out of 5</strong>. And they still didn't come back.</p>
+    <p>That is the research question: <strong>if satisfaction is high, why is retention near zero?</strong></p>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <span class="section-label">02 · Before the findings: fixing the data</span>
+    <h2>Three measurements that were wrong</h2>
+    <p>Before any finding could be trusted, I had to identify and correct three instrumentation errors that were each producing a plausible but false picture.</p>
+
+    <div class="finding">
+      <h3>Error 1 — The database row cap</h3>
+      <p>The metrics endpoint returned exactly 1,000 readings per query and treated that as a total. The real 30-day volume was more than double. <strong>Everything built on "usage" before this was corrected was measuring an artifact, not behavior.</strong></p>
+    </div>
+
+    <div class="finding">
+      <h3>Error 2 — Activation event scope</h3>
+      <p>The <code>start_reading</code> event only fired on the homepage tool. The product runs across 126 pages, most of which were invisible to that metric. The 5% activation rate I had been acting on mixed two completely different populations: homepage visitors (36% activation) and content page visitors (1.7%). Treating them as one number had led to the wrong intervention for two months.</p>
+    </div>
+
+    <div class="finding">
+      <h3>Error 3 — Bot traffic</h3>
+      <p>A spike in readings that looked like a growth signal turned out to be automated traffic. The signature: several languages disappeared overnight while real traffic kept rising, and the endpoint showed zero errors. <strong>Detecting this avoided misreading a robot as a user cohort.</strong> It also revealed that the bot was consuming more than half the monthly AI cost.</p>
+    </div>
+
+    <div class="callout">
+      <span class="callout-icon">⚑</span>
+      <p><strong>The method that worked:</strong> cross-referencing two independent sources (GA4 events and AI API billing, which cannot be faked) before trusting any single number. When they disagreed, I investigated the gap rather than picking the more convenient figure.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <span class="section-label">03 · Findings</span>
+    <h2>What the data said</h2>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <strong>&lt;2%</strong>
+        <span>Week-1 return rate — the share of new users still active 7 days after their first visit</span>
+      </div>
+      <div class="stat-card pink">
+        <strong>5 / 5</strong>
+        <span>Average in-product rating from paying users — every rating submitted was maximum score</span>
+      </div>
+      <div class="stat-card berry">
+        <strong>36%</strong>
+        <span>Activation on the homepage — users who start a reading after landing there</span>
+      </div>
+      <div class="stat-card amber">
+        <strong>1.7%</strong>
+        <span>Activation on content pages — the same action, same product, different entry point</span>
+      </div>
+    </div>
+
+    <div class="finding berry" style="margin-top:28px">
+      <h3>Finding 1 — Satisfaction does not predict retention</h3>
+      <p>Users who completed a paid reading gave it the highest possible rating and did not return. The product delivered on its promise within a single session. The issue is not quality; it is <strong>the absence of a compelling reason to come back tomorrow</strong>.</p>
+    </div>
+
+    <div class="finding" style="margin-top:14px">
+      <h3>Finding 2 — The bottleneck is at the offer click, not the checkout</h3>
+      <p>Once a user reached the checkout page, 20% converted to a purchase. The drop happened much earlier: only 2.7% of users who saw an offer clicked it. <strong>The friction is in communicating value, not in completing payment.</strong></p>
+    </div>
+
+    <div class="finding pink" style="margin-top:14px">
+      <h3>Finding 3 — Two audiences, one product</h3>
+      <p>Traffic analysis by keyword intent and geography revealed two populations with almost no overlap: one arriving via spiritual/esoteric queries (high volume, low purchase intent, concentrated in South Asia), and one arriving via self-development queries (lower volume, measurable purchase intent, US-dominant). These two groups were landing on the same pages with the same offer — and reading completely different signals from it.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <span class="section-label">04 · Qualitative signal</span>
+    <h2>The unsolicited email</h2>
+    <p>Among the users who cancelled, one sent an unsolicited message that reframed the entire retention problem:</p>
+
+    <div class="verbatim">
+      <blockquote>
+        "I came across your page wanting confirmation that I had made a right decision about something, but I realised just because I questioned a decision didn't mean it was wrong. I canceled simply because <em>I want to live in the moment and trust my intuition more.</em> Your site is incredible, I honestly enjoyed all the features — it has depth, and it doesn't feel manipulative. For me it was a 1000% experience, no complaints whatsoever. You built a great thing."
+      </blockquote>
+      <cite>Paying subscriber, unsolicited email after cancellation</cite>
+    </div>
+
+    <p>This introduced a concept I had not framed before: <strong>graduation churn</strong>. Some users leave not because the product failed, but because it succeeded — they reached the clarity they came for and no longer needed an external mirror. The product's own positioning ("not to predict, to pivot") was creating self-resolving sessions.</p>
+    <p>This does not make retention impossible, but it redefines what retention means for this product: the goal is not to create dependency, but to <strong>give people a reason to return when the next moment of doubt arrives</strong>.</p>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <span class="section-label">05 · Decisions taken</span>
+    <h2>What changed</h2>
+    <ul class="decision-list">
+      <li>
+        <span>1</span>
+        <div><strong>Stopped redesigning the homepage.</strong> Activation at 36% was not the problem. Redirected effort to the content pages, which accounted for 80% of traffic and had 1.7% activation — fixing the bridge between article and tool was worth 20× more than homepage polish.</div>
+      </li>
+      <li>
+        <span>2</span>
+        <div><strong>Reframed the CRO target.</strong> The checkout was not the leak. The intervention needed to be on offer visibility and the moment before the offer click — not on simplifying payment flow.</div>
+      </li>
+      <li>
+        <span>3</span>
+        <div><strong>Separated the two audiences in content and acquisition strategy.</strong> Building pages that mix high-volume/low-intent and low-volume/high-intent traffic on the same CTA actively suppresses conversion for both groups.</div>
+      </li>
+      <li>
+        <span>4</span>
+        <div><strong>Reframed retention from "daily habit" to "return when it matters."</strong> The product's ethical positioning (non-manipulative, autonomy-first) makes compulsion loops both unethical and ineffective. The alternative is a product strong enough that users remember it when they need it next — which is a content and trust problem, not a push notification problem.</div>
+      </li>
+    </ul>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <div class="reflection">
+      <h3>Reflection</h3>
+      <p>The main methodological lesson: <strong>a plausible number is not a reliable number.</strong> Every metric I corrected looked reasonable before correction. Cross-referencing independent data sources — especially one that reflects real cost (API billing) versus one that reflects declared events (analytics) — is the most reliable way to catch instrumentation errors before acting on them.</p>
+      <p style="margin-bottom:0">The main product lesson: when users rate an experience highly but do not return, the question is not "how do we keep them" but "what are they actually using this for?" — which requires qualitative signal, not more dashboards.</p>
+    </div>
+  </section>
+
+
+  <div class="cta-row">
+    <div>
+      <h2>See more work</h2>
+      <p>AI products, analytics, and client projects</p>
+    </div>
+    <a class="button" href="/portfolio">Back to portfolio ↗</a>
+  </div>
+
+</main>
+
+<footer>
+  <p><a href="/">Floryne Pierson</a> &middot; <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a></p>
+</footer>
+
+</body>
+</html>

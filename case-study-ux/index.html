@@ -287,8 +287,16 @@
     <span class="section-label">01 · Context</span>
     <h2>The product and the question</h2>
     <p>Magical Chart is a freemium AI tarot and astrology product. Free users can get one reading per day; a paid subscription unlocks unlimited readings, a 165-lesson course, and additional reports. The core product loop is: visit &rarr; free reading &rarr; return &rarr; subscribe.</p>
+
+    <img src="/case-study-ux/magical-chart-homepage.png" alt="Magical Chart homepage — free tarot reading with Wooly the AI companion" style="display:block;width:100%;border-radius:18px;border:1px solid rgba(0,229,255,.2);box-shadow:0 12px 36px rgba(0,0,0,.35);margin:20px 0 24px">
+
     <p>After several months of live traffic, the data showed a stable pattern I couldn't explain: <strong>the people who paid rated the product 5 out of 5</strong>. And they still didn't come back.</p>
     <p>That is the research question: <strong>if satisfaction is high, why is retention near zero?</strong></p>
+
+    <div class="finding berry" style="margin-top:8px">
+      <h3>Initial hypothesis</h3>
+      <p>My first assumption was an activation problem: most visitors never started a reading, so they never experienced the product. Fix activation, fix retention. The data invalidated this — and finding out why took correcting three instrumentation errors first.</p>
+    </div>
   </section>
 
   <hr class="divider">
@@ -401,6 +409,16 @@
         <div><strong>Reframed retention from "daily habit" to "return when it matters."</strong> The product's ethical positioning (non-manipulative, autonomy-first) makes compulsion loops both unethical and ineffective. The alternative is a product strong enough that users remember it when they need it next — which is a content and trust problem, not a push notification problem.</div>
       </li>
     </ul>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <span class="section-label">06 · Impact</span>
+    <h2>What changed</h2>
+    <p>The activation rate on content pages moved from 1.7% toward the homepage baseline (36%) after the content-to-tool bridge was reworked — the gap narrowed, though it has not closed. The offer click rate remains under 5%, which confirms the CRO work is ongoing.</p>
+    <p>The more lasting impact was on how decisions get made: <strong>no product change is now justified without a named data source</strong>. The two-source cross-check (events + API billing) is now standard before any metric is acted on.</p>
+    <p style="font-size:12px;color:#8090c0">Note: this product is an independent side project, not a team environment. Retention numbers remain low in absolute terms. The value of this case study is not the outcome metrics but the research process — finding the right question, correcting the instrumentation, and acting on the finding rather than the assumption.</p>
   </section>
 
   <hr class="divider">

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog — Floryne Pierson</title>
+  <meta name="description" content="Technical writing by Floryne Pierson — building AI products, debugging in production, and what the data actually says.">
+  <link rel="canonical" href="https://florynepierson.com/blog">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blog — Floryne Pierson">
+  <meta property="og:description" content="Technical writing on building AI products, debugging in production, and what the data actually says.">
+  <meta property="og:url" content="https://florynepierson.com/blog">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec;--white:#fff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:15px/1.75 'Plus Jakarta Sans',sans-serif}
+    a{color:inherit;text-decoration:none}.wrap{width:min(760px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 760px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .hero{padding:64px 0 48px;border-bottom:1px solid rgba(0,229,255,.12);margin-bottom:52px}
+    .eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;color:var(--berry);margin-bottom:14px}
+    h1{font:500 clamp(42px,6vw,58px)/1.06 'Cormorant Garamond',serif;color:#fff;margin:0 0 16px}
+    .hero p{font-size:14px;color:var(--muted);max-width:560px;margin:0}
+    .posts{display:grid;gap:1px;border:1px solid rgba(0,229,255,.14);border-radius:20px;overflow:hidden;margin-bottom:80px}
+    .post{display:block;padding:28px 32px;background:rgba(255,255,255,.025);transition:background .2s}
+    .post:hover{background:rgba(0,229,255,.05)}
+    .post:not(:last-child){border-bottom:1px solid rgba(0,229,255,.1)}
+    .post-meta{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .post-tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .post-date{font-size:11px;color:#8d9bc5}
+    .post h2{font:600 26px/1.15 'Cormorant Garamond',serif;color:#fff;margin:0 0 8px;transition:color .2s}
+    .post:hover h2{color:var(--cyan)}
+    .post p{margin:0;font-size:13px;color:#9eacd8;line-height:1.7}
+    .post-read{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:11px;font-weight:700;color:var(--pink)}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .foot a{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.hero{padding:48px 0 36px}.post{padding:22px 20px}.post h2{font-size:22px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <div class="hero">
+      <div class="eyebrow">Technical writing</div>
+      <h1>Things I learned<br>building in public.</h1>
+      <p>Notes on AI products, debugging in production, data that doesn't lie, and decisions I'd make again — or wouldn't.</p>
+    </div>
+    <div class="posts">
+      <a class="post" href="/blog/my-analytics-were-broken-for-weeks">
+        <div class="post-meta">
+          <span class="post-tag">Analytics</span>
+          <span class="post-date">November 2026</span>
+        </div>
+        <h2>My analytics were broken for weeks and I didn't know</h2>
+        <p>How a 2-second setTimeout on 1,536 pages made most of my traffic invisible to GA4 — and what I did about it.</p>
+        <span class="post-read">Read →</span>
+      </a>
+      <a class="post" href="/blog/fixing-a-silent-stripe-webhook">
+        <div class="post-meta">
+          <span class="post-tag">Payments · Debugging</span>
+          <span class="post-date">October 2026</span>
+        </div>
+        <h2>Fixing a silent Stripe webhook that was failing 100% of the time</h2>
+        <p>Paying users weren't getting access. The webhook looked configured. Nothing was written to the database. Here's how I found it.</p>
+        <span class="post-read">Read →</span>
+      </a>
+      <a class="post" href="/blog/bot-filter-ga4">
+        <div class="post-meta">
+          <span class="post-tag">Analytics · SEO</span>
+          <span class="post-date">August 2026</span>
+        </div>
+        <h2>50 fake sessions per day that GA4 didn't catch</h2>
+        <p>Headless Chrome scrapers running real JavaScript. How I detected them and why the standard GA4 bot filter wasn't enough.</p>
+        <span class="post-read">Read →</span>
+      </a>
+    </div>
+  </main>
+  <footer class="wrap foot">
+    <a href="/portfolio">← Back to portfolio</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

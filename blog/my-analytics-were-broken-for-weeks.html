@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My analytics were broken for weeks and I didn't know — Floryne Pierson</title>
+  <meta name="description" content="How a 2-second setTimeout on 1,536 pages made most of my traffic invisible to GA4, and how I fixed it with a whitelist-controlled script.">
+  <link rel="canonical" href="https://florynepierson.com/blog/my-analytics-were-broken-for-weeks">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="My analytics were broken for weeks and I didn't know">
+  <meta property="og:description" content="How a 2-second setTimeout on 1,536 pages made most of my traffic invisible to GA4.">
+  <meta property="og:url" content="https://florynepierson.com/blog/my-analytics-were-broken-for-weeks">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:16px/1.8 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(680px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 680px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .article{padding:56px 0 80px}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .date{font-size:11px;color:#8d9bc5}
+    h1{font:500 clamp(36px,5vw,52px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 20px}
+    .lede{font-size:17px;color:#dbe5ff;line-height:1.7;border-left:3px solid var(--cyan);padding-left:20px;margin:0 0 40px}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:40px 0 14px}
+    p{margin:0 0 20px;color:#c3c9ec}
+    code{font-family:monospace;font-size:.88em;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.18);border-radius:5px;padding:2px 7px;color:#a8f0f0}
+    pre{background:rgba(5,11,32,.8);border:1px solid rgba(0,229,255,.2);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px}
+    pre code{background:none;border:none;padding:0;color:#cce8ff;font-size:13px;line-height:1.7}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 24px}
+    .callout p{margin:0;color:#f0cce8;font-size:14px}
+    .callout strong{color:#fa4fc8}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
+    .back:hover{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <article class="article">
+      <a class="back" href="/blog">← All posts</a>
+      <div class="article-meta">
+        <span class="tag">Analytics</span>
+        <span class="date">November 2026</span>
+      </div>
+      <h1>My analytics were broken for weeks and I didn't know</h1>
+      <p class="lede">How a 2-second setTimeout on 1,536 pages made most of my traffic invisible to GA4 — and what I built to fix it properly.</p>
+
+      <p>I was looking at my GA4 data and something felt off. There were sessions full of custom events — readings completed, offers shown, buttons clicked — but no <code>page_view</code>, no <code>session_start</code>, no attribution. Around 80 sessions per day were arriving as <code>(not set)</code> in the Source/Medium report. They had engagement. They had no origin.</p>
+
+      <p>That's when I started digging.</p>
+
+      <h2>The root cause</h2>
+
+      <p>On 1,536 pages, <code>gtag.js</code> was loaded inside a <code>window.addEventListener("load", () => setTimeout(..., 2000))</code> block. The intent was performance: don't block the page with analytics on first load.</p>
+
+      <p>The problem: on a slow 3G connection, <code>window.load</code> itself fires at 54 seconds. Add another 2 seconds and you're at 56 seconds before GA4 even initialises. Most users are long gone by then.</p>
+
+      <p>What actually happened: the custom events (tracked by a separate script that ran earlier) fired and reached the GA4 property just fine. But <code>page_view</code>, <code>session_start</code> and <code>first_visit</code> — which are produced <em>by the GA4 configuration</em>, not by custom code — never fired at all. So GA4 had engagement signals with no session context to attach them to.</p>
+
+      <div class="callout">
+        <p><strong>The symptom:</strong> ~700 sessions with zero <code>session_start</code>, but dozens of <code>page_view</code> and <code>user_engagement</code> events. Every decision I made during that period was based on incomplete data.</p>
+      </div>
+
+      <h2>The fix</h2>
+
+      <p>The solution was to load <code>gtag.js</code> with a short, fixed delay instead of waiting for <code>load</code>:</p>
+
+      <pre><code>// Before
+window.addEventListener("load", () => {
+  setTimeout(loadGtag, 2000);
+});
+
+// After
+setTimeout(loadGtag, 300);</code></pre>
+
+      <p>300ms is enough to avoid blocking the critical rendering path. It doesn't depend on the network state of the page. And critically, it's short enough that even fast users who bounce immediately still get a <code>session_start</code> recorded.</p>
+
+      <p>The 300ms delay also serves a second purpose: it gives the page time to render so that a bot-detection check I run against <code>screen</code> dimensions reads accurate values, rather than the emulated defaults that headless browsers set at load.</p>
+
+      <h2>The hard part: applying it to 1,536 pages</h2>
+
+      <p>Manually editing 1,536 HTML files wasn't an option. I wrote a Node script to do it automatically — but the first version had a bug that taught me something important.</p>
+
+      <p>The original approach used a single regex with <code>[\s\S]*?</code> to match the script block. On pages that had <em>two</em> loading blocks (one for gtag at 1500ms, one for GTM at 2000ms), the lazy quantifier jumped from the first block's opener to the second block's closing bracket. It merged both blocks into one and left orphaned syntax behind. <strong>JavaScript was invalid on 182 pages</strong> before I caught it.</p>
+
+      <p>The correct approach: parse the HTML structurally, block by block, counting open and close brackets instead of using a regex boundary. And before writing any modified block back to disk, compile it with <code>new Function()</code> — which parses without executing, so a syntax error throws before anything is saved.</p>
+
+      <pre><code>// Validate before writing
+try {
+  new Function(modifiedScript);
+} catch (e) {
+  throw new Error(`Invalid JS on ${file}: ${e.message}`);
+}</code></pre>
+
+      <p>After the fix: 3,103 valid blocks rewritten, 2 blocks skipped (already invalid in the source, unrelated to this change). Zero regressions.</p>
+
+      <h2>What I learned</h2>
+
+      <p>The obvious lesson is about loading order. But the more useful one is about control: a script that modifies files at scale needs a whitelist check, not just a rewrite. My final version of the script validates every output before it touches the filesystem, and runs a <code>--check</code> mode that confirms the invariant — "every page that configures GA4 also loads gtag.js without depending on <code>load</code>" — without making any changes.</p>
+
+      <p>If you're building a content site with hundreds or thousands of pages and third-party scripts, don't trust that everything is loading in the right order just because it works on your laptop on a fast connection. Measure it on slow 3G. You might find that your analytics have been lying to you for weeks.</p>
+    </article>
+  </main>
+  <footer class="wrap foot">
+    <a href="/blog">← All posts</a> · <a href="/portfolio">Portfolio</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

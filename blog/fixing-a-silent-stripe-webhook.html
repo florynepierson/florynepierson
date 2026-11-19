@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fixing a silent Stripe webhook that was failing 100% of the time — Floryne Pierson</title>
+  <meta name="description" content="Paying users weren't getting access. The webhook looked configured. Nothing was written to the database. Here's the exact sequence that caught it.">
+  <link rel="canonical" href="https://florynepierson.com/blog/fixing-a-silent-stripe-webhook">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Fixing a silent Stripe webhook that was failing 100% of the time">
+  <meta property="og:description" content="Paying users weren't getting access. The webhook looked configured. Nothing was written to the database.">
+  <meta property="og:url" content="https://florynepierson.com/blog/fixing-a-silent-stripe-webhook">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:16px/1.8 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(680px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 680px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .article{padding:56px 0 80px}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .date{font-size:11px;color:#8d9bc5}
+    h1{font:500 clamp(36px,5vw,52px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 20px}
+    .lede{font-size:17px;color:#dbe5ff;line-height:1.7;border-left:3px solid var(--cyan);padding-left:20px;margin:0 0 40px}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:40px 0 14px}
+    p{margin:0 0 20px;color:#c3c9ec}
+    code{font-family:monospace;font-size:.88em;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.18);border-radius:5px;padding:2px 7px;color:#a8f0f0}
+    pre{background:rgba(5,11,32,.8);border:1px solid rgba(0,229,255,.2);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px}
+    pre code{background:none;border:none;padding:0;color:#cce8ff;font-size:13px;line-height:1.7}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 24px}
+    .callout p{margin:0;color:#f0cce8;font-size:14px}
+    .callout strong{color:#fa4fc8}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
+    .back:hover{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <article class="article">
+      <a class="back" href="/blog">← All posts</a>
+      <div class="article-meta">
+        <span class="tag">Payments · Debugging</span>
+        <span class="date">October 2026</span>
+      </div>
+      <h1>Fixing a silent Stripe webhook that was failing 100% of the time</h1>
+      <p class="lede">Paying users weren't getting access. The webhook looked configured. Nothing was written to the database. Here's the exact sequence that caught it.</p>
+
+      <p>A user paid. They got the Stripe receipt. They came back to the site and had no premium access. I checked the database — their row hadn't been updated. I checked the Stripe dashboard — payment successful, subscription active. Somewhere between Stripe confirming the payment and my database knowing about it, everything had silently failed.</p>
+
+      <p>That gap is the webhook. And the webhook was failing on every single event, with no error visible anywhere.</p>
+
+      <h2>Why it was silent</h2>
+
+      <p>The first place I looked was the Stripe dashboard under <strong>Developers → Webhooks → Recent deliveries</strong>. Everything showed as delivered. Green checkmarks. HTTP 200. This was the most confusing part: Stripe thought it had succeeded, and my endpoint had returned 200, yet nothing had happened.</p>
+
+      <p>The issue was in the order of operations inside the handler. My endpoint was structured like this:</p>
+
+      <pre><code>export default async function handler(req, res) {
+  // 1. Parse body
+  const body = await getRawBody(req);
+
+  // 2. Return 200 immediately (avoid Stripe timeout)
+  res.status(200).end();
+
+  // 3. Verify signature
+  const event = stripe.webhooks.constructEvent(
+    body,
+    req.headers['stripe-signature'],
+    process.env.STRIPE_WEBHOOK_SECRET
+  );
+
+  // 4. Handle event
+  await handleEvent(event);
+}</code></pre>
+
+      <p>The <code>res.status(200).end()</code> was placed before the signature verification. The intent was correct — Stripe requires a fast response to avoid retries — but the execution was wrong. When <code>constructEvent</code> threw (because I was in the wrong environment and using the wrong webhook secret), the exception was swallowed. The 200 had already been sent. Stripe saw success. The function exited. Nothing was written.</p>
+
+      <div class="callout">
+        <p><strong>The trap:</strong> responding 200 before verifying means you're guaranteed to return success even when the actual work fails. Stripe stops retrying. The event is gone.</p>
+      </div>
+
+      <h2>Finding the real error</h2>
+
+      <p>The clue was in the Vercel function logs, not the Stripe dashboard. When I queried the logs for the webhook endpoint, there were no entries at all during the period when payments happened. The function hadn't run — or had run so briefly it left no trace.</p>
+
+      <p>I added a log at the very first line of the handler:</p>
+
+      <pre><code>export default async function handler(req, res) {
+  console.log('webhook received', req.method, new Date().toISOString());
+  // ...
+}</code></pre>
+
+      <p>That line never appeared in production logs. Which meant the function was being called by Stripe, returning 200 (from somewhere), but my code wasn't executing at all.</p>
+
+      <p>The real issue: I had two webhook endpoints registered in Stripe. One was the production endpoint, correctly pointing at my Vercel deployment. The other was a leftover from local development — a forwarding URL from <code>stripe listen --forward-to localhost:3000</code> that had somehow been saved as a live endpoint. Stripe was delivering to the development endpoint first (alphabetically, it came first in the dashboard list). That endpoint was unreachable, Stripe retried, eventually the delivery failed — but by then it had already marked the event as handled to avoid duplicate processing.</p>
+
+      <h2>The fix</h2>
+
+      <p>Three changes:</p>
+
+      <p><strong>1. Remove the stale endpoint.</strong> Delete any webhook endpoint that isn't your current production URL. Having two endpoints for the same events means you're gambling on which one Stripe picks first.</p>
+
+      <p><strong>2. Verify before responding.</strong> The correct pattern is to verify the signature, acknowledge with 200 if valid, and then do the work asynchronously — but critically, the 200 only goes out after verification succeeds:</p>
+
+      <pre><code>export default async function handler(req, res) {
+  const body = await getRawBody(req);
+
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      body,
+      req.headers['stripe-signature'],
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
+  } catch (err) {
+    console.error('Webhook signature verification failed:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  // Only 200 if signature is valid
+  res.status(200).end();
+
+  // Now handle the event (outside the response cycle)
+  await handleEvent(event);
+}</code></pre>
+
+      <p><strong>3. Use the correct webhook secret.</strong> Stripe generates a separate signing secret for each endpoint. The secret from <code>stripe listen</code> (local CLI) is different from the secret in the Stripe dashboard for your production endpoint. I was using the CLI secret in my production environment variable. They're not interchangeable.</p>
+
+      <h2>Verifying the fix works</h2>
+
+      <p>After deploying, I used the Stripe dashboard to resend a previous event: <strong>Developers → Webhooks → [your endpoint] → Recent deliveries → [event] → Resend</strong>. This time, the Vercel logs showed the handler running, the signature check passing, and the database row updating. I also checked the user's row directly in Supabase to confirm <code>is_premium = true</code> was written.</p>
+
+      <p>The pattern worth keeping: for any webhook handler, before you ship it, trigger a test event from the Stripe dashboard and watch the destination logs in real time. Don't trust that a 200 response means the work happened — verify that the specific side effect (database write, email sent, access granted) actually occurred.</p>
+
+      <p>Silent failures are the worst category of production bug. The system looks healthy. Metrics look fine. Users are just quietly not getting what they paid for.</p>
+    </article>
+  </main>
+  <footer class="wrap foot">
+    <a href="/blog">← All posts</a> · <a href="/portfolio">Portfolio</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

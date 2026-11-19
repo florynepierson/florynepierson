@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>50 fake sessions per day that GA4 didn't catch — Floryne Pierson</title>
+  <meta name="description" content="Headless Chrome scrapers running real JavaScript. How I detected them and why the standard GA4 bot filter wasn't enough.">
+  <link rel="canonical" href="https://florynepierson.com/blog/bot-filter-ga4">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="50 fake sessions per day that GA4 didn't catch">
+  <meta property="og:description" content="Headless Chrome scrapers running real JavaScript. How I detected them and why the standard GA4 bot filter wasn't enough.">
+  <meta property="og:url" content="https://florynepierson.com/blog/bot-filter-ga4">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:16px/1.8 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(680px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 680px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .article{padding:56px 0 80px}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .date{font-size:11px;color:#8d9bc5}
+    h1{font:500 clamp(36px,5vw,52px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 20px}
+    .lede{font-size:17px;color:#dbe5ff;line-height:1.7;border-left:3px solid var(--cyan);padding-left:20px;margin:0 0 40px}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:40px 0 14px}
+    p{margin:0 0 20px;color:#c3c9ec}
+    code{font-family:monospace;font-size:.88em;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.18);border-radius:5px;padding:2px 7px;color:#a8f0f0}
+    pre{background:rgba(5,11,32,.8);border:1px solid rgba(0,229,255,.2);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px}
+    pre code{background:none;border:none;padding:0;color:#cce8ff;font-size:13px;line-height:1.7}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 24px}
+    .callout p{margin:0;color:#f0cce8;font-size:14px}
+    .callout strong{color:#fa4fc8}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
+    .back:hover{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <article class="article">
+      <a class="back" href="/blog">← All posts</a>
+      <div class="article-meta">
+        <span class="tag">Analytics · SEO</span>
+        <span class="date">August 2026</span>
+      </div>
+      <h1>50 fake sessions per day that GA4 didn't catch</h1>
+      <p class="lede">Headless Chrome scrapers running real JavaScript. How I detected them and why the standard GA4 bot filter wasn't enough.</p>
+
+      <p>GA4 has a "filter known bots and spiders" toggle in Admin → Data Streams → More Tagging Settings. I had it enabled. It wasn't enough.</p>
+
+      <p>The bots hitting my site weren't using generic user-agent strings or old curl-based scrapers. They were headless Chrome instances running full JavaScript — loading the page, executing scripts, triggering custom events. From GA4's perspective, they looked like real users. They fired <code>page_view</code>. They had session IDs. Some even had engagement time.</p>
+
+      <p>I noticed the problem when I started cross-referencing two signals: GA4 session counts versus actual AI API calls per day. On a site where every meaningful interaction involves a server-side API call, the number of sessions should roughly correlate with the number of API calls. They didn't. Some days I had 60+ sessions with zero API calls. Those sessions had to be fake.</p>
+
+      <h2>What headless Chrome looks like in the data</h2>
+
+      <p>The pattern was consistent once I knew what to look for:</p>
+
+      <ul style="color:#c3c9ec;line-height:2;padding-left:1.4em;margin:0 0 20px">
+        <li>Session duration: exactly 0 seconds, or unrealistically uniform (e.g. every session exactly 2.1s)</li>
+        <li>Screen resolution: <code>800x600</code> or <code>1280x720</code> — the headless Chrome default viewports</li>
+        <li>No scroll events, no click events — just <code>page_view</code> and exit</li>
+        <li>Geographic clustering: same city, same ISP, rotating every few days</li>
+        <li>Always landing on the same pages — typically the ones ranking highest in search</li>
+      </ul>
+
+      <p>The standard GA4 bot filter catches crawlers that identify themselves — Googlebot, Bingbot, known scrapers that send accurate user-agent headers. It doesn't catch headless Chrome that spoofs a normal user-agent string. Those bots look identical to a real Chrome user on the network layer.</p>
+
+      <h2>The detection approach</h2>
+
+      <p>I added a client-side check that runs before the GA4 tag initialises. The logic: headless Chrome at its defaults exposes a few detectable properties that real browsers don't.</p>
+
+      <pre><code>function isHeadless() {
+  // Headless Chrome default: navigator.webdriver = true
+  if (navigator.webdriver) return true;
+
+  // Headless Chrome: no plugins array
+  if (navigator.plugins.length === 0) return true;
+
+  // Headless default viewport: 800x600
+  // Real mobile: matches devicePixelRatio > 1
+  // Real desktop: typically wider
+  const w = screen.width;
+  const h = screen.height;
+  if (w === 800 && h === 600) return true;
+  if (w === 1280 && h === 720 && window.devicePixelRatio === 1) return true;
+
+  return false;
+}</code></pre>
+
+      <p>If <code>isHeadless()</code> returns true, I skip loading GA4 entirely. No tag fires, no session is recorded. The bot scrapes the page content but leaves no analytics trace.</p>
+
+      <div class="callout">
+        <p><strong>Important:</strong> <code>navigator.webdriver</code> is the most reliable signal — it's set to <code>true</code> by the WebDriver spec when a browser is under automation control. Legitimate users never have it set. But sophisticated scrapers can patch it out. The screen dimension check is a useful second layer for the ones that do.</p>
+      </div>
+
+      <h2>Why this matters for conversion analysis</h2>
+
+      <p>The practical impact isn't just inflated session counts. It's inflated <em>non-converting</em> session counts, which makes your conversion rate look worse than it is.</p>
+
+      <p>If you have 1,000 real sessions and 50 fake sessions, your denominator is 1,050. If 30 real users convert, you report a 2.86% conversion rate instead of 3.0%. That's a small distortion in absolute terms. But if you're trying to understand why a specific landing page doesn't convert, and 30% of its sessions are bot traffic with zero engagement, you're optimising for the wrong thing.</p>
+
+      <p>After filtering the bot traffic out, two pages that looked like outliers — high traffic, low conversion — moved to roughly average performance. The "problem" with those pages was that scrapers happened to target them more. There was no UX issue to fix.</p>
+
+      <h2>What didn't work</h2>
+
+      <p>Before writing the custom check, I tried a few things that didn't solve the problem:</p>
+
+      <p><strong>IP blocking:</strong> Bots rotate IPs. You block one subnet, the next session comes from a different cloud provider. The maintenance burden isn't worth it for traffic at this scale.</p>
+
+      <p><strong>Rate limiting by user agent:</strong> Bots spoof normal Chrome user agents. This catches nothing while potentially blocking real users.</p>
+
+      <p><strong>GA4's built-in filter:</strong> As noted above — it only matches against a known list of bot user-agent strings. Headless Chrome with a spoofed UA isn't on that list.</p>
+
+      <p>The only thing that worked was running the detection client-side, before the analytics tag, using properties that the browser itself exposes and that scrapers tend to leave in their default state.</p>
+
+      <h2>The limits of this approach</h2>
+
+      <p>This isn't a comprehensive bot mitigation strategy. A determined scraper can patch <code>navigator.webdriver</code>, set a realistic screen resolution, and install fake plugins. If someone wants to scrape your content badly enough, they will.</p>
+
+      <p>What this catches is the commodity scraping — the mass-market tools that use default headless Chrome settings without any stealth configuration. That's most of the bot traffic on a small-to-medium content site. The check takes about 0.1ms client-side, adds no server load, and keeps analytics data clean without any third-party dependency.</p>
+
+      <p>For a solo-built product where every analytics decision is a resource allocation decision, clean data matters more than it looks. A fake session that inflates your bounce rate on a key landing page can send you on a week-long UX investigation for a problem that doesn't exist.</p>
+    </article>
+  </main>
+  <footer class="wrap foot">
+    <a href="/blog">← All posts</a> · <a href="/portfolio">Portfolio</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

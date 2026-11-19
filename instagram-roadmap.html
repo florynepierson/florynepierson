@@ -322,38 +322,83 @@
     </div>
 
     <!-- ══════════════ CALENDRIER -->
-    <h2>Calendrier de publication — 16 mois</h2>
-    <p style="font-size:13px;margin-bottom:28px">3 posts/semaine (lundi · mercredi · samedi). Ratio 60/30/10 — L = valeur large, M = qualifié, S = moi/Magical Chart. Départ : semaine du 25 nov 2026.</p>
+    <h2>Calendrier de publication — 7 mois</h2>
+    <p style="font-size:13px;margin-bottom:8px">1 post/jour. 205 posts disponibles = <strong style="color:#fff">~7 mois de contenu déjà écrit</strong>. Ratio hebdo : 4 tips larges (L) + 2 qualifiés (M) + 1 "moi" toutes les 10 jours (S). Départ : 25 nov 2026.</p>
+    <p style="font-size:12px;color:#8d9bc5;margin-bottom:28px">Avantage du 1/jour : l'algo Instagram récompense la régularité. Faisable ici car le contenu est déjà rédigé — il suffit de programmer.</p>
 
     <style>
       .cal{width:100%;border-collapse:collapse;margin-bottom:52px;font-size:12px}
-      .cal th{text-align:left;padding:8px 12px;color:#8d9bc5;font-weight:600;font-size:10px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid rgba(0,229,255,.15)}
-      .cal td{padding:9px 12px;border-bottom:1px solid rgba(0,229,255,.07);vertical-align:top;line-height:1.5}
+      .cal th{text-align:left;padding:8px 10px;color:#8d9bc5;font-weight:600;font-size:10px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid rgba(0,229,255,.15)}
+      .cal td{padding:8px 10px;border-bottom:1px solid rgba(0,229,255,.07);vertical-align:top;line-height:1.5;font-size:11px}
       .cal tr:hover td{background:rgba(255,255,255,.025)}
-      .tag-l{display:inline-block;padding:2px 7px;border-radius:999px;font-size:9px;font-weight:700;background:rgba(0,229,255,.12);color:#00e5ff}
-      .tag-m{display:inline-block;padding:2px 7px;border-radius:999px;font-size:9px;font-weight:700;background:rgba(250,79,200,.12);color:#fa4fc8}
-      .tag-s{display:inline-block;padding:2px 7px;border-radius:999px;font-size:9px;font-weight:700;background:rgba(251,191,36,.12);color:#fbbf24}
-      .cal .week-label{color:#8d9bc5;white-space:nowrap;font-size:11px}
-      .cal .date{color:#8d9bc5;font-size:10px;white-space:nowrap}
+      .tag-l{display:inline-block;padding:1px 6px;border-radius:999px;font-size:9px;font-weight:700;background:rgba(0,229,255,.12);color:#00e5ff}
+      .tag-m{display:inline-block;padding:1px 6px;border-radius:999px;font-size:9px;font-weight:700;background:rgba(250,79,200,.12);color:#fa4fc8}
+      .tag-s{display:inline-block;padding:1px 6px;border-radius:999px;font-size:9px;font-weight:700;background:rgba(251,191,36,.12);color:#fbbf24}
+      .cal .wk{color:#8d9bc5;white-space:nowrap;font-size:10px;font-weight:700}
+      .cal .dt{color:#8d9bc5;font-size:9px}
     </style>
 
     <table class="cal">
-      <thead><tr><th>Semaine</th><th>Lundi</th><th>Mercredi</th><th>Samedi</th></tr></thead>
+      <thead><tr><th>Sem.</th><th>Lun</th><th>Mar</th><th>Mer</th><th>Jeu</th><th>Ven</th><th>Sam</th><th>Dim</th></tr></thead>
       <tbody>
-        <tr><td class="week-label">S1 — nov</td><td><span class="date">25/11</span><br><span class="tag-l">L</span> Le bon modèle IA selon la tâche</td><td><span class="date">27/11</span><br><span class="tag-m">M</span> Le meilleur réseau selon l'objectif</td><td><span class="date">29/11</span><br><span class="tag-l">L</span> Comment écrire un prompt qui marche</td></tr>
-        <tr><td class="week-label">S2 — déc</td><td><span class="date">02/12</span><br><span class="tag-l">L</span> 5 tâches répétitives à automatiser</td><td><span class="date">04/12</span><br><span class="tag-m">M</span> Instagram vs TikTok vs LinkedIn</td><td><span class="date">06/12</span><br><span class="tag-s">S</span> J'ai construit un SaaS tarot seule</td></tr>
-        <tr><td class="week-label">S3 — déc</td><td><span class="date">09/12</span><br><span class="tag-l">L</span> 5 choses que l'IA fait vraiment mal</td><td><span class="date">11/12</span><br><span class="tag-m">M</span> 14x trafic organique en 2 mois</td><td><span class="date">13/12</span><br><span class="tag-l">L</span> Ne plus jamais partir d'une page blanche</td></tr>
-        <tr><td class="week-label">S4 — déc</td><td><span class="date">16/12</span><br><span class="tag-l">L</span> Le train de l'IA n'est pas parti</td><td><span class="date">18/12</span><br><span class="tag-m">M</span> Contenu éphémère vs contenu durable</td><td><span class="date">20/12</span><br><span class="tag-l">L</span> Comment évaluer un outil IA avant de payer</td></tr>
-        <tr><td class="week-label">S5 — déc</td><td><span class="date">23/12</span><br><span class="tag-l">L</span> La routine matinale 3 min avec l'IA</td><td><span class="date">25/12</span><br><span class="tag-m">M</span> Pourquoi choisir UN seul réseau</td><td><span class="date">27/12</span><br><span class="tag-l">L</span> Les meilleurs outils IA gratuits</td></tr>
-        <tr><td class="week-label">S6 — jan</td><td><span class="date">30/12</span><br><span class="tag-l">L</span> Les 3 peurs face à l'IA — et la vérité</td><td><span class="date">01/01</span><br><span class="tag-m">M</span> Google ne paie pas, le direct paie</td><td><span class="date">03/01</span><br><span class="tag-s">S</span> J'ai donné un nom et une personnalité à mon IA</td></tr>
-        <tr><td class="week-label">S7 — jan</td><td><span class="date">06/01</span><br><span class="tag-l">L</span> Automatisation no-code en 1h</td><td><span class="date">08/01</span><br><span class="tag-m">M</span> +37% productivité écriture (MIT)</td><td><span class="date">10/01</span><br><span class="tag-l">L</span> Utiliser l'IA comme un collègue senior</td></tr>
-        <tr><td class="week-label">S8 — jan</td><td><span class="date">13/01</span><br><span class="tag-l">L</span> Comment trier ses emails automatiquement</td><td><span class="date">15/01</span><br><span class="tag-m">M</span> Consultants avec IA : +25% vitesse, +40% qualité (BCG)</td><td><span class="date">17/01</span><br><span class="tag-l">L</span> Résumer un contrat avant de signer</td></tr>
-        <tr><td class="week-label">S9 — jan</td><td><span class="date">20/01</span><br><span class="tag-l">L</span> Apprendre n'importe quoi 10x plus vite</td><td><span class="date">22/01</span><br><span class="tag-m">M</span> Pricer par zone géographique</td><td><span class="date">24/01</span><br><span class="tag-s">S</span> La première fois qu'un inconnu a payé</td></tr>
-        <tr><td class="week-label">S10 — jan</td><td><span class="date">27/01</span><br><span class="tag-l">L</span> Ce que "maîtriser l'IA" veut vraiment dire</td><td><span class="date">29/01</span><br><span class="tag-m">M</span> Veille concurrentielle en 20 min</td><td><span class="date">31/01</span><br><span class="tag-l">L</span> Checklist simplification mensuelle</td></tr>
-        <tr><td class="week-label">S11 — fév</td><td><span class="date">03/02</span><br><span class="tag-l">L</span> RAG expliqué en 60 secondes</td><td><span class="date">05/02</span><br><span class="tag-m">M</span> Développeurs 55% plus rapides avec IA (GitHub)</td><td><span class="date">07/02</span><br><span class="tag-l">L</span> Comment utiliser l'IA sans perdre sa voix</td></tr>
-        <tr><td class="week-label">S12 — fév</td><td><span class="date">10/02</span><br><span class="tag-l">L</span> Comment savoir si une offre d'emploi est sérieuse</td><td><span class="date">12/02</span><br><span class="tag-m">M</span> 72% des entreprises utilisent l'IA, 31% des salariés</td><td><span class="date">14/02</span><br><span class="tag-s">S</span> 99% de marge brute — la structure de coût</td></tr>
-        <tr><td class="week-label">S13–S26<br><em>fév–mai</em></td><td colspan="3" style="color:#8d9bc5;font-size:12px;line-height:1.9">Même rythme L/M/S. Continuer à piocher dans le topic bank en alternant : IA & outils → growth & acquisition → mindset → tech → product → blockchain. Toutes les 3 semaines : 1 post "moi" (Magical Chart). Pas de CTA dur avant ~300 abonnés engagés.</td></tr>
-        <tr><td class="week-label">S27–S70<br><em>mai–mars 28</em></td><td colspan="3" style="color:#8d9bc5;font-size:12px;line-height:1.9">205 posts disponibles = 68 semaines de contenu à ce rythme. À partir de ~500 abonnés : introduire "follow pour la suite" + soft CTA vers Magical Chart sur les posts produit.</td></tr>
+        <tr>
+          <td class="wk">S1<br>nov</td>
+          <td><span class="dt">25/11</span><br><span class="tag-l">L</span> Le bon modèle IA selon la tâche</td>
+          <td><span class="dt">26/11</span><br><span class="tag-l">L</span> Comment écrire un prompt qui marche</td>
+          <td><span class="dt">27/11</span><br><span class="tag-m">M</span> Le meilleur réseau selon l'objectif</td>
+          <td><span class="dt">28/11</span><br><span class="tag-l">L</span> 5 choses que l'IA fait vraiment mal</td>
+          <td><span class="dt">29/11</span><br><span class="tag-m">M</span> Instagram vs TikTok vs LinkedIn</td>
+          <td><span class="dt">30/11</span><br><span class="tag-l">L</span> 5 tâches répétitives à automatiser</td>
+          <td><span class="dt">01/12</span><br><span class="tag-l">L</span> Ne plus jamais partir d'une page blanche</td>
+        </tr>
+        <tr>
+          <td class="wk">S2<br>déc</td>
+          <td><span class="dt">02/12</span><br><span class="tag-m">M</span> Pourquoi choisir UN seul réseau</td>
+          <td><span class="dt">03/12</span><br><span class="tag-l">L</span> Le train de l'IA n'est pas parti</td>
+          <td><span class="dt">04/12</span><br><span class="tag-l">L</span> La routine matinale 3 min avec l'IA</td>
+          <td><span class="dt">05/12</span><br><span class="tag-m">M</span> Contenu éphémère vs contenu durable</td>
+          <td><span class="dt">06/12</span><br><span class="tag-l">L</span> Comment évaluer un outil IA</td>
+          <td><span class="dt">07/12</span><br><span class="tag-s">S</span> J'ai construit un SaaS tarot seule</td>
+          <td><span class="dt">08/12</span><br><span class="tag-l">L</span> Les meilleurs outils IA gratuits</td>
+        </tr>
+        <tr>
+          <td class="wk">S3<br>déc</td>
+          <td><span class="dt">09/12</span><br><span class="tag-l">L</span> Les 3 peurs face à l'IA</td>
+          <td><span class="dt">10/12</span><br><span class="tag-m">M</span> 14x trafic organique en 2 mois</td>
+          <td><span class="dt">11/12</span><br><span class="tag-l">L</span> Automatisation no-code en 1h</td>
+          <td><span class="dt">12/12</span><br><span class="tag-l">L</span> Utiliser l'IA comme un collègue senior</td>
+          <td><span class="dt">13/12</span><br><span class="tag-m">M</span> Pricer par zone géographique</td>
+          <td><span class="dt">14/12</span><br><span class="tag-l">L</span> Comment trier ses emails automatiquement</td>
+          <td><span class="dt">15/12</span><br><span class="tag-l">L</span> Apprendre n'importe quoi 10x plus vite</td>
+        </tr>
+        <tr>
+          <td class="wk">S4<br>déc</td>
+          <td><span class="dt">16/12</span><br><span class="tag-m">M</span> +37% productivité écriture (MIT)</td>
+          <td><span class="dt">17/12</span><br><span class="tag-l">L</span> Résumer un contrat avant de signer</td>
+          <td><span class="dt">18/12</span><br><span class="tag-s">S</span> J'ai donné un nom et une personnalité à mon IA</td>
+          <td><span class="dt">19/12</span><br><span class="tag-l">L</span> Ce que "maîtriser l'IA" veut dire</td>
+          <td><span class="dt">20/12</span><br><span class="tag-m">M</span> Veille concurrentielle en 20 min</td>
+          <td><span class="dt">21/12</span><br><span class="tag-l">L</span> RAG expliqué en 60 secondes</td>
+          <td><span class="dt">22/12</span><br><span class="tag-l">L</span> Checklist simplification mensuelle</td>
+        </tr>
+        <tr>
+          <td class="wk">S5<br>déc</td>
+          <td><span class="dt">23/12</span><br><span class="tag-m">M</span> Consultants IA +25% vitesse (BCG)</td>
+          <td><span class="dt">24/12</span><br><span class="tag-l">L</span> Utiliser l'IA sans perdre sa voix</td>
+          <td><span class="dt">25/12</span><br><span class="tag-l">L</span> Vérifier si une offre d'emploi est sérieuse</td>
+          <td><span class="dt">26/12</span><br><span class="tag-m">M</span> 72% entreprises IA / 31% salariés</td>
+          <td><span class="dt">27/12</span><br><span class="tag-l">L</span> Préparer une réunion en 10 min</td>
+          <td><span class="dt">28/12</span><br><span class="tag-s">S</span> La première fois qu'un inconnu a payé</td>
+          <td><span class="dt">29/12</span><br><span class="tag-l">L</span> Analyser une proposition commerciale</td>
+        </tr>
+        <tr>
+          <td class="wk">S6<br>jan</td>
+          <td colspan="7" style="color:#8d9bc5;line-height:2">Continuer en alternant les thèmes : IA & outils → growth & acquisition → data/chiffres → mindset → tech → product → blockchain. Post "moi" (S) toutes les 10 jours. Pas de CTA dur avant ~300 abonnés engagés.</td>
+        </tr>
+        <tr>
+          <td class="wk">→ juin 27</td>
+          <td colspan="7" style="color:#8d9bc5;line-height:2">205 posts = ~29 semaines au rythme 1/jour. À partir de ~500 abonnés : ajouter "follow pour la suite" + soft CTA Magical Chart sur les posts produit.</td>
+        </tr>
       </tbody>
     </table>
 

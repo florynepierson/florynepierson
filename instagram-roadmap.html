@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instagram Roadmap — Floryne</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec;--white:#fff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:15px/1.75 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(760px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 760px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .hero{padding:64px 0 48px;border-bottom:1px solid rgba(0,229,255,.12);margin-bottom:52px}
+    .eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;color:var(--berry);margin-bottom:14px}
+    h1{font:500 clamp(38px,5vw,52px)/1.06 'Cormorant Garamond',serif;color:#fff;margin:0 0 16px}
+    .hero p{font-size:14px;color:var(--muted);max-width:560px;margin:0}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:48px 0 16px}
+    h3{font:600 16px/1.3 'Plus Jakarta Sans',sans-serif;color:#fff;margin:28px 0 10px}
+    p{margin:0 0 16px;color:#c3c9ec;font-size:14px}
+    .pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:0 0 48px}
+    .pillar{padding:22px 24px;border:1px solid rgba(0,229,255,.18);border-radius:16px;background:rgba(255,255,255,.025)}
+    .pillar-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
+    .pillar-label.tech{color:var(--cyan)}
+    .pillar-label.growth{color:var(--pink)}
+    .pillar-label.ai{color:#a78bfa}
+    .pillar-label.builder{color:#fbbf24}
+    .pillar h3{margin:0 0 8px;font-size:15px}
+    .pillar p{margin:0;font-size:12px;color:#8d9bc5}
+    .formats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 48px}
+    .format{padding:20px 22px;border:1px solid rgba(0,229,255,.18);border-radius:16px;background:rgba(255,255,255,.025)}
+    .format h3{margin:0 0 8px;font-size:14px;color:var(--cyan)}
+    .format p{margin:0;font-size:12px;color:#8d9bc5}
+    .week{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:0 0 48px}
+    .day{padding:14px 16px;border:1px solid rgba(0,229,255,.14);border-radius:12px;background:rgba(255,255,255,.02);text-align:center}
+    .day-name{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8d9bc5;margin-bottom:6px}
+    .day-topic{font-size:11px;font-weight:600;color:#fff;line-height:1.4}
+    .day-format{font-size:9px;color:#8d9bc5;margin-top:4px}
+    .topics{margin:0 0 80px}
+    .topic-group{margin-bottom:36px}
+    .topic-group-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,229,255,.12)}
+    .topic-group-label.tech{color:var(--cyan)}
+    .topic-group-label.growth{color:var(--pink)}
+    .topic-group-label.ai{color:#a78bfa}
+    .topic-group-label.builder{color:#fbbf24}
+    .topic-group-label.product{color:#34d399}
+    .topic-list{display:flex;flex-wrap:wrap;gap:8px}
+    .topic{font-size:12px;padding:5px 12px;border-radius:999px;border:1px solid rgba(0,229,255,.2);color:#c3c9ec;background:rgba(255,255,255,.025)}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 32px}
+    .callout p{margin:0;color:#f0cce8;font-size:13px}
+    .callout strong{color:#fa4fc8}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .foot a{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.pillars,.formats{grid-template-columns:1fr}.week{grid-template-columns:repeat(2,1fr)}.hero{padding:48px 0 36px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <div class="hero">
+      <div class="eyebrow">Content strategy</div>
+      <h1>Instagram roadmap</h1>
+      <p>Topics, formats and a weekly rhythm for building an audience around what I actually build — tech, product, growth, AI.</p>
+    </div>
+
+    <h2>The objective</h2>
+    <p>Instagram is the visual channel. The goal is different from X (credibility/builder) and Pinterest (aesthetic/universe): here the goal is <strong>trust through face and voice</strong> — showing the person behind the product, the decisions, the learnings.</p>
+    <p>One post every two days to start. Reels get reach. Carousels get saves. Stories get DMs.</p>
+
+    <div class="callout">
+      <p><strong>Rule:</strong> every post should answer a question someone actually has, or share a result someone actually wants to know. No filler, no "good morning" content.</p>
+    </div>
+
+    <h2>The 4 content pillars</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-label tech">Tech</div>
+        <h3>What I built and how</h3>
+        <p>Architecture decisions, bugs found in production, stack choices, tools I use. Concrete and specific — never generic.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-label growth">Growth & Business</div>
+        <h3>What actually moved the needle</h3>
+        <p>Acquisition, pricing, funnel learnings, what the data said vs what I expected. Numbers where possible.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-label ai">AI & Tools</div>
+        <h3>How I use AI in my workflow</h3>
+        <p>Tools tested, prompts that work, news commented with a practical angle. Not hype — applied.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-label builder">Builder mindset</div>
+        <h3>What it's really like</h3>
+        <p>Solo founder decisions, what didn't work, the gap between what users say and what they do. Honest over polished.</p>
+      </div>
+    </div>
+
+    <h2>Formats</h2>
+    <div class="formats">
+      <div class="format">
+        <h3>Reels</h3>
+        <p>Face camera, 30-60 seconds, text overlay. Take a tweet, say it out loud. Hook in the first 2 seconds. This is where reach comes from.</p>
+      </div>
+      <div class="format">
+        <h3>Carousels</h3>
+        <p>Lists, frameworks, before/after. 5-8 slides. Strong cover slide with a clear promise. This is where saves and shares come from.</p>
+      </div>
+      <div class="format">
+        <h3>Stories</h3>
+        <p>Behind the scenes, polls, quick tips, questions. No production required. This is where DMs and trust come from.</p>
+      </div>
+    </div>
+
+    <h2>Weekly rhythm</h2>
+    <div class="week">
+      <div class="day">
+        <div class="day-name">Monday</div>
+        <div class="day-topic">Tech / Engineering</div>
+        <div class="day-format">Reel or Carousel</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Wednesday</div>
+        <div class="day-topic">Growth / Business</div>
+        <div class="day-format">Carousel or Reel</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Friday</div>
+        <div class="day-topic">AI news / Tools</div>
+        <div class="day-format">Reel</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Saturday</div>
+        <div class="day-topic">Builder mindset</div>
+        <div class="day-format">Reel or Story</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Daily</div>
+        <div class="day-topic">Stories</div>
+        <div class="day-format">Behind the scenes</div>
+      </div>
+    </div>
+
+    <h2>Topic bank</h2>
+    <div class="topics">
+
+      <div class="topic-group">
+        <div class="topic-group-label tech">Tech / Engineering</div>
+        <div class="topic-list">
+          <span class="topic">I built an entire site in plain HTML — here's why</span>
+          <span class="topic">The Stripe webhook that was failing silently</span>
+          <span class="topic">How I detected headless Chrome bots GA4 missed</span>
+          <span class="topic">My analytics were broken for 5 days</span>
+          <span class="topic">Astronomy engine: 0.29° down to 0.003°</span>
+          <span class="topic">What "serverless" actually means day to day</span>
+          <span class="topic">Every serverless function should do one thing</span>
+          <span class="topic">Why I didn't migrate to Next.js</span>
+          <span class="topic">How I built a quota system that users can't bypass</span>
+          <span class="topic">Static HTML at scale: what it forces you to learn</span>
+          <span class="topic">The bug that only appears in production</span>
+          <span class="topic">Log everything that should happen, alert on silence</span>
+          <span class="topic">How I use Supabase for a solo product</span>
+          <span class="topic">What I learned building an Android app as a web dev</span>
+        </div>
+      </div>
+
+      <div class="topic-group">
+        <div class="topic-group-label growth">Growth & Business</div>
+        <div class="topic-list">
+          <span class="topic">14x organic traffic in 2 months — what actually moved it</span>
+          <span class="topic">I consolidated 264 SEO pages into 22</span>
+          <span class="topic">Why Google traffic doesn't convert but direct does</span>
+          <span class="topic">Pick one channel first. Here's why I chose Pinterest</span>
+          <span class="topic">Each channel has one job — mixing them wastes all three</span>
+          <span class="topic">I changed my price 3 times in 4 months</span>
+          <span class="topic">Pricing by geography: same product, different willingness to pay</span>
+          <span class="topic">My newsletter: 32% open EN, 45% open FR — same email</span>
+          <span class="topic">Why I capture email after the first experience, not before</span>
+          <span class="topic">189 cold messages, 0 replies — what I learned</span>
+          <span class="topic">The free tier is a research budget</span>
+          <span class="topic">Traffic without purchase intent is a vanity metric</span>
+          <span class="topic">Urgency converts. Discount alone doesn't.</span>
+          <span class="topic">The only channel that survives an algorithm change</span>
+          <span class="topic">E-E-A-T: what it actually means for content in sensitive verticals</span>
+        </div>
+      </div>
+
+      <div class="topic-group">
+        <div class="topic-group-label ai">AI & Tools</div>
+        <div class="topic-list">
+          <span class="topic">How I use Claude to write code I actually understand</span>
+          <span class="topic">AI wrote most of my site — knowing what to ignore is the skill</span>
+          <span class="topic">I use AI for design to ship fast, then refine with Figma/Canva</span>
+          <span class="topic">The judgment layer is still entirely human</span>
+          <span class="topic">Cost-aware LLM engineering: 99% gross margin</span>
+          <span class="topic">Haiku vs Sonnet: when to use which</span>
+          <span class="topic">How to evaluate an AI persona systematically</span>
+          <span class="topic">I built a scoring rubric for my AI's personality</span>
+          <span class="topic">What "AI-powered" actually means in a product</span>
+          <span class="topic">Tools I tested this month and what I kept</span>
+          <span class="topic">How to spot a jailbreak attempt in your logs</span>
+          <span class="topic">Why I built ethical guardrails into every reading</span>
+          <span class="topic">AI as a feature vs AI as the product</span>
+        </div>
+      </div>
+
+      <div class="topic-group">
+        <div class="topic-group-label builder">Builder mindset</div>
+        <div class="topic-list">
+          <span class="topic">Nobody tells you when you're doing well as a solo founder</span>
+          <span class="topic">The constraint became the architecture</span>
+          <span class="topic">I built for a market I didn't belong to</span>
+          <span class="topic">Slow growth is underrated</span>
+          <span class="topic">The gap between what users say and what they do</span>
+          <span class="topic">Every technical shortcut is a product decision in disguise</span>
+          <span class="topic">Opportunity cost doesn't show up on any invoice</span>
+          <span class="topic">I write everything down — not for others, for future me</span>
+          <span class="topic">Independent means every decision is yours — good and bad</span>
+          <span class="topic">The first time a stranger paid I opened the database</span>
+          <span class="topic">A project works when you're watching. A product works when you're not.</span>
+          <span class="topic">What school taught me that tutorials didn't</span>
+        </div>
+      </div>
+
+      <div class="topic-group">
+        <div class="topic-group-label product">Product</div>
+        <div class="topic-list">
+          <span class="topic">Why Wooly never predicts — only reflects</span>
+          <span class="topic">I gave my AI a name and a scoring rubric</span>
+          <span class="topic">The free tier has to be real or the paid tier doesn't earn itself</span>
+          <span class="topic">Retention on a spiritual product vs a utility</span>
+          <span class="topic">How I built in 6 languages using search data, not assumptions</span>
+          <span class="topic">Why I didn't require an account before the first reading</span>
+          <span class="topic">Two-layer quota: localStorage for UX, server-side for enforcement</span>
+          <span class="topic">My Indian traffic is high. My Indian revenue is near zero.</span>
+          <span class="topic">Building in a "non-serious" market as an engineer</span>
+          <span class="topic">The spirituality market is not irrational — users know exactly what they want to feel</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+  <footer class="wrap foot">
+    <a href="/portfolio">← Portfolio</a> · <a href="/blog">Blog</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

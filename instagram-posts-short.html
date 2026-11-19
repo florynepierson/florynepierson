@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instagram Posts (Reels format) — Floryne</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec;--white:#fff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:15px/1.75 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(820px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 820px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .hero{padding:56px 0 40px;border-bottom:1px solid rgba(0,229,255,.12);margin-bottom:48px}
+    .eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;color:var(--berry);margin-bottom:14px}
+    h1{font:500 clamp(36px,5vw,50px)/1.06 'Cormorant Garamond',serif;color:#fff;margin:0 0 14px}
+    .hero p{font-size:13px;color:var(--muted);max-width:560px;margin:0}
+    h2{font:600 26px/1.15 'Cormorant Garamond',serif;color:#fff;margin:52px 0 20px;padding-bottom:10px;border-bottom:1px solid rgba(0,229,255,.12)}
+    .posts{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:52px}
+    .post{border:1px solid rgba(0,229,255,.14);border-radius:18px;background:rgba(255,255,255,.025);overflow:hidden}
+    .post-overlay{padding:16px 20px 12px;border-bottom:1px solid rgba(0,229,255,.08)}
+    .overlay-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#8d9bc5;margin-bottom:7px}
+    .overlay-text{font:600 17px/1.35 'Cormorant Garamond',serif;color:#fff}
+    .post-caption{padding:12px 20px 16px}
+    .caption-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#8d9bc5;margin-bottom:7px}
+    .caption-text{font-size:12px;color:#c3c9ec;line-height:1.9;white-space:pre-line}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1);margin-top:40px}
+    .foot a{color:var(--cyan)}
+    @media(max-width:680px){.posts{grid-template-columns:1fr}.wrap{width:calc(100% - 28px)}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/instagram-roadmap">Roadmap</a><a href="/instagram-posts">Posts longs</a><a href="/blog">Blog</a></nav>
+  </header>
+  <main class="wrap">
+    <div class="hero">
+      <div class="eyebrow">Instagram Reels — format natif</div>
+      <h1>Posts courts + tips</h1>
+      <p>Overlay (texte sur vidéo) + légende courte format Instagram. Casual, direct, valeur immédiate.</p>
+    </div>
+
+    <!-- ══════════════════════ STORYTELLING REELS -->
+    <h2>Reels — expériences vécues</h2>
+    <div class="posts">
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">my analytics were broken for 5 days. I had no idea.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">a 2s setTimeout on 1,500+ pages = most of my traffic invisible to GA4 🫠
+
+the tag was there. the script loaded. it just fired too early.
+
+I was making product decisions on data that didn't exist.
+
+lesson: check *when* your analytics fires, not just whether it's installed
+
+save this if you run your own site 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">my Stripe webhook was failing 100% of the time. zero error logs.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">paying users weren't getting access. nothing looked wrong.
+
+the bug: I was sending 200 *before* verifying the signature
+
+Stripe marks it successful the moment it gets a 200 — it doesn't care what happens after
+
+fix: verify first. process second. respond third.
+
+the scariest bugs are the ones that don't throw errors 🔥</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">50 fake sessions per day. GA4 didn't catch one.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">headless Chrome scrapers running real JS, real events, real session data 🤖
+
+GA4's bot filter works on user agents. these had clean ones.
+
+the tell: screen dimensions 1280×1200 and 1366×1366 — no real device has those
+
+one check at the top of your analytics script = problem solved
+
+your data might be lying to you rn 👀
+
+save this 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I went from 1,500 SEO pages to 22. rankings went up.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">counterintuitive but it makes sense when you think about it
+
+264 near-duplicate pages merged → 22 rich ones
+
+less pages competing for the same query
+cleaner crawl budget
+stronger topical focus per page
+
+more pages ≠ more SEO
+more pages for the same intent = self-sabotage
+
+save if you do content SEO 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">Google sends me the most traffic. zero paying users.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">direct traffic converts. Google doesn't.
+
+why: Google intent = curiosity. direct intent = return.
+
+someone searched "free tarot reading" → they want free
+someone came back directly → they already liked what they found
+
+traffic and purchase intent are different things
+
+I almost optimised for the wrong one for months 😬
+
+what's your highest traffic source that doesn't convert? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I sent hundreds of cold messages. almost no one replied.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">cold outreach without an audience is just noise
+
+you're asking for attention from people who have no reason to trust you yet
+
+what actually worked: building in public, documenting what I measured, making the work visible
+
+inbounds are slower to start. they compound.
+
+build the audience first. then outreach becomes a conversation, not a pitch 📌
+
+save this 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">the first time a stranger paid for my product, I didn't celebrate.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">I opened the database to check the webhook had fired correctly
+
+that's when I knew I was an engineer 😂
+
+the celebration came after: row exists ✓ access granted ✓ email sent ✓
+
+building a product means your first instinct after a sale is to verify the system worked
+
+there's something satisfying about that tbh
+
+what was your reaction to your first sale? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">nobody tells you when you're doing well as a solo founder.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">no manager. no team. no sprint review.
+
+you learn to read data the way other people read feedback
+
+open rate up → something resonated
+conversion flat → there's a hole in the funnel
+churn spike → something broke the trust
+
+the data doesn't validate you. it tells you what's working.
+
+that's actually more useful.
+
+solo founders: what's your signal that something is working? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I built for a market I didn't belong to.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">I'm not a tarot reader. I'm an engineer who measured what people were searching for.
+
+you don't have to be the user. you have to understand them well enough to build something they'd choose.
+
+the advantage of being an outsider: you question things insiders take for granted
+
+what market are you building for? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">my AI persona has a scoring rubric. 6 dimensions. 60 points.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">context use · source grounding · guardrails · language match · persona coherence · concrete grounding
+
+baseline: 55/60
+after two targeted prompt fixes: 60/60
+
+you can't improve what you don't measure — including personality
+
+the model doesn't have a personality by default. you define it, then you score it.
+
+save if you're building LLM products 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">my AI product costs ~$0.005 per reading. I still didn't optimise that first.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">gross margin: ~99%
+
+optimising AI cost would have saved me a few dollars a month
+
+what I optimised instead: the funnel. where users drop between reading and purchase.
+
+that's where the revenue was hiding.
+
+instrument before you optimise. the bottleneck is almost never the most technical thing.
+
+save this 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">slow growth is underrated.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">I didn't go viral. organic growth over months, one decision at a time.
+
+what slow growth gives you that viral doesn't:
+→ you learn what's actually working
+→ your infra scales with users, not ahead of them
+→ your audience chose you deliberately
+
+viral is a moment. compounding is a business.
+
+the goal isn't a spike. it's a slope that doesn't flatten 📈</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ TIPS -->
+    <h2>Tips — business & acquisition</h2>
+    <div class="posts">
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">if your discount isn't converting, the problem isn't the price.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">desire can't be fixed with a promo code
+
+discount = price sensitivity test
+no movement = they don't want it enough yet
+
+fix: improve what you're offering before you cut the price
+
+also: urgency converts. discount alone doesn't.
+"50% off" → barely moved
+"50% off — ends tonight" → meaningfully better
+
+same discount. deadline made the difference.
+
+save this 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">pick one acquisition channel first. master it. then diversify.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">every channel has one job:
+
+Pinterest → curiosity about your universe
+Google → capture existing intent
+Instagram → trust through face & voice
+X → credibility in your niche
+TikTok → reach people who didn't know they needed you
+
+mixing these up without knowing what you're asking each one to do = wasting all of them
+
+you don't diversify until the first channel actually works
+
+what's your main channel rn? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">capture email after the experience. never before.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">asking for the email before giving anything = the user has zero proof you're worth their inbox
+
+the right moment: right after they've received something valuable and are still in it
+
+users who experienced the product before seeing a price converted at a much higher rate than those who hit a wall first
+
+the gate comes after the experience. always.
+
+save this 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">your free tier needs to be real. or the paid tier doesn't earn itself.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">if you need to weaken the free tier to sell the paid one, the paid one isn't good enough yet
+
+the upgrade should be obvious on its own:
+"I want more of this" ← this is the goal
+"I guess I have to pay to continue" ← this is a gate, not a product
+
+the free experience is the acquisition mechanism. not a cost.
+
+what does your free tier actually give users? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">before you optimise anything: instrument first.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">you can't fix what you can't see
+
+most people optimise the thing that feels most technical. it's rarely the actual bottleneck.
+
+measure: where do users drop? what did they do right before they left? what did paying users do differently?
+
+the data will point at something unexpected every time
+
+then optimise that thing. not the one that felt obvious.
+
+save this 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">same product, same price. different countries, different conversion.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">$10 means something very different in France, India and Brazil
+
+purchasing power parity is real and it affects willingness to pay
+
+but it's not just PPP — intent differs too
+high traffic from a country ≠ high intent to pay from that country
+
+check: what do users from each country actually *do* on your product?
+
+before you celebrate traffic from a new market, look at what they do after they arrive 👀</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ TIPS AI -->
+    <h2>Tips — AI & tools</h2>
+    <div class="posts">
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">AI accelerates execution. it doesn't replace product sense.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">AI suggested features I didn't build, optimisations that didn't matter, abstractions I didn't need
+
+every suggestion was technically correct
+I had to decide whether "technically correct" was actually useful
+
+the judgment — what to build vs what to skip — doesn't come from the model
+
+that comes from understanding your users, your data, your constraints
+
+the skill isn't using AI. it's knowing when to say no to what it suggests.
+
+what's the most useful AI tool in your stack? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">use AI for the first version of every design. refine after.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">AI → 80% of the design in an hour
+fast enough to test · good enough to ship · cheap enough to throw away
+
+the last 20% — taste, consistency, details users feel but can't name — that's where Figma/Canva/a designer earns their cost
+
+rule: don't polish what hasn't been validated yet
+
+ship the AI version → learn what's worth refining → then spend the design budget
+
+save this 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">cheaper model ≠ worse product. it depends what you're using it for.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Haiku (cheapest): classification, rewriting, simple generation, repetitive tasks ✅
+Sonnet (mid): coding, reasoning, complex generation ✅
+Opus (most expensive): deep reasoning, nuanced judgment ✅
+
+most people default to the most powerful model for everything
+
+that's like using a sledgehammer to hang a picture frame
+
+match the model to the task. your cost drops, your latency drops, nothing breaks.
+
+save this if you're building with LLMs 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">how to tell if an email opportunity is a scam.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">🚩 Gmail/Yahoo sender, not a company domain
+🚩 no website in the signature
+🚩 vague about what they actually need
+🚩 "urgent" with no real deadline
+🚩 payment upfront before any contract
+🚩 username changed recently, low followers
+
+none of these alone is conclusive
+all of them together is a pattern
+
+any serious business emails you from their own domain. that's the first filter.
+
+save this 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">AI as a feature vs AI as the product.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">AI as a feature: "we added AI to summarise your notes"
+AI as the product: remove the AI and there's nothing left
+
+the products that will last are the ones where the AI makes the core experience irreplaceable — not just cheaper or faster
+
+when AI is the product, every decision flows from one question:
+does this make the AI experience better for the user?
+
+which category is your product in? 👇</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ TIPS BLOCKCHAIN -->
+    <h2>Tips — Blockchain & Web3</h2>
+    <div class="posts">
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">what a smart contract actually does. in plain English.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">code that lives on a blockchain and runs automatically when conditions are met
+
+no middleman. no "our team will review." no processing time.
+
+classic example: escrow
+normally you need a bank or lawyer to hold funds until both parties deliver
+a smart contract does the same — rules written in code, visible to everyone, executes automatically
+
+"trustless" means you trust the code, not the other person
+
+the catch: writing that code correctly is extremely hard. bugs are irreversible.
+
+save this 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">Web3 UX is broken. everyone in the industry knows it.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">seed phrases: 12 random words. lose them = lose everything forever. no recovery.
+
+gas fees: send $5, pay $3 in unpredictable fees
+
+irreversible transactions: sent to the wrong address? gone.
+
+the technical foundation is solid
+the UX layer on top is still treating normal users like cryptographers
+
+the products that win in Web3 won't have the most sophisticated contracts
+they'll make this usable by someone who's never read a whitepaper
+
+that's an engineering + product problem. which means it's solvable 👀</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">decentralisation is a spectrum, not a binary.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">"is it decentralised?" is usually the wrong question
+
+better questions:
+→ who controls the smart contracts? can they be upgraded?
+→ who controls the frontend? if the site goes down, can you still access funds?
+→ who owns the majority of governance tokens?
+
+most "decentralised" protocols are decentralised on some dimensions and centralised on others
+
+that's not necessarily bad — full decentralisation has real costs
+
+but knowing where the centralisation lives tells you where the real risks are
+
+save this if you're evaluating Web3 projects 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">token vs coin. the actual difference.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">coin: has its own blockchain
+→ Bitcoin (Bitcoin blockchain), Ether (Ethereum), SOL (Solana)
+
+token: runs on top of an existing blockchain
+→ USDC (runs on Ethereum), most DeFi tokens
+
+why it matters:
+coins = native currency of a network, used to pay gas fees
+tokens = built by anyone using smart contracts, represent anything (governance rights, stablecoins, NFTs...)
+
+most things called "coins" in the news are actually tokens
+
+save this if you're new to crypto 🔖</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════ TIPS TECH -->
+    <h2>Tips — Tech & Engineering</h2>
+    <div class="posts">
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">log everything that should happen. alert on silence.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">most monitoring is reactive: alert when something throws an error
+
+the problem: the worst bugs don't throw errors. they just quietly don't work.
+
+better approach: log every expected event
+→ webhook received ✓
+→ database write complete ✓
+→ email sent ✓
+
+if any of those stops appearing in logs, something is wrong — even if nothing errored
+
+silence is a signal. treat it like one.
+
+save this 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">a project works when you're watching. a product works when you're not.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">the gap between the two:
+→ monitoring for things that should happen but don't
+→ graceful failure when an external API goes down
+→ logs you can actually read at 11pm on a Sunday
+
+building something that runs without you watching is a different skill than building something that works
+
+most tutorials teach you the second one
+
+save this if you're moving from side projects to real products 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">measure the broken state before you fix anything.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">I had a bug in my astronomy engine. error of 0.29°.
+
+before touching a single line of code: I used Swiss Ephemeris as a reference and measured exactly how wrong I was, on what inputs, by how much.
+
+then I fixed it. 0.29° → 0.003°.
+
+the rule: never touch the code before you know what "correct" looks like
+
+fixing without measuring first = guessing
+measuring first = you know exactly when you're done
+
+save this 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">every function should do exactly one thing.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">when a function starts doing two things, debugging is a guessing game
+when it does three, you've lost track of what it's responsible for
+
+this isn't just for large teams — it's how one person keeps a production system understandable at 2am when something breaks
+
+my rule: if I can't describe what a function does in one sentence, it does too much
+
+what's the most useful engineering principle you actually apply? 👇</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+  <footer class="wrap foot">
+    <a href="/instagram-roadmap">← Roadmap</a> · <a href="/instagram-posts">Posts longs</a> · <a href="/portfolio">Portfolio</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evaluating an AI persona systematically: Wooly from 55/60 to 60/60 — Floryne Pierson</title>
+  <meta name="description" content="How I built a scoring rubric for an LLM persona, measured the baseline, found the failure modes, and improved the prompt — with numbers at every step.">
+  <link rel="canonical" href="https://florynepierson.com/blog/evaluating-an-ai-persona-systematically">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Evaluating an AI persona systematically: Wooly from 55/60 to 60/60">
+  <meta property="og:description" content="How I built a scoring rubric for an LLM persona, measured the baseline, found the failure modes, and improved the prompt — with numbers at every step.">
+  <meta property="og:url" content="https://florynepierson.com/blog/evaluating-an-ai-persona-systematically">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:16px/1.8 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(680px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 680px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .article{padding:56px 0 80px}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .date{font-size:11px;color:#8d9bc5}
+    h1{font:500 clamp(36px,5vw,52px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 20px}
+    .lede{font-size:17px;color:#dbe5ff;line-height:1.7;border-left:3px solid var(--cyan);padding-left:20px;margin:0 0 40px}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:40px 0 14px}
+    p{margin:0 0 20px;color:#c3c9ec}
+    code{font-family:monospace;font-size:.88em;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.18);border-radius:5px;padding:2px 7px;color:#a8f0f0}
+    pre{background:rgba(5,11,32,.8);border:1px solid rgba(0,229,255,.2);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px}
+    pre code{background:none;border:none;padding:0;color:#cce8ff;font-size:13px;line-height:1.7}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 24px}
+    .callout p{margin:0;color:#f0cce8;font-size:14px}
+    .callout strong{color:#fa4fc8}
+    table{width:100%;border-collapse:collapse;margin:0 0 24px;font-size:13px}
+    th{text-align:left;padding:10px 14px;border-bottom:1px solid rgba(0,229,255,.25);color:#00e5ff;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+    td{padding:10px 14px;border-bottom:1px solid rgba(0,229,255,.08);color:#c3c9ec}
+    tr:last-child td{border-bottom:none}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
+    .back:hover{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <article class="article">
+      <a class="back" href="/blog">← All posts</a>
+      <div class="article-meta">
+        <span class="tag">AI Engineering · LLM Evaluation</span>
+        <span class="date">July 2026</span>
+      </div>
+      <h1>Evaluating an AI persona systematically: Wooly from 55/60 to 60/60</h1>
+      <p class="lede">How I built a scoring rubric for an LLM persona, measured the baseline, found the failure modes, and improved the prompt — with numbers at every step.</p>
+
+      <p>Wooly is the AI companion at the core of Magical Chart. She draws tarot cards, writes personalised readings, and holds a reflection space for users. Her character — warm, grounded, honest about uncertainty, never projecting — is load-bearing. If she gets it wrong, the product fails at its most important job.</p>
+
+      <p>The question that troubled me early: how do I know if Wooly is good? "Feels right" is not a development standard. It's not reproducible, it doesn't catch regressions, and it doesn't tell you what to fix when something is off.</p>
+
+      <p>I needed a rubric.</p>
+
+      <h2>The six dimensions</h2>
+
+      <p>I defined six dimensions that capture what a good Wooly reading requires. Each is scored 0–2 on each test case, giving a maximum score of 12 per case:</p>
+
+      <table>
+        <thead><tr><th>Dimension</th><th>What it checks</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Context use</strong></td><td>Does the response actually use the user's question and drawn cards, or is it generic?</td></tr>
+          <tr><td><strong>Source grounding</strong></td><td>Are card meanings drawn from the retrieved tarot knowledge, not hallucinated?</td></tr>
+          <tr><td><strong>Guardrails</strong></td><td>Does the response stay within ethical limits — no medical/legal advice, no predictions as certainties?</td></tr>
+          <tr><td><strong>Language match</strong></td><td>Does Wooly respond in the same language the user asked in?</td></tr>
+          <tr><td><strong>Persona coherence</strong></td><td>Does the warmth, tone, and character hold consistently?</td></tr>
+          <tr><td><strong>Concrete grounding</strong></td><td>Does the reading close with something actionable, not just reflective?</td></tr>
+        </tbody>
+      </table>
+
+      <p>Five test cases covering different input types: a question with one card, a spread with three cards, a reflection request with no card, a distressed user message, and a bilingual (French) input. That gives a 60-point maximum per evaluation run.</p>
+
+      <h2>The baseline: 55/60</h2>
+
+      <p>The initial prompt scored <strong>55/60 (11/12 average across cases)</strong> on human review. That sounds good. But the specific failures were meaningful:</p>
+
+      <p>The weakest dimension was <strong>concrete grounding</strong>. Wooly's readings were warm and contextualised, but they tended to end in open space — a reflection, a question, an invitation. What they didn't do was give the user something to carry away. The scoring rubric caught this pattern systematically across cases. Without the rubric, I'd have read individual outputs and found them mostly fine. With it, I could see that one specific structural element was missing in a consistent way.</p>
+
+      <p>The second failure mode was <strong>language match</strong> under edge conditions. When a user's message was mostly French but contained a few English words (a common pattern on the site), Wooly sometimes responded in English. The language detection was operating on the dominant signal, not the whole signal.</p>
+
+      <h2>The prompt change</h2>
+
+      <p>Rather than rewrite the entire prompt, I changed one thing at a time.</p>
+
+      <p>For concrete grounding: I added an explicit instruction that readings must close with an "anchor" — a single sentence that names what the user can observe, try, or notice before the next time they draw. Not advice, not a directive — an invitation to look at something specific. This distinction matters for the product's ethics (Wooly doesn't tell users what to do) while still giving a landing point.</p>
+
+      <p>For language match: I added an explicit instruction that Wooly detects the user's language from their message and maintains it throughout, regardless of what language appears in the retrieved card meanings (which are stored in English).</p>
+
+      <p>These were two separate additions, applied and re-evaluated individually.</p>
+
+      <h2>After the fix: 60/60</h2>
+
+      <p>The consolidated baseline after prompt correction: <strong>60/60 (12/12 across all five cases)</strong>. The retrieval benchmark — precision, recall, F1 on card meaning retrieval — also reached 100% after fixing one edge case in the retrieval logic.</p>
+
+      <p>That 60/60 is a snapshot, not a permanent state. Each time the prompt changes, or the model version changes, or new retrieval sources are added, the eval runs again. The baseline file is versioned alongside the prompt.</p>
+
+      <h2>The router: deciding what kind of question this is</h2>
+
+      <p>One structural decision that improved quality more than any single prompt tweak: routing.</p>
+
+      <p>Wooly handles three types of requests: a tarot reading (card-based), a reflection (open-ended, no cards), or something that needs clarification before it can be answered. These have different retrieval needs — card meanings for the first, interpretive frameworks for the second, nothing for the third — and different generation patterns.</p>
+
+      <p>A single monolithic prompt trying to handle all three degrades on each. I split the system into a router that classifies the input first, then hands off to a specialist handler:</p>
+
+      <pre><code>// wooly-router.js
+function routeInput(message, drawnCards) {
+  if (drawnCards && drawnCards.length > 0) return 'tarot';
+  if (needsClarification(message)) return 'clarify';
+  return 'reflection';
+}
+
+// Each specialist handles its own retrieval
+const handler = specialists[routeInput(message, cards)];
+const response = await handler.generate(message, cards, context);</code></pre>
+
+      <p>The routing classification itself is not LLM-based — it's a deterministic rule check on the input. No token spend, no latency, no model call needed to decide "did the user draw cards." The LLM only runs once: for generation, in the right specialist context.</p>
+
+      <h2>The scoring automation</h2>
+
+      <p>The scorer that runs against the baseline checks three of the six dimensions automatically: source grounding (did retrieved card IDs appear in the output), guardrail violations (did the output contain flagged phrases like "you will" or "I predict"), and language match (did the output language match the input language).</p>
+
+      <p>The other three — context use, persona coherence, and concrete grounding — require human review. The automation handles the mechanical checks; the human review handles the judgment calls. Automated checks that require judgment produce false confidence faster than no checks at all.</p>
+
+      <div class="callout">
+        <p><strong>The lesson:</strong> "it feels like it's working" is a starting point, not an evaluation. Build the rubric before you need it — before the first production regression, before you've shipped enough that changes feel risky. A rubric that exists when nothing is wrong is what lets you catch problems and verify fixes when something eventually is.</p>
+      </div>
+
+      <h2>What the retrieval comparison revealed</h2>
+
+      <p>One additional finding from the eval process: comparing structured retrieval (pgvector semantic search over card meanings) versus lexical fallback (keyword matching) on the same test cases.</p>
+
+      <p>Structured retrieval won on nuanced questions — "what does this card mean when I'm feeling stuck in a relationship" — where the semantic match to card meanings mattered. Lexical fallback performed equivalently on direct queries — "what is the meaning of The Tower" — where the card name was explicit in the input.</p>
+
+      <p>The production system uses structured retrieval with lexical fallback. What the comparison confirmed is that the fallback isn't a degraded experience — it's appropriate for a different query type. That's a subtler conclusion than "structured is better," and it only became visible through systematic comparison on a fixed test set.</p>
+    </article>
+  </main>
+  <footer class="wrap foot">
+    <a href="/blog">← All posts</a> · <a href="/portfolio">Portfolio</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

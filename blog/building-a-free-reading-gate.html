@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Building a free reading gate that users can't trivially bypass — Floryne Pierson</title>
+  <meta name="description" content="How I designed a two-layer daily reading quota — localStorage for UX, server-side for enforcement — and what I learned about where each layer should sit.">
+  <link rel="canonical" href="https://florynepierson.com/blog/building-a-free-reading-gate">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Building a free reading gate that users can't trivially bypass">
+  <meta property="og:description" content="How I designed a two-layer daily reading quota — localStorage for UX, server-side for enforcement — and what I learned about where each layer should sit.">
+  <meta property="og:url" content="https://florynepierson.com/blog/building-a-free-reading-gate">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:16px/1.8 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(680px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 680px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .article{padding:56px 0 80px}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .date{font-size:11px;color:#8d9bc5}
+    h1{font:500 clamp(36px,5vw,52px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 20px}
+    .lede{font-size:17px;color:#dbe5ff;line-height:1.7;border-left:3px solid var(--cyan);padding-left:20px;margin:0 0 40px}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:40px 0 14px}
+    p{margin:0 0 20px;color:#c3c9ec}
+    code{font-family:monospace;font-size:.88em;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.18);border-radius:5px;padding:2px 7px;color:#a8f0f0}
+    pre{background:rgba(5,11,32,.8);border:1px solid rgba(0,229,255,.2);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px}
+    pre code{background:none;border:none;padding:0;color:#cce8ff;font-size:13px;line-height:1.7}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 24px}
+    .callout p{margin:0;color:#f0cce8;font-size:14px}
+    .callout strong{color:#fa4fc8}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
+    .back:hover{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <article class="article">
+      <a class="back" href="/blog">← All posts</a>
+      <div class="article-meta">
+        <span class="tag">Product Engineering</span>
+        <span class="date">May 2026</span>
+      </div>
+      <h1>Building a free reading gate that users can't trivially bypass</h1>
+      <p class="lede">How I designed a two-layer daily reading quota — localStorage for UX, server-side for enforcement — and what I learned about where each layer should sit.</p>
+
+      <p>Free-tier gates on AI products have a fundamental tension: you want to show the user an accurate count of how many readings they have left (good UX), but you also need that count to be enforceable (security). These two requirements push toward different implementations.</p>
+
+      <p>Accurate counts need to be fast and local — nobody wants a network round-trip just to display "2 readings remaining." Enforcement needs to be server-side — anything that lives only in the browser can be cleared, modified, or bypassed.</p>
+
+      <p>The design for Magical Chart uses both layers explicitly, with each doing what it's suited for.</p>
+
+      <h2>Layer 1: localStorage for display</h2>
+
+      <p>The client-side state is a simple object stored in <code>localStorage</code>:</p>
+
+      <pre><code>{
+  "dailyCount": 2,
+  "lastResetDate": "2026-05-14",
+  "sessionCount": 1
+}</code></pre>
+
+      <p><code>lastResetDate</code> is compared to today's date on every page load. If they differ, <code>dailyCount</code> resets to 0. This is the display layer — it drives the UI: showing remaining count, greying out the draw button when the quota is reached, displaying the upgrade prompt.</p>
+
+      <p>It is not the enforcement layer. A user who opens DevTools and deletes their <code>localStorage</code> will see their count reset to 0 — the UI will show "readings remaining." But when they make the API call, the server checks independently.</p>
+
+      <h2>Layer 2: server-side enforcement</h2>
+
+      <p>Every reading request goes through a serverless function. That function checks usage against two signals:</p>
+
+      <p><strong>For authenticated users</strong> (logged in with Supabase auth): the check is against their row in the database. <code>user_profiles.daily_reading_count</code> is incremented on each successful generation and reset nightly by a cron job. If the count is at or above the free-tier limit, the API returns 429 regardless of what the client-side state claims.</p>
+
+      <p><strong>For anonymous users</strong> (no account): the check is against a fingerprint derived from the request. No IP logging (privacy), but a hashed combination of user-agent and a session token set at first visit. This isn't bulletproof — a sophisticated user can clear cookies and get a new session token — but it raises the bar above "open DevTools, delete localStorage." The goal isn't to make bypass impossible; it's to make casual bypass annoying enough that the legitimate upgrade path looks attractive by comparison.</p>
+
+      <pre><code>// server-side check (simplified)
+async function checkReadingQuota(req) {
+  const user = await getUser(req);
+
+  if (user) {
+    const { daily_reading_count } = await supabase
+      .from('user_profiles')
+      .select('daily_reading_count')
+      .eq('id', user.id)
+      .single();
+
+    if (daily_reading_count >= FREE_TIER_DAILY_LIMIT) {
+      return { allowed: false, reason: 'daily_limit' };
+    }
+  } else {
+    const fingerprint = getAnonymousFingerprint(req);
+    const count = await getAnonymousCount(fingerprint);
+    if (count >= ANONYMOUS_DAILY_LIMIT) {
+      return { allowed: false, reason: 'daily_limit' };
+    }
+  }
+
+  return { allowed: true };
+}</code></pre>
+
+      <h2>Two separate quotas, not one</h2>
+
+      <p>There are actually two distinct daily quotas in the product, served by different pages with different user intents:</p>
+
+      <p><strong>The homepage quota</strong> is higher. Users arriving at the homepage are likely new — they're evaluating whether the product is worth their time. A tighter quota here means they bounce before getting hooked. The goal is to let them experience enough that the upgrade case becomes obvious on its own.</p>
+
+      <p><strong>The tool/article quotas</strong> are tighter. Users arriving through search to a specific reading type (Celtic cross spread, single card pull) are further in the funnel. They've already decided they want this kind of experience — the quota is a nudge toward the upgrade, not a gate that prevents discovery.</p>
+
+      <p>These quotas live in a config object, not hardcoded. Changing the homepage quota doesn't require touching the tool pages, and vice versa. When testing whether a looser quota improves conversion, you change one number, deploy, and compare the data.</p>
+
+      <h2>The UX principle: don't lie to the user</h2>
+
+      <p>The worst implementation pattern for a free-tier gate is showing the user a count that doesn't match what the server will actually do. If the UI shows "1 reading remaining" but the server rejects the next request because a previous session was counted separately, the user experience is confusing and trust-eroding.</p>
+
+      <p>The sync between client and server state needs to be tight. Every time the server confirms a successful generation, the client increments its own count. If the server rejects a request, the client updates its display to reflect the real remaining count — not what it thought it was. The localStorage state is a cache of the server's truth, not an independent source.</p>
+
+      <pre><code>// After each API response:
+if (response.ok) {
+  incrementLocalCount();
+} else if (response.status === 429) {
+  // Don't trust local count — sync from server response
+  const { remaining } = await response.json();
+  setLocalCount(FREE_TIER_DAILY_LIMIT - remaining);
+}</code></pre>
+
+      <div class="callout">
+        <p><strong>The design principle:</strong> client-side state should be treated as a display cache, not authoritative truth. Anything you don't want to enforce with server-side logic shouldn't be enforced at all. The flip side: anything you enforce server-side should be reflected client-side promptly, or users will face confusing rejections.</p>
+      </div>
+
+      <h2>What I didn't build: account-required gates</h2>
+
+      <p>An alternative design: require an account before any reading, eliminating the anonymous user problem entirely. This is simpler to implement and easier to enforce.</p>
+
+      <p>I decided against it. The funnel data was clear: users who experienced at least one reading before being asked to register converted to accounts at a significantly higher rate than users who hit a registration wall first. The free experience before friction is load-bearing. Making it account-only would have simplified the gate implementation but hurt the acquisition funnel.</p>
+
+      <p>The two-layer design is more complex precisely because the product decision required it. The complexity isn't accidental — it's the cost of maintaining a good free experience while still having a real gate.</p>
+    </article>
+  </main>
+  <footer class="wrap foot">
+    <a href="/blog">← All posts</a> · <a href="/portfolio">Portfolio</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

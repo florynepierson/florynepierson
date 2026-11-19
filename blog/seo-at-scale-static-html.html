@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SEO at scale with static HTML: consolidating 264 pages into 22 — Floryne Pierson</title>
+  <meta name="description" content="How I went from ~1,500 thin SEO pages to 22 genuinely rich ones — and why reducing page count was the right SEO move.">
+  <link rel="canonical" href="https://florynepierson.com/blog/seo-at-scale-static-html">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SEO at scale with static HTML: consolidating 264 pages into 22">
+  <meta property="og:description" content="How I went from ~1,500 thin SEO pages to 22 genuinely rich ones — and why reducing page count was the right SEO move.">
+  <meta property="og:url" content="https://florynepierson.com/blog/seo-at-scale-static-html">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:16px/1.8 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(680px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 680px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .article{padding:56px 0 80px}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .date{font-size:11px;color:#8d9bc5}
+    h1{font:500 clamp(36px,5vw,52px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 20px}
+    .lede{font-size:17px;color:#dbe5ff;line-height:1.7;border-left:3px solid var(--cyan);padding-left:20px;margin:0 0 40px}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:40px 0 14px}
+    p{margin:0 0 20px;color:#c3c9ec}
+    code{font-family:monospace;font-size:.88em;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.18);border-radius:5px;padding:2px 7px;color:#a8f0f0}
+    pre{background:rgba(5,11,32,.8);border:1px solid rgba(0,229,255,.2);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px}
+    pre code{background:none;border:none;padding:0;color:#cce8ff;font-size:13px;line-height:1.7}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 24px}
+    .callout p{margin:0;color:#f0cce8;font-size:14px}
+    .callout strong{color:#fa4fc8}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
+    .back:hover{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <article class="article">
+      <a class="back" href="/blog">← All posts</a>
+      <div class="article-meta">
+        <span class="tag">SEO · Engineering</span>
+        <span class="date">June 2026</span>
+      </div>
+      <h1>SEO at scale with static HTML: consolidating 264 pages into 22</h1>
+      <p class="lede">How I went from ~1,500 thin SEO pages to 22 genuinely rich ones — and why reducing page count was the right move.</p>
+
+      <p>The standard SEO playbook for content sites says: more pages, more keywords, more indexed URLs. For a while, Magical Chart followed that playbook. The result was roughly 1,500 pages, hundreds of them near-duplicate: variations on the same zodiac sign, the same tarot card, the same astrological concept with slightly different phrasing in the title.</p>
+
+      <p>The crawl budget was spread thin. Pages competed with each other for the same queries. And importantly, none of those thin pages gave a user a reason to stay.</p>
+
+      <p>The consolidation changed the architecture: 264 near-duplicate pages merged into 22 genuinely rich ones, with 301 redirects preserving link equity. This is what I learned from doing it at that scale in plain static HTML.</p>
+
+      <h2>Why static HTML at this scale</h2>
+
+      <p>No framework. No build step. No SSR. Every page is a file on disk, served directly by Vercel's CDN. This matters for SEO in two ways: pages are crawlable by default (no JavaScript rendering required for content), and load times are as fast as a static file can be.</p>
+
+      <p>The tradeoff is that "updating 264 pages" means writing a script that opens 264 files, makes the change, validates the output, and writes it back. There's no CMS, no template re-render, no database update that propagates. Everything is explicit.</p>
+
+      <p>That explicitness is also why things like the structural parser for modifying scripts (described in an earlier post) became necessary. When files are the source of truth and you're operating at hundreds or thousands of them, the tooling has to be robust — because there's no abstraction layer to catch mistakes.</p>
+
+      <h2>Identifying the pages to consolidate</h2>
+
+      <p>The first step was categorising pages by content uniqueness, not by URL structure. A page about "The Tower tarot card" and a page about "The Tower reversed meaning" might have different URLs but share most of their content. A page about "Capricorn daily reading" and a page about "Capricorn weekly reading" might look distinct but have the same intent: someone who wants to know what astrology says about Capricorn right now.</p>
+
+      <p>I grouped pages by semantic cluster — what user intent does this page serve? — and within each cluster, identified which page had the most content, the strongest backlink profile, and the best Search Console performance. That page became the canonical target. Everything else became a 301 source.</p>
+
+      <div class="callout">
+        <p><strong>The critical check before each consolidation:</strong> read the Search Console data for the pages you're about to remove. One page I nearly 301'd had a 6.4% CTR at position 8.9 — six times the site average at that position. It was the strongest page in its cluster. The redirect would have been a mistake. The data was nine days old in an export I had on disk; I had to query live GSC data to catch it.</p>
+      </div>
+
+      <h2>The 301 redirect implementation</h2>
+
+      <p>Static HTML on Vercel means redirects live in <code>vercel.json</code>. For 264 source URLs redirecting to 22 targets, the config block is long but mechanical:</p>
+
+      <pre><code>{
+  "redirects": [
+    {
+      "source": "/tarot/tower-reversed",
+      "destination": "/tarot/tower",
+      "permanent": true
+    },
+    {
+      "source": "/tarot/tower-upright",
+      "destination": "/tarot/tower",
+      "permanent": true
+    }
+    // ... 260 more entries
+  ]
+}</code></pre>
+
+      <p>I generated this config block from a spreadsheet mapping each source URL to its target, then validated every entry before deploying: each source should return 301, each target should return 200. A script ran the checks automatically — 264 HTTP requests, flagging any that didn't match expectations — before the config went live.</p>
+
+      <h2>E-E-A-T: adding real identity to thin content</h2>
+
+      <p>The consolidation was a cleanup operation. The growth came from something different: adding genuine author identity and trust signals to the pages that remained.</p>
+
+      <p>Google's E-E-A-T framework (Experience, Expertise, Authoritativeness, Trustworthiness) has become increasingly important for content in sensitive verticals — health, finance, and, as it turns out, astrology and tarot, which Google classifies as "wellness/spirituality." Pages without a named author, without a clear editorial policy, without explanation of how readings are generated, were being treated with skepticism.</p>
+
+      <p>I added:</p>
+      <ul style="color:#c3c9ec;line-height:2;padding-left:1.4em;margin:0 0 20px">
+        <li>An "About this reading" section explaining what Wooly is and how the AI generation works</li>
+        <li>An author byline linked to a real profile page</li>
+        <li>"How it works" pages explaining the methodology behind natal charts and tarot interpretations</li>
+        <li>Explicit editorial disclaimers: readings are for reflection, not prediction</li>
+      </ul>
+
+      <p>These aren't keyword optimisations. They're trust signals that change how Google weighs the content — and they also changed how users engaged with it. Time on page went up on pages with the "how it works" section. The content gave users something to understand, not just consume.</p>
+
+      <h2>What the architecture constraint forced</h2>
+
+      <p>Building SEO at this scale in static HTML forces a discipline that frameworks can obscure: you have to know what every page contains, because there's no dynamic rendering to paper over gaps. When I ran the consolidation audit, I found 326 pages that had no GA4 tag at all — they were invisible to analytics. I found 22 pages without an <code>.html</code> extension that existed on disk but were never served by Vercel. I found pages whose canonical URLs didn't match their actual URLs.</p>
+
+      <p>None of these were visible at the product level. They only appeared because the static file audit had to be explicit. A framework with a CMS would have handled some of this automatically — but it also would have made it harder to see the raw state of what was actually deployed.</p>
+
+      <p>The constraint of "every page is a file, every change is explicit" is slower. It's also more auditable. For a site where SEO is a primary acquisition channel and correctness of metadata is load-bearing, that tradeoff was worth it.</p>
+
+      <h2>The result</h2>
+
+      <p>The consolidation didn't immediately spike rankings. 301 redirects take time to process, and Google re-evaluates the target page's authority after absorbing the redirected link equity. What it did immediately was simplify the crawl: fewer URLs, clearer topical focus per remaining page, no self-competition between near-duplicate variants.</p>
+
+      <p>The growth that followed — roughly 14x in organic sessions over two months — came from the combination of consolidation, E-E-A-T additions, and new content in clusters that had no existing coverage. No single change explains it. The consolidation was the foundation that made the other changes land.</p>
+    </article>
+  </main>
+  <footer class="wrap foot">
+    <a href="/blog">← All posts</a> · <a href="/portfolio">Portfolio</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

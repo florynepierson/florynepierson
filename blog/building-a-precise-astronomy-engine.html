@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Building a precise astronomy engine for production: 0.29° down to 0.003° — Floryne Pierson</title>
+  <meta name="description" content="How I measured, diagnosed and fixed two coordinate-system bugs in my astronomy engine — using Swiss Ephemeris as a reference before touching a single line of code.">
+  <link rel="canonical" href="https://florynepierson.com/blog/building-a-precise-astronomy-engine">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Building a precise astronomy engine for production: 0.29° down to 0.003°">
+  <meta property="og:description" content="How I measured, diagnosed and fixed two coordinate-system bugs — using Swiss Ephemeris as a reference before touching a single line of code.">
+  <meta property="og:url" content="https://florynepierson.com/blog/building-a-precise-astronomy-engine">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:16px/1.8 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(680px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 680px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .article{padding:56px 0 80px}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .date{font-size:11px;color:#8d9bc5}
+    h1{font:500 clamp(36px,5vw,52px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 20px}
+    .lede{font-size:17px;color:#dbe5ff;line-height:1.7;border-left:3px solid var(--cyan);padding-left:20px;margin:0 0 40px}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:40px 0 14px}
+    p{margin:0 0 20px;color:#c3c9ec}
+    code{font-family:monospace;font-size:.88em;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.18);border-radius:5px;padding:2px 7px;color:#a8f0f0}
+    pre{background:rgba(5,11,32,.8);border:1px solid rgba(0,229,255,.2);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px}
+    pre code{background:none;border:none;padding:0;color:#cce8ff;font-size:13px;line-height:1.7}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 24px}
+    .callout p{margin:0;color:#f0cce8;font-size:14px}
+    .callout strong{color:#fa4fc8}
+    table{width:100%;border-collapse:collapse;margin:0 0 24px;font-size:13px}
+    th{text-align:left;padding:10px 14px;border-bottom:1px solid rgba(0,229,255,.25);color:#00e5ff;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+    td{padding:10px 14px;border-bottom:1px solid rgba(0,229,255,.08);color:#c3c9ec}
+    tr:last-child td{border-bottom:none}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
+    .back:hover{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <article class="article">
+      <a class="back" href="/blog">← All posts</a>
+      <div class="article-meta">
+        <span class="tag">Astronomy · AI Engineering</span>
+        <span class="date">September 2026</span>
+      </div>
+      <h1>Building a precise astronomy engine for production: 0.29° down to 0.003°</h1>
+      <p class="lede">How I measured, diagnosed and fixed two coordinate-system bugs — using Swiss Ephemeris as a reference before touching a single line of code.</p>
+
+      <p>Magical Chart generates natal astrology reports: planetary positions, house cusps, aspects. The accuracy of that output depends entirely on the astronomy engine underneath. If the Moon's north node is off by a degree, every interpretation built on top of it is wrong. The question is: how do you know when it's wrong, and how do you know when you've actually fixed it?</p>
+
+      <p>That's what this article is about. Not the glamorous part of building an AI product — but the measurement discipline that makes the glamorous part trustworthy.</p>
+
+      <h2>The discipline: measure the broken state first</h2>
+
+      <p>When I started auditing the astronomy engine, I had a hunch that the coordinate handling wasn't right. The temptation is to fix the code you suspect is wrong, then verify it looks better. That's the wrong order.</p>
+
+      <p>The right order: <strong>measure the broken state against an authoritative external reference, then fix, then re-measure.</strong> This gives you before/after statistics instead of "it looked wrong and now it looks right." For a production system that tells real users where their Saturn was when they were born, the difference matters.</p>
+
+      <p>I used <strong>Swiss Ephemeris</strong> as the external reference — the same library used by professional astrology software, accurate to sub-arcsecond precision. I ran 25 test dates through both engines and recorded the deltas.</p>
+
+      <h2>Bug 1: Lunar nodes — computing an event instead of a position</h2>
+
+      <p>The first bug was conceptual, not just numerical. The original implementation called <code>SearchMoonNode()</code> — a function that searches for the moment in time when the Moon last crossed the ecliptic plane. That's an event. What we needed was the current direction of that crossing — a position on the ecliptic, expressed as an angle.</p>
+
+      <p>These are related but different things. The event tells you when the Moon was last at the node. The position tells you where the node currently is in the sky. For a natal chart, you need the position.</p>
+
+      <p>Measured error in the broken state against Swiss Ephemeris: mean 0.29°, max 1.07° across 25 dates.</p>
+
+      <p>The correct implementation computes the instantaneous ascending node using the Moon's orbital angular momentum vector — the cross product of position and velocity, projected onto the ecliptic plane:</p>
+
+      <pre><code>// Broken: event search
+const node = Astronomy.SearchMoonNode(date);
+
+// Fixed: instantaneous position via orbital mechanics
+const moonState = Astronomy.GeoVector(Body.Moon, date, true);
+const h = cross(moonState.position, moonState.velocity);
+const ascendingNodeLongitude = Math.atan2(-h.x, h.y) * 180 / Math.PI;</code></pre>
+
+      <p>After the fix: mean error 0.003°, max 0.007°. That's a 97× improvement.</p>
+
+      <h2>Bug 2: Planets — equatorial coordinates treated as ecliptic</h2>
+
+      <p>The second bug was a coordinate system mismatch. Planetary positions were being computed in <strong>equatorial coordinates</strong> (RA/Dec, referenced to Earth's equator) but then read as if they were <strong>ecliptic coordinates</strong> (longitude/latitude, referenced to the orbital plane). These are two different reference frames, tilted relative to each other by about 23.4°.</p>
+
+      <p>The practical error: for most planets near the ecliptic, this produced position errors of 1–2°. For planets near the solstice points (where the two frames diverge most), errors were higher.</p>
+
+      <p>The fix was one line — using the astronomy library's built-in ecliptic conversion instead of reading the raw equatorial components:</p>
+
+      <pre><code>// Broken: reading equatorial RA as ecliptic longitude
+const lon = geoVector.x; // wrong reference frame
+
+// Fixed: proper ecliptic conversion
+const ecliptic = Astronomy.Ecliptic(geoVector);
+const lon = ecliptic.elon;</code></pre>
+
+      <p>After the fix: mean error below 0.001° for all tested planets.</p>
+
+      <table>
+        <thead><tr><th>Component</th><th>Before (mean error)</th><th>After (mean error)</th></tr></thead>
+        <tbody>
+          <tr><td>Lunar nodes</td><td>0.29°</td><td>0.003°</td></tr>
+          <tr><td>Planetary longitudes</td><td>1–2°</td><td>&lt;0.001°</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Why 1° matters in astrology</h2>
+
+      <p>One degree of longitude on the ecliptic corresponds to roughly 111 km on Earth's surface when projected onto an astrocartography map. At 1° of error, a planet line that should run through Paris might be drawn through Brussels. For a natal chart interpretation, a 1° error can shift a planet across a house cusp — changing the entire interpretation of that placement.</p>
+
+      <p>Precision isn't a vanity metric here. It's the difference between telling a user their rising sign correctly or incorrectly.</p>
+
+      <h2>The provider pattern: keeping the engine replaceable</h2>
+
+      <p>The astronomy engine is wrapped in a provider interface. No code outside <code>astronomy-core</code> calls the underlying library directly — everything goes through <code>AstronomyProvider</code>:</p>
+
+      <pre><code>// All callers use the provider interface
+const provider = new AstronomyEngineProvider();
+const positions = await provider.getPlanetaryPositions(date, lat, lon);
+
+// The underlying library is an implementation detail
+// — replaceable without touching astrology-core or the AI layer</code></pre>
+
+      <p>This matters for a few reasons. The underlying library (Astronomy Engine, running in Node without native bindings) is accurate but not the gold standard — Swiss Ephemeris is more precise but requires Python bindings that don't fit the serverless architecture. If I need to swap in a more accurate backend later, the provider interface means none of the downstream code changes.</p>
+
+      <p>It also means tests can inject a mock provider that returns known positions, making the astrology interpretation layer testable independently of the actual ephemeris calculations.</p>
+
+      <h2>The Chiron edge case: building a custom ephemeris</h2>
+
+      <p>Chiron — a minor planet often included in modern astrology charts — wasn't in the astronomy library at all. No ephemeris, no function to call.</p>
+
+      <p>I fetched Chiron's orbital elements from JPL Horizons (NASA's planetary data API) and implemented a Keplerian orbital solver. To verify it, I pulled JPL's own perturbed position vectors at four reference dates and compared. The errors were within acceptable range for astrology purposes — not Swiss-Ephemeris-class accuracy, but documented and bounded, not silently wrong.</p>
+
+      <p>The key principle carried through: don't claim precision you haven't measured. The Chiron implementation is documented as "Keplerian approximation, JPL-cross-checked at four points" — not as equivalent to the true node work where I have full error statistics.</p>
+
+      <div class="callout">
+        <p><strong>The lesson:</strong> "it looks right" is not evidence. Measure the broken state, fix one thing at a time, re-measure. If you can't put a number on how wrong it was before, you can't put a number on how right it is now. For any system where correctness is load-bearing — financial calculations, medical data, astronomical positions — documented error bars are not optional.</p>
+      </div>
+
+      <h2>What the validation process prevented</h2>
+
+      <p>During Phase 2 of the validation, I discovered that a core library function my implementation depended on simply didn't exist in the version I was running — <code>Astronomy.LunarNode()</code> wasn't there. The code would have crashed at runtime for every natal chart request.</p>
+
+      <p>Because the validation layer existed before the astrology interpretation layer was built on top of it, the crash was caught in tests, not in production. That's the other reason to validate before building the dependent layer: a broken foundation costs more to fix the longer you build on top of it.</p>
+    </article>
+  </main>
+  <footer class="wrap foot">
+    <a href="/blog">← All posts</a> · <a href="/portfolio">Portfolio</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

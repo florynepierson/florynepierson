@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instagram Posts — Floryne</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec;--white:#fff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:15px/1.75 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(820px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 820px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .hero{padding:56px 0 40px;border-bottom:1px solid rgba(0,229,255,.12);margin-bottom:48px}
+    .eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;color:var(--berry);margin-bottom:14px}
+    h1{font:500 clamp(36px,5vw,50px)/1.06 'Cormorant Garamond',serif;color:#fff;margin:0 0 14px}
+    .hero p{font-size:13px;color:var(--muted);max-width:560px;margin:0}
+    h2{font:600 26px/1.15 'Cormorant Garamond',serif;color:#fff;margin:52px 0 20px;padding-bottom:10px;border-bottom:1px solid rgba(0,229,255,.12)}
+    .posts{display:grid;gap:16px;margin-bottom:64px}
+    .post{border:1px solid rgba(0,229,255,.14);border-radius:18px;background:rgba(255,255,255,.025);overflow:hidden}
+    .post-overlay{padding:18px 22px 14px;border-bottom:1px solid rgba(0,229,255,.1)}
+    .overlay-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#8d9bc5;margin-bottom:8px}
+    .overlay-text{font:600 18px/1.3 'Cormorant Garamond',serif;color:#fff}
+    .post-caption{padding:14px 22px 18px}
+    .caption-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#8d9bc5;margin-bottom:8px}
+    .caption-text{font-size:13px;color:#c3c9ec;line-height:1.75;white-space:pre-line}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-right:6px;margin-top:4px}
+    .tag.tech{border:1px solid rgba(0,229,255,.35);color:var(--cyan)}
+    .tag.growth{border:1px solid rgba(250,79,200,.35);color:var(--pink)}
+    .tag.ai{border:1px solid rgba(167,139,250,.35);color:#a78bfa}
+    .tag.builder{border:1px solid rgba(251,191,36,.35);color:#fbbf24}
+    .tag.product{border:1px solid rgba(52,211,153,.35);color:#34d399}
+    .tag.web3{border:1px solid rgba(245,158,11,.35);color:#f59e0b}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .foot a{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.hero{padding:40px 0 32px}.overlay-text{font-size:16px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/instagram-roadmap">Roadmap</a><a href="/blog">Blog</a></nav>
+  </header>
+  <main class="wrap">
+    <div class="hero">
+      <div class="eyebrow">Instagram Reels</div>
+      <h1>Posts prêts à tourner</h1>
+      <p>Texte overlay (ce qui apparaît sur la vidéo) + légende complète. Chaque post apporte de la valeur standalone.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ TECH -->
+    <h2>Tech & Engineering</h2>
+    <div class="posts">
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay — ce qui apparaît sur la vidéo</div>
+          <div class="overlay-text">My analytics were broken for 5 days. I had no idea.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">A 2-second setTimeout on 1,536 pages was making most of my traffic invisible to GA4.
+
+The tag was there. The script loaded. But it fired before the page was actually ready — so GA4 never registered the visit.
+
+I was making product decisions on data that didn't exist.
+
+The fix: load the analytics script after the page is interactive, not on a timer. 20 minutes to fix. Weeks to find.
+
+If your GA4 numbers feel off, check when your tag actually fires — not just whether it's installed.
+
+Save this if you run your own site. 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">My Stripe webhook was failing 100% of the time. Zero error logs.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Paying users weren't getting access. The webhook looked configured. Nothing was written to the database.
+
+The bug: I was sending the 200 response before verifying the signature.
+
+Stripe marks a webhook as successful the moment it gets a 200 — it doesn't care what happens after. So my endpoint was confirming receipt, then failing silently on signature verification.
+
+The fix: verify the signature first, then process, then respond.
+
+The scariest bugs in production are the ones that don't throw errors. They just quietly don't work.
+
+Drop a 🔥 if you've ever debugged something that "looked fine."</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">50 fake sessions per day. GA4 didn't catch a single one.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Headless Chrome scrapers running real JavaScript. Real GA4 events. Real session data.
+
+GA4's built-in bot filter is based on user-agent strings. These bots had clean user agents.
+
+The tell: screen dimensions of exactly 1280×1200 and 1366×1366. No real device has those dimensions.
+
+I added a check at the top of every analytics script: if those dimensions match, block all tracking.
+
+If you're making conversion decisions from your analytics, you need to know what's actually in your data.
+
+Save this. 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I built an entire site in plain HTML. 1,500+ pages. No framework.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Not because I'm a purist. Because I needed to understand every file on my site.
+
+When SEO is your main acquisition channel, you can't afford abstraction you don't control.
+
+No build step = every page is crawlable by default.
+No framework = no JavaScript rendering required for content.
+No CMS = every change is explicit and auditable.
+
+The tradeoff: "updating 300 pages" means writing a script that opens 300 files and validates every one.
+
+The constraint became the architecture. And it taught me more about how the web actually works than any framework ever did.
+
+What's your stack? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I built an astronomy engine precise to 0.003°. It started at 0.29°.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Two bugs. Both coordinate system errors. Neither threw an exception.
+
+Bug 1: I was using an event search function to get the lunar nodes position instead of calculating the actual instantaneous position. 0.29° error. Fixed with a cross-product calculation.
+
+Bug 2: I was mixing equatorial and ecliptic coordinates without converting. 1-2° error on some planets.
+
+Rule I follow now: measure the broken state first. Use a known reference (I used Swiss Ephemeris). Then fix.
+
+Never touch the code before you know what "correct" looks like.
+
+Save if you work with precision calculations. 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">Every serverless function should do exactly one thing.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Generate a reading. Check a quota. Process a webhook.
+
+When a function starts doing two things, debugging becomes a guessing game. When it does three, you've lost track of what it's responsible for.
+
+Single responsibility isn't a principle for large teams. It's how one person keeps a production system understandable at 2am when something breaks.
+
+My rule: if I can't describe what a function does in one sentence, it does too much.
+
+What's the most useful engineering principle you actually apply day-to-day? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">A project works when you're watching. A product works when you're not.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">The gap between the two is monitoring, error handling, and the edge cases you didn't think of.
+
+I learned this after my first deployment where everything worked perfectly — until I closed my laptop.
+
+Things that only exist in a "product" and not a "project":
+→ Alerts when something that should happen doesn't
+→ Graceful failure when an external API is down
+→ Logs you can actually read at 11pm on a Sunday
+
+Building something that runs without you watching is a different skill than building something that works.
+
+Save this if you're moving from projects to real products. 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I built a quota system that users can't trivially bypass.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">The naive version: store the count in localStorage. The problem: anyone can open DevTools and clear it in 3 seconds.
+
+My approach: two layers, each doing what it's suited for.
+
+Layer 1 — localStorage: fast, local, drives the UI. Shows remaining count. Resets at midnight. Not the enforcement layer.
+
+Layer 2 — server-side: every reading request checks against the database. If the user clears localStorage, the server still knows.
+
+Design principle: client-side state is a display cache, not authoritative truth. Anything you don't want to enforce server-side shouldn't be enforced at all.
+
+Save this if you're building a freemium product. 🔖</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════ GROWTH -->
+    <h2>Growth & Business</h2>
+    <div class="posts">
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">14x organic traffic in 2 months. Here's what actually moved it.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Not one thing. Three, in the right order.
+
+1. Consolidation: 264 near-duplicate pages merged into 22 rich ones, with 301 redirects preserving link equity. Fewer pages competing for the same query.
+
+2. E-E-A-T: added a real author byline, "how it works" pages, editorial disclaimers. Google weighs trust signals in sensitive verticals — astrology qualifies.
+
+3. New content in clusters with no existing coverage.
+
+The consolidation didn't spike rankings. It simplified the crawl and created the foundation for the other two to land.
+
+SEO is rarely one lever. It's usually three done in the right sequence.
+
+Save this if you're working on content SEO. 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">Google sends me the most traffic. Google sends me zero paying users.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Direct traffic — people who typed the URL or came from a saved link — converts. Google doesn't.
+
+Why: the intent arriving from Google is curiosity. Someone searched "free tarot reading" and landed on my site. The intent arriving direct is return — someone who already experienced something and came back for more.
+
+Traffic and purchase intent are different things. Optimising for one doesn't optimise for the other.
+
+I almost spent months improving pages that rank well but never sell. The data stopped me.
+
+Before you optimise for traffic, ask: what's the intent of the people already coming? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I picked one channel first. Pinterest. Here's why that was the right call.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Not because Pinterest is the best channel. Because I could only do one thing well.
+
+Each channel has one job:
+→ Pinterest: make people curious about your universe before they know what you sell
+→ Google: capture people who already know what they want
+→ Instagram: build trust through face and voice
+→ X: credibility and builder community
+
+Mixing these up without knowing what you're asking each one to do is how you waste all three.
+
+You don't diversify until the first channel actually works.
+
+What was your first channel? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I changed my price 3 times in 4 months. Each time I had a hypothesis.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Pricing isn't a decision you make once.
+
+Each change tested something specific:
+→ Does a lower price increase conversion enough to offset the margin loss?
+→ Does annual pricing convert differently from monthly?
+→ Does geographic pricing change the composition of paying users?
+
+The data answered each time. Sometimes yes, sometimes no.
+
+The mistake isn't changing your price. It's changing it without knowing what you're measuring.
+
+Before you change your price, write down the hypothesis first. Then look at the data after. That order matters.
+
+Save this if you're figuring out pricing. 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">My newsletter: 32% open rate in English. 45% in French. Same email.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Same product. Same Wooly. Same send time. Different relationship to the content.
+
+I don't fully understand why the gap is that large. But I stopped pretending it's just translation quality.
+
+What I do know:
+→ Localisation isn't just changing the words
+→ The same idea can land completely differently in a different cultural context
+→ You have to measure by language segment, not by total list
+
+Industry average open rate is ~21%. I'm at 32-45% because I only capture emails after the user has already received something valuable — never before.
+
+The gate comes after the experience. Never before.
+
+What's your open rate? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I sent 189 cold outreach messages. 1 response. Here's what I learned.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Not 1 conversion. 1 response.
+
+Cold outreach without an audience is noise. You're asking for attention from people who have no reason to trust you yet.
+
+What I did instead: built in public, documented what I measured, made the work visible.
+
+Inbounds are slower to start. They compound.
+
+The difference between cold outreach and inbound isn't the message — it's whether the person already has a reason to care before you reach them.
+
+Build the audience first. Then the outreach becomes a conversation, not a pitch.
+
+Save this if you're doing B2B outreach. 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">Same product. India: high traffic, near-zero revenue. US: low traffic, actual buyers.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Geography tells you who's coming. It doesn't tell you why.
+
+The intent arriving from India is curiosity. The intent arriving from the US is purchase.
+
+Same product. Same AI. Wildly different willingness to pay — and willingness to pay is only one part of it. Intent matters as much as purchasing power.
+
+What I changed: I stopped optimising pages for high-traffic geographies and started optimising for high-intent ones.
+
+Before you celebrate traffic from a new country, check: what do those users do after they arrive?
+
+What's your highest-traffic country with the lowest conversion? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">Urgency converts. Discount alone doesn't.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">I ran two promos:
+
+"50% off" — no end date. Conversion barely moved.
+"50% off — ends tonight." — meaningfully better.
+
+Same discount. The difference was the deadline.
+
+Why: a discount without urgency gives the user permission to come back later. And later almost never happens.
+
+The other lesson: if a 30% discount doesn't move conversion at all, the problem isn't price. It's desire. No discount fixes a product people don't want enough.
+
+Before your next promo, decide: are you testing price sensitivity or desire? They need different experiments.
+
+Save this. 🔖</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════ AI -->
+    <h2>AI & Tools</h2>
+    <div class="posts">
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">AI wrote most of my site. Knowing what to ignore is the skill.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">AI suggested features I didn't build, optimisations that didn't matter, and abstractions I didn't need.
+
+Every single time it was technically correct. And every single time I had to decide whether "technically correct" was actually useful.
+
+That judgment — what to build vs what to skip — doesn't come from the model. It comes from understanding your users, your data, and your constraints.
+
+The model accelerates execution. It doesn't replace the product sense that tells you what's worth executing.
+
+The skill isn't using AI. It's knowing when to say no to what it suggests.
+
+What's the most useful AI tool in your stack right now? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">My AI product has a 99% gross margin. I still didn't optimise the AI cost first.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Everyone told me to optimise AI cost first.
+
+My cost per reading: ~$0.005. Gross margin: 98.6-99.8%.
+
+Optimising that would have saved me roughly $4 a month.
+
+What I optimised instead: the funnel. The gap between reading and purchase. The quota design that lets users experience value before hitting a paywall.
+
+That's where the revenue was hiding.
+
+Instrument before you optimise. The constraint is almost never the one that feels most technical.
+
+Save this if you're building an AI product. 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I built a scoring rubric to evaluate my AI persona's personality.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">6 dimensions. 10 points each. 60 points total.
+
+→ Context use: does it actually use the birth date provided?
+→ Source grounding: does it reference the cards drawn?
+→ Guardrails: does it avoid prediction and dependency?
+→ Language match: does it mirror the user's tone?
+→ Persona coherence: is it consistently Wooly, not generic GPT?
+→ Concrete grounding: does it give something specific to sit with?
+
+Baseline: 55/60. After two targeted prompt fixes: 60/60.
+
+You can't improve what you don't measure — including personality.
+
+The model doesn't have a personality by default. You define it, then you score it.
+
+Save this if you're building LLM products. 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I use AI for the first version of every design. Then I refine.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">AI gets you to 80% of a design in an hour.
+
+The first version is fast enough to test whether the layout logic is right. Good enough to show to users. Cheap enough to throw away if the concept is wrong.
+
+The last 20% — the taste, the consistency, the details users feel but can't name — that's where Figma, Canva, or a good freelancer earns their cost.
+
+Rule: don't polish what hasn't been validated yet.
+
+Ship the AI version first. Learn what's worth refining. Then spend the design budget on what you know matters.
+
+What tools do you use for design? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">The difference between AI as a feature and AI as the product.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">AI as a feature: "we added AI to summarise your notes."
+AI as the product: the AI is why the product exists at all.
+
+When AI is the product, every design decision flows from one question: does this make the AI experience better?
+
+Not cheaper. Not faster. Better for the user in front of it.
+
+The products that will last aren't the ones that added AI to something that already existed. They're the ones where removing the AI would leave nothing.
+
+Which category is your product in? 👇</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════ BUILDER -->
+    <h2>Builder mindset</h2>
+    <div class="posts">
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">Nobody tells you when you're doing well as a solo founder.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">No manager. No team. No sprint review. No quarterly feedback.
+
+You learn to read the data the way other people read feedback.
+
+Open rate up → something resonated.
+Conversion flat → the funnel has a hole.
+Churn spike → something broke the trust.
+
+The data doesn't tell you you're doing well. It tells you what's working and what isn't. That's actually more useful.
+
+The hardest part of building alone isn't the technical problems. It's sitting with uncertainty long enough to let the data answer.
+
+Solo founders: what's your signal that something is working? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">The first time a stranger paid for something I built, I didn't celebrate.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">I opened the database to make sure the webhook had fired correctly.
+
+That's when I knew I was an engineer.
+
+The celebration came later — after I confirmed the row existed, the access had been granted, and the email had been sent.
+
+Building a product means your first instinct after a sale is to verify the system worked, not to screenshot the notification.
+
+There's something satisfying about that. The product running correctly is the celebration.
+
+What was your reaction to your first sale? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I built for a market I didn't belong to. Here's what that required.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">I'm not a tarot reader. I'm an engineer who measured what people were searching for.
+
+What it required:
+→ Reading every support message like it was a user interview
+→ Building ethical guardrails into the product because I wasn't the user who could feel when something was wrong
+→ Treating the content as seriously as the code
+→ Never assuming I knew what resonated
+
+You don't have to be the user. You have to understand the user well enough to build something they'd choose.
+
+The advantage of being an outsider: you question things insiders take for granted.
+
+What market are you building for? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">My biggest cost isn't the API bill. It's the weeks I spent on features nobody used.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Opportunity cost doesn't show up on any invoice.
+
+I spent weeks building a feature users said they wanted. Zero engagement after launch.
+
+The gap between what users say and what they do is where most product work gets wasted.
+
+What I do now before building anything:
+→ Is there behavioral evidence that users want this, not just stated preference?
+→ What's the smallest version I can ship to get signal?
+→ What am I not building while I build this?
+
+The last question is the most important one and the one people ask least.
+
+Save this if you're deciding what to build next. 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I write everything down. Not for other people. For future me.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Every decision, every bug, every measurement, every hypothesis that turned out to be wrong.
+
+Not in a public changelog. In a private engineering journal.
+
+Why: in 3 months I won't remember why I made that architecture decision, why I chose that price point, or why I didn't build that feature.
+
+The journal is the difference between learning from your own experience and repeating it.
+
+It's also the fastest way to onboard yourself after a break — which as a solo founder you will take at some point.
+
+Document as you go. Future you will thank you.
+
+What's your system for capturing decisions? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">Slow growth is underrated.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">I didn't go viral. 14x organic growth over two months, one SEO decision at a time.
+
+What slow growth gives you that viral doesn't:
+
+→ You learn what's actually working, because there's no single spike to attribute everything to
+→ Your infrastructure scales with your users, not ahead of them
+→ You build an audience that chose you deliberately, not one that stumbled in and left
+
+Viral is a moment. Compounding is a business.
+
+The goal isn't a spike. It's a slope that doesn't flatten.
+
+What's your current growth channel? 👇</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════ PRODUCT -->
+    <h2>Product</h2>
+    <div class="posts">
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">My AI never tells you what will happen. That's a product decision.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Every reading ends with a question, a reflection prompt, something to sit with.
+
+Not a prediction.
+
+Why: prediction erodes trust. If the AI says "you'll meet someone in June" and June passes, the product broke the user's experience.
+
+Reflection builds trust. The user brings their own meaning to the reading and leaves with something that felt true to them — because they made it true.
+
+This is also the ethical line. An AI in a sensitive category has to know what it won't do. The model won't draw that line by itself. You have to draw it in the product.
+
+What ethical guardrails have you built into your product? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">The free tier has to be real. Or the paid tier doesn't earn itself.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Real reading. Real AI. Real output. Every day. No account required.
+
+If you need to hide or weaken the free tier to sell the paid one, the paid one isn't good enough yet.
+
+The funnel data was clear: users who experienced at least one full reading before seeing a price converted at a significantly higher rate than users who hit a registration wall first.
+
+The free experience isn't a cost. It's the acquisition mechanism.
+
+The upgrade case should be obvious on its own: "I want more of this" — not "I guess I have to pay to continue."
+
+What does your free tier actually give users? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I built the same product in 6 languages. Using search data, not assumptions.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">English, French, Spanish, Portuguese, Italian, German, Japanese.
+
+Every language decision came from keyword research — where is the search volume, what is the intent, is there an existing competitor?
+
+Not from "we should be global" or "our product works in any language."
+
+Localisation isn't translation. It's understanding why a user in that market would choose your product over what already exists for them.
+
+The pages in languages with no keyword research stayed English. The ones with real volume got proper localisation.
+
+Build where there's intent. Don't translate into silence.
+
+Save this if you're thinking about international expansion. 🔖</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════ WEB3 -->
+    <h2>Blockchain & Web3</h2>
+    <div class="posts">
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">What a smart contract actually does in plain English.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">A smart contract is code that lives on a blockchain and runs automatically when conditions are met.
+
+No middleman. No "processing time." No "our team will review."
+
+Example: escrow. Normally you need a bank or a lawyer to hold funds until both parties fulfil their obligations. A smart contract does the same thing — but the rules are written in code, visible to everyone, and execute automatically.
+
+The interesting part: the code is public, immutable, and runs the same way for everyone. That's what "trustless" actually means — you don't need to trust the other party, you trust the code.
+
+The less interesting part: writing that code correctly is extremely hard. Most smart contract bugs are irreversible.
+
+Save this if you're new to Web3. 🔖</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">I read a blockchain for the first time as a developer. Here's what I actually saw.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Not price charts. Not NFT jpegs.
+
+A chain of blocks, each containing a list of transactions, each linked to the previous one by its hash.
+
+Change anything in block 47 and block 48's hash breaks. And 49. And every block after it. That's what makes it tamper-evident.
+
+It's not magic. It's cryptographic linking and distributed consensus.
+
+What surprised me: how readable it is. Every transaction is public. You can look up any wallet address and see its entire history.
+
+What didn't surprise me: the UX is still terrible for anyone who isn't already technical.
+
+That gap between what it can do and how hard it is to use — that's where the interesting products are being built.
+
+What's your mental model of blockchain? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">Web3 UX is broken and everyone in the industry knows it.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">Seed phrases. Gas fees. Wallet addresses. Irreversible transactions.
+
+Every one of these is a user experience failure waiting to happen.
+
+Seed phrases: 12 random words that if lost mean you lose everything forever. No recovery. No support ticket.
+
+Gas fees: you want to send $5 but you need to pay $3 in fees that fluctuate unpredictably.
+
+The technical foundation is solid. The UX layer built on top of it is still treating normal users like they're cryptographers.
+
+The products that will win in Web3 aren't the ones with the most sophisticated smart contracts. They're the ones that make this usable by someone who's never read a whitepaper.
+
+That's an engineering and product problem. Which means it's solvable.
+
+What's the worst Web3 UX you've encountered? 👇</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-overlay">
+          <div class="overlay-label">Overlay</div>
+          <div class="overlay-text">Decentralisation is a spectrum, not a binary.</div>
+        </div>
+        <div class="post-caption">
+          <div class="caption-label">Légende</div>
+          <div class="caption-text">"Is it decentralised?" is usually the wrong question.
+
+The right questions:
+→ Who controls the smart contracts? (Can they be upgraded? By whom?)
+→ Who controls the frontend? (If the website goes down, can you still access your funds?)
+→ Who controls the oracles? (External data fed into the contracts)
+→ Who owns the majority of the governance tokens?
+
+Most "decentralised" protocols are decentralised on some dimensions and highly centralised on others.
+
+That's not necessarily a problem — full decentralisation has real costs in performance, upgradeability, and UX.
+
+But understanding where the centralisation actually lives tells you where the real risks are.
+
+Save this if you're evaluating Web3 projects. 🔖</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+  <footer class="wrap foot">
+    <a href="/instagram-roadmap">← Roadmap</a> · <a href="/portfolio">Portfolio</a> · <a href="/blog">Blog</a>
+  </footer>
+</body>
+</html>

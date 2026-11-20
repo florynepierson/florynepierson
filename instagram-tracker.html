@@ -69,15 +69,15 @@
   <main class="wrap">
     <div class="hero">
       <div class="eyebrow">Instagram — suivi de publication</div>
-      <h1>Tracker — 89 posts</h1>
+      <h1>Tracker — 195 posts</h1>
       <p>Calendrier complet. Coche CapCut fait + publié au fur et à mesure. L'état est sauvegardé dans Supabase.</p>
     </div>
 
     <div class="stats-row" id="stats-row">
-      <div class="stat"><div class="stat-num" id="stat-total">89</div><div class="stat-label">posts au total</div></div>
+      <div class="stat"><div class="stat-num" id="stat-total">195</div><div class="stat-label">posts au total</div></div>
       <div class="stat"><div class="stat-num" id="stat-capcut">0</div><div class="stat-label">CapCut fait</div></div>
       <div class="stat"><div class="stat-num" id="stat-posted">0</div><div class="stat-label">publiés</div></div>
-      <div class="stat"><div class="stat-num" id="stat-remaining">89</div><div class="stat-label">restants</div></div>
+      <div class="stat"><div class="stat-num" id="stat-remaining">195</div><div class="stat-label">restants</div></div>
     </div>
     <div id="save-status"></div>
 
@@ -191,6 +191,18 @@
       <tbody id="tbody-en-misc"></tbody>
     </table>
 
+    <h2>Tips EN — Toutes les sections (106 posts)</h2>
+    <table>
+      <thead><tr>
+        <th class="pos">#</th>
+        <th class="date">Date</th>
+        <th>Post</th>
+        <th class="cb-cell">CapCut</th>
+        <th class="cb-cell">Publié</th>
+      </tr></thead>
+      <tbody id="tbody-en-tips"></tbody>
+    </table>
+
   </main>
   <footer class="wrap foot">
     <a href="/instagram-roadmap">← Roadmap</a> · <a href="/instagram-tips-fr">Tips FR</a> · <a href="/instagram-tips">Tips EN</a> · <a href="/instagram-posts-short">Posts</a>
@@ -202,23 +214,45 @@
 
     // section_id → table body id + source page → link base
     const SECTION_TABLE = {
-      'apprivoiser': 'tbody-apprivoiser',
-      'quotidien':   'tbody-quotidien',
-      'bases':       'tbody-bases',
-      'chiffres':    'tbody-chiffres',
-      'pratiques':   'tbody-pratiques',
-      'reseaux':     'tbody-reseaux',
-      'funfacts':    'tbody-funfacts',
-      'reels':       'tbody-reels',
-      'tips-ai':     'tbody-en-misc',
-      'blockchain':  'tbody-en-misc',
-      'tech':        'tbody-en-misc',
-      'moi':         'tbody-en-misc',
+      // Tips FR (instagram-tips-fr.html)
+      'apprivoiser':    'tbody-apprivoiser',
+      'quotidien':      'tbody-quotidien',
+      'bases':          'tbody-bases',
+      'chiffres':       'tbody-chiffres',
+      'pratiques':      'tbody-pratiques',
+      'reseaux':        'tbody-reseaux',
+      'funfacts':       'tbody-funfacts',
+      // Posts courts EN (instagram-posts-short.html)
+      'reels':          'tbody-reels',
+      'tips-ai':        'tbody-en-misc',
+      'blockchain':     'tbody-en-misc',
+      'tech':           'tbody-en-misc',
+      'moi':            'tbody-en-misc',
+      // Tips EN (instagram-tips.html)
+      'ia-outils':      'tbody-en-tips',
+      'analyse':        'tbody-en-tips',
+      'scale':          'tbody-en-tips',
+      'acquisition':    'tbody-en-tips',
+      'pricing':        'tbody-en-tips',
+      'produit':        'tbody-en-tips',
+      'seo':            'tbody-en-tips',
+      'stack':          'tbody-en-tips',
+      'recrutement':    'tbody-en-tips',
+      'branding':       'tbody-en-tips',
+      'blockchain-tips':'tbody-en-tips',
+      'mindset':        'tbody-en-tips',
+      'quotidien-en':   'tbody-en-tips',
+      'apprivoiser-en': 'tbody-en-tips',
+      'data-stats':     'tbody-en-tips',
+      'pratiques-en':   'tbody-en-tips',
+      'social':         'tbody-en-tips',
+      'funfacts-en':    'tbody-en-tips',
     };
 
     const SOURCE_PATH = {
       'instagram-tips-fr':    '/instagram-tips-fr',
       'instagram-posts-short':'/instagram-posts-short',
+      'instagram-tips':       '/instagram-tips',
     };
 
     const LANG_LABEL = { fr: 'FR', en: 'EN' };

@@ -219,6 +219,36 @@
           </div>
         </article>
 
+        <article class="case">
+          <div class="case-copy">
+            <div class="case-type">Open-source · TypeScript library</div>
+            <h3 class="title-with-mark"><img class="title-mark" src="/portfolio/assets/logo-star-map.svg" alt="" aria-hidden="true"><span>astronomy-core</span></h3>
+            <div class="meta">The ephemeris engine behind Magical Chart, extracted as a standalone open-source library</div>
+            <p>The calculation engine powering every chart on Magical Chart — planetary positions, Placidus house cusps, astrocartography coordinates — extracted into an independent TypeScript package with a provider pattern so the ephemeris backend can be swapped without touching application code.</p>
+            <ul>
+              <li>15 bodies: Sun, Moon, Mercury through Pluto, Chiron, Ceres, Pallas, Juno, Vesta, True Lunar Nodes, Black Moon Lilith.</li>
+              <li>Placidus house cusps via fixed-point iteration; Black Moon Lilith via osculating apogee from analytic Moon velocity rather than finite difference — the finite-difference version had up to 160&deg; error against Swiss Ephemeris.</li>
+              <li>Equatorial coordinates use of-date obliquity, not J2000 mean equator — the J2000 version drifts 0.36&ndash;0.42&deg; against Swiss Ephemeris at 26 years post-epoch, enough to shift an astrocartography line by hundreds of kilometres.</li>
+              <li>141 tests across 7 files, validated against Swiss Ephemeris (556 dates &times; 5 locations) and NASA/JPL Horizons.</li>
+            </ul>
+            <div class="skill-tags" aria-label="Skills shown"><span>TypeScript</span><span>Celestial mechanics</span><span>Provider pattern</span><span>Swiss Ephemeris validation</span></div>
+            <p style="margin-top:18px"><a class="text-link" href="https://github.com/florynepierson/astronomy-core" target="_blank" rel="noopener noreferrer">View the repository ↗</a></p>
+          </div>
+          <div class="case-visual">
+            <div style="background:#0b0f1e;border-radius:16px;padding:22px 20px;font-family:'Courier New',monospace;font-size:11px;line-height:1.75;color:#9eacd8;border:1px solid rgba(0,229,255,.18)">
+              <div style="color:#00e5ff;margin-bottom:14px;font-size:10px;letter-spacing:.08em">// planetary positions · 2000-01-01T12:00:00Z</div>
+              <div><span style="color:#fa4fc8">Sun</span> &nbsp;&nbsp;&nbsp;&nbsp;lon <span style="color:#fff">280.46°</span> &nbsp;dist <span style="color:#7dd3fc">0.983 AU</span> &nbsp;spd <span style="color:#86efac">+1.02°/d</span></div>
+              <div><span style="color:#fa4fc8">Moon</span> &nbsp;&nbsp;&nbsp;lon <span style="color:#fff">218.31°</span> &nbsp;dist <span style="color:#7dd3fc">0.00257 AU</span> &nbsp;spd <span style="color:#86efac">+12.1°/d</span></div>
+              <div><span style="color:#fa4fc8">Mercury</span> lon <span style="color:#fff">271.08°</span> &nbsp;dist <span style="color:#7dd3fc">1.421 AU</span> &nbsp;spd <span style="color:#fbbf24">-1.14°/d</span></div>
+              <div><span style="color:#fa4fc8">Venus</span> &nbsp;&nbsp;lon <span style="color:#fff">240.98°</span> &nbsp;dist <span style="color:#7dd3fc">1.138 AU</span> &nbsp;spd <span style="color:#86efac">+1.23°/d</span></div>
+              <div style="margin-top:14px;color:#00e5ff;font-size:10px;letter-spacing:.08em">// Placidus house cusps · 48.85°N 2.35°E</div>
+              <div>ASC <span style="color:#fff">12.4° Gem</span> &nbsp;MC <span style="color:#fff">19.7° Aqu</span></div>
+              <div style="color:#9eacd8;font-size:10px;margin-top:4px">validated vs Swiss Ephemeris · 556 dates &times; 5 locations</div>
+            </div>
+            <div class="visual-caption">Real output from the library at J2000 epoch. Positions match Swiss Ephemeris to &lt;0.01&deg;.</div>
+          </div>
+        </article>
+
       </div>
     </section>
 

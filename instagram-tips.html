@@ -59,29 +59,25 @@
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">someone in my Slack used Claude Opus to summarise a 3-sentence message.
+          <div class="caption-text">In 2024, Anthropic published its model pricing: Haiku costs $0.25 per million input tokens. Opus costs $15.
 
-that's like hiring a surgeon to put on a bandage.
+That's a 60x price difference on the same task.
 
-here's the actual decision framework:
+Most people building AI products default to the strongest model for everything. For a product doing 10,000 daily requests, that gap is the difference between $75 and $4,500 a month. Same output quality for most tasks. Very different bill.
 
-fast + cheap (Haiku/Flash): classification, rewriting, summaries, repetitive tasks
-→ 10-50x cheaper than flagship models. use it for anything routine.
+The actual decision framework:
 
-balanced (Sonnet/Pro): coding, reasoning, structured generation
-→ the right tool for 80% of serious work.
+Fast + cheap (Haiku, Gemini Flash): classification, rewriting, summaries, any repetitive task that doesn't require deep reasoning. Use it for anything routine.
 
-powerful (Opus/Ultra): complex judgment, nuanced analysis, edge cases
-→ reserve it for problems where nothing else is good enough.
+Balanced (Sonnet, Gemini Pro): coding, reasoning, complex generation. The right tool for 80% of serious work.
 
-the cost difference between Haiku and Opus on the same task can be 50x.
+Powerful (Opus, GPT-4o): nuanced judgment, edge cases, long-document analysis. Reserve it for the problems where nothing else is genuinely good enough.
 
-most people use the strongest model for everything.
-that's not ambition. it's waste.
+The model isn't the bottleneck. Matching it to the task is.
 
-match the model to the task.
+Save this: it's one of the most expensive invisible mistakes in AI products.
 
-save this 🔖</div>
+Source: Anthropic pricing, 2024 🔖</div>
         </div>
       </div>
 
@@ -92,26 +88,30 @@ save this 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">when AI gives you a bad answer, the instinct is to blame the model.
+          <div class="caption-text">In 2022, researchers at Tokyo University tested whether adding simple instructions like "Think step by step" to prompts changed AI performance on math problems.
 
-90% of the time, the problem is the input.
+Accuracy went from 17% to 78%.
 
-garbage in, garbage out — it was true for databases in 1980, it's true for LLMs today.
+Same model. Same question. Different framing.
 
-the formula that works every time:
-→ role: "you are a senior product manager at a B2B SaaS..."
-→ context: what you're actually trying to do and why
-→ format: bullet list / table / 3 sentences / JSON (be specific)
-→ constraint: tone, length, what to avoid
+The lesson: AI isn't a search engine you query. It's a conversation you open. The quality of what comes out depends almost entirely on what you put in.
 
-before: "write me an email to my client"
-after: "you are an account manager. write a 100-word email to a client who hasn't responded in 2 weeks. warm tone. goal: get a 15-min call. no pressure."
+The formula that consistently works:
+→ Role: who you want it to be ("you are a senior account manager at a B2B SaaS...")
+→ Context: what's actually happening and why it matters
+→ Format: exactly how you want the answer (bullet list, 3 sentences, JSON, table)
+→ Constraint: what to avoid, what tone, what length
 
-same model. completely different output.
+Before: "write me an email to my client"
+After: "you are an account manager. write a 100-word follow-up to a client who hasn't responded in 2 weeks. warm but professional. goal: get a 15-min call. no pressure tactics."
 
-the skill isn't using AI. it's briefing it.
+Same model. Completely different output.
 
-save this 🔖</div>
+The skill isn't using AI. It's briefing it.
+
+Save this for the next time you're frustrated with an AI answer.
+
+Source: Kojima et al., "Large Language Models are Zero-Shot Reasoners", NeurIPS 2022 🔖</div>
         </div>
       </div>
 
@@ -122,23 +122,21 @@ save this 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">McKinsey (2017): less than 5% of occupations can be fully automated with current technology.
+          <div class="caption-text">In 2017, McKinsey analyzed 800 occupations and thousands of individual tasks.
 
-but 60% of jobs have at least 30% of their tasks that could be automated.
+Their conclusion: less than 5% of jobs can be fully automated with current technology.
 
-that's not replacement — it's transformation.
+But 60% of jobs have at least 30% of their tasks that could be.
 
-the people who fall behind aren't the ones whose entire job disappears
-they're the ones doing the automatable 30% manually while others don't
+That's not the same thing. AI isn't going to replace the accountant. It's going to automate the data entry, the reconciliation, the reminder emails. The accountant does the rest: judgment, advice, client relationships.
 
-AI compresses execution time
-the judgment, the strategy, the relationships — still human
+What changes is the content of the work. Not the work itself. In almost every case.
 
-the gap between someone who uses AI well and someone who doesn't is widening every quarter
+The question isn't "will I lose my job?" It's "which 30% of my tasks are about to change, and am I preparing for that?"
 
-which side of that gap are you on? 👇
+The people who have that answer early will have the advantage.
 
-source: McKinsey Global Institute, 2017 🔖</div>
+Source: McKinsey Global Institute, "A Future That Works", 2017; updated 2023 🔖</div>
         </div>
       </div>
 
@@ -149,20 +147,25 @@ source: McKinsey Global Institute, 2017 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">🚫 knowing what it doesn't know
-(GPT-4o: ~1.5% hallucination rate on general queries — but 58-88% on legal cases)
-🚫 real-time information (unless it has web access)
-🚫 understanding your specific context without being told
-🚫 making judgment calls that require lived experience
-🚫 deciding what actually matters in your situation
+          <div class="caption-text">In 2024, researchers released the HalluLens benchmark: a systematic test of hallucination rates across AI models.
 
-AI is a very fast, very capable tool
-it's not a decision-maker
+GPT-4o hallucinated on roughly 1.5% of general knowledge questions.
 
-knowing where it fails is not an argument against using it
-it's the argument for using it correctly
+On legal case questions: 58% to 88%.
 
-source: HalluLens benchmark, 2024 🔖</div>
+Same model. The hallucination rate doesn't stay constant. It spikes in domains where the model is pattern-matching on limited data, or where there's no clear right answer in its training set.
+
+5 things AI is genuinely bad at:
+
+→ Knowing what it doesn't know (it will make something up rather than say "I'm not sure")
+→ Real-time information: its knowledge has a cutoff date unless it has web access
+→ Your specific context: it only knows what you tell it
+→ Judgment calls that require lived experience
+→ Deciding what actually matters in your situation
+
+AI is a very powerful tool. Knowing where it fails is not an argument against using it. It's the argument for using it correctly.
+
+Source: HalluLens benchmark, 2024 🔖</div>
         </div>
       </div>
 
@@ -173,24 +176,25 @@ source: HalluLens benchmark, 2024 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">every AI tool looks incredible in its own demo.
+          <div class="caption-text">Every AI tool looks incredible in its own demo.
 
-the demo is designed by the people who built it, on the cases where it works best, with clean data, in ideal conditions.
+That's not an accident. The demo was built by the team that knows every strength and every edge case. They picked the most favorable examples, cleaned the data, and practiced the scenario dozens of times.
 
-your use case will not be their demo.
+Your use case will not be their demo.
 
 5 questions to ask before paying:
-→ does it do one thing well, or many things at 60%?
-→ what happens to my data when I use it? (read the ToS)
-→ can I export my work if I cancel?
-→ is there an API, or am I locked into their UI forever?
-→ what does the free tier actually give me vs. what they want me to think it gives me?
 
-the gap between demo and daily use is where you find out the truth.
+→ Does it do one thing well, or many things at 60%? The best tools have a clear primary job.
+→ What happens to your data? Read the terms of service, especially the clause about training.
+→ Can you export your work if you cancel? Lock-in is a real risk.
+→ Is there an API, or are you locked into their UI forever?
+→ What does the free tier actually give you vs. what does the marketing imply?
 
-test it on a real task before paying.
+The gap between demo and daily use is where you find out the truth.
 
-save this 🔖</div>
+Test it on a real task before paying, not the task they suggested, but the one you actually need.
+
+Save this before your next AI subscription. 🔖</div>
         </div>
       </div>
 
@@ -201,22 +205,21 @@ save this 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">people always ask what's in my AI stack. here's the actual list, with what I use each for:
+          <div class="caption-text">I've tried probably 40 AI tools in the last 18 months. Most of them lasted a week.
 
-Claude → coding, long-form writing, complex reasoning (best for long context)
-Perplexity → research with cited sources, not invented answers
-Midjourney / Ideogram → first version of any visual asset
-Notion AI → summarising and structuring meeting notes
-Vercel AI → deploying fast
+Here's what stayed:
 
-what I tried and dropped: most "all-in-one AI" tools that do everything at 60%
+Claude: long-form writing, coding, complex reasoning. Best for tasks that require holding a lot of context at once.
+Perplexity: research with cited sources. I use it every time I need to verify something fast, and it doesn't invent references.
+Midjourney / Ideogram: first version of any visual. Fast enough that I can test 10 concepts in an hour.
+Notion AI: meeting notes and long-document summaries. It lives where the notes already are.
+Vercel AI SDK: deployments and AI-powered product features. Part of every product I build.
 
-rule: 3 tools you use deeply beat 10 you use occasionally.
+What I dropped: almost every "all-in-one AI" tool that promises to do 10 things. They all do them at 60%.
 
-the question isn't "what's the best AI tool?"
-it's "what's the best tool for this specific task?"
+The rule I ended up with: 3 tools you use every day beat 10 you open occasionally.
 
-what's in your stack? 👇</div>
+What's in your stack? 👇</div>
         </div>
       </div>
 
@@ -227,26 +230,23 @@ what's in your stack? 👇</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">you ask an AI: "what's our refund policy?"
+          <div class="caption-text">In 2023, Air Canada deployed an AI chatbot to handle customer service. A grieving customer asked about bereavement fares.
 
-it makes something up. confidently.
+The AI made up a policy that didn't exist. The customer booked based on that information and later sued. Air Canada lost in court.
 
-why: the model was trained on the internet, not on your documents, your policies, your company's internal knowledge.
+The problem: the model had been trained on the internet, not on Air Canada's actual policies. It pattern-matched to what a bereavement fare policy might look like. Confident and wrong.
 
-RAG (Retrieval Augmented Generation) fixes this:
+RAG (Retrieval Augmented Generation) was built to solve exactly this:
 
-before generating an answer, the model retrieves the relevant chunks from YOUR documents
-then uses them as context to generate a grounded response
+Before generating an answer, the model retrieves the relevant chunks from your actual knowledge base, then uses them as context.
 
-result: the AI answers from your actual knowledge base, not from general internet patterns
+Result: the AI answers from your real data, not from what it thinks your data probably says.
 
-this is how "chat with your PDF" products work
-it's how enterprise AI avoids hallucinating about internal processes
-it's how you build AI that knows things only your company knows
+This is how "chat with your PDF" products work. It's how enterprise AI doesn't hallucinate about internal processes. It's how you build AI that knows things only your company knows.
 
-the technology isn't magic. it's search + generation, chained together.
+The technology isn't magic. It's search and generation, chained together.
 
-save this if you're building with AI 🔖</div>
+Save this if you're building with AI. 🔖</div>
         </div>
       </div>
 
@@ -257,24 +257,22 @@ save this if you're building with AI 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">Notion added AI summaries to their notes app.
-useful. but remove the AI, Notion still exists.
+          <div class="caption-text">Notion added AI to its notes app. Useful. But if you remove the AI tomorrow, Notion still exists. The core product is the workspace, and the AI is a layer on top.
 
-Magical Chart (what I built): remove the AI, there's nothing left. the reading IS the AI.
+Magical Chart (what I built): remove the AI and there's nothing left. The tarot reading is the AI. The whole experience is generated.
 
-this distinction matters because it changes every product decision:
+The distinction matters because it changes every product decision:
 
-AI feature: "how do we make this one feature useful?"
-AI product: "how do we make the whole AI experience irreplaceable?"
+AI as a feature: "how do we make this feature useful without breaking the product if it fails?"
+AI as the product: "how do we make this AI experience genuinely irreplaceable?"
 
-the products that last aren't the ones that added AI to something that already existed.
+The products that last won't be the ones that bolted AI onto something that already existed.
 
-they'll be the ones where the AI is the reason the product exists at all.
+They'll be the ones where removing the AI makes the product incoherent.
 
-when AI is the product, every decision flows from one question:
-does this make the AI experience genuinely better for the user?
+When AI is the whole product, every decision flows from one question: does this make the AI experience better for the user?
 
-which one are you building? 👇</div>
+Which category is yours? 👇</div>
         </div>
       </div>
 
@@ -1690,27 +1688,24 @@ save this 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">in 2011, researchers studied Israeli judges' parole decisions across the day.
+          <div class="caption-text">In 2011, Shai Danziger and colleagues published a study in PNAS: they tracked 1,112 parole board hearings by Israeli judges over 10 months.
 
-early morning: 65% chance of a favorable ruling.
-just before a break: nearly 0%.
+At the start of the day, judges granted parole in 65% of cases. As the session wore on, the approval rate dropped steadily, reaching nearly 0% just before breaks.
 
-not bad judges. decision fatigue.
--- Danziger et al., PNAS, 2011
+Not bad judges. Decision fatigue. The quality of choices degrades as cognitive energy depletes, regardless of expertise.
 
-here's how I protect my mornings from it:
+Here's how I protect my mornings from it:
 
-before I open my inbox:
-→ paste yesterday's notes into Claude → "what are the 3 most important things today?"
-→ run a Perplexity search on anything I need to research
-→ have Claude draft any emails I need to send, so I edit instead of write from zero
+Before I open my inbox:
+→ Paste yesterday's notes into Claude: "what are the 3 most important things today?"
+→ Ask Claude to draft any emails I need to send, then I edit instead of write from zero
+→ Run a Perplexity search on anything I need to research that day
 
-takes 3 minutes.
-protects the first 2 hours.
+Takes 3 minutes. Protects the first 2 hours.
 
-the trick isn't using AI to do more. it's using it to think less about the stuff that doesn't need thinking.
+The trick isn't using AI to do more. It's using it to spend less cognitive energy on what doesn't need it, so the energy is there for the decisions that do.
 
-source: Danziger et al., PNAS, 2011 🔖</div>
+Source: Danziger et al., "Extraneous factors in judicial decisions", PNAS, 2011 🔖</div>
         </div>
       </div>
 
@@ -1721,20 +1716,23 @@ source: Danziger et al., PNAS, 2011 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">blank page paralysis is a real productivity killer
+          <div class="caption-text">In 1988, educational psychologist John Sweller published his cognitive load theory: generating something from nothing costs significantly more cognitive energy than evaluating and modifying something that already exists.
 
-fix: always ask AI for a first draft, an outline, or even just 3 options
+That's why the blank page is so hard. It's not laziness or lack of ideas. It's that your brain has to generate and evaluate simultaneously, which is exhausting.
 
-you're not asking it to write for you. you're asking it to remove the activation energy
+The fix: never start from zero.
 
-editing is 10x faster than writing from zero
-reacting is 10x faster than generating
+Ask AI for a first draft, an outline, or even just 3 options. You're not asking it to write for you. You're asking it to remove the activation energy.
 
-this applies to: emails, articles, landing pages, pitch decks, feature specs, cold messages
+Editing is 10x faster than writing from scratch. Reacting is 10x faster than generating.
 
-start from something. then shape it.
+This applies to everything: emails, articles, landing pages, pitch decks, feature specs, cold messages, meeting agendas.
 
-save this 🔖</div>
+Start from something. Then make it yours.
+
+Save this: you'll never face a blank page the same way again.
+
+Source: Sweller, "Cognitive Load During Problem Solving", Cognitive Science, 1988 🔖</div>
         </div>
       </div>
 
@@ -1745,23 +1743,23 @@ save this 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">McKinsey (2012): knowledge workers spend 28% of their workweek on email.
-Atlassian: 72% of meetings are considered ineffective by the people in them.
+          <div class="caption-text">McKinsey calculated it in 2012: knowledge workers spend an average of 28% of their workweek managing email. That's 11 hours a week just on the inbox.
 
-most of what consumes our time isn't what we're paid to do.
+Atlassian surveyed teams and found that 72% of meetings are considered ineffective by the people sitting in them. A third of the calendar on something most participants would rather skip.
+
+The two biggest time drains in most knowledge jobs aren't the hard parts. They're the mechanical parts.
 
 5 things worth automating this week:
-→ email triage: filters + labels + auto-archive newsletters (20 min once, permanent fix)
-→ meeting notes: Otter.ai or Notion AI summarises the call automatically
-→ social scheduling: Buffer or Publer, post in bulk instead of daily
-→ invoice generation: template + Zapier, auto-sent
-→ reporting: a script on a schedule, not a manual export every Friday
 
-rule of thumb: if you're copying and pasting anything on a weekly basis, that's a 1-hour automation task.
+→ Email triage: set filters once (newsletters skip inbox, noreply auto-archives, key contacts auto-star). 20 minutes of setup, permanent return.
+→ Meeting notes: Otter.ai or Notion AI summarises the call automatically. You stop taking notes.
+→ Social scheduling: Buffer or Publer. Post in bulk, not daily.
+→ Invoice generation: template and Zapier, auto-sent.
+→ Reporting: a script on a schedule, not a manual export every Friday.
 
-the ROI is permanent.
+Rule of thumb: if you're copying and pasting anything on a weekly basis, that's a 1-hour automation task with a permanent return.
 
-source: McKinsey Global Institute (2012); Atlassian 🔖</div>
+Sources: McKinsey Global Institute (2012); Atlassian 🔖</div>
         </div>
       </div>
 
@@ -1772,20 +1770,28 @@ source: McKinsey Global Institute (2012); Atlassian 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">most people use AI like Google: short queries, one-shot questions
+          <div class="caption-text">Most people use AI the way they use Google: short queries, one-shot questions, expecting an instant answer.
 
-better way: treat it like a conversation with someone senior
+The output matches the input.
 
-→ give context: "I'm building X for Y audience, here's the problem..."
-→ share what you've tried: "I already tested A and B, they didn't work because..."
-→ ask for pushback: "what am I missing? what would you do differently?"
-→ iterate: "that's good, but make it shorter / more direct / less salesy"
+The people who get significantly more out of it treat it like opening a conversation with a senior colleague.
 
-the more context you give, the better the answer
+The difference in practice:
 
-don't be lazy at the input. be lazy at the output.
+Google approach: "how to write a cold email"
+Senior colleague approach: "I'm reaching out to a VP of Engineering at a mid-size SaaS company. I've never spoken to them. I want a 20-minute call to discuss a potential partnership. Here's what I know about their company: [context]. What would you say, and why?"
 
-save this 🔖</div>
+The more context you give, the more specific and useful the answer.
+
+Prompts that consistently unlock better responses:
+→ "What am I missing in this reasoning?"
+→ "What would someone who disagrees with me say?"
+→ "I tried X and it didn't work because Y. What would you try next?"
+→ "Make this shorter / more direct / less formal"
+
+Don't be lazy at the input. Be lazy at the output.
+
+Save this 🔖</div>
         </div>
       </div>
 
@@ -1796,24 +1802,22 @@ save this 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">most people use ChatGPT for everything.
+          <div class="caption-text">I've had a ChatGPT subscription since 2022. I still use 5 other tools every week.
 
-that's like using a hammer for every job in the house.
+Using one AI tool for everything is like using Word for every job on your computer. It works. It's not optimal.
 
-here's what the rest of the toolkit looks like, all with free tiers:
+Here's what the broader toolkit looks like, all with generous free tiers:
 
-Perplexity → research with cited sources. not invented answers.
-Claude.ai → better for long documents, complex reasoning, nuanced writing.
-Gemini → connected to Google, great for Gmail / Docs workflows.
-Gamma.app → turn a prompt into a full presentation in 3 minutes.
-ElevenLabs → text to realistic voice, for demos and content.
-Napkin.ai → paste text, get a diagram automatically.
+Perplexity: research with cited sources. I use it every time I need to verify a fact quickly. It doesn't invent references.
+Claude.ai: complex reasoning, long documents, nuanced writing. Better than ChatGPT for anything that requires holding a lot of context.
+Gemini: plugged into Google Workspace. The right choice if you live in Gmail or Docs.
+Gamma.app: turn a prompt into a full presentation in 3 minutes. The output is genuinely good.
+ElevenLabs: text to realistic voice, for demos and content.
+Napkin.ai: paste text, get a diagram automatically.
 
-the ones I tried and dropped: most "all-in-one AI" tools that do everything at 60%
+The rule I keep coming back to: use the best tool for the specific job, not the most familiar one for everything.
 
-better to have 3 tools you use deeply than 10 you use occasionally.
-
-what's in your stack? 👇</div>
+What's in your stack? 👇</div>
         </div>
       </div>
 
@@ -1824,22 +1828,27 @@ what's in your stack? 👇</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">pick any repetitive task. then:
+          <div class="caption-text">30 minutes a week on a repetitive task is 26 hours a year.
 
-1. map it: what's the trigger? what's the action?
-2. open Make.com or n8n (free tiers exist)
-3. connect trigger → action with no code
-4. test on 3 real cases
-5. set it and forget it
+That's three full workdays spent on something that runs the same way every single time.
 
-example: "new form submission → create Notion entry → send Slack notification"
-that takes 25 minutes to build and runs forever
+Most solo founders and freelancers have at least 3 of these.
 
-the barrier to automation is entirely mental. the tools are there.
+Here's how to eliminate one this week:
 
-most people automate nothing. the ones who automate even 3 things gain 2+ hours a week.
+1. Map it: what triggers the task? what's the action it produces?
+2. Open Make.com or n8n (both have free tiers)
+3. Connect trigger to action with no code, drag and drop
+4. Test on 3 real cases
+5. Set it and forget it
 
-save this 🔖</div>
+Example that takes 25 minutes to build: "new form submission creates a Notion entry and sends me a Slack notification." Runs forever after that.
+
+The barrier to automation is entirely mental. The tools exist, they're free, and they require no coding knowledge.
+
+Most people automate nothing. The ones who automate even 3 things gain 2+ hours a week, permanently.
+
+Save this and pick one task to automate today. 🔖</div>
         </div>
       </div>
 
@@ -1850,24 +1859,28 @@ save this 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">In 1984, Benjamin Bloom published what became known as the "2 sigma problem": students who received one-on-one tutoring performed 2 standard deviations above average — equivalent to jumping from the 50th to the 98th percentile.
+          <div class="caption-text">In 1984, education researcher Benjamin Bloom published what became known as the "2 sigma problem."
 
-the problem: no education system could ever afford one tutor per student.
+His finding: students who received one-on-one tutoring performed 2 standard deviations above the class average, the equivalent of moving from the 50th to the 98th percentile.
 
-until now.
+The problem: no education system in the world can afford one tutor per student.
 
-when learning something new:
-→ "explain X to me like I'm a smart beginner"
-→ "give me the 20% of concepts I need to understand 80% of this"
-→ "quiz me on what I just learned"
-→ "what's a common misconception about this?"
-→ "give me a real example from [my specific field]"
+He called it a problem because it was unsolvable. The best learning outcome we know of was completely unscalable.
 
-AI as tutor is not perfect. but it adapts to exactly what you don't understand, in real time.
+Until now.
+
+When learning something new:
+→ "Explain X to me like I'm a smart beginner with no background in this"
+→ "Give me the 20% of concepts I need to understand 80% of this topic"
+→ "Quiz me on what I just learned"
+→ "What's a common misconception beginners have about this?"
+→ "Give me a real example from [my specific field]"
+
+AI as tutor is not perfect. But it's infinitely patient, available at 3am, and adapts to exactly what you don't understand yet.
 
 Bloom's unsolvable problem now has a free answer.
 
-source: Bloom, B.S. (1984). The 2 Sigma Problem. Educational Researcher. 🔖</div>
+Source: Bloom, B.S. (1984). "The 2 Sigma Problem." Educational Researcher. 🔖</div>
         </div>
       </div>
 
@@ -1878,27 +1891,28 @@ source: Bloom, B.S. (1984). The 2 Sigma Problem. Educational Researcher. 🔖</d
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">Gloria Mark (UC Irvine) has been measuring how often people switch focus while working.
+          <div class="caption-text">In 2004, Gloria Mark at UC Irvine measured how often people switch focus while working.
 
-2004: every 2.5 minutes on average.
-2023: every 47 seconds.
+The average: once every 2.5 minutes.
 
-the number has been declining for 20 years.
+She ran the same study in 2023.
 
-every tool, subscription, tab, and notification is a small tax on that number.
+The average is now once every 47 seconds.
 
-monthly audit to push back:
-→ subscriptions: cancel anything unused in the last 30 days
-→ tools: if two do the same thing, drop one
-→ tabs: close everything older than a week
-→ notifications: off by default, except what genuinely requires immediate action
-→ tasks: if something has been on your list for 3+ weeks, delete or delegate
+The number has been declining for 20 years, not because people became less disciplined, but because every new tool, notification, and subscription adds a small persistent tax on attention.
 
-the goal isn't minimalism. it's attention protection.
+Monthly audit to push back:
+→ Subscriptions: cancel anything unused in the last 30 days
+→ Tools: if two do the same thing, drop one
+→ Tabs: close everything older than a week
+→ Notifications: off by default, except what genuinely requires immediate attention
+→ Tasks: if something has been on your list for 3+ weeks, delete or delegate
 
-47 seconds is not a lot. protect it.
+The goal isn't minimalism. It's attention protection.
 
-source: Mark, "Attention Span", UC Irvine, 2023 🔖</div>
+47 seconds is not much to protect. Run this audit monthly and you'll feel the difference within a week.
+
+Source: Mark, "Attention Span", UC Irvine, 2023 🔖</div>
         </div>
       </div>
 
@@ -1909,27 +1923,29 @@ source: Mark, "Attention Span", UC Irvine, 2023 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">McKinsey (2012): knowledge workers spend 28% of their workweek managing email. that's 11 hours a week.
+          <div class="caption-text">McKinsey calculated in 2012 that knowledge workers spend 28% of their workweek managing email. For an 8-hour workday, that's over 2 hours a day just on the inbox.
 
-layer 1 — Gmail filters (10 min, once):
-→ contains "unsubscribe" → skip inbox, label "read later"
-→ from "noreply@" or "no-reply@" → auto-archive
-→ from known clients / recruiters → auto-star
+Most of that time isn't spent reading important messages. It's triaging noise.
 
-layer 2 — AI triage (Make.com or n8n, free tier):
-→ new email arrives → AI extracts: sender, urgency, action needed
-→ sends a 2-line digest to Slack or Telegram instead of making you open every thread
+Here's how to get it back, in three layers:
 
-layer 3 — AI draft reply:
-→ star a thread → AI generates a first-draft reply in your tone
-→ you edit in 30 seconds instead of writing from zero
+Layer 1: Gmail filters (10 minutes, once):
+→ Contains "unsubscribe": skip inbox, label "read later"
+→ From "noreply@" or "no-reply@": auto-archive
+→ From clients or recruiters: auto-star, stay in inbox
 
-setup: ~2 hours once
-time recovered: 30-60 min/day permanently
+Layer 2: AI triage (Make.com or n8n, free tier):
+When a new email arrives, an AI node extracts sender, urgency, and required action. You get a 2-line Slack or Telegram digest instead of opening every thread.
 
-your inbox should work for you.
+Layer 3: AI draft reply:
+Star a thread and AI generates a first-draft reply in your tone. You edit in 30 seconds instead of writing from zero.
 
-source: McKinsey Global Institute (2012) 🔖</div>
+Setup: about 2 hours once.
+Time recovered: 30 to 60 minutes every day, permanently.
+
+Your inbox should work for you.
+
+Source: McKinsey Global Institute, 2012 🔖</div>
         </div>
       </div>
 
@@ -1946,22 +1962,23 @@ source: McKinsey Global Institute (2012) 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">the internet launched in the 90s
-most businesses didn't have a website until the 2000s
-the ones who moved in 2003 still built empires
+          <div class="caption-text">In 1994, Jeff Bezos quit his job at a New York hedge fund to sell books online. The internet had just grown 2,300% in a year. His colleagues thought he'd lost his mind.
 
-smartphones launched in 2007
-the app economy didn't peak until 2012-2015
+In 2003, people building their first websites thought they'd "arrived too late." Amazon had just crossed $1 billion in annual revenue. The people who acted in 2003 still built empires.
 
-Rogers' diffusion of innovations curve (1962) has a tipping point at 16% adoption — after which a technology becomes mainstream and the early-mover edge shrinks fast.
+In the 1920s, most American factories still ran on steam power. Electricity had existed for 40 years. The ones that made the switch after 1920 still transformed their industries.
 
-in 2024, only ~31% of workers use AI tools regularly (Microsoft/LinkedIn Work Trend Index). active professional mastery is well below that.
+We are in the 2003 moment of AI.
 
-we are early. the window is still open.
+Everett Rogers' diffusion of innovations curve (1962) shows every technology has a tipping point: 16% adoption. Before that point, the early-mover advantage is at its maximum. The majority hasn't started yet.
 
-the train hasn't left. it just started boarding.
+In 2024, only ~31% of workers use AI tools regularly. Active professional mastery is well below that.
 
-source: Rogers (1962); Microsoft/LinkedIn Work Trend Index, 2024 🔖</div>
+The window is open. The train just started boarding.
+
+Save this to share with someone who thinks they've missed the AI wave.
+
+Sources: McKinsey/LinkedIn Work Trend Index 2024; Rogers, "Diffusion of Innovations", 1962 🔖</div>
         </div>
       </div>
 
@@ -1972,26 +1989,25 @@ source: Rogers (1962); Microsoft/LinkedIn Work Trend Index, 2024 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">AI is not magic. it's pattern recognition at scale.
+          <div class="caption-text">In June 2017, eight researchers at Google Brain published a 15-page paper called "Attention Is All You Need."
 
-the architecture behind most modern AI is the transformer — published June 2017 in "Attention Is All You Need" (Vaswani et al., Google Brain). 8 authors, 15 pages, cited over 100,000 times since.
+They had invented the transformer, the architecture that makes ChatGPT, Claude, and every major language model work today. The paper has been cited over 100,000 times.
 
-it learned which words follow which other words, in which contexts
-it predicts what a useful response looks like
+Their key idea: teach a model to read an entire text at once, tracking which words are connected to which others even across long distances, rather than processing word by word as earlier models did.
 
-that's it
+The result: a model that could learn the patterns of human language at a scale never seen before.
 
-it doesn't understand. it doesn't feel. it doesn't know what it doesn't know.
+It was trained on billions of texts. It learned which words follow which others, in which contexts, with which tone. When you ask it a question, it predicts what a useful response looks like.
 
-but it's extraordinarily good at:
-→ generating first drafts
-→ summarising and structuring
-→ answering well-defined questions
-→ writing code that follows patterns
+That's it.
 
-once you stop anthropomorphising it, it becomes a lot more useful.
+It doesn't understand. It doesn't feel. It doesn't know what it doesn't know.
 
-source: Vaswani et al., "Attention Is All You Need", NeurIPS 2017 🔖</div>
+But it's extraordinarily good at generating first drafts, summarising and structuring information, answering well-defined questions, and helping you think when you're stuck.
+
+Once you stop anthropomorphising it, it becomes a lot more useful.
+
+Source: Vaswani et al., "Attention Is All You Need", NeurIPS 2017 🔖</div>
         </div>
       </div>
 
@@ -2002,27 +2018,25 @@ source: Vaswani et al., "Attention Is All You Need", NeurIPS 2017 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">the most common thing I hear from people who don't use AI:
-"I don't know how to code."
+          <div class="caption-text">In 2024, Gartner predicted that 70% of new enterprise applications would be built using no-code or low-code tools. And that "citizen developers" (non-engineers who build tools) would outnumber professional developers 4 to 1.
 
-the two are unrelated.
+Coding is no longer the entry point to building with technology.
 
-the most powerful AI use cases right now require zero code:
-→ writing: Claude, ChatGPT, Notion AI
-→ research with sources: Perplexity
-→ presentations in minutes: Gamma.app
-→ images: Midjourney, Ideogram
-→ voice: ElevenLabs
-→ automations: Make.com (drag and drop, no code)
-→ spreadsheet formulas: just ask AI to write them
+The most powerful AI use cases right now require zero lines of code:
 
-coding unlocks more. but it's not the entry point.
+→ Writing and editing: Claude, ChatGPT, Notion AI
+→ Research with cited sources: Perplexity
+→ Presentations in minutes: Gamma.app
+→ Image generation: Midjourney, Ideogram
+→ Voice synthesis: ElevenLabs
+→ Workflow automation: Make.com (drag and drop)
+→ Spreadsheet formulas: just ask AI to write them
 
-the entry point is: take one task you do manually every week. ask AI to help with it.
+Coding unlocks more. But it's not where you start.
 
-that's it.
+Whether you work in HR, finance, marketing, or operations, the tools already exist for you, without writing a single line.
 
-save this 🔖</div>
+Source: Gartner, "Magic Quadrant for Enterprise Low-Code Application Platforms", 2024 🔖</div>
         </div>
       </div>
 
@@ -2033,25 +2047,23 @@ save this 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">most people spend months "meaning to try AI properly."
+          <div class="caption-text">On Monday morning, you open Claude for the first time. You don't quite know what to ask. You type something vague. The answer is surprisingly useful.
 
-here's the full onboarding. 7 days. no course needed.
+By Friday, you realise you would have spent 3 hours on these tasks before. You spent 45 minutes.
 
-day 1: open Claude.ai. ask it to explain something you're currently learning.
-day 2: paste an email you need to write. ask it to draft it. edit the result.
-day 3: give it a long article. ask for a 5-bullet summary.
-day 4: ask it to help you structure a decision (project, presentation, choice).
-day 5: ask it a question you were too embarrassed to Google.
-day 6: paste something you wrote. ask for honest feedback.
-day 7: reflect on which task felt most useful. do more of that.
+Here's what happens in between.
 
-that's the whole onboarding.
+Monday: Tell it who you are and what you do. Ask something you've been wanting to understand for months but never made time for.
+Tuesday: Take the most complicated professional email you need to send this week. Paste your rough notes. Ask for a draft. Edit it. Send.
+Wednesday: Give it a long document or meeting notes. "Summarise in 5 points, with what I need to remember if I only have 3 minutes."
+Thursday: Paste a decision you need to make. "Give me 3 arguments against my current position that I haven't considered yet."
+Friday: Ask the question you'd never ask a colleague for fear of sounding ignorant. It doesn't judge.
 
-no certification. no bootcamp.
+Weekend: note which task saved you the most time or energy. Start building it into your routine.
 
-the barrier isn't technical. it's starting.
+The skill builds through use, not through reading about how to use it.
 
-save this and do day 1 today. 🔖</div>
+Save this and start Monday. 🔖</div>
         </div>
       </div>
 
@@ -2062,21 +2074,25 @@ save this and do day 1 today. 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">fear 1: "it will take my job"
-reality: McKinsey (2017) found less than 5% of occupations are fully automatable. but 60% of jobs have 30%+ of tasks that could change. adapt to that — don't avoid it.
+          <div class="caption-text">The most common fear: "AI will take my job."
 
-fear 2: "I don't understand it enough to use it"
-reality: you don't understand how your car engine works either. you still drive it.
+McKinsey analyzed 800 occupations and thousands of individual tasks (2017, confirmed 2023). Less than 5% of jobs can be fully automated. But 60% have at least 30% of tasks that could change.
 
-fear 3: "everything it generates is fake / wrong"
-reality: GPT-4o hallucinates ~1.5% of the time on general queries (HalluLens, 2024). that's real — and manageable. the skill is knowing when to verify.
+That's not the same thing. AI isn't going to replace the accountant. It's going to automate the data entry, the reconciliation, the reminders. The question isn't "will I lose my job?" It's "which parts of my work are about to look different, and am I preparing for that?"
 
-none of these fears are irrational
-but none of them are reasons to avoid it
+The second fear: "I don't understand it enough to use it."
 
-the cost of not learning is higher than the cost of making a few mistakes while learning.
+You don't understand how your car engine works either. You still drive it. The user doesn't need to understand transformer architecture to benefit from it.
 
-source: McKinsey Global Institute (2017); HalluLens (2024) 🔖</div>
+The third fear: "everything it generates is fake or wrong."
+
+HalluLens (2024) tested GPT-4o systematically: roughly 1.5% hallucination rate on general queries. That's real, and it means you should verify anything important. So do Google results. The skill is knowing when verification matters, not avoiding the tool altogether.
+
+None of these fears are irrational. None of them are reasons not to start.
+
+The cost of not learning is higher than the cost of making mistakes while learning.
+
+Sources: McKinsey Global Institute (2017, 2023); HalluLens benchmark, 2024 🔖</div>
         </div>
       </div>
 
@@ -2087,22 +2103,24 @@ source: McKinsey Global Institute (2017); HalluLens (2024) 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">the trap: you ask AI to write something. it comes back generic. you post it. it sounds like everyone else.
+          <div class="caption-text">There's a trap almost everyone falls into at first.
 
-the fix: use AI to draft, not to publish
+You ask AI to write something. It gives you back something clean, well-structured, properly formatted. And it sounds like anyone.
 
-your process:
-→ write your raw thoughts first (even messy)
-→ ask AI to structure or improve it
-→ edit the output back toward your voice
-→ add the specific detail only you would know
+The problem isn't the tool. It's that you've outsourced the parts that only you can provide: the lived experience, the specific context, the actual opinion.
 
-AI is good at structure and grammar
-it's bad at lived experience, specific context, and genuine opinion
+The process that works:
 
-those are yours. don't outsource them.
+→ Write your raw ideas first, even messy, even just 5 lines
+→ Ask AI to structure or improve them
+→ Edit the output back toward your voice
+→ Add the specific detail only you would know: a real experience, a number from your own data, a genuine take
 
-save this 🔖</div>
+AI is excellent at structure and grammar. It's poor at lived experience, precise context, and real opinion.
+
+Those three things are yours. Don't outsource them.
+
+Save this rule: it's the difference between content that could be anyone's and content that's unmistakably yours. 🔖</div>
         </div>
       </div>
 
@@ -2113,29 +2131,29 @@ save this 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">76% of workers say they need new AI skills to stay competitive.
-AI-related job listings grew 17x between 2016 and 2023 on LinkedIn.
--- Microsoft/LinkedIn Work Trend Index, 2024
+          <div class="caption-text">In 2024, Microsoft and LinkedIn surveyed 31,000 workers across 31 countries.
 
-here's what that skill actually is. it's not knowing how transformers work.
+76% said they need new AI skills to stay competitive in their role.
+AI-related job listings on LinkedIn grew 17x between 2016 and 2023.
+
+Here's what that skill actually is, and it's not knowing how transformers work.
+
+Everett Rogers' diffusion of innovations curve (1962) shows we're at a critical point: the people building fluency today will be the references when the majority starts. That window is narrow.
 
 AI literacy in 2025:
-→ knowing which tool to use for which task
-→ writing a prompt that gets a useful answer, not a vague one
-→ knowing when to trust the output and when to verify it
-→ knowing what AI genuinely can't do (judgment, real-time info, your context)
-→ iterating when the first answer is wrong
+→ Knowing which tool to use for which task
+→ Writing a prompt that gets a useful answer, not a vague one
+→ Knowing when to trust the output and when to verify it
+→ Understanding what AI genuinely can't do: judgment, real-time information, your specific context
+→ Iterating when the first answer misses
 
-that's it. the whole skill.
+That's the whole skill. You can build it in a few weeks of regular use. No degree. No bootcamp. No course.
 
-you can build it in a few weeks of regular use.
-no degree. no bootcamp. just use it on real problems.
+The people who say "I need to learn AI" but don't start are waiting for a school that doesn't exist.
 
-the people who say "I need to learn AI" but don't start are waiting for a school that doesn't exist.
+The school is the tool.
 
-the school is the tool.
-
-source: Microsoft/LinkedIn Work Trend Index, 2024 🔖</div>
+Sources: Microsoft/LinkedIn Work Trend Index, 2024; Rogers, "Diffusion of Innovations", 1962 🔖</div>
         </div>
       </div>
 
@@ -2146,25 +2164,24 @@ source: Microsoft/LinkedIn Work Trend Index, 2024 🔖</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">they're the ones who waited until they felt "ready."
+          <div class="caption-text">They're the ones who waited until they felt "ready."
 
-there is no ready.
+Everett Rogers spent decades studying how technologies spread through society. His conclusion: the early adopters (13.5% of the population) aren't smarter than everyone else. They just started earlier.
 
-the first prompts will be vague.
-the first automations will break.
-the first outputs will be underwhelming.
+And that head start compounds. By the time the majority begins adopting, the early movers are already the references. They're the ones who get consulted, hired, listened to.
 
-that's how every new skill works.
+Developers who resisted AI coding tools in 2023 are now 55% slower at completing tasks than peers who adopted them.
+(GitHub/Microsoft, Copilot study, 2022)
 
-developers who resisted AI coding tools in 2023 are now 55% slower than peers who adopted them.
--- GitHub/Microsoft, Copilot study, 2022
+That gap doesn't stay constant. It grows.
 
-that gap compounds. it doesn't stay constant.
+The first prompts will be vague. The first automations will break. The first outputs will be underwhelming.
 
-start before you're ready.
-make the mistakes early enough that they're behind you by the time it really matters.
+That's how every new skill works. The difficulty isn't technical: it's the willingness to be a beginner at something that feels important.
 
-source: GitHub/Microsoft, Copilot study, 2022 🔖</div>
+Start before you're ready. It's the only way to be ahead.
+
+Sources: Rogers, "Diffusion of Innovations", 1962; GitHub/Microsoft Copilot study, 2022 🔖</div>
         </div>
       </div>
 

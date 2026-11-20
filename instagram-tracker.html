@@ -283,7 +283,7 @@
 
     async function loadPosts() {
       try {
-        const res = await fetch(`${SB_URL}/rest/v1/content_calendar?select=*&order=position.asc&limit=200`, {
+        const res = await fetch(`${SB_URL}/rest/v1/content_calendar?select=*&order=position.asc&limit=250`, {
           headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
         });
         if (!res.ok) throw new Error(await res.text());

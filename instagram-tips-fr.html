@@ -142,25 +142,28 @@ Sauvegarde ce post pour le partager à quelqu'un qui pense que l'IA c'est "juste
       <div class="post">
         <div class="post-overlay">
           <div class="overlay-label">Overlay</div>
-          <div class="overlay-text">Une semaine pour passer de zéro à vraiment utiliser l'IA.</div>
+          <div class="overlay-text">5 outils IA. Un par jour. Une semaine pour changer ta façon de travailler.</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">Le lundi, tu ouvres Claude pour la première fois. Tu ne sais pas trop quoi lui demander. Tu tapes quelque chose de vague. La réponse est étonnamment utile.
+          <div class="caption-text">Pas un journal de bord. Un plan avec des outils précis et des choses à taper.
 
-Le vendredi, tu réalises que tu aurais passé 3 heures sur ces tâches avant. Tu en as mis 45 minutes.
+Lundi — Claude (claude.ai, gratuit)
+Crée un "Project" et colle-y ta description de poste ou ce que tu fais au quotidien. Claude s'en souviendra dans toutes tes conversations suivantes. Première tâche : demande-lui d'expliquer un concept de ton secteur que tu n'as jamais pris le temps de creuser.
 
-Voilà ce qui se passe entre les deux.
+Mardi — NotebookLM (notebooklm.google.com, gratuit)
+Importe un PDF, un rapport, un compte-rendu de réunion. Pose des questions comme si tu interrogeais quelqu'un qui l'avait lu. "Quels sont les trois points que je dois retenir si je n'ai que 5 minutes ?" "Y a-t-il des contradictions dans ce document ?"
 
-Lundi : Dis-lui qui tu es et ce que tu fais. Demande-lui quelque chose que tu voulais comprendre depuis longtemps sans jamais prendre le temps.
-Mardi : Prends l'email professionnel le plus compliqué que tu dois envoyer cette semaine. Colle tes notes brutes. Demande un brouillon. Modifie-le. Envoie.
-Mercredi : Donne-lui un document ou un compte-rendu long. "Résume en 5 points, avec ce que je dois retenir si je n'ai que 3 minutes."
-Jeudi : Colle une décision que tu dois prendre. "Donne-moi 3 arguments contre ma position actuelle que je n'ai pas encore considérés."
-Vendredi : Pose la question que tu n'oserais jamais poser à un collègue par peur de paraître ignorant(e). Elle ne juge pas.
+Mercredi — Make (make.com, gratuit jusqu'à 1000 opérations/mois)
+Crée ta première automatisation : Gmail reçoit un email d'un client → Make l'envoie à Claude pour extraction du sujet et du niveau d'urgence → le résultat arrive dans Notion ou Slack. Setup : 45 minutes. Gain : permanent.
 
-Le week-end : note quelle tâche t'a le plus économisé du temps ou de l'énergie. Commence à l'intégrer dans ta routine.
+Jeudi — Perplexity (perplexity.ai, gratuit)
+Pour toute recherche qui aurait pris 20 minutes sur Google. La différence : il cite ses sources, tu peux vérifier, et il comprend les questions complexes formulées en langage naturel. Teste sur une veille sectorielle ou une comparaison d'outils.
 
-La compétence se construit en utilisant, pas en lisant des guides sur comment utiliser.
+Vendredi — Claude, en mode avocat du diable
+Colle une décision que tu dois prendre. Prompt exact : "Je vais [décision]. Donne-moi les 3 arguments les plus solides contre cette décision que je n'ai probablement pas encore considérés."
+
+Ce n'est pas une initiation douce. C'est une semaine où tu installes des réflexes qui restent.
 
 Sauvegarde ce post et commence lundi. 🔖</div>
         </div>
@@ -285,25 +288,26 @@ Sauvegarde ce post pour les moments où tu remettrais à demain. 🔖</div>
       <div class="post">
         <div class="post-overlay">
           <div class="overlay-label">Overlay</div>
-          <div class="overlay-text">La routine matinale de 3 minutes qui fait gagner des heures.</div>
+          <div class="overlay-text">Tu passes 2h15 par jour dans ta boîte mail. Voilà comment passer à 30 minutes.</div>
         </div>
         <div class="post-caption">
           <div class="caption-label">Légende</div>
-          <div class="caption-text">McKinsey a calculé que les knowledge workers passent en moyenne 28 % de leur journée de travail à lire et répondre à leurs emails. Pour une journée de 8 heures, c'est 2 h 15 rien que sur la boîte mail.
+          <div class="caption-text">McKinsey a calculé que les knowledge workers passent 28 % de leur journée sur leurs emails. 2h15 par jour, tous les jours.
 
-Et une étude de Danziger et al. (PNAS, 2011) sur 1 112 audiences de parole en Israël a montré que les juges accordaient la liberté conditionnelle dans 65 % des cas en début de journée, contre quasi 0 % en fin de session. La qualité des décisions se dégrade à mesure que l'énergie cognitive s'épuise.
+Voilà comment passer ça à 30 minutes avec trois outils.
 
-Ces deux données expliquent pourquoi l'IA le matin change quelque chose :
+Étape 1 — Filtres Gmail (5 minutes de setup, une seule fois)
+Crée des filtres qui labellisent automatiquement : newsletters → label "Lire plus tard" + archiver, notifications d'outils (Slack, Notion, GitHub) → archiver directement, emails de ton domaine principal → label "Prioritaire". Tu ne verras plus que ce qui mérite ton attention.
 
-→ Je colle mes notes de la veille dans Claude et je demande : "Quelles sont les 3 choses les plus importantes à faire aujourd'hui ?"
-→ Je demande à Claude de rédiger les emails que j'ai à envoyer, je n'ai plus qu'à relire et personnaliser
-→ Je lance une recherche rapide sur Perplexity pour ce que j'ai besoin d'investiguer
+Étape 2 — Zapier ou Make pour classifier le reste
+Schéma : nouvel email reçu → Make envoie le sujet + expéditeur à Claude avec ce prompt : "Classe cet email en : [action requise aujourd'hui / à lire cette semaine / peut être ignoré]. Réponds uniquement avec la catégorie." → le résultat est collé dans le label Gmail correspondant. Setup : 1 heure. Après : ta boîte est triée avant que tu l'ouvres.
 
-3 minutes le matin, environ 40 minutes d'énergie cognitive économisée sur la journée.
+Étape 3 — La règle des 2 minutes avec Claude
+Pour les emails qui demandent une réponse : colle le texte dans Claude avec ce prompt : "Voici un email que j'ai reçu. Rédige une réponse courte, professionnelle, en [langue]. Ton : [direct / chaleureux / formel]." Tu relis, tu ajustes si nécessaire, tu envoies. 45 secondes au lieu de 5 minutes.
 
-Sources : McKinsey Global Institute, 2012 ; Danziger et al., PNAS, 2011.
+Le résultat : ta boîte est déjà triée quand tu l'ouvres le matin. Tu n'ouvres que ce qui compte. Tu réponds sans partir d'une page blanche.
 
-Sauvegarde ce post et teste cette routine demain matin. 🔖</div>
+Sauvegarde ce post et commence par l'étape 1 aujourd'hui. 🔖</div>
         </div>
       </div>
 

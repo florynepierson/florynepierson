@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instagram Guidelines · Floryne</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec;--white:#fff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:15px/1.75 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(820px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 820px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .hero{padding:56px 0 40px;border-bottom:1px solid rgba(0,229,255,.12);margin-bottom:48px}
+    .eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;color:var(--berry);margin-bottom:14px}
+    h1{font:500 clamp(36px,5vw,50px)/1.06 'Cormorant Garamond',serif;color:#fff;margin:0 0 14px}
+    .hero p{font-size:13px;color:var(--muted);max-width:560px;margin:0}
+    h2{font:600 26px/1.15 'Cormorant Garamond',serif;color:#fff;margin:52px 0 20px;padding-bottom:10px;border-bottom:1px solid rgba(0,229,255,.12)}
+    h3{font:600 17px/1.3 'Plus Jakarta Sans',sans-serif;color:#fff;margin:32px 0 10px}
+    .section{margin-bottom:52px}
+    .rule{border:1px solid rgba(0,229,255,.14);border-radius:14px;background:rgba(255,255,255,.025);padding:20px 24px;margin-bottom:12px}
+    .rule-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#8d9bc5;margin-bottom:8px}
+    .rule-body{font-size:13px;color:#c3c9ec;line-height:1.8}
+    .rule-body strong{color:#fff}
+    .rule-body code{background:rgba(0,229,255,.1);color:var(--cyan);padding:1px 6px;border-radius:4px;font-size:12px}
+    .example{border:1px solid rgba(98,91,255,.25);border-radius:14px;background:rgba(98,91,255,.06);padding:18px 22px;margin:16px 0}
+    .example-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--berry);margin-bottom:8px}
+    .example-body{font-size:12px;color:#c3c9ec;line-height:1.9;white-space:pre-line}
+    .do-dont{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+    .do{border:1px solid rgba(0,229,255,.2);border-radius:12px;background:rgba(0,229,255,.04);padding:14px 18px}
+    .dont{border:1px solid rgba(250,79,200,.2);border-radius:12px;background:rgba(250,79,200,.04);padding:14px 18px}
+    .do-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:7px}
+    .dont-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--pink);margin-bottom:7px}
+    .do p,.dont p{font-size:12px;color:#c3c9ec;margin:0;line-height:1.7}
+    .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-right:6px;margin-bottom:4px}
+    .tag-tips{background:rgba(98,91,255,.2);color:#a09cff}
+    .tag-reels{background:rgba(0,229,255,.15);color:var(--cyan)}
+    .tag-fr{background:rgba(250,79,200,.15);color:var(--pink)}
+    .checklist{list-style:none;padding:0;margin:12px 0}
+    .checklist li{padding:5px 0 5px 24px;position:relative;font-size:13px;color:#c3c9ec}
+    .checklist li::before{content:'✓';position:absolute;left:0;color:var(--cyan);font-weight:700}
+    .checklist li.no::before{content:'✗';color:var(--pink)}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1);margin-top:40px}
+    .foot a{color:var(--cyan)}
+    @media(max-width:680px){.do-dont{grid-template-columns:1fr}.wrap{width:calc(100% - 28px)}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne</a>
+    <nav><a href="/instagram-roadmap">Roadmap</a><a href="/instagram-posts-short">Reels</a><a href="/instagram-tips">Tips EN</a><a href="/instagram-tips-fr">Tips FR</a><a href="/instagram-tracker">Tracker</a></nav>
+  </header>
+  <main class="wrap">
+    <div class="hero">
+      <div class="eyebrow">Rédaction Instagram</div>
+      <h1>Guidelines</h1>
+      <p>Règles de rédaction pour les trois formats de posts : Tips EN, Tips FR, et Reels courts. À consulter avant de rédiger ou de faire rédiger.</p>
+    </div>
+
+    <!-- ══════════════ FORMATS -->
+    <div class="section">
+      <h2>Les trois formats</h2>
+
+      <div class="rule">
+        <div class="rule-label">Tips EN <span class="tag tag-tips">tips EN</span></div>
+        <div class="rule-body">Posts longs orientés valeur en anglais. Audience : builders, AI engineers, indie hackers, fondateurs. Ton : expert, direct, appuyé sur des données. Longueur légende : 150-250 mots.</div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-label">Tips FR <span class="tag tag-fr">tips FR</span></div>
+        <div class="rule-body">Même structure que Tips EN, en français. Audience : professionnels non-tech qui veulent comprendre et utiliser l'IA. Ton : accessible, pédagogique, sans condescendance. Longueur légende : 150-250 mots.</div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-label">Reels courts <span class="tag tag-reels">reels</span></div>
+        <div class="rule-body">Posts courts format natif Instagram. Basés sur des expériences vécues (bugs, décisions, chiffres réels du produit). Ton : casual, honnête, lowercase assumé. Longueur légende : 60-100 mots.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════ OVERLAY -->
+    <div class="section">
+      <h2>Overlay (texte sur vidéo)</h2>
+
+      <div class="rule">
+        <div class="rule-label">Structure obligatoire</div>
+        <div class="rule-body">
+          L'overlay est le seul élément visible avant le clic. Il doit :
+          <ul class="checklist">
+            <li>Contenir un chiffre précis, un fait contre-intuitif, ou une tension ("X. Pourtant Y.")</li>
+            <li>Terminer par un redirect explicite : <code>Description ↓</code> / <code>Read the description ↓</code> / <code>Je t'explique ↓</code></li>
+            <li>Ne pas avoir de point final avant le redirect</li>
+            <li>Rester sous 20 mots (lu en 2 secondes max)</li>
+            <li class="no">Ne jamais résumer le post — créer l'envie de lire</li>
+            <li class="no">Ne jamais être vague ("something interesting about AI. Description ↓")</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="do-dont">
+        <div class="do">
+          <div class="do-label">Bon overlay</div>
+          <p>GPT-4o hallucinates 1.5% of the time on general questions. On legal questions: up to 88%. Same model. Description ↓</p>
+        </div>
+        <div class="dont">
+          <div class="dont-label">Mauvais overlay</div>
+          <p>Un chiffre sur l'IA et l'emploi circule partout, coupé à la moitié qui dérange. Voilà la phrase complète.</p>
+        </div>
+      </div>
+
+      <div class="do-dont">
+        <div class="do">
+          <div class="do-label">Bon overlay</div>
+          <p>Less than 5% of jobs will be automated. Everyone stopped reading there. Here's the sentence that follows. Description ↓</p>
+        </div>
+        <div class="dont">
+          <div class="dont-label">Mauvais overlay</div>
+          <p>The AI and jobs debate is more nuanced than you think. Here's the full picture.</p>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-label">Règles supplémentaires (issues de la pratique)</div>
+        <div class="rule-body">
+          <ul class="checklist">
+            <li>Citer la source dans l'overlay donne de la crédibilité et ancre le sujet : <code>Le WEF prédit...</code> / <code>McKinsey a étudié...</code></li>
+            <li>Ne pas révéler le twist dans l'overlay — le cacher crée l'envie de lire la description</li>
+            <li>Ne pas mettre deux chiffres dans l'overlay si le deuxième est le twist (garder un seul, laisser l'autre pour la légende)</li>
+            <li>L'overlay doit parler à quelqu'un qui ne connaît pas l'IA — tester mentalement : "est-ce qu'un comptable comprend ?"</li>
+            <li class="no">Pas de formule "tout le monde sait X, mais Y" si X et Y sont tous les deux dans l'overlay</li>
+            <li class="no">Pas de "Le chiffre que personne ne cite" sans donner le premier chiffre pour ancrer</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ LÉGENDE TIPS -->
+    <div class="section">
+      <h2>Légende — Tips EN &amp; Tips FR</h2>
+
+      <div class="rule">
+        <div class="rule-label">Structure en 5 blocs</div>
+        <div class="rule-body">
+          <strong>1. Accroche source</strong> — première phrase avec date + contexte réel.<br>
+          EN : <code>In [année], [qui] [a fait quoi].</code><br>
+          FR : <code>En [année], [qui] [a fait quoi].</code><br><br>
+          <strong>2. Stat ou fait central</strong> — le chiffre de l'overlay développé, plus le contexte qui le rend surprenant.<br><br>
+          <strong>3. Explication ou framework</strong> — pourquoi ça marche, ce que ça change concrètement. Listes avec <code>⭐</code> ou <code>→</code>.<br><br>
+          <strong>4. Save this</strong> — raison contextuelle + 🔖. Ne pas écrire "Save this post" à sec.<br>
+          EN : <code>Save this if you [situation]. 🔖</code><br>
+          FR : <code>Sauvegarde ce post pour [action/partage]. 🔖</code><br><br>
+          <strong>5. Source + ligne d'abonnement</strong> — toujours en dernier, jamais omis.
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-label">Lignes fixes d'abonnement</div>
+        <div class="rule-body">
+          À copier-coller sans modification :<br><br>
+          <strong>EN :</strong> <code>I post weekly tips to actually use AI in your work — before it becomes the norm. Follow for more.</code><br><br>
+          <strong>FR :</strong> <code>Je poste chaque semaine des tips concrets pour prendre de l'avance sur l'IA. Abonne-toi.</code>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-label">Majuscules</div>
+        <div class="rule-body">
+          Sentence case strict : majuscule en début de phrase, noms propres, acronymes. Pas de Title Case dans le corps. Pas de tout-minuscule dans les Tips (réservé aux Reels).
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="example-label">Structure complète Tips EN</div>
+        <div class="example-body">In 2023, Air Canada deployed an AI chatbot to handle customer service. [accroche source]
+
+The AI made up a policy that didn't exist. The customer sued. Air Canada lost. [fait central]
+
+RAG (Retrieval Augmented Generation) was built to solve exactly this:
+⭐ The model retrieves chunks from your actual knowledge base
+⭐ Uses them as context before generating an answer
+⭐ Result: answers from real data, not from pattern-matching [framework]
+
+Save this if you're building with AI. 🔖 [save this]
+
+Source: [référence] 🔖
+
+I post weekly tips to actually use AI in your work — before it becomes the norm. Follow for more. [ligne fixe]</div>
+      </div>
+
+      <div class="example">
+        <div class="example-label">Structure complète Tips FR</div>
+        <div class="example-body">En 2017, huit chercheurs de Google publient un article de 12 pages. [accroche source]
+
+Leur idée : apprendre à une IA à lire un texte entier d'un coup. [fait central]
+
+Ce que ça change concrètement :
+→ Elle n'analyse plus mot par mot
+→ Elle repère les liens entre mots distants
+→ Elle peut apprendre les patterns du langage à une échelle jamais vue [explication]
+
+Sauvegarde ce post pour l'expliquer à quelqu'un qui a encore peur. 🔖 [save this]
+
+Source : Vaswani et al., Google Brain, 2017.
+
+Je poste chaque semaine des tips concrets pour prendre de l'avance sur l'IA. Abonne-toi. [ligne fixe]</div>
+      </div>
+    </div>
+
+    <!-- ══════════════ LÉGENDE REELS -->
+    <div class="section">
+      <h2>Légende — Reels courts</h2>
+
+      <div class="rule">
+        <div class="rule-label">Structure en 4 blocs</div>
+        <div class="rule-body">
+          <strong>1. Résumé du problème</strong> — une ou deux phrases, ce qui s'est passé concrètement.<br><br>
+          <strong>2. La cause</strong> — le vrai mécanisme, pas la surface.<br><br>
+          <strong>3. Le fix ou la leçon</strong> — ce qu'on retient, applicable.<br><br>
+          <strong>4. Accroche finale</strong> — "save this 🔖" ou question ouverte, pas de ligne d'abonnement fixe obligatoire.
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-label">Ton et style</div>
+        <div class="rule-body">
+          Lowercase assumé dans le corps. Phrases courtes. Basé sur une expérience réelle du produit (bug, chiffre, décision). Pas de source formelle requise. Pas de framework avec ⭐ : les listes restent courtes et alignées.
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="example-label">Exemple Reel</div>
+        <div class="example-body">My Stripe webhook was failing 100% of the time. Zero error logs.
+
+the bug: I was sending 200 *before* verifying the signature
+
+Stripe marks it successful the moment it gets a 200 — it doesn't care what happens after
+
+fix: verify first. process second. respond third.
+
+the scariest bugs are the ones that don't throw errors 🔥</div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CHECKLIST AVANT PUBLICATION -->
+    <div class="section">
+      <h2>Checklist avant publication</h2>
+
+      <div class="rule">
+        <div class="rule-label">Pour tout format</div>
+        <div class="rule-body">
+          <ul class="checklist">
+            <li>L'overlay contient un chiffre ou une tension réelle</li>
+            <li>L'overlay se termine par un redirect (↓)</li>
+            <li>La légende commence par un fait daté, pas par une opinion</li>
+            <li>Les majuscules suivent la règle du format (Sentence case pour Tips, lowercase pour Reels)</li>
+            <li>Tips EN/FR : ligne d'abonnement fixe présente en dernier</li>
+            <li>Tips EN/FR : source citée</li>
+            <li>Tips EN/FR : "Save this" avec raison contextuelle</li>
+            <li class="no">Pas de "Here's what you need to know" ou équivalent vague</li>
+            <li class="no">Pas d'overlay sans chiffre ni tension</li>
+            <li class="no">Pas de légende qui résume l'overlay mot pour mot</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <footer class="foot">
+    <a href="/instagram-roadmap">Roadmap</a> · <a href="/instagram-posts-short">Reels</a> · <a href="/instagram-tips">Tips EN</a> · <a href="/instagram-tips-fr">Tips FR</a> · <a href="/instagram-tracker">Tracker</a>
+  </footer>
+</body>
+</html>

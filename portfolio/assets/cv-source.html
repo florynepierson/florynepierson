@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CV Floryne Pierson - AI Product Builder</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    line-height: 1.45;
+    color: #111;
+    max-width: 21cm;
+    margin: 0 auto;
+    padding: 0.1cm 1.3cm 0.1cm;
+    background: #fff;
+  }
+
+  /* ── HEADER ── */
+  .header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .header-left { flex: 1; }
+  .header-right { flex-shrink: 0; }
+  .photo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; border: 2px solid #d0d8e4; }
+  .name { font-size: 22pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #1a3a5c; }
+  .title { font-size: 12pt; color: #1a5276; font-weight: bold; margin-top: 2px; }
+  .contact { font-size: 9pt; margin-top: 5px; color: #333; line-height: 1.6; }
+  .contact a { color: #1a5276; text-decoration: none; }
+
+  /* ── SECTIONS ── */
+  .section { margin-top: 11px; }
+  .section-title { font-size: 10pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1.5px solid #1a5276; padding-bottom: 2px; margin-bottom: 7px; color: #1a5276; }
+
+  /* ── JOBS ── */
+  .job { margin-bottom: 9px; }
+  .job-title-row { display: flex; align-items: center; gap: 7px; }
+  .co-logo { width: 32px; height: 32px; object-fit: contain; border-radius: 4px; flex-shrink: 0; }
+  .co-logos { display: flex; gap: 3px; flex-shrink: 0; }
+  .job-title { font-weight: bold; font-size: 10.5pt; color: #1a5276; }
+  .job-meta { font-size: 9pt; color: #1a5276; font-style: italic; margin-top: 1px; margin-bottom: 3px; padding-left: 39px; }
+  .job-meta-double { padding-left: 71px; }
+  ul { padding-left: 16px; margin-left: 23px; }
+  .ul-double { margin-left: 55px; }
+  li { font-size: 9.5pt; margin-bottom: 2px; }
+
+  /* ── EDUCATION ── */
+  .edu-item { margin-bottom: 7px; display: flex; gap: 10px; align-items: flex-start; }
+  .edu-logo { width: 44px; height: 44px; object-fit: contain; flex-shrink: 0; margin-top: 1px; }
+  .edu-text b { font-size: 10pt; display: block; }
+  .edu-text span { font-size: 9pt; color: #333; }
+  .edu-plain { margin-bottom: 7px; }
+  .edu-plain b { font-size: 10pt; display: block; }
+  .edu-plain span { font-size: 9pt; color: #333; }
+
+  .profile-text { font-size: 9.5pt; line-height: 1.55; }
+  .skills-row { font-size: 9.5pt; margin-bottom: 3px; }
+  .page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="name">Floryne Pierson</div>
+    <div class="title">AI Product Builder | Product Owner | Digital Products</div>
+    <div class="contact">
+      Montauroux / Nice area, South-East France &nbsp;·&nbsp; Hybrid in the region &nbsp;·&nbsp; Remote internationally<br>
+      hello@florynepierson.com &nbsp;·&nbsp; <a href="https://linkedin.com/in/floryne-pierson">linkedin.com/in/floryne-pierson</a> &nbsp;·&nbsp; <a href="https://florynepierson.com/portfolio">florynepierson.com/portfolio</a><br>
+      Agent + MCP: <a href="https://github.com/florynepierson/mcp-astrology-demo">github.com/florynepierson/mcp-astrology-demo</a><br>
+      RAG: <a href="https://github.com/florynepierson/rag-demo-provectus">github.com/florynepierson/rag-demo-provectus</a> &nbsp;·&nbsp; npm: <a href="https://github.com/floryneia/astronomy-core">github.com/floryneia/astronomy-core</a>
+    </div>
+  </div>
+  <div class="header-right">
+    <img class="photo" src="./floryne-headshot-cv.jpeg">
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="section">
+  <div class="section-title">Profile</div>
+  <div class="profile-text">
+    Product-minded engineer with a background in business data analysis and applied AI. Since September 2025,
+    combining independent website and AI consulting projects with one-to-one tutoring in mathematics and English. Since
+    May 2026, shaping and operating Magical Chart, a live AI-powered product available in 22 languages — including its own
+    multi-step AI agent, a published MCP server, a native Android app and a production astronomy API listed on RapidAPI. Experienced in product direction, user journeys,
+    prioritization, analytics and iteration. Seeking Product Owner, Digital Product Manager or AI Product roles.
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section">
+  <div class="section-title">Experience</div>
+
+  <div class="job">
+    <div class="job-title-row">
+      <img class="co-logo" src="./magical-chart-logo-app.jpg" style="border-radius:6px;">
+      <span class="job-title">Founder &amp; Product Lead — Magical Chart</span>
+    </div>
+    <div class="job-meta">May 2026–Present &nbsp;|&nbsp; Independent digital product &nbsp;|&nbsp; Remote &nbsp;|&nbsp; magicalchart.com</div>
+    <ul>
+      <li>Conceived and launched an AI-powered product with interactive tarot, astrology and numerology experiences available in 22 languages; own its product direction, roadmap, user journeys and iteration.</li>
+      <li>Shape pricing and the free-to-paid journey; use product analytics and customer feedback to prioritize improvements.</li>
+      <li>Published Magical Chart on Google Play; implemented in-app billing and push notification reminders for a native Android experience alongside the web product.</li>
+      <li>Built an interactive, location-aware 3D Star Map with a 3D landscape mode rendering the real horizon and terrain, connecting the product's astronomy engine to a 3D sky with named stars and touch-friendly controls.</li>
+      <li>Extracted and open-sourced the product's astronomy calculation engine as <b>astronomy-core</b>, a TypeScript npm package (published, 141 tests) with provider-pattern design, covering 15+ celestial bodies, Placidus houses, astrocartography and asteroid positions — validated against Swiss Ephemeris.</li>
+      <li>Built a structured tarot learning course with 209 lessons and Duolingo-style progress tracking — lesson-by-lesson progression with persistent state, available as a standalone $49 product.</li>
+      <li>Scoped and shipped a multi-step AI agent (Anthropic tool-calling), deliberately contained: isolated page, daily usage quota, hard monthly spend cap read from usage logs before every call — validating demand before committing budget, not just a technical build.</li>
+      <li>Built and published an open-source MCP (Model Context Protocol) server exposing the product's astronomical engine as callable tools for any AI agent, verified with a real client handshake before release.</li>
+      <li>Integrated Langfuse for LLM observability across all production AI calls, capturing model, token usage, latency and prompt version per trace on a live product serving 3,800+ users.</li>
+      <li>Build and deploy with Claude Code, Codex and Cursor, leading product decisions and AI-assisted workflows.</li>
+      <li>Audited AI inference spend with a custom usage-tracking script, found one model choice responsible for <b>81% of cost</b> on lower token volume, and migrated every production AI call to a more cost-efficient model without degrading output quality.</li>
+      <li>Operate a product with <b>1,100+ informational pages</b> and interactive tools across 22 languages.</li>
+      <li>Latest 30-day analytics: <b>3,828 users and 5,011 sessions</b> in GA4 (12 Sep–11 Oct 2026); Search Console recorded <b>1,604 clicks</b> (12 Sep–10 Oct 2026).</li>
+      <li>Designed, built and published a <b>paid astronomy API</b> — natal charts, astrocartography, moon phases and AI interpretation — with tiered Stripe billing, automated key generation and delivery via webhook, usage quota enforcement, and a self-serve dashboard; listed on RapidAPI marketplace.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-title-row">
+      <img class="co-logo" src="./florynepierson-favicon.png">
+      <span class="job-title">Freelance Web &amp; AI Consultant — Independent</span>
+    </div>
+    <div class="job-meta">September 2025–Present &nbsp;|&nbsp; Remote &nbsp;|&nbsp; florynepierson.com</div>
+    <ul>
+      <li>Create websites for clients and advise on practical ways to use AI in their work.</li>
+      <li>Built a Make.com automation for a small-business client to handle incoming email, removing a manual step from their operations — hands-on workflow automation, not just API theory.</li>
+      <li>Deliver content strategy, SEO and analytics work end to end, from technical audit to implementation and measurement (Google Search Console, GA4, Microsoft Clarity).</li>
+      <li>Client project: local SEO and booking-journey optimisation for Claire et Coloré, a beauty salon in Reims — diagnosed drop-off points in the booking path and shipped the fix.</li>
+      <li>Built and open-sourced a retrieval-augmented generation (RAG) demo for document Q&A — available on GitHub.</li>
+      <li>Prospect for projects, clarify needs and scope solutions with prospective clients.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-title-row">
+      <img class="co-logo" src="./midnight-logo.svg" style="border-radius:5px;">
+      <span class="job-title">Independent Developer — Midnight ZKP Explorer</span>
+    </div>
+    <div class="job-meta">2026 &nbsp;|&nbsp; Personal project &nbsp;|&nbsp; my-dapp-liard.vercel.app</div>
+    <ul>
+      <li>Built an interactive dApp with 14 visualization tabs covering ZK proof flows, Merkle trees, nullifier mechanics, selective disclosure, DEX/AMM logic and the full transaction lifecycle — with real wallet connectivity (wagmi) and a revision quiz.</li>
+      <li>Earned Blockchain Fundamentals and Phase 2 certifications from Midnight Academy alongside the build.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-title-row">
+      <img class="co-logo" src="./superprof-logo.png">
+      <span class="job-title">Private Tutor — Mathematics &amp; English</span>
+    </div>
+    <div class="job-meta">September 2025–Present &nbsp;|&nbsp; Middle school and high school level &nbsp;|&nbsp; France</div>
+    <ul>
+      <li>Provide one-to-one tutoring in mathematics and English for secondary-school students.</li>
+      <li>Adapt explanations and practice to each student's level and learning goals.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-title-row">
+      <div class="co-logos">
+        <img class="co-logo" src="./lobellia-logo.png">
+        <img class="co-logo" src="./urssaf-logo.jpg">
+      </div>
+      <span class="job-title">Business Data Analyst — LOBELLIA Conseil / ASTILLIA</span>
+    </div>
+    <div class="job-meta job-meta-double">September 2024–July 2025 &nbsp;|&nbsp; Permanent &nbsp;|&nbsp; Client assignment: URSSAF &nbsp;|&nbsp; Montrouge, France</div>
+    <ul class="ul-double">
+      <li>Analyzed and processed business data to support operational decision-making and reporting.</li>
+      <li>Worked with business and technical stakeholders to clarify requirements and support delivery.</li>
+      <li>Produced reporting and data-driven analyses; contributed to monitoring, process improvements and tool improvements.</li>
+      <li><b>Tools:</b> SQL, PostgreSQL, Power BI, Git, pgAdmin.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-title-row">
+      <img class="co-logo" src="./lobellia-logo.png">
+      <span class="job-title">Business Data Analyst Intern — LOBELLIA Conseil / ASTILLIA</span>
+    </div>
+    <div class="job-meta">February 2024–August 2024 &nbsp;|&nbsp; Internship &nbsp;|&nbsp; Montrouge, France</div>
+    <ul>
+      <li>Developed and maintained Power BI dashboards for business users.</li>
+      <li>Automated recurring reporting and operational tasks using VBA.</li>
+      <li>Supported requirements analysis, data processing and project deliverables in collaboration with business teams.</li>
+      <li><b>Tools:</b> Power BI, VBA.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-title-row">
+      <img class="co-logo" src="./viaticum-logo.png">
+      <span class="job-title">AI &amp; Data Science Intern — Viaticum</span>
+    </div>
+    <div class="job-meta">May 2023–August 2023 &nbsp;|&nbsp; Paris, France</div>
+    <ul>
+      <li>Independently designed and developed an AI-based approach to personalize travel offers using consumer profiles and preferences.</li>
+      <li>Defined consumer personas and matching logic to connect profiles with relevant travel offers.</li>
+      <li>Led the project from problem definition and data analysis through solution development, results analysis and stakeholder presentation.</li>
+      <li><b>Tools:</b> Python, Deep Learning, NLP, Power BI.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-title-row">
+      <img class="co-logo" src="./sncf-logo.png">
+      <span class="job-title">Engineering Studies Intern — SNCF Réseau</span>
+    </div>
+    <div class="job-meta">June 2022–July 2022 &nbsp;|&nbsp; Metz, France</div>
+    <ul>
+      <li>Supported engineering teams with operational reporting, organization and analysis of information.</li>
+      <li>Contributed to internal process improvements and basic automation.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- EDUCATION — forced to new page -->
+<div class="section page-break">
+  <div class="section-title">Education</div>
+
+  <div class="edu-item">
+    <img class="edu-logo" src="./esilv-logo.png">
+    <div class="edu-text">
+      <b>ESILV — École Supérieure d'Ingénieurs Léonard de Vinci</b>
+      <span>De Vinci Higher Education, Paris–La Défense<br>
+      General Engineering Degree, Data &amp; Artificial Intelligence major | 2021–2024<br>
+      Coursework: C#, Python, supervised &amp; unsupervised learning, deep learning fundamentals.</span>
+    </div>
+  </div>
+
+  <div class="edu-item">
+    <img class="edu-logo" src="./hanyang-logo.png">
+    <div class="edu-text">
+      <b>Hanyang University (Seoul, South Korea) — Department of Computer Science</b>
+      <span>Master 2 exchange semester | August–December 2023<br>
+      Relevant coursework: Computer Vision, Data Science for Social Sciences, Natural Language Processing, Machine Learning, Korean Language (Foundational)</span>
+    </div>
+  </div>
+
+  <div class="edu-plain">
+    <b>Lycée Fabert, Metz — CPGE MPSI/MP* (Classes Préparatoires), 2018–2021</b>
+    <span>France's selective national track preparing for competitive entry into top engineering schools.</span>
+  </div>
+
+  <div class="edu-plain">
+    <b>Baccalauréat — Lycée Georges de la Tour, Metz, 2018</b>
+    <span>Scientific track, Mathematics specialization, Highest Honors.</span>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="section">
+  <div class="section-title">Skills</div>
+  <div class="skills-row"><b>Product:</b> Product discovery, product direction, feature prioritization, user journeys, prototyping, product analytics, experimentation, cross-functional collaboration, product delivery</div>
+  <div class="skills-row"><b>Data &amp; AI:</b> SQL, PostgreSQL, Python, Deep Learning, NLP, AI product integration, LLM-assisted prototyping, multi-step tool-calling agents (Anthropic), the Model Context Protocol (built a server), retrieval-augmented generation (RAG), Langfuse (LLM observability)</div>
+  <div class="skills-row"><b>Engineering &amp; Tools:</b> Node.js, TypeScript, APIs &amp; webhooks, Supabase, Vercel, Stripe, Android (Google Play), Claude Code, Codex, Cursor, Make.com, Power BI, GA4, Google Search Console, Git, VBA, pgAdmin</div>
+</div>
+
+<!-- LANGUAGES -->
+<div class="section">
+  <div class="section-title">Languages</div>
+  <div class="skills-row"><b>French:</b> Native &nbsp;·&nbsp; <b>English:</b> Fluent &nbsp;·&nbsp; <b>Spanish:</b> Intermediate</div>
+</div>
+
+</body>
+</html>

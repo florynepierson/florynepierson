@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Building a 3D sky map in the browser: what actually made it hard — Floryne Pierson</title>
+  <title>Building a 3D sky map in the browser: what actually made it hard | Floryne Pierson</title>
   <meta name="description" content="Proper motion, a WebGL bloom shader that left square halos on Apple silicon, and verifying Gaia data integrity at runtime. The parts of my sky map that took the longest to get right.">
   <link rel="canonical" href="https://florynepierson.com/blog/building-a-3d-sky-map">
   <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
@@ -63,39 +63,39 @@
         <span class="date">November 2026</span>
       </div>
       <h1>Building a 3D sky map in the browser: what actually made it hard</h1>
-      <p class="lede">Proper motion. A WebGL bloom shader that left square halos on Apple silicon. And verifying Gaia satellite data integrity at runtime — in the browser. Here's what took the longest to get right.</p>
+      <p class="lede">Proper motion. A WebGL bloom shader that left square halos on Apple silicon. And verifying Gaia satellite data integrity at runtime, in the browser. Here's what took the longest to get right.</p>
 
       <p>When I built the sky map for Magical Chart, the initial prototype was straightforward: load a star catalog, project coordinates onto a sphere, render with Three.js. The hard part wasn't the rendering. It was everything that had to be correct before a single pixel reached the screen.</p>
 
-      <p>The map shows the exact sky at a specific date, time, and location — usually a birth date. If someone was born in Paris in 1987, the sky they see has to match what was actually overhead that night. That constraint forces you into a chain of problems that look simple until you dig in.</p>
+      <p>The map shows the exact sky at a specific date, time, and location (usually a birth date). If someone was born in Paris in 1987, the sky they see has to match what was actually overhead that night. That constraint forces you into a chain of problems that look simple until you dig in.</p>
 
       <h2>1. Stars aren't where the catalog says they are</h2>
 
-      <p>Star catalogs store positions at a reference epoch — typically J2000.0 (January 1, 2000, noon) or J2016.0 for the Gaia satellite data. The positions are right at that moment. At any other date, they're wrong.</p>
+      <p>Star catalogs store positions at a reference epoch, typically J2000.0 (January 1, 2000, noon) or J2016.0 for the Gaia satellite data. The positions are right at that moment. At any other date, they're wrong.</p>
 
-      <p>Stars have proper motion: a slow angular drift across the sky caused by their actual movement through space relative to the Sun. Most are negligible. Some are not. Barnard's Star — the second-closest stellar system to Earth — moves about 10 arcseconds per year. Over 50 years, that's more than 8 arcminutes of drift. Visible to the naked eye if you're comparing two maps.</p>
+      <p>Stars have proper motion: a slow angular drift across the sky caused by their actual movement through space relative to the Sun. Most are negligible. Some are not. Barnard's Star, the second-closest stellar system to Earth, moves about 10 arcseconds per year. Over 50 years, that's more than 8 arcminutes of drift. Visible to the naked eye if you're comparing two maps.</p>
 
       <p>For stars with a known distance, I propagate positions using 3D Cartesian space motion: convert catalog coordinates to a position vector in parsecs, apply the velocity vector (also in parsecs per year) for the elapsed time, then convert back to right ascension and declination. For stars without a usable distance measurement, the fallback is an angular proper motion correction applied directly on the celestial sphere.</p>
 
       <div class="callout">
-        <p><strong>The constraint:</strong> if someone shows the map to their grandmother and says "this is the sky the night you were born," and she pulls out an old astronomy book and finds a star in the wrong place, the product fails. Precision isn't aesthetic — it's the product promise.</p>
+        <p><strong>The constraint:</strong> if someone shows the map to their grandmother and says "this is the sky the night you were born," and she pulls out an old astronomy book and finds a star in the wrong place, the product fails. Precision isn't aesthetic. It's the product promise.</p>
       </div>
 
-      <p>The catalog I use is <a href="https://github.com/astronexus/HYG-Database" target="_blank" rel="noreferrer">HYG v4.1</a> (Hipparcos–Yale–Gliese combined), filtered to stars brighter than magnitude 6.5 — the naked-eye limit. It includes proper motion measurements for most entries, and 3D Cartesian positions and velocities for nearby stars. For validation I cross-check a subset of bright stars against Gaia DR3 astrometry, which brings sub-milliarcsecond proper motion measurements for the nearest and best-measured targets.</p>
+      <p>The catalog I use is <a href="https://github.com/astronexus/HYG-Database" target="_blank" rel="noreferrer">HYG v4.1</a> (Hipparcos-Yale-Gliese combined), filtered to stars brighter than magnitude 6.5, the naked-eye limit. It includes proper motion measurements for most entries, and 3D Cartesian positions and velocities for nearby stars. For validation I cross-check a subset of bright stars against Gaia DR3 astrometry, which brings sub-milliarcsecond proper motion measurements for the nearest and best-measured targets.</p>
 
       <h2>2. The bloom shader left square halos on Apple silicon</h2>
 
-      <p>Bright stars glow. That's what they look like to the naked eye, and it's part of what makes a sky map feel real rather than a data visualization. The obvious implementation is a post-processing bloom pass — render the scene, then run a blur over the bright pixels.</p>
+      <p>Bright stars glow. That's what they look like to the naked eye, and it's part of what makes a sky map feel real rather than a data visualization. The obvious implementation is a post-processing bloom pass: render the scene, then run a blur over the bright pixels.</p>
 
       <p>Three.js has <code>UnrealBloomPass</code> for exactly this. I integrated it, it looked good in testing, and I shipped it. Then I started getting reports of a visual artifact: hard, square halos around the brightest stars.</p>
 
-      <p>The cause: <code>UnrealBloomPass</code> works by building a chain of downsampled mip maps from the render buffer and blurring across them. On Apple silicon Macs (and iPhones, iPads) going through ANGLE — the WebGL translation layer — the mip-chain produces visible blocky artifacts around point-sized sources like stars. The halo is circular in WebGL on other hardware. Through ANGLE it's square.</p>
+      <p>The cause: <code>UnrealBloomPass</code> works by building a chain of downsampled mip maps from the render buffer and blurring across them. On Apple silicon Macs (and iPhones, iPads) going through ANGLE, the WebGL translation layer, the mip-chain produces visible blocky artifacts around point-sized sources like stars. The halo is circular in WebGL on other hardware. Through ANGLE it's square.</p>
 
-      <p>I reproduced it consistently on an M2 machine. And since my audience is majority Apple devices — it was showing up for a significant fraction of users.</p>
+      <p>I reproduced it consistently on an M2 machine. And since my audience is majority Apple devices, it was showing up for a significant fraction of users.</p>
 
       <p>The fix: remove <code>UnrealBloomPass</code> entirely and produce the glow in the star shader itself. Each star is a point sprite; the fragment shader calculates a sharp core and an exponential falloff glow weighted by magnitude. The glow is circular by construction, not by blur, so it cannot go square. And it costs nothing: it's just math per fragment, no extra render pass, no full-screen texture sample.</p>
 
-      <pre><code>// Fragment shader — glow produced per-fragment, not by post-processing
+      <pre><code>// Fragment shader: glow produced per-fragment, not by post-processing
 vec2 p = gl_PointCoord - 0.5;
 float r = length(p);
 if (r > 0.5) discard;
@@ -109,15 +109,15 @@ gl_FragColor = vec4(vColor, alpha);</code></pre>
       <p>The side effect: it's also faster on mobile. <code>UnrealBloomPass</code> runs a full-screen pass per frame. The shader approach costs roughly nothing, which matters on a product where the majority of users are on phones.</p>
 
       <figure>
-        <img src="/blog/star-map-interface.png" alt="The Magical Chart sky map showing Valletta, Malta on October 14 2026 at 9 PM. Stars have clean circular glows — Vega, Capella, Fomalhaut — rendered entirely by the fragment shader with no post-processing bloom pass.">
-        <figcaption>The sky above Valletta, Malta — October 14, 2026, 9 PM. Every star glow is computed per-fragment. No post-processing pass runs at all.</figcaption>
+        <img src="/blog/star-map-interface.png" alt="The Magical Chart sky map showing Valletta, Malta on October 14 2026 at 9 PM. Stars have clean circular glows (Vega, Capella, Fomalhaut) rendered entirely by the fragment shader with no post-processing bloom pass.">
+        <figcaption>The sky above Valletta, Malta, October 14, 2026, 9 PM. Every star glow is computed per-fragment. No post-processing pass runs at all.</figcaption>
       </figure>
 
       <h2>3. Precession: the third coordinate correction nobody talks about</h2>
 
-      <p>Proper motion moves a star's position through space. But even if a star were perfectly stationary, its catalog coordinates would still drift over time — because Earth's axis precesses. The poles trace a slow circle roughly 26,000 years long. The catalog's reference frame, fixed at J2000.0, gradually rotates relative to the sky you're looking at on a different date.</p>
+      <p>Proper motion moves a star's position through space. But even if a star were perfectly stationary, its catalog coordinates would still drift over time, because Earth's axis precesses. The poles trace a slow circle roughly 26,000 years long. The catalog's reference frame, fixed at J2000.0, gradually rotates relative to the sky you're looking at on a different date.</p>
 
-      <p>Over one year, precession shifts most stars by about 20 arcseconds. Over 80 years — the range the sky map needs to handle for birth dates — that's around 25 arcminutes of cumulative drift. More than half a degree. Far enough that a star near a constellation boundary could appear in the wrong figure on a birth chart.</p>
+      <p>Over one year, precession shifts most stars by about 20 arcseconds. Over 80 years (the range the sky map needs to handle for birth dates), that's around 25 arcminutes of cumulative drift. More than half a degree. Far enough that a star near a constellation boundary could appear in the wrong figure on a birth chart.</p>
 
       <p>The correction is the IAU 1976 precession model: three polynomial angles that parameterize a rotation of the celestial sphere from J2000.0 to the target date. It runs after proper motion propagation, so each star gets both corrections in sequence.</p>
 
@@ -142,13 +142,13 @@ const C = Math.sin(theta)*Math.cos(dec)*Math.cos(ra + zeta) + Math.cos(theta)*Ma
 
       <p>Without a refraction correction, the Sun at sunrise appears below the horizon when it's geometrically there but visually just appearing. For a sky map that lets you watch a time-lapse of a sunset, the Sun disappearing underground before it reaches the horizon is noticeable.</p>
 
-      <p>The model is Meeus's formula from <em>Astronomical Algorithms</em>, which approximates a standard atmosphere. It's not a full physical simulation — it doesn't account for measured temperature or pressure. But it matches real observations closely enough for every altitude above a few degrees, and it tapers smoothly to zero near the horizon to avoid a singularity where the formula would otherwise produce infinite refraction.</p>
+      <p>The model is Meeus's formula from <em>Astronomical Algorithms</em>, which approximates a standard atmosphere. It's not a full physical simulation: it doesn't account for measured temperature or pressure. But it matches real observations closely enough for every altitude above a few degrees, and it tapers smoothly to zero near the horizon to avoid a singularity where the formula would otherwise produce infinite refraction.</p>
 
       <h2>The underlying constraint</h2>
 
-      <p>None of these problems were obvious upfront. Each one surfaced because I had a specific test: show someone the sky on a date they knew — their own birthday, a lunar eclipse they remembered, a meteor shower they'd photographed. When something looked wrong, I had to fix it rather than explain it away.</p>
+      <p>None of these problems were obvious upfront. Each one surfaced because I had a specific test: show someone the sky on a date they knew, their own birthday, a lunar eclipse they remembered, a meteor shower they'd photographed. When something looked wrong, I had to fix it rather than explain it away.</p>
 
-      <p>The product constraint was stricter than a typical data visualization: if the sky is wrong for someone's birth date, the product is wrong. That forced a level of precision I wouldn't have needed for a purely decorative map. The star positions needed to be correct for dates going back 80 years — which means proper motion, then precession, in that order, applied to every visible star. The rendering needed to work correctly on the dominant hardware.</p>
+      <p>The product constraint was stricter than a typical data visualization: if the sky is wrong for someone's birth date, the product is wrong. That forced a level of precision I wouldn't have needed for a purely decorative map. The star positions needed to be correct for dates going back 80 years, which means proper motion, then precession, in that order, applied to every visible star. The rendering needed to work correctly on the dominant hardware.</p>
 
       <p>What I didn't expect is that "WebGL rendering" and "astronomical precision" would create each other's problems. The rendering constraints pushed me toward shader-level glow because post-processing failed on real hardware. The precision constraints pushed me toward a richer star catalog than I would have used for aesthetics alone. Each constraint fed the other.</p>
 

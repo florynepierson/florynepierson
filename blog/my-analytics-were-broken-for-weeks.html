@@ -92,7 +92,7 @@ setTimeout(loadGtag, 300);</code></pre>
 
       <h2>The hard part: applying it to hundreds of pages</h2>
 
-      <p>Manually editing 1,536 HTML files wasn't an option. I wrote a Node script to do it automatically — but the first version had a bug that taught me something important.</p>
+      <p>Manually editing hundreds of HTML files wasn't an option. I wrote a Node script to do it automatically — but the first version had a bug that taught me something important.</p>
 
       <p>The original approach used a single regex with <code>[\s\S]*?</code> to match the script block. On pages that had <em>two</em> loading blocks (one for gtag at 1500ms, one for GTM at 2000ms), the lazy quantifier jumped from the first block's opener to the second block's closing bracket. It merged both blocks into one and left orphaned syntax behind. <strong>JavaScript was invalid on 182 pages</strong> before I caught it.</p>
 

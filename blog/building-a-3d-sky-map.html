@@ -78,7 +78,7 @@
         <p><strong>The constraint:</strong> if someone shows the map to their grandmother and says "this is the sky the night you were born," and she pulls out an old astronomy book and finds a star in the wrong place, the product fails. Precision isn't aesthetic — it's the product promise.</p>
       </div>
 
-      <p>The catalog I use (HYG v4.1, ~120,000 stars) includes proper motion measurements for most entries, and 3D position and velocity data for nearby stars. For the highest-precision targets I supplement with Gaia DR3 astrometry, which brings in proper motion measurements down to microarcsecond precision for some stars.</p>
+      <p>The catalog I use is <a href="https://github.com/astronexus/HYG-Database" target="_blank" rel="noreferrer">HYG v4.1</a> (Hipparcos–Yale–Gliese combined), filtered to stars brighter than magnitude 6.5 — the naked-eye limit. It includes proper motion measurements for most entries, and 3D Cartesian positions and velocities for nearby stars. For validation I cross-check a subset of bright stars against Gaia DR3 astrometry, which brings sub-milliarcsecond proper motion measurements for the nearest and best-measured targets.</p>
 
       <h2>2. The bloom shader left square halos on Apple silicon</h2>
 
@@ -90,35 +90,43 @@
 
       <p>I reproduced it consistently on an M2 machine. And since my audience is majority Apple devices — it was showing up for a significant fraction of users.</p>
 
-      <p>The fix: remove <code>UnrealBloomPass</code> entirely and produce the glow in the star shader itself. Each star is a point sprite; the fragment shader calculates a soft circular falloff from center to edge, weighted by the star's magnitude. The glow is circular by construction, not by blur, so it cannot go square. And it costs nothing: it's just math per fragment, no extra render pass, no full-screen texture sample.</p>
+      <p>The fix: remove <code>UnrealBloomPass</code> entirely and produce the glow in the star shader itself. Each star is a point sprite; the fragment shader calculates a sharp core and an exponential falloff glow weighted by magnitude. The glow is circular by construction, not by blur, so it cannot go square. And it costs nothing: it's just math per fragment, no extra render pass, no full-screen texture sample.</p>
 
       <pre><code>// Fragment shader — glow produced per-fragment, not by post-processing
-float d = length(vUv - vec2(0.5));
-float glow = smoothstep(0.5, 0.0, d) * vBrightness;
-gl_FragColor = vec4(vColor * glow, glow);</code></pre>
+vec2 p = gl_PointCoord - 0.5;
+float r = length(p);
+if (r > 0.5) discard;
+// Core held to ~3px so bright stars gain glow, not disc area.
+float coreEdge = clamp(1.7 / vSize, 0.05, 0.32);
+float core = 1.0 - smoothstep(coreEdge * 0.5, coreEdge, r);
+float glow = exp(-r * 4.2) * (0.08 + 0.40 * clamp((vBrightness - 1.2) / 4.5, 0.0, 1.0));
+float alpha = max(glow, core * 0.98);
+gl_FragColor = vec4(vColor, alpha);</code></pre>
 
       <p>The side effect: it's also faster on mobile. <code>UnrealBloomPass</code> runs a full-screen pass per frame. The shader approach costs roughly nothing, which matters on a product where the majority of users are on phones.</p>
 
-      <h2>3. Verifying Gaia satellite data in the browser</h2>
+      <h2>3. Precession: the third coordinate correction nobody talks about</h2>
 
-      <p>The Gaia satellite is the most precise star catalog ever built. Its DR3 release contains astrometric data — positions, parallaxes, proper motions — for over 1.8 billion stars. For the sky map I use a subset of Gaia DR3 records cross-matched to Hipparcos stars, which gives me high-precision astrometry for the brightest and nearest stars in the catalog.</p>
+      <p>Proper motion moves a star's position through space. But even if a star were perfectly stationary, its catalog coordinates would still drift over time — because Earth's axis precesses. The poles trace a slow circle roughly 26,000 years long. The catalog's reference frame, fixed at J2000.0, gradually rotates relative to the sky you're looking at on a different date.</p>
 
-      <p>The data ships as a compressed JSON archive served alongside the application. When it loads, I decompress it in the browser using <code>DecompressionStream</code>, then verify its SHA-256 fingerprint against a value embedded in the metadata before trusting a single record.</p>
+      <p>Over one year, precession shifts most stars by about 20 arcseconds. Over 80 years — the range the sky map needs to handle for birth dates — that's around 25 arcminutes of cumulative drift. More than half a degree. Far enough that a star near a constellation boundary could appear in the wrong figure on a birth chart.</p>
 
-      <pre><code>const stream = new Blob([await response.arrayBuffer()])
-  .stream()
-  .pipeThrough(new DecompressionStream('gzip'));
+      <p>The correction is the IAU 1976 precession model: three polynomial angles that parameterize a rotation of the celestial sphere from J2000.0 to the target date. It runs after proper motion propagation, so each star gets both corrections in sequence.</p>
 
-const archive = JSON.parse(await new Response(stream).text());
-const payload = new TextEncoder().encode(JSON.stringify(archive.records));
-const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', payload))]
-  .map(b => b.toString(16).padStart(2, '0')).join('');
+      <pre><code>// IAU 1976 precession from J2000.0 to target date (T in Julian centuries)
+const T = years / 100;
+const arcsec = Math.PI / (180 * 3600);
+const zeta  = (2306.2181*T + 0.30188*T*T + 0.017998*T*T*T) * arcsec;
+const z     = (2306.2181*T + 1.09468*T*T + 0.018203*T*T*T) * arcsec;
+const theta = (2004.3109*T - 0.42665*T*T - 0.041833*T*T*T) * arcsec;
+// Apply as 3-rotation matrix: R_z(-z) · R_y(theta) · R_z(-zeta)
+const A = Math.cos(dec) * Math.sin(ra + zeta);
+const B = Math.cos(theta)*Math.cos(dec)*Math.cos(ra + zeta) - Math.sin(theta)*Math.sin(dec);
+const C = Math.sin(theta)*Math.cos(dec)*Math.cos(ra + zeta) + Math.cos(theta)*Math.sin(dec);</code></pre>
 
-if (digest !== archive.metadata.recordsSha256) {
-  throw new Error('Gaia archive fingerprint does not match its records.');
-}</code></pre>
-
-      <p>If the hash doesn't match — corrupted download, CDN modification, anything — the archive is rejected. This isn't paranoia. A sky map built on silently corrupted star positions would show wrong coordinates and there would be no visible error. The map would look fine and be wrong. The integrity check makes corruption fail loudly instead of silently.</p>
+      <div class="callout">
+        <p><strong>Order matters:</strong> proper motion must be applied first, then precession. Doing it the other way around mixes the star's movement in the wrong reference frame. It's a small difference in practice, but the code has to get the sequence right.</p>
+      </div>
 
       <h2>4. Atmospheric refraction near the horizon</h2>
 
@@ -126,13 +134,13 @@ if (digest !== archive.metadata.recordsSha256) {
 
       <p>Without a refraction correction, the Sun at sunrise appears below the horizon when it's geometrically there but visually just appearing. For a sky map that lets you watch a time-lapse of a sunset, the Sun disappearing underground before it reaches the horizon is noticeable.</p>
 
-      <p>The model I use is an approximation based on a standard atmosphere and an airmass curve. It's not a full physical simulation — it doesn't account for temperature or pressure on a given night. But it's accurate enough that the visual behavior matches reality for every altitude above roughly 5 degrees, and handles the singularity at the horizon gracefully.</p>
+      <p>The model is Meeus's formula from <em>Astronomical Algorithms</em>, which approximates a standard atmosphere. It's not a full physical simulation — it doesn't account for measured temperature or pressure. But it matches real observations closely enough for every altitude above a few degrees, and it tapers smoothly to zero near the horizon to avoid a singularity where the formula would otherwise produce infinite refraction.</p>
 
       <h2>The underlying constraint</h2>
 
       <p>None of these problems were obvious upfront. Each one surfaced because I had a specific test: show someone the sky on a date they knew — their own birthday, a lunar eclipse they remembered, a meteor shower they'd photographed. When something looked wrong, I had to fix it rather than explain it away.</p>
 
-      <p>The product constraint was stricter than a typical data visualization: if the sky is wrong for someone's birth date, the product is wrong. That forced a level of precision I wouldn't have needed for a purely decorative map. The star positions needed to be correct for dates going back 80 years. The rendering needed to work correctly on the dominant hardware. The data needed to be verifiably intact.</p>
+      <p>The product constraint was stricter than a typical data visualization: if the sky is wrong for someone's birth date, the product is wrong. That forced a level of precision I wouldn't have needed for a purely decorative map. The star positions needed to be correct for dates going back 80 years — which means proper motion, then precession, in that order, applied to every visible star. The rendering needed to work correctly on the dominant hardware.</p>
 
       <p>What I didn't expect is that "WebGL rendering" and "astronomical precision" would create each other's problems. The rendering constraints pushed me toward shader-level glow because post-processing failed on real hardware. The precision constraints pushed me toward a richer star catalog than I would have used for aesthetics alone. Each constraint fed the other.</p>
 

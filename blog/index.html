@@ -23,14 +23,19 @@
     .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 760px)/2))}
     .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em}.brand:after{content:' ✿';color:var(--cyan)}
     .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
-    .hero{padding:64px 0 48px;border-bottom:1px solid rgba(0,229,255,.12);margin-bottom:52px}
+    .hero{padding:64px 0 48px;border-bottom:1px solid rgba(0,229,255,.12);margin-bottom:40px}
     .eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700;color:var(--berry);margin-bottom:14px}
     h1{font:500 clamp(42px,6vw,58px)/1.06 'Cormorant Garamond',serif;color:#fff;margin:0 0 16px}
     .hero p{font-size:14px;color:var(--muted);max-width:560px;margin:0}
+    .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+    .filter-btn{padding:6px 14px;border-radius:999px;border:1px solid rgba(0,229,255,.25);background:transparent;color:#8d9bc5;font:700 10px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .18s}
+    .filter-btn:hover{border-color:rgba(0,229,255,.6);color:#c3c9ec}
+    .filter-btn.active{background:rgba(0,229,255,.12);border-color:var(--cyan);color:var(--cyan)}
     .posts{display:grid;gap:1px;border:1px solid rgba(0,229,255,.14);border-radius:20px;overflow:hidden;margin-bottom:80px}
     .post{display:block;padding:28px 32px;background:rgba(255,255,255,.025);transition:background .2s}
     .post:hover{background:rgba(0,229,255,.05)}
     .post:not(:last-child){border-bottom:1px solid rgba(0,229,255,.1)}
+    .post.hidden{display:none}
     .post-meta{display:flex;align-items:center;gap:12px;margin-bottom:10px}
     .post-tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
     .post-date{font-size:11px;color:#8d9bc5}
@@ -54,8 +59,15 @@
       <h1>Things I learned<br>building in public.</h1>
       <p>Notes on AI products, debugging in production, data that doesn't lie, and decisions I'd make again — or wouldn't.</p>
     </div>
+    <div class="filters">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="ai-engineering">AI Engineering</button>
+      <button class="filter-btn" data-cat="analytics">Analytics</button>
+      <button class="filter-btn" data-cat="engineering">Engineering</button>
+      <button class="filter-btn" data-cat="seo">SEO</button>
+    </div>
     <div class="posts">
-      <a class="post" href="/blog/building-a-3d-sky-map">
+      <a class="post" href="/blog/building-a-3d-sky-map" data-cats="ai-engineering engineering">
         <div class="post-meta">
           <span class="post-tag">WebGL · Astronomy · Engineering</span>
           <span class="post-date">November 2026</span>
@@ -64,7 +76,7 @@
         <p>Proper motion, a WebGL bloom shader that left square halos on Apple silicon, and verifying Gaia data integrity at runtime. The parts that took the longest to get right.</p>
         <span class="post-read">Read →</span>
       </a>
-      <a class="post" href="/blog/my-analytics-were-broken-for-weeks">
+      <a class="post" href="/blog/my-analytics-were-broken-for-weeks" data-cats="analytics">
         <div class="post-meta">
           <span class="post-tag">Analytics</span>
           <span class="post-date">November 2026</span>
@@ -73,7 +85,7 @@
         <p>How a 2-second setTimeout on 1,536 pages made most of my traffic invisible to GA4 — and what I did about it.</p>
         <span class="post-read">Read →</span>
       </a>
-      <a class="post" href="/blog/fixing-a-silent-stripe-webhook">
+      <a class="post" href="/blog/fixing-a-silent-stripe-webhook" data-cats="engineering">
         <div class="post-meta">
           <span class="post-tag">Payments · Debugging</span>
           <span class="post-date">October 2026</span>
@@ -82,7 +94,7 @@
         <p>Paying users weren't getting access. The webhook looked configured. Nothing was written to the database. Here's how I found it.</p>
         <span class="post-read">Read →</span>
       </a>
-      <a class="post" href="/blog/bot-filter-ga4">
+      <a class="post" href="/blog/bot-filter-ga4" data-cats="analytics seo">
         <div class="post-meta">
           <span class="post-tag">Analytics · SEO</span>
           <span class="post-date">August 2026</span>
@@ -91,7 +103,7 @@
         <p>Headless Chrome scrapers running real JavaScript. How I detected them and why the standard GA4 bot filter wasn't enough.</p>
         <span class="post-read">Read →</span>
       </a>
-      <a class="post" href="/blog/building-a-precise-astronomy-engine">
+      <a class="post" href="/blog/building-a-precise-astronomy-engine" data-cats="ai-engineering">
         <div class="post-meta">
           <span class="post-tag">Astronomy · AI Engineering</span>
           <span class="post-date">September 2026</span>
@@ -100,7 +112,7 @@
         <p>How I measured, diagnosed and fixed two coordinate-system bugs — using Swiss Ephemeris as a reference before touching a single line of code.</p>
         <span class="post-read">Read →</span>
       </a>
-      <a class="post" href="/blog/cost-aware-llm-engineering">
+      <a class="post" href="/blog/cost-aware-llm-engineering" data-cats="ai-engineering">
         <div class="post-meta">
           <span class="post-tag">AI Engineering · Cost</span>
           <span class="post-date">August 2026</span>
@@ -109,7 +121,7 @@
         <p>At 99% gross margin, optimizing AI cost per reading saves 4 cents a sale. Here's what I actually measured, and what I changed instead.</p>
         <span class="post-read">Read →</span>
       </a>
-      <a class="post" href="/blog/evaluating-an-ai-persona-systematically">
+      <a class="post" href="/blog/evaluating-an-ai-persona-systematically" data-cats="ai-engineering">
         <div class="post-meta">
           <span class="post-tag">AI Engineering · LLM Evaluation</span>
           <span class="post-date">July 2026</span>
@@ -118,7 +130,7 @@
         <p>How I built a scoring rubric for an LLM persona, measured the baseline, found the failure modes, and improved the prompt — with numbers at every step.</p>
         <span class="post-read">Read →</span>
       </a>
-      <a class="post" href="/blog/seo-at-scale-static-html">
+      <a class="post" href="/blog/seo-at-scale-static-html" data-cats="seo engineering">
         <div class="post-meta">
           <span class="post-tag">SEO · Engineering</span>
           <span class="post-date">June 2026</span>
@@ -127,7 +139,7 @@
         <p>How I went from ~1,500 thin SEO pages to 22 genuinely rich ones — and why reducing page count was the right SEO move.</p>
         <span class="post-read">Read →</span>
       </a>
-      <a class="post" href="/blog/building-a-free-reading-gate">
+      <a class="post" href="/blog/building-a-free-reading-gate" data-cats="engineering">
         <div class="post-meta">
           <span class="post-tag">Product Engineering</span>
           <span class="post-date">May 2026</span>
@@ -141,5 +153,17 @@
   <footer class="wrap foot">
     <a href="/portfolio">← Back to portfolio</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
   </footer>
+  <script>
+    const btns = document.querySelectorAll('.filter-btn');
+    const posts = document.querySelectorAll('.post');
+    btns.forEach(btn => btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      posts.forEach(post => {
+        post.classList.toggle('hidden', cat !== 'all' && !post.dataset.cats.includes(cat));
+      });
+    }));
+  </script>
 </body>
 </html>

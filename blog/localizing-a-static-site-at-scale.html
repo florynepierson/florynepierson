@@ -74,11 +74,11 @@
 
       <h2>2. Translation memory: a committed JSON file</h2>
 
-      <p>Translations live in <code>lib/localized-copy.json</code>, committed to the repository. It contains about 15,000 entries per language. A build that runs with this file present does not make any network requests. It is deterministic and works offline.</p>
+      <p>Translations live in a committed JSON file in the repository. A build that runs with this file present does not make any network requests. It is deterministic and works offline.</p>
 
-      <p>Populating the file is a separate step, run with a <code>--translate</code> flag. Missing keys are batched and sent to Google Translate. For product pages where tone matters, an Anthropic Claude call replaces Google Translate, with a system prompt that specifies brand names never to translate (Magical Chart, Wooly, Gene Keys, BaZi) and the target register.</p>
+      <p>Populating the file is a separate step. Missing keys are batched and sent to a machine translation API. For product pages where tone matters, a Claude call replaces the machine translation, with a system prompt that specifies brand names never to translate and the target register.</p>
 
-      <p>After translation, hand-authored overrides in <code>lib/localized-copy-overrides.json</code> replace specific strings where the machine translation was wrong or off-tone. The overrides file is small and reviewed manually. Everything else runs automatically.</p>
+      <p>After translation, a small hand-authored overrides file replaces specific strings where the machine translation was wrong or off-tone. It is reviewed manually. Everything else runs automatically.</p>
 
       <h2>3. Two translation granularities</h2>
 
@@ -89,14 +89,13 @@
       <pre><code>// Translate: "Your &lt;strong&gt;free&lt;/strong&gt; reading is ready"
 // Not:       "Your " + "free" + " reading is ready"</code></pre>
 
-      <p>Block translations are stored in a separate <code>lib/localized-block-copy.json</code> file. The generator applies them after string-level translation, replacing matched elements with the pre-translated block versions. This matters most for Portuguese and Italian, where adjective-noun agreement is strict.</p>
+      <p>Block translations are stored in a separate committed file. The generator applies them after string-level translation, replacing matched elements with the pre-translated block versions. This matters most for Portuguese and Italian, where adjective-noun agreement is strict.</p>
 
       <h2>4. The 73-line runtime fallback</h2>
 
       <p>The build handles everything it can see. What it cannot see is content injected dynamically by JavaScript: AI-generated reading text, card names drawn at render time, date labels formatted by the browser. For those, a MutationObserver watches the DOM and translates content as it appears:</p>
 
-      <pre><code>// lib/localized-runtime.js
-const observer = new MutationObserver(mutations => {
+      <pre><code>const observer = new MutationObserver(mutations => {
   for (const m of mutations) {
     for (const node of m.addedNodes) {
       if (node.nodeType === Node.TEXT_NODE) translateNode(node)

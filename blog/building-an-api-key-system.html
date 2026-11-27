@@ -74,7 +74,7 @@ function hashKey(raw) {
 
       <p>SHA-256 is a one-way function: given the hash, there is no efficient path back to the original key. If a database backup leaks, the attacker has a list of hex strings that are useless without the originals. This is the same approach used by GitHub and npm for their API tokens.</p>
 
-      <p>All keys have the prefix <code>sk_mc_</code>. This makes them easy to identify in logs, and allows immediate recognition and revocation if one appears somewhere it should not.</p>
+      <p>All keys have a fixed prefix. This makes them easy to identify in logs and allows immediate recognition and revocation if one appears somewhere it should not.</p>
 
       <h2>2. Validation on each request</h2>
 
@@ -82,7 +82,7 @@ function hashKey(raw) {
 
       <pre><code>export function extractBearerKey(req) {
   const auth = req.headers['authorization'] || ''
-  if (!auth.startsWith('Bearer sk_mc_')) return null
+  if (!auth.startsWith('Bearer ')) return null
   const key = auth.slice('Bearer '.length).trim()
   return key.length >= 20 ? key : null
 }</code></pre>
@@ -90,11 +90,8 @@ function hashKey(raw) {
       <p>Once extracted, the key is hashed and looked up in the database by hash. The database query never uses the raw key string:</p>
 
       <pre><code>const hash = hashKey(rawKey)
-const r = await fetch(
-  `${base}/rest/v1/api_keys?key_hash=eq.${encodeURIComponent(hash)}&select=*&limit=1`,
-  { headers }
-)
-const rows = await r.json()
+// look up by hash — raw key never sent to the database
+const rows = await db.queryByKeyHash(hash)
 if (!rows.length) return { ok: false, reason: 'invalid_key' }
 
 const rec = rows[0]
@@ -113,11 +110,7 @@ if (now >= resetAt) {
   const nextReset = new Date(
     Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1)
   )
-  await fetch(`${base}/rest/v1/api_keys?id=eq.${rec.id}`, {
-    method: 'PATCH',
-    headers,
-    body: JSON.stringify({ calls_used: 0, reset_at: nextReset.toISOString() }),
-  })
+  await db.updateKey(rec.id, { calls_used: 0, reset_at: nextReset.toISOString() })
 }</code></pre>
 
       <p><code>reset_at</code> is always set to the first day of the next calendar month in UTC. This means the reset happens at a predictable time regardless of when the key was issued or when this particular request lands.</p>
@@ -132,13 +125,9 @@ if (now >= resetAt) {
 
       <p>Once the key is validated and the request is allowed through, the usage counter increments. This write does not block the response:</p>
 
-      <pre><code>fetch(`${base}/rest/v1/api_keys?id=eq.${rec.id}`, {
-  method: 'PATCH',
-  headers,
-  body: JSON.stringify({
-    calls_used: callsUsed + 1,
-    last_used_at: now.toISOString()
-  }),
+      <pre><code>db.updateKey(rec.id, {
+  calls_used: callsUsed + 1,
+  last_used_at: now.toISOString()
 }).catch(() => {})</code></pre>
 
       <p>The <code>.catch(() => {})</code> is intentional. If the usage increment fails (database briefly unavailable, network blip), the request still succeeds. The counter might be off by one, but the caller gets their response without added latency. The alternative is making every API call wait for a write to complete, which adds a database round-trip to every request's critical path for the sake of a counter that is only used for monthly reporting.</p>
@@ -153,9 +142,9 @@ if (now >= resetAt) {
 
       <pre><code>export function unauthorizedResponse(res, reason) {
   const messages = {
-    invalid_key:    'Invalid API key. Get one at https://www.magicalchart.com/for-agents',
+    invalid_key:    'Invalid API key.',
     inactive_key:   'This API key has been deactivated.',
-    quota_exceeded: 'Monthly quota exceeded. Upgrade your plan at ...',
+    quota_exceeded: 'Monthly quota exceeded.',
     server_config:  'Server configuration error.',
   }
   res.setHeader('WWW-Authenticate', 'Bearer realm="Magical Chart API"')

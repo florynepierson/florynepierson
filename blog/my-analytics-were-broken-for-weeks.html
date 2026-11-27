@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My analytics were broken for weeks and I didn't know — Floryne Pierson</title>
-  <meta name="description" content="How a 2-second setTimeout on 1,536 pages made most of my traffic invisible to GA4, and how I fixed it with a whitelist-controlled script.">
+  <meta name="description" content="How a 2-second setTimeout on hundreds of pages made most of my traffic invisible to GA4, and how I fixed it with a whitelist-controlled script.">
   <link rel="canonical" href="https://florynepierson.com/blog/my-analytics-were-broken-for-weeks">
   <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
   <meta property="og:type" content="article">
   <meta property="og:title" content="My analytics were broken for weeks and I didn't know">
-  <meta property="og:description" content="How a 2-second setTimeout on 1,536 pages made most of my traffic invisible to GA4.">
+  <meta property="og:description" content="How a 2-second setTimeout on hundreds of pages made most of my traffic invisible to GA4.">
   <meta property="og:url" content="https://florynepierson.com/blog/my-analytics-were-broken-for-weeks">
   <meta name="theme-color" content="#080b1d">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,7 +56,7 @@
         <span class="date">November 2026</span>
       </div>
       <h1>My analytics were broken for weeks and I didn't know</h1>
-      <p class="lede">How a 2-second setTimeout on 1,536 pages made most of my traffic invisible to GA4 — and what I built to fix it properly.</p>
+      <p class="lede">How a 2-second setTimeout on hundreds of pages made most of my traffic invisible to GA4 — and what I built to fix it properly.</p>
 
       <p>I was looking at my GA4 data and something felt off. There were sessions full of custom events — readings completed, offers shown, buttons clicked — but no <code>page_view</code>, no <code>session_start</code>, no attribution. Around 80 sessions per day were arriving as <code>(not set)</code> in the Source/Medium report. They had engagement. They had no origin.</p>
 
@@ -64,14 +64,14 @@
 
       <h2>The root cause</h2>
 
-      <p>On 1,536 pages, <code>gtag.js</code> was loaded inside a <code>window.addEventListener("load", () => setTimeout(..., 2000))</code> block. The intent was performance: don't block the page with analytics on first load.</p>
+      <p>On hundreds of pages, <code>gtag.js</code> was loaded inside a <code>window.addEventListener("load", () => setTimeout(..., 2000))</code> block. The intent was performance: don't block the page with analytics on first load.</p>
 
       <p>The problem: on a slow 3G connection, <code>window.load</code> itself fires at 54 seconds. Add another 2 seconds and you're at 56 seconds before GA4 even initialises. Most users are long gone by then.</p>
 
       <p>What actually happened: the custom events (tracked by a separate script that ran earlier) fired and reached the GA4 property just fine. But <code>page_view</code>, <code>session_start</code> and <code>first_visit</code> — which are produced <em>by the GA4 configuration</em>, not by custom code — never fired at all. So GA4 had engagement signals with no session context to attach them to.</p>
 
       <div class="callout">
-        <p><strong>The symptom:</strong> ~700 sessions with zero <code>session_start</code>, but dozens of <code>page_view</code> and <code>user_engagement</code> events. Every decision I made during that period was based on incomplete data.</p>
+        <p><strong>The symptom:</strong> sessions with zero <code>session_start</code>, but dozens of <code>page_view</code> and <code>user_engagement</code> events. Every decision I made during that period was based on incomplete data.</p>
       </div>
 
       <h2>The fix</h2>
@@ -90,7 +90,7 @@ setTimeout(loadGtag, 300);</code></pre>
 
       <p>The 300ms delay also serves a second purpose: it gives the page time to render so that a bot-detection check I run against <code>screen</code> dimensions reads accurate values, rather than the emulated defaults that headless browsers set at load.</p>
 
-      <h2>The hard part: applying it to 1,536 pages</h2>
+      <h2>The hard part: applying it to hundreds of pages</h2>
 
       <p>Manually editing 1,536 HTML files wasn't an option. I wrote a Node script to do it automatically — but the first version had a bug that taught me something important.</p>
 
@@ -105,7 +105,7 @@ try {
   throw new Error(`Invalid JS on ${file}: ${e.message}`);
 }</code></pre>
 
-      <p>After the fix: 3,103 valid blocks rewritten, 2 blocks skipped (already invalid in the source, unrelated to this change). Zero regressions.</p>
+      <p>After the fix: every valid block rewritten, a small number skipped (already invalid in the source, unrelated to this change). Zero regressions.</p>
 
       <h2>What I learned</h2>
 

@@ -98,9 +98,9 @@
 
       <p>Rather than rewrite the entire prompt, I changed one thing at a time.</p>
 
-      <p>For concrete grounding: I added an explicit instruction that readings must close with an "anchor" — a single sentence that names what the user can observe, try, or notice before the next time they draw. Not advice, not a directive — an invitation to look at something specific. This distinction matters for the product's ethics (Wooly doesn't tell users what to do) while still giving a landing point.</p>
+      <p>For concrete grounding: I added an instruction that closes each reading with something the user can hold onto — a specific observation or invitation rather than a purely open-ended reflection. The distinction matters for the product's ethics while still giving a landing point.</p>
 
-      <p>For language match: I added an explicit instruction that Wooly detects the user's language from their message and maintains it throughout, regardless of what language appears in the retrieved card meanings (which are stored in English).</p>
+      <p>For language match: I added an instruction that explicitly addresses language consistency between the user's input and the retrieved knowledge base.</p>
 
       <p>These were two separate additions, applied and re-evaluated individually.</p>
 
@@ -118,8 +118,7 @@
 
       <p>A single monolithic prompt trying to handle all three degrades on each. I split the system into a router that classifies the input first, then hands off to a specialist handler:</p>
 
-      <pre><code>// wooly-router.js
-function routeInput(message, drawnCards) {
+      <pre><code>function routeInput(message, drawnCards) {
   if (drawnCards && drawnCards.length > 0) return 'tarot';
   if (needsClarification(message)) return 'clarify';
   return 'reflection';
@@ -133,7 +132,7 @@ const response = await handler.generate(message, cards, context);</code></pre>
 
       <h2>The scoring automation</h2>
 
-      <p>The scorer that runs against the baseline checks three of the six dimensions automatically: source grounding (did retrieved card IDs appear in the output), guardrail violations (did the output contain flagged phrases like "you will" or "I predict"), and language match (did the output language match the input language).</p>
+      <p>The scorer that runs against the baseline checks three of the six dimensions automatically: source grounding (did retrieved card IDs appear in the output), guardrail violations (did the output contain any flagged language patterns), and language match (did the output language match the input language).</p>
 
       <p>The other three — context use, persona coherence, and concrete grounding — require human review. The automation handles the mechanical checks; the human review handles the judgment calls. Automated checks that require judgment produce false confidence faster than no checks at all.</p>
 
@@ -143,11 +142,11 @@ const response = await handler.generate(message, cards, context);</code></pre>
 
       <h2>What the retrieval comparison revealed</h2>
 
-      <p>One additional finding from the eval process: comparing structured retrieval (pgvector semantic search over card meanings) versus lexical fallback (keyword matching) on the same test cases.</p>
+      <p>One additional finding from the eval process: comparing semantic retrieval versus lexical fallback on the same test cases.</p>
 
-      <p>Structured retrieval won on nuanced questions — "what does this card mean when I'm feeling stuck in a relationship" — where the semantic match to card meanings mattered. Lexical fallback performed equivalently on direct queries — "what is the meaning of The Tower" — where the card name was explicit in the input.</p>
+      <p>Semantic retrieval won on nuanced questions — "what does this card mean when I'm feeling stuck in a relationship" — where proximity of meaning mattered more than keyword presence. Lexical fallback performed equivalently on direct queries — "what is the meaning of The Tower" — where the card name was explicit in the input.</p>
 
-      <p>The production system uses structured retrieval with lexical fallback. What the comparison confirmed is that the fallback isn't a degraded experience — it's appropriate for a different query type. That's a subtler conclusion than "structured is better," and it only became visible through systematic comparison on a fixed test set.</p>
+      <p>What the comparison confirmed is that the fallback isn't a degraded experience — it's appropriate for a different query type. That's a subtler conclusion than "semantic is better," and it only became visible through systematic comparison on a fixed test set.</p>
     </article>
   </main>
   <footer class="wrap foot">

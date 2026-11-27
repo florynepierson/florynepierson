@@ -82,27 +82,22 @@
 
       <p>Every reading request goes through a serverless function. That function checks usage against two signals:</p>
 
-      <p><strong>For authenticated users</strong> (logged in with Supabase auth): the check is against their row in the database. <code>user_profiles.daily_reading_count</code> is incremented on each successful generation and reset nightly by a cron job. If the count is at or above the free-tier limit, the API returns 429 regardless of what the client-side state claims.</p>
+      <p><strong>For authenticated users</strong> (logged in): the check is against their usage record in the database. The counter is incremented on each successful generation and reset on a scheduled basis. If the count is at or above the free-tier limit, the API returns 429 regardless of what the client-side state claims.</p>
 
-      <p><strong>For anonymous users</strong> (no account): the check is against a fingerprint derived from the request. No IP logging (privacy), but a hashed combination of user-agent and a session token set at first visit. This isn't bulletproof — a sophisticated user can clear cookies and get a new session token — but it raises the bar above "open DevTools, delete localStorage." The goal isn't to make bypass impossible; it's to make casual bypass annoying enough that the legitimate upgrade path looks attractive by comparison.</p>
+      <p><strong>For anonymous users</strong> (no account): the check is against a request fingerprint. No IP logging (privacy). The fingerprint is derived from request signals and a session token set at first visit. The goal isn't to make bypass impossible; it's to make casual bypass annoying enough that the legitimate upgrade path looks attractive by comparison.</p>
 
       <pre><code>// server-side check (simplified)
 async function checkReadingQuota(req) {
   const user = await getUser(req);
 
   if (user) {
-    const { daily_reading_count } = await supabase
-      .from('user_profiles')
-      .select('daily_reading_count')
-      .eq('id', user.id)
-      .single();
-
-    if (daily_reading_count >= FREE_TIER_DAILY_LIMIT) {
+    const count = await db.getUserDailyCount(user.id);
+    if (count >= FREE_TIER_DAILY_LIMIT) {
       return { allowed: false, reason: 'daily_limit' };
     }
   } else {
     const fingerprint = getAnonymousFingerprint(req);
-    const count = await getAnonymousCount(fingerprint);
+    const count = await db.getAnonymousCount(fingerprint);
     if (count >= ANONYMOUS_DAILY_LIMIT) {
       return { allowed: false, reason: 'daily_limit' };
     }

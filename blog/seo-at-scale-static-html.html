@@ -122,7 +122,7 @@
 
       <h2>What the architecture constraint forced</h2>
 
-      <p>Building SEO at this scale in static HTML forces a discipline that frameworks can obscure: you have to know what every page contains, because there's no dynamic rendering to paper over gaps. When I ran the consolidation audit, I found 326 pages that had no GA4 tag at all — they were invisible to analytics. I found 22 pages without an <code>.html</code> extension that existed on disk but were never served by Vercel. I found pages whose canonical URLs didn't match their actual URLs.</p>
+      <p>Building SEO at this scale in static HTML forces a discipline that frameworks can obscure: you have to know what every page contains, because there's no dynamic rendering to paper over gaps. When I ran the consolidation audit, I found a significant number of pages with no analytics tag at all — invisible to measurement. I found pages without an <code>.html</code> extension that existed on disk but were never served. I found pages whose canonical URLs didn't match their actual URLs.</p>
 
       <p>None of these were visible at the product level. They only appeared because the static file audit had to be explicit. A framework with a CMS would have handled some of this automatically — but it also would have made it harder to see the raw state of what was actually deployed.</p>
 
@@ -132,7 +132,7 @@
 
       <p>The consolidation didn't immediately spike rankings. 301 redirects take time to process, and Google re-evaluates the target page's authority after absorbing the redirected link equity. What it did immediately was simplify the crawl: fewer URLs, clearer topical focus per remaining page, no self-competition between near-duplicate variants.</p>
 
-      <p>The growth that followed — roughly 14x in organic sessions over two months — came from the combination of consolidation, E-E-A-T additions, and new content in clusters that had no existing coverage. No single change explains it. The consolidation was the foundation that made the other changes land.</p>
+      <p>The growth that followed came from the combination of consolidation, E-E-A-T additions, and new content in clusters that had no existing coverage. No single change explains it. The consolidation was the foundation that made the other changes land.</p>
     </article>
   </main>
   <footer class="wrap foot">

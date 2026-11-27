@@ -109,8 +109,8 @@ gl_FragColor = vec4(vColor, alpha);</code></pre>
       <p>The side effect: it's also faster on mobile. <code>UnrealBloomPass</code> runs a full-screen pass per frame. The shader approach costs roughly nothing, which matters on a product where the majority of users are on phones.</p>
 
       <figure>
-        <img src="/blog/star-map-interface.png" alt="The Magical Chart sky map showing Valletta, Malta on October 14 2026 at 9 PM. Stars have clean circular glows (Vega, Capella, Fomalhaut) rendered entirely by the fragment shader with no post-processing bloom pass.">
-        <figcaption>The sky above Valletta, Malta, October 14, 2026, 9 PM. Every star glow is computed per-fragment. No post-processing pass runs at all.</figcaption>
+        <img src="/blog/star-map-interface.png" alt="The Magical Chart sky map showing a location in southern Europe in October 2026 at 9 PM. Stars have clean circular glows (Vega, Capella, Fomalhaut) rendered entirely by the fragment shader with no post-processing bloom pass.">
+        <figcaption>The sky above Southern Europe, October 2026, 9 PM. Every star glow is computed per-fragment. No post-processing pass runs at all.</figcaption>
       </figure>
 
       <h2>3. Precession: the third coordinate correction nobody talks about</h2>

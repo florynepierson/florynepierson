@@ -141,7 +141,7 @@
 
       <h2>Verifying the fix works</h2>
 
-      <p>After deploying, I used the Stripe dashboard to resend a previous event: <strong>Developers → Webhooks → [your endpoint] → Recent deliveries → [event] → Resend</strong>. This time, the Vercel logs showed the handler running, the signature check passing, and the database row updating. I also checked the user's row directly in Supabase to confirm <code>is_premium = true</code> was written.</p>
+      <p>After deploying, I used the Stripe dashboard to resend a previous event: <strong>Developers → Webhooks → [your endpoint] → Recent deliveries → [event] → Resend</strong>. This time, the Vercel logs showed the handler running, the signature check passing, and the database row updating. I also confirmed directly in the database that the user's access flag had been written correctly.</p>
 
       <p>The pattern worth keeping: for any webhook handler, before you ship it, trigger a test event from the Stripe dashboard and watch the destination logs in real time. Don't trust that a 200 response means the work happened — verify that the specific side effect (database write, email sent, access granted) actually occurred.</p>
 

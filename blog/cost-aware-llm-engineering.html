@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cost-aware LLM engineering: why I didn't optimize what everyone told me to — Floryne Pierson</title>
-  <meta name="description" content="At 99% gross margin, optimizing AI cost per reading saves 4 cents a sale. Here's what I actually measured, and what I changed instead.">
+  <meta name="description" content="When AI cost per reading is a fraction of the sale price, the common optimizations aren't worth doing. Here's what I actually measured, and what I changed instead.">
   <link rel="canonical" href="https://florynepierson.com/blog/cost-aware-llm-engineering">
   <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
   <meta property="og:type" content="article">
@@ -60,7 +60,7 @@
         <span class="date">August 2026</span>
       </div>
       <h1>Cost-aware LLM engineering: why I didn't optimize what everyone told me to</h1>
-      <p class="lede">At 99% gross margin, optimizing AI cost per reading saves 4 cents a sale. Here's what I actually measured, and what I changed instead.</p>
+      <p class="lede">When gross margins are very high, optimizing AI cost per reading saves a few cents a sale. Here's what I actually measured, and what I changed instead.</p>
 
       <p>The standard advice for LLM-powered products is: use the cheapest model that gets the job done, cache aggressively, shorten your prompts. It's good advice in the abstract. The problem is that "cheapest model that gets the job done" only makes sense if you first know how much the current model is actually costing you — per request, per sale, per month.</p>
 
@@ -75,7 +75,7 @@
         <li><strong>Deep reports</strong> — natal charts, human design reports. Multi-section, structured, requires sustained quality across 2,000–4,000 tokens of output.</li>
       </ul>
 
-      <p>The tiering was set early: Haiku for daily readings (~$0.005/reading), Sonnet for deep reports (~$0.019/report). This wasn't a blind cost decision — it came from testing both models on each task and observing where quality degraded.</p>
+      <p>The tiering was set early based on testing both models on each task and observing where quality degraded, not on a blind cost decision.</p>
 
       <p>Haiku on a short conversational reading: indistinguishable from Sonnet in feel. Haiku on a 3,000-token structured natal report: noticeably thinner, section transitions rougher, less specific to the user's data. The tier split was real.</p>
 
@@ -93,26 +93,26 @@
 
       <h2>What the actual margin numbers showed</h2>
 
-      <p>Gross margin on paid products, after AI cost: <strong>98.6% to 99.8%</strong> depending on the product tier. At those numbers, downgrading a €4.99 report from Sonnet to Haiku saves approximately 4 cents per sale.</p>
+      <p>Gross margin on paid products, after AI cost, is well above 98% across all product tiers. At those numbers, the saving from downgrading a report to a cheaper model is a few cents per sale.</p>
 
-      <p>To put that in perspective: with 3 sales at the time of the analysis, the total potential savings from switching all Sonnet reports to Haiku was about 12 cents. The engineering time to make the switch, test for quality regression, and monitor for user complaints would cost orders of magnitude more in time value.</p>
+      <p>To put that in perspective: at early-stage sales volumes, the total potential savings from a model switch would be measured in cents. The engineering time to make the switch, test for quality regression, and monitor for user complaints costs orders of magnitude more in time value.</p>
 
       <table>
-        <thead><tr><th>Product</th><th>Price</th><th>AI cost (est.)</th><th>Gross margin</th></tr></thead>
+        <thead><tr><th>Product</th><th>AI cost (est.)</th><th>Gross margin</th></tr></thead>
         <tbody>
-          <tr><td>Daily reading (Haiku)</td><td>Free / included</td><td>~$0.005</td><td>—</td></tr>
-          <tr><td>Deep report (Sonnet)</td><td>€4.99</td><td>~$0.019</td><td>~99.6%</td></tr>
-          <tr><td>Premium subscription</td><td>€19.99/mo</td><td>~$0.10–0.30/mo</td><td>~98.6%</td></tr>
+          <tr><td>Daily reading (smaller model)</td><td>fraction of a cent</td><td>very high</td></tr>
+          <tr><td>Deep report (larger model)</td><td>a few cents</td><td>very high</td></tr>
+          <tr><td>Premium subscription</td><td>cents per month</td><td>very high</td></tr>
         </tbody>
       </table>
 
-      <p>The conclusion wasn't "don't optimize cost." It was: at this scale, the meaningful cost levers aren't per-token model selection — they're volume-level decisions. If I ever reach a point where AI cost is a real line item (thousands of users, millions of tokens/month), the tiering decisions will need revisiting. At current scale, the cost ceiling that actually matters is the monthly cap I imposed as a safety rail against runaway usage, not the per-request model choice.</p>
+      <p>The conclusion wasn't "don't optimize cost." It was: at this scale, the meaningful cost levers aren't per-token model selection — they're volume-level decisions. If I ever reach a point where AI cost is a real line item (thousands of users, millions of tokens/month), the tiering decisions will need revisiting. At current scale, the cost ceiling that actually matters is the monthly cap imposed as a safety rail against runaway usage, not the per-request model choice.</p>
 
       <h2>What I did optimize</h2>
 
       <p>The useful cost work was elsewhere:</p>
 
-      <p><strong>A hard monthly spend cap.</strong> An API key with no spending limit on a product with a free tier is a risk vector — not from normal usage, but from abuse (prompt injection attempts, automated scraping that triggers AI calls, bugs in rate limiting). I set a hard cap at $1/month as an alert threshold. If anything hits that ceiling, something is wrong operationally before it's a cost problem.</p>
+      <p><strong>A hard monthly spend cap.</strong> An API key with no spending limit on a product with a free tier is a risk vector — not from normal usage, but from abuse (prompt injection attempts, automated scraping that triggers AI calls, bugs in rate limiting). I set a hard cap as an alert threshold. If anything hits that ceiling, something is wrong operationally before it's a cost problem.</p>
 
       <p><strong>Instrumentation before optimization.</strong> The LLM monitoring dashboard — tracking model usage, latency, token counts, and cost per endpoint — came before any cost optimization decisions. Without it, the "76 second Sonnet" myth would have lived on indefinitely. With it, I could see that Sonnet was clearing the timeout with margin to spare, that Haiku was handling 90%+ of all calls, and that the actual cost distribution was completely different from what the documentation claimed.</p>
 

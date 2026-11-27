@@ -80,30 +80,12 @@
 
       <h2>The detection approach</h2>
 
-      <p>I added a client-side check that runs before the GA4 tag initialises. The logic: headless Chrome at its defaults exposes a few detectable properties that real browsers don't.</p>
+      <p>I added a client-side check that runs before the GA4 tag initialises. The logic: headless Chrome at its defaults exposes a few detectable properties that real browsers don't — WebDriver API flags set by the automation spec, browser environment signals that differ from genuine user sessions, and viewport characteristics typical of unattended execution contexts.</p>
 
-      <pre><code>function isHeadless() {
-  // Headless Chrome default: navigator.webdriver = true
-  if (navigator.webdriver) return true;
-
-  // Headless Chrome: no plugins array
-  if (navigator.plugins.length === 0) return true;
-
-  // Headless default viewport: 800x600
-  // Real mobile: matches devicePixelRatio > 1
-  // Real desktop: typically wider
-  const w = screen.width;
-  const h = screen.height;
-  if (w === 800 && h === 600) return true;
-  if (w === 1280 && h === 720 && window.devicePixelRatio === 1) return true;
-
-  return false;
-}</code></pre>
-
-      <p>If <code>isHeadless()</code> returns true, I skip loading GA4 entirely. No tag fires, no session is recorded. The bot scrapes the page content but leaves no analytics trace.</p>
+      <p>If the check identifies an automated browser, I skip loading GA4 entirely. No tag fires, no session is recorded. The bot scrapes the page content but leaves no analytics trace.</p>
 
       <div class="callout">
-        <p><strong>Important:</strong> <code>navigator.webdriver</code> is the most reliable signal — it's set to <code>true</code> by the WebDriver spec when a browser is under automation control. Legitimate users never have it set. But sophisticated scrapers can patch it out. The screen dimension check is a useful second layer for the ones that do.</p>
+        <p><strong>Important:</strong> the WebDriver flag is the most reliable signal — it's set by the spec when a browser is under automation control, and legitimate users never have it set. Sophisticated scrapers can patch individual signals, so a multi-signal check is more robust than relying on any single property.</p>
       </div>
 
       <h2>Why this matters for conversion analysis</h2>

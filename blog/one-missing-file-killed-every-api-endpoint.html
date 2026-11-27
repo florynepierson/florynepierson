@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One missing file killed every API endpoint | Floryne Pierson</title>
+  <meta name="description" content="I committed a file that imported a module that did not exist in the repository. Vercel deployed it. Every single API endpoint returned FUNCTION_INVOCATION_FAILED.">
+  <link rel="canonical" href="https://florynepierson.com/blog/one-missing-file-killed-every-api-endpoint">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="One missing file killed every API endpoint">
+  <meta property="og:description" content="I committed a file that imported a module that did not exist in the repository. Every single API endpoint returned FUNCTION_INVOCATION_FAILED. Here is how I found it.">
+  <meta property="og:url" content="https://florynepierson.com/blog/one-missing-file-killed-every-api-endpoint">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:16px/1.8 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(680px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 680px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .article{padding:56px 0 80px}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .date{font-size:11px;color:#8d9bc5}
+    h1{font:500 clamp(36px,5vw,52px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 20px}
+    .lede{font-size:17px;color:#dbe5ff;line-height:1.7;border-left:3px solid var(--cyan);padding-left:20px;margin:0 0 40px}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:40px 0 14px}
+    p{margin:0 0 20px;color:#c3c9ec}
+    code{font-family:monospace;font-size:.88em;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.18);border-radius:5px;padding:2px 7px;color:#a8f0f0}
+    pre{background:rgba(5,11,32,.8);border:1px solid rgba(0,229,255,.2);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px}
+    pre code{background:none;border:none;padding:0;color:#cce8ff;font-size:13px;line-height:1.7}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 24px}
+    .callout p{margin:0;color:#f0cce8;font-size:14px}
+    .callout strong{color:#fa4fc8}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
+    .back:hover{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <article class="article">
+      <a class="back" href="/blog">← All posts</a>
+      <div class="article-meta">
+        <span class="tag">Engineering · Debugging</span>
+        <span class="date">November 2026</span>
+      </div>
+      <h1>One missing file killed every API endpoint</h1>
+      <p class="lede">I committed a file that imported a module that did not exist in the repository. Vercel deployed it. Every single API endpoint returned FUNCTION_INVOCATION_FAILED. The error message pointed nowhere useful.</p>
+
+      <p>I added an API key authentication layer to the Magical Chart astronomy API. The implementation lived in a new file, <code>lib/api-key-auth.js</code>. I imported it in <code>api/birth-chart.js</code>, committed that file, and pushed. Vercel deployed successfully. The health monitor sent an alert 90 seconds later: HTTP 500 on the health endpoint.</p>
+
+      <p>I hit the birth chart endpoint directly. <code>FUNCTION_INVOCATION_FAILED</code>. I hit the tarot endpoint, which had nothing to do with API keys. <code>FUNCTION_INVOCATION_FAILED</code>. I hit the health check. Same result.</p>
+
+      <p>Everything was down.</p>
+
+      <h2>1. Why all functions failed, not just one</h2>
+
+      <p>The first instinct was that the birth chart endpoint was broken. But the tarot endpoint and the health check had no relationship to the new code. How could a change to one file break all of them?</p>
+
+      <p>The answer is how Vercel bundles serverless functions with ES modules. When a function uses <code>import</code> at the top of the file, the bundler resolves the full import graph at deploy time. If any module in that graph is missing, the entire bundle fails to initialize. The function throws before its handler is ever called.</p>
+
+      <p>But the tarot endpoint did not import <code>api/birth-chart.js</code>. The connection was different: the project has a shared dispatcher in <code>api/cron.js</code> that imports from roughly 30 library files. That dispatcher is the entry point for most functions. When Vercel attempted to initialize it, the missing file was reachable through the import graph, and the entire dispatcher failed to load.</p>
+
+      <div class="callout">
+        <p><strong>The cascade:</strong> one missing import in one file propagates through the shared module graph and kills every function that shares that graph. In a serverless monorepo with shared library code, a missing file is not a local problem.</p>
+      </div>
+
+      <h2>2. The diagnosis: git show HEAD, not git status</h2>
+
+      <p><code>git status</code> showed the working tree state. It listed <code>lib/api-key-auth.js</code> as untracked, meaning it was present on disk but had never been staged. That was the problem: the file existed locally, so local tests passed. It was imported in the committed code. It was not in the commit.</p>
+
+      <p>The correct command to verify what Vercel actually deployed was:</p>
+
+      <pre><code>git show HEAD:lib/api-key-auth.js</code></pre>
+
+      <p>This showed nothing. The file was not in the last commit. Vercel pulled from the repository, found the import, could not resolve the module, and the function crashed.</p>
+
+      <p><code>git status</code> tells you the state of your working directory. <code>git show HEAD:path</code> tells you what is actually in the deployed commit. These are not the same question, and in this case they had different answers.</p>
+
+      <h2>3. The fix and the pre-commit hook surprise</h2>
+
+      <p>The fix was one command:</p>
+
+      <pre><code>git add lib/api-key-auth.js &amp;&amp; git commit -m "fix: add missing api-key-auth module"</code></pre>
+
+      <p>The commit appeared to fail: the terminal showed exit code 1 and a list of unstaged files. But looking more carefully at the output, the pre-commit hook had run, amended the previous commit to include the file, and force-pushed automatically. <code>git show HEAD</code> confirmed the file was present in the commit.</p>
+
+      <p>The health endpoint returned 200 about 30 seconds later, once Vercel completed the new deploy.</p>
+
+      <h2>4. The lesson</h2>
+
+      <p>The failure had two causes. The obvious one is that I forgot to stage a new file before pushing. The less obvious one is that nothing caught it: no CI, no import checker, no test that actually exercised the endpoint after deployment.</p>
+
+      <p>Three practices would have prevented or shortened the outage:</p>
+
+      <p><strong>Verify the commit, not the working tree.</strong> Before pushing, <code>git diff HEAD</code> shows what is staged. <code>git show HEAD:path</code> confirms a specific file is in the commit. These checks take 10 seconds.</p>
+
+      <p><strong>Run a smoke test against the actual deployment.</strong> A single <code>curl</code> against the production health endpoint after each push would catch this within 60 seconds, before the monitoring system does.</p>
+
+      <p><strong>Know your import graph.</strong> In a project with shared dispatcher modules, any new file that enters the shared graph is a potential failure point for every function. The impact radius of a missing module is not obvious from reading the import statement alone.</p>
+
+      <p>The outage lasted about four minutes from first alert to recovery. The root cause was invisible from the error message, but obvious from the commit history once I knew where to look.</p>
+
+    </article>
+  </main>
+  <footer class="wrap foot">
+    <a href="/blog">← All posts</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

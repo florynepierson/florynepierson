@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The math behind astrocartography lines | Floryne Pierson</title>
+  <meta name="description" content="Every planet produces four lines on the astrocartography map. MC, IC, Ascendant, Descendant. Each is a different equation, and they all reduce to the same question: where on Earth was this planet overhead, rising, or setting?">
+  <link rel="canonical" href="https://florynepierson.com/blog/how-astrocartography-lines-work">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The math behind astrocartography lines">
+  <meta property="og:description" content="MC, IC, Ascendant, Descendant. Four lines per planet, four different equations, one question: where on Earth was this planet overhead, rising, or setting?">
+  <meta property="og:url" content="https://florynepierson.com/blog/how-astrocartography-lines-work">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:16px/1.8 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(680px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 680px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .article{padding:56px 0 80px}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .date{font-size:11px;color:#8d9bc5}
+    h1{font:500 clamp(36px,5vw,52px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 20px}
+    .lede{font-size:17px;color:#dbe5ff;line-height:1.7;border-left:3px solid var(--cyan);padding-left:20px;margin:0 0 40px}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:40px 0 14px}
+    p{margin:0 0 20px;color:#c3c9ec}
+    code{font-family:monospace;font-size:.88em;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.18);border-radius:5px;padding:2px 7px;color:#a8f0f0}
+    pre{background:rgba(5,11,32,.8);border:1px solid rgba(0,229,255,.2);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px}
+    pre code{background:none;border:none;padding:0;color:#cce8ff;font-size:13px;line-height:1.7}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 24px}
+    .callout p{margin:0;color:#f0cce8;font-size:14px}
+    .callout strong{color:#fa4fc8}
+    table{width:100%;border-collapse:collapse;margin:0 0 24px;font-size:13px}
+    th{text-align:left;padding:10px 14px;border-bottom:1px solid rgba(0,229,255,.25);color:#00e5ff;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+    td{padding:10px 14px;border-bottom:1px solid rgba(0,229,255,.08);color:#c3c9ec}
+    tr:last-child td{border-bottom:none}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
+    .back:hover{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <article class="article">
+      <a class="back" href="/blog">← All posts</a>
+      <div class="article-meta">
+        <span class="tag">Astronomy · Engineering</span>
+        <span class="date">October 2026</span>
+      </div>
+      <h1>The math behind astrocartography lines</h1>
+      <p class="lede">Every planet produces four lines on the world map. MC, IC, Ascendant, Descendant. Each is a different equation, and they all reduce to the same question: where on Earth was this planet exactly overhead, rising, or setting at the moment of birth?</p>
+
+      <p>Astrocartography is the practice of projecting a birth chart onto a world map. The idea is straightforward: at the moment of birth, each planet occupied a specific position in the sky. That position corresponds to specific geographic locations where the planet was culminating at the top of the sky, rising on the eastern horizon, setting on the western horizon, or crossing the nadir directly underfoot. Those locations form lines across the map.</p>
+
+      <p>Implementing this requires computing four different geometric relationships between a planet's equatorial coordinates and every point on Earth's surface. Here is how the math works.</p>
+
+      <h2>1. The four line types</h2>
+
+      <table>
+        <tr><th>Line</th><th>Meaning</th><th>Geometry</th></tr>
+        <tr><td>MC (Midheaven)</td><td>Planet was at the top of the sky</td><td>Vertical meridian</td></tr>
+        <tr><td>IC (Nadir)</td><td>Planet was directly underfoot</td><td>Vertical meridian, 180° from MC</td></tr>
+        <tr><td>ASC (Ascendant)</td><td>Planet was rising on the eastern horizon</td><td>Curved line across latitudes</td></tr>
+        <tr><td>DSC (Descendant)</td><td>Planet was setting on the western horizon</td><td>Curved line across latitudes</td></tr>
+      </table>
+
+      <p>The first step for all four lines is converting the planet's ecliptic longitude and latitude to equatorial coordinates (right ascension RA and declination dec), using the true obliquity of the ecliptic at the birth date.</p>
+
+      <h2>2. MC and IC lines: one equation, two meridians</h2>
+
+      <p>A planet culminates at the Midheaven when the Local Sidereal Time equals its Right Ascension. Local Sidereal Time equals Greenwich Apparent Sidereal Time plus geographic longitude. So the MC line is the meridian where:</p>
+
+      <pre><code>GAST + longitude_MC = RA
+longitude_MC = RA - GAST</code></pre>
+
+      <p>That is a single vertical line on the map. The IC line is exactly 180° from it. In code:</p>
+
+      <pre><code>const gst   = getSiderealTime(birthDate)   // GAST in degrees
+const mcLon = wrap180(ra - gst)
+const icLon = wrap180(ra - gst + 180)</code></pre>
+
+      <p>GAST comes from the astronomy-engine's <code>SiderealTime()</code> function, which applies full IAU 2000/2006 nutation corrections. Using the simpler mean sidereal time causes a systematic error of about 0.1 degrees in the MC line position, which at mid-latitudes corresponds to roughly 10 kilometers of geographic displacement.</p>
+
+      <h2>3. ASC and DSC curves: the horizon equation</h2>
+
+      <p>A planet rises on the eastern horizon when its hour angle H satisfies the standard horizon equation:</p>
+
+      <pre><code>cos H = -tan(latitude) * tan(declination)</code></pre>
+
+      <p>The corresponding geographic longitude for the rising point is:</p>
+
+      <pre><code>longitude_rise = RA - H - GAST</code></pre>
+
+      <p>This is computed at every 2-degree latitude step between -70° and +70°:</p>
+
+      <pre><code>for (let phi = -70; phi <= 70; phi += 2) {
+  const c = -Math.tan(phi * R) * Math.tan(dec * R)
+  if (c < -1 || c > 1) continue   // circumpolar: planet never rises here
+  const H = Math.acos(c) * D
+  lever.push({ lat: phi, lon: wrap180(ra - H - gst) })    // ASC
+  coucher.push({ lat: phi, lon: wrap180(ra + H - gst) })  // DSC
+}</code></pre>
+
+      <p>When <code>|c|</code> exceeds 1, the planet is circumpolar at that latitude: either it never sets (always above the horizon) or it never rises (always below). The curve simply ends at that latitude. This is a physical limit of the geometry, not a code limitation.</p>
+
+      <div class="callout">
+        <p><strong>Key fact about the lines:</strong> they depend exclusively on the birth moment (date and time), not on the birth location. The birth place determines which lines run through which cities for the person. It does not move the lines themselves.</p>
+      </div>
+
+      <h2>4. Projection: equirectangular and why</h2>
+
+      <p>The map uses an equirectangular (Plate Carrée) projection:</p>
+
+      <pre><code>function px(lon) { return (lon + 180) / 360 * WIDTH  }
+function py(lat) { return (90  - lat) / 180 * HEIGHT }</code></pre>
+
+      <p>This was chosen deliberately. MC and IC lines are geographic meridians, which in equirectangular projection are true vertical lines. In a Mercator or Robinson projection they would curve, which would misrepresent the geometry. The Ascendant and Descendant curves are not straight lines in any projection, but they look similar across common choices, so the projection decision is driven by the meridian case.</p>
+
+      <h2>5. The antimeridian problem</h2>
+
+      <p>The Ascendant and Descendant curves cross the antimeridian (180°/-180° boundary) somewhere in the Pacific. When two consecutive computed points jump from +179° to -179°, drawing a straight segment between them produces a horizontal line across the entire map.</p>
+
+      <p>The fix is to split the polyline into segments whenever consecutive points differ by more than 180° in longitude:</p>
+
+      <pre><code>function splitCurve(pts) {
+  const segments = []
+  let current = []
+  for (const pt of pts) {
+    if (current.length) {
+      const d = Math.abs(pt.lon - current.at(-1).lon)
+      if (d > 180) { segments.push(current); current = [] }
+    }
+    current.push(pt)
+  }
+  if (current.length) segments.push(current)
+  return segments
+}</code></pre>
+
+      <p>The same logic runs in both the SVG renderer and the MapLibre GeoJSON layer. Each segment becomes a separate polyline. The map shows two curve fragments on either side of the antimeridian, which is the correct representation.</p>
+
+      <h2>6. City proximity: kilometers, not degrees</h2>
+
+      <p>The map annotates cities that fall within a threshold distance of any line. The original implementation measured proximity in degrees of longitude difference. This made the threshold twice as strict at high latitudes (where longitude degrees are narrow) as at the equator (where they are wide).</p>
+
+      <p>The fix is to convert longitude difference to kilometers using the cosine of latitude:</p>
+
+      <pre><code>const km = (dlon, lat) =>
+  Math.abs(dlon) * 111.32 * Math.cos(lat * Math.PI / 180)</code></pre>
+
+      <p>The threshold is 400 kilometers, which is the standard orb used in published astrocartography literature. A city at 60° north latitude needs to be within 400 km of a line, which is about 7° of longitude there, not the 3.6° that an uncorrected degree-based threshold would give.</p>
+
+    </article>
+  </main>
+  <footer class="wrap foot">
+    <a href="/blog">← All posts</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

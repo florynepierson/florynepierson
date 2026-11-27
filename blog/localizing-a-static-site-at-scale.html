@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>15 languages, no framework, no server rendering | Floryne Pierson</title>
+  <meta name="description" content="363 French pages, 15 languages, one committed JSON translation memory. Every localised page is a static HTML file generated at build time. The only runtime dependency is 73 lines of vanilla JavaScript.">
+  <link rel="canonical" href="https://florynepierson.com/blog/localizing-a-static-site-at-scale">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="15 languages, no framework, no server rendering">
+  <meta property="og:description" content="363 French pages, 15 languages, one committed JSON translation memory. Static HTML at build time, 73 lines of JS at runtime.">
+  <meta property="og:url" content="https://florynepierson.com/blog/localizing-a-static-site-at-scale">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:16px/1.8 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(680px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 680px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .article{padding:56px 0 80px}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .date{font-size:11px;color:#8d9bc5}
+    h1{font:500 clamp(36px,5vw,52px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 20px}
+    .lede{font-size:17px;color:#dbe5ff;line-height:1.7;border-left:3px solid var(--cyan);padding-left:20px;margin:0 0 40px}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:40px 0 14px}
+    p{margin:0 0 20px;color:#c3c9ec}
+    code{font-family:monospace;font-size:.88em;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.18);border-radius:5px;padding:2px 7px;color:#a8f0f0}
+    pre{background:rgba(5,11,32,.8);border:1px solid rgba(0,229,255,.2);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px}
+    pre code{background:none;border:none;padding:0;color:#cce8ff;font-size:13px;line-height:1.7}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 24px}
+    .callout p{margin:0;color:#f0cce8;font-size:14px}
+    .callout strong{color:#fa4fc8}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
+    .back:hover{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <article class="article">
+      <a class="back" href="/blog">← All posts</a>
+      <div class="article-meta">
+        <span class="tag">Engineering · SEO</span>
+        <span class="date">September 2026</span>
+      </div>
+      <h1>15 languages, no framework, no server rendering</h1>
+      <p class="lede">363 French pages, 15 languages, one committed JSON translation memory. Every localised page is a static HTML file generated at build time. The only runtime dependency is 73 lines of vanilla JavaScript.</p>
+
+      <p>Magical Chart started as an English-only site. Adding French was straightforward: translate the pages, deploy. The question was what to do with the second language, then the third. By the time German, Portuguese, Japanese, Arabic and a dozen others were in scope, the approach had to be systematic.</p>
+
+      <p>The constraint was the stack: plain HTML, no framework, no server. Everything that reached the CDN had to be a static file. The solution is a build-time HTML rewriter that takes an English source file and produces a fully translated, fully localized version for each target language.</p>
+
+      <h2>1. The architecture: a build-time HTML rewrite</h2>
+
+      <p>The generator reads an English HTML file and outputs one file per target language. It does not use a template language or a component system. It operates directly on the raw HTML string, splitting it into tokens and processing each one:</p>
+
+      <pre><code>const split = s => s.split(
+  /(&lt;script\b[\s\S]*?&lt;\/script\s*&gt;|&lt;style\b[\s\S]*?&lt;\/style\s*&gt;|&lt;!--[\s\S]*?--&gt;|&lt;(?:[^"'&lt;&gt;]|"[^"]*"|'[^']*')+&gt;)/gi
+)</code></pre>
+
+      <p>This splits the document into alternating text and tag tokens. Text tokens are translated. Tag tokens have their attributes translated and their <code>href</code> attributes rewritten to localised URLs. <code>&lt;script&gt;</code> blocks are parsed via the TypeScript AST to translate string literals without touching code.</p>
+
+      <h2>2. Translation memory: a committed JSON file</h2>
+
+      <p>Translations live in <code>lib/localized-copy.json</code>, committed to the repository. It contains about 15,000 entries per language. A build that runs with this file present does not make any network requests. It is deterministic and works offline.</p>
+
+      <p>Populating the file is a separate step, run with a <code>--translate</code> flag. Missing keys are batched and sent to Google Translate. For product pages where tone matters, an Anthropic Claude call replaces Google Translate, with a system prompt that specifies brand names never to translate (Magical Chart, Wooly, Gene Keys, BaZi) and the target register.</p>
+
+      <p>After translation, hand-authored overrides in <code>lib/localized-copy-overrides.json</code> replace specific strings where the machine translation was wrong or off-tone. The overrides file is small and reviewed manually. Everything else runs automatically.</p>
+
+      <h2>3. Two translation granularities</h2>
+
+      <p>String-level translation works for most content: individual text nodes, button labels, alt text. But Romance languages have grammatical gender agreement that spans across inline elements. A sentence like "Your <strong>free</strong> reading is ready" may need the adjective to agree with a noun that is in a different tag. Translating the text node "free" in isolation produces the wrong form.</p>
+
+      <p>The fix is block-level translation: translate the entire paragraph as one unit, including its inline markup:</p>
+
+      <pre><code>// Translate: "Your &lt;strong&gt;free&lt;/strong&gt; reading is ready"
+// Not:       "Your " + "free" + " reading is ready"</code></pre>
+
+      <p>Block translations are stored in a separate <code>lib/localized-block-copy.json</code> file. The generator applies them after string-level translation, replacing matched elements with the pre-translated block versions. This matters most for Portuguese and Italian, where adjective-noun agreement is strict.</p>
+
+      <h2>4. The 73-line runtime fallback</h2>
+
+      <p>The build handles everything it can see. What it cannot see is content injected dynamically by JavaScript: AI-generated reading text, card names drawn at render time, date labels formatted by the browser. For those, a MutationObserver watches the DOM and translates content as it appears:</p>
+
+      <pre><code>// lib/localized-runtime.js
+const observer = new MutationObserver(mutations => {
+  for (const m of mutations) {
+    for (const node of m.addedNodes) {
+      if (node.nodeType === Node.TEXT_NODE) translateNode(node)
+      else if (node.nodeType === Node.ELEMENT_NODE) translateSubtree(node)
+    }
+  }
+})
+observer.observe(document.body, { childList: true, subtree: true })</code></pre>
+
+      <p>The runtime also rewrites <code>fetch()</code> to inject the target language into every AI reading request, so the model responds in the right language without each call site needing to know about localisation. It patches the Nominatim geocoder to send the correct <code>accept-language</code> header. It rewrites Stripe checkout links to inject the locale parameter.</p>
+
+      <p>The file is 73 lines. It has no imports and no external dependencies.</p>
+
+      <h2>5. RTL, hreflang, and SEO at build time</h2>
+
+      <p>Right-to-left languages (Arabic, Persian) get <code>dir="rtl"</code> on the <code>&lt;html&gt;</code> element, RTL-specific fonts injected via Google Fonts, and layout corrections applied inline. All of this happens at build time. No separate CSS file, no JavaScript layout adjustment.</p>
+
+      <p>Each generated page gets a full set of <code>&lt;link rel="alternate" hreflang="..."&gt;</code> tags pointing to every other language version, plus an updated canonical URL. The generator also writes or updates the language-specific sitemap and adds it to <code>robots.txt</code>. The English source page is updated simultaneously to include the new language in its own hreflang set.</p>
+
+      <div class="callout">
+        <p><strong>The result:</strong> a new page added in English becomes available in French within one build. Adding a new language to the site requires running the generator once against all existing pages. The translation memory accumulates and subsequent builds are instant.</p>
+      </div>
+
+    </article>
+  </main>
+  <footer class="wrap foot">
+    <a href="/blog">← All posts</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

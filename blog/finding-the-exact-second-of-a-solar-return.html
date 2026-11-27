@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finding the exact second of a solar return | Floryne Pierson</title>
+  <meta name="description" content="A solar return happens at the precise instant the Sun returns to its natal longitude. Finding that instant to 10-millisecond precision requires a solver, not a formula.">
+  <link rel="canonical" href="https://florynepierson.com/blog/finding-the-exact-second-of-a-solar-return">
+  <link rel="icon" type="image/svg+xml" href="/portfolio/assets/portfolio-favicon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Finding the exact second of a solar return">
+  <meta property="og:description" content="A solar return happens at the precise instant the Sun returns to its natal longitude. Finding that instant to 10-millisecond precision requires a solver, not a formula.">
+  <meta property="og:url" content="https://florynepierson.com/blog/finding-the-exact-second-of-a-solar-return">
+  <meta name="theme-color" content="#080b1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#080b1d;--berry:#625bff;--pink:#fa4fc8;--cyan:#00e5ff;--muted:#c3c9ec}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background-color:var(--paper);background-image:radial-gradient(ellipse at 8% 5%,rgba(91,72,255,.4),transparent 35%),radial-gradient(ellipse at 94% 24%,rgba(0,217,255,.18),transparent 31%);background-attachment:fixed;color:#c3c9ec;font:16px/1.8 'Plus Jakarta Sans',sans-serif}
+    a{color:var(--cyan);text-decoration:none}.wrap{width:min(680px,calc(100% - 44px));margin:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;position:sticky;top:0;z-index:500;background:rgba(8,11,29,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,.16);width:100vw;margin-left:calc(50% - 50vw);padding-inline:max(22px,calc((100vw - 680px)/2))}
+    .brand{font-weight:700;color:#f6f4ff;letter-spacing:.02em;text-decoration:none}.brand:after{content:' ✿';color:var(--cyan)}
+    .top nav{display:flex;gap:24px}.top nav a{color:#c5cef7}.top nav a:hover{color:var(--cyan)}
+    .article{padding:56px 0 80px}
+    .article-meta{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid rgba(0,229,255,.35);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .date{font-size:11px;color:#8d9bc5}
+    h1{font:500 clamp(36px,5vw,52px)/1.08 'Cormorant Garamond',serif;color:#fff;margin:0 0 20px}
+    .lede{font-size:17px;color:#dbe5ff;line-height:1.7;border-left:3px solid var(--cyan);padding-left:20px;margin:0 0 40px}
+    h2{font:600 28px/1.15 'Cormorant Garamond',serif;color:#fff;margin:40px 0 14px}
+    p{margin:0 0 20px;color:#c3c9ec}
+    code{font-family:monospace;font-size:.88em;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.18);border-radius:5px;padding:2px 7px;color:#a8f0f0}
+    pre{background:rgba(5,11,32,.8);border:1px solid rgba(0,229,255,.2);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px}
+    pre code{background:none;border:none;padding:0;color:#cce8ff;font-size:13px;line-height:1.7}
+    .callout{padding:18px 22px;border-left:3px solid var(--pink);border-radius:0 12px 12px 0;background:rgba(250,79,200,.07);margin:0 0 24px}
+    .callout p{margin:0;color:#f0cce8;font-size:14px}
+    .callout strong{color:#fa4fc8}
+    .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
+    .back:hover{color:var(--cyan)}
+    @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Floryne Pierson</a>
+    <nav><a href="/portfolio">Portfolio</a><a href="/blog">Blog</a><a href="mailto:hello@florynepierson.com">Contact</a></nav>
+  </header>
+  <main class="wrap">
+    <article class="article">
+      <a class="back" href="/blog">← All posts</a>
+      <div class="article-meta">
+        <span class="tag">Astronomy · Engineering</span>
+        <span class="date">October 2026</span>
+      </div>
+      <h1>Finding the exact second of a solar return</h1>
+      <p class="lede">A solar return happens once a year, at the precise instant the Sun returns to its natal longitude. Finding that instant to 10-millisecond precision requires a numerical solver, not a formula.</p>
+
+      <p>A solar return chart is cast for the moment the Sun reaches the exact ecliptic longitude it occupied at birth. For someone born with the Sun at 14.731° Aries, the solar return occurs the instant the Sun crosses 14.731° Aries again, which happens within a day or two of their birthday every year. The chart for that precise moment is what matters, not the chart for midnight on their birthday.</p>
+
+      <p>The difference matters in practice. The solar return Ascendant, which changes sign roughly every two hours, can shift from one sign to an entirely different one depending on whether you use the exact instant or an approximation rounded to the nearest day. For a product that promises astronomical precision, that is not acceptable.</p>
+
+      <h2>1. The search window: Julian years, not calendar arithmetic</h2>
+
+      <p>The first decision is how to narrow the search before handing it to the solver. The naive approach is to look at the user's birth month and day, find the nearest occurrence of that date in the target year, and search around it. This breaks on leap years, on birthdays near solstices where the Sun's speed varies, and on users born on February 29.</p>
+
+      <p>The implementation avoids calendar arithmetic entirely. It computes how many Julian years (each exactly 365.25 days) have elapsed since birth, then adds that many days to the birth timestamp to get an approximate date:</p>
+
+      <pre><code>const approxYears = targetYear - birthDate.getUTCFullYear()
+const approxDate  = new Date(
+  birthDate.getTime() + approxYears * 365.25 * 86_400_000
+)
+const searchStart = new Date(approxDate.getTime() - 5 * 86_400_000)
+return engine.findSunLongitude(natalSunLongitude, searchStart, 10)</code></pre>
+
+      <p>The search window opens 5 days before that approximation and closes 10 days after it. The Sun moves about 1 degree per day, so a 15-day window comfortably brackets the true return regardless of leap-year drift or calendar edge cases.</p>
+
+      <h2>2. The solver: bisection with quadratic acceleration</h2>
+
+      <p>Inside the search window, the problem is to find the zero of a function: <code>f(t) = sun_longitude(t) - natal_longitude</code>. At the start of the window this is negative (the Sun has not yet reached the target). At the end it is positive. Somewhere in between it crosses zero.</p>
+
+      <p>The solver used is not pure bisection and not Newton's method. It is bisection accelerated by quadratic interpolation, from the astronomy-engine library:</p>
+
+      <pre><code>function SearchSunLongitude(targetLon, dateStart, limitDays) {
+  function sun_offset(t) {
+    let pos = SunPosition(t)
+    return LongitudeOffset(pos.elon - targetLon)
+  }
+  let t1 = MakeTime(dateStart)
+  let t2 = t1.AddDays(limitDays)
+  return Search(sun_offset, t1, t2, { dt_tolerance_seconds: 0.01 })
+}</code></pre>
+
+      <p><code>LongitudeOffset</code> normalizes the signed difference to the range (-180, 180], which keeps the function well-behaved when the target longitude is near 0° and the Sun's position wraps from 359° to 1°.</p>
+
+      <p>At each iteration, <code>Search</code> fits a parabola through three points (the bracket endpoints and their midpoint), then checks whether the parabola has a root inside the bracket. If it does, and if the root is a good enough approximation, the solver jumps there instead of bisecting. Otherwise it falls back to standard bisection. This converges much faster than bisection alone on smooth functions like solar longitude.</p>
+
+      <div class="callout">
+        <p><strong>Convergence in practice:</strong> pure bisection over a 10-day window would need log2(10 days / 0.01 seconds) = roughly 26 iterations. The quadratic acceleration typically reaches the tolerance in well under 20 iterations. The iteration limit is 20.</p>
+      </div>
+
+      <h2>3. Precision: 10 milliseconds, 0.0001 degrees</h2>
+
+      <p>The solver terminates when the bracket half-width is less than 0.01 seconds (10 milliseconds). At the Sun's mean ecliptic speed of about 1 degree per day, 10 milliseconds of time corresponds to roughly 1.7 milliarcseconds of arc. The search is finding the Sun's position to a precision that no traditional astrological software specifies.</p>
+
+      <p>The test suite verifies the full pipeline. It calls <code>getSolarReturnDate</code> for a known birth date, then checks the Sun's longitude at the returned timestamp:</p>
+
+      <pre><code>const diff = Math.abs(sunAtReturn.longitude - natalSun.longitude)
+expect(Math.min(diff, 360 - diff)).toBeLessThan(0.0001)</code></pre>
+
+      <p>0.0001° is 0.36 arcseconds. The <code>Math.min(diff, 360 - diff)</code> handles the wrap correctly: a Sun at 359.9999° and a natal longitude of 0.0001° are 0.0002° apart, not 359.9998° apart.</p>
+
+      <h2>4. UTC enforcement and location independence</h2>
+
+      <p>The solar return timestamp is in UTC. Every method in the astronomy provider validates that the date string ends in <code>Z</code> before passing it to the engine. This is not optional: mixing local time with sidereal time calculations silently produces wrong coordinates.</p>
+
+      <p>The solar return chart is then cast for the user's current location, not their birth location. The birth date determines <em>when</em> the return occurs (the timestamp). The current location determines <em>which</em> Ascendant and house cusps appear in the chart for that moment. These are two separate inputs, and the function signature keeps them separate on purpose.</p>
+
+    </article>
+  </main>
+  <footer class="wrap foot">
+    <a href="/blog">← All posts</a> · <a href="mailto:hello@florynepierson.com">hello@florynepierson.com</a>
+  </footer>
+</body>
+</html>

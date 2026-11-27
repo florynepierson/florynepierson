@@ -44,6 +44,9 @@
     .foot{padding:30px 0 38px;text-align:center;color:#8d9bc5;font-size:11px;border-top:1px solid rgba(0,229,255,.1)}
     .back{display:inline-flex;align-items:center;gap:6px;color:#8d9bc5;font-size:12px;margin-bottom:28px}
     .back:hover{color:var(--cyan)}
+    figure{margin:0 0 28px}
+    figure img{width:100%;border-radius:14px;border:1px solid rgba(0,229,255,.18);display:block}
+    figcaption{font-size:11px;color:#6d7ba8;margin-top:10px;text-align:center}
     @media(max-width:620px){.wrap{width:calc(100% - 28px)}.article{padding:40px 0 60px}h1{font-size:34px}.lede{font-size:15px}}
   </style>
 </head>
@@ -104,6 +107,11 @@ float alpha = max(glow, core * 0.98);
 gl_FragColor = vec4(vColor, alpha);</code></pre>
 
       <p>The side effect: it's also faster on mobile. <code>UnrealBloomPass</code> runs a full-screen pass per frame. The shader approach costs roughly nothing, which matters on a product where the majority of users are on phones.</p>
+
+      <figure>
+        <img src="/blog/star-map-interface.png" alt="The Magical Chart sky map showing Valletta, Malta on October 14 2026 at 9 PM. Stars have clean circular glows — Vega, Capella, Fomalhaut — rendered entirely by the fragment shader with no post-processing bloom pass.">
+        <figcaption>The sky above Valletta, Malta — October 14, 2026, 9 PM. Every star glow is computed per-fragment. No post-processing pass runs at all.</figcaption>
+      </figure>
 
       <h2>3. Precession: the third coordinate correction nobody talks about</h2>
 
